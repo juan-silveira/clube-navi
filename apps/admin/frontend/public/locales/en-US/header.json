@@ -1,0 +1,37 @@
+{
+  "search": {
+    "button": "Search...",
+    "noResults": "No result found",
+    "placeholder": "Search..."
+  },
+  "balanceSwitch": {
+    "hide": "Hide values",
+    "show": "Show values"
+  },
+  "notification": {
+    "empty": "No notifications",
+    "title": "Notifications",
+    "loading": "Loading...",
+    "viewAll": "View all",
+    "markAsRead": "Mark as read",
+    "markAllRead": "Mark all as read"
+  },
+  "profile": {
+    "defaultUser": "User",
+    "menu": {
+      "logout": "Logout",
+      "profile": "Profile",
+      "soundEnabled": "Notification sound enabled",
+      "soundDisabled": "Notification sound disabled",
+      "soundActivated": "Sound activated",
+      "soundDeactivated": "Sound deactivated",
+      "notificationSound": "Notification sound"
+    },
+    "defaultEmail": "email@example.com"
+  },
+  "mobileFooter": {
+    "messages": "Messages",
+    "settings": "Settings",
+    "notifications": "Notifications"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "title": "Segurança",
+  "subtitle": "Gerencie suas configurações de segurança e privacidade",
+  "pageTitle": "Segurança",
+  "common": {
+    "active": "Ativo",
+    "cancel": "Cancelar",
+    "next": "Próximo",
+    "back": "Voltar",
+    "finish": "Concluir",
+    "important": "Importante",
+    "attention": "Atenção"
+  },
+  "errors": {
+    "default2FAConfigError": "Erro ao configurar 2FA"
+  },
+  "tips": {
+    "title": "Dicas de Segurança",
+    "enable2FA": {
+      "title": "Ativar 2FA",
+      "description": "A autenticação em dois fatores adiciona uma camada extra de segurança à sua conta"
+    },
+    "backupCodes": {
+      "title": "Códigos de Backup",
+      "description": "Mantenha seus códigos de backup em um local seguro para recuperação de conta"
+    },
+    "strongPassword": {
+      "title": "Senha Forte",
+      "description": "Use senhas com pelo menos 8 caracteres, incluindo letras, números e símbolos"
+    },
+    "monitorActivity": {
+      "title": "Monitore Atividade",
+      "description": "Verifique regularmente o histórico de login e as atividades da conta"
+    },
+    "authenticatorApp": {
+      "title": "App Autenticador",
+      "description": "Use Google Authenticator, Authy ou similar para gerar códigos temporários seguros"
+    },
+    "operationProtection": {
+      "title": "Proteção de Operação",
+      "description": "Com o 2FA ativado, saques e transferências exigirão código de verificação"
+    }
+  },
+  "twoFactorAuthentication": {
+    "title": "Autenticação em Dois Fatores (2FA)",
+    "enable": "Ativar 2FA",
+    "disable": {
+      "button": "Desabilitar 2FA",
+      "modalTitle": "Desabilitar Autenticação em Dois Fatores",
+      "tooltip": "Desabilitar o 2FA reduzirá a segurança da sua conta. Você precisará digitar o código do seu app autenticador para confirmar.",
+      "warningBase": "Desabilitar o 2FA reduzirá a segurança da sua conta.",
+      "warningBackupCode": " Digite um código de backup para confirmar.",
+      "warningAuthenticatorCode": " Digite o código do seu app autenticador para confirmar.",
+      "backupCodeLabel": "Código de Backup",
+      "confirmationCodeLabel": "Código de Confirmação",
+      "backToAuthenticatorCode": "← Voltar para código do autenticador",
+      "useBackupCode": "Usar código de backup 2FA →",
+      "characters": "caracteres",
+      "digits": "dígitos",
+      "enterCodeToConfirm": "Digite o código de {{length}} {{type}} para confirmar"
+    },
+    "tooltip": "A autenticação em dois fatores adiciona uma camada extra de segurança, exigindo um código temporário do seu app autenticador (Google Authenticator, Authy, etc.) além da sua senha.",
+    "description": "Adicione uma camada extra de segurança",
+    "messages": {
+      "accountProtected": "Sua conta está protegida com 2FA",
+      "enabledSuccess": "2FA ativado com sucesso!",
+      "disabledSuccess": "2FA desabilitado com sucesso"
+    },
+    "activeMethods": {
+      "title": "Métodos Ativos:",
+      "authenticatorApp": "App Autenticador",
+      "lastUsed": "Último uso"
+    },
+    "setup": {
+      "modalTitle": "Configurar Autenticação em Dois Fatores",
+      "step1Title": "Passo 1: Escaneie o QR Code",
+      "step1Description": "Use seu app autenticador (Google Authenticator, Authy, etc.) para escanear o código",
+      "manualKeyLabel": "Ou insira manualmente a chave:",
+      "step2Title": "Passo 2: Verificar Código",
+      "step2Description": "Digite o código de 6 dígitos mostrado no seu app autenticador",
+      "verificationCodeLabel": "Código de Verificação",
+      "verifyAndActivate": "Verificar e Ativar",
+      "step3SuccessTitle": "2FA Ativado com Sucesso!",
+      "step3Description": "Guarde seus códigos de backup em local seguro",
+      "secretCopied": "Chave copiada para a área de transferência"
+    },
+    "backup": {
+      "importantWarning": "Guarde estes códigos de backup. Você pode usá-los para acessar sua conta caso perca acesso ao seu app autenticador. Cada código pode ser usado apenas uma vez.",
+      "copyCodesButton": "Copiar Códigos",
+      "downloadCodesButton": "Baixar Códigos",
+      "codesCopied": "Códigos copiados para a área de transferência",
+      "codesDownloadedSuccess": "Códigos baixados com sucesso",
+      "downloadFileContent": "Códigos de Backup - Coinage 2FA\nData: {{date}}\n\n{{codes}}\n\nGuarde estes códigos em local seguro. Cada código pode ser usado apenas uma vez."
+    },
+    "errors": {
+      "enterSixDigitCode": "Digite o código de 6 dígitos",
+      "invalidCode": "Código inválido",
+      "defaultDisableError": "Erro ao desabilitar 2FA"
+    }
+  },
+  "changePassword": {
+    "title": "Alterar Senha",
+    "button": "Atualizar Senha",
+    "modalTitle": "Alterar Senha",
+    "loading": "Alterando...",
+    "tooltip": "Mantenha sua conta segura alterando sua senha regularmente. Use uma senha forte com pelo menos 8 caracteres, incluindo letras, números e símbolos.",
+    "description": "Atualize sua senha regularmente",
+    "labels": {
+      "currentPassword": "Confirme a Senha Atual",
+      "newPassword": "Nova Senha",
+      "confirmPassword": "Confirme a Nova Senha"
+    },
+    "placeholders": {
+      "currentPassword": "Digite a Senha Atual",
+      "newPassword": "Digite a Nova Senha",
+      "confirmPassword": "Confirme a Nova Senha"
+    },
+    "messages": {
+      "success": "Senha alterada com sucesso!"
+    },
+    "errors": {
+      "allFieldsRequired": "Todos os campos são obrigatórios",
+      "passwordCriteriaFailed": "Senha não atende aos critérios de segurança:\n{{errors}}",
+      "passwordsDoNotMatch": "A nova senha e a confirmação não coincidem",
+      "newPasswordMustBeDifferent": "A nova senha deve ser diferente da senha atual",
+      "defaultChangeError": "Erro ao alterar senha",
+      "connectionError": "Erro de conexão. Tente novamente."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Confira as tarifas e prazos da sua conta",
+  "loading": "Carregando suas tarifas personalizadas...",
+  "subtitle": "Consulte todas as tarifas personalizadas aplicadas à sua conta",
+  "vipLevel": "VIP Nível {{level}}",
+  "pageTitle": "Tarifas e Prazos",
+  "validFrom": "Válido desde",
+  "table": {
+    "name": "Nome",
+    "token": "Token",
+    "transferFee": "Taxa de Transferência"
+  },
+  "network": {
+    "label": "Rede",
+    "mainnet": "Mainnet (Azore)",
+    "testnet": "Testnet (Floripa)"
+  },
+  "fees": {
+    "depositPix": "Taxa de depósito (PIX)",
+    "withdrawPix": "Taxa de saque (PIX)"
+  },
+  "sections": {
+    "transfers": "Transferências",
+    "depositsWithdrawals": "Depósitos e Saques"
+  }
+}

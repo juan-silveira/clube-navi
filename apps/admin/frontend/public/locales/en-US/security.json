@@ -1,0 +1,130 @@
+{
+  "title": "Security",
+  "subtitle": "Manage your security and privacy settings",
+  "pageTitle": "Security",
+  "common": {
+    "active": "Active",
+    "cancel": "Cancel",
+    "next": "Next",
+    "back": "Back",
+    "finish": "Finish",
+    "important": "Important",
+    "attention": "Attention"
+  },
+  "errors": {
+    "default2FAConfigError": "Error setting up 2FA"
+  },
+  "tips": {
+    "title": "Security Tips",
+    "enable2FA": {
+      "title": "Enable 2FA",
+      "description": "Two-factor authentication adds an extra layer of security to your account"
+    },
+    "backupCodes": {
+      "title": "Backup Codes",
+      "description": "Keep your backup codes in a safe place for account recovery"
+    },
+    "strongPassword": {
+      "title": "Strong Password",
+      "description": "Use passwords with at least 8 characters, including letters, numbers and symbols"
+    },
+    "monitorActivity": {
+      "title": "Monitor Activity",
+      "description": "Regularly check login history and account activities"
+    },
+    "authenticatorApp": {
+      "title": "Authenticator App",
+      "description": "Use Google Authenticator, Authy or similar to generate secure temporary codes"
+    },
+    "operationProtection": {
+      "title": "Operation Protection",
+      "description": "With 2FA enabled, withdrawals and transfers will require verification code"
+    }
+  },
+  "twoFactorAuthentication": {
+    "title": "Two-Factor Authentication (2FA)",
+    "enable": "Enable 2FA",
+    "disable": {
+      "button": "Disable 2FA",
+      "modalTitle": "Disable Two-Factor Authentication",
+      "tooltip": "Disabling 2FA will reduce your account security. You will need to enter the code from your authenticator app to confirm.",
+      "warningBase": "Disabling 2FA will reduce your account security.",
+      "warningBackupCode": " Enter a backup code to confirm.",
+      "warningAuthenticatorCode": " Enter the code from your authenticator app to confirm.",
+      "backupCodeLabel": "Backup Code",
+      "confirmationCodeLabel": "Confirmation Code",
+      "backToAuthenticatorCode": "← Back to authenticator code",
+      "useBackupCode": "Use 2FA backup code →",
+      "characters": "characters",
+      "digits": "digits",
+      "enterCodeToConfirm": "Enter the {{length}} {{type}} code to confirm"
+    },
+    "tooltip": "Two-factor authentication adds an extra layer of security, requiring a temporary code from your authenticator app (Google Authenticator, Authy, etc.) in addition to your password.",
+    "description": "Add an extra layer of security",
+    "messages": {
+      "accountProtected": "Your account is protected with 2FA",
+      "enabledSuccess": "2FA enabled successfully!",
+      "disabledSuccess": "2FA disabled successfully"
+    },
+    "activeMethods": {
+      "title": "Active Methods:",
+      "authenticatorApp": "Authenticator App",
+      "lastUsed": "Last used"
+    },
+    "setup": {
+      "modalTitle": "Set Up Two-Factor Authentication",
+      "step1Title": "Step 1: Scan the QR Code",
+      "step1Description": "Use your authenticator app (Google Authenticator, Authy, etc.) to scan the code",
+      "manualKeyLabel": "Or enter the key manually:",
+      "step2Title": "Step 2: Verify Code",
+      "step2Description": "Enter the 6-digit code shown in your authenticator app",
+      "verificationCodeLabel": "Verification Code",
+      "verifyAndActivate": "Verify and Enable",
+      "step3SuccessTitle": "2FA Enabled Successfully!",
+      "step3Description": "Save your backup codes in a safe place",
+      "secretCopied": "Key copied to clipboard"
+    },
+    "backup": {
+      "importantWarning": "Save these backup codes. You can use them to access your account if you lose access to your authenticator app. Each code can only be used once.",
+      "copyCodesButton": "Copy Codes",
+      "downloadCodesButton": "Download Codes",
+      "codesCopied": "Codes copied to clipboard",
+      "codesDownloadedSuccess": "Codes downloaded successfully",
+      "downloadFileContent": "Backup Codes - Coinage 2FA\nDate: {{date}}\n\n{{codes}}\n\nKeep these codes in a safe place. Each code can only be used once."
+    },
+    "errors": {
+      "enterSixDigitCode": "Enter the 6-digit code",
+      "invalidCode": "Invalid code",
+      "defaultDisableError": "Error disabling 2FA"
+    }
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "button": "Update Password",
+    "modalTitle": "Change Password",
+    "loading": "Updating...",
+    "tooltip": "Keep your account secure by changing your password regularly. Use a strong password with at least 8 characters, including letters, numbers and symbols.",
+    "description": "Update your password regularly",
+    "labels": {
+      "currentPassword": "Confirm Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password"
+    },
+    "placeholders": {
+      "currentPassword": "Enter Current Password",
+      "newPassword": "Enter New Password",
+      "confirmPassword": "Confirm New Password"
+    },
+    "messages": {
+      "success": "Password changed successfully!"
+    },
+    "errors": {
+      "allFieldsRequired": "All fields are required",
+      "passwordCriteriaFailed": "Password does not meet security criteria:\n{{errors}}",
+      "passwordsDoNotMatch": "New password and confirmation do not match",
+      "newPasswordMustBeDifferent": "The new password must be different from the current password",
+      "defaultChangeError": "Error changing password",
+      "connectionError": "Connection error. Please try again."
+    }
+  }
+}

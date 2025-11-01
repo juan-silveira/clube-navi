@@ -1,0 +1,272 @@
+{
+  "title": "Gestão de Usuários do Sistema",
+  "subtitle": "Gerencie todos os usuários do sistema, independente da empresa",
+  "roles": {
+    "USER": "Usuário",
+    "ADMIN": "Administrador",
+    "APP_ADMIN": "Admin da Empresa",
+    "SUPER_ADMIN": "Super Admin"
+  },
+  "stats": {
+    "total": "Total",
+    "active": "Ativos",
+    "inactive": "Inativos",
+    "companies": "Empresas",
+    "superAdmins": "Super Admins"
+  },
+  "table": {
+    "title": "Usuários",
+    "loading": "Carregando usuários...",
+    "empty": {
+      "title": "Nenhum usuário encontrado",
+      "subtitle": "Tente ajustar os filtros para ver mais resultados",
+      "description": "Tente ajustar os filtros para ver mais resultados"
+    },
+    "columns": {
+      "role": "Role",
+      "user": "Usuário",
+      "status": "Status",
+      "actions": "Ações",
+      "company": "Empresa",
+      "activity": "Atividade",
+      "documents": "Documentos"
+    },
+    "activity": {
+      "today": "Hoje",
+      "logins": "logins",
+      "daysAgo": "{{days}} dias atrás",
+      "transactions": "transações"
+    },
+    "companies": {
+      "label": "empresas",
+      "title": "Empresas ({{count}})",
+      "accesses": "acessos"
+    },
+    "documents": {
+      "notSent": "Não Enviado",
+      "partial": "Parcial",
+      "pending": "Pendente",
+      "approved": "Aprovado",
+      "complete": "Completo",
+      "rejected": "Rejeitado",
+      "statusTitle": "Status dos Documentos",
+      "backDocument": "Verso do Documento",
+      "approvedCount": "{{approved}}/{{total}} documentos aprovados",
+      "frontDocument": "Frente do Documento",
+      "noneSubmitted": "Nenhum documento enviado ainda",
+      "statusNotSent": "Não Enviado",
+      "statusPending": "Pendente",
+      "selfieDocument": "Selfie com Documento",
+      "statusComplete": "Completo",
+      "statusRejected": "Rejeitado",
+      "backDocumentDesc": "Foto do verso do RG/CNH",
+      "frontDocumentDesc": "Foto da frente do RG/CNH",
+      "incompleteWarning": "⚠️ Documentação Incompleta",
+      "pendingSubmission": "Aguardando envio/aprovação dos demais documentos",
+      "selfieDocumentDesc": "Foto segurando o documento"
+    },
+    "pagination": {
+      "showing": "Exibindo {{from}} ao {{to}} de {{total}} registros",
+      "perPage10": "10 por página",
+      "perPage20": "20 por página",
+      "perPage50": "50 por página",
+      "perPage100": "100 por página"
+    }
+  },
+  "buttons": {
+    "block": "Bloquear",
+    "clear": "Limpar",
+    "refresh": "Atualizar",
+    "unblock": "Desbloquear",
+    "activate": "Ativar",
+    "exportCSV": "Exportar CSV",
+    "selectAll": "Selecionar Todos",
+    "deactivate": "Desativar",
+    "deselectAll": "Desselecionar",
+    "viewProfile": "Ver Perfil",
+    "notifySelected": "Notificar Selecionados"
+  },
+  "status": {
+    "active": "Ativo",
+    "blocked": "Bloqueado",
+    "inactive": "Inativo"
+  },
+  "filters": {
+    "clear": "Limpar",
+    "role": {
+      "all": "Todos os Roles",
+      "label": "Role",
+      "placeholder": "Role"
+    },
+    "roleFilter": "Role: {{role}}",
+    "status": {
+      "all": "Todos os Status",
+      "label": "Status",
+      "placeholder": "Status"
+    },
+    "company": {
+      "all": "Todas as Empresas",
+      "label": "Empresa",
+      "placeholder": "Empresa"
+    },
+    "country": {
+      "all": "Todos os países",
+      "label": "País"
+    },
+    "loginFilter": "Login: {{login}}",
+    "searchFilter": "Busca: {{search}}",
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Nome, email, CPF..."
+    },
+    "statusFilter": "Status: {{status}}",
+    "activeFilters": "Filtros ativos",
+    "companyFilter": "Empresa: {{company}}",
+    "lastLogin": {
+      "label": "Último Login",
+      "lastDay": "Último dia",
+      "anyPeriod": "Qualquer período",
+      "last7Days": "Últimos 7 dias",
+      "last30Days": "Últimos 30 dias",
+      "last90Days": "Últimos 90 dias",
+      "placeholder": "Período"
+    },
+    "activeLabels": {
+      "role": "Role",
+      "login": "Login",
+      "search": "Busca",
+      "status": "Status",
+      "company": "Empresa"
+    }
+  },
+  "messages": {
+    "authError": "Erro de autenticação ao carregar usuários",
+    "loadError": "Erro ao carregar usuários",
+    "actionError": "Erro ao executar ação",
+    "blockSuccess": "{{name}} foi bloqueado",
+    "noPermission": "Você não tem permissão para esta ação",
+    "rateLimitError": "Muitas requisições simultâneas. Aguarde um momento.",
+    "unblockSuccess": "{{name}} foi desbloqueado",
+    "activateSuccess": "{{name}} foi ativado",
+    "genericLoadError": "Erro ao carregar usuários. Tente novamente.",
+    "deactivateSuccess": "{{name}} foi desativado",
+    "selectUserWarning": "Selecione ao menos um usuário para enviar notificação"
+  },
+  "selection": {
+    "selected": "{{count}} selecionado",
+    "selectedPlural": "{{count}} selecionados"
+  },
+  "userDetails": {
+    "noName": "Usuário sem nome",
+    "loading": "Carregando perfil do usuário...",
+    "noEmail": "Email não informado",
+    "plans": {
+      "PRO": "Pro",
+      "BASIC": "Básico",
+      "PREMIUM": "Premium",
+      "notDefined": "Não definido"
+    },
+    "tabs": {
+      "fees": "Taxas",
+      "profile": "Perfil",
+      "activity": "Atividade",
+      "balances": "Saldos",
+      "documents": "Documentos",
+      "notifications": "Notificações"
+    },
+    "backButton": "Voltar",
+    "loadingData": "Carregando dados do usuário...",
+    "profile": {
+      "cpf": "CPF",
+      "email": "Email",
+      "phone": "Telefone",
+      "active": "ATIVO",
+      "status": "Status",
+      "noAlias": "sem-alias",
+      "fullName": "Nome Completo",
+      "inactive": "INATIVO",
+      "userPlan": "Plano do Usuário",
+      "birthDate": "Data de Nascimento",
+      "editButton": "Editar",
+      "saveButton": "Salvar Alterações",
+      "azoreWallet": "Carteira Azore",
+      "linkedSince": "Desde",
+      "notInformed": "Não informado",
+      "cancelButton": "Cancelar",
+      "notGenerated": "Não gerada",
+      "companyActive": "ATIVA",
+      "cpfPlaceholder": "123.456.789-01",
+      "companyInactive": "INATIVA",
+      "linkedCompanies": "Empresas Vinculadas ({{count}})",
+      "phonePlaceholder": "(00) 00000-0000",
+      "companyNotAvailable": "Nome não disponível",
+      "birthDatePlaceholder": "Data de nascimento",
+      "publicKeyPlaceholder": "Chave pública da carteira"
+    },
+    "activity": {
+      "title": "Histórico de Atividades",
+      "status": "Status:",
+      "category": "Categoria:",
+      "subtitle": "Últimas 20 ações realizadas pelo usuário",
+      "updating": "Atualizando...",
+      "noActivity": "Nenhuma atividade encontrada",
+      "actions": {
+        "login": "Login realizado",
+        "logout": "Logout realizado",
+        "token_swap": "Token swap realizado",
+        "login_failed": "Falha no login",
+        "stake_created": "Stake criado",
+        "transfer_sent": "Transferência enviada",
+        "deposit_failed": "Falha no depósito",
+        "password_reset": "Senha redefinida",
+        "profile_viewed": "Perfil visualizado",
+        "reward_claimed": "Recompensa coletada",
+        "profile_updated": "Perfil atualizado",
+        "stake_withdrawn": "Stake retirado",
+        "transfer_failed": "Falha na transferência",
+        "password_changed": "Senha alterada",
+        "transaction_sent": "Transação enviada",
+        "deposit_confirmed": "Depósito confirmado",
+        "deposit_initiated": "Depósito iniciado",
+        "document_uploaded": "Documento enviado",
+        "document_verified": "Documento verificado",
+        "transfer_received": "Transferência recebida",
+        "withdrawal_failed": "Falha no saque",
+        "transaction_failed": "Falha na transação",
+        "withdrawal_approved": "Saque aprovado",
+        "contract_interaction": "Interação com contrato",
+        "withdrawal_completed": "Saque concluído",
+        "withdrawal_initiated": "Saque iniciado",
+        "transaction_confirmed": "Transação confirmada"
+      },
+      "refreshButton": "Atualizar",
+      "noActivityDesc": "Este usuário ainda não possui atividades registradas"
+    },
+    "messages": {
+      "loadError": "Erro ao carregar dados do usuário",
+      "saveError": "Erro ao salvar alterações",
+      "updateError": "Erro ao atualizar usuário",
+      "userNotFound": "Usuário não encontrado",
+      "updateSuccess": "Usuário atualizado com sucesso",
+      "noPermissionEdit": "Você não tem permissão para editar usuários",
+      "notificationError": "Erro ao enviar notificação",
+      "notificationSuccess": "Notificação enviada com sucesso",
+      "notificationRequired": "Preencha título e mensagem da notificação"
+    },
+    "notifications": {
+      "title": "Enviar Notificação para {{name}}",
+      "typeLabel": "Tipo",
+      "sendButton": "Enviar Notificação",
+      "titleLabel": "Título",
+      "types": {
+        "info": "Informação",
+        "error": "Erro",
+        "success": "Sucesso",
+        "warning": "Aviso"
+      },
+      "messageLabel": "Mensagem",
+      "titlePlaceholder": "Título da notificação",
+      "messagePlaceholder": "Digite a mensagem da notificação..."
+    }
+  }
+}

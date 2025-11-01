@@ -1,0 +1,30 @@
+{
+  "income": {
+    "title": "Informe de Ingresos",
+    "subtitle": "Visualice y exporte sus ingresos por año calendario",
+    "selectYear": "Seleccione el Año",
+    "downloadPDF": "Descargar PDF",
+    "downloading": "Descargando...",
+    "loading": "Cargando informe...",
+    "errorTitle": "Error al cargar el informe",
+    "balancesSummary": "Resumen de Saldos",
+    "initialBalance": "Saldo Inicial",
+    "finalBalance": "Saldo Final",
+    "token": "Token",
+    "balance": "Saldo",
+    "noBalance": "Sin saldo",
+    "earningsByProduct": "Ingresos por Producto",
+    "totalReceived": "Total Recibido",
+    "approximateValue": "Valor Aproximado",
+    "noEarnings": "No hay ingresos registrados en este período",
+    "totals": "Totales",
+    "total": "Total",
+    "grandTotal": "TOTAL GENERAL",
+    "note": "Nota",
+    "noteText": "Los valores en reales brasileños (BRL) son aproximados, basados en las cotizaciones del último día del año calendario.",
+    "legalNote": "Este documento sirve solo como informe de ingresos y no reemplaza la declaración oficial de impuestos."
+  },
+  "errors": {
+    "downloadFailed": "Error al descargar el PDF. Inténtelo de nuevo."
+  }
+}

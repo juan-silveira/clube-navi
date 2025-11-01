@@ -1,0 +1,30 @@
+{
+  "income": {
+    "title": "Informe de Rendimentos",
+    "subtitle": "Visualize e exporte seus rendimentos por ano calendário",
+    "selectYear": "Selecione o Ano",
+    "downloadPDF": "Baixar PDF",
+    "downloading": "Baixando...",
+    "loading": "Carregando informe...",
+    "errorTitle": "Erro ao carregar informe",
+    "balancesSummary": "Resumo de Saldos",
+    "initialBalance": "Saldo Inicial",
+    "finalBalance": "Saldo Final",
+    "token": "Token",
+    "balance": "Saldo",
+    "noBalance": "Sem saldo",
+    "earningsByProduct": "Rendimentos por Produto",
+    "totalReceived": "Total Recebido",
+    "approximateValue": "Valor Aproximado",
+    "noEarnings": "Nenhum rendimento registrado neste período",
+    "totals": "Totais",
+    "total": "Total",
+    "grandTotal": "TOTAL GERAL",
+    "note": "Observação",
+    "noteText": "Os valores em reais (BRL) são aproximados, baseados nas cotações do último dia do ano-calendário.",
+    "legalNote": "Este documento serve apenas como informe de rendimentos, não substitui a declaração oficial de imposto de renda."
+  },
+  "errors": {
+    "downloadFailed": "Erro ao baixar PDF. Tente novamente."
+  }
+}

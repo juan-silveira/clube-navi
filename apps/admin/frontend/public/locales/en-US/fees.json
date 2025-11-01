@@ -1,0 +1,26 @@
+{
+  "title": "Check your account fees and terms",
+  "loading": "Loading your personalized fees...",
+  "subtitle": "View all personalized fees applied to your account",
+  "vipLevel": "VIP Level {{level}}",
+  "pageTitle": "Fees and Terms",
+  "validFrom": "Valid since",
+  "table": {
+    "name": "Name",
+    "token": "Token",
+    "transferFee": "Transfer Fee"
+  },
+  "network": {
+    "label": "Network",
+    "mainnet": "Mainnet (Azore)",
+    "testnet": "Testnet (Floripa)"
+  },
+  "fees": {
+    "depositPix": "Deposit fee (PIX)",
+    "withdrawPix": "Withdrawal fee (PIX)"
+  },
+  "sections": {
+    "transfers": "Transfers",
+    "depositsWithdrawals": "Deposits and Withdrawals"
+  }
+}

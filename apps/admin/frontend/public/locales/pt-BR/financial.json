@@ -1,0 +1,97 @@
+{
+  "title": "Relatório Financeiro",
+  "subtitle": "Visualize todos os saldos, stakes e ordens dos usuários",
+  "stats": {
+    "totalUsers": "Total de Usuários",
+    "totalTokens": "Total de Tokens",
+    "activeOrders": "Ordens Ativas",
+    "companies": "Empresas",
+    "stakeContracts": "Contratos de Stake"
+  },
+  "filters": {
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Nome, email ou CPF"
+    },
+    "company": {
+      "all": "Todas as empresas",
+      "label": "Empresa",
+      "placeholder": "Todas as empresas"
+    },
+    "network": {
+      "all": "Todas as redes",
+      "label": "Rede",
+      "placeholder": "Todas as redes"
+    },
+    "balanceFilter": {
+      "label": "Filtrar Saldo",
+      "all": "Todos",
+      "with": "Apenas com saldo",
+      "without": "Apenas sem saldo"
+    },
+    "tokens": {
+      "label": "Tokens",
+      "placeholder": "Selecione os tokens para exibir (todos se vazio)",
+      "selectAll": "Selecionar todos",
+      "deselectAll": "Limpar"
+    },
+    "clear": "Limpar",
+    "apply": "Aplicar"
+  },
+  "table": {
+    "title": "Relatório Detalhado",
+    "loading": "Carregando...",
+    "totals": "TOTAL",
+    "columns": {
+      "user": "Usuário",
+      "company": "Empresa",
+      "balance": "Saldo",
+      "stake": "Stake",
+      "order": "Ordem",
+      "total": "Total"
+    },
+    "empty": {
+      "title": "Nenhum dado encontrado",
+      "description": "Ajuste os filtros ou aguarde o carregamento dos dados"
+    }
+  },
+  "buttons": {
+    "exportCSV": "Exportar CSV",
+    "refresh": "Atualizar",
+    "syncBlockchain": "Sincronizar Blockchain"
+  },
+  "messages": {
+    "loadError": "Erro ao carregar relatório financeiro",
+    "exportSuccess": "Relatório exportado com sucesso",
+    "syncStarted": "Sincronização iniciada. Os dados serão atualizados em breve.",
+    "syncError": "Erro ao sincronizar com blockchain"
+  },
+  "history": {
+    "title": "Histórico",
+    "deposits": "Depósitos",
+    "withdrawals": "Saques",
+    "transfersSent": "Enviou",
+    "transfersReceived": "Recebeu"
+  },
+  "orders": {
+    "active": "Ordens Ativas",
+    "cancelled": "Ordens Canceladas",
+    "executed": "Ordens Executadas",
+    "type": "Tipo",
+    "side": "Lado",
+    "price": "Preço",
+    "amount": "Quantidade",
+    "remaining": "Restante",
+    "exchange": "Exchange",
+    "pair": "Par",
+    "additionalTrades": "+ {{count}} trades adicionais"
+  },
+  "stakes": {
+    "active": "Stakes Ativos",
+    "contract": "Contrato",
+    "token": "Token",
+    "balance": "Saldo",
+    "network": "Rede",
+    "address": "Endereço"
+  }
+}

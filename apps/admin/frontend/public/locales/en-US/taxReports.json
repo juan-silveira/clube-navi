@@ -1,0 +1,30 @@
+{
+  "income": {
+    "title": "Income Report",
+    "subtitle": "View and export your income by calendar year",
+    "selectYear": "Select Year",
+    "downloadPDF": "Download PDF",
+    "downloading": "Downloading...",
+    "loading": "Loading report...",
+    "errorTitle": "Error loading report",
+    "balancesSummary": "Balance Summary",
+    "initialBalance": "Initial Balance",
+    "finalBalance": "Final Balance",
+    "token": "Token",
+    "balance": "Balance",
+    "noBalance": "No balance",
+    "earningsByProduct": "Earnings by Product",
+    "totalReceived": "Total Received",
+    "approximateValue": "Approximate Value",
+    "noEarnings": "No earnings registered in this period",
+    "totals": "Totals",
+    "total": "Total",
+    "grandTotal": "GRAND TOTAL",
+    "note": "Note",
+    "noteText": "Values in Brazilian Real (BRL) are approximate, based on the exchange rates from the last day of the calendar year.",
+    "legalNote": "This document serves only as an income report and does not replace the official tax return."
+  },
+  "errors": {
+    "downloadFailed": "Failed to download PDF. Please try again."
+  }
+}

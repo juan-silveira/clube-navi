@@ -1,0 +1,308 @@
+{
+  "info": {
+    "name": "🏢 Gerenciamento de Company",
+    "description": "Endpoints para gerenciamento de empresas da API Azore Blockchain",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "{{base_url}}",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "type": "string"
+    },
+    {
+      "key": "company_id",
+      "value": "{{company_id}}",
+      "type": "string"
+    },
+    {
+      "key": "company_name",
+      "value": "{{company_name}}",
+      "type": "string"
+    },
+    {
+      "key": "page",
+      "value": "{{page}}",
+      "type": "string"
+    },
+    {
+      "key": "limit",
+      "value": "{{limit}}",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"{{company_name}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Companies",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies?page={{page}}&limit={{limit}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies"],
+          "query": [
+            {
+              "key": "page",
+              "value": "{{page}}"
+            },
+            {
+              "key": "limit",
+              "value": "{{limit}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Company by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Company",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"{{company_name}} Atualizado\",\n  \"isActive\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deactivate Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/deactivate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "deactivate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Activate Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/activate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "activate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Rate Limits",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rateLimit\": {\n    \"requestsPerMinute\": 100,\n    \"requestsPerHour\": 1000,\n    \"requestsPerDay\": 10000\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/rate-limits",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "rate-limits"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Company Usage Stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/usage-stats",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "usage-stats"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Company Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/users?page={{page}}&limit={{limit}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "users"],
+          "query": [
+            {
+              "key": "page",
+              "value": "{{page}}"
+            },
+            {
+              "key": "limit",
+              "value": "{{limit}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Company Users Stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/users/stats",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "users", "stats"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Company Requests Stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/{{company_id}}/requests/stats?period=day",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "{{company_id}}", "requests", "stats"],
+          "query": [
+            {
+              "key": "period",
+              "value": "day"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Companies Service",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/companies/test/service",
+          "host": ["{{base_url}}"],
+          "path": ["api", "companies", "test", "service"]
+        }
+      },
+      "response": []
+    }
+  ]
+} 

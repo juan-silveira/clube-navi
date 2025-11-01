@@ -1,0 +1,26 @@
+{
+  "withdrawal": {
+    "confirmed": {
+      "title": "Retiro Confirmado",
+      "message": "¡Su retiro de R$ {{amount}} fue procesado exitosamente!\n\nDestino: {{pixKey}}\nProcesado en: {{completedAt}}\nID de transacción: {{endToEndId}}"
+    }
+  },
+  "balance": {
+    "received": {
+      "title": "Recepción de {{tokenSymbol}}",
+      "message": "Su billetera **{{walletAddress}}** recibió **{{amount}} {{tokenSymbol}}**. Saldo anterior: **{{oldBalance}}**, Saldo actual: **{{newBalance}}**."
+    },
+    "sent": {
+      "title": "Transferencia de {{tokenSymbol}}",
+      "message": "Su billetera **{{walletAddress}}** transfirió **{{amount}} {{tokenSymbol}}**. Saldo actual: **{{newBalance}}**."
+    },
+    "changed": {
+      "title": "Cambio en el saldo de {{tokenSymbol}}",
+      "message": "Su saldo del token **{{tokenSymbol}}** {{changeType}} de **{{oldAmount}}** a **{{newAmount}}** ({{changePercent}}%)."
+    }
+  },
+  "changeTypes": {
+    "increased": "aumentó",
+    "decreased": "disminuyó"
+  }
+}

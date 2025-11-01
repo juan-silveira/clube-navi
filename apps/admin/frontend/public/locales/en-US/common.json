@@ -1,0 +1,42 @@
+{
+  "alerts": {
+    "info": "Information",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning"
+  },
+  "labels": {
+    "date": "Date",
+    "name": "Name",
+    "email": "Email",
+    "amount": "Amount",
+    "status": "Status",
+    "actions": "Actions",
+    "balance": "Balance",
+    "password": "Password",
+    "description": "Description"
+  },
+  "buttons": {
+    "back": "Back",
+    "edit": "Edit",
+    "next": "Next",
+    "save": "Save",
+    "close": "Close",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "search": "Search",
+    "submit": "Submit",
+    "confirm": "Confirm"
+  },
+  "login": {
+    "success": "Login successful",
+    "welcome": "Welcome, {{name}}!"
+  },
+  "messages": {
+    "error": "An error occurred",
+    "noData": "No data found",
+    "loading": "Loading...",
+    "success": "Operation completed successfully",
+    "confirmDelete": "Are you sure you want to delete?"
+  }
+}

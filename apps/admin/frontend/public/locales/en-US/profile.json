@@ -1,0 +1,57 @@
+{
+  "info": {
+    "cpf": "CPF",
+    "email": "EMAIL",
+    "phone": "PHONE",
+    "title": "Info",
+    "active": "Active",
+    "status": "STATUS",
+    "inactive": "Inactive",
+    "birthDate": "BIRTH DATE",
+    "publicKey": "PUBLIC KEY",
+    "currentCompany": "CURRENT COMPANY"
+  },
+  "pageTitle": "User Profile",
+  "roles": {
+    "USER": "User",
+    "ADMIN": "Company Admin",
+    "APP_ADMIN": "Coinage Admin",
+    "SUPER_ADMIN": "Super Admin"
+  },
+  "defaultUser": "User",
+  "notInformed": "Not informed",
+  "balances": {
+    "AZE": "Azore Coin Balance (AZE)",
+    "cBRL": "Digital Real Balance (cBRL)",
+    "title": "Current Balances",
+    "table": {
+      "logo": "Logo",
+      "name": "Name",
+      "symbol": "Symbol",
+      "address": "Address:",
+      "balance": "Balance",
+      "network": "Network:",
+      "noBalance": "No balance available. Please login to view your balances.",
+      "totalTokens": "Total Tokens:"
+    }
+  },
+  "pixKeys": {
+    "title": "PIX Keys",
+    "noKeys": "No PIX keys registered",
+    "remove": "Remove",
+    "default": "Default",
+    "addButton": "Add",
+    "types": {
+      "cpf": "CPF",
+      "email": "Email",
+      "phone": "Phone",
+      "random": "Random Key"
+    },
+    "setDefault": "Set as default",
+    "errorRemove": "Error removing PIX key",
+    "registeredAt": "Registered on",
+    "registerFirst": "Register first key",
+    "errorSetDefault": "Error setting default key"
+  },
+  "roleNotDefined": "Role not defined"
+}

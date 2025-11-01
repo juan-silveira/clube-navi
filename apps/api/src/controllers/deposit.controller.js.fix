@@ -1,0 +1,146 @@
+// Adicionar este método no deposit.controller.js após o método getDepositStatus
+
+  /**
+   * Regenerar QR Code PIX para transação existente
+   */
+  async regeneratePixQrCode(req, res) {
+    try {
+      const { transactionId } = req.params;
+      
+      // Buscar transação
+      const transaction = await prisma.transaction.findUnique({
+        where: { id: transactionId },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              cpf: true,
+              phone: true
+            }
+          }
+        }
+      });
+      
+      if (!transaction) {
+        return res.status(404).json({
+          success: false,
+          message: 'Transação não encontrada'
+        });
+      }
+      
+      // Se já tem QR Code válido, retornar
+      if (transaction.metadata?.qrCodeImage && transaction.metadata?.pixCode) {
+        return res.json({
+          success: true,
+          data: {
+            transactionId: transaction.id,
+            pixCode: transaction.metadata.pixCode,
+            qrCodeImage: transaction.metadata.qrCodeImage,
+            totalAmount: parseFloat(transaction.amount) + parseFloat(transaction.fee || 0)
+          }
+        });
+      }
+      
+      // Se tem PIX ID mas não tem QR Code, buscar no Asaas
+      if (transaction.pix_transaction_id) {
+        try {
+          const pixService = require('../services/pix.service');
+          const config = pixService.providerConfig.asaas;
+          const apiKey = process.env.ASAAS_API_KEY;
+          
+          // Buscar QR Code do pagamento existente
+          const qrCodeResponse = await axios.get(
+            `${config.baseUrl}/payments/${transaction.pix_transaction_id}/pixQrCode`,
+            {
+              headers: {
+                'access_token': apiKey
+              }
+            }
+          );
+          
+          const qrCodeData = qrCodeResponse.data;
+          
+          // Atualizar metadata com QR Code
+          await prisma.transaction.update({
+            where: { id: transactionId },
+            data: {
+              metadata: {
+                ...transaction.metadata,
+                pixCode: qrCodeData.payload,
+                qrCodeImage: qrCodeData.encodedImage,
+                expiresAt: qrCodeData.expirationDate
+              }
+            }
+          });
+          
+          return res.json({
+            success: true,
+            data: {
+              transactionId: transaction.id,
+              pixCode: qrCodeData.payload,
+              qrCodeImage: qrCodeData.encodedImage,
+              totalAmount: parseFloat(transaction.amount) + parseFloat(transaction.fee || 0)
+            }
+          });
+          
+        } catch (error) {
+          console.error('Erro ao buscar QR Code no Asaas:', error.response?.data);
+        }
+      }
+      
+      // Se não tem PIX criado, criar novo
+      const totalAmount = parseFloat(transaction.amount) + parseFloat(transaction.fee || 0);
+      const pixService = require('../services/pix.service');
+      
+      const pixCharge = await pixService.createPixCharge({
+        amount: totalAmount,
+        description: `Depósito cBRL - ${transaction.user.name}`,
+        userInfo: {
+          id: transaction.user.id,
+          name: transaction.user.name,
+          email: transaction.user.email,
+          cpf: transaction.user.cpf,
+          phone: transaction.user.phone
+        },
+        externalId: transaction.id,
+        expirationMinutes: 30
+      });
+      
+      // Atualizar transação
+      await prisma.transaction.update({
+        where: { id: transactionId },
+        data: {
+          pix_transaction_id: pixCharge.paymentId,
+          metadata: {
+            ...transaction.metadata,
+            pixPaymentId: pixCharge.paymentId,
+            pixCode: pixCharge.pixCode,
+            qrCodeImage: pixCharge.qrCodeImage,
+            expiresAt: pixCharge.expiresAt,
+            asaasData: pixCharge.asaasData
+          }
+        }
+      });
+      
+      return res.json({
+        success: true,
+        data: {
+          transactionId: transaction.id,
+          pixCode: pixCharge.pixCode,
+          qrCodeImage: pixCharge.qrCodeImage,
+          totalAmount: totalAmount,
+          message: 'QR Code regenerado com sucesso'
+        }
+      });
+      
+    } catch (error) {
+      console.error('Erro ao regenerar QR Code:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Erro ao regenerar QR Code',
+        error: error.message
+      });
+    }
+  }

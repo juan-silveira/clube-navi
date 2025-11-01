@@ -1,0 +1,89 @@
+{
+  "title": "Mensajes WhatsApp",
+  "subtitle": "Envíe mensajes de WhatsApp a usuarios seleccionados",
+  "tips": {
+    "tip1": "Use plantillas para agilizar el envío de mensajes comunes",
+    "tip2": "La variable {{nome}} será reemplazada automáticamente por el nombre de cada destinatario",
+    "tip3": "Solo los usuarios con número de teléfono registrado pueden recibir mensajes",
+    "tip4": "Puede editar las plantillas antes de enviar para personalizar el mensaje"
+  },
+  "cards": {
+    "tips": "Consejos",
+    "history": "Historial de Mensajes",
+    "sendMessage": "Enviar Mensaje"
+  },
+  "status": {
+    "sent": "Enviado",
+    "failed": "Falló",
+    "partial": "Parcial"
+  },
+  "buttons": {
+    "next": "Siguiente",
+    "sending": "Enviando...",
+    "previous": "Anterior",
+    "selectAll": "Seleccionar Todos",
+    "deselectAll": "Deseleccionar Todos",
+    "hideHistory": "Ocultar Historial",
+    "sendMessage": "Enviar Mensaje",
+    "showHistory": "Ver Historial"
+  },
+  "history": {
+    "sent": "{{count}} enviado(s)",
+    "empty": "Aún no se han enviado mensajes",
+    "failed": "{{count}} fallaron",
+    "loading": "Cargando historial...",
+    "pagination": "Página {{current}} de {{total}}",
+    "recipients": "{{count}} destinatario(s)"
+  },
+  "success": {
+    "allSent": "¡Mensaje enviado con éxito a {{count}} usuario(s)!",
+    "allFailed": "Error al enviar mensaje a todos los {{count}} destinatario(s)",
+    "partialSent": "Mensaje enviado a {{success}} usuario(s). {{failed}} fallaron."
+  },
+  "errors": {
+    "loadUsers": "Error al cargar usuarios",
+    "noMessage": "Escriba un mensaje",
+    "sendError": "Error al enviar mensaje",
+    "loadHistory": "Error al cargar historial",
+    "noRecipients": "Seleccione al menos un destinatario",
+    "loadTemplates": "Error al cargar plantillas"
+  },
+  "form": {
+    "message": {
+      "label": "Mensaje",
+      "characters": "{{count}} caracteres",
+      "placeholder": "Escriba su mensaje aquí...\n\nPuede usar la siguiente variable:\n{{nome}} - Nombre del usuario\n\nEjemplo:\n¡Hola, {{nome}}! Bienvenido a la plataforma."
+    },
+    "templates": {
+      "label": "Plantillas (opcional)"
+    },
+    "recipients": {
+      "label": "Destinatarios",
+      "selected": "{{count}} usuario(s) seleccionado(s)",
+      "placeholder": "Buscar y seleccionar usuarios..."
+    }
+  },
+  "stats": {
+    "usersWithPhone": "Usuarios con teléfono",
+    "usersWithoutPhone": "{{count}} sin teléfono",
+    "templatesAvailable": "Plantillas disponibles"
+  },
+  "templateNames": {
+    "Boas-vindas": "Bienvenida",
+    "Comunicado Geral": "Comunicado General",
+    "Manutenção Programada": "Mantenimiento Programado",
+    "Lembrete de Documentos": "Recordatorio de Documentos",
+    "Aprovação de Documentação": "Aprobación de Documentación",
+    "Mensagem Personalizada": "Mensaje Personalizado",
+    "Lembrete de Saque Pendente": "Recordatorio de Retiro Pendiente"
+  },
+  "templateMessages": {
+    "welcome": "👋 *¡Bienvenido a Coinage!*\n\n¡Hola, {{nome}}!\n\nEstamos felices de tenerte con nosotros. Nuestra plataforma ofrece las mejores soluciones en criptomonedas.\n\n¡Si necesitas ayuda, estamos a tu disposición!",
+    "document_reminder": "📄 *Recordatorio de Documentación*\n\n¡Hola, {{nome}}!\n\nNotamos que aún no has enviado todos los documentos necesarios para la validación de tu cuenta.\n\nPor favor, accede al sistema y completa tu registro para tener acceso total a la plataforma.",
+    "document_approved": "✅ *Aprobación de Documentación de Coinage*\n\n¡Hola, {{nome}}!\n\nTodos los documentos necesarios para la validación de tu cuenta han sido aprobados.\n\nAhora tienes acceso total a la plataforma.",
+    "withdrawal_reminder": "💰 *Retiro Pendiente*\n\n¡Hola, {{nome}}!\n\nTienes un retiro pendiente de aprobación. Estamos analizando tu solicitud y pronto responderemos.\n\n¡Verifica el estado en el sistema!",
+    "general_announcement": "📢 *Comunicado Importante*\n\n¡Hola, {{nome}}!\n\n[Escribe aquí el contenido del comunicado]\n\nAtentamente,\nEquipo Coinage",
+    "maintenance": "🔧 *Mantenimiento Programado*\n\n¡Hola!\n\nInformamos que realizaremos un mantenimiento programado el {{data}} a las {{hora}}.\n\nDurante este período, algunos servicios pueden estar temporalmente no disponibles.\n\n¡Contamos con tu comprensión!",
+    "custom": ""
+  }
+}

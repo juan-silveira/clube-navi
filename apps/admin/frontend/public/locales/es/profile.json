@@ -1,0 +1,57 @@
+{
+  "info": {
+    "cpf": "CPF",
+    "email": "EMAIL",
+    "phone": "TELÉFONO",
+    "title": "Info",
+    "active": "Activo",
+    "status": "ESTADO",
+    "inactive": "Inactivo",
+    "birthDate": "FECHA DE NACIMIENTO",
+    "publicKey": "CLAVE PÚBLICA",
+    "currentCompany": "EMPRESA ACTUAL"
+  },
+  "pageTitle": "Perfil de Usuario",
+  "roles": {
+    "USER": "Usuario",
+    "ADMIN": "Admin de la Empresa",
+    "APP_ADMIN": "Admin Coinage",
+    "SUPER_ADMIN": "Super Admin"
+  },
+  "defaultUser": "Usuario",
+  "notInformed": "No informado",
+  "balances": {
+    "AZE": "Saldo de Coin Azore (AZE)",
+    "cBRL": "Saldo en Real Digital (cBRL)",
+    "title": "Saldos Actuales",
+    "table": {
+      "logo": "Logo",
+      "name": "Nombre",
+      "symbol": "Símbolo",
+      "address": "Dirección:",
+      "balance": "Saldo",
+      "network": "Red:",
+      "noBalance": "No hay saldo disponible. Inicie sesión para ver sus saldos.",
+      "totalTokens": "Total de Tokens:"
+    }
+  },
+  "pixKeys": {
+    "title": "Claves PIX",
+    "noKeys": "Ninguna clave PIX registrada",
+    "remove": "Eliminar",
+    "default": "Predeterminada",
+    "addButton": "Agregar",
+    "types": {
+      "cpf": "CPF",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "random": "Clave Aleatoria"
+    },
+    "setDefault": "Establecer como predeterminada",
+    "errorRemove": "Error al eliminar clave PIX",
+    "registeredAt": "Registrada el",
+    "registerFirst": "Registrar primera clave",
+    "errorSetDefault": "Error al establecer clave predeterminada"
+  },
+  "roleNotDefined": "Rol no definido"
+}

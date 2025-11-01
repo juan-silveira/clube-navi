@@ -1,0 +1,191 @@
+{
+  "title": "Gestão de Empresas",
+  "subtitle": "Gerencie todas as empresas e suas configurações de whitelabel",
+  "stats": {
+    "total": "Total",
+    "active": "Ativas",
+    "inactive": "Inativas",
+    "customBranding": "Personalizadas",
+    "defaultBranding": "Padrão"
+  },
+  "table": {
+    "title": "Empresas",
+    "loading": "Carregando empresas...",
+    "empty": {
+      "title": "Nenhuma empresa encontrada",
+      "subtitle": "Tente ajustar os filtros para ver mais resultados"
+    },
+    "stats": {
+      "users": "usuários",
+      "transactions": "transações"
+    },
+    "columns": {
+      "stats": "Estatísticas",
+      "status": "Status",
+      "actions": "Ações",
+      "company": "Empresa",
+      "activity": "Atividade",
+      "branding": "Personalização"
+    },
+    "activity": {
+      "today": "Hoje",
+      "active": "Ativo:",
+      "created": "Criado:",
+      "daysAgo": "{{days}} dias atrás",
+      "noRecentActivity": "Sem atividade recente"
+    },
+    "pagination": {
+      "showing": "Exibindo {{from}} ao {{to}} de {{total}} registros",
+      "perPage10": "10 por página",
+      "perPage20": "20 por página",
+      "perPage50": "50 por página",
+      "perPage100": "100 por página"
+    },
+    "brandingStatus": {
+      "custom": "Personalizada",
+      "default": "Padrão"
+    }
+  },
+  "buttons": {
+    "save": "Salvar Configurações",
+    "clear": "Limpar",
+    "cancel": "Cancelar",
+    "upload": "Clique para enviar",
+    "refresh": "Atualizar",
+    "exportCSV": "Exportar CSV"
+  },
+  "status": {
+    "active": "Ativo",
+    "pending": "Pendente",
+    "inactive": "Inativo"
+  },
+  "actions": {
+    "activate": "Ativar",
+    "deactivate": "Desativar",
+    "editBranding": "Editar Branding",
+    "manageStakes": "Gestão de Stakes"
+  },
+  "filters": {
+    "status": {
+      "all": "Todos os Status",
+      "label": "Status",
+      "placeholder": "Status"
+    },
+    "branding": {
+      "all": "Todas",
+      "label": "Personalização",
+      "custom": "Personalizada",
+      "default": "Padrão",
+      "placeholder": "Branding"
+    },
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Nome ou alias da empresa"
+    },
+    "activeFilters": "Filtros ativos",
+    "lastActivity": {
+      "label": "Última Atividade",
+      "lastDay": "Último dia",
+      "anyPeriod": "Qualquer período",
+      "last7Days": "Últimos 7 dias",
+      "last30Days": "Últimos 30 dias",
+      "last90Days": "Últimos 90 dias",
+      "placeholder": "Período"
+    },
+    "activeLabels": {
+      "search": "Busca",
+      "status": "Status",
+      "activity": "Atividade",
+      "branding": "Branding"
+    }
+  },
+  "messages": {
+    "loadError": "Erro ao carregar empresas",
+    "saveError": "Erro ao salvar configurações",
+    "actionError": "Erro ao executar ação",
+    "saveSuccess": "Configurações de branding salvas com sucesso!",
+    "uploadError": "Erro ao enviar arquivo",
+    "noPermission": "Você não tem permissão para esta ação",
+    "activateError": "Erro ao ativar empresa",
+    "uploadSuccess": "{{assetType}} enviado com sucesso!",
+    "uploadingAsset": "Enviando {{assetType}}...",
+    "activateSuccess": "{{name}} foi ativada",
+    "deactivateError": "Erro ao desativar empresa",
+    "deactivateSuccess": "{{name}} foi desativada"
+  },
+  "branding": {
+    "modalTitle": "Configuração de Branding",
+    "colors": {
+      "text": "Cor do Texto",
+      "accent": "Cor de Destaque",
+      "primary": "Cor Primária",
+      "secondary": "Cor Secundária",
+      "background": "Cor de Fundo"
+    },
+    "images": {
+      "width": "Largura",
+      "height": "Altura",
+      "favicon": "Favicon",
+      "darkLogo": "Logo Escura",
+      "mainLogo": "Logo Principal",
+      "dimensionsTip": "Use \"100%\" para preencher todo o espaço disponível, ou valores em pixels para tamanhos fixos. \"auto\" mantém a proporção original.",
+      "dimensionsHint": "Use %, px ou auto",
+      "urlPlaceholder": "URL da imagem",
+      "backgroundImage": "Imagem de Fundo",
+      "widthPlaceholder": "Ex: 100%, 500px, auto",
+      "heightPlaceholder": "Ex: 100%, 400px, auto",
+      "backgroundDimensions": "Dimensões da Imagem de Fundo"
+    },
+    "layout": {
+      "style": "Estilo de Layout",
+      "fontSize": "Tamanho da Fonte",
+      "borderRadius": "Bordas Arredondadas (px)",
+      "styles": {
+        "default": "Padrão",
+        "sidebar": "Lateral",
+        "centered": "Centralizado",
+        "fullscreen": "Tela Cheia"
+      },
+      "fontSizes": {
+        "large": "Grande",
+        "small": "Pequeno",
+        "medium": "Médio"
+      },
+      "borderRadiusPlaceholder": "8"
+    },
+    "urls": {
+      "support": "URL de Suporte",
+      "privacyPolicy": "Política de Privacidade",
+      "termsOfService": "Termos de Serviço",
+      "supportPlaceholder": "https://support.empresa.com",
+      "privacyPolicyPlaceholder": "https://empresa.com/privacy",
+      "termsOfServicePlaceholder": "https://empresa.com/terms"
+    },
+    "sections": {
+      "urls": "URLs",
+      "texts": "Textos",
+      "colors": "Cores",
+      "images": "Imagens",
+      "layout": "Layout e Estilo",
+      "preview": "Preview"
+    },
+    "preview": {
+      "mobile": "Mobile",
+      "desktop": "Desktop"
+    },
+    "texts": {
+      "brandName": "Nome da Marca",
+      "footerText": "Texto do Rodapé",
+      "loginTitle": "Título da Tela de Login",
+      "contactEmail": "Email de Contato",
+      "loginSubtitle": "Subtítulo da Tela de Login",
+      "welcomeMessage": "Mensagem de Boas-vindas",
+      "brandNamePlaceholder": "Nome da marca",
+      "footerTextPlaceholder": "© 2025 Empresa. Todos os direitos reservados.",
+      "loginTitlePlaceholder": "Bem-vindo à Coinage",
+      "contactEmailPlaceholder": "support@empresa.com",
+      "loginSubtitlePlaceholder": "Plataforma líder em blockchain",
+      "welcomeMessagePlaceholder": "Bem-vindo! Sua plataforma confiável..."
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "title": "Depósito",
+  "subtitle": "Agregue fondos a su cuenta Coinage en Reales",
+  "pageTitle": "Depósito",
+  "step2": {
+    "fee": "Tarifa (R$ 3,00 fija):",
+    "title": "Revisar Depósito",
+    "subtitle": "Revise los detalles antes de confirmar",
+    "vipLevel": "VIP {{level}}",
+    "backButton": "Volver",
+    "processing": "Procesando...",
+    "totalToPay": "Monto Total a Pagar:",
+    "calculating": "Calculando tarifas...",
+    "finalAmount": "Monto Final (cBRL):",
+    "depositButton": "Realizar Depósito",
+    "desiredAmount": "Monto Deseado:",
+    "importantNote": "Importante:",
+    "importantText": "El monto se convertirá a cBRL en la blockchain Azore después de la confirmación del pago."
+  },
+  "step1": {
+    "title": "Monto del Depósito",
+    "subtitle": "Ingrese el monto que desea depositar en Reales",
+    "minAmount": "Monto mínimo: R$ 0,01",
+    "amountLabel": "Monto (R$)",
+    "continueButton": "Continuar",
+    "depositTokensButton": "Depositar Tokens"
+  },
+  "steps": {
+    "amount": "Monto",
+    "confirmation": "Confirmación"
+  },
+  "tokenModal": {
+    "name": "Nombre:",
+    "howTo": "Cómo depositar tokens",
+    "title": "Depositar Tokens",
+    "rpcUrl": "RPC URL:",
+    "symbol": "Símbolo:",
+    "chainId": "Chain ID:",
+    "explorer": "Explorador:",
+    "closeButton": "Cerrar",
+    "description": "Para depositar tokens, necesita tener la red Azore configurada en su",
+    "networkData": "Datos de la red Azore:",
+    "yourAddress": "Su Dirección",
+    "addToMetamask": "Agregar a MetaMask"
+  },
+  "messages": {
+    "apiError": "Error de API",
+    "errorTitle": "Error en el depósito",
+    "depositError": "Error al procesar el depósito",
+    "invalidValue": "Valor inválido",
+    "networkAdded": "¡Red Azore agregada!",
+    "successTitle": "¡Depósito iniciado con éxito!",
+    "invalidAmount": "Por favor, ingrese un monto válido de al menos R$ 0,01",
+    "networkExists": "La red ya existe",
+    "tryAgainLater": "Inténtelo de nuevo más tarde.",
+    "successMessage": "Redirigiendo al pago PIX...",
+    "installMetamask": "Por favor, instale MetaMask para continuar.",
+    "metamaskNotFound": "MetaMask no encontrada",
+    "errorAddingNetwork": "Error al agregar red",
+    "networkAddedMessage": "La red Azore se ha agregado a su MetaMask.",
+    "networkExistsMessage": "La red Azore ya está configurada en su MetaMask.",
+    "apiCommunicationError": "Error de comunicación con la API",
+    "transactionIdNotFound": "ID de transacción no encontrado en la respuesta",
+    "errorAddingNetworkMessage": "No se pudo agregar la red Azore."
+  }
+}

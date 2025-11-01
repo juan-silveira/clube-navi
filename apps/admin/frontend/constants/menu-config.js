@@ -1,0 +1,213 @@
+/**
+ * Configuração dos menus com suporte a internacionalização
+ * Use getMenuItems(t) para obter os menus traduzidos
+ */
+
+export const getMenuItems = (t) => [
+  {
+    isHeadr: true,
+    title: t('menu:sections.menu'),
+  },
+  {
+    title: t('menu:items.dashboard'),
+    icon: "heroicons-outline:home",
+    isHide: true,
+    link: "/dashboard",
+  },
+  {
+    title: t('menu:items.adminDashboard'),
+    icon: "heroicons:chart-bar-square",
+    isHide: true,
+    link: "/dashboard/admin",
+    adminOnly: true,
+  },
+  {
+    isHeadr: true,
+    title: t('menu:sections.financial'),
+  },
+  {
+    title: t('menu:items.withdraw'),
+    isHide: true,
+    icon: "fa6-brands:pix",
+    link: "/withdraw",
+  },
+  {
+    title: t('menu:items.deposit'),
+    isHide: true,
+    icon: "heroicons-outline:arrow-down-on-square",
+    link: "/deposit",
+  },
+  {
+    title: t('menu:items.transfer'),
+    isHide: true,
+    icon: "heroicons-outline:switch-horizontal",
+    link: "/transfer",
+  },
+  {
+    title: t('menu:items.exchange'),
+    isHide: true,
+    icon: "material-symbols:currency-exchange-rounded",
+    link: "/exchange",
+  },
+  {
+    title: t('menu:items.statement'),
+    isHide: true,
+    icon: "heroicons-outline:banknotes",
+    link: "/statement",
+  },
+  {
+    title: t('menu:items.incomeReport'),
+    isHide: true,
+    icon: "heroicons-outline:document-chart-bar",
+    link: "/tax-reports/income",
+  },
+  {
+    isHeadr: true,
+    title: t('menu:sections.investments'),
+  },
+  {
+    title: t('menu:items.investments'),
+    isHide: true,
+    icon: "heroicons-outline:trending-up",
+    link: "/investments",
+  },
+  {
+    isHeadr: true,
+    title: t('menu:sections.userSettings'),
+  },
+  {
+    title: t('menu:items.accountData'),
+    isHide: true,
+    icon: "heroicons-outline:user-circle",
+    link: "/profile",
+  },
+  {
+    title: t('menu:items.documentValidation'),
+    isHide: true,
+    icon: "heroicons-outline:identification",
+    link: "/document-validation",
+  },
+  {
+    title: t('menu:items.feesAndDeadlines'),
+    isHide: true,
+    icon: "heroicons-outline:currency-dollar",
+    link: "/fees",
+  },
+  {
+    title: t('menu:items.security'),
+    isHide: true,
+    icon: "heroicons-outline:shield-check",
+    link: "/security"
+  },
+  {
+    isHeadr: true,
+    title: t('menu:sections.companySettings'),
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    title: t('menu:items.userSearch'),
+    isHide: true,
+    icon: "heroicons-outline:search",
+    link: "/admin/users",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    title: t('menu:items.companyTransactions'),
+    isHide: true,
+    icon: "heroicons-outline:credit-card",
+    link: "/admin/transactions",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    title: t('menu:items.stakesManagement'),
+    isHide: true,
+    icon: "heroicons-outline:chart-pie",
+    link: "/admin/company-stakes",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    isHeadr: true,
+    title: t('menu:sections.systemSettings'),
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.userManagement'),
+    isHide: true,
+    icon: "heroicons-outline:users",
+    link: "/system/users",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.companyManagement'),
+    isHide: true,
+    icon: "heroicons-outline:building-office",
+    link: "/admin/companies",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.documentValidationSystem'),
+    isHide: true,
+    icon: "heroicons-outline:identification",
+    link: "/system/document-validation",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.withdrawalManagement'),
+    isHide: true,
+    icon: "heroicons-outline:banknotes",
+    link: "/system/withdrawals",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.whatsappMessages'),
+    isHide: true,
+    icon: "fa6-brands:whatsapp",
+    link: "/system/whatsapp",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.financialReports'),
+    isHide: true,
+    icon: "heroicons-outline:document-chart-bar",
+    link: "/system/financial-report",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.globalSettings'),
+    isHide: true,
+    icon: "heroicons-outline:cog-6-tooth",
+    link: "/system/settings",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.contractDeploy'),
+    isHide: true,
+    icon: "heroicons:rocket-launch",
+    link: "/system/contracts/deploy",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.contractInteraction'),
+    isHide: true,
+    icon: "heroicons-outline:code-bracket",
+    link: "/contracts/interact",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.translations'),
+    isHide: true,
+    icon: "heroicons-outline:language",
+    link: "/system/translations",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    isHeadr: true,
+    title: t('menu:sections.support'),
+  },
+  {
+    title: t('menu:items.helpCenter'),
+    isHide: true,
+    icon: "heroicons-outline:question-mark-circle",
+    link: "/help",
+  },
+];

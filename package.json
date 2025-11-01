@@ -1,0 +1,48 @@
+{
+  "name": "clube-navi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Clube Navi - Plataforma whitelabel de clube de benefícios com carteira digital blockchain",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "setup:env": "node scripts/setup-env.js",
+    "dev": "turbo run dev",
+    "dev:all": "concurrently -n \"API,FRONTEND\" -c \"blue,magenta\" \"npm run dev:api\" \"npm run dev:frontend\"",
+    "dev:full": "concurrently -n \"API,FRONTEND,MOBILE\" -c \"blue,magenta,green\" \"npm run dev:api\" \"npm run dev:frontend\" \"npm run dev:mobile\"",
+    "dev:api": "cd apps/api && npm run dev",
+    "dev:frontend": "cd apps/admin/frontend && npm run dev -- -p 3033",
+    "dev:mobile": "cd apps/mobile && npm run start",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "turbo run type-check",
+    "dev:admin": "cd apps/admin && npm run dev",
+    "ios": "cd apps/mobile && npm run ios",
+    "android": "cd apps/mobile && npm run android",
+    "build:mobile:ios": "cd apps/mobile && eas build --platform ios",
+    "build:mobile:android": "cd apps/mobile && eas build --platform android",
+    "build:mobile:all": "cd apps/mobile && eas build --platform all"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^2.0.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.15.0",
+    "prettier": "^3.3.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "packageManager": "npm@10.8.1",
+  "dependencies": {
+    "@react-navigation/core": "^7.13.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}

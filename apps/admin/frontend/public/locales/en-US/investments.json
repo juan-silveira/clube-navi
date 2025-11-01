@@ -1,0 +1,440 @@
+{
+  "title": "My Investments",
+  "tabs": {
+    "fixed": "Fixed Income",
+    "stake": "Stake",
+    "crypto": "Crypto Assets",
+    "private": "Private Offers",
+    "analysis": "Analysis",
+    "variable": "Variable Income",
+    "portfolio": "My Portfolio",
+    "opportunities": "Opportunities"
+  },
+  "stake": {
+    "title": "Digital Asset Staking",
+    "loading": "Loading staking options...",
+    "risk": {
+      "low": "Low",
+      "high": "High",
+      "medium": "Medium",
+      "variable": "Variable"
+    },
+    "subtitle": "Lock your assets and receive periodic rewards",
+    "card": {
+      "risk": "Risk:",
+      "inStake": "In Stake:",
+      "maturity": "Maturity:",
+      "available": "Available:",
+      "toReceive": "To Receive",
+      "stakeButton": "Stake",
+      "withdrawButton": "Withdraw",
+      "quarterlyReturn": "Quarterly Return:"
+    },
+    "noDeadline": "No deadline",
+    "empty": {
+      "title": "No stake contract available",
+      "description": "There are no public stake contracts available at the moment"
+    },
+    "infoCard": {
+      "title": "How does Staking work?",
+      "benefit1": "Earnings paid periodically according to the chosen plan",
+      "benefit2": "Possibility to automatically reinvest earnings",
+      "benefit3": "Different levels of risk and return available",
+      "benefit4": "Early withdrawal subject to penalties",
+      "description": "Staking allows you to lock your digital assets for a specified period in exchange for periodic rewards. The longer the lock period, the higher the rewards."
+    },
+    "errors": {
+      "loadContracts": "Error loading stake contracts. Please try again later."
+    }
+  },
+  "analysis": {
+    "title": "Analysis and Insights",
+    "description": "This section will be available soon with detailed charts and market analysis.",
+    "inDevelopment": "Analysis in Development"
+  },
+  "crypto": {
+    "buyButton": "Buy",
+    "table": {
+      "asset": "Asset",
+      "price": "Price",
+      "market": "Market",
+      "actions": "Actions",
+      "payment": "Payment",
+      "daysRemaining": "Days Remaining",
+      "profitability": "Profitability"
+    },
+    "infoCard": {
+      "title": "About Crypto Assets",
+      "description": "Invest in digital assets with high appreciation potential. Crypto assets offer exposure to the digital currency market with different levels of risk and return."
+    },
+    "products": {
+      "monthly": "Monthly",
+      "bitcoinFuture": "Bitcoin Future",
+      "daysRemaining": "{{days}} days",
+      "primaryMarket": "Primary",
+      "bitcoinProfitability": "+200% in 2024"
+    }
+  },
+  "newInvestmentButton": "New Investment",
+  "opportunities": {
+    "price": "Price",
+    "title": "Investment Opportunities",
+    "marketCap": "Market Cap",
+    "investButton": "Invest",
+    "solana": {
+      "description": "High performance blockchain for DApps"
+    },
+    "polygon": {
+      "description": "Ethereum scalability solution"
+    },
+    "chainlink": {
+      "description": "Decentralized oracle network"
+    }
+  },
+  "fixedIncome": {
+    "buyButton": "Buy",
+    "table": {
+      "asset": "Asset",
+      "price": "Price",
+      "market": "Market",
+      "actions": "Actions",
+      "payment": "Payment",
+      "daysRemaining": "Days Remaining",
+      "profitability": "Profitability"
+    },
+    "empty": {
+      "title": "No fixed income investments available",
+      "description": "There are no fixed income products available at the moment"
+    },
+    "infoCard": {
+      "title": "About Digital Fixed Income",
+      "description": "Investments with predictable returns and lower volatility. Ideal for investors seeking security and consistent profitability with regular payments."
+    },
+    "products": {
+      "daily": "Daily",
+      "daysRemaining": "{{days}} days",
+      "primaryMarket": "Primary",
+      "coinageProfitability": "Return of 1.5% per month"
+    }
+  },
+  "pedacinhoPratique": {
+    "title": "My Pedacinho Pratique",
+    "risk": {
+      "low": "Low",
+      "high": "High",
+      "label": "Risk: {{level}}",
+      "medium": "Medium",
+      "veryLow": "Very Low",
+      "veryHigh": "Very High"
+    },
+    "card": {
+      "more": "More",
+      "risk": "Risk:",
+      "myStake": "My Stake:",
+      "nextDue": "Next Due:",
+      "buyButton": "Buy",
+      "toReceive": "{{symbol}} to receive",
+      "sellButton": "Sell",
+      "claimButton": "Claim",
+      "stakeButton": "Stake",
+      "tooltipInfo": "Smart stake contract for business participation investment.",
+      "totalStaked": "Total Staked:",
+      "errorLoading": "(Error loading some data)",
+      "lastQuarterly": "Last Quarterly:",
+      "unstakeButton": "Withdraw",
+      "compoundButton": "Compound",
+      "stakingBlocked": "Staking Blocked",
+      "statementsButton": "Recent Statements"
+    },
+    "pcnBalance": "PCN Balance",
+    "empty": {
+      "title": "No Pedacinho Pratique contract found",
+      "description": "There are no stake contracts with \"Pedacinho Pratique\" available at the moment"
+    },
+    "errors": {
+      "loadContracts": "Error loading Pedacinho Pratique contracts"
+    },
+    "statements": {
+      "modalTitle": "Statements - {{contractName}}",
+      "loading": "Loading statements...",
+      "noStatements": "No statements available",
+      "table": {
+        "date": "Date",
+        "name": "Name",
+        "type": "Type",
+        "file": "File",
+        "link": "Link",
+        "actions": "Actions"
+      },
+      "buttons": {
+        "open": "Open",
+        "download": "Download",
+        "openLink": "Open Link",
+        "close": "Close"
+      }
+    }
+  },
+  "variableIncome": {
+    "buyButton": "Buy",
+    "table": {
+      "asset": "Asset",
+      "price": "Price",
+      "market": "Market",
+      "actions": "Actions",
+      "payment": "Payment",
+      "daysRemaining": "Days Remaining",
+      "profitability": "Profitability"
+    },
+    "empty": {
+      "title": "No variable income investments available",
+      "description": "There are no variable income products available at the moment"
+    },
+    "closedButton": "Closed",
+    "infoCard": {
+      "title": "About Digital Variable Income",
+      "description": "Products with variable returns based on royalties and participations. Offers potential for higher profitability with periodic payments linked to asset performance."
+    },
+    "products": {
+      "closed": "Closed",
+      "biannual": "Biannual",
+      "finished": "Finished",
+      "quarterly": "Quarterly",
+      "daysRemaining": "{{days}} days",
+      "primaryMarket": "Primary",
+      "imbProfitability": "Approx. 20% per year + IGPM Adjustment",
+      "mjdProfitability": "Royalties up to 17% per year"
+    }
+  },
+  "privateOffers": {
+    "empty": {
+      "title": "No private offers available",
+      "description": "You are not authorized for any private offers at the moment"
+    },
+    "errors": {
+      "loadContracts": "Error loading private offers. Please try again later."
+    }
+  },
+  "paymentFrequency": {
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "biweekly": "Biweekly",
+    "monthly": "Monthly",
+    "bimonthly": "Bimonthly",
+    "quarterly": "Quarterly",
+    "semiannual": "Semi-annual",
+    "annual": "Annual",
+    "single": "single",
+    "days": "{{count}} days"
+  },
+  "productCard": {
+    "loading": "Loading...",
+    "monthlyRentability": "Monthly profitability",
+    "equivalentTo": "Equivalent to",
+    "assetType": "Asset type",
+    "maturity": "Maturity",
+    "remuneration": "Remuneration",
+    "captured": "captured",
+    "minInvestment": "Minimum investment:",
+    "investButton": "Invest",
+    "cdiPreposition": "of",
+    "cdiTooltip": "Reference CDI value updated on {{date}}. Used purely for comparison purposes.",
+    "status": {
+      "collecting": "Collecting",
+      "completed": "Completed",
+      "closed": "Closed",
+      "open": "Collecting",
+      "active": "Collecting"
+    },
+    "assetTypes": {
+      "receivable": "Receivable",
+      "participation": "Participation",
+      "equity": "Equity",
+      "debenture": "Debenture",
+      "cri": "CRI",
+      "cra": "CRA",
+      "royalty": "Royalty",
+      "agribusiness": "Agribusiness",
+      "real_estate": "Real Estate",
+      "credit": "Credit",
+      "other": "Other"
+    }
+  },
+  "sidebar": {
+    "collecting": "Collecting",
+    "monthlyRentability": "Monthly profitability",
+    "equivalentTo": "Equivalent to",
+    "assetType": "Asset type",
+    "maturity": "Maturity:",
+    "installment": "Installment",
+    "assetAvailability": "Asset availability",
+    "tokensIssued": "Amount to raise",
+    "capturedAmount": "Amount raised",
+    "minInvestment": "Minimum investment",
+    "investButton": "Invest",
+    "loginButton": "Login",
+    "taxExemption": "Tax exemption",
+    "taxExemptionText": "Exempt from income tax when sales (token liquidation) do not exceed R$ 35,000 per month.",
+    "aboutAsset": "About the asset",
+    "aboutAssetEmpty": "Asset information not available."
+  },
+  "detailPage": {
+    "backButton": "Back",
+    "productNotFound": "Product not found",
+    "assetAvailability": "Asset Availability:",
+    "minimumInvestment": "Minimum investment:",
+    "investmentAmountLabel": "Set your Investment amount",
+    "estimatedValue": "Estimated value to receive",
+    "viewLastTransactions": "View latest transactions",
+    "viewLastInvestments": "View latest investments",
+    "invest": "Invest",
+    "withdraw": "Withdraw",
+    "buy": "Buy",
+    "reinvest": "Reinvest",
+    "claim": "Claim",
+    "aboutAssetTitle": "About the asset",
+    "aboutAssetEmpty": "Asset information not available.",
+    "aboutIssuerTitle": "About the issuer",
+    "issuerFoundationYear": "Foundation year",
+    "issuerProjects": "Projects",
+    "documentsTitle": "Documents",
+    "documentWhitepaper": "Whitepaper",
+    "documentEssentialInfo": "Essential Information",
+    "documentOfferInfo": "Public Offering Information",
+    "guaranteesTitle": "Guarantees",
+    "risksTitle": "Risks",
+    "tokenHistoryTitle": "Token Historical Record",
+    "blockchainTitle": "Blockchain record",
+    "blockchainNetwork": "Blockchain Network",
+    "contractAddress": "Contract Address",
+    "errorLoading": "Error loading product details",
+    "issuer": "Issuer",
+    "toReceive": "To Receive",
+    "myInvestment": "My Investment",
+    "risk": "Risk",
+    "riskLevels": {
+      "veryLow": "Very Low",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "veryHigh": "Very High"
+    }
+  },
+  "productHeader": {
+    "monthlyProfitability": "Monthly Profitability",
+    "maturity": "Maturity:",
+    "amountToRaise": "Amount to raise:",
+    "amountRaised": "Amount raised:",
+    "investors": "Investors:",
+    "taxExemption": "Exempt from income tax when sales (token liquidation) do not exceed R$ 35,000 per month.",
+    "status": {
+      "activeCollecting": "Active collecting",
+      "completed": "Completed"
+    }
+  },
+  "transactionsModal": {
+    "title": "Investment history in {{productCode}}",
+    "titleFallback": "Investment history in product",
+    "loading": "Loading...",
+    "errorTitle": "Error loading transactions",
+    "errorContractAddress": "Contract address not available",
+    "errorGeneric": "Unable to load transactions",
+    "retryButton": "Try again",
+    "closeButton": "Close",
+    "emptyState": "No investments in this asset yet",
+    "table": {
+      "headers": {
+        "investment": "Investment",
+        "date": "Date",
+        "hash": "Hash",
+        "value": "Value"
+      },
+      "investmentLabel": "Investment"
+    },
+    "pagination": {
+      "showing": "Showing {{from}} to {{to}} of {{total}} records"
+    }
+  },
+  "modals": {
+    "stake": {
+      "title": "Stake in Contract",
+      "newStake": "New Stake",
+      "description": "Enter the amount you want to stake in the contract.",
+      "availableBalance": "Available balance:",
+      "minStakeValue": "Minimum stake value:",
+      "amountLabel": "Amount to stake ({{symbol}})",
+      "maxButton": "MAX",
+      "decimalHint": "Use comma for decimals (e.g., 1,197.654365) or period which will be automatically converted",
+      "insufficientValue": "⚠️ Insufficient value:",
+      "insufficientValueDesc": "The minimum stake value is {{minValue}} {{symbol}}",
+      "insufficientBalance": "⚠️ Insufficient balance:",
+      "insufficientBalanceDesc": "You do not have sufficient balance for this operation",
+      "emissionLimitReached": "⚠️ Emission limit reached:",
+      "emissionLimitDesc": "The maximum amount available for investment is {{available}} {{symbol}}",
+      "noteTitle": "Note:",
+      "noteDesc": "The stake will be processed on the blockchain and you will start receiving rewards based on the invested amount.",
+      "importantTitle": "⏳ Important:",
+      "importantDesc": "After clicking \"Confirm Stake\", wait on the screen while the transaction is processed on the blockchain. The screen will close automatically when the transaction is confirmed.",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm Stake",
+      "processing": "Processing...",
+      "successMessage": "Stake of {{amount}} {{symbol}} completed successfully!",
+      "errorInvalidAmount": "Enter a valid amount to stake",
+      "errorInsufficientBalance": "Insufficient balance",
+      "errorMinValue": "Minimum stake value is {{minValue}} {{symbol}}",
+      "errorMaxEmission": "The maximum amount available for investment is {{available}} {{symbol}}. Total emission limit: {{totalEmission}} {{symbol}}",
+      "maxAdjusted": "Maximum value adjusted to {{amount}} {{symbol}}. This is the available limit in the contract. Your balance: {{balance}} {{symbol}}",
+      "emissionLimitFull": "Emission limit reached. There is no more space available for new investments in this contract."
+    },
+    "unstake": {
+      "title": "Unstake from Contract",
+      "unstakeTitle": "Unstake Tokens",
+      "description": "Enter the amount you want to unstake from the contract.",
+      "availableBalance": "Available balance:",
+      "amountLabel": "Amount to unstake ({{symbol}})",
+      "maxButton": "MAX",
+      "decimalHint": "Use comma for decimals (e.g., 1,197.654365) or period which will be automatically converted",
+      "noteTitle": "Note:",
+      "noteDesc": "The unstake will be processed on the blockchain and the amount will be removed from your stake balance in the contract.",
+      "importantTitle": "⏳ Important:",
+      "importantDesc": "After clicking \"Confirm Unstake\", wait on the screen while the transaction is processed on the blockchain. The screen will close automatically when the transaction is confirmed.",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm Unstake",
+      "processing": "Processing...",
+      "successMessage": "Unstake of {{amount}} {{symbol}} completed successfully!",
+      "errorInvalidAmount": "Enter a valid amount to unstake",
+      "errorExceedsBalance": "Amount exceeds available balance",
+      "exceedsStake": "⚠️ Amount exceeds staked balance:",
+      "exceedsStakeDesc": "The maximum amount you can withdraw is {{stakeBalance}} {{symbol}}"
+    },
+    "compound": {
+      "title": "Reinvest Rewards",
+      "autoReinvest": "Automatic Reinvestment",
+      "description": "Your rewards will be automatically reinvested to generate more earnings.",
+      "amountToReinvest": "Amount to reinvest:",
+      "emissionLimitReached": "⚠️ Emission limit reached:",
+      "emissionLimitDesc": "Cannot reinvest because the amount to reinvest ({{rewardsValue}} {{symbol}}) exceeds the available limit ({{available}} {{symbol}}). Total emission limit: {{totalEmission}} {{symbol}}. Please claim your receivables first.",
+      "noteTitle": "Note:",
+      "noteDesc": "Reinvestment will increase your stake balance, enhancing your future earnings through compound interest.",
+      "importantTitle": "⏳ Important:",
+      "importantDesc": "After clicking \"Confirm Reinvestment\", wait on the screen while the transaction is processed on the blockchain. The screen will close automatically when the transaction is confirmed.",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm Reinvestment",
+      "processing": "Processing...",
+      "successMessage": "Rewards reinvested successfully!",
+      "errorExceedsLimit": "Cannot reinvest. The amount to reinvest ({{rewardsValue}} {{symbol}}) exceeds the available limit ({{available}} {{symbol}}). Please claim your receivables first."
+    },
+    "claim": {
+      "title": "Claim Rewards",
+      "confirmationTitle": "Claim Confirmation",
+      "description": "You are about to receive your accumulated rewards.",
+      "amountToReceive": "Amount to receive:",
+      "noteDesc": "Tokens will be sent directly to your wallet after confirmation.",
+      "importantTitle": "⏳ Important:",
+      "importantDesc": "After clicking \"Confirm\", wait on the screen while the transaction is processed on the blockchain. The screen will close automatically when the transaction is confirmed.",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm",
+      "processing": "Processing...",
+      "successMessage": "Rewards claimed successfully!"
+    }
+  }
+}

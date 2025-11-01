@@ -1,0 +1,40 @@
+{
+  "items": {
+    "deposit": "Depositar",
+    "exchange": "Compra e Venda",
+    "security": "Segurança",
+    "transfer": "Transferir",
+    "withdraw": "Sacar",
+    "dashboard": "Dashboard",
+    "statement": "Extrato",
+    "incomeReport": "Informe de Rendimentos",
+    "helpCenter": "Central de Ajuda",
+    "userSearch": "Busca por Usuário",
+    "accountData": "Dados da Conta",
+    "investments": "Meus Investimentos",
+    "translations": "Traduções",
+    "adminDashboard": "Admin Dashboard",
+    "contractDeploy": "Deploy de Contratos",
+    "globalSettings": "Configurações Globais",
+    "userManagement": "Gestão de Usuários",
+    "financialReports": "Relatórios Financeiros",
+    "feesAndDeadlines": "Tarifas e Prazos",
+    "stakesManagement": "Gestão de Stakes",
+    "whatsappMessages": "Mensagens WhatsApp",
+    "companyManagement": "Gestão de Empresas",
+    "documentValidation": "Validação de Documentos",
+    "companyTransactions": "Transações da Empresa",
+    "contractInteraction": "Interação com Contratos",
+    "withdrawalManagement": "Gestão de Saques",
+    "documentValidationSystem": "Validação de Documentos"
+  },
+  "sections": {
+    "menu": "menu",
+    "support": "Suporte e Ajuda",
+    "financial": "Financeiro",
+    "investments": "Investimentos",
+    "userSettings": "Configurações do Usuário",
+    "systemSettings": "Configurações do Sistema",
+    "companySettings": "Configurações da Empresa"
+  }
+}

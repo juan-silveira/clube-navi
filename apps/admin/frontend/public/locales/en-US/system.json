@@ -1,0 +1,66 @@
+{
+  "translations": {
+    "title": "Translation System",
+    "table": {
+      "key": "Key",
+      "save": "Save",
+      "title": "Translations",
+      "saving": "Saving...",
+      "english": "English",
+      "spanish": "Español",
+      "modified": "modified",
+      "portuguese": "Português",
+      "modifiedPlural": "modified"
+    },
+    "controls": {
+      "search": "Search",
+      "language": "Language",
+      "namespace": "Namespace",
+      "syncToFiles": "Sync to Files",
+      "syncFromFiles": "Sync from Files",
+      "searchPlaceholder": "Search key or value...",
+      "syncToFilesTooltip": "Export translations from database to project JSON files",
+      "syncFromFilesTooltip": "Import translations from project JSON files to database"
+    },
+    "namespaces": {
+      "auth": "Authentication screens (login, registration, password recovery)",
+      "menu": "Navigation menus",
+      "admin": "Company administration",
+      "stake": "Staking and investments",
+      "common": "Common texts (buttons, labels, generic messages)",
+      "emails": "Email templates",
+      "errors": "Error messages",
+      "header": "Header and top navigation",
+      "system": "System administration",
+      "deposit": "Deposit screens",
+      "profile": "User profile",
+      "exchange": "Exchange (market, book, orders)",
+      "transfer": "Transfer screens",
+      "withdraw": "Withdrawal screens",
+      "dashboard": "Dashboards (user and admin)",
+      "financial": "Financial operations (deposit, withdrawal, transfer)",
+      "statement": "Transaction statement",
+      "validations": "Form validation messages",
+      "notifications": "Notifications and alerts"
+    },
+    "messages": {
+      "loading": "Loading translations...",
+      "syncing": "Syncing...",
+      "errorSaving": "Error saving translation",
+      "partialSave": "Only {count}/3 languages saved successfully",
+      "errorSyncing": "Error syncing",
+      "syncComplete": "Sync completed!",
+      "noTranslations": "No translations found",
+      "sessionExpired": "Session expired. Please login again.",
+      "savedAllLanguages": "Translation saved in all languages!",
+      "errorLoadingNamespaces": "Error loading namespaces",
+      "errorLoadingTranslations": "Error loading translations"
+    },
+    "statistics": {
+      "namespaces": "Namespaces",
+      "totalLanguages": "Total Languages",
+      "activeLanguages": "Active Languages",
+      "totalTranslations": "Total Translations"
+    }
+  }
+}

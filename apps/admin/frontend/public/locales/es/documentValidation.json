@@ -1,0 +1,123 @@
+{
+  "title": "Validación de Documentos",
+  "approved": "Aprobados",
+  "subtitle": "Analice y valide documentos enviados por los usuarios",
+  "table": {
+    "file": "Archivo:",
+    "type": "Tipo:",
+    "empty": "No se encontraron documentos",
+    "title": "Documentos",
+    "users": "usuario",
+    "loading": "Cargando documentos...",
+    "document": "documento",
+    "uploaded": "Enviado:",
+    "usersPlural": "usuarios",
+    "documentsPlural": "documentos",
+    "rejectionReason": "Motivo del Rechazo:"
+  },
+  "selectFiles": "Seleccione archivos para enviar",
+  "stats": {
+    "total": "Total",
+    "pending": "Pendientes",
+    "approved": "Aprobados",
+    "rejected": "Rechazados"
+  },
+  "uploadSingle": "Enviar Documento",
+  "buttons": {
+    "clear": "Limpiar",
+    "cancel": "Cancelar",
+    "reject": "Rechazar",
+    "approve": "Aprobar",
+    "refresh": "Actualizar",
+    "rejectDocument": "Rechazar Documento",
+    "approveDocument": "Aprobar Documento"
+  },
+  "selectedCount": "{{count}} documento(s) seleccionado(s)",
+  "status": {
+    "notSent": "No enviado",
+    "pending": "Pendiente",
+    "unknown": "Desconocido",
+    "approved": "Aprobado",
+    "rejected": "Rechazado"
+  },
+  "uploadMultiple": "Enviar {{count}} Documentos",
+  "warnings": {
+    "item1": "DNI, Licencia de Conducir, Pasaporte o Tarjeta Profesional",
+    "item2": "Fotos nítidas, sin reflejos ni sombras",
+    "item3": "Use el mismo documento en las 3 fotos",
+    "item4": "Análisis en hasta 2 días hábiles",
+    "title": "Documentos Aceptados"
+  },
+  "uploadDocuments": "Enviar Documentos",
+  "uploader": {
+    "remove": "Eliminar",
+    "preview": "Vista previa del archivo",
+    "dropHere": "Suelte aquí",
+    "fileTypes": "JPEG, PNG, PDF (máx. 10MB)",
+    "uploading": "Enviando",
+    "previewNew": "Vista previa del nuevo archivo",
+    "uploadedOn": "Enviado el",
+    "clickOrDrag": "Haga clic o arrastre",
+    "rejectionReason": "Motivo del Rechazo"
+  },
+  "imageModal": {
+    "close": "Cerrar",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "resetZoom": "Restablecer zoom (100%)",
+    "pdfInstructions": "Use los controles del visor de PDF para navegar • Presione ESC o haga clic en X para cerrar",
+    "imageInstructions": "Use los botones + y - para hacer zoom (50% - 300%) • Presione ESC o haga clic en X para cerrar"
+  },
+  "messages": {
+    "success": "¡Documento enviado con éxito!",
+    "loadError": "Error al cargar documentos para validación",
+    "rejectSuccess": "Documento rechazado",
+    "approveSuccess": "Documento aprobado con éxito",
+    "successMultiple": "¡{{count}} documento(s) enviado(s) con éxito!",
+    "validationError": "Error al validar documento",
+    "noDocumentsSelected": "Ningún documento seleccionado para enviar",
+    "rejectionReasonRequired": "Por favor proporcione un motivo de rechazo"
+  },
+  "modal": {
+    "clickToView": "Haga clic para ver",
+    "pdfDocument": "Documento PDF",
+    "rejectTitle": "Rechazar Documento",
+    "approveTitle": "Aprobar Documento",
+    "rejectionReasonLabel": "Motivo del Rechazo *",
+    "clickToViewFullscreen": "Haga clic para ver en pantalla completa",
+    "rejectionReasonPlaceholder": "Describa el motivo del rechazo..."
+  },
+  "documentTypes": {
+    "front": {
+      "label": "Frente del Documento",
+      "description": "Foto del frente de su documento de identidad"
+    },
+    "back": {
+      "label": "Reverso del Documento",
+      "description": "Foto del reverso de su documento de identidad"
+    },
+    "selfie": {
+      "label": "Selfie con Documento",
+      "description": "Foto suya sosteniendo el documento cerca de su rostro"
+    }
+  },
+  "filters": {
+    "status": {
+      "all": "Todos los Estados",
+      "label": "Estado"
+    },
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Nombre, email..."
+    },
+    "documentType": {
+      "all": "Todos los Tipos",
+      "label": "Tipo de Documento"
+    }
+  },
+  "errors": {
+    "fileTooLarge": "Archivo demasiado grande. Máximo: 10MB.",
+    "uploadFailed": "Error al enviar documento",
+    "invalidFileType": "Tipo de archivo no permitido. Use JPEG, PNG, HEIC, WEBP o PDF."
+  }
+}

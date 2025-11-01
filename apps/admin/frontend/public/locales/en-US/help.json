@@ -1,0 +1,335 @@
+{
+  "title": "Help",
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to your questions",
+    "searchFor": "for",
+    "clearSearch": "Clear search",
+    "searchFound": "found",
+    "relatedLinks": "Useful links:",
+    "searchResults": "result",
+    "noResults": {
+      "title": "No results found",
+      "button": "Contact Support",
+      "description": "We didn't find questions related to your search."
+    },
+    "searchFoundPlural": "found",
+    "searchPlaceholder": "Search questions...",
+    "searchResultsPlural": "results",
+    "categories": {
+      "general": {
+        "label": "General",
+        "questions": {
+          "kyc": {
+            "answer": "Access 'Document Validation' in the menu, upload a clear photo of your ID (front and back), take a selfie for facial recognition, and wait for approval (usually within 24 business hours).",
+            "question": "How to validate my documents (KYC)?",
+            "links": {
+              "validateDocuments": "Validate documents"
+            }
+          },
+          "security": {
+            "answer": "Yes! We use the best security practices in the market, including: two-factor authentication (2FA), end-to-end encryption for your data, secure storage of private keys, and 24/7 monitoring of suspicious activities.",
+            "question": "Is the platform secure?",
+            "links": {
+              "configureSecurity": "Configure security"
+            }
+          },
+          "createAccount": {
+            "answer": "To create an account, click 'Sign Up' at the top of the page, fill in your personal information (name, email, phone, and CPF), create a strong password, and follow the email verification instructions. After confirming your email, you can start using the platform.",
+            "question": "How to create an account?"
+          },
+          "whatIsCoinage": {
+            "answer": "Coinage is a digital asset platform that allows you to buy, sell, and manage your token investments securely and intuitively. Our platform offers features like instant PIX deposits, token exchange, and secure digital wallet.",
+            "question": "What is Coinage?",
+            "links": {
+              "tutorials": "View tutorials"
+            }
+          }
+        }
+      },
+      "deposits": {
+        "label": "Deposits",
+        "questions": {
+          "minDeposit": {
+            "answer": "Yes, the minimum deposit amount is R$ 10.00 for all payment methods. There is no maximum limit, but amounts above R$ 50,000.00 may require additional validation.",
+            "question": "Is there a minimum deposit amount?",
+            "links": {
+              "viewFees": "View fees"
+            }
+          },
+          "depositTime": {
+            "answer": "The time varies according to the chosen method: PIX is instant (credited within 2 minutes), TED can take up to 1 business day, and DOC takes up to 2 business days. You will receive a notification once the amount is credited.",
+            "question": "How long does it take for the deposit to be credited?"
+          },
+          "howToDeposit": {
+            "answer": "Access the 'Deposit' section in the side menu, choose the payment method (PIX, TED, or DOC), enter the desired amount, and follow the on-screen instructions. For PIX, you will receive a QR Code or PIX key to make the payment.",
+            "question": "How to make a deposit?",
+            "links": {
+              "tutorial": "View tutorial",
+              "makeDeposit": "Make deposit"
+            }
+          },
+          "cancelDeposit": {
+            "answer": "PIX deposits cannot be canceled after payment confirmation. For TED and DOC, you can cancel through your bank before processing. Contact support if you need help.",
+            "question": "Can I cancel a deposit?"
+          }
+        }
+      },
+      "exchange": {
+        "label": "Exchange",
+        "questions": {
+          "orderBook": {
+            "answer": "The order book shows all available buy and sell orders with their respective prices and quantities. You can create your own limit order by setting price and quantity, or accept an existing order by clicking on it.",
+            "question": "How does the order book work?",
+            "links": {
+              "tutorial": "View tutorial",
+              "orderBook": "Access book"
+            }
+          },
+          "orderTypes": {
+            "answer": "Market order executes immediately at the best available price at the moment. It's ideal for those who want speed. Limit order allows you to set the desired price, being executed only when the market reaches that value. It's ideal for those who want price control.",
+            "question": "What's the difference between market order and limit order?",
+            "links": {
+              "exchange": "Access exchange",
+              "tutorial": "View buy tutorials"
+            }
+          },
+          "cancelOrder": {
+            "answer": "Yes, limit orders can be canceled at any time before execution through the order book. Market orders are executed immediately and cannot be canceled. There is no fee for cancellation.",
+            "question": "Can I cancel an order?",
+            "links": {
+              "orderBook": "View order book"
+            }
+          },
+          "tradingFees": {
+            "answer": "Fees vary according to your monthly volume: up to R$ 10,000 = 0.5%, R$ 10,000 to R$ 50,000 = 0.3%, R$ 50,000 to R$ 100,000 = 0.2%, above R$ 100,000 = 0.1%. Check 'Fees and Deadlines' for complete details.",
+            "question": "What are the trading fees?",
+            "links": {
+              "viewFees": "View fees"
+            }
+          }
+        }
+      },
+      "security": {
+        "label": "Security",
+        "questions": {
+          "lost2FA": {
+            "answer": "Use one of the backup codes that were generated when you enabled 2FA. If you don't have the codes, contact our support through the 'Contact Support' option providing your registration details, a photo ID, and a selfie video for identity validation.",
+            "question": "What to do if I lose access to 2FA?"
+          },
+          "what2FA": {
+            "answer": "2FA is an extra layer of security that requires a temporary code (generated by an authenticator app) in addition to your password to access the account. Even if someone discovers your password, they won't be able to access without the code from your phone. We strongly recommend enabling this feature.",
+            "question": "What is two-factor authentication (2FA)?",
+            "links": {
+              "enable2FA": "Enable 2FA"
+            }
+          },
+          "enable2FA": {
+            "answer": "Access 'Security' in the menu, click 'Enable 2FA', download an authenticator app (Google Authenticator or Authy), scan the QR code that will appear on the screen, enter the 6-digit code generated by the app, and confirm. Keep the backup codes in a safe place.",
+            "question": "How to enable 2FA?",
+            "links": {
+              "configureNow": "Configure now"
+            }
+          },
+          "changePassword": {
+            "answer": "Access 'Security' in the menu, click 'Change Password', enter your current password, create a strong new password (minimum 8 characters with letters, numbers, and symbols), and confirm. You will receive an email confirming the change.",
+            "question": "How to change my password?",
+            "links": {
+              "changePassword": "Change password"
+            }
+          },
+          "protectAccount": {
+            "answer": "Follow these practices: enable 2FA, use a strong and unique password, don't share your credentials, always check the URL before logging in, be suspicious of suspicious emails, and keep your device secure with updated antivirus.",
+            "question": "How to protect my account?"
+          }
+        }
+      },
+      "transfers": {
+        "label": "Transfers",
+        "questions": {
+          "howToTransfer": {
+            "answer": "Access 'Transfer' in the menu, enter the recipient's email or CPF, enter the amount and token you want to transfer, review the details, and confirm the operation. Internal transfers are instant and fee-free.",
+            "question": "How to transfer to another Coinage user?",
+            "links": {
+              "tutorial": "View tutorial",
+              "makeTransfer": "Make transfer"
+            }
+          },
+          "transferLimit": {
+            "answer": "There is no limit for transfers between Coinage users. You can transfer any amount available in your wallet, as long as you have sufficient balance.",
+            "question": "Is there a limit for transfers?"
+          },
+          "cancelTransfer": {
+            "answer": "No. Transfers are processed instantly and cannot be canceled. Always make sure to check the recipient's details before confirming.",
+            "question": "Can I cancel a transfer?"
+          },
+          "checkTransfers": {
+            "answer": "Access 'Statement' in the menu to see all your transactions, including sent and received transfers. You can filter by date, transaction type, and token.",
+            "question": "How to check my transfers?",
+            "links": {
+              "viewStatement": "View statement"
+            }
+          }
+        }
+      },
+      "withdrawals": {
+        "label": "Withdrawals",
+        "questions": {
+          "withdrawFees": {
+            "answer": "The fee varies according to the method: PIX has a fee of R$ 2.90, TED has a fee of R$ 9.90, and DOC has a fee of R$ 4.90. Check 'Fees and Deadlines' for complete information.",
+            "question": "What are the withdrawal fees?",
+            "links": {
+              "viewFees": "View full fees"
+            }
+          },
+          "withdrawTime": {
+            "answer": "PIX withdrawals are processed within 30 minutes during business hours (9am to 6pm). TED can take up to 1 business day. Withdrawals requested outside business hours are processed on the next business day.",
+            "question": "How long does it take to process a withdrawal?"
+          },
+          "howToWithdraw": {
+            "answer": "Access 'Withdraw' in the menu, choose the registered bank account (or register a new one), enter the amount you want to withdraw, confirm the details, and authorize the operation. For PIX withdrawals, enter the destination PIX key.",
+            "question": "How to make a withdrawal?",
+            "links": {
+              "tutorial": "View tutorial",
+              "makeWithdraw": "Make withdrawal"
+            }
+          },
+          "withdrawLimit": {
+            "answer": "Yes, the initial limit is R$ 10,000.00 per day. This limit can be increased upon request and validation of additional documents. Customers with verified account (complete KYC) can request higher limits.",
+            "question": "Is there a daily withdrawal limit?",
+            "links": {
+              "validateDocuments": "Validate documents"
+            }
+          }
+        }
+      }
+    },
+    "quickActions": {
+      "support": {
+        "title": "Still Have Questions?",
+        "button": "Contact Support",
+        "description": "Our support team is ready to help you"
+      },
+      "tutorials": {
+        "title": "Watch Video Tutorials",
+        "button": "Watch Tutorials",
+        "description": "Learn visually with our step-by-step tutorials"
+      }
+    }
+  },
+  "pageTitle": "Help Center",
+  "home": {
+    "title": "Help Center",
+    "footer": "Choose the option that best suits your needs. We're here to help!",
+    "subtitle": "How can we help you today?",
+    "faq": {
+      "title": "FAQ",
+      "description": "Answers to common questions"
+    },
+    "support": {
+      "title": "Support",
+      "description": "Speak directly with our team"
+    },
+    "tutorials": {
+      "title": "Tutorials",
+      "description": "Step-by-step guides to use the platform"
+    }
+  },
+  "support": {
+    "title": "Contact Support",
+    "subtitle": "Send your message and we'll get back to you soon",
+    "form": {
+      "title": "Send your message",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "message": {
+        "label": "Message",
+        "placeholder": "Describe your question or problem in detail..."
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Enter the subject of your message"
+      },
+      "success": {
+        "title": "Message sent successfully!",
+        "description": "Our team will contact you soon."
+      },
+      "category": {
+        "label": "Category",
+        "options": {
+          "kyc": "Document validation",
+          "other": "Other matters",
+          "select": "Select a category",
+          "account": "Account issues",
+          "deposit": "Deposit issues",
+          "exchange": "Trading issues",
+          "security": "Security",
+          "withdrawal": "Withdrawal issues"
+        }
+      }
+    },
+    "info": {
+      "hours": {
+        "title": "Business Hours",
+        "sunday": "Sunday:",
+        "saturday": "Saturday:",
+        "weekdays": "Monday to Friday:",
+        "sundayTime": "Closed",
+        "saturdayTime": "9am to 1pm",
+        "weekdaysTime": "9am to 6pm"
+      },
+      "otherOptions": {
+        "faq": "Check FAQ",
+        "title": "Other Options",
+        "tutorials": "View Tutorials"
+      },
+      "responseTime": {
+        "title": "Response Time",
+        "description": "We typically respond within <strong>24 business hours</strong>. For urgent cases, you will receive an even faster response."
+      }
+    }
+  },
+  "tutorials": {
+    "title": "Tutorials",
+    "subtitle": "Step-by-step guides to use the platform",
+    "videoTutorial": "Video tutorial",
+    "categories": {
+      "advanced": "Advanced",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate"
+    },
+    "list": {
+      "limitBuy": {
+        "title": "Limit Buy Order",
+        "description": "Learn to set your buy price in the order book"
+      },
+      "transfer": {
+        "title": "How to make a transfer",
+        "description": "Step-by-step guide to transfer amounts between accounts quickly"
+      },
+      "withdraw": {
+        "title": "How to make a withdrawal",
+        "description": "Complete guide to withdraw your funds securely via PIX"
+      },
+      "limitSell": {
+        "title": "Limit Sell Order",
+        "description": "How to create sell orders with full price control"
+      },
+      "marketBuy": {
+        "title": "Market Buy",
+        "description": "How to buy tokens with immediate execution at the best price"
+      },
+      "marketSell": {
+        "title": "Market Sell",
+        "description": "How to sell tokens quickly at market price"
+      },
+      "firstDeposit": {
+        "title": "How to make your first deposit",
+        "description": "Learn to add funds to your account securely via PIX"
+      }
+    },
+    "modal": {
+      "browserNotSupported": "Your browser does not support the video element."
+    }
+  }
+}

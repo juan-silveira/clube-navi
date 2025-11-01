@@ -1,0 +1,77 @@
+{
+  "title": "Retiro",
+  "subtitle": "Transforme sus cBRL en reales y reciba vía PIX",
+  "pageTitle": "Retiro",
+  "step0": {
+    "title": "Registre su Clave PIX",
+    "subtitle": "Para realizar retiros, necesita tener una clave PIX registrada. La clave debe pertenecer al mismo CPF de su cuenta.",
+    "verifyingKeys": "Verificando claves PIX registradas...",
+    "registerButton": "Registrar Clave PIX"
+  },
+  "step1": {
+    "title": "Monto del Retiro",
+    "inCBRL": "en cBRL",
+    "feeLabel": "Tarifa",
+    "subtitle": "Ingrese el monto en cBRL que desea retirar",
+    "maxButton": "MAX",
+    "minAmount": "Mínimo: R$ 10,00",
+    "feeLoading": "Cargando...",
+    "amountLabel": "Monto del Retiro (cBRL)",
+    "changeButton": "Cambiar",
+    "keyTypes": {
+      "cpf": "CPF",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "random": "Clave aleatoria"
+    },
+    "continueButton": "Continuar",
+    "feeCalculating": "Calculando...",
+    "checkingBalance": "Verificando saldo...",
+    "availableBalance": "Saldo disponible",
+    "registeredPixKey": "Clave PIX registrada",
+    "syncingBlockchain": "Sincronizando con la blockchain..."
+  },
+  "step2": {
+    "title": "Confirmar Retiro",
+    "subtitle": "Revise los detalles antes de confirmar",
+    "sendingTo": "Enviando a:",
+    "backButton": "Volver",
+    "processing": "Procesando...",
+    "withdrawFee": "Tarifa de retiro:",
+    "confirmButton": "Confirmar Retiro",
+    "importantNote": "Importante:",
+    "importantText": "Al confirmar, {{amount}} cBRL serán quemados de su billetera y {{netAmount}} serán enviados vía PIX.",
+    "youWillReceive": "Recibirá:",
+    "requestedAmount": "Monto solicitado:"
+  },
+  "steps": {
+    "amount": "Monto",
+    "confirmation": "Confirmación"
+  },
+  "twoFactor": {
+    "title": "Verificación 2FA - Retiro"
+  },
+  "messages": {
+    "invalid2FA": "Código 2FA inválido",
+    "executingBurn": "Ejecutando quema de tokens en la blockchain...",
+    "invalidAmount": "Monto inválido",
+    "tryAgainLater": "Inténtelo de nuevo más tarde",
+    "minAmountError": "Monto mínimo",
+    "errorConfirming": "Error al confirmar retiro",
+    "errorInitiating": "Error al iniciar retiro",
+    "errorProcessing": "Error al procesar retiro",
+    "withdrawSuccess": "¡Retiro iniciado con éxito!",
+    "minAmountMessage": "El monto mínimo de retiro es R$ 10,00",
+    "pixKeyRegistered": "Clave PIX registrada",
+    "invalid2FAMessage": "Ingrese el código correcto de su aplicación autenticadora",
+    "withdrawInitiated": "Retiro iniciado",
+    "initiatingWithdraw": "Iniciando retiro",
+    "verifyingDocuments": "Verificando documentos...",
+    "insufficientBalance": "Saldo insuficiente",
+    "pixKeyNotRegistered": "Clave PIX no registrada",
+    "preparingTransaction": "Preparando transacción...",
+    "withdrawSuccessMessage": "Será analizado y enviado el valor en hasta 24h a su clave PIX",
+    "pixKeyRegisteredMessage": "Ahora puede realizar retiros",
+    "insufficientBalanceMessage": "Su saldo disponible es de {{balance}}"
+  }
+}

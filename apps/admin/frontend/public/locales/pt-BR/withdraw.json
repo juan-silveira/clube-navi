@@ -1,0 +1,77 @@
+{
+  "title": "Saque",
+  "subtitle": "Transforme seus cBRL em reais e receba via PIX",
+  "pageTitle": "Saque",
+  "step0": {
+    "title": "Cadastre sua Chave PIX",
+    "subtitle": "Para realizar saques, você precisa ter uma chave PIX cadastrada. A chave deve pertencer ao mesmo CPF da sua conta.",
+    "verifyingKeys": "Verificando chaves PIX cadastradas...",
+    "registerButton": "Cadastrar Chave PIX"
+  },
+  "step1": {
+    "title": "Valor do Saque",
+    "inCBRL": "em cBRL",
+    "feeLabel": "Taxa",
+    "subtitle": "Digite o valor em cBRL que deseja sacar",
+    "maxButton": "MAX",
+    "minAmount": "Mínimo: R$ 10,00",
+    "feeLoading": "Carregando...",
+    "amountLabel": "Valor do Saque (cBRL)",
+    "changeButton": "Alterar",
+    "keyTypes": {
+      "cpf": "CPF",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "random": "Chave aleatória"
+    },
+    "continueButton": "Continuar",
+    "feeCalculating": "Calculando...",
+    "checkingBalance": "Verificando saldo...",
+    "availableBalance": "Saldo disponível",
+    "registeredPixKey": "Chave PIX cadastrada",
+    "syncingBlockchain": "Sincronizando com a blockchain..."
+  },
+  "step2": {
+    "title": "Confirmar Saque",
+    "subtitle": "Revise os detalhes antes de confirmar",
+    "sendingTo": "Enviando para:",
+    "backButton": "Voltar",
+    "processing": "Processando...",
+    "withdrawFee": "Taxa de saque:",
+    "confirmButton": "Confirmar Saque",
+    "importantNote": "Importante:",
+    "importantText": "Ao confirmar, {{amount}} cBRL serão queimados da sua carteira e {{netAmount}} serão enviados via PIX.",
+    "youWillReceive": "Você receberá:",
+    "requestedAmount": "Valor solicitado:"
+  },
+  "steps": {
+    "amount": "Valor",
+    "confirmation": "Confirmação"
+  },
+  "twoFactor": {
+    "title": "Verificação 2FA - Saque"
+  },
+  "messages": {
+    "invalid2FA": "Código 2FA inválido",
+    "executingBurn": "Executando queima de tokens na blockchain...",
+    "invalidAmount": "Valor inválido",
+    "tryAgainLater": "Tente novamente mais tarde",
+    "minAmountError": "Valor mínimo",
+    "errorConfirming": "Erro ao confirmar saque",
+    "errorInitiating": "Erro ao iniciar saque",
+    "errorProcessing": "Erro ao processar saque",
+    "withdrawSuccess": "Saque iniciado com sucesso!",
+    "minAmountMessage": "O valor mínimo para saque é R$ 10,00",
+    "pixKeyRegistered": "Chave PIX cadastrada",
+    "invalid2FAMessage": "Digite o código correto do seu aplicativo autenticador",
+    "withdrawInitiated": "Saque iniciado",
+    "initiatingWithdraw": "Iniciando saque",
+    "verifyingDocuments": "Verificando documentos...",
+    "insufficientBalance": "Saldo insuficiente",
+    "pixKeyNotRegistered": "Chave PIX não cadastrada",
+    "preparingTransaction": "Preparando transação...",
+    "withdrawSuccessMessage": "Será analisado e enviado o valor em até 24h para sua chave PIX",
+    "pixKeyRegisteredMessage": "Agora você pode realizar saques",
+    "insufficientBalanceMessage": "Seu saldo disponível é de {{balance}}"
+  }
+}
