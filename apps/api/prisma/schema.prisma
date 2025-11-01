@@ -1,0 +1,1128 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+  jsonProtocol  = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id               String           @id @default(uuid()) @db.Uuid
+  name             String           @db.VarChar(255)
+  isActive         Boolean          @default(true) @map("is_active")
+  rateLimit        Json             @default("{\"requestsPerDay\": 10000, \"requestsPerHour\": 1000, \"requestsPerMinute\": 100}") @map("rate_limit")
+  lastActivityAt   DateTime?        @map("last_activity_at") @db.Timestamptz(6)
+  createdAt        DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+  alias            String?          @unique @db.VarChar(50)
+  companyBrandings CompanyBranding?
+  documents        Document[]
+  transactions     Transaction[]
+  userActions      UserAction[]
+  userCompanies    UserCompany[]
+  contractActions  ContractAction[]
+  stakeStatements  StakeStatement[]
+
+  @@index([isActive], map: "idx_companies_active")
+  @@index([lastActivityAt], map: "idx_companies_last_activity")
+  @@index([alias], map: "idx_companies_alias")
+  @@map("companies")
+}
+
+model User {
+  id                     String              @id @default(uuid()) @db.Uuid
+  name                   String              @db.VarChar(255)
+  email                  String              @unique @db.VarChar(255)
+  username               String              @unique @db.VarChar(50)
+  cpf                    String              @unique @db.VarChar(14)
+  phone                  String?             @db.VarChar(20)
+  birthDate              DateTime?           @map("birth_date") @db.Date
+  publicKey              String              @map("public_key")
+  privateKey             String              @map("private_key")
+  password               String              @db.VarChar(255)
+  passwordChangedAt      DateTime?           @map("password_changed_at") @db.Timestamptz(6)
+  isFirstAccess          Boolean             @default(true) @map("is_first_access")
+  sessionToken           String?             @unique @map("session_token") @db.VarChar(255)
+  sessionExpiresAt       DateTime?           @map("session_expires_at") @db.Timestamptz(6)
+  sessionTimeout         Int                 @default(600) @map("session_timeout")
+  isActive               Boolean             @default(true) @map("is_active")
+  emailConfirmed         Boolean             @default(false) @map("email_confirmed")
+  profilePicture         String?             @map("profile_picture")
+  blockchainAddress      String?             @map("blockchain_address") @db.VarChar(42)
+  metadata               Json?
+  lastActivityAt         DateTime?           @map("last_activity_at") @db.Timestamptz(6)
+  failedLoginAttempts    Int                 @default(0) @map("failed_login_attempts")
+  lastFailedLoginAt      DateTime?           @map("last_failed_login_at") @db.Timestamptz(6)
+  isBlockedLoginAttempts Boolean             @default(false) @map("is_blocked_login_attempts")
+  createdAt              DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt              DateTime            @updatedAt @map("updated_at") @db.Timestamptz(6)
+  userPlan               UserPlan            @default(BASIC) @map("user_plan")
+  backDocument           UserDocumentStatus? @default(not_sent) @map("back_document")
+  frontDocument          UserDocumentStatus? @default(not_sent) @map("front_document")
+  selfieDocument         UserDocumentStatus? @default(not_sent) @map("selfie_document")
+  balances               Json?               @default("{}")
+  stakes                 Json?               @default("{}")
+  preferredLanguage      String              @default("pt-BR") @map("preferred_language") @db.VarChar(10)
+  apiKeys                ApiKey[]
+  deployedBrandings      CompanyBranding[]   @relation("CompanyBrandingDeployer")
+  earnings               Earnings[]
+  notifications          Notification[]
+  passwordResets         PasswordReset[]
+  transactions           Transaction[]
+  receivedTransfers      Transfer[]          @relation("ReceivedTransfers")
+  transfers              Transfer[]          @relation("UserTransfers")
+  userActions            UserAction[]
+  approvedUserCompanies  UserCompany[]       @relation("UserCompanyApprover")
+  requestedUserCompanies UserCompany[]       @relation("UserCompanyRequester")
+  userCompanies          UserCompany[]
+  reviewedDocuments      UserDocument[]      @relation("UserDocumentReviewer")
+  userDocuments          UserDocument[]
+  userPixKeys            UserPixKey[]
+  userTaxes              UserTaxes?
+  userTwoFactors         UserTwoFactor[]
+  withdrawals            Withdrawal[]
+  contractActions        ContractAction[]
+  userBalances           UserBalance[]
+
+  @@index([email], map: "idx_users_email")
+  @@index([cpf], map: "idx_users_cpf")
+  @@index([isActive], map: "idx_users_active")
+  @@index([emailConfirmed], map: "idx_users_email_confirmed")
+  @@index([lastActivityAt], map: "idx_users_last_activity")
+  @@index([userPlan], map: "idx_users_user_plan")
+  @@index([preferredLanguage], map: "idx_users_preferred_language")
+  @@map("users")
+}
+
+model ApiKey {
+  id          String    @id @default(uuid()) @db.Uuid
+  key         String    @unique @db.VarChar(64)
+  keyHash     String    @unique @map("key_hash") @db.VarChar(255)
+  name        String    @db.VarChar(100)
+  description String?
+  isActive    Boolean   @default(true) @map("is_active")
+  expiresAt   DateTime? @map("expires_at") @db.Timestamptz(6)
+  lastUsedAt  DateTime? @map("last_used_at") @db.Timestamptz(6)
+  permissions Json?
+  userId      String    @map("user_id") @db.Uuid
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user        User      @relation(fields: [userId], references: [id])
+
+  @@map("api_keys")
+}
+
+model Transaction {
+  id                      String             @id @default(uuid()) @db.Uuid
+  companyId               String             @map("company_id") @db.Uuid
+  userId                  String?            @map("user_id") @db.Uuid
+  transactionType         TransactionType    @map("transaction_type")
+  status                  TransactionStatus  @default(pending)
+  amount                  Decimal?           @db.Decimal(20, 8)
+  currency                String?            @db.VarChar(5)
+  network                 Network?
+  contractAddress         String?            @map("contract_address") @db.VarChar(42)
+  txHash                  String?            @map("tx_hash") @db.VarChar(66)
+  blockNumber             BigInt?            @map("block_number")
+  fromAddress             String?            @map("from_address") @db.VarChar(42)
+  toAddress               String?            @map("to_address") @db.VarChar(42)
+  gasUsed                 BigInt?            @map("gas_used")
+  functionName            String?            @map("function_name") @db.VarChar(50)
+  confirmedAt             DateTime?          @map("confirmed_at") @db.Timestamptz(6)
+  failedAt                DateTime?          @map("failed_at") @db.Timestamptz(6)
+  createdAt               DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt               DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+  metadata                Json?
+  pix_status              TransactionStatus?
+  pix_transaction_id      String?            @db.VarChar(255)
+  pix_end_to_end_id       String?            @db.VarChar(255)
+  pix_key                 String?            @db.VarChar(255)
+  pix_key_type            String?            @db.VarChar(50)
+  pix_confirmed_at        DateTime?          @db.Timestamptz(6)
+  pix_failed_at           DateTime?          @db.Timestamptz(6)
+  blockchain_status       TransactionStatus?
+  blockchain_tx_hash      String?            @db.VarChar(66)
+  blockchain_block_number BigInt?
+  blockchain_confirmed_at DateTime?          @db.Timestamptz(6)
+  blockchain_failed_at    DateTime?          @db.Timestamptz(6)
+  fee                     Decimal?           @default(0) @db.Decimal(15, 2)
+  net_amount              Decimal?           @db.Decimal(20, 8)
+  operation_type          String?            @db.VarChar(50)
+  company                 Company            @relation(fields: [companyId], references: [id])
+  user                    User?              @relation(fields: [userId], references: [id])
+
+  @@index([userId, transactionType], map: "idx_transactions_user_type")
+  @@index([companyId, status], map: "idx_transactions_company_status")
+  @@index([transactionType, status], map: "idx_transactions_type_status")
+  @@index([txHash], map: "idx_transactions_tx_hash")
+  @@index([createdAt], map: "idx_transactions_created_at")
+  @@index([contractAddress], map: "idx_transactions_contract")
+  @@index([blockchain_status], map: "idx_transactions_blockchain_status")
+  @@index([blockchain_tx_hash], map: "idx_transactions_blockchain_tx_hash")
+  @@index([operation_type], map: "idx_transactions_operation_type")
+  @@index([pix_status], map: "idx_transactions_pix_status")
+  @@index([pix_transaction_id], map: "idx_transactions_pix_transaction_id")
+  @@map("transactions")
+}
+
+model ContractType {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String           @unique @db.VarChar(50)
+  description String?
+  category    ContractCategory
+  abiPath     String           @map("abi_path") @db.VarChar(255)
+  version     String           @default("1.0.0") @db.VarChar(20)
+  isActive    Boolean          @default(true) @map("is_active")
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+  contracts   SmartContract[]
+
+  @@index([name], map: "idx_contract_types_name")
+  @@index([category], map: "idx_contract_types_category")
+  @@index([isActive], map: "idx_contract_types_active")
+  @@map("contract_types")
+}
+
+model SmartContract {
+  id             String        @id @default(uuid()) @db.Uuid
+  companyId      String        @map("company_id") @db.Uuid
+  contractTypeId String?       @map("contract_type_id") @db.Uuid
+  name           String        @db.VarChar(255)
+  address        String        @unique @db.VarChar(42)
+  network        Network
+  abi            Json?
+  bytecode       String?
+  isActive       Boolean       @default(true) @map("is_active")
+  metadata       Json?
+  deployedAt     DateTime?     @map("deployed_at") @db.Timestamptz(6)
+  deployedBy     String?       @map("deployed_by") @db.Uuid
+  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+  contractType   ContractType? @relation(fields: [contractTypeId], references: [id])
+  contractActions ContractAction[]
+  stakeStatements StakeStatement[]
+
+  @@index([address], map: "idx_smart_contracts_address")
+  @@index([network], map: "idx_smart_contracts_network")
+  @@index([isActive], map: "idx_smart_contracts_active")
+  @@index([contractTypeId], map: "idx_smart_contracts_contract_type")
+  @@index([deployedBy], map: "idx_smart_contracts_deployed_by")
+  @@map("smart_contracts")
+}
+
+model Document {
+  id             String           @id @default(uuid()) @db.Uuid
+  companyId      String           @map("company_id") @db.Uuid
+  userId         String?          @map("user_id") @db.Uuid
+  filename       String           @db.VarChar(255)
+  originalName   String           @map("original_name") @db.VarChar(255)
+  mimeType       String           @map("mime_type") @db.VarChar(100)
+  size           BigInt
+  category       DocumentCategory @default(other)
+  tags           Json?            @db.Json
+  metadata       Json?
+  path           String           @db.VarChar(500)
+  url            String?          @db.VarChar(500)
+  isPublic       Boolean          @default(false) @map("is_public")
+  expiresAt      DateTime?        @map("expires_at") @db.Timestamptz(6)
+  downloadCount  Int              @default(0) @map("download_count")
+  lastDownloadAt DateTime?        @map("last_download_at") @db.Timestamptz(6)
+  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+  company        Company          @relation(fields: [companyId], references: [id])
+
+  @@index([companyId], map: "idx_documents_company_id")
+  @@index([category], map: "idx_documents_category")
+  @@index([expiresAt], map: "idx_documents_expires_at")
+  @@map("documents")
+}
+
+model UserDocument {
+  id              String             @id @default(uuid()) @db.Uuid
+  userId          String             @map("user_id") @db.Uuid
+  documentType    UserDocumentType   @map("document_type")
+  status          UserDocumentStatus @default(not_sent)
+  s3Url           String?            @map("s3_url") @db.VarChar(500)
+  s3Key           String?            @map("s3_key") @db.VarChar(500)
+  filename        String?            @db.VarChar(255)
+  mimeType        String?            @map("mime_type") @db.VarChar(100)
+  fileSize        BigInt?            @map("file_size")
+  rejectionReason String?            @map("rejection_reason")
+  reviewedBy      String?            @map("reviewed_by") @db.Uuid
+  reviewedAt      DateTime?          @map("reviewed_at") @db.Timestamptz(6)
+  uploadedAt      DateTime?          @map("uploaded_at") @db.Timestamptz(6)
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+  reviewer        User?              @relation("UserDocumentReviewer", fields: [reviewedBy], references: [id])
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, documentType], name: "user_document_type_unique")
+  @@index([userId], map: "idx_user_documents_user_id")
+  @@index([status], map: "idx_user_documents_status")
+  @@index([documentType], map: "idx_user_documents_type")
+  @@index([reviewedBy], map: "idx_user_documents_reviewer")
+  @@index([status, documentType], map: "idx_user_documents_status_type")
+  @@map("user_documents")
+}
+
+model UserCompany {
+  id                 String            @id @default(uuid()) @db.Uuid
+  userId             String            @map("user_id") @db.Uuid
+  companyId          String            @map("company_id") @db.Uuid
+  status             UserCompanyStatus @default(pending)
+  role               UserRole          @default(USER)
+  linkedAt           DateTime?         @map("linked_at") @db.Timestamptz(6)
+  permissions        Json              @default("{}")
+  requestedBy        String?           @map("requested_by") @db.Uuid
+  approvedBy         String?           @map("approved_by") @db.Uuid
+  approvedAt         DateTime?         @map("approved_at") @db.Timestamptz(6)
+  lastAccessAt       DateTime?         @map("last_access_at") @db.Timestamptz(6)
+  accessCount        Int               @default(0) @map("access_count")
+  canViewPrivateKeys Boolean           @default(false) @map("can_view_private_keys")
+  metadata           Json?
+  createdAt          DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime          @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt          DateTime?         @map("deleted_at") @db.Timestamptz(6)
+  approver           User?             @relation("UserCompanyApprover", fields: [approvedBy], references: [id])
+  company            Company           @relation(fields: [companyId], references: [id])
+  requester          User?             @relation("UserCompanyRequester", fields: [requestedBy], references: [id])
+  user               User              @relation(fields: [userId], references: [id])
+
+  @@unique([userId, companyId])
+  @@index([userId], map: "idx_user_companies_user_id")
+  @@index([companyId], map: "idx_user_companies_company_id")
+  @@index([status], map: "idx_user_companies_status")
+  @@index([role], map: "idx_user_companies_role")
+  @@index([companyId, status], map: "idx_user_companies_company_status")
+  @@index([userId, status], map: "idx_user_companies_user_status")
+  @@index([companyId, role], map: "idx_user_companies_company_role")
+  @@map("user_companies")
+}
+
+model UserTwoFactor {
+  id               String        @id @default(uuid()) @db.Uuid
+  userId           String        @map("user_id") @db.Uuid
+  type             TwoFactorType
+  secret           String?
+  phoneNumber      String?       @map("phone_number") @db.VarChar(20)
+  email            String?       @db.VarChar(255)
+  isActive         Boolean       @default(false) @map("is_active")
+  isVerified       Boolean       @default(false) @map("is_verified")
+  backupCodes      Json?         @map("backup_codes")
+  usedBackupCodes  Json          @default("[]") @map("used_backup_codes")
+  setupCompletedAt DateTime?     @map("setup_completed_at") @db.Timestamptz(6)
+  lastUsedAt       DateTime?     @map("last_used_at") @db.Timestamptz(6)
+  failedAttempts   Int           @default(0) @map("failed_attempts")
+  lockedUntil      DateTime?     @map("locked_until") @db.Timestamptz(6)
+  settings         Json          @default("{}")
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt        DateTime?     @map("deleted_at") @db.Timestamptz(6)
+  user             User          @relation(fields: [userId], references: [id])
+
+  @@unique([userId, type])
+  @@index([userId], map: "idx_user_two_factors_user_id")
+  @@index([userId, isActive], map: "idx_user_two_factors_user_active")
+  @@map("user_two_factors")
+}
+
+model EmailTemplate {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique @db.VarChar(100)
+  subject     String   @db.VarChar(255)
+  htmlContent String   @map("html_content")
+  textContent String?  @map("text_content")
+  variables   Json?
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([name], map: "idx_email_templates_name")
+  @@index([isActive], map: "idx_email_templates_active")
+  @@map("email_templates")
+}
+
+model CompanyBranding {
+  id                 String      @id @default(uuid()) @db.Uuid
+  companyId          String      @unique @map("company_id") @db.Uuid
+  primaryColor       String      @default("#007bff") @map("primary_color") @db.VarChar(7)
+  secondaryColor     String?     @map("secondary_color") @db.VarChar(7)
+  accentColor        String?     @map("accent_color") @db.VarChar(7)
+  backgroundColor    String      @default("#ffffff") @map("background_color") @db.VarChar(7)
+  textColor          String      @default("#333333") @map("text_color") @db.VarChar(7)
+  logoUrl            String?     @map("logo_url")
+  logoUrlDark        String?     @map("logo_url_dark")
+  faviconUrl         String?     @map("favicon_url")
+  backgroundImageUrl String?     @map("background_image_url")
+  layoutStyle        LayoutStyle @default(default) @map("layout_style")
+  borderRadius       Int         @default(8) @map("border_radius")
+  fontFamily         String?     @map("font_family") @db.VarChar(100)
+  fontSize           FontSize    @default(medium) @map("font_size")
+  loginTitle         String?     @map("login_title") @db.VarChar(100)
+  loginSubtitle      String?     @map("login_subtitle") @db.VarChar(200)
+  welcomeMessage     String?     @map("welcome_message")
+  footerText         String?     @map("footer_text")
+  supportUrl         String?     @map("support_url")
+  privacyPolicyUrl   String?     @map("privacy_policy_url")
+  termsOfServiceUrl  String?     @map("terms_of_service_url")
+  contactEmail       String?     @map("contact_email") @db.VarChar(255)
+  customCss          String?     @map("custom_css")
+  customJs           String?     @map("custom_js")
+  allowCustomization Boolean     @default(true) @map("allow_customization")
+  isActive           Boolean     @default(true) @map("is_active")
+  version            Int         @default(1)
+  deployedAt         DateTime?   @map("deployed_at") @db.Timestamptz(6)
+  deployedBy         String?     @map("deployed_by") @db.Uuid
+  createdAt          DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt          DateTime?   @map("deleted_at") @db.Timestamptz(6)
+  miniUrl            String?     @map("mini_url")
+  miniUrlDark        String?     @map("mini_url_dark")
+  textUrl            String?     @map("text_url")
+  textUrlDark        String?     @map("text_url_dark")
+  company            Company     @relation(fields: [companyId], references: [id])
+  deployer           User?       @relation("CompanyBrandingDeployer", fields: [deployedBy], references: [id])
+
+  @@index([companyId], map: "idx_company_brandings_company_id")
+  @@index([isActive], map: "idx_company_brandings_is_active")
+  @@map("company_brandings")
+}
+
+model Notification {
+  id         String    @id @default(uuid()) @db.Uuid
+  sender     String    @default("coinage") @db.VarChar(50)
+  title      String    @db.VarChar(255)
+  message    String
+  isRead     Boolean   @default(false) @map("is_read")
+  isActive   Boolean   @default(true) @map("is_active")
+  readDate   DateTime? @map("read_date") @db.Timestamptz(6)
+  deleteDate DateTime? @map("delete_date") @db.Timestamptz(6)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  userId     String    @map("user_id") @db.Uuid
+  isFavorite Boolean   @default(false) @map("is_favorite")
+  user       User      @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_notifications_user_id")
+  @@index([isActive], map: "idx_notifications_active")
+  @@index([isRead], map: "idx_notifications_read")
+  @@index([isFavorite], map: "idx_notifications_favorite")
+  @@index([createdAt], map: "idx_notifications_created")
+  @@map("notifications")
+}
+
+model Earnings {
+  id               String   @id @default(uuid()) @db.Uuid
+  userId           String   @map("user_id") @db.Uuid
+  tokenSymbol      String   @map("token_symbol") @db.VarChar(20)
+  tokenName        String   @map("token_name") @db.VarChar(100)
+  amount           Decimal  @db.Decimal(20, 8)
+  quote            Decimal  @db.Decimal(20, 8)
+  network          Network  @default(testnet)
+  transactionHash  String?  @map("transaction_hash") @db.VarChar(66)
+  distributionDate DateTime @map("distribution_date") @db.Timestamptz(6)
+  isActive         Boolean  @default(true) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user             User     @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_earnings_user_id")
+  @@index([tokenSymbol], map: "idx_earnings_token_symbol")
+  @@index([network], map: "idx_earnings_network")
+  @@index([distributionDate], map: "idx_earnings_distribution_date")
+  @@index([isActive], map: "idx_earnings_active")
+  @@map("earnings")
+}
+
+model UserAction {
+  id           String             @id @default(uuid()) @db.Uuid
+  userId       String             @map("user_id") @db.Uuid
+  companyId    String?            @map("company_id") @db.Uuid
+  action       UserActionType
+  category     UserActionCategory
+  status       UserActionStatus   @default(success)
+  details      Json?
+  metadata     Json?
+  relatedId    String?            @map("related_id") @db.Uuid
+  relatedType  String?            @map("related_type") @db.VarChar(50)
+  ipAddress    String?            @map("ip_address") @db.VarChar(45)
+  userAgent    String?            @map("user_agent")
+  deviceInfo   Json?              @map("device_info")
+  location     Json?
+  errorMessage String?            @map("error_message")
+  errorCode    String?            @map("error_code") @db.VarChar(50)
+  duration     Int?
+  performedAt  DateTime           @default(now()) @map("performed_at") @db.Timestamptz(6)
+  company      Company?           @relation(fields: [companyId], references: [id])
+  user         User               @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_user_actions_user_id")
+  @@index([companyId], map: "idx_user_actions_company_id")
+  @@index([action], map: "idx_user_actions_action")
+  @@index([category], map: "idx_user_actions_category")
+  @@index([status], map: "idx_user_actions_status")
+  @@index([performedAt], map: "idx_user_actions_performed_at")
+  @@index([relatedId], map: "idx_user_actions_related_id")
+  @@index([userId, performedAt], map: "idx_user_actions_user_performed")
+  @@index([userId, category], map: "idx_user_actions_user_category")
+  @@index([userId, action, status], map: "idx_user_actions_user_action_status")
+  @@map("user_actions")
+}
+
+model UserTaxes {
+  id                 String    @id @default(uuid()) @db.Uuid
+  userId             String    @unique @map("user_id") @db.Uuid
+  exchangeFeePercent Float     @default(0.3) @map("exchange_fee_percent")
+  transferFeePercent Float     @default(0.1) @map("transfer_fee_percent")
+  gasSubsidyEnabled  Boolean   @default(false) @map("gas_subsidy_enabled")
+  gasSubsidyPercent  Float     @default(0) @map("gas_subsidy_percent")
+  customFees         Json?     @map("custom_fees")
+  isVip              Boolean   @default(false) @map("is_vip")
+  vipLevel           Int       @default(0) @map("vip_level")
+  validFrom          DateTime  @default(now()) @map("valid_from") @db.Timestamptz(6)
+  validUntil         DateTime? @map("valid_until") @db.Timestamptz(6)
+  metadata           Json?
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  depositFee         Float     @default(3.0) @map("deposit_fee")
+  withdrawFee        Float     @default(5.0) @map("withdraw_fee")
+  pixValidation      Float?    @default(1.0) @map("pix_validation")
+  tokenTransferFees  Json?     @default("{\"DREX\": 1.0, \"cBRL\": 0.5}") @map("token_transfer_fees")
+  user               User      @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_user_taxes_user_id")
+  @@index([isVip], map: "idx_user_taxes_is_vip")
+  @@index([vipLevel], map: "idx_user_taxes_vip_level")
+  @@map("user_taxes")
+}
+
+model UserPixKey {
+  id               String     @id @default(uuid()) @db.Uuid
+  userId           String     @map("user_id") @db.Uuid
+  keyType          PixKeyType @map("key_type")
+  keyValue         String     @map("key_value") @db.VarChar(255)
+  holderName       String     @map("holder_name") @db.VarChar(255)
+  holderDocument   String     @map("holder_document") @db.VarChar(20)
+  isVerified       Boolean    @default(false) @map("is_verified")
+  isActive         Boolean    @default(true) @map("is_active")
+  isDefault        Boolean    @default(false) @map("is_default")
+  verificationData Json?      @map("verification_data")
+  lastVerifiedAt   DateTime?  @map("last_verified_at") @db.Timestamptz(6)
+  createdAt        DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user             User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([keyType, keyValue], name: "unique_pix_key")
+  @@index([userId], map: "idx_user_pix_keys_user_id")
+  @@index([keyType, keyValue], map: "idx_user_pix_keys_key_type_value")
+  @@index([userId, isDefault], map: "idx_user_pix_keys_user_default")
+  @@index([isActive], map: "idx_user_pix_keys_active")
+  @@map("user_pix_keys")
+}
+
+model PasswordReset {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  token     String    @unique @db.VarChar(255)
+  email     String    @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz(6)
+  used      Boolean   @default(false)
+  usedAt    DateTime? @map("used_at") @db.Timestamptz(6)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "idx_password_resets_user_id")
+  @@index([token], map: "idx_password_resets_token")
+  @@index([expiresAt], map: "idx_password_resets_expires")
+  @@index([email], map: "idx_password_resets_email")
+  @@map("password_resets")
+}
+
+model Withdrawal {
+  id                String           @id @default(uuid()) @db.Uuid
+  userId            String           @map("user_id") @db.Uuid
+  amount            Decimal          @db.Decimal(20, 8)
+  netAmount         Decimal?         @map("net_amount") @db.Decimal(20, 8)
+  fee               Decimal?         @default(0) @db.Decimal(15, 2)
+  pixKey            String           @map("pix_key") @db.VarChar(255)
+  pixKeyType        String?          @map("pix_key_type") @db.VarChar(50)
+  status            WithdrawalStatus @default(PENDING)
+  pixStatus         WithdrawalStatus? @map("pix_status") @default(PENDING)
+  burnTxHash        String?          @map("burn_tx_hash") @db.VarChar(66)
+  pixTransactionId  String?          @map("pix_transaction_id") @db.VarChar(255)
+  pixEndToEndId     String?          @map("pix_end_to_end_id") @db.VarChar(255)
+  processingStarted DateTime?        @map("processing_started") @db.Timestamptz(6)
+  completedAt       DateTime?        @map("completed_at") @db.Timestamptz(6)
+  failedAt          DateTime?        @map("failed_at") @db.Timestamptz(6)
+  errorMessage      String?          @map("error_message")
+  metadata          Json?
+  createdAt         DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user              User             @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_withdrawals_user_id")
+  @@index([status], map: "idx_withdrawals_status")
+  @@index([userId, status], map: "idx_withdrawals_user_status")
+  @@index([burnTxHash], map: "idx_withdrawals_burn_tx_hash")
+  @@index([pixTransactionId], map: "idx_withdrawals_pix_transaction_id")
+  @@index([createdAt], map: "idx_withdrawals_created_at")
+  @@map("withdrawals")
+}
+
+model Transfer {
+  id              String    @id @default(uuid()) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  fromAddress     String    @map("from_address") @db.VarChar(42)
+  toAddress       String    @map("to_address") @db.VarChar(42)
+  recipientUserId String?   @map("recipient_user_id") @db.Uuid
+  amount          Decimal   @db.Decimal(20, 8)
+  asset           String    @db.VarChar(20)
+  type            String    @db.VarChar(20)
+  description     String?
+  fee             Decimal   @default(0) @db.Decimal(15, 2)
+  feePercent      Float     @default(0) @map("fee_percent")
+  netAmount       Decimal   @map("net_amount") @db.Decimal(20, 8)
+  status          String    @default("pending") @db.VarChar(20)
+  blockchain      String    @default("Azore") @db.VarChar(50)
+  chainId         Int       @default(8800) @map("chain_id")
+  transactionHash String?   @map("transaction_hash") @db.VarChar(66)
+  blockNumber     Int?      @map("block_number")
+  errorMessage    String?   @map("error_message")
+  processedAt     DateTime? @map("processed_at") @db.Timestamptz(6)
+  completedAt     DateTime? @map("completed_at") @db.Timestamptz(6)
+  failedAt        DateTime? @map("failed_at") @db.Timestamptz(6)
+  metadata        Json?
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  recipientUser   User?     @relation("ReceivedTransfers", fields: [recipientUserId], references: [id])
+  user            User      @relation("UserTransfers", fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_transfers_user_id")
+  @@index([recipientUserId], map: "idx_transfers_recipient_user_id")
+  @@index([status], map: "idx_transfers_status")
+  @@index([type], map: "idx_transfers_type")
+  @@index([asset], map: "idx_transfers_asset")
+  @@index([transactionHash], map: "idx_transfers_tx_hash")
+  @@index([createdAt], map: "idx_transfers_created_at")
+  @@map("transfers")
+}
+
+model ExchangeOrder {
+  id                      String          @id @default(uuid()) @db.Uuid
+  blockchainOrderId       BigInt          @map("blockchain_order_id")
+  exchangeContractAddress String          @map("exchange_contract_address") @db.VarChar(42)
+  userAddress             String          @map("user_address") @db.VarChar(42)
+  orderType               String          @map("order_type") @db.VarChar(10)
+  orderSide               String          @map("order_side") @db.VarChar(10)
+  tokenASymbol            String          @map("token_a_symbol") @db.VarChar(10)
+  tokenBSymbol            String          @map("token_b_symbol") @db.VarChar(10)
+  price                   Decimal         @db.Decimal(36, 18)
+  amount                  Decimal         @db.Decimal(36, 18)
+  remainingAmount         Decimal         @map("remaining_amount") @db.Decimal(36, 18)
+  filledAmount            Decimal         @default(0) @map("filled_amount") @db.Decimal(36, 18)
+  status                  String          @db.VarChar(20)
+  transactionHash         String?         @map("transaction_hash") @db.VarChar(66)
+  gasUsed                 BigInt?         @map("gas_used")
+  gasPrice                Decimal?        @map("gas_price") @db.Decimal(36, 18)
+  blockNumber             BigInt?         @map("block_number")
+  createdAt               DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt               DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  expiresAt               DateTime?       @map("expires_at") @db.Timestamptz(6)
+  buyTrades               ExchangeTrade[] @relation("BuyOrderTrades")
+  sellTrades              ExchangeTrade[] @relation("SellOrderTrades")
+
+  @@index([userAddress, createdAt(sort: Desc)], map: "idx_user_orders")
+  @@index([exchangeContractAddress, status, orderType], map: "idx_active_orders")
+  @@index([blockchainOrderId, exchangeContractAddress], map: "idx_blockchain_order")
+  @@index([exchangeContractAddress, orderType, price, createdAt], map: "idx_price_time")
+  @@index([status], map: "idx_order_status")
+  @@map("exchange_orders")
+}
+
+model ExchangeTrade {
+  id                      String         @id @default(uuid()) @db.Uuid
+  exchangeContractAddress String         @map("exchange_contract_address") @db.VarChar(42)
+  buyOrderId              String?        @map("buy_order_id") @db.Uuid
+  sellOrderId             String?        @map("sell_order_id") @db.Uuid
+  buyerAddress            String         @map("buyer_address") @db.VarChar(42)
+  sellerAddress           String         @map("seller_address") @db.VarChar(42)
+  tokenASymbol            String         @map("token_a_symbol") @db.VarChar(10)
+  tokenBSymbol            String         @map("token_b_symbol") @db.VarChar(10)
+  price                   Decimal        @db.Decimal(36, 18)
+  amount                  Decimal        @db.Decimal(36, 18)
+  totalValue              Decimal        @map("total_value") @db.Decimal(36, 18)
+  feeAmount               Decimal        @map("fee_amount") @db.Decimal(36, 18)
+  transactionHash         String         @map("transaction_hash") @db.VarChar(66)
+  blockNumber             BigInt         @map("block_number")
+  tradeTimestamp          DateTime       @map("trade_timestamp") @db.Timestamptz(6)
+  createdAt               DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  buyOrder                ExchangeOrder? @relation("BuyOrderTrades", fields: [buyOrderId], references: [id])
+  sellOrder               ExchangeOrder? @relation("SellOrderTrades", fields: [sellOrderId], references: [id])
+
+  @@index([exchangeContractAddress, tradeTimestamp(sort: Desc)], map: "idx_pair_trades")
+  @@index([buyerAddress, tradeTimestamp(sort: Desc)], map: "idx_user_trades_buyer")
+  @@index([sellerAddress, tradeTimestamp(sort: Desc)], map: "idx_user_trades_seller")
+  @@index([exchangeContractAddress, price, amount], map: "idx_price_volume")
+  @@index([transactionHash], map: "idx_trade_tx_hash")
+  @@map("exchange_trades")
+}
+
+model ExchangeOrderBookSnapshot {
+  id                      String   @id @default(uuid()) @db.Uuid
+  exchangeContractAddress String   @map("exchange_contract_address") @db.VarChar(42)
+  snapshotTimestamp       DateTime @map("snapshot_timestamp") @db.Timestamptz(6)
+  orderBookData           Json     @map("order_book_data")
+  bestBid                 Decimal? @map("best_bid") @db.Decimal(36, 18)
+  bestAsk                 Decimal? @map("best_ask") @db.Decimal(36, 18)
+  spread                  Decimal? @db.Decimal(36, 18)
+  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([exchangeContractAddress, snapshotTimestamp(sort: Desc)], map: "idx_snapshots")
+  @@map("exchange_order_book_snapshots")
+}
+
+model ExchangeStatistics {
+  id                      String   @id @default(uuid()) @db.Uuid
+  exchangeContractAddress String   @map("exchange_contract_address") @db.VarChar(42)
+  statDate                DateTime @map("stat_date") @db.Date
+  totalVolume24h          Decimal  @default(0) @map("total_volume_24h") @db.Decimal(36, 18)
+  totalTrades24h          BigInt   @default(0) @map("total_trades_24h")
+  priceChange24h          Decimal  @default(0) @map("price_change_24h") @db.Decimal(10, 4)
+  high24h                 Decimal? @map("high_24h") @db.Decimal(36, 18)
+  low24h                  Decimal? @map("low_24h") @db.Decimal(36, 18)
+  lastPrice               Decimal? @map("last_price") @db.Decimal(36, 18)
+  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt               DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([exchangeContractAddress, statDate], map: "unique_exchange_stat_date")
+  @@index([exchangeContractAddress, statDate(sort: Desc)], map: "idx_exchange_stats")
+  @@map("exchange_statistics")
+}
+
+model ExchangeQueueJob {
+  id           String    @id @default(uuid()) @db.Uuid
+  jobType      String    @map("job_type") @db.VarChar(50)
+  jobData      Json      @map("job_data")
+  status       String    @db.VarChar(20)
+  priority     Int       @default(5)
+  retryCount   Int       @default(0) @map("retry_count")
+  maxRetries   Int       @default(3) @map("max_retries")
+  errorMessage String?   @map("error_message")
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  startedAt    DateTime? @map("started_at") @db.Timestamptz(6)
+  completedAt  DateTime? @map("completed_at") @db.Timestamptz(6)
+
+  @@index([status, priority(sort: Desc), createdAt], map: "idx_pending_jobs")
+  @@index([jobType, status], map: "idx_job_type")
+  @@map("exchange_queue_jobs")
+}
+
+enum Network {
+  mainnet
+  testnet
+}
+
+enum TransactionType {
+  transfer
+  contract_deploy
+  contract_call
+  contract_read
+  deposit
+  withdraw
+  stake
+  unstake
+  exchange
+  stake_reward
+}
+
+enum TransactionStatus {
+  pending
+  confirmed
+  failed
+  cancelled
+}
+
+enum WithdrawalStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  CONFIRMED
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+  APP_ADMIN
+}
+
+enum UserPlan {
+  BASIC
+  PRO
+  PREMIUM
+}
+
+enum DocumentCategory {
+  identity
+  address_proof
+  financial
+  contract
+  other
+}
+
+enum UserCompanyStatus {
+  pending
+  active
+  suspended
+  revoked
+}
+
+enum TwoFactorType {
+  totp
+  sms
+  email
+  backup_codes
+}
+
+enum EmailStatus {
+  pending
+  sent
+  delivered
+  opened
+  clicked
+  bounced
+  failed
+}
+
+enum LayoutStyle {
+  default
+  centered
+  sidebar
+  fullscreen
+}
+
+enum FontSize {
+  small
+  medium
+  large
+}
+
+enum UserDocumentType {
+  front
+  back
+  selfie
+}
+
+enum UserDocumentStatus {
+  not_sent
+  pending
+  approved
+  rejected
+}
+
+enum UserActionType {
+  login
+  logout
+  login_failed
+  password_reset
+  password_changed
+  two_factor_enabled
+  two_factor_disabled
+  two_factor_verified
+  profile_updated
+  profile_viewed
+  document_uploaded
+  document_verified
+  deposit_initiated
+  deposit_confirmed
+  deposit_failed
+  withdrawal_initiated
+  withdrawal_approved
+  withdrawal_completed
+  withdrawal_failed
+  transfer_sent
+  transfer_received
+  transfer_failed
+  transaction_sent
+  transaction_confirmed
+  transaction_failed
+  contract_interaction
+  token_swap
+  stake_created
+  stake_withdrawn
+  reward_claimed
+  api_key_created
+  api_key_deleted
+  suspicious_activity
+  account_locked
+  account_unlocked
+  notification_sent
+  email_sent
+  webhook_triggered
+  cache_cleared
+  user_created
+  user_updated
+  user_deleted
+  permission_granted
+  permission_revoked
+  distributeReward
+}
+
+enum UserActionCategory {
+  authentication
+  profile
+  financial
+  blockchain
+  security
+  system
+  admin
+}
+
+enum UserActionStatus {
+  success
+  failed
+  pending
+  cancelled
+}
+
+enum ContractCategory {
+  token
+  nft
+  defi
+  escrow
+  governance
+  bridge
+  oracle
+  other
+}
+
+enum PixKeyType {
+  cpf
+  email
+  phone
+  random
+}
+
+model ContractAction {
+  id          String       @id @default(uuid()) @db.Uuid
+  contractId  String       @map("contract_id") @db.Uuid
+  companyId   String       @map("company_id") @db.Uuid
+  userId      String       @map("user_id") @db.Uuid
+  actionType  String       @map("action_type") @db.VarChar(100)
+  metadata    Json?
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  contract    SmartContract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  company     Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([contractId], map: "idx_contract_actions_contract_id")
+  @@index([companyId], map: "idx_contract_actions_company_id")
+  @@index([userId], map: "idx_contract_actions_user_id")
+  @@index([actionType], map: "idx_contract_actions_action_type")
+  @@index([createdAt(sort: Desc)], map: "idx_contract_actions_created_at")
+  @@map("contract_actions")
+}
+
+model NotificationConfig {
+  id                String   @id @default(uuid()) @db.Uuid
+  type              String   @unique @db.VarChar(50) // 'withdrawal' ou 'document'
+  userIds           Json     @default("[]") @map("user_ids") // Array de UUIDs dos usuários
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([type], map: "idx_notification_config_type")
+  @@map("notification_configs")
+}
+
+model WhatsAppMessage {
+  id                String   @id @default(uuid()) @db.Uuid
+  senderUserId      String   @map("sender_user_id") @db.Uuid
+  recipientUserIds  Json     @map("recipient_user_ids") // Array de UUIDs dos destinatários
+  recipientPhones   Json     @map("recipient_phones") // Array de telefones
+  message           String   @db.Text
+  templateId        String?  @map("template_id") @db.VarChar(50)
+  status            String   @default("sent") @db.VarChar(20) // sent, failed, partial
+  successCount      Int      @default(0) @map("success_count")
+  failureCount      Int      @default(0) @map("failure_count")
+  sentAt            DateTime @default(now()) @map("sent_at") @db.Timestamptz(6)
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([senderUserId], map: "idx_whatsapp_messages_sender")
+  @@index([sentAt], map: "idx_whatsapp_messages_sent_at")
+  @@index([templateId], map: "idx_whatsapp_messages_template")
+  @@index([status], map: "idx_whatsapp_messages_status")
+  @@map("whatsapp_messages")
+}
+
+model UserBalance {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  balances  Json     @default("{}")
+  stakes    Json     @default("{}")
+  tokenData Json?    @map("token_data") // NOVO: Dados processados por token (balance, stake, order, total)
+  network   Network  @default(testnet)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "idx_user_balances_user_id")
+  @@index([createdAt], map: "idx_user_balances_created_at")
+  @@index([userId, createdAt(sort: Desc)], map: "idx_user_balances_user_date")
+  @@index([network], map: "idx_user_balances_network")
+  @@map("user_balances")
+}
+
+// ============================================
+// INTERNATIONALIZATION (i18n) MODELS
+// ============================================
+
+model Language {
+  id        String   @id @default(uuid()) @db.Uuid
+  code      String   @unique @db.VarChar(10)  // pt-BR, en-US, es
+  name      String   @db.VarChar(100)          // Português (Brasil), English (US), Español
+  flag      String?  @db.VarChar(10)           // Emoji da bandeira
+  isActive  Boolean  @default(true) @map("is_active")
+  isDefault Boolean  @default(false) @map("is_default")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  translations Translation[]
+
+  @@index([code], map: "idx_languages_code")
+  @@index([isActive], map: "idx_languages_active")
+  @@index([isDefault], map: "idx_languages_default")
+  @@map("languages")
+}
+
+model TranslationNamespace {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique @db.VarChar(50)  // common, auth, dashboard, etc
+  description String?  @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  translations Translation[]
+
+  @@index([key], map: "idx_translation_namespaces_key")
+  @@map("translation_namespaces")
+}
+
+model Translation {
+  id           String               @id @default(uuid()) @db.Uuid
+  namespaceId  String               @map("namespace_id") @db.Uuid
+  languageId   String               @map("language_id") @db.Uuid
+  key          String               @db.VarChar(255)  // login.title, login.form.email
+  value        String               @db.Text
+  screen       String?              @db.VarChar(100)  // auth/login, dashboard, etc
+  context      String?              @db.Text          // Contexto adicional para tradutores
+  createdAt    DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime             @updatedAt @map("updated_at") @db.Timestamptz(6)
+  createdBy    String?              @map("created_by") @db.Uuid
+  updatedBy    String?              @map("updated_by") @db.Uuid
+
+  namespace    TranslationNamespace @relation(fields: [namespaceId], references: [id], onDelete: Cascade)
+  language     Language             @relation(fields: [languageId], references: [id], onDelete: Cascade)
+
+  @@unique([namespaceId, languageId, key], name: "unique_translation")
+  @@index([namespaceId, languageId], map: "idx_translations_namespace_language")
+  @@index([languageId], map: "idx_translations_language")
+  @@index([screen], map: "idx_translations_screen")
+  @@index([key], map: "idx_translations_key")
+  @@map("translations")
+}
+
+model Issuer {
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String   @db.VarChar(255)
+  logoUrl        String?  @map("logo_url") @db.Text
+  logoKey        String?  @map("logo_key") @db.Text
+  foundationYear Int?     @map("foundation_year")
+  website        String?  @db.Text
+  description    String?  @db.Text
+  stakes         String[] @default([])
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([isActive], map: "issuers_is_active_idx")
+  @@index([name], map: "issuers_name_idx")
+  @@index([stakes], map: "issuers_stakes_idx")
+  @@map("issuers")
+}
+
+// Email logging for tracking sent emails and confirmation tokens
+model EmailLog {
+  id           String   @id @default(uuid()) @db.Uuid
+  templateId   String?  @map("template_id") @db.VarChar(100)
+  fromEmail    String   @map("from_email") @db.VarChar(255)
+  fromName     String?  @map("from_name") @db.VarChar(255)
+  toEmail      String   @map("to_email") @db.VarChar(255)
+  toName       String?  @map("to_name") @db.VarChar(255)
+  subject      String   @db.VarChar(500)
+  htmlContent  String?  @map("html_content") @db.Text
+  textContent  String?  @map("text_content") @db.Text
+  status       String   @default("pending") @db.VarChar(50) // pending, sent, delivered, failed, used
+  provider     String?  @db.VarChar(50)
+  providerId   String?  @map("provider_id") @db.VarChar(255)
+  metadata     Json?
+  error        String?  @db.Text
+  sentAt       DateTime? @map("sent_at") @db.Timestamptz(6)
+  deliveredAt  DateTime? @map("delivered_at") @db.Timestamptz(6)
+  openedAt     DateTime? @map("opened_at") @db.Timestamptz(6)
+  clickedAt    DateTime? @map("clicked_at") @db.Timestamptz(6)
+  bounced      Boolean  @default(false)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([toEmail], map: "idx_email_log_to_email")
+  @@index([status], map: "idx_email_log_status")
+  @@index([subject], map: "idx_email_log_subject")
+  @@index([createdAt], map: "idx_email_log_created_at")
+  @@map("email_logs")
+}
+
+// CDI (Certificado de Depósito Interbancário) Rates
+// Stores historical CDI rates fetched from Banco Central do Brasil API
+model CdiRate {
+  id        String   @id @default(uuid()) @db.Uuid
+  date      DateTime @unique @db.Date                    // Data do CDI (única)
+  rate      Decimal  @db.Decimal(10, 6)                  // Taxa diária CDI (ex: 0.045513)
+  rateYear  Decimal  @db.Decimal(10, 4)                  // Taxa anualizada (ex: 12.75)
+  source    String   @default("BCB") @db.VarChar(50)     // Fonte dos dados (BCB = Banco Central do Brasil)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([date(sort: Desc)], map: "idx_cdi_rates_date")
+  @@map("cdi_rates")
+}
+
+// Stake Statements
+// Stores financial statements (demonstrativos) for stake contracts
+model StakeStatement {
+  id            String        @id @default(uuid()) @db.Uuid
+  contractId    String        @map("contract_id") @db.Uuid
+  companyId     String        @map("company_id") @db.Uuid
+  statementDate DateTime      @map("statement_date") @db.Date
+  name          String        @db.VarChar(255)
+  fileUrl       String?       @map("file_url") @db.VarChar(500)
+  fileKey       String?       @map("file_key") @db.VarChar(500)
+  linkUrl       String?       @map("link_url") @db.VarChar(500)
+  createdAt     DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  contract      SmartContract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  company       Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([contractId], map: "idx_stake_statements_contract_id")
+  @@index([companyId], map: "idx_stake_statements_company_id")
+  @@index([statementDate(sort: Desc)], map: "idx_stake_statements_statement_date")
+  @@index([createdAt(sort: Desc)], map: "idx_stake_statements_created_at")
+  @@map("stake_statements")
+}
