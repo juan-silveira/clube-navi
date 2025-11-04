@@ -1,0 +1,8 @@
+{
+  "name": "@clube-navi/shared-assets",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "types": "index.ts",
+  "private": true,
+  "description": "Shared assets between mobile and admin applications"
+}

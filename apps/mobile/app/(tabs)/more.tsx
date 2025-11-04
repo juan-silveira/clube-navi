@@ -29,10 +29,8 @@ export default function More() {
     );
   };
 
-  const menuItems = [
-    { icon: 'home-outline', title: 'Início', route: '/index' },
-    { icon: 'search-outline', title: 'Buscar', route: '/explore' },
-    { icon: 'notifications-outline', title: 'Notificações', route: '/notifications', badge: 12 },
+  const menuItems: Array<{ icon: string; title: string; route?: string; badge?: number }> = [
+    { icon: 'grid-outline', title: 'Dashboard', route: '/(tabs)/dashboard' },
     { icon: 'people-outline', title: 'Lojas que sigo' },
     { icon: 'headset-outline', title: 'Ajuda' },
     { icon: 'bag-outline', title: 'Minhas compras' },

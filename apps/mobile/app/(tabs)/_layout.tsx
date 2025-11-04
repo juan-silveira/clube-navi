@@ -1,14 +1,39 @@
 import { Tabs } from 'expo-router';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { whitelabelConfig } from '@/config/whitelabel';
+import { useAuthStore } from '@/store/authStore';
 
 const TabBarIndicator = ({ focused }: { focused: boolean }) => {
   if (!focused) return null;
   return <View style={styles.indicator} />;
 };
 
+const ProfileAvatar = ({ user, focused }: { user: any; focused: boolean }) => {
+  const firstName = user?.name?.split(' ')[0] || 'U';
+  const hasProfilePicture = user?.profilePicture && user.profilePicture !== 'https://via.placeholder.com/60';
+
+  return (
+    <View style={styles.tabItem}>
+      <View style={[styles.centerButton, focused && styles.centerButtonActive]}>
+        {hasProfilePicture ? (
+          <Image
+            source={{ uri: user.profilePicture }}
+            style={styles.avatar}
+          />
+        ) : (
+          <View style={[styles.avatarPlaceholder, { backgroundColor: whitelabelConfig.colors.primary }]}>
+            <Text style={styles.avatarText}>{firstName.charAt(0).toUpperCase()}</Text>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
+
 export default function TabLayout() {
+  const { user } = useAuthStore();
+
   return (
     <Tabs
       screenOptions={{
@@ -54,16 +79,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: '',
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.tabItem}>
-              <View style={[styles.centerButton, focused && styles.centerButtonActive]}>
-                <Image
-                  source={{ uri: 'https://via.placeholder.com/50' }}
-                  style={styles.avatar}
-                />
-              </View>
-            </View>
-          ),
+          tabBarIcon: ({ focused }) => <ProfileAvatar user={user} focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -88,6 +104,84 @@ export default function TabLayout() {
               <Ionicons name="menu-outline" size={size} color={color} />
             </View>
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="dashboard"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="internet-management"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="my-plans"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="invoices"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="unlock"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="upgrade-plan"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="new-plan"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="cashback"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="cashback-statement"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="benefit-detail"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="cinema"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="gift-cards"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="cinemas-list"
+        options={{
+          href: null, // Esconde do menu de tabs
         }}
       />
     </Tabs>
@@ -131,5 +225,17 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
+  },
+  avatarPlaceholder: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: whitelabelConfig.colors.white,
   },
 });

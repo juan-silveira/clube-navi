@@ -1,132 +1,123 @@
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { whitelabelConfig } from '@/config/whitelabel';
+import { useRouter, usePathname, useLocalSearchParams } from 'expo-router';
+import { deserializeBreadcrumb, addToBreadcrumb, getBackPath, serializeBreadcrumb } from '@/utils/navigationHelper';
 
 export default function Explore() {
-  const popularSearches = [
-    'iPhone 15',
-    'Notebook',
-    'Fone bluetooth',
-    'Smart TV',
-    'Air Fryer',
-    'Tênis Nike',
+  const router = useRouter();
+  const currentPath = usePathname();
+  const params = useLocalSearchParams();
+
+  // Deserializa o breadcrumb recebido
+  const currentBreadcrumb = deserializeBreadcrumb(params.breadcrumb as string);
+
+  const productsAndServices = [
+    { id: 1, icon: 'film-outline', label: 'Cinema', route: '/(tabs)/cinema', color: whitelabelConfig.colors.primary },
+    { id: 2, icon: 'cash-outline', label: 'Cashback', route: '/(tabs)/cashback', color: whitelabelConfig.colors.primary },
+    { id: 3, icon: 'gift-outline', label: 'GiftCard', route: '/(tabs)/gift-cards', color: whitelabelConfig.colors.primary },
+    { id: 4, icon: 'wifi-outline', label: 'Internet', route: '/(tabs)/internet-management', color: whitelabelConfig.colors.primary },
   ];
 
-  const categories = [
-    { id: 1, title: 'Eletrônicos', icon: 'phone-portrait', color: '#007AFF', image: 'https://via.placeholder.com/100' },
-    { id: 2, title: 'Moda', icon: 'shirt', color: '#FF9500', image: 'https://via.placeholder.com/100' },
-    { id: 3, title: 'Casa e Jardim', icon: 'home', color: '#34C759', image: 'https://via.placeholder.com/100' },
-    { id: 4, title: 'Esportes', icon: 'football', color: '#FF3B30', image: 'https://via.placeholder.com/100' },
-    { id: 5, title: 'Livros', icon: 'book', color: '#5856D6', image: 'https://via.placeholder.com/100' },
-    { id: 6, title: 'Beleza', icon: 'heart', color: '#FF2D55', image: 'https://via.placeholder.com/100' },
-    { id: 7, title: 'Brinquedos', icon: 'game-controller', color: '#FFD60A', image: 'https://via.placeholder.com/100' },
-    { id: 8, title: 'Automotivo', icon: 'car', color: '#8E8E93', image: 'https://via.placeholder.com/100' },
+  const cinemaCategories = [
+    { id: 1, label: 'Em cartaz', route: '/(tabs)/cinema' },
+    { id: 2, label: 'Estreias', route: '/(tabs)/cinema' },
+    { id: 3, label: 'Em breve', route: '/(tabs)/cinema' },
+    { id: 4, label: 'Comprar ingressos', route: '/(tabs)/cinema' },
+    { id: 5, label: 'Cinemas perto de você', route: '/(tabs)/cinema' },
+    { id: 6, label: 'Vouchers', route: '/(tabs)/cinema' },
+    { id: 7, label: 'Explorar', route: '/(tabs)/cinema' },
+    { id: 8, label: 'Procurar', route: '/(tabs)/cinema' },
   ];
 
-  const trendingTopics = [
-    { id: 1, title: 'Black Friday 2024', subtitle: 'Ofertas imperdíveis', image: 'https://via.placeholder.com/300x150' },
-    { id: 2, title: 'Lançamentos', subtitle: 'Produtos novos', image: 'https://via.placeholder.com/300x150' },
-    { id: 3, title: 'Mais vendidos', subtitle: 'Top produtos', image: 'https://via.placeholder.com/300x150' },
-  ];
+  const handleBack = () => {
+    const backPath = getBackPath(currentBreadcrumb);
+    if (backPath) {
+      router.push({
+        pathname: backPath.path as any,
+        params: backPath.params || {},
+      });
+    } else {
+      // Fallback para home se não houver breadcrumb
+      router.push('/');
+    }
+  };
 
   return (
     <View style={styles.container}>
-      {/* Header com busca */}
-      <View style={[styles.header, { backgroundColor: whitelabelConfig.colors.primary }]}>
-        <Text style={styles.headerTitle}>Explorar</Text>
+      {/* Header com barra de pesquisa */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleBack} style={styles.backButton}>
+          <Ionicons name="chevron-back" size={28} color="#1C1C1E" />
+        </TouchableOpacity>
         <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
-            placeholder="O que você está procurando?"
+            placeholder="O que você está buscando?"
             placeholderTextColor="#999"
           />
-          <TouchableOpacity style={styles.scanButton}>
-            <Ionicons name="scan" size={20} color={whitelabelConfig.colors.primary} />
-          </TouchableOpacity>
+          <Ionicons name="search" size={20} color="#999" />
         </View>
       </View>
 
-      <ScrollView style={styles.scrollView}>
-        {/* Buscas Populares */}
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        {/* Produtos e serviços */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Buscas populares</Text>
-          <View style={styles.tagsContainer}>
-            {popularSearches.map((search, index) => (
-              <TouchableOpacity key={index} style={styles.tag}>
-                <Ionicons name="trending-up" size={14} color={whitelabelConfig.colors.primary} />
-                <Text style={styles.tagText}>{search}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        {/* Categorias */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Categorias</Text>
-          <View style={styles.categoriesGrid}>
-            {categories.map((category) => (
-              <TouchableOpacity key={category.id} style={styles.categoryCard}>
-                <View style={[styles.categoryIconContainer, { backgroundColor: category.color + '15' }]}>
-                  <Ionicons name={category.icon as any} size={32} color={category.color} />
+          <Text style={styles.sectionTitle}>Produtos e serviços</Text>
+          <View style={styles.productsGrid}>
+            {productsAndServices.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.productCard}
+                onPress={() => {
+                  const newBreadcrumb = addToBreadcrumb(currentBreadcrumb, currentPath, params);
+                  router.push({
+                    pathname: item.route as any,
+                    params: { breadcrumb: serializeBreadcrumb(newBreadcrumb) },
+                  });
+                }}
+              >
+                <View style={[styles.productIconContainer, { backgroundColor: item.color + '15' }]}>
+                  <Ionicons name={item.icon as any} size={32} color={item.color} />
                 </View>
-                <Text style={styles.categoryTitle}>{category.title}</Text>
+                <Text style={styles.productLabel}>{item.label}</Text>
               </TouchableOpacity>
             ))}
           </View>
         </View>
 
-        {/* Em Alta */}
+        {/* Navegue pelas categorias */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Em alta</Text>
-            <TouchableOpacity>
-              <Text style={styles.seeAllText}>Ver tudo</Text>
-            </TouchableOpacity>
+          <Text style={styles.sectionTitle}>Navegue pelas categorias</Text>
+
+          {/* Cinema Header */}
+          <View style={styles.categoryHeader}>
+            <Ionicons name="film-outline" size={24} color="#1C1C1E" />
+            <Text style={styles.categoryHeaderText}>Cinema</Text>
           </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.trendingScroll}
-          >
-            {trendingTopics.map((topic) => (
-              <TouchableOpacity key={topic.id} style={styles.trendingCard}>
-                <Image source={{ uri: topic.image }} style={styles.trendingImage} />
-                <View style={styles.trendingOverlay}>
-                  <Text style={styles.trendingTitle}>{topic.title}</Text>
-                  <Text style={styles.trendingSubtitle}>{topic.subtitle}</Text>
-                </View>
+
+          {/* Lista de categorias */}
+          <View style={styles.categoriesList}>
+            {cinemaCategories.map((category) => (
+              <TouchableOpacity
+                key={category.id}
+                style={styles.categoryItem}
+                onPress={() => {
+                  const newBreadcrumb = addToBreadcrumb(currentBreadcrumb, currentPath, params);
+                  router.push({
+                    pathname: category.route as any,
+                    params: { breadcrumb: serializeBreadcrumb(newBreadcrumb) },
+                  });
+                }}
+              >
+                <Text style={styles.categoryItemText}>{category.label}</Text>
+                <Ionicons name="chevron-forward" size={20} color={whitelabelConfig.colors.primary} />
               </TouchableOpacity>
             ))}
-          </ScrollView>
+          </View>
         </View>
 
-        {/* Histórico de Busca */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Buscas recentes</Text>
-            <TouchableOpacity>
-              <Text style={styles.clearText}>Limpar</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.historyContainer}>
-            <TouchableOpacity style={styles.historyItem}>
-              <Ionicons name="time-outline" size={20} color={whitelabelConfig.colors.textSecondary} />
-              <Text style={styles.historyText}>Smart TV 55 polegadas</Text>
-              <Ionicons name="close" size={18} color={whitelabelConfig.colors.textSecondary} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.historyItem}>
-              <Ionicons name="time-outline" size={20} color={whitelabelConfig.colors.textSecondary} />
-              <Text style={styles.historyText}>Fone de ouvido JBL</Text>
-              <Ionicons name="close" size={18} color={whitelabelConfig.colors.textSecondary} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.historyItem}>
-              <Ionicons name="time-outline" size={20} color={whitelabelConfig.colors.textSecondary} />
-              <Text style={styles.historyText}>Notebook Gamer</Text>
-              <Ionicons name="close" size={18} color={whitelabelConfig.colors.textSecondary} />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <View style={styles.bottomSpacer} />
       </ScrollView>
     </View>
   );
@@ -135,158 +126,109 @@ export default function Explore() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: whitelabelConfig.colors.background,
+    backgroundColor: '#F8F9FA',
   },
   header: {
-    paddingTop: 50,
+    backgroundColor: '#FFF',
+    paddingTop: 60,
     paddingBottom: 16,
-    paddingHorizontal: 16,
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.white,
-    marginBottom: 12,
-  },
-  searchContainer: {
+    paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: whitelabelConfig.colors.white,
-    borderRadius: 8,
-    paddingHorizontal: 12,
+    gap: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E5EA',
   },
-  searchIcon: {
-    marginRight: 8,
+  backButton: {
+    width: 40,
+  },
+  searchContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F8F9FA',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    height: 48,
+    gap: 8,
   },
   searchInput: {
     flex: 1,
-    height: 44,
-    fontSize: 14,
-    color: whitelabelConfig.colors.text,
-  },
-  scanButton: {
-    padding: 8,
+    fontSize: 15,
+    color: '#1C1C1E',
   },
   scrollView: {
     flex: 1,
   },
   section: {
-    backgroundColor: whitelabelConfig.colors.white,
-    padding: 16,
-    marginTop: 8,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
+    backgroundColor: '#FFF',
+    marginTop: 16,
+    paddingVertical: 24,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.text,
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1C1C1E',
+    paddingHorizontal: 20,
+    marginBottom: 20,
   },
-  seeAllText: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.primary,
-  },
-  clearText: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.error,
-  },
-  tagsContainer: {
+  productsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 12,
-  },
-  tag: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: whitelabelConfig.colors.background,
     paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-    marginRight: 8,
-    marginBottom: 8,
+    gap: 12,
   },
-  tagText: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.text,
-    marginLeft: 6,
-  },
-  categoriesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 12,
-    marginHorizontal: -8,
-  },
-  categoryCard: {
-    width: '25%',
+  productCard: {
+    width: '47%',
+    backgroundColor: '#F8F9FA',
+    borderRadius: 16,
+    padding: 20,
     alignItems: 'center',
-    paddingVertical: 12,
+    gap: 12,
   },
-  categoryIconContainer: {
+  productIconContainer: {
     width: 64,
     height: 64,
     borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 8,
   },
-  categoryTitle: {
-    fontSize: 12,
-    color: whitelabelConfig.colors.text,
-    textAlign: 'center',
+  productLabel: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#1C1C1E',
   },
-  trendingScroll: {
-    marginTop: 12,
-    marginHorizontal: -16,
-    paddingHorizontal: 16,
-  },
-  trendingCard: {
-    width: 300,
-    height: 150,
-    marginRight: 12,
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
-  trendingImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  trendingOverlay: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    padding: 16,
-  },
-  trendingTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.white,
-    marginBottom: 4,
-  },
-  trendingSubtitle: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.white,
-  },
-  historyContainer: {
-    marginTop: 8,
-  },
-  historyItem: {
+  categoryHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: whitelabelConfig.colors.border,
+    gap: 12,
+    paddingHorizontal: 20,
+    marginBottom: 16,
   },
-  historyText: {
-    flex: 1,
-    fontSize: 16,
-    color: whitelabelConfig.colors.text,
-    marginLeft: 12,
+  categoryHeaderText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1C1C1E',
+  },
+  categoriesList: {
+    paddingHorizontal: 20,
+  },
+  categoryItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#F8F9FA',
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+  },
+  categoryItemText: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#1C1C1E',
+  },
+  bottomSpacer: {
+    height: 40,
   },
 });

@@ -1,215 +1,356 @@
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { whitelabelConfig } from '@/config/whitelabel';
-import { useRef, useEffect } from 'react';
+import { useAuthStore } from '@/store/authStore';
+import { useRouter, usePathname } from 'expo-router';
+import { serializeBreadcrumb } from '@/utils/navigationHelper';
 
-export default function Dashboard() {
-  const bannerScrollRef = useRef<ScrollView>(null);
-  const scrollPosition = useRef(0);
-  const categories = ['Tudo', 'Eletrônicos', 'Moda', 'Casa', 'Esportes', 'Livros'];
+const { width } = Dimensions.get('window');
 
-  const quickAccess = [
-    { icon: 'pricetag', label: 'Ofertas', color: '#FF9500' },
-    { icon: 'card', label: 'Cartão', color: '#34C759' },
-    { icon: 'gift', label: 'Cupons', color: '#5856D6' },
-    { icon: 'wallet', label: 'Carteira', color: '#007AFF' },
-    { icon: 'cash', label: 'Cashback', color: '#FF2D55' },
-    { icon: 'ticket', label: 'Ingressos', color: '#FFD60A' },
-    { icon: 'restaurant', label: 'Alimentação', color: '#FF9500' },
-    { icon: 'cart', label: 'Mercado', color: '#34C759' },
-  ];
+// Imagens dos banners (futuramente virão do S3 via admin)
+const BANNER_IMAGES = {
+  cashback: require('../../assets/images/banners/cashback.jpg'),
+  ofertas: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=400&h=400&fit=crop',
+  valePresente: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=400&h=400&fit=crop',
+};
 
-  const banners = [
-    { id: 1, title: 'OFERTAS ESPECIAIS', subtitle: 'Até 45% OFF', color: whitelabelConfig.colors.primary },
-    { id: 2, title: 'BLACK FRIDAY', subtitle: 'Até 70% OFF', color: '#000000' },
-    { id: 3, title: 'FRETE GRÁTIS', subtitle: 'Em compras acima de R$ 99', color: '#34C759' },
-    { id: 4, title: 'CUPOM R$ 50', subtitle: 'Para primeira compra', color: '#FF9500' },
-  ];
+export default function Home() {
+  const { user } = useAuthStore();
+  const router = useRouter();
+  const currentPath = usePathname();
 
-  // Criar array infinito: duplica os banners 3 vezes para scroll infinito
-  const infiniteBanners = [...banners, ...banners, ...banners];
-  const BANNER_WIDTH = 316; // 300 + 16 margin
+  const firstName = user?.name?.split(' ')[0] || 'Usuário';
 
-  useEffect(() => {
-    // Iniciar no meio do array infinito
-    setTimeout(() => {
-      bannerScrollRef.current?.scrollTo({ x: banners.length * BANNER_WIDTH, animated: false });
-    }, 100);
-
-    let interval: NodeJS.Timeout;
-
-    // Aguardar 30 segundos antes de iniciar o auto-scroll
-    const startTimeout = setTimeout(() => {
-      // Auto-scroll dos banners a cada 5 segundos
-      interval = setInterval(() => {
-        scrollPosition.current += 1;
-        const newPosition = (scrollPosition.current % banners.length) * BANNER_WIDTH + banners.length * BANNER_WIDTH;
-        bannerScrollRef.current?.scrollTo({ x: newPosition, animated: true });
-      }, 5000);
-    }, 30000);
-
-    return () => {
-      clearTimeout(startTimeout);
-      if (interval) clearInterval(interval);
-    };
-  }, []);
-
-  const handleBannerScroll = (event: any) => {
-    const contentOffsetX = event.nativeEvent.contentOffset.x;
-    const totalWidth = banners.length * BANNER_WIDTH;
-
-    // Quando chega no final, volta para o início
-    if (contentOffsetX >= totalWidth * 2) {
-      bannerScrollRef.current?.scrollTo({ x: totalWidth, animated: false });
-      scrollPosition.current = 0;
-    }
-    // Quando chega no início, vai para o final
-    else if (contentOffsetX <= 0) {
-      bannerScrollRef.current?.scrollTo({ x: totalWidth, animated: false });
-      scrollPosition.current = 0;
-    }
-  };
-
-  const products = [
-    { id: 1, title: 'Produto Exemplo 1', price: 'R$ 99,90', discount: '15% OFF', image: 'https://via.placeholder.com/150' },
-    { id: 2, title: 'Produto Exemplo 2', price: 'R$ 149,90', discount: '20% OFF', image: 'https://via.placeholder.com/150' },
-    { id: 3, title: 'Produto Exemplo 3', price: 'R$ 79,90', discount: '10% OFF', image: 'https://via.placeholder.com/150' },
-    { id: 4, title: 'Produto Exemplo 4', price: 'R$ 199,90', discount: '25% OFF', image: 'https://via.placeholder.com/150' },
+  const quickAccessItems = [
+    { icon: 'wifi', label: 'Internet', route: '/(tabs)/internet-management' },
+    { icon: 'cash', label: 'Cashback', route: '/(tabs)/cashback' },
+    { icon: 'gift', label: 'Vale-Presente', route: '/(tabs)/gift-cards' },
+    { icon: 'card', label: 'Cartão', route: '/(tabs)/explore' },
   ];
 
   return (
     <View style={styles.container}>
-      {/* Header Amarelo */}
+      {/* Header amarelo com saudação - FIXO */}
       <View style={[styles.header, { backgroundColor: whitelabelConfig.colors.primary }]}>
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder={`Buscar no ${whitelabelConfig.branding.companyName}`}
-            placeholderTextColor="#999"
-          />
+        <View style={styles.headerContent}>
+          <View style={styles.greetingContainer}>
+            <View style={styles.avatar}>
+              <Text style={[styles.avatarText, { color: whitelabelConfig.colors.primary }]}>{firstName.charAt(0).toUpperCase()}</Text>
+            </View>
+            <Text style={styles.greetingText}>Olá, {firstName}!</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.notificationButton}
+            onPress={() => router.push({
+              pathname: '/(tabs)/notifications',
+              params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+            })}
+          >
+            <Ionicons name="notifications-outline" size={28} color="#FFF" />
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>3</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity style={styles.locationContainer}>
-          <Ionicons name="location-outline" size={16} color="#FFFFFF" />
-          <Text style={styles.locationText}>Rua Exemplo, 123</Text>
-          <Ionicons name="chevron-forward" size={16} color="#FFFFFF" />
-        </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.scrollView}>
-        {/* Categorias Horizontais */}
+      {/* Conteúdo com scroll */}
+      <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
+
+      {/* Card de destaque - Gerencie sua Internet */}
+      <View style={styles.section}>
+        <View style={styles.highlightCard}>
+          <View style={styles.highlightLeft}>
+            <Image
+              source={{ uri: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=400&fit=crop' }}
+              style={styles.highlightLeftImage}
+              resizeMode="cover"
+            />
+            <View style={styles.highlightLeftOverlay}>
+              <Ionicons name="wifi" size={32} color={whitelabelConfig.colors.primary} />
+              <Text style={styles.highlightLeftText}>Internet</Text>
+            </View>
+          </View>
+          <View style={styles.highlightRight}>
+            <Text style={styles.highlightTitle}>Gerencie sua Internet!</Text>
+            <Text style={styles.highlightSubtitle}>
+              Veja seus planos, benefícios e faturas em um só lugar.
+            </Text>
+            <TouchableOpacity
+              style={[styles.highlightButton, { backgroundColor: whitelabelConfig.colors.primary }]}
+              onPress={() => router.push({
+                pathname: '/(tabs)/internet-management',
+                params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+              })}
+            >
+              <Text style={styles.highlightButtonText}>Acessar agora</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+
+      {/* Você pode gostar disso */}
+      <View style={styles.quickAccessSection}>
+        <View style={styles.quickAccessSectionHeader}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Você pode gostar disso</Text>
+            <TouchableOpacity
+              style={[styles.exploreBadge, { borderColor: whitelabelConfig.colors.primary }]}
+              onPress={() => router.push({
+                pathname: '/(tabs)/explore',
+                params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+              })}
+            >
+              <Text style={[styles.exploreBadgeText, { color: whitelabelConfig.colors.primary }]}>Explorar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={styles.categoriesContainer}
+          contentContainerStyle={styles.quickAccessCarousel}
         >
-          {categories.map((category, index) => (
+          {quickAccessItems.map((item, index) => (
             <TouchableOpacity
               key={index}
-              style={[
-                styles.categoryButton,
-                index === 0 && styles.categoryButtonActive
-              ]}
+              style={[styles.quickAccessButton, { backgroundColor: whitelabelConfig.colors.primary }]}
+              onPress={() => router.push({
+                pathname: item.route as any,
+                params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+              })}
             >
-              <Text style={[
-                styles.categoryText,
-                index === 0 && styles.categoryTextActive
-              ]}>
-                {category}
-              </Text>
+              <Ionicons name={item.icon as any} size={28} color="#FFF" />
+              <Text style={styles.quickAccessButtonText}>{item.label}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
+      </View>
 
-        {/* Banner Promocional - Carousel Infinito */}
-        <View style={styles.bannerContainer}>
-          <ScrollView
-            ref={bannerScrollRef}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            decelerationRate="fast"
-            snapToInterval={BANNER_WIDTH}
-            snapToAlignment="start"
-            onMomentumScrollEnd={handleBannerScroll}
-          >
-            {infiniteBanners.map((banner, index) => (
+      {/* Banner grande - Cashback */}
+      <View style={styles.section}>
+        <TouchableOpacity
+          style={styles.bigBanner}
+          onPress={() => router.push({
+            pathname: '/(tabs)/explore',
+            params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+          })}
+        >
+          <Image
+            source={BANNER_IMAGES.cashback}
+            style={styles.bannerImageFull}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* Vantagens exclusivas */}
+      <View style={styles.advantagesSection}>
+        <View style={styles.advantagesSectionHeader}>
+          <Text style={styles.sectionTitle}>Vantagens exclusivas</Text>
+        </View>
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.advantagesContainer}
+        >
+          {/* Card 1 - Cashback */}
+          <View style={styles.advantageCard}>
+            <View style={styles.advantageLeft}>
+              <View style={styles.advantageTextContainer}>
+                <Text style={styles.advantageTitle}>Conheça nossas</Text>
+                <Text style={styles.advantageTitle}>melhores opções</Text>
+                <Text style={styles.advantageSubtitle}>para Cashback!</Text>
+              </View>
               <TouchableOpacity
-                key={`${banner.id}-${index}`}
-                style={[styles.banner, { backgroundColor: banner.color }]}
+                style={[styles.advantageButton, { borderColor: whitelabelConfig.colors.primary }]}
+                onPress={() => router.push({
+                  pathname: '/(tabs)/explore',
+                  params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+                })}
               >
-                <Text style={styles.bannerTitle}>{banner.title}</Text>
-                <Text style={styles.bannerSubtitle}>{banner.subtitle}</Text>
+                <Text style={[styles.advantageButtonText, { color: whitelabelConfig.colors.primary }]}>Ver +</Text>
               </TouchableOpacity>
-            ))}
-          </ScrollView>
+            </View>
+            <View style={[styles.advantageRight, { backgroundColor: '#4A90E2' }]}>
+              <Text style={styles.advantageEmoji}>🎯</Text>
+              <View style={[styles.advantageBadge, { backgroundColor: whitelabelConfig.colors.primary }]}>
+                <Text style={styles.advantageBadgeText}>Até 25%</Text>
+                <Text style={styles.advantageBadgeSubtext}>de Cashback</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Card 2 - Lojas */}
+          <View style={styles.advantageCard}>
+            <View style={styles.advantageLeft}>
+              <View style={styles.advantageTextContainer}>
+                <Text style={styles.advantageTitle}>Lojas</Text>
+                <Text style={styles.advantageTitle}>exclusivas</Text>
+                <Text style={styles.advantageSubtitle}>para você!</Text>
+              </View>
+              <TouchableOpacity
+                style={[styles.advantageButton, { borderColor: '#8B5CF6' }]}
+                onPress={() => router.push({
+                  pathname: '/(tabs)/explore',
+                  params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+                })}
+              >
+                <Text style={[styles.advantageButtonText, { color: '#8B5CF6' }]}>Ver +</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={[styles.advantageRight, { backgroundColor: '#8B5CF6' }]}>
+              <Text style={styles.advantageEmoji}>🏪</Text>
+            </View>
+          </View>
+
+          {/* Card 3 - Vale Presente */}
+          <View style={styles.advantageCard}>
+            <View style={styles.advantageLeft}>
+              <View style={styles.advantageTextContainer}>
+                <Text style={styles.advantageTitle}>Vale</Text>
+                <Text style={styles.advantageTitle}>Presente</Text>
+                <Text style={styles.advantageSubtitle}>especial!</Text>
+              </View>
+              <TouchableOpacity
+                style={[styles.advantageButton, { borderColor: '#FF8C00' }]}
+                onPress={() => router.push({
+                  pathname: '/(tabs)/gift-cards',
+                  params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+                })}
+              >
+                <Text style={[styles.advantageButtonText, { color: '#FF8C00' }]}>Ver +</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={[styles.advantageRight, { backgroundColor: '#FF8C00' }]}>
+              <Text style={styles.advantageEmoji}>🎁</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+
+      {/* Novidades */}
+      <View style={styles.novitiesSection}>
+        <View style={styles.novitiesSectionHeader}>
+          <Text style={styles.sectionTitle}>Novidades</Text>
         </View>
 
-        {/* Acesso Rápido - Scroll Horizontal */}
-        <View style={styles.quickAccessSection}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.quickAccessContainer}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.novitiesContainer}
+        >
+          <TouchableOpacity style={styles.novityCard}>
+            <Image
+              source={{ uri: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=800&h=400&fit=crop' }}
+              style={styles.novityCardImage}
+              resizeMode="cover"
+            />
+            <View style={styles.novityOverlay}>
+              <View style={styles.novityTextContainer}>
+                <Text style={styles.novitySubtitle}>Assinatura</Text>
+                <Text style={styles.novityTitle}>Teste de velocidade</Text>
+              </View>
+              <TouchableOpacity style={styles.novityDetailsButton}>
+                <Ionicons name="document-text-outline" size={18} color="#1C1C1E" />
+                <Text style={styles.novityDetailsText}>Detalhes</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.novityCard}>
+            <Image
+              source={{ uri: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&h=400&fit=crop' }}
+              style={styles.novityCardImage}
+              resizeMode="cover"
+            />
+            <View style={styles.novityOverlay}>
+              <View style={styles.novityTextContainer}>
+                <Text style={styles.novitySubtitle}>Cashback</Text>
+                <Text style={styles.novityTitle}>Lojas exclusivas</Text>
+              </View>
+              <TouchableOpacity style={styles.novityDetailsButton}>
+                <Ionicons name="document-text-outline" size={18} color="#1C1C1E" />
+                <Text style={styles.novityDetailsText}>Detalhes</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
+      {/* Em cartaz Hoje */}
+      <View style={styles.section}>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Em cartaz Hoje</Text>
+          <TouchableOpacity
+            style={[styles.seeAllButton, { borderColor: whitelabelConfig.colors.primary }]}
+            onPress={() => router.push({
+              pathname: '/(tabs)/explore',
+              params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+            })}
           >
-            {quickAccess.map((item, index) => (
-              <TouchableOpacity key={index} style={styles.quickAccessItem}>
-                <View style={[styles.quickAccessIcon, { backgroundColor: item.color + '20' }]}>
-                  <Ionicons name={item.icon as any} size={28} color={item.color} />
-                </View>
-                <Text style={styles.quickAccessLabel}>{item.label}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+            <Text style={[styles.seeAllText, { color: whitelabelConfig.colors.primary }]}>Ver +</Text>
+          </TouchableOpacity>
         </View>
+      </View>
 
-        {/* Seção de Produtos */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Ofertas do dia</Text>
-            <TouchableOpacity>
-              <Text style={styles.seeAllText}>Ver todos</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.moviesContainer}
+      >
+          {[
+            { image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=400&h=600&fit=crop' },
+            { image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop' },
+            { image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=400&h=600&fit=crop' },
+            { image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=600&fit=crop' },
+            { image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=600&fit=crop' },
+          ].map((movie, index) => (
+            <TouchableOpacity key={index} style={styles.movieCard}>
+              <Image
+                source={{ uri: movie.image }}
+                style={styles.moviePoster}
+                resizeMode="cover"
+              />
             </TouchableOpacity>
-          </View>
+          ))}
+      </ScrollView>
 
-          <View style={styles.productsGrid}>
-            {products.map((product) => (
-              <TouchableOpacity key={product.id} style={styles.productCard}>
-                <Image source={{ uri: product.image }} style={styles.productImage} />
-                <View style={styles.productInfo}>
-                  <Text style={styles.productTitle} numberOfLines={2}>{product.title}</Text>
-                  <Text style={styles.productPrice}>{product.price}</Text>
-                  <Text style={styles.productDiscount}>{product.discount}</Text>
-                  <Text style={styles.freeShipping}>Frete grátis</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
+      {/* Links úteis */}
+      <View style={styles.linksSection}>
+        <View style={styles.linksSectionHeader}>
+          <Text style={styles.sectionTitle}>Links úteis</Text>
         </View>
 
-        {/* Segunda Seção */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Recomendados para você</Text>
-            <TouchableOpacity>
-              <Text style={styles.seeAllText}>Ver todos</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.linksMenu}>
+          <TouchableOpacity style={styles.linkItem}>
+            <View style={styles.linkItemLeft}>
+              <Ionicons name="person-outline" size={24} color={whitelabelConfig.colors.text} />
+              <Text style={styles.linkItemText}>Perfil</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={whitelabelConfig.colors.textSecondary} />
+          </TouchableOpacity>
 
-          <View style={styles.productsGrid}>
-            {products.map((product) => (
-              <TouchableOpacity key={product.id} style={styles.productCard}>
-                <Image source={{ uri: product.image }} style={styles.productImage} />
-                <View style={styles.productInfo}>
-                  <Text style={styles.productTitle} numberOfLines={2}>{product.title}</Text>
-                  <Text style={styles.productPrice}>{product.price}</Text>
-                  <Text style={styles.productDiscount}>{product.discount}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <TouchableOpacity style={styles.linkItem}>
+            <View style={styles.linkItemLeft}>
+              <Ionicons name="notifications-outline" size={24} color={whitelabelConfig.colors.text} />
+              <Text style={styles.linkItemText}>Notificações</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={whitelabelConfig.colors.textSecondary} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.linkItem}>
+            <View style={styles.linkItemLeft}>
+              <Ionicons name="shield-checkmark-outline" size={24} color={whitelabelConfig.colors.text} />
+              <Text style={styles.linkItemText}>Políticas e privacidade</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={whitelabelConfig.colors.textSecondary} />
+          </TouchableOpacity>
         </View>
+      </View>
+
+      <View style={styles.bottomSpacer} />
       </ScrollView>
     </View>
   );
@@ -218,178 +359,409 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F8F9FA',
   },
   header: {
-    paddingTop: 50,
-    paddingBottom: 12,
-    paddingHorizontal: 16,
+    paddingTop: 60,
+    paddingBottom: 24,
+    paddingHorizontal: 20,
+    zIndex: 10,
   },
-  searchContainer: {
+  scrollContent: {
+    flex: 1,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  greetingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: whitelabelConfig.colors.white,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    marginBottom: 12,
+    gap: 12,
   },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
+  avatar: {
+    width: 40,
     height: 40,
-    fontSize: 14,
-    color: whitelabelConfig.colors.text,
-  },
-  locationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  locationText: {
-    color: whitelabelConfig.colors.white,
-    fontSize: 12,
-    marginLeft: 4,
-    marginRight: 4,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  categoriesContainer: {
-    backgroundColor: whitelabelConfig.colors.white,
-    paddingVertical: 12,
-    paddingHorizontal: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  categoryButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    marginHorizontal: 4,
-    borderRadius: 16,
-  },
-  categoryButtonActive: {
-    backgroundColor: whitelabelConfig.colors.primary,
-  },
-  categoryText: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.text,
-  },
-  categoryTextActive: {
-    color: whitelabelConfig.colors.white,
-    fontWeight: '600',
-  },
-  bannerContainer: {
-    paddingVertical: 16,
-    paddingLeft: 16,
-    backgroundColor: whitelabelConfig.colors.background,
-  },
-  banner: {
-    width: 300,
-    borderRadius: 12,
-    padding: 24,
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  bannerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.white,
-    marginBottom: 8,
-  },
-  bannerSubtitle: {
-    fontSize: 18,
-    color: whitelabelConfig.colors.white,
-  },
-  quickAccessSection: {
-    backgroundColor: whitelabelConfig.colors.white,
-    paddingVertical: 16,
-    marginBottom: 8,
-  },
-  quickAccessContainer: {
-    paddingHorizontal: 16,
-  },
-  quickAccessItem: {
-    alignItems: 'center',
-    marginRight: 24,
-  },
-  quickAccessIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    borderRadius: 20,
+    backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 8,
   },
-  quickAccessLabel: {
-    fontSize: 12,
-    color: whitelabelConfig.colors.text,
-    textAlign: 'center',
-    maxWidth: 80,
+  avatarText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  greetingText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+  notificationButton: {
+    position: 'relative',
+  },
+  badge: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    backgroundColor: '#FF3B30',
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  badgeText: {
+    color: '#FFF',
+    fontSize: 11,
+    fontWeight: 'bold',
   },
   section: {
-    backgroundColor: whitelabelConfig.colors.white,
-    paddingVertical: 16,
-    marginBottom: 8,
+    paddingHorizontal: 20,
+    marginTop: 24,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
     marginBottom: 16,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.text,
+    fontWeight: '700',
+    color: '#1C1C1E',
+  },
+  seeAllButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 8,
+    borderWidth: 2,
   },
   seeAllText: {
     fontSize: 14,
-    color: whitelabelConfig.colors.primary,
-  },
-  productsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingHorizontal: 8,
-  },
-  productCard: {
-    width: '48%',
-    backgroundColor: whitelabelConfig.colors.white,
-    borderRadius: 8,
-    margin: '1%',
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    overflow: 'hidden',
-  },
-  productImage: {
-    width: '100%',
-    height: 150,
-    resizeMode: 'cover',
-  },
-  productInfo: {
-    padding: 12,
-  },
-  productTitle: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.text,
-    marginBottom: 8,
-    height: 40,
-  },
-  productPrice: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.text,
-    marginBottom: 4,
-  },
-  productDiscount: {
-    fontSize: 12,
-    color: whitelabelConfig.colors.success,
     fontWeight: '600',
+  },
+  exploreBadge: {
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 8,
+    borderWidth: 2,
+  },
+  exploreBadgeText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  highlightCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 16,
+    flexDirection: 'row',
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
+    height: 180,
+  },
+  highlightLeft: {
+    width: '40%',
+    position: 'relative',
+  },
+  highlightLeftImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+  highlightLeftOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+  },
+  highlightLeftText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1C1C1E',
+  },
+  highlightRight: {
+    width: '60%',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  highlightTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1C1C1E',
+    marginBottom: 8,
+  },
+  highlightSubtitle: {
+    fontSize: 13,
+    color: '#8E8E93',
+    lineHeight: 18,
+    marginBottom: 16,
+  },
+  highlightButton: {
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  highlightButtonText: {
+    color: '#FFF',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  quickAccessSection: {
+    marginTop: 24,
+  },
+  quickAccessSectionHeader: {
+    paddingHorizontal: 20,
+  },
+  quickAccessCarousel: {
+    gap: 12,
+    marginTop: 16,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  quickAccessButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    gap: 12,
+  },
+  quickAccessButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFF',
+  },
+  bigBanner: {
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 6,
+  },
+  bannerImageFull: {
+    width: '100%',
+    height: 200,
+    borderRadius: 16,
+  },
+  advantagesSection: {
+    marginTop: 24,
+  },
+  advantagesSectionHeader: {
+    paddingHorizontal: 20,
+  },
+  advantagesContainer: {
+    gap: 16,
+    marginTop: 16,
+    paddingVertical: 8, // Espaço para as sombras não serem cortadas
+    paddingBottom: 16, // Margin bottom adicional
+    paddingLeft: 20, // Alinha primeiro card com o conteúdo acima
+    paddingRight: 20, // Espaço após o último card
+  },
+  advantageCard: {
+    width: width * 0.8, // 80% da largura da tela
+    height: 160,
+    backgroundColor: '#FFF',
+    borderRadius: 24, // Mais arredondado
+    flexDirection: 'row',
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 6,
+  },
+  advantageLeft: {
+    width: '40%',
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingLeft: 12,
+    paddingRight: 8,
+    justifyContent: 'space-between',
+  },
+  advantageTextContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  advantageTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#1C1C1E',
+    lineHeight: 22,
+  },
+  advantageSubtitle: {
+    fontSize: 14,
+    color: '#8E8E93',
+    marginTop: 4,
+  },
+  advantageButton: {
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    alignSelf: 'flex-start',
+  },
+  advantageButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  advantageRight: {
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  advantageEmoji: {
+    fontSize: 80,
+  },
+  advantageBadge: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  advantageBadgeText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#FFF',
+  },
+  advantageBadgeSubtext: {
+    fontSize: 12,
+    color: '#FFF',
+    opacity: 0.9,
+  },
+  novitiesSection: {
+    marginTop: 24,
+  },
+  novitiesSectionHeader: {
+    paddingHorizontal: 20,
+  },
+  novitiesContainer: {
+    gap: 16,
+    marginTop: 16,
+    paddingVertical: 8,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  novityCard: {
+    width: width * 0.8,
+    height: 180,
+    borderRadius: 24,
+    overflow: 'hidden',
+    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 6,
+  },
+  novityCardImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+  novityOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+  },
+  novityTextContainer: {
+    flex: 1,
+  },
+  novitySubtitle: {
+    fontSize: 12,
+    color: '#FFF',
+    opacity: 0.9,
     marginBottom: 4,
   },
-  freeShipping: {
-    fontSize: 12,
-    color: whitelabelConfig.colors.success,
+  novityTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#FFF',
+  },
+  novityDetailsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    gap: 6,
+  },
+  novityDetailsText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1C1C1E',
+  },
+  moviesContainer: {
+    gap: 12,
+    marginTop: 16,
+    paddingVertical: 8,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  movieCard: {
+    width: 140,
+    height: 250,
+    borderRadius: 12,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  moviePoster: {
+    width: '100%',
+    height: '100%',
+  },
+  linksSection: {
+    marginTop: 24,
+    marginBottom: 20,
+  },
+  linksSectionHeader: {
+    paddingHorizontal: 20,
+    marginBottom: 16,
+  },
+  linksMenu: {
+    backgroundColor: whitelabelConfig.colors.white,
+  },
+  linkItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  linkItemLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  linkItemText: {
+    fontSize: 16,
+    color: whitelabelConfig.colors.text,
+    marginLeft: 16,
+  },
+  bottomSpacer: {
+    height: 40,
   },
 });

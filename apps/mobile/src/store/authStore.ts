@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { apiService } from '@/services/api';
+import { biometricService } from '@/services/biometricService';
 import type { User, LoginCredentials, RegisterData } from '@/types/user';
 
 interface AuthState {
@@ -10,6 +11,7 @@ interface AuthState {
 
   // Actions
   login: (credentials: LoginCredentials) => Promise<boolean>;
+  loginWithBiometric: () => Promise<boolean>;
   register: (data: RegisterData) => Promise<boolean>;
   logout: () => Promise<void>;
   loadUser: () => Promise<void>;
@@ -64,6 +66,62 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
 
+  loginWithBiometric: async () => {
+    set({ isLoading: true, error: null });
+
+    try {
+      // Autentica com biometria e obtém credenciais armazenadas
+      const credentials = await biometricService.authenticate();
+
+      if (!credentials) {
+        set({
+          isLoading: false,
+          error: 'Falha na autenticação biométrica',
+        });
+        return false;
+      }
+
+      // Faz login com as credenciais recuperadas
+      const response = await apiService.login({
+        email: credentials.email,
+        password: credentials.password,
+      });
+
+      if (response.success && response.data) {
+        if (response.data.requires2FA) {
+          set({
+            isLoading: false,
+            error: '2FA não implementado ainda',
+          });
+          return false;
+        }
+
+        set({
+          user: response.data.user,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+
+        return true;
+      }
+
+      set({
+        isLoading: false,
+        error: response.error || 'Credenciais inválidas',
+      });
+
+      return false;
+    } catch (error: any) {
+      set({
+        isLoading: false,
+        error: error.message || 'Erro ao fazer login com biometria',
+      });
+
+      return false;
+    }
+  },
+
   register: async (data: RegisterData) => {
     set({ isLoading: true, error: null });
 
@@ -102,6 +160,8 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     try {
       await apiService.logout();
+      // NOTA: NÃO limpar biometria no logout - ela deve persistir para próximo login
+      // A biometria só deve ser limpa se o usuário desabilitar explicitamente nas configurações
     } finally {
       set({
         user: null,
