@@ -122,14 +122,7 @@ class UserService {
       if (!this.prisma) await this.init();
 
       const user = await this.prisma.user.findUnique({
-        where: { id },
-        include: {
-          userCompanies: {
-            include: {
-              company: true
-            }
-          }
-        }
+        where: { id }
       });
 
       if (!user) return null;

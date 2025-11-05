@@ -90,7 +90,7 @@ const defaultTokens = [
   {
     name: 'Coinage Real Brasil',
     symbol: 'cBRL',
-    address: '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804',
+    address: process.env.CBRL_TESTNET || '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804',
     network: 'testnet',
     contractType: 'ERC20',
     version: '1.0.0',
@@ -112,7 +112,7 @@ const defaultTokens = [
   {
     name: 'Coinage Real Brasil',
     symbol: 'cBRL',
-    address: '0x2f8d31627a1f014691eb6e56c235b2382702f4b9',
+    address: process.env.CBRL_MAINNET || '0x18e946548b2C24Ad371343086e424ABaC3393678',
     network: 'mainnet',
     contractType: 'ERC20',
     version: '1.0.0',
@@ -156,7 +156,7 @@ const defaultTokens = [
   {
     name: 'Coinage Real Brasil',
     symbol: 'cBRL',
-    address: '0x18e946548b2C24Ad371343086e424ABaC3393678',
+    address: process.env.CBRL_MAINNET || '0x18e946548b2C24Ad371343086e424ABaC3393678',
     network: 'mainnet',
     contractType: 'ERC20',
     version: '1.0.0',

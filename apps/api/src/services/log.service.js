@@ -267,6 +267,7 @@ class LogService {
         page = 1,
         limit = 50,
         companyId,
+        userId,
         status,
         network,
         transactionType,
@@ -278,34 +279,39 @@ class LogService {
       const where = {};
 
       if (companyId) where.companyId = companyId;
+      if (userId) where.userId = userId; // Suportar filtro por userId
       if (status) where.status = status;
       if (network) where.network = network;
       if (transactionType) where.transactionType = transactionType;
 
       if (startDate || endDate) {
-        where.created_at = {};
-        if (startDate) where.created_at.$gte = new Date(startDate);
-        if (endDate) where.created_at.$lte = new Date(endDate);
+        where.createdAt = {};
+        if (startDate) where.createdAt.gte = new Date(startDate);
+        if (endDate) where.createdAt.lte = new Date(endDate);
       }
 
-      const { count, rows } = await this.Transaction.findAndCountAll({
-        where,
-        limit: parseInt(limit),
-        offset: parseInt(offset),
-        order: [['created_at', 'DESC']]
-      });
+      // Usar Prisma ao invés de Sequelize
+      const prisma = prismaConfig.getPrisma();
+
+      const [transactions, count] = await Promise.all([
+        prisma.transaction.findMany({
+          where,
+          take: parseInt(limit),
+          skip: parseInt(offset),
+          orderBy: { createdAt: 'desc' }
+        }),
+        prisma.transaction.count({ where })
+      ]);
 
       return {
         success: true,
         message: 'Transações listadas com sucesso',
-        data: {
-          transactions: rows.map(tx => tx.getFormattedResponse()),
-          pagination: {
-            page: parseInt(page),
-            limit: parseInt(limit),
-            total: count,
-            pages: Math.ceil(count / limit)
-          }
+        data: transactions,
+        pagination: {
+          page: parseInt(page),
+          limit: parseInt(limit),
+          total: count,
+          pages: Math.ceil(count / limit)
         }
       };
     } catch (error) {

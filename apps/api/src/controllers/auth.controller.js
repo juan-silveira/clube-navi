@@ -263,104 +263,104 @@ const login = async (req, res) => {
       }
     }
 
-    // Obter empresa atual baseada no company_alias fornecido no login
+    // FUNCIONALIDADE DE EMPRESAS REMOVIDA - Comentado para evitar erros
     let currentCompany = null;
-    try {
-      if (company_alias) {
-        // Buscar empresa pelo alias fornecido
-        const targetCompany = await prisma.company.findUnique({
-          where: { alias: company_alias }
-        });
-
-        if (targetCompany) {
-          // Verificar se o usuário tem acesso a esta empresa
-          const userCompanyAccess = await prisma.userCompany.findUnique({
-            where: {
-              userId_companyId: {
-                userId: user.id,
-                companyId: targetCompany.id
-              },
-              status: 'active'
-            }
-          });
-
-          if (userCompanyAccess) {
-            currentCompany = {
-              id: targetCompany.id,
-              name: targetCompany.name,
-              alias: targetCompany.alias,
-              isActive: targetCompany.isActive
-            };
-
-            // Atualizar lastAccessAt para esta empresa (definindo como atual)
-            await prisma.userCompany.update({
-              where: {
-                userId_companyId: {
-                  userId: user.id,
-                  companyId: currentCompany.id
-                }
-              },
-              data: { lastAccessAt: new Date() }
-            });
-
-            console.log(`🏢 Login: Empresa definida via alias "${company_alias}": ${currentCompany.name}`);
-          } else {
-            console.warn(`⚠️ Usuário ${user.email} não tem acesso à empresa "${company_alias}"`);
-          }
-        } else {
-          console.warn(`⚠️ Empresa com alias "${company_alias}" não encontrada`);
-        }
-      }
-
-      // Se não foi possível definir via alias, usar a lógica atual (lastAccessAt)
-      if (!currentCompany) {
-        currentCompany = await userCompanyService.getCurrentCompany(user.id);
-        
-        // Se ainda não há empresa atual, usar a primeira empresa ativa
-        if (!currentCompany) {
-          const userWithCompanies = await prisma.user.findUnique({
-            where: { id: user.id },
-            include: {
-              userCompanies: {
-                where: {
-                  status: 'active',
-                  company: { isActive: true }
-                },
-                include: {
-                  company: true
-                },
-                orderBy: { linkedAt: 'asc' } // Primeira empresa vinculada
-              }
-            }
-          });
-          
-          if (userWithCompanies?.userCompanies?.length > 0) {
-            const firstCompany = userWithCompanies.userCompanies[0];
-            currentCompany = {
-              id: firstCompany.company.id,
-              name: firstCompany.company.name,
-              alias: firstCompany.company.alias,
-              isActive: firstCompany.company.isActive
-            };
-            
-            // Atualizar lastAccessAt para esta empresa
-            await prisma.userCompany.update({
-              where: {
-                userId_companyId: {
-                  userId: user.id,
-                  companyId: currentCompany.id
-                }
-              },
-              data: { lastAccessAt: new Date() }
-            });
-            
-            console.log(`📅 Login: Definindo empresa padrão para ${user.name}: ${currentCompany.name}`);
-          }
-        }
-      }
-    } catch (error) {
-      console.warn('⚠️ Não foi possível obter/definir empresa atual no login:', error.message);
-    }
+    // try {
+    //   if (company_alias) {
+    //     // Buscar empresa pelo alias fornecido
+    //     const targetCompany = await prisma.company.findUnique({
+    //       where: { alias: company_alias }
+    //     });
+    //
+    //     if (targetCompany) {
+    //       // Verificar se o usuário tem acesso a esta empresa
+    //       const userCompanyAccess = await prisma.userCompany.findUnique({
+    //         where: {
+    //           userId_companyId: {
+    //             userId: user.id,
+    //             companyId: targetCompany.id
+    //           },
+    //           status: 'active'
+    //         }
+    //       });
+    //
+    //       if (userCompanyAccess) {
+    //         currentCompany = {
+    //           id: targetCompany.id,
+    //           name: targetCompany.name,
+    //           alias: targetCompany.alias,
+    //           isActive: targetCompany.isActive
+    //         };
+    //
+    //         // Atualizar lastAccessAt para esta empresa (definindo como atual)
+    //         await prisma.userCompany.update({
+    //           where: {
+    //             userId_companyId: {
+    //               userId: user.id,
+    //               companyId: currentCompany.id
+    //             }
+    //           },
+    //           data: { lastAccessAt: new Date() }
+    //         });
+    //
+    //         console.log(`🏢 Login: Empresa definida via alias "${company_alias}": ${currentCompany.name}`);
+    //       } else {
+    //         console.warn(`⚠️ Usuário ${user.email} não tem acesso à empresa "${company_alias}"`);
+    //       }
+    //     } else {
+    //       console.warn(`⚠️ Empresa com alias "${company_alias}" não encontrada`);
+    //     }
+    //   }
+    //
+    //   // Se não foi possível definir via alias, usar a lógica atual (lastAccessAt)
+    //   if (!currentCompany) {
+    //     currentCompany = await userCompanyService.getCurrentCompany(user.id);
+    //
+    //     // Se ainda não há empresa atual, usar a primeira empresa ativa
+    //     if (!currentCompany) {
+    //       const userWithCompanies = await prisma.user.findUnique({
+    //         where: { id: user.id },
+    //         include: {
+    //           userCompanies: {
+    //             where: {
+    //               status: 'active',
+    //               company: { isActive: true }
+    //             },
+    //             include: {
+    //               company: true
+    //             },
+    //             orderBy: { linkedAt: 'asc' } // Primeira empresa vinculada
+    //           }
+    //         }
+    //       });
+    //
+    //       if (userWithCompanies?.userCompanies?.length > 0) {
+    //         const firstCompany = userWithCompanies.userCompanies[0];
+    //         currentCompany = {
+    //           id: firstCompany.company.id,
+    //           name: firstCompany.company.name,
+    //           alias: firstCompany.company.alias,
+    //           isActive: firstCompany.company.isActive
+    //         };
+    //
+    //         // Atualizar lastAccessAt para esta empresa
+    //         await prisma.userCompany.update({
+    //           where: {
+    //             userId_companyId: {
+    //               userId: user.id,
+    //               companyId: currentCompany.id
+    //             }
+    //           },
+    //           data: { lastAccessAt: new Date() }
+    //         });
+    //
+    //         console.log(`📅 Login: Definindo empresa padrão para ${user.name}: ${currentCompany.name}`);
+    //       }
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.warn('⚠️ Não foi possível obter/definir empresa atual no login:', error.message);
+    // }
     
     // Simular req.company para o logging
     const reqWithCompany = { ...req, company: currentCompany };
@@ -389,19 +389,20 @@ const login = async (req, res) => {
       });
     }
 
+    // FUNCIONALIDADE DE EMPRESAS REMOVIDA - Comentado para evitar erros
     // Atualizar último acesso na empresa principal (Coinage) por padrão
-    try {
-      const userCompanyService = require('../services/userCompany.service');
-      const companyService = require('../services/company.service');
-      
-      // Buscar empresa Coinage
-      const coinageCompany = await companyService.getCompanyByAlias('coinage');
-      if (coinageCompany) {
-        await userCompanyService.updateLastActivity(user.id, coinageCompany.id);
-      }
-    } catch (accessError) {
-      console.warn('⚠️ Erro ao atualizar último acesso:', accessError.message);
-    }
+    // try {
+    //   const userCompanyService = require('../services/userCompany.service');
+    //   const companyService = require('../services/company.service');
+    //
+    //   // Buscar empresa Coinage
+    //   const coinageCompany = await companyService.getCompanyByAlias('coinage');
+    //   if (coinageCompany) {
+    //     await userCompanyService.updateLastActivity(user.id, coinageCompany.id);
+    //   }
+    // } catch (accessError) {
+    //   console.warn('⚠️ Erro ao atualizar último acesso:', accessError.message);
+    // }
 
     // Iniciar cache automático
     try {
@@ -974,7 +975,8 @@ const register = async (req, res) => {
       // Endereço
       address,
       // Opcional
-      company_alias
+      company_alias,
+      referralCode // Código de indicação (username de quem indicou)
     } = req.body;
 
     // Validações básicas
@@ -1073,6 +1075,20 @@ const register = async (req, res) => {
     // NOTA: As chaves blockchain serão geradas após a validação do email
     // Não gerar chaves no registro inicial
 
+    // Validar código de indicação se fornecido
+    if (referralCode) {
+      const referrer = await prisma.user.findUnique({
+        where: { username: referralCode.toLowerCase() }
+      });
+
+      if (!referrer) {
+        return res.status(400).json({
+          success: false,
+          message: 'Código de indicação inválido'
+        });
+      }
+    }
+
     // Preparar dados do usuário
     let userData = {
       email: email.toLowerCase(),
@@ -1084,6 +1100,7 @@ const register = async (req, res) => {
       isActive: true, // Usuário começa ativo
       isFirstAccess: true,
       emailConfirmed: false, // Email não confirmado inicialmente
+      referralId: referralCode ? referralCode.toLowerCase() : null, // Username de quem indicou
       metadata: {
         personType,
         address: address || null
@@ -1448,6 +1465,192 @@ const getAvailableCompanies = async (req, res) => {
   }
 };
 
+/**
+ * Buscar usuário por username (para validação de código de indicação)
+ */
+const getUserByUsername = async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    if (!username) {
+      return res.status(400).json({
+        success: false,
+        message: 'Username é obrigatório'
+      });
+    }
+
+    const prisma = getPrisma();
+    const user = await prisma.user.findUnique({
+      where: { username: username.toLowerCase() },
+      select: {
+        id: true,
+        username: true,
+        name: true,
+        referralDescription: true,
+        isActive: true
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado'
+      });
+    }
+
+    if (!user.isActive) {
+      return res.status(400).json({
+        success: false,
+        message: 'Usuário não está ativo'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Usuário encontrado',
+      data: {
+        username: user.username,
+        name: user.name,
+        referralDescription: user.referralDescription || 'Sem descrição'
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao buscar usuário por username:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor'
+    });
+  }
+};
+
+/**
+ * Atualizar descrição de indicação do usuário logado
+ */
+const updateReferralDescription = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const { referralDescription } = req.body;
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'Usuário não autenticado'
+      });
+    }
+
+    if (!referralDescription || referralDescription.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Descrição de indicação é obrigatória'
+      });
+    }
+
+    if (referralDescription.length > 500) {
+      return res.status(400).json({
+        success: false,
+        message: 'Descrição deve ter no máximo 500 caracteres'
+      });
+    }
+
+    const prisma = getPrisma();
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { referralDescription: referralDescription.trim() },
+      select: {
+        id: true,
+        username: true,
+        referralDescription: true
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Descrição de indicação atualizada com sucesso',
+      data: {
+        username: updatedUser.username,
+        referralDescription: updatedUser.referralDescription
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao atualizar descrição de indicação:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor'
+    });
+  }
+};
+
+/**
+ * Obter estatísticas de indicações do usuário logado
+ */
+const getReferralStats = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'Usuário não autenticado'
+      });
+    }
+
+    const prisma = getPrisma();
+
+    // Buscar usuário atual
+    const currentUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        username: true,
+        referralDescription: true
+      }
+    });
+
+    // Contar usuários indicados
+    const referralCount = await prisma.user.count({
+      where: {
+        referralId: currentUser.username.toLowerCase()
+      }
+    });
+
+    // Buscar lista de indicados (opcional - pode ser paginada no futuro)
+    const referrals = await prisma.user.findMany({
+      where: {
+        referralId: currentUser.username.toLowerCase()
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        createdAt: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: 10 // Limitar a 10 mais recentes
+    });
+
+    res.json({
+      success: true,
+      message: 'Estatísticas de indicações obtidas com sucesso',
+      data: {
+        referralCode: currentUser.username,
+        referralDescription: currentUser.referralDescription,
+        totalReferrals: referralCount,
+        recentReferrals: referrals
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao obter estatísticas de indicações:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor'
+    });
+  }
+};
+
 module.exports = {
   login,
   register,
@@ -1463,5 +1666,8 @@ module.exports = {
   blockUser,
   unblockUser,
   listBlockedUsers,
-  getAvailableCompanies
+  getAvailableCompanies,
+  getUserByUsername,
+  updateReferralDescription,
+  getReferralStats
 };

@@ -539,30 +539,9 @@ class BlockchainService {
   }
 
   /**
-   * Obtém o saldo de um token específico
-   * @param {string} address - Endereço do usuário
-   * @param {string} tokenSymbol - Sigla do token
-   * @param {string} network - Rede
-   * @returns {Promise<string>} Saldo formatado
+   * FUNÇÃO REMOVIDA: getTokenBalance duplicada que dependia de SmartContract table
+   * Use a função getTokenBalance(userAddress, tokenAddress, tokenABI, network) definida acima (linha ~66)
    */
-  async getTokenBalance(address, tokenSymbol, network = this.config.defaultNetwork) {
-    try {
-      const contract = await this.getTokenContract(tokenSymbol, network);
-      const balanceWei = await contract.balanceOf(address);
-      
-      // Obter decimals do token
-      const decimals = await contract.decimals();
-      
-      // Formatar saldo
-      const balance = ethers.formatUnits(balanceWei, decimals);
-      
-      return balance;
-
-    } catch (error) {
-      console.error(`Erro ao obter saldo do token ${tokenSymbol}:`, error);
-      return '0';
-    }
-  }
 
   /**
    * Converte valor para Wei (considerando decimals do token)

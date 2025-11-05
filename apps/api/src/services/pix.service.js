@@ -441,23 +441,36 @@ class PixService {
       
     } catch (error) {
       console.error('❌ Erro ao criar cobrança EFI - Detalhes completos:');
-      console.error('  Mensagem:', error.message);
-      console.error('  Código:', error.code);
-      if (error.response) {
+      console.error('  Tipo do erro:', typeof error);
+      console.error('  Error completo:', error);
+      console.error('  Error JSON:', JSON.stringify(error, null, 2));
+      console.error('  Mensagem:', error?.message);
+      console.error('  Código:', error?.code);
+      console.error('  Nome:', error?.name);
+      if (error?.response) {
         console.error('  Response data:', JSON.stringify(error.response.data || error.response, null, 2));
+        console.error('  Response status:', error.response?.status);
+        console.error('  Response statusText:', error.response?.statusText);
       }
-      console.error('  Stack:', error.stack);
-      
+      console.error('  Stack:', error?.stack);
+      console.error('  Keys do error:', Object.keys(error || {}));
+
       // Extrair mensagem de erro mais específica
-      let errorMessage = error.message || 'Erro desconhecido';
-      if (error.response?.data?.mensagem) {
+      let errorMessage = error?.message || 'Erro desconhecido';
+
+      // EFI retorna erro diretamente no objeto: { error, error_description }
+      if (error?.error_description) {
+        errorMessage = `${error.error}: ${error.error_description}`;
+      } else if (error?.response?.data?.mensagem) {
         errorMessage = error.response.data.mensagem;
-      } else if (error.response?.data?.detail) {
+      } else if (error?.response?.data?.detail) {
         errorMessage = error.response.data.detail;
-      } else if (error.response?.data?.error_description) {
+      } else if (error?.response?.data?.error_description) {
         errorMessage = error.response.data.error_description;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
       }
-      
+
       throw new Error(`Falha ao criar PIX EFI: ${errorMessage}`);
     }
   }

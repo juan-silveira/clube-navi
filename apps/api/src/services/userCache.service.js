@@ -1,7 +1,7 @@
 const prismaConfig = require('../config/prisma');
 const redisService = require('./redis.service');
 const blockchainService = require('./blockchain.service');
-const TokenAmountService = require('./tokenAmount.service');
+// const TokenAmountService = require('./tokenAmount.service'); // REMOVIDO - serviço não utilizado
 
 class UserCacheService {
   constructor() {
@@ -10,7 +10,7 @@ class UserCacheService {
     this.CACHE_TTL = 300; // 5 minutos em segundos
     this.REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutos em ms
     this.prisma = null;
-    this.tokenAmountService = new TokenAmountService();
+    // this.tokenAmountService = new TokenAmountService(); // REMOVIDO - serviço não utilizado
   }
 
   /**
@@ -117,31 +117,32 @@ class UserCacheService {
       // console.log(`✅ [UserCacheService] Dados blockchain carregados:`, blockchainData);
       
       // 3. Verificar se é primeira sessão do usuário
-      // CORREÇÃO: Verificar se existem dados anteriores no Redis ao invés de sessão ativa
-      const previousBalances = await this.tokenAmountService.getPreviousBalances(userId, blockchainData.network || 'testnet');
-      const isFirstSession = Object.keys(previousBalances).length === 0;
-      
+      // REMOVIDO: TokenAmountService não está mais disponível
+      // const previousBalances = await this.tokenAmountService.getPreviousBalances(userId, blockchainData.network || 'testnet');
+      // const isFirstSession = Object.keys(previousBalances).length === 0;
+      const isFirstSession = !this.activeSessions.has(userId);
+
       console.log(`🔍 [UserCacheService] DEBUG primeira sessão para usuário ${userId}:`);
       console.log(`  - activeSessions.has(${userId}): ${this.activeSessions.has(userId)}`);
-      console.log(`  - previousBalances keys: ${Object.keys(previousBalances).length}`);
       console.log(`  - isFirstSession calculado: ${isFirstSession}`);
-      
+
       // 4. Detectar mudanças nos saldos e criar notificações
-      if (blockchainData.balancesTable) {
-        const detectionResult = await this.tokenAmountService.detectBalanceChanges(
-          userId, 
-          blockchainData, 
-          postgresData.user.publicKey, 
-          isFirstSession
-        );
-        
-        // Log de informações para debug
-        if (detectionResult.isFirstLoad) {
-          console.log(`🆕 [UserCacheService] Primeira sessão para usuário ${userId}: ${Object.keys(blockchainData.balancesTable).length} tokens encontrados`);
-        } else if (detectionResult.changes.length > 0 || detectionResult.newTokens.length > 0) {
-          console.log(`🔄 [UserCacheService] Usuário ${userId}: ${detectionResult.changes.length} mudanças e ${detectionResult.newTokens.length} novos tokens`);
-        }
-      }
+      // REMOVIDO: TokenAmountService não está mais disponível
+      // if (blockchainData.balancesTable) {
+      //   const detectionResult = await this.tokenAmountService.detectBalanceChanges(
+      //     userId,
+      //     blockchainData,
+      //     postgresData.user.publicKey,
+      //     isFirstSession
+      //   );
+      //
+      //   // Log de informações para debug
+      //   if (detectionResult.isFirstLoad) {
+      //     console.log(`🆕 [UserCacheService] Primeira sessão para usuário ${userId}: ${Object.keys(blockchainData.balancesTable).length} tokens encontrados`);
+      //   } else if (detectionResult.changes.length > 0 || detectionResult.newTokens.length > 0) {
+      //     console.log(`🔄 [UserCacheService] Usuário ${userId}: ${detectionResult.changes.length} mudanças e ${detectionResult.newTokens.length} novos tokens`);
+      //   }
+      // }
       
       // 5. Combinar dados
       const combinedData = {
@@ -171,30 +172,7 @@ class UserCacheService {
       const user = await this.prisma.user.findUnique({
         where: { id: userId },
         include: {
-          apiKeys: {
-            where: { isActive: true },
-            select: {
-              id: true,
-              name: true,
-              description: true,
-              isActive: true,
-              expiresAt: true,
-              lastUsedAt: true,
-              createdAt: true
-            }
-          },
-          userCompanies: {
-            where: { status: 'active' },
-            include: {
-              company: {
-                select: {
-                  id: true,
-                  name: true,
-                  isActive: true
-                }
-              }
-            }
-          },
+          // FUNCIONALIDADE REMOVIDA: apiKeys, userCompanies
           userTwoFactors: {
             where: { isActive: true },
             select: {
@@ -214,7 +192,7 @@ class UserCacheService {
 
       // Buscar transações recentes
       const recentTransactions = await this.prisma.transaction.findMany({
-        where: { 
+        where: {
           userId: userId,
           createdAt: {
             gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) // Últimos 30 dias
@@ -223,13 +201,7 @@ class UserCacheService {
         orderBy: { createdAt: 'desc' },
         take: 50,
         include: {
-          company: {
-            select: {
-              id: true,
-              name: true,
-              alias: true
-            }
-          },
+          // FUNCIONALIDADE REMOVIDA: company
           user: {
             select: {
               id: true,
@@ -240,27 +212,29 @@ class UserCacheService {
         }
       });
 
+      // FUNCIONALIDADE REMOVIDA: requestLog
       // Buscar logs de requisições recentes
-      const recentRequestLogs = await this.prisma.requestLog.findMany({
-        where: { 
-          userId: userId,
-          createdAt: {
-            gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // Últimos 7 dias
-          }
-        },
-        orderBy: { createdAt: 'desc' },
-        take: 100
-      });
+      // const recentRequestLogs = await this.prisma.requestLog.findMany({
+      //   where: {
+      //     userId: userId,
+      //     createdAt: {
+      //       gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // Últimos 7 dias
+      //     }
+      //   },
+      //   orderBy: { createdAt: 'desc' },
+      //   take: 100
+      // });
 
       // Estatísticas do usuário
       const userStats = {
         totalTransactions: await this.prisma.transaction.count({
           where: { userId }
         }),
-        totalApiKeys: await this.prisma.apiKey.count({
-          where: { userId, isActive: true }
-        }),
-        totalCompanies: user.userCompanies.length,
+        // FUNCIONALIDADE REMOVIDA: apiKeys, companies
+        // totalApiKeys: await this.prisma.apiKey.count({
+        //   where: { userId, isActive: true }
+        // }),
+        // totalCompanies: user.userCompanies.length,
         twoFactorEnabled: user.userTwoFactors.length > 0
       };
 
@@ -270,7 +244,7 @@ class UserCacheService {
       return {
         user: sanitizedUser,
         transactions: recentTransactions,
-        requestLogs: recentRequestLogs,
+        // requestLogs: recentRequestLogs, // REMOVIDO
         stats: userStats,
         loadedAt: new Date().toISOString()
       };

@@ -84,26 +84,18 @@ console.log('📦 Environment PIX/EFI loaded:', {
 const app = require('./app');
 const http = require('http');
 const websocketService = require('./services/websocket.service');
-const exchangeSystemManager = require('./services/exchangeSystemManager');
-const reconciliationWorker = require('./workers/reconciliationWorker');
 
 // Importar configuração Prisma ao invés do Sequelize
 const prismaConfig = require('./config/prisma');
 const redisService = require('./services/redis.service');
 const userCacheService = require('./services/userCache.service');
 
-// Importar serviços (mantenha os originais por enquanto, eles serão migrados gradualmente)
-const contractService = require('./services/contract.service');
-const companyService = require('./services/company.service');
+// Importar serviços
 const userService = require('./services/user.service');
 const logService = require('./services/log.service');
 const adminService = require('./services/admin.service.prisma');
 const passwordResetService = require('./services/passwordReset.service');
-const tokenInitializerService = require('./services/tokenInitializer.service');
-const tokenService = require('./services/token.service');
-const stakeService = require('./services/stake.service');
 const queueService = require('./services/queue.service');
-// const initService = require('./services/init.service.prisma'); // Temporariamente desabilitado
 
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -181,58 +173,30 @@ const startServer = () => {
       console.error('❌ Erro ao inicializar UserCacheService:', error.message);
     }
     
-    // Inicializar serviços (alguns podem falhar se dependem de Sequelize, mas não vamos quebrar)
+    // Inicializar serviços
     console.log('🔍 Inicializando serviços...');
-    
-    try {
-      await contractService.initialize();
-      console.log('✅ Contract service inicializado');
-    } catch (error) {
-      console.log('⚠️ Contract service: não inicializado (aguardando migração para Prisma)');
-    }
-    
-    try {
-      await companyService.initialize();
-      console.log('✅ Company service (Prisma) inicializado');
-    } catch (error) {
-      console.log('⚠️ Company service: erro na inicialização -', error.message);
-    }
-    
+
     try {
       await userService.init();
       console.log('✅ User service (Prisma) inicializado');
     } catch (error) {
       console.log('⚠️ User service: erro na inicialização -', error.message);
     }
-    
+
     try {
       await logService.initialize();
       console.log('✅ Log service inicializado');
     } catch (error) {
-      console.log('⚠️ Log service: não inicializado (aguardando migração para Prisma)');
+      console.log('⚠️ Log service: não inicializado');
     }
-    
+
     try {
       await passwordResetService.initialize();
       console.log('✅ Password reset service inicializado');
     } catch (error) {
-      console.log('⚠️ Password reset service: não inicializado (aguardando migração para Prisma)');
+      console.log('⚠️ Password reset service: não inicializado');
     }
-    
-    try {
-      await tokenService.initialize();
-      console.log('✅ Token service inicializado');
-    } catch (error) {
-      console.log('⚠️ Token service: não inicializado (aguardando migração para Prisma)');
-    }
-    
-    try {
-      await stakeService.initialize();
-      console.log('✅ Stake service inicializado');
-    } catch (error) {
-      console.log('⚠️ Stake service: não inicializado (aguardando migração para Prisma)');
-    }
-    
+
     // Inicializar fila (opcional)
     try {
       await queueService.initialize();
@@ -240,63 +204,14 @@ const startServer = () => {
     } catch (error) {
       console.log('⚠️ Queue service: não disponível');
     }
-    
-    
-    // Tentar inicializar sistema completo (temporariamente desabilitado)
-    try {
-      // await initService.initializeSystem();
-      console.log('✅ Sistema básico inicializado');
-    } catch (error) {
-      console.log('⚠️ Sistema: inicialização parcial (alguns serviços podem não estar disponíveis)');
-    }
-    
-    // Tokens serão gerenciados via frontend pelos administradores
-    console.log('ℹ️ Tokens serão gerenciados via interface administrativa');
 
     // Inicializar dados padrão
     console.log('🔍 Verificando dados padrão...');
     try {
-      // Verificar se existem empresas
-      const companiesCount = await prisma.company.count();
-      console.log(`📊 Companies existentes: ${companiesCount}`);
-      
-      if (companiesCount === 0) {
-        console.log('🏗️ Criando empresa padrão...');
-        const defaultCompany = await prisma.company.create({
-          data: {
-            name: 'Company Padrão',
-            alias: 'default',
-            isActive: true,
-            createdAt: new Date(),
-            updatedAt: new Date()
-          }
-        });
-        console.log('✅ Company padrão criado:', defaultCompany.name);
-      }
-
-      // Verificar se existe empresa com alias 'navi'
-      const naviCompany = await prisma.company.findFirst({
-        where: { alias: 'navi' }
-      });
-
-      if (!naviCompany) {
-        console.log('🏗️ Criando empresa Navi...');
-        const naviCompany = await prisma.company.create({
-          data: {
-            name: 'Navi',
-            alias: 'navi',
-            isActive: true,
-            createdAt: new Date(),
-            updatedAt: new Date()
-          }
-        });
-        console.log('✅ Company Navi criada:', naviCompany.name);
-      }
-      
       // Verificar se existem usuários
       const usersCount = await prisma.user.count();
       console.log(`👥 Usuários existentes: ${usersCount}`);
-      
+
       // Criar usuário admin padrão se não existir
       console.log(`🔍 Verificando se deve criar usuário admin (usersCount = ${usersCount})`);
       if (usersCount === 0) {
@@ -310,252 +225,13 @@ const startServer = () => {
       } else {
         console.log('👤 Usuário admin já existe, pulando criação');
       }
-      
+
     } catch (error) {
       console.log('⚠️ Erro ao verificar dados padrão:', error.message);
     }
     
     console.log('');
     console.log('🎉 Sistema iniciado com Prisma!');
-    console.log('📝 Nota: Alguns serviços podem não estar disponíveis até a migração completa');
-    
-    // Inicializar MintWorker
-    try {
-      const mintWorker = require('./workers/mint.worker');
-      await mintWorker.start();
-      console.log('🏭 MintWorker inicializado com sucesso');
-    } catch (error) {
-      console.error('❌ Erro ao inicializar MintWorker:', error.message);
-    }
-
-    // Inicializar CDI Sync Job
-    try {
-      const cdiSyncJob = require('./jobs/cdiSync.job');
-      cdiSyncJob.start();
-      console.log('💹 CDI Sync Job inicializado com sucesso');
-    } catch (error) {
-      console.error('❌ Erro ao inicializar CDI Sync Job:', error.message);
-    }
-
-    // Inicializar Exchange V2 (Gasless Architecture)
-    try {
-      console.log('🚀 Inicializando Exchange V2 (Gasless)...');
-      const exchangeRoutes = require('./routes/exchangeRoutes');
-
-      const CONTRACT_ADDRESS = process.env.EXCHANGE_CONTRACT_ADDRESS || '0xaBE82005386d4E9A0e9fcA3eeA1b1fcd9304E0D9';
-      const defaultNetwork = process.env.DEFAULT_NETWORK || 'testnet';
-      const RPC_URL = defaultNetwork === 'mainnet'
-        ? process.env.MAINNET_RPC_URL || 'https://rpc-mainnet.azore.technology'
-        : process.env.TESTNET_RPC_URL || 'https://rpc-testnet.azore.technology';
-      const ADMIN_PRIVATE_KEY = process.env.ADMIN_WALLET_PRIVATE_KEY;
-
-      // Load proper exchange ABI
-      const loadExchangeABI = () => {
-        try {
-          const abiPath = path.join(__dirname, 'contracts', 'abis', 'default_exchange_abi.json');
-          const abiContent = fs.readFileSync(abiPath, 'utf8');
-          return JSON.parse(abiContent);
-        } catch (error) {
-          console.error('Error loading exchange ABI:', error);
-          return null;
-        }
-      };
-
-      const CONTRACT_ABI = loadExchangeABI();
-
-      if (!CONTRACT_ABI) {
-        console.error('❌ Failed to load exchange ABI, skipping exchange initialization');
-        return;
-      }
-
-      await exchangeRoutes.initializeServices(CONTRACT_ADDRESS, CONTRACT_ABI, RPC_URL, {
-        privateKey: ADMIN_PRIVATE_KEY
-      });
-
-      console.log('✅ Exchange V2 (Gasless) inicializado com sucesso!');
-      console.log(`📍 Contract: ${CONTRACT_ADDRESS}`);
-
-      // Inicializar sistema de matching otimizado
-      console.log('🚀 Initializing Exchange Matching System...');
-      try {
-        // Buscar todos os contratos de exchange do banco de dados
-        const exchangeContracts = await prisma.smartContract.findMany({
-          where: {
-            contractTypeId: 'b96cbbfd-38b9-4224-8eb6-467fb612190b', // Exchange contract type
-            isActive: true
-          }
-        });
-
-        console.log(`📋 Found ${exchangeContracts.length} exchange contracts in database`);
-
-        // Preparar contratos para inicialização
-        const contractsConfig = exchangeContracts.map(contract => {
-          const metadata = contract.metadata || {};
-
-          // Validar que temos os metadados necessários
-          if (!metadata.tokenA || !metadata.tokenB) {
-            console.warn(`⚠️ Contract ${contract.name} (${contract.address}) missing token metadata`);
-            return null;
-          }
-
-          return {
-            address: contract.address,
-            abi: CONTRACT_ABI, // Mesmo ABI para todos os contratos de exchange
-            name: contract.name,
-            tokenA: metadata.tokenA,
-            tokenB: metadata.tokenB
-          };
-        }).filter(Boolean); // Remove contratos sem metadata válido
-
-        // Log dos contratos encontrados
-        contractsConfig.forEach(contract => {
-          console.log(`  - ${contract.name}: ${contract.tokenA.symbol}/${contract.tokenB.symbol} at ${contract.address}`);
-        });
-
-        await exchangeSystemManager.initialize({
-          rpcUrl: RPC_URL,
-          privateKey: ADMIN_PRIVATE_KEY,
-          exchangeContracts: contractsConfig
-        });
-
-        console.log('✅ Exchange Matching System initialized successfully!');
-      } catch (error) {
-        console.error('❌ Failed to initialize Exchange Matching System:', error);
-        console.log('⚠️ Exchange will continue without optimized matching');
-      }
-
-      // Inicializar AutoMatchingService
-      try {
-        const AutoMatchingService = require('./services/autoMatchingService');
-        const ExchangeService = require('./services/exchangeService');
-
-        const exchangeService = new ExchangeService();
-
-        await exchangeService.initialize(CONTRACT_ADDRESS, CONTRACT_ABI, RPC_URL);
-
-        const autoMatchingService = new AutoMatchingService(exchangeService, prisma);
-        await autoMatchingService.start(); // Agora é assíncrono para carregar contratos
-
-        global.autoMatchingService = autoMatchingService;
-
-        // Cleanup no shutdown
-        process.on('SIGTERM', () => {
-          autoMatchingService.stop();
-        });
-
-        process.on('SIGINT', () => {
-          autoMatchingService.stop();
-        });
-
-        console.log('✅ AutoMatchingService inicializado - Matching automático a cada 1 segundo');
-      } catch (error) {
-        console.error('❌ Erro ao inicializar AutoMatchingService:', error);
-      }
-
-      // Inicializar MatchExecutorService
-      try {
-        const MatchExecutorService = require('./services/matchExecutorService');
-
-        const matchExecutorService = new MatchExecutorService();
-        await matchExecutorService.initialize(RPC_URL, ADMIN_PRIVATE_KEY);
-        await matchExecutorService.startConsumer();
-
-        global.matchExecutorService = matchExecutorService;
-
-        // Cleanup no shutdown
-        process.on('SIGTERM', async () => {
-          await matchExecutorService.stop();
-        });
-
-        process.on('SIGINT', async () => {
-          await matchExecutorService.stop();
-        });
-
-        console.log('✅ MatchExecutorService inicializado - Consumer RabbitMQ ativo');
-      } catch (error) {
-        console.error('❌ Erro ao inicializar MatchExecutorService:', error);
-      }
-
-      // Inicializar WebSocket Broadcast Consumer
-      try {
-        const WebSocketBroadcastConsumer = require('./services/websocketBroadcastConsumer');
-
-        const websocketBroadcastConsumer = new WebSocketBroadcastConsumer();
-        await websocketBroadcastConsumer.initialize(io);
-        await websocketBroadcastConsumer.startConsumer();
-
-        global.websocketBroadcastConsumer = websocketBroadcastConsumer;
-
-        // Cleanup no shutdown
-        process.on('SIGTERM', async () => {
-          await websocketBroadcastConsumer.stop();
-        });
-
-        process.on('SIGINT', async () => {
-          await websocketBroadcastConsumer.stop();
-        });
-
-        console.log('✅ WebSocket Broadcast Consumer inicializado - Notificações em tempo real ativas');
-      } catch (error) {
-        console.error('❌ Erro ao inicializar WebSocket Broadcast Consumer:', error);
-      }
-
-      console.log(`🔗 RPC: ${RPC_URL}`);
-      console.log('🛡️ Arquitetura gasless: Admin wallet com TRANSFER_ROLE');
-
-      // Inicializar InstantOrderIdUpdater (substitui o sistema de intervalo)
-      try {
-        const InstantOrderIdUpdater = require('./services/instantOrderIdUpdater.service');
-        const instantUpdater = new InstantOrderIdUpdater();
-        await instantUpdater.initialize();
-
-        // Inicia escuta em tempo real (PostgreSQL NOTIFY/LISTEN)
-        await instantUpdater.startListening();
-
-        console.log('🎯 InstantOrderIdUpdater ativo - RESPOSTA IMEDIATA');
-        console.log('⚡ Toda nova ordem será processada INSTANTANEAMENTE');
-
-        // Cleanup graceful
-        process.on('SIGTERM', async () => {
-          await instantUpdater.destroy();
-        });
-
-        process.on('SIGINT', async () => {
-          await instantUpdater.destroy();
-        });
-
-      } catch (error) {
-        console.error('❌ Erro ao inicializar InstantOrderIdUpdater:', error.message);
-      }
-
-      // Inicializar Reconciliation Worker
-      try {
-        console.log('🔄 Inicializando Reconciliation Worker...');
-
-        // Aguardar um pouco para não sobrecarregar na inicialização
-        setTimeout(() => {
-          // reconciliationWorker.start(); // DESABILITADO - causando transações duplicadas
-          console.log('🚫 Reconciliation Worker DESABILITADO para evitar transações duplicadas');
-        }, 5000); // 5 segundos de delay
-
-        // Cleanup graceful
-        process.on('SIGTERM', async () => {
-          reconciliationWorker.stop();
-        });
-
-        process.on('SIGINT', async () => {
-          reconciliationWorker.stop();
-        });
-
-      } catch (error) {
-        console.error('❌ Erro ao inicializar Reconciliation Worker:', error.message);
-      }
-    } catch (error) {
-      console.error('❌ Erro ao inicializar Exchange V2:', error.message);
-      console.log('⚠️ Exchange V2 não disponível, mas servidor continuará...');
-    }
-
-    console.log('');
 
     startServer();
   } catch (err) {
@@ -576,10 +252,6 @@ const startServer = () => {
 process.on('SIGTERM', async () => {
   console.log('🛑 SIGTERM recebido, encerrando servidor...');
   try {
-    // Shutdown Exchange System Manager primeiro
-    await exchangeSystemManager.shutdown();
-    console.log('✅ Exchange System Manager encerrado');
-
     await prismaConfig.close();
     console.log('✅ Conexões Prisma fechadas');
   } catch (error) {
@@ -591,10 +263,6 @@ process.on('SIGTERM', async () => {
 process.on('SIGINT', async () => {
   console.log('🛑 SIGINT recebido, encerrando servidor...');
   try {
-    // Shutdown Exchange System Manager primeiro
-    await exchangeSystemManager.shutdown();
-    console.log('✅ Exchange System Manager encerrado');
-
     await prismaConfig.close();
     console.log('✅ Conexões Prisma fechadas');
   } catch (error) {

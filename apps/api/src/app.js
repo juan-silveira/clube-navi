@@ -21,14 +21,6 @@ const testSimpleRoutes = require('./routes/test-simple.routes');
 const asaasTestRoutes = require('./routes/asaas-test.routes');
 // const debugUserRoutes = require('./routes/debug-user.routes'); // Temporariamente desabilitado
 
-const contractRoutes = require('./routes/contract.routes');
-const tokenRoutes = require('./routes/token.routes');
-const stakeRoutes = require('./routes/stake.routes');
-const stakeContractRoutes = require('./routes/stakeContracts.routes');
-const stakeStatementsRoutes = require('./routes/stakeStatements.routes');
-const issuersRoutes = require('./routes/issuers.routes');
-const contractsInteractRoutes = require('./routes/contracts.routes');
-const companyRoutes = require('./routes/company.routes');
 const logRoutes = require('./routes/log.routes');
 const userRoutes = require('./routes/user.routes');
 const adminRoutes = require('./routes/admin.routes');
@@ -44,34 +36,18 @@ const whitelabelRoutes = require('./routes/whitelabel.routes');
 const twoFactorRoutes = require('./routes/twoFactor.routes');
 const cacheRoutes = require('./routes/cache.routes');
 const notificationRoutes = require('./routes/notification.routes');
-const tokenAmountRoutes = require('./routes/tokenAmount.routes');
-const earningsRoutes = require('./routes/earnings.routes');
 const taxReportsRoutes = require('./routes/taxReports.routes');
 const userPlanRoutes = require('./routes/userPlan.routes');
 const configRoutes = require('./routes/config.routes');
-const smartContractRoutes = require('./routes/smartContract.routes');
-const exchangeMatchingRoutes = require('./routes/exchangeMatchingRoutes');
 const userDocumentRoutes = require('./routes/userDocument.routes');
 const userActionsRoutes = require('./routes/userActions.routes');
-const contractTypeRoutes = require('./routes/contractType.routes');
 const workersRoutes = require('./routes/workers.routes');
-const portfolioRoutes = require('./routes/portfolio.routes');
-const tokenPriceRoutes = require('./routes/tokenPrice.routes');
-// TEMPORARIAMENTE DESABILITADO - cBRL service removido
-// const pixRoutes = require('./routes/pix.routes');
 const profileRoutes = require('./routes/profile.routes');
 const s3PhotoRoutes = require('./routes/s3-photo.routes');
-const companyBrandingRoutes = require('./routes/company-branding.routes');
-const companiesRoutes = require('./routes/companies.routes');
 const backupRoutes = require('./routes/backup.routes');
-const contractDeployRoutes = require('./routes/contractDeployRoutes');
-const financialReportRoutes = require('./routes/financialReport.routes');
 
 // Importar serviços
-const contractService = require('./services/contract.service');
-const companyService = require('./services/company.service');
 const logService = require('./services/log.service');
-const tokenAmountService = require('./services/tokenAmount.service');
 
 // Importar middlewares
 const { 
@@ -455,12 +431,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs, {
 
 // Removida inicialização assíncrona dos serviços do app.js
 
-// Inicializar serviço de monitoramento de saldos de tokens
-const tokenAmountServiceInstance = new tokenAmountService();
-tokenAmountServiceInstance.initialize().catch(error => {
-  console.error('❌ Erro ao inicializar serviço de monitoramento de saldos:', error);
-});
-
 // Rotas públicas (sem autenticação) - comunicação direta com blockchain
 app.use('/api/test', testRoutes);
 app.use('/api/debug', testPrismaRoutes);
@@ -745,21 +715,25 @@ app.get('/api/companies/:id', apiRateLimiter, async (req, res, next) => {
 });
 
 // Rotas de empresas (com autenticação JWT e rate limiting)
-app.use('/api/companies', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, companyRoutes);
+// REMOVIDO - arquivos de rotas não existem mais
+// app.use('/api/companies', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, companyRoutes);
 
 // Rotas de contratos de stake (com autenticação JWT)
-app.use('/api/stake-contracts', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, stakeContractRoutes);
-app.use('/api/stake-statements', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, stakeStatementsRoutes);
-app.use('/api/issuers', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, issuersRoutes);
-app.use('/api/portfolio', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, portfolioRoutes);
+// REMOVIDO - arquivos de rotas não existem mais
+// app.use('/api/stake-contracts', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, stakeContractRoutes);
+// app.use('/api/stake-statements', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, stakeStatementsRoutes);
+// app.use('/api/issuers', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, issuersRoutes);
+// app.use('/api/portfolio', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, portfolioRoutes);
 
 // Rotas públicas específicas para busca de contratos (devem vir ANTES da rota geral)
-app.use('/api/contracts/tokens', contractsInteractRoutes);
-app.use('/api/contracts/exchanges', contractsInteractRoutes);
-app.use('/api/contracts/stakes', contractsInteractRoutes);
+// REMOVIDO - arquivos de rotas não existem mais
+// app.use('/api/contracts/tokens', contractsInteractRoutes);
+// app.use('/api/contracts/exchanges', contractsInteractRoutes);
+// app.use('/api/contracts/stakes', contractsInteractRoutes);
 
 // Outras rotas de contratos mantêm autenticação JWT (rota geral)
-app.use('/api/contracts', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, contractsInteractRoutes);
+// REMOVIDO - arquivos de rotas não existem mais
+// app.use('/api/contracts', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, contractsInteractRoutes);
 
 // Rotas de autenticação (públicas)
 app.use('/api/auth', loginRateLimiter, authRoutes);
@@ -784,14 +758,15 @@ app.get('/api/admin/test-jwt', authenticateJWT, (req, res) => {
 });
 
 // Rotas administrativas de tokens (com autenticação JWT para frontend) - DEVE VIR ANTES DA ROTA GENÉRICA
-app.use('/api/admin/tokens', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, tokenRoutes);
+// REMOVIDO - arquivos de rotas não existem mais
+// app.use('/api/admin/tokens', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, tokenRoutes);
 
 // Middleware híbrido para aceitar JWT ou API Key
 const authenticateHybrid = (req, res, next) => {
   // Verificar se há JWT token no header
   const authHeader = req.headers.authorization;
   console.log('🔍 [HYBRID] AuthHeader:', authHeader ? 'presente' : 'ausente');
-  
+
   if (authHeader && authHeader.startsWith('Bearer ')) {
     const token = authHeader.substring(7);
     console.log('🔍 [HYBRID] Token parts:', token.split('.').length);
@@ -801,24 +776,26 @@ const authenticateHybrid = (req, res, next) => {
       return authenticateJWT(req, res, next);
     }
   }
-  
+
   // Caso contrário, usar API Key middleware
   console.log('🔄 Usando autenticação API Key para tokens');
   return authenticateApiKey(req, res, next);
 };
 
 // Rotas de tokens (com autenticação híbrida e sistema de fila)
+// REMOVIDO - arquivos de rotas não existem mais
 // Rota pública para listar tokens (para admin/settings)
-app.use('/api/tokens/public', tokenRoutes);
+// app.use('/api/tokens/public', tokenRoutes);
 
 // Rota pública para preços de tokens (sem autenticação)
-app.use('/api/tokens', tokenPriceRoutes);
+// app.use('/api/tokens', tokenPriceRoutes);
 
 // Rota protegida para operações com tokens
-app.use('/api/tokens', authenticateHybrid, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, tokenRoutes);
+// app.use('/api/tokens', authenticateHybrid, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, tokenRoutes);
 
 // Rotas de stakes (com autenticação e sistema de fila)
-app.use('/api/stakes', authenticateJWT, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, stakeRoutes);
+// REMOVIDO - arquivos de rotas não existem mais
+// app.use('/api/stakes', authenticateJWT, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, stakeRoutes);
 
 // TESTE TEMPORÁRIO: Endpoint de debug direto no app
 app.get('/api/transactions-debug', async (req, res) => {
@@ -867,13 +844,13 @@ app.use('/api/transactions', transactionRoutes);
 
 // Rotas de depósitos (com autenticação JWT e email confirmado)
 const depositRoutes = require('./routes/deposit.routes');
-const mintRoutes = require('./routes/mint.routes');
+// const mintRoutes = require('./routes/mint.routes'); // REMOVIDO - arquivo não existe mais
 const pixRoutes = require('./routes/pix.routes');
 const { requireEmailConfirmation } = require('./middleware/emailConfirmed.middleware');
 // IMPORTANTE: Rotas de desenvolvimento SEM autenticação devem vir ANTES
 app.use('/api/pix/dev', pixRoutes);
 app.use('/api/deposits/dev', depositRoutes);
-app.use('/api/mint/dev', mintRoutes);
+// app.use('/api/mint/dev', mintRoutes); // REMOVIDO - arquivo não existe mais
 
 // Rota de debug direta (sem autenticação)
 app.get('/api/debug/pix/:transactionId', async (req, res) => {
@@ -926,21 +903,24 @@ app.get('/api/debug/pix/:transactionId', async (req, res) => {
 
 // Rotas com autenticação JWT
 app.use('/api/deposits', authenticateJWT, depositRoutes);
-app.use('/api/mint', authenticateJWT, mintRoutes);
+// app.use('/api/mint', authenticateJWT, mintRoutes); // REMOVIDO - arquivo não existe mais
 app.use('/api/pix', authenticateJWT, pixRoutes);
 
 // Exchange Matching System API
-app.use('/api/exchange-matching', exchangeMatchingRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/exchange-matching', exchangeMatchingRoutes);
 
 // Rotas de saques (com autenticação JWT - email confirmado temporariamente desabilitado)
-const withdrawRoutes = require('./routes/withdraw.routes');
-const adminWithdrawalsRoutes = require('./routes/adminWithdrawals.routes');
-app.use('/api/withdrawals', authenticateJWT, withdrawRoutes);
-app.use('/api/admin/withdrawals', adminWithdrawalsRoutes);
+// REMOVIDO - arquivos não existem mais
+// const withdrawRoutes = require('./routes/withdraw.routes');
+// const adminWithdrawalsRoutes = require('./routes/adminWithdrawals.routes');
+// app.use('/api/withdrawals', authenticateJWT, withdrawRoutes);
+// app.use('/api/admin/withdrawals', adminWithdrawalsRoutes);
 
 // Rotas de transferências (com autenticação JWT)
-const transferRoutes = require('./routes/transfer.routes');
-app.use('/api/transfers', authenticateJWT, transferRoutes);
+// REMOVIDO - arquivo não existe mais
+// const transferRoutes = require('./routes/transfer.routes');
+// app.use('/api/transfers', authenticateJWT, transferRoutes);
 
 // Rotas de logs (com autenticação JWT)
 app.use('/api/logs', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, logRoutes);
@@ -955,7 +935,8 @@ app.use('/api/documents', authenticateJWT, apiRateLimiter, addUserInfo, logAuthe
 app.use('/api/queue', queueRoutes);
 
 // Rotas específicas de empresas (devem vir antes das rotas gerais de admin)
-app.use('/api/admin/companies', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, companiesRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/admin/companies', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, companiesRoutes);
 
 // Rota de estatísticas admin (com JWT e verificação de SUPER_ADMIN)
 app.get('/api/admin/stats', authenticateJWT, requireSuperAdmin, async (req, res) => {
@@ -1080,7 +1061,8 @@ app.get('/api/admin/stats', authenticateJWT, requireSuperAdmin, async (req, res)
 // Rotas admin (com autenticação admin)
 // Nota: rotas mais específicas devem vir ANTES das rotas gerais
 // Financial report usa JWT (para acesso via dashboard web)
-app.use('/api/admin/financial-report', authenticateJWT, financialReportRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/admin/financial-report', authenticateJWT, financialReportRoutes);
 app.use('/api/admin', authenticateApiKey, requireApiAdmin, apiRateLimiter, addAdminUserInfo, logAdminRequest, adminRoutes);
 
 // Rota para estatísticas de rate limiting (admin)
@@ -1168,14 +1150,16 @@ app.use('/api/cache', authenticateJWT, apiRateLimiter, addUserInfo, logAuthentic
 app.use('/api/notifications', notificationRoutes);
 
 // Rotas de sincronização de balances (com autenticação JWT)
-const balanceSyncRoutes = require('./routes/balanceSync.routes');
-app.use('/api/balance-sync', balanceSyncRoutes);
+// REMOVIDO - arquivo não existe mais
+// const balanceSyncRoutes = require('./routes/balanceSync.routes');
+// app.use('/api/balance-sync', balanceSyncRoutes);
 
 // Rotas de atualização automática de saldos (com autenticação JWT)
 
 // Rotas de monitoramento de saldos de tokens
-app.use('/api/token-amounts', tokenAmountRoutes);
-app.use('/api/earnings', earningsRoutes);
+// REMOVIDO - arquivos não existem mais
+// app.use('/api/token-amounts', tokenAmountRoutes);
+// app.use('/api/earnings', earningsRoutes);
 app.use('/api/tax-reports', taxReportsRoutes);
 
 // Rotas de planos de usuário (públicas para consulta, autenticadas para admin)
@@ -1194,7 +1178,8 @@ app.get('/api/config/test-direct', (req, res) => {
 app.use('/api/config', configRoutes);
 
 // Smart Contract Routes (Public)
-app.use('/api/smart-contracts', smartContractRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/smart-contracts', smartContractRoutes);
 
 // User Documents Routes (com autenticação JWT)
 app.use('/api/user-documents', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userDocumentRoutes);
@@ -1203,7 +1188,8 @@ app.use('/api/user-documents', authenticateJWT, apiRateLimiter, addUserInfo, log
 app.use('/api/user-actions', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userActionsRoutes);
 
 // Contract Types Routes
-app.use('/api/contract-types', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, contractTypeRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/contract-types', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, contractTypeRoutes);
 
 // Workers Routes (Admin only)
 app.use('/api/workers', workersRoutes);
@@ -1214,21 +1200,21 @@ app.use('/api/workers', workersRoutes);
 // Rotas do Profile
 app.use('/api/profile', profileRoutes);
 app.use('/api/s3-photos', authenticateJWT, s3PhotoRoutes);
-app.use('/api/company-branding', authenticateJWT, companyBrandingRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/company-branding', authenticateJWT, companyBrandingRoutes);
 
 // Backup routes (public - no authentication required)
 app.use('/api/backup', backupRoutes);
 
-// System contract deploy routes (requires JWT authentication)
-app.use('/api/system/contracts', authenticateJWT, contractDeployRoutes);
-
 // PIX Keys routes (com autenticação JWT)
-const pixKeysRoutes = require('./routes/pixKeys.routes');
-app.use('/api/pix-keys', pixKeysRoutes);
+// REMOVIDO - arquivo não existe mais
+// const pixKeysRoutes = require('./routes/pixKeys.routes');
+// app.use('/api/pix-keys', pixKeysRoutes);
 
 // Switch company routes (com autenticação JWT)
-const switchCompanyRoutes = require('./routes/switch-company.routes');
-app.use('/api/switch-company', authenticateJWT, switchCompanyRoutes);
+// REMOVIDO - arquivo não existe mais
+// const switchCompanyRoutes = require('./routes/switch-company.routes');
+// app.use('/api/switch-company', authenticateJWT, switchCompanyRoutes);
 
 // Banks routes (públicas)
 const banksRoutes = require('./routes/banks.routes');
@@ -1244,15 +1230,18 @@ app.use('/api/webhooks/efi', efiRoutes);
 
 // Rotas de debug PIX (temporário)
 const debugPixRoutes = require('./routes/debug-pix.routes');
-const exchangeRoutes = require('./routes/exchangeRoutes');
+// REMOVIDO - arquivo não existe mais
+// const exchangeRoutes = require('./routes/exchangeRoutes');
 app.use('/api/debug', debugPixRoutes);
 
 // Rotas de exchange (públicas para consulta, autenticadas para trading)
-app.use('/api/exchange', exchangeRoutes);
+// REMOVIDO - arquivo não existe mais
+// app.use('/api/exchange', exchangeRoutes);
 
 // Rotas de reconciliação (admin only)
-const reconciliationRoutes = require('./routes/reconciliation.routes');
-app.use('/api/reconciliation', reconciliationRoutes);
+// REMOVIDO - arquivo não existe mais
+// const reconciliationRoutes = require('./routes/reconciliation.routes');
+// app.use('/api/reconciliation', reconciliationRoutes);
 
 // Rotas de configuração de notificações
 const { router: notificationConfigRoutes } = require('./routes/notificationConfig.routes');
@@ -1267,12 +1256,14 @@ const userTaxesRoutes = require('./routes/userTaxes.routes');
 app.use('/api/user-taxes', authenticateJWT, userTaxesRoutes);
 
 // Rotas de traduções/internacionalização (com autenticação JWT para admin)
-const translationRoutes = require('./routes/translation.routes');
-app.use('/api/translations', authenticateJWT, translationRoutes);
+// REMOVIDO - arquivo não existe mais
+// const translationRoutes = require('./routes/translation.routes');
+// app.use('/api/translations', authenticateJWT, translationRoutes);
 
 // Rotas de CDI (Certificado de Depósito Interbancário)
-const cdiRoutes = require('./routes/cdi.routes');
-app.use('/api/cdi', cdiRoutes);
+// REMOVIDO - arquivo não existe mais
+// const cdiRoutes = require('./routes/cdi.routes');
+// app.use('/api/cdi', cdiRoutes);
 
 // Middleware de tratamento de erros 404
 app.use('*', (req, res) => {

@@ -1,20 +1,14 @@
 const { ethers } = require('ethers');
 const blockchainService = require('./blockchain.service');
 const { loadLocalABI } = require('../contracts');
+const { getCBRLAddress } = require('../utils/blockchain.utils');
 
 class MintService {
   constructor() {
-    // Determinar a rede e o contrato correto
-    const NETWORK = process.env.DEFAULT_NETWORK || 'mainnet'; // Usar mainnet por padrão em produção
-    
     // Configurações do contrato cBRL
     this.CONFIG = {
-      // Usar contrato correto baseado na rede
-      // Mainnet: 0x18e946548b2C24Ad371343086e424ABaC3393678
-      // Testnet: 0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804
-      TOKEN_CONTRACT_ADDRESS: NETWORK === 'testnet' 
-        ? '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804'  // Testnet contract
-        : '0x18e946548b2C24Ad371343086e424ABaC3393678', // Mainnet contract (produção)
+      // Usar contrato correto baseado na BLOCKCHAIN_NETWORK do .env
+      TOKEN_CONTRACT_ADDRESS: getCBRLAddress(),
       
       // Endereço do Ivan que paga o gas (sempre o mesmo)
       ADMIN_ADDRESS: '0x5528C065931f523CA9F3a6e49a911896fb1D2e6f',
@@ -71,6 +65,7 @@ class MintService {
       const initialBalance = await blockchainService.getTokenBalance(
         recipientAddress,
         this.CONFIG.TOKEN_CONTRACT_ADDRESS,
+        this.tokenABI,
         network
       );
       
@@ -112,6 +107,7 @@ class MintService {
       const finalBalance = await blockchainService.getTokenBalance(
         recipientAddress,
         this.CONFIG.TOKEN_CONTRACT_ADDRESS,
+        this.tokenABI,
         network
       );
       

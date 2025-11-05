@@ -693,4 +693,74 @@ router.post('/admin/block-user', authenticateToken, authController.blockUser);
  */
 router.get('/available-companies', authController.getAvailableCompanies);
 
+/**
+ * @swagger
+ * /auth/referral/validate/{username}:
+ *   get:
+ *     summary: Validar código de indicação (buscar usuário por username)
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: path
+ *         name: username
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Username do usuário que está indicando
+ *     responses:
+ *       200:
+ *         description: Usuário encontrado
+ *       404:
+ *         description: Usuário não encontrado
+ *       400:
+ *         description: Usuário não está ativo
+ */
+router.get('/referral/validate/:username', authController.getUserByUsername);
+
+/**
+ * @swagger
+ * /auth/referral/description:
+ *   put:
+ *     summary: Atualizar descrição de indicação do usuário logado
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - referralDescription
+ *             properties:
+ *               referralDescription:
+ *                 type: string
+ *                 maxLength: 500
+ *                 description: Descrição que aparecerá para quem for usar seu código
+ *     responses:
+ *       200:
+ *         description: Descrição atualizada com sucesso
+ *       401:
+ *         description: Usuário não autenticado
+ *       400:
+ *         description: Descrição inválida
+ */
+router.put('/referral/description', authenticateToken, authController.updateReferralDescription);
+
+/**
+ * @swagger
+ * /auth/referral/stats:
+ *   get:
+ *     summary: Obter estatísticas de indicações do usuário logado
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Estatísticas de indicações obtidas com sucesso
+ *       401:
+ *         description: Usuário não autenticado
+ */
+router.get('/referral/stats', authenticateToken, authController.getReferralStats);
+
 module.exports = router; 

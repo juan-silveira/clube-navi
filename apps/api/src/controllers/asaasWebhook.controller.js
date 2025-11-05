@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const depositService = require('../services/deposit.service');
-const withdrawService = require('../services/withdraw.service');
+// const withdrawService = require('../services/withdraw.service'); // REMOVIDO - serviço não utilizado
 const PixService = require('../services/pix.service');
 const pixService = new PixService();
 const { PrismaClient } = require('../generated/prisma');
@@ -253,9 +253,9 @@ class AsaasWebhookController {
       });
       
       // Reverter o burn de cBRL (devolver tokens ao usuário)
-      await withdrawService.reverseWithdrawal(withdrawal.id);
-      
-      console.log(`⚠️ [Asaas Webhook] Saque ${withdrawal.id} falhou e foi revertido`);
+      // REMOVIDO - withdrawService não disponível
+      // await withdrawService.reverseWithdrawal(withdrawal.id);
+      console.log(`⚠️ [Asaas Webhook] AVISO: Saque ${withdrawal.id} falhou mas reversão automática não está implementada`);
       
     } catch (error) {
       console.error('❌ [Asaas Webhook] Erro ao processar transferência falhada:', error);

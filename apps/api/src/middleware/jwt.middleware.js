@@ -112,14 +112,8 @@ const authenticateToken = async (req, res, next) => {
     }
     
     const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
-      include: {
-        userCompanies: {
-          include: {
-            company: true
-          }
-        }
-      }
+      where: { id: decoded.id }
+      // FUNCIONALIDADE REMOVIDA: userCompanies
     });
 
     if (!user || !user.isActive) {
@@ -129,46 +123,19 @@ const authenticateToken = async (req, res, next) => {
       });
     }
 
-    // Otimizado: usar dados já carregados sem query extra
-    // console.log(`🔍 JWT Middleware DEBUG - user.userCompanies:`, user.userCompanies ? user.userCompanies.length : 'null');
-    if (user.userCompanies && user.userCompanies.length > 0) {
-      // Selecionar empresa ativa (sem query adicional)
-      const activeCompanies = user.userCompanies.filter(uc => uc.status === 'active' && uc.company.isActive);
-      
-      if (activeCompanies.length > 0) {
-        // Ordenar por último acesso (mais recente primeiro) ou por data de criação
-        activeCompanies.sort((a, b) => {
-          if (a.lastAccessAt && b.lastAccessAt) {
-            return new Date(b.lastAccessAt) - new Date(a.lastAccessAt);
-          }
-          return new Date(b.linkedAt) - new Date(a.linkedAt);
-        });
-        
-        const selectedCompany = activeCompanies[0];
-        req.company = {
-          id: selectedCompany.company.id,
-          name: selectedCompany.company.name,
-          alias: selectedCompany.company.alias || selectedCompany.company.name.toLowerCase(),
-          isActive: selectedCompany.company.isActive,
-          userRole: selectedCompany.role,
-          linkedAt: selectedCompany.linkedAt,
-          lastAccessAt: selectedCompany.lastAccessAt
-        };
-        user.companyId = selectedCompany.company.id;
-        
-        // console.log(`🏢 JWT Middleware - Usuário ${user.name} usando empresa: ${selectedCompany.company.name} (${selectedCompany.company.id})`);
-      } else {
-        console.warn(`⚠️ JWT Middleware - Nenhuma empresa ativa encontrada para usuário ${user.id}`);
-      }
-    }
+    // FUNCIONALIDADE REMOVIDA: Seleção de empresa (userCompanies removido do schema)
+    // if (user.userCompanies && user.userCompanies.length > 0) {
+    //   const activeCompanies = user.userCompanies.filter(uc => uc.status === 'active' && uc.company.isActive);
+    //   ...
+    // }
     
-    // Verificar roles do usuário
-    const userRoles = user.userCompanies.map(uc => uc.role);
+    // Verificar roles do usuário (sem userCompanies - removido do schema)
+    const userRoles = []; // TODO: Implementar sistema de roles sem companies
 
     // Helpers de verificação de permissão
-    user.isAdmin = userRoles.includes('ADMIN') || userRoles.includes('APP_ADMIN') || userRoles.includes('SUPER_ADMIN');
-    user.isApiAdmin = userRoles.includes('APP_ADMIN') || userRoles.includes('SUPER_ADMIN');
-    user.isSuperAdmin = userRoles.includes('SUPER_ADMIN');
+    user.isAdmin = false; // TODO: Implementar sistema de roles
+    user.isApiAdmin = false;
+    user.isSuperAdmin = false;
     user.roles = userRoles;
 
     req.user = user;
@@ -244,36 +211,18 @@ const optionalJWT = async (req, res, next) => {
     }
     
     const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
-      include: {
-        userCompanies: {
-          include: {
-            company: true
-          }
-        }
-      }
+      where: { id: decoded.id }
+      // FUNCIONALIDADE REMOVIDA: userCompanies
     });
 
     if (user && user.isActive) {
-      // Adicionar dados da empresa se existir
-      if (user.userCompanies && user.userCompanies.length > 0) {
-        // Priorizar empresa "Coinage" se existir, senão usar a primeira
-        let selectedCompany = user.userCompanies.find(uc => 
-          uc.company.alias === 'coinage' || uc.company.name === 'Coinage'
-        );
-        
-        if (!selectedCompany) {
-          selectedCompany = user.userCompanies[0];
-        }
-        
-        req.company = selectedCompany.company;
-        user.companyId = selectedCompany.company.id;
-      }
-      
-      // Verificar se é admin do sistema baseado nas roles das empresas
-      const hasAdminRole = user.userCompanies.some(uc => 
-        uc.role === 'SUPER_ADMIN' || uc.role === 'APP_ADMIN' || uc.role === 'ADMIN'
-      );
+      // FUNCIONALIDADE REMOVIDA: Dados da empresa (userCompanies removido do schema)
+      // if (user.userCompanies && user.userCompanies.length > 0) {
+      //   ...
+      // }
+
+      // FUNCIONALIDADE REMOVIDA: Verificação de roles (userCompanies removido do schema)
+      const hasAdminRole = false; // TODO: Implementar sistema de roles
       user.isApiAdmin = hasAdminRole;
       
       req.user = user;

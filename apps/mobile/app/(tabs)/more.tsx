@@ -1,11 +1,13 @@
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, usePathname } from 'expo-router';
 import { whitelabelConfig } from '@/config/whitelabel';
 import { useAuthStore } from '@/store/authStore';
+import { serializeBreadcrumb } from '@/utils/navigationHelper';
 
 export default function More() {
   const router = useRouter();
+  const currentPath = usePathname();
   const { user, logout } = useAuthStore();
 
   const handleLogout = async () => {
@@ -29,8 +31,9 @@ export default function More() {
     );
   };
 
-  const menuItems: Array<{ icon: string; title: string; route?: string; badge?: number }> = [
+  const menuItems: Array<{ icon: string; title: string; route?: string; badge?: number; useBreadcrumb?: boolean }> = [
     { icon: 'grid-outline', title: 'Dashboard', route: '/(tabs)/dashboard' },
+    { icon: 'gift-outline', title: 'Minhas indicações', route: '/referrals', useBreadcrumb: true },
     { icon: 'people-outline', title: 'Lojas que sigo' },
     { icon: 'headset-outline', title: 'Ajuda' },
     { icon: 'bag-outline', title: 'Minhas compras' },
@@ -76,7 +79,18 @@ export default function More() {
           <TouchableOpacity
             key={index}
             style={styles.menuItem}
-            onPress={() => item.route && router.push(item.route)}
+            onPress={() => {
+              if (item.route) {
+                if (item.useBreadcrumb) {
+                  router.push({
+                    pathname: item.route as any,
+                    params: { breadcrumb: serializeBreadcrumb([{ path: currentPath }]) },
+                  });
+                } else {
+                  router.push(item.route);
+                }
+              }
+            }}
           >
             <View style={styles.menuItemLeft}>
               <Ionicons name={item.icon as any} size={24} color={whitelabelConfig.colors.text} />

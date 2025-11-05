@@ -325,14 +325,14 @@ class LogController {
   }
 
   /**
-   * Obtém transações da empresa autenticada
+   * Obtém transações do usuário autenticado
    */
   async getMyTransactions(req, res) {
     try {
-      if (!req.company) {
+      if (!req.user) {
         return res.status(401).json({
           success: false,
-          message: 'Empresa não autenticada',
+          message: 'Usuário não autenticado',
           error: 'NOT_AUTHENTICATED'
         });
       }
@@ -350,7 +350,7 @@ class LogController {
       const options = {
         page: parseInt(page) || 1,
         limit: parseInt(limit) || 50,
-        companyId: req.company.id,
+        userId: req.user.id, // Usar userId ao invés de companyId
         status,
         network,
         transactionType,
@@ -363,7 +363,7 @@ class LogController {
     } catch (error) {
       res.status(400).json({
         success: false,
-        message: 'Erro ao obter transações da empresa',
+        message: 'Erro ao obter transações do usuário',
         error: error.message
       });
     }

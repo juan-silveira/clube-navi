@@ -50,22 +50,18 @@ class DepositService {
     try {
       if (!this.prisma) await this.init();
       
-      // Buscar empresa do usuário
+      // Verificar se usuário existe
       const user = await this.prisma.user.findUnique({
         where: { id: userId },
-        include: {
-          userCompanies: {
-            include: {
-              company: true
-            }
-          }
-        }
+        select: { id: true, name: true, email: true }
       });
 
-      const companyId = user?.userCompanies?.[0]?.company?.id;
-      if (!companyId) {
-        throw new Error('Usuário não possui empresa associada');
+      if (!user) {
+        throw new Error('Usuário não encontrado');
       }
+
+      // Sem company - sistema simplificado
+      const companyId = null;
 
       // Calcular taxa usando UserTaxesService
       const feeCalculation = await userTaxesService.calculateDepositFee(userId, amount);
@@ -77,55 +73,29 @@ class DepositService {
       const ADMIN_ADDRESS = process.env.ADMIN_WALLET_ADDRESS || '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb3';
       
       // Determinar a rede e o contrato correto
-      const NETWORK = process.env.DEFAULT_NETWORK || 'mainnet'; // Usar mainnet por padrão em produção
+      const { getCBRLAddress, getBlockchainNetwork } = require('../utils/blockchain.utils');
 
-      // DEBUG TEMPORÁRIO - REMOVER DEPOIS
-      console.log('🔍 [DEPOSIT DEBUG] DEFAULT_NETWORK from env:', process.env.DEFAULT_NETWORK);
-      console.log('🔍 [DEPOSIT DEBUG] NETWORK final value:', NETWORK);
-      
-      // Usar contrato correto baseado na rede
-      // Mainnet: 0x18e946548b2C24Ad371343086e424ABaC3393678
-      // Testnet: 0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804
-      const CONTRACT_ADDRESS = NETWORK === 'testnet' 
-        ? '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804'  // Testnet contract
-        : '0x18e946548b2C24Ad371343086e424ABaC3393678'; // Mainnet contract (produção)
+      // Usar contrato correto baseado na BLOCKCHAIN_NETWORK do .env
+      const CONTRACT_ADDRESS = getCBRLAddress();
+      const NETWORK = getBlockchainNetwork();
+
+      console.log('🔍 [DEPOSIT DEBUG] Blockchain Network:', NETWORK);
+      console.log('🔍 [DEPOSIT DEBUG] cBRL Contract Address:', CONTRACT_ADDRESS);
 
       // CRIAR TRANSAÇÃO ÚNICA com campos unificados e padronizados
       const transaction = await this.prisma.transaction.create({
         data: {
           id: uuidv4(),
           userId: userId,
-          companyId: companyId,
-          transactionType: 'deposit', // Padronizado como 'deposit'
-          
-          // Status principal
+          transactionType: 'deposit',
           status: 'pending',
-          
-          // Valores
-          amount: parseFloat(amount), // Valor base (sem taxa)
+          amount: parseFloat(amount),
           fee: parseFloat(fee),
-          net_amount: parseFloat(netAmount), // Valor que será creditado
-          currency: 'cBRL', // Depósito resulta em cBRL
-          
-          // Blockchain fields (preenchidos desde o início)
-          network: NETWORK,
-          contractAddress: CONTRACT_ADDRESS,
-          fromAddress: ADMIN_ADDRESS, // Endereço admin (mint vem do admin)
-          toAddress: user?.blockchainAddress || user?.publicKey, // Endereço do usuário
-          functionName: 'mint',
-          
-          // PIX - Inicialmente pendente
-          pix_status: 'pending',
-          pix_key: 'contato@coinage.com.br',
-          pix_key_type: 'EMAIL',
-          
-          // Blockchain - Inicialmente null (só inicia após PIX confirmado)
-          blockchain_status: null,
-          
-          // Tipo de operação
-          operation_type: 'deposit',
-          
-          // Metadata
+          netAmount: parseFloat(netAmount),
+          currency: 'BRL',
+          fromAddress: ADMIN_ADDRESS,
+          toAddress: user?.blockchainAddress || user?.publicKey,
+          operationType: 'deposit',
           metadata: {
             type: 'deposit',
             paymentMethod: 'pix',
@@ -139,7 +109,11 @@ class DepositService {
             totalAmount: totalAmount,
             netAmount: netAmount,
             adminAddress: ADMIN_ADDRESS,
-            userAddress: user?.blockchainAddress || user?.publicKey
+            userAddress: user?.blockchainAddress || user?.publicKey,
+            pixStatus: 'pending',
+            pixKey: 'contato@coinage.com.br',
+            pixKeyType: 'EMAIL',
+            blockchainStatus: null
           }
         }
       });
@@ -195,13 +169,13 @@ class DepositService {
         console.log(`   Tem pixCode? ${!!pixCharge.pixCode}`);
         console.log(`   Tem qrCodeImage? ${!!pixCharge.qrCodeImage}`);
 
-        // Atualizar transação com dados do PIX
+        // Atualizar transação com dados do PIX (tudo no metadata - pix_transaction_id não existe no schema)
         await this.prisma.transaction.update({
           where: { id: transaction.id },
           data: {
-            pix_transaction_id: pixCharge.paymentId,
             metadata: {
               ...transaction.metadata,
+              pixTransactionId: pixCharge.paymentId,
               pixPaymentId: pixCharge.paymentId,
               pixCode: pixCharge.pixCode,
               qrCodeImage: pixCharge.qrCodeImage,
@@ -212,6 +186,25 @@ class DepositService {
         });
 
         console.log(`💾 Dados salvos no banco para transação ${transaction.id}`);
+
+        // 🧪 AUTO-CONFIRMAÇÃO EM MODO MOCK: Confirmar PIX automaticamente após 5 segundos
+        if (process.env.USE_PIX_MOCK === 'true') {
+          console.log(`🧪 [MOCK MODE] Agendando auto-confirmação PIX em 5 segundos...`);
+          setTimeout(async () => {
+            try {
+              console.log(`🧪 [MOCK MODE] Executando auto-confirmação PIX para ${transaction.id}...`);
+              await this.confirmPixDeposit(transaction.id, {
+                txid: `mock_txid_${Date.now()}`,
+                status: 'confirmed',
+                paidAt: new Date().toISOString(),
+                amount: totalAmount
+              });
+              console.log(`✅ [MOCK MODE] PIX auto-confirmado para ${transaction.id}`);
+            } catch (error) {
+              console.error(`❌ [MOCK MODE] Erro ao auto-confirmar PIX:`, error.message);
+            }
+          }, 5000); // 5 segundos
+        }
 
         return {
           transactionId: transaction.id,
@@ -239,9 +232,29 @@ class DepositService {
       } catch (pixError) {
         console.error('❌ Erro ao criar PIX no Asaas:', pixError.message);
         console.error('   Detalhes do erro:', pixError.response?.data || pixError);
-        
+
         // Em caso de erro na criação do PIX, criar dados mock como fallback
         const pixPaymentId = `pix_${transaction.id}_${Date.now()}`;
+        const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
+        const qrCodeMock = `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Coinage Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
+        // IMPORTANTE: Atualizar transaction com dados do PIX no metadata (não há campo pix_transaction_id no schema)
+        await this.prisma.transaction.update({
+          where: { id: transaction.id },
+          data: {
+            metadata: {
+              ...transaction.metadata,
+              pixTransactionId: pixPaymentId,
+              pixPaymentId: pixPaymentId,
+              pixCode: qrCodeMock,
+              qrCodeImage: '', // Sem imagem no mock
+              expiresAt: expiresAt.toISOString(),
+              fallback: true,
+              pixError: pixError.message
+            }
+          }
+        });
+
         const pixData = {
           pixPaymentId,
           transactionId: transaction.id,
@@ -249,14 +262,14 @@ class DepositService {
           netAmount: parseFloat(netAmount),
           fee: parseFloat(fee),
           status: 'pending',
-          qrCode: `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Coinage Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
+          qrCode: qrCodeMock,
           pixKey: 'contato@coinage.com.br',
-          expiresAt: new Date(Date.now() + 30 * 60 * 1000),
+          expiresAt: expiresAt,
           createdAt: new Date(),
           error: pixError.message
         };
 
-        console.log(`📱 PIX fallback (mock) criado: ${pixPaymentId} para transação ${transaction.id}`);
+        console.log(`📱 PIX fallback (mock) criado e salvo: ${pixPaymentId} para transação ${transaction.id}`);
 
         return {
           transactionId: transaction.id,
@@ -291,8 +304,11 @@ class DepositService {
         throw new Error('Transação não encontrada');
       }
 
-      if (transaction.pix_status !== 'pending') {
-        throw new Error('PIX não está pendente');
+      // PIX status está no metadata
+      const pixStatus = transaction.metadata?.pixStatus || 'pending';
+      if (pixStatus !== 'pending') {
+        console.log(`⚠️ PIX já foi confirmado anteriormente (status: ${pixStatus})`);
+        return transaction; // Retornar sem erro
       }
 
       // TRANSAÇÃO ATÔMICA: Atualizar PIX e controlar fila blockchain
@@ -302,8 +318,9 @@ class DepositService {
           where: { id: transactionId }
         });
 
-        if (currentTransaction.blockchain_status !== null) {
-          console.log(`🛡️ BLOCKCHAIN JÁ INICIADO: ${transactionId} (status: ${currentTransaction.blockchain_status})`);
+        const blockchainStatus = currentTransaction.metadata?.blockchainStatus;
+        if (blockchainStatus && blockchainStatus !== 'null') {
+          console.log(`🛡️ BLOCKCHAIN JÁ INICIADO: ${transactionId} (status: ${blockchainStatus})`);
           return currentTransaction; // Retornar sem enviar novamente para fila
         }
 
@@ -311,21 +328,17 @@ class DepositService {
         return await prisma.transaction.update({
           where: { id: transactionId },
           data: {
-            // PIX confirmado
-            pix_status: 'confirmed',
-            pix_confirmed_at: new Date(),
-            pix_transaction_id: pixData?.pixId || `mock_pix_${Date.now()}`,
-            pix_end_to_end_id: pixData?.endToEndId || `E${Date.now()}`,
-            
-            // Iniciar blockchain ATOMICAMENTE
-            blockchain_status: 'pending',
-            
             // Status geral ainda pendente (aguardando blockchain)
             status: 'pending',
-            
-            // Atualizar metadata
+
+            // Atualizar metadata com PIX confirmado e blockchain pendente
             metadata: {
               ...currentTransaction.metadata,
+              pixStatus: 'confirmed',
+              pixConfirmedAt: new Date().toISOString(),
+              pixTransactionId: pixData?.pixId || `mock_pix_${Date.now()}`,
+              pixEndToEndId: pixData?.endToEndId || `E${Date.now()}`,
+              blockchainStatus: 'pending',
               pixConfirmation: {
                 confirmedAt: new Date().toISOString(),
                 ...(pixData && {
@@ -341,7 +354,9 @@ class DepositService {
       });
 
       // VERIFICAR SE JÁ FOI ENVIADO PARA FILA (blockchain_status mudou de null para pending)
-      if (transaction.blockchain_status === null && updatedTransaction.blockchain_status === 'pending') {
+      const oldBlockchainStatus = transaction.metadata?.blockchainStatus;
+      const newBlockchainStatus = updatedTransaction.metadata?.blockchainStatus;
+      if (!oldBlockchainStatus && newBlockchainStatus === 'pending') {
         // Buscar endereço blockchain do usuário
         const user = await this.prisma.user.findUnique({
           where: { id: transaction.userId },
@@ -355,11 +370,17 @@ class DepositService {
 
         // EXECUTAR MINT DIRETAMENTE AO INVÉS DE USAR FILA
         console.log(`🔄 Executando mint blockchain para: ${transactionId}`);
-        
+        console.log(`💰 Valor do mint: ${updatedTransaction.netAmount || updatedTransaction.amount}`);
+
         try {
+          const mintAmount = updatedTransaction.netAmount || updatedTransaction.amount;
+          if (!mintAmount) {
+            throw new Error('Valor do mint não encontrado na transação');
+          }
+
           const mintResult = await mintService.mintCBRL(
             recipientAddress,
-            transaction.net_amount.toString(),
+            mintAmount.toString(),
             process.env.DEFAULT_NETWORK || 'testnet',
             transactionId
           );
@@ -369,15 +390,14 @@ class DepositService {
             const finalTransaction = await this.prisma.transaction.update({
               where: { id: transactionId },
               data: {
-                blockchain_status: 'confirmed',
-                blockchain_confirmed_at: new Date(),
                 status: 'confirmed', // Status geral também confirmed
                 confirmedAt: new Date(),
                 txHash: mintResult.transactionHash,
-                blockNumber: parseInt(mintResult.blockNumber) || null,
-                gasUsed: parseInt(mintResult.gasUsed) || null,
+                blockNumber: BigInt(parseInt(mintResult.blockNumber) || 0),
                 metadata: {
                   ...updatedTransaction.metadata,
+                  blockchainStatus: 'confirmed',
+                  blockchainConfirmedAt: new Date().toISOString(),
                   blockchain: {
                     transactionHash: mintResult.transactionHash,
                     blockNumber: mintResult.blockNumber,
@@ -398,15 +418,15 @@ class DepositService {
           }
         } catch (blockchainError) {
           console.error('❌ Erro na blockchain:', blockchainError);
-          
+
           // Atualizar status para failed
           await this.prisma.transaction.update({
             where: { id: transactionId },
             data: {
-              blockchain_status: 'failed',
               status: 'failed',
               metadata: {
                 ...updatedTransaction.metadata,
+                blockchainStatus: 'failed',
                 blockchain: {
                   error: blockchainError.message,
                   failedAt: new Date().toISOString()
@@ -448,44 +468,43 @@ class DepositService {
         }
 
         // VERIFICAÇÃO CRÍTICA: Se já foi processado, ABORTAR imediatamente
-        if (transaction.blockchain_status === 'confirmed') {
+        const blockchainStatus = transaction.metadata?.blockchainStatus;
+        if (blockchainStatus === 'confirmed') {
           console.log(`🛡️ DUPLICATA DETECTADA E BLOQUEADA: ${transactionId} já foi processado`);
           return { already_processed: true, transaction };
         }
 
-        if (transaction.blockchain_status !== 'pending') {
-          throw new Error(`Blockchain status inválido: ${transaction.blockchain_status}. Esperado: pending`);
+        if (blockchainStatus !== 'pending') {
+          throw new Error(`Blockchain status inválido: ${blockchainStatus}. Esperado: pending`);
         }
 
         // VALIDAR: PIX deve estar confirmado antes de confirmar status geral
-        if (transaction.pix_status !== 'confirmed') {
-          throw new Error(`PIX deve estar confirmado antes da blockchain. PIX status: ${transaction.pix_status}`);
+        const pixStatus = transaction.metadata?.pixStatus;
+        if (pixStatus !== 'confirmed') {
+          throw new Error(`PIX deve estar confirmado antes da blockchain. PIX status: ${pixStatus}`);
         }
 
         // Atualizar ATOMICAMENTE para confirmed
         return await prisma.transaction.update({
           where: { id: transactionId },
           data: {
-            // Blockchain confirmado
-            blockchain_status: 'confirmed',
-            blockchain_confirmed_at: new Date(),
-            blockchain_tx_hash: blockchainData.txHash,
-            blockchain_block_number: blockchainData.blockNumber,
-            
             // Dados blockchain (usar txHash como campo principal)
             txHash: blockchainData.txHash, // Campo principal unificado
-            blockNumber: blockchainData.blockNumber,
+            blockNumber: BigInt(blockchainData.blockNumber || 0),
             fromAddress: blockchainData.fromAddress || transaction.fromAddress,
             toAddress: blockchainData.toAddress || transaction.toAddress,
-            gasUsed: blockchainData.gasUsed,
-            
+
             // Status geral CONFIRMADO (só agora que PIX + Blockchain estão ok)
             status: 'confirmed',
             confirmedAt: new Date(),
-            
+
             // Atualizar metadata
             metadata: {
               ...transaction.metadata,
+              blockchainStatus: 'confirmed',
+              blockchainConfirmedAt: new Date().toISOString(),
+              blockchainTxHash: blockchainData.txHash,
+              blockchainBlockNumber: blockchainData.blockNumber,
               blockchainConfirmation: {
                 confirmedAt: new Date().toISOString(),
                 txHash: blockchainData.txHash,
@@ -571,12 +590,12 @@ class DepositService {
       return await this.prisma.transaction.update({
         where: { id: transactionId },
         data: {
-          blockchain_status: 'failed',
-          blockchain_failed_at: new Date(),
           status: 'failed',
           failedAt: new Date(),
           metadata: {
             ...(transaction?.metadata || {}),
+            blockchainStatus: 'failed',
+            blockchainFailedAt: new Date().toISOString(),
             blockchainFailureReason: reason,
             failedAt: new Date().toISOString()
           }
@@ -621,10 +640,10 @@ class DepositService {
         status: transaction.status,
         pixCode: transaction.metadata?.pixCode || '',
         qrCodeImage: transaction.metadata?.qrCodeImage || '',
-        pixStatus: transaction.pix_status,
-        blockchainStatus: transaction.blockchain_status,
-        pixTransactionId: transaction.pix_transaction_id,
-        blockchainTxHash: transaction.blockchain_tx_hash || transaction.txHash,
+        pixStatus: transaction.metadata?.pixStatus || 'pending',
+        blockchainStatus: transaction.metadata?.blockchainStatus || null,
+        pixTransactionId: transaction.metadata?.pixTransactionId || null,
+        blockchainTxHash: transaction.metadata?.blockchainTxHash || transaction.txHash,
         createdAt: transaction.createdAt,
         confirmedAt: transaction.confirmedAt,
         metadata: transaction.metadata
@@ -718,9 +737,9 @@ class DepositService {
       await this.prisma.transaction.update({
         where: { id: transactionId },
         data: {
-          blockchain_status: 'pending',
           metadata: {
             ...transaction.metadata,
+            blockchainStatus: 'pending',
             sentToMintQueue: true,
             sentToMintAt: new Date().toISOString()
           }

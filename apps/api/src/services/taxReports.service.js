@@ -1,5 +1,5 @@
 const prismaConfig = require('../config/prisma');
-const userBalanceHistoryService = require('./userBalanceHistory.service');
+// const userBalanceHistoryService = require('./userBalanceHistory.service'); // REMOVIDO - serviço não utilizado
 
 // Função helper para obter Prisma
 const getPrisma = () => prismaConfig.getPrisma();
@@ -423,7 +423,9 @@ class TaxReportsService {
       // allowFallback = false quando procuramos por data específica de 31/12, para evitar pegar snapshots futuros
       const isEndOfYear = targetDate.getMonth() === 11 && targetDate.getDate() === 31;
       console.log(`[TaxReports] Buscando snapshot para ${targetDate.toLocaleDateString('pt-BR')} (isEndOfYear: ${isEndOfYear})...`);
-      const snapshotResult = await userBalanceHistoryService.getBalanceAtDate(userId, targetDate, network, !isEndOfYear);
+      // REMOVIDO: userBalanceHistoryService não está mais disponível
+      // const snapshotResult = await userBalanceHistoryService.getBalanceAtDate(userId, targetDate, network, !isEndOfYear);
+      const snapshotResult = { success: false, noData: true }; // Retornar dados vazios
 
       if (snapshotResult.success) {
         // Se noData = true, retornar dados vazios

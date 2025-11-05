@@ -900,6 +900,98 @@ const updateUserLanguage = async (req, res) => {
   }
 };
 
+/**
+ * Obter saldo de cBRL do usuário autenticado
+ */
+const getUserBalance = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Buscar usuário com endereço blockchain
+    const prisma = getPrisma();
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        blockchainAddress: true,
+        publicKey: true
+      }
+    });
+
+    if (!user || !user.blockchainAddress) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não possui endereço blockchain configurado'
+      });
+    }
+
+    // Obter endereço do token cBRL baseado na rede
+    const { getCBRLAddress, getBlockchainNetwork } = require('../utils/blockchain.utils');
+    const cbrlAddress = getCBRLAddress();
+    const network = getBlockchainNetwork();
+
+    console.log(`🔍 Buscando saldo cBRL para usuário ${user.name}`);
+    console.log(`📍 Endereço: ${user.blockchainAddress}`);
+    console.log(`🪙 Token cBRL: ${cbrlAddress}`);
+    console.log(`🌐 Network: ${network}`);
+
+    // Buscar saldo do token na blockchain
+    let tokenBalance;
+    let balanceEth = '0';
+
+    try {
+      const { loadLocalABI } = require('../contracts');
+      const tokenABI = await loadLocalABI('default_token_abi');
+
+      console.log('🔄 Consultando blockchain...');
+
+      tokenBalance = await blockchainService.getTokenBalance(
+        user.blockchainAddress,
+        cbrlAddress,
+        tokenABI,
+        network
+      );
+
+      balanceEth = tokenBalance.balanceEth || tokenBalance.balance || '0';
+      console.log(`✅ Saldo cBRL: ${balanceEth}`);
+
+    } catch (blockchainError) {
+      console.warn('⚠️ Erro ao consultar blockchain:', blockchainError.message);
+      console.warn('⚠️ Retornando saldo zerado');
+      balanceEth = '0';
+    }
+
+    // Formatar resposta
+    const formattedBalance = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(parseFloat(balanceEth));
+
+    res.json({
+      success: true,
+      data: {
+        balance: tokenBalance?.balanceWei || '0',
+        formattedBalance: formattedBalance,
+        balanceEth: balanceEth,
+        tokenSymbol: 'cBRL',
+        tokenAddress: cbrlAddress,
+        network: network
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao buscar saldo do usuário:', error);
+    console.error('❌ Stack trace:', error.stack);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao buscar saldo',
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getUserById,
@@ -919,5 +1011,6 @@ module.exports = {
   getUserByEmail,
   getUserActions,
   getUserSavedBalances,
-  updateUserLanguage
+  updateUserLanguage,
+  getUserBalance
 };

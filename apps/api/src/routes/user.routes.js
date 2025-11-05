@@ -364,6 +364,24 @@ router.get('/:id/taxes',
   }
 );
 
+/**
+ * @swagger
+ * /api/users/balance:
+ *   get:
+ *     summary: Obter saldo de cBRL do usuário autenticado
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Saldo obtido com sucesso
+ *       401:
+ *         description: Não autenticado
+ *       404:
+ *         description: Usuário sem endereço blockchain
+ */
+router.get('/balance', authenticateJWT, userController.getUserBalance);
+
 router.get('/:id', jwtMiddleware.authenticateToken, userController.getUserById);
 
 /**
