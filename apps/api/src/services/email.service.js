@@ -994,6 +994,76 @@ class EmailService {
   }
 
   /**
+   * Verifica e marca token de confirmação de email como usado
+   * @param {string} token - Token a ser verificado
+   * @returns {Promise<Object|null>} Dados do token se válido
+   */
+  async verifyEmailConfirmationToken(token) {
+    try {
+      if (!this.prisma) await this.init();
+
+      const emailLog = await this.prisma.emailLog.findFirst({
+        where: {
+          subject: 'Email Confirmation Token',
+          metadata: {
+            path: ['token'],
+            equals: token
+          }
+        }
+      });
+
+      if (!emailLog) {
+        console.log('⚠️ Token não encontrado:', token.substring(0, 16) + '...');
+        return null;
+      }
+
+      const metadata = emailLog.metadata;
+
+      // Verificar se metadata tem os campos necessários
+      if (!metadata || !metadata.userId || !metadata.expiresAt) {
+        console.error('❌ Metadata inválido:', emailLog.id);
+        return null;
+      }
+
+      // Verificar se expirou
+      const expiresAt = new Date(metadata.expiresAt);
+      if (expiresAt < new Date()) {
+        console.log('⏰ Token expirado:', token.substring(0, 16) + '...');
+        return null;
+      }
+
+      // Verificar se já foi usado
+      if (emailLog.status === 'used') {
+        console.log('🔒 Token já foi usado:', token.substring(0, 16) + '...');
+        return null;
+      }
+
+      // Marcar como usado
+      await this.prisma.emailLog.update({
+        where: { id: emailLog.id },
+        data: {
+          status: 'used',
+          metadata: {
+            ...metadata,
+            usedAt: new Date().toISOString()
+          }
+        }
+      });
+
+      console.log('✅ Token verificado e marcado como usado para userId:', metadata.userId);
+
+      return {
+        userId: metadata.userId,
+        companyId: metadata.companyId,
+        email: emailLog.toEmail
+      };
+    } catch (error) {
+      console.error('❌ Erro ao verificar token:', error);
+      return null;
+    }
+  }
+
+  /**
    * Validar configuração dos provedores de email
    * @returns {Promise<Object>} Status da validação
    */

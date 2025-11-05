@@ -33,7 +33,7 @@ const getApiUrl = () => {
   }
 
   // Em produção, usar URL real da API
-  return 'https://api.clubenavi.com';
+  return 'https://api.clubedigital.com.br';
 };
 
 export const API_URL = getApiUrl();
@@ -58,3 +58,30 @@ export const API_ENDPOINTS = {
 } as const;
 
 export const API_TIMEOUT = 30000; // 30 segundos
+
+// Blockchain Configuration
+export const BLOCKCHAIN_CONFIG = {
+  // Network (testnet or mainnet)
+  NETWORK: 'testnet', // Pode ser alterado para 'mainnet' em produção
+
+  // Explorer URLs
+  MAINNET_EXPLORER_URL: 'https://azorescan.com',
+  TESTNET_EXPLORER_URL: 'https://floripa.azorescan.com',
+
+  // Get current explorer URL based on network
+  getExplorerUrl(): string {
+    return this.NETWORK === 'mainnet'
+      ? this.MAINNET_EXPLORER_URL
+      : this.TESTNET_EXPLORER_URL;
+  },
+
+  // Get transaction URL
+  getTxUrl(txHash: string): string {
+    return `${this.getExplorerUrl()}/tx/${txHash}`;
+  },
+
+  // Get address URL
+  getAddressUrl(address: string): string {
+    return `${this.getExplorerUrl()}/address/${address}`;
+  },
+};

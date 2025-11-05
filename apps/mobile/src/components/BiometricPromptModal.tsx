@@ -7,6 +7,8 @@ interface BiometricPromptModalProps {
   biometricType: string;
   onEnableBiometric: () => void;
   onCancel: () => void;
+  isReplacing?: boolean; // Se está substituindo uma biometria existente
+  previousUser?: string; // Email do usuário anterior com biometria
 }
 
 export default function BiometricPromptModal({
@@ -14,7 +16,23 @@ export default function BiometricPromptModal({
   biometricType,
   onEnableBiometric,
   onCancel,
+  isReplacing = false,
+  previousUser,
 }: BiometricPromptModalProps) {
+  const getTitle = () => {
+    if (isReplacing && previousUser) {
+      return `Substituir ${biometricType}?`;
+    }
+    return `Ativar ${biometricType}?`;
+  };
+
+  const getDescription = () => {
+    if (isReplacing && previousUser) {
+      return `Isto irá substituir o ${biometricType.toLowerCase()} ativado para ${previousUser}. Deseja continuar?`;
+    }
+    return `Faça login de forma rápida e segura usando seu ${biometricType.toLowerCase()} nas próximas vezes.`;
+  };
+
   return (
     <Modal
       transparent
@@ -30,11 +48,11 @@ export default function BiometricPromptModal({
           </View>
 
           {/* Título */}
-          <Text style={styles.title}>Ativar {biometricType}?</Text>
+          <Text style={styles.title}>{getTitle()}</Text>
 
           {/* Descrição */}
           <Text style={styles.description}>
-            Faça login de forma rápida e segura usando seu {biometricType.toLowerCase()} nas próximas vezes.
+            {getDescription()}
           </Text>
 
           {/* Botões */}

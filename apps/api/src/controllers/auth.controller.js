@@ -368,7 +368,6 @@ const login = async (req, res) => {
     // Registrar login bem-sucedido
     await userActionsService.logAuth(user.id, 'login', reqWithCompany, {
       details: {
-        isFirstAccess: user.isFirstAccess,
         userPlan: user.userPlan,
         companyName: currentCompany?.name,
         companyAlias: currentCompany?.alias
@@ -536,16 +535,14 @@ const changePassword = async (req, res) => {
 
     // Atualizar senha no banco (o userService.updateUser já faz o hash)
     const updateResult = await userService.updateUser(req.user.id, {
-      password: newPassword,
-      isFirstAccess: false
+      password: newPassword
     });
 
     if (updateResult.success) {
       // Registrar mudança de senha bem-sucedida
       await userActionsService.logSecurity(req.user.id, 'password_changed', req, {
         details: {
-          isFirstAccess: user.isFirstAccess,
-          wasFirstAccess: true
+          type: 'password_changed'
         }
       });
       
@@ -979,6 +976,9 @@ const register = async (req, res) => {
       referralCode // Código de indicação (username de quem indicou)
     } = req.body;
 
+    // Log do referralCode recebido
+    console.log('📝 Registro - referralCode recebido:', referralCode);
+
     // Validações básicas
     if (!email || !username || !password) {
       return res.status(400).json({
@@ -1075,10 +1075,12 @@ const register = async (req, res) => {
     // NOTA: As chaves blockchain serão geradas após a validação do email
     // Não gerar chaves no registro inicial
 
-    // Validar código de indicação se fornecido
+    // Validar código de indicação se fornecido e obter ID do indicador
+    let referrerId = null;
     if (referralCode) {
       const referrer = await prisma.user.findUnique({
-        where: { username: referralCode.toLowerCase() }
+        where: { username: referralCode.toLowerCase() },
+        select: { id: true, username: true }
       });
 
       if (!referrer) {
@@ -1087,6 +1089,9 @@ const register = async (req, res) => {
           message: 'Código de indicação inválido'
         });
       }
+
+      referrerId = referrer.id;
+      console.log(`✅ Código de indicação válido: ${referralCode} (ID: ${referrerId})`);
     }
 
     // Preparar dados do usuário
@@ -1098,12 +1103,12 @@ const register = async (req, res) => {
       privateKey: null, // Será preenchido após validação de email
       phone: phone ? phone.replace(/\D/g, '') : null, // Salvar apenas números (opcional)
       isActive: true, // Usuário começa ativo
-      isFirstAccess: true,
       emailConfirmed: false, // Email não confirmado inicialmente
-      referralId: referralCode ? referralCode.toLowerCase() : null, // Username de quem indicou
+      referralId: referrerId, // UUID de quem indicou
       metadata: {
         personType,
-        address: address || null
+        address: address || null,
+        referralCode: referralCode ? referralCode.toLowerCase() : null // Guardar o código também para referência
       }
     };
 
@@ -1174,17 +1179,20 @@ const register = async (req, res) => {
       }
     });
 
+    // Gerar token de confirmação ANTES do try-catch
+    let confirmationToken = null;
+
     // Enviar email de confirmação
     try {
       console.log('📧 Enviando email de confirmação para:', user.email);
 
       // Gerar token de confirmação
-      const confirmationToken = await emailService.generateEmailConfirmationToken(user.id, 'default');
+      confirmationToken = await emailService.generateEmailConfirmationToken(user.id, 'default');
 
       // Enviar email de confirmação
       await emailService.sendEmailConfirmation(user.email, {
         userName: user.name,
-        companyName: 'Clube Navi',
+        companyName: 'Clube Digital',
         token: confirmationToken,
         userId: user.id,
         companyAlias: 'default',
@@ -1213,7 +1221,8 @@ const register = async (req, res) => {
         accessToken,
         refreshToken,
         emailSent: true,
-        requiresEmailConfirmation: true
+        requiresEmailConfirmation: true,
+        confirmationToken // Retornar token para debug/teste
       }
     });
 
@@ -1602,33 +1611,41 @@ const getReferralStats = async (req, res) => {
     const currentUser = await prisma.user.findUnique({
       where: { id: userId },
       select: {
+        id: true,
         username: true,
         referralDescription: true
       }
     });
 
-    // Contar usuários indicados
+    if (!currentUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado'
+      });
+    }
+
+    // Contar usuários indicados (usando o ID do usuário)
     const referralCount = await prisma.user.count({
       where: {
-        referralId: currentUser.username.toLowerCase()
+        referralId: currentUser.id
       }
     });
 
-    // Buscar lista de indicados (opcional - pode ser paginada no futuro)
+    // Buscar lista de indicados (usando o ID do usuário)
     const referrals = await prisma.user.findMany({
       where: {
-        referralId: currentUser.username.toLowerCase()
+        referralId: currentUser.id
       },
       select: {
         id: true,
         name: true,
         username: true,
+        email: true,
         createdAt: true
       },
       orderBy: {
         createdAt: 'desc'
-      },
-      take: 10 // Limitar a 10 mais recentes
+      }
     });
 
     res.json({
@@ -1651,6 +1668,263 @@ const getReferralStats = async (req, res) => {
   }
 };
 
+/**
+ * Validar código de indicação
+ */
+const validateReferralCode = async (req, res) => {
+  try {
+    const { referralCode } = req.body;
+
+    if (!referralCode) {
+      return res.status(400).json({
+        success: false,
+        message: 'Código de indicação é obrigatório'
+      });
+    }
+
+    const prisma = getPrisma();
+
+    // Buscar usuário pelo username (código de indicação)
+    const referrer = await prisma.user.findFirst({
+      where: {
+        username: {
+          equals: referralCode,
+          mode: 'insensitive'
+        }
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        referralDescription: true
+      }
+    });
+
+    if (!referrer) {
+      return res.status(404).json({
+        success: false,
+        message: 'Código de indicação não encontrado'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Código de indicação válido',
+      data: {
+        referrerId: referrer.id,
+        referrerName: referrer.name,
+        referrerUsername: referrer.username,
+        referralDescription: referrer.referralDescription || 'Nenhuma descrição disponível'
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao validar código de indicação:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor'
+    });
+  }
+};
+
+/**
+ * Confirmar email do usuário via token
+ */
+const confirmEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const prisma = getPrisma();
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: 'Token de confirmação é obrigatório'
+      });
+    }
+
+    // Verificar e decodificar token
+    const decoded = await emailService.verifyEmailConfirmationToken(token);
+
+    if (!decoded || !decoded.userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Token inválido ou expirado'
+      });
+    }
+
+    // Buscar usuário
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId }
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado'
+      });
+    }
+
+    // Verificar se já foi confirmado
+    if (user.emailConfirmed) {
+      return res.status(200).json({
+        success: true,
+        message: 'Email já foi confirmado anteriormente',
+        data: { alreadyConfirmed: true }
+      });
+    }
+
+    // Gerar chaves blockchain se ainda não existem
+    let updateData = { emailConfirmed: true };
+
+    if (!user.publicKey || !user.privateKey) {
+      console.log('🔑 Gerando chaves blockchain para o usuário:', user.id);
+      const { publicKey, privateKey } = userService.generateKeyPair();
+      updateData.publicKey = publicKey;
+      updateData.privateKey = privateKey;
+      console.log('✅ Chaves geradas - PublicKey:', publicKey);
+    }
+
+    // Atualizar status de confirmação e chaves
+    await prisma.user.update({
+      where: { id: user.id },
+      data: updateData
+    });
+
+    // Limpar cache do usuário
+    await userCacheService.clearUserCache(user.id);
+
+    // Registrar ação
+    await userActionsService.logAuth(user.id, 'email_confirmed', req, {
+      status: 'success',
+      keysGenerated: !user.publicKey
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Email confirmado com sucesso!',
+      data: { confirmed: true }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao confirmar email:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao confirmar email'
+    });
+  }
+};
+
+/**
+ * Reenviar email de confirmação
+ */
+const resendConfirmationEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const prisma = getPrisma();
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email é obrigatório'
+      });
+    }
+
+    // Buscar usuário
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() }
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado'
+      });
+    }
+
+    // Verificar se já foi confirmado
+    if (user.emailConfirmed) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email já está confirmado'
+      });
+    }
+
+    // Gerar novo token
+    const confirmationToken = await emailService.generateEmailConfirmationToken(user.id, 'default');
+
+    // Enviar email
+    await emailService.sendEmailConfirmation(user.email, {
+      userName: user.name,
+      companyName: 'Clube Digital',
+      token: confirmationToken,
+      userId: user.id,
+      companyAlias: 'default',
+      baseUrl: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8033',
+      expiresIn: '24 horas'
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Email de confirmação reenviado com sucesso',
+      data: {
+        confirmationToken // Retornar token para debug/teste
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao reenviar email:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao reenviar email de confirmação'
+    });
+  }
+};
+
+/**
+ * Verificar status de confirmação de email
+ */
+const checkEmailConfirmation = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const prisma = getPrisma();
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'Não autorizado'
+      });
+    }
+
+    // Buscar usuário
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { emailConfirmed: true, email: true }
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        emailConfirmed: user.emailConfirmed,
+        email: user.email
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao verificar confirmação:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao verificar status de confirmação'
+    });
+  }
+};
+
 module.exports = {
   login,
   register,
@@ -1669,5 +1943,9 @@ module.exports = {
   getAvailableCompanies,
   getUserByUsername,
   updateReferralDescription,
-  getReferralStats
+  getReferralStats,
+  confirmEmail,
+  resendConfirmationEmail,
+  checkEmailConfirmation,
+  validateReferralCode
 };

@@ -14,7 +14,8 @@ import { useRouter, usePathname, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { whitelabelConfig } from '@/config/whitelabel';
 import { deserializeBreadcrumb, getBackPath } from '@/utils/navigationHelper';
-import { useAuthStore } from '@/store/authStore';
+import { apiService } from '@/services/api';
+import BottomNav from '@/components/BottomNav';
 
 interface ReferralStats {
   referralCode: string;
@@ -24,6 +25,7 @@ interface ReferralStats {
     id: string;
     name: string;
     username: string;
+    email: string;
     createdAt: string;
   }>;
 }
@@ -32,7 +34,6 @@ export default function Referrals() {
   const router = useRouter();
   const currentPath = usePathname();
   const params = useLocalSearchParams();
-  const { token } = useAuthStore();
 
   const currentBreadcrumb = deserializeBreadcrumb(params.breadcrumb as string);
 
@@ -49,19 +50,13 @@ export default function Referrals() {
   const loadStats = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/referral/stats`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const response = await apiService.get('/api/auth/referral/stats');
 
-      const data = await response.json();
-
-      if (data.success) {
-        setStats(data.data);
-        setDescription(data.data.referralDescription || '');
+      if (response.success && response.data) {
+        setStats(response.data);
+        setDescription(response.data.referralDescription || '');
       } else {
-        Alert.alert('Erro', data.message || 'Erro ao carregar estatísticas');
+        Alert.alert('Erro', response.message || 'Erro ao carregar estatísticas');
       }
     } catch (error) {
       console.error('Erro ao carregar estatísticas:', error);
@@ -79,20 +74,11 @@ export default function Referrals() {
 
     try {
       setSaving(true);
-      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/referral/description`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          referralDescription: description,
-        }),
+      const response = await apiService.put('/api/auth/referral/description', {
+        referralDescription: description,
       });
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.success) {
         setStats(prev => prev ? {
           ...prev,
           referralDescription: description,
@@ -100,7 +86,7 @@ export default function Referrals() {
         setIsEditing(false);
         Alert.alert('Sucesso', 'Descrição atualizada com sucesso!');
       } else {
-        Alert.alert('Erro', data.message || 'Erro ao salvar descrição');
+        Alert.alert('Erro', response.message || 'Erro ao salvar descrição');
       }
     } catch (error) {
       console.error('Erro ao salvar descrição:', error);
@@ -113,7 +99,7 @@ export default function Referrals() {
   const shareReferralCode = async () => {
     try {
       await Share.share({
-        message: `Use meu código de indicação ${stats?.referralCode} para se cadastrar no ${whitelabelConfig.appName}!\n\n${stats?.referralDescription || 'Junte-se a nós!'}`,
+        message: `Use meu código de indicação ${stats?.referralCode} para se cadastrar no ${whitelabelConfig.branding.companyName}!\n\n${stats?.referralDescription || 'Junte-se a nós!'}`,
       });
     } catch (error) {
       console.error('Erro ao compartilhar:', error);
@@ -262,10 +248,10 @@ export default function Referrals() {
           </View>
         </View>
 
-        {/* Últimas Indicações */}
+        {/* Minhas Indicações */}
         {stats && stats.recentReferrals.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Últimas Indicações</Text>
+            <Text style={styles.sectionTitle}>Minhas Indicações ({stats.totalReferrals})</Text>
             {stats.recentReferrals.map((referral) => (
               <View key={referral.id} style={styles.referralItem}>
                 <View style={[styles.referralIcon, { backgroundColor: whitelabelConfig.colors.primary + '20' }]}>
@@ -274,6 +260,7 @@ export default function Referrals() {
                 <View style={styles.referralInfo}>
                   <Text style={styles.referralName}>{referral.name}</Text>
                   <Text style={styles.referralUsername}>@{referral.username}</Text>
+                  <Text style={styles.referralEmail}>{referral.email}</Text>
                 </View>
                 <Text style={styles.referralDate}>{formatDate(referral.createdAt)}</Text>
               </View>
@@ -281,6 +268,7 @@ export default function Referrals() {
           </View>
         )}
       </ScrollView>
+      <BottomNav />
     </View>
   );
 }
@@ -475,6 +463,11 @@ const styles = StyleSheet.create({
   },
   referralUsername: {
     fontSize: 14,
+    color: '#8E8E93',
+    marginTop: 2,
+  },
+  referralEmail: {
+    fontSize: 12,
     color: '#8E8E93',
     marginTop: 2,
   },

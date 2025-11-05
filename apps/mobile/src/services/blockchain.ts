@@ -17,7 +17,7 @@ class BlockchainService {
       const token = await apiService.getAccessToken();
 
       if (!token) {
-        console.error('No access token available');
+        // Silenciosamente retorna null se não houver token (usuário deslogado)
         return null;
       }
 
@@ -35,6 +35,13 @@ class BlockchainService {
 
       if (!response.ok) {
         const errorText = await response.text();
+
+        // Se o usuário ainda não confirmou o email e não tem publicKey, retornar null silenciosamente
+        if (response.status === 404) {
+          console.log('ℹ️ User does not have publicKey yet (email not confirmed)');
+          return null;
+        }
+
         console.error('❌ Failed to fetch balance:', response.status, errorText);
         throw new Error(`Failed to fetch balance: ${response.status}`);
       }

@@ -907,22 +907,21 @@ const getUserBalance = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Buscar usuário com endereço blockchain
+    // Buscar usuário com chave pública (endereço blockchain)
     const prisma = getPrisma();
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
         id: true,
         name: true,
-        blockchainAddress: true,
         publicKey: true
       }
     });
 
-    if (!user || !user.blockchainAddress) {
+    if (!user || !user.publicKey) {
       return res.status(404).json({
         success: false,
-        message: 'Usuário não possui endereço blockchain configurado'
+        message: 'Usuário não possui chave pública (publicKey) configurada'
       });
     }
 
@@ -932,7 +931,7 @@ const getUserBalance = async (req, res) => {
     const network = getBlockchainNetwork();
 
     console.log(`🔍 Buscando saldo cBRL para usuário ${user.name}`);
-    console.log(`📍 Endereço: ${user.blockchainAddress}`);
+    console.log(`📍 PublicKey (Endereço): ${user.publicKey}`);
     console.log(`🪙 Token cBRL: ${cbrlAddress}`);
     console.log(`🌐 Network: ${network}`);
 
@@ -947,7 +946,7 @@ const getUserBalance = async (req, res) => {
       console.log('🔄 Consultando blockchain...');
 
       tokenBalance = await blockchainService.getTokenBalance(
-        user.blockchainAddress,
+        user.publicKey,
         cbrlAddress,
         tokenABI,
         network
@@ -992,6 +991,64 @@ const getUserBalance = async (req, res) => {
   }
 };
 
+/**
+ * Upload de foto de perfil para S3
+ */
+const uploadProfilePicture = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: 'Nenhuma imagem foi enviada'
+      });
+    }
+
+    // Importar serviço S3
+    const s3Service = require('../services/s3.service');
+
+    // Upload para S3
+    const filename = `profile-photos/${userId}-${Date.now()}.jpg`;
+    const imageUrl = await s3Service.uploadFile(req.file.buffer, filename, req.file.mimetype);
+
+    // Atualizar profilePicture do usuário no banco
+    const prisma = getPrisma();
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { profilePicture: imageUrl },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        profilePicture: true
+      }
+    });
+
+    // Registrar ação
+    await userActionsService.logUser(userId, 'profile_picture_updated', userId, req, {
+      details: { imageUrl }
+    });
+
+    res.json({
+      success: true,
+      message: 'Foto de perfil atualizada com sucesso',
+      data: {
+        profilePicture: imageUrl,
+        user: updatedUser
+      }
+    });
+
+  } catch (error) {
+    console.error('Erro ao fazer upload de foto de perfil:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao fazer upload da imagem',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getUserById,
@@ -1012,5 +1069,6 @@ module.exports = {
   getUserActions,
   getUserSavedBalances,
   updateUserLanguage,
-  getUserBalance
+  getUserBalance,
+  uploadProfilePicture
 };

@@ -1,8 +1,91 @@
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Modal, Alert, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { whitelabelConfig } from '@/config/whitelabel';
+import { useAuthStore } from '@/store/authStore';
+import { useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
+import { uploadService } from '@/services/upload';
 
 export default function Profile() {
+  const { user, updateUser } = useAuthStore();
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const firstName = user?.name?.split(' ')[0] || 'Usuário';
+  const hasProfilePicture = user?.profilePicture && user.profilePicture !== 'https://via.placeholder.com/60';
+
+  const handlePickImage = async (useCamera: boolean) => {
+    try {
+      setShowImageModal(false);
+
+      // Solicitar permissões
+      let permissionResult;
+      if (useCamera) {
+        permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+      } else {
+        permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      }
+
+      if (!permissionResult.granted) {
+        Alert.alert(
+          'Permissão necessária',
+          `Precisamos de permissão para acessar ${useCamera ? 'a câmera' : 'suas fotos'}.`
+        );
+        return;
+      }
+
+      // Abrir câmera ou galeria
+      let result;
+      if (useCamera) {
+        result = await ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 0.8,
+        });
+      } else {
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ['images'],
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 0.8,
+        });
+      }
+
+      if (!result.canceled && result.assets[0]) {
+        const imageUri = result.assets[0].uri;
+        await uploadImage(imageUri);
+      }
+    } catch (error) {
+      console.error('Erro ao selecionar imagem:', error);
+      Alert.alert('Erro', 'Ocorreu um erro ao selecionar a imagem');
+    }
+  };
+
+  const uploadImage = async (imageUri: string) => {
+    try {
+      setUploadingImage(true);
+
+      const uploadResult = await uploadService.uploadProfilePicture(imageUri);
+
+      if (uploadResult.success && uploadResult.imageUrl) {
+        // Atualizar o usuário no store com a nova foto
+        if (user) {
+          updateUser({
+            ...user,
+            profilePicture: uploadResult.imageUrl,
+          });
+        }
+        Alert.alert('Sucesso', 'Foto atualizada com sucesso!');
+      } else {
+        Alert.alert('Erro', uploadResult.error || 'Erro ao fazer upload da imagem');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer upload:', error);
+      Alert.alert('Erro', 'Ocorreu um erro ao fazer upload da imagem');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
   const menuSections = [
     {
       title: 'Compras',
@@ -38,13 +121,33 @@ export default function Profile() {
       {/* Header com perfil */}
       <View style={styles.header}>
         <View style={styles.profileContainer}>
-          <Image
-            source={{ uri: 'https://via.placeholder.com/80' }}
-            style={styles.avatar}
-          />
+          <TouchableOpacity
+            style={styles.avatarContainer}
+            onPress={() => setShowImageModal(true)}
+            disabled={uploadingImage}
+          >
+            {hasProfilePicture ? (
+              <Image
+                source={{ uri: user?.profilePicture }}
+                style={styles.avatar}
+              />
+            ) : (
+              <View style={[styles.avatarPlaceholder, { backgroundColor: whitelabelConfig.colors.primary }]}>
+                <Text style={styles.avatarText}>{firstName.charAt(0).toUpperCase()}</Text>
+              </View>
+            )}
+            {/* Ícone de câmera */}
+            <View style={[styles.cameraIcon, { backgroundColor: whitelabelConfig.colors.primary }]}>
+              {uploadingImage ? (
+                <ActivityIndicator size="small" color="#FFF" />
+              ) : (
+                <Ionicons name="camera" size={18} color="#FFF" />
+              )}
+            </View>
+          </TouchableOpacity>
           <View style={styles.profileInfo}>
-            <Text style={styles.name}>Ivan Alberton</Text>
-            <Text style={styles.email}>ivan.alberton@email.com</Text>
+            <Text style={styles.name}>{user?.name || 'Usuário'}</Text>
+            <Text style={styles.email}>{user?.email || 'email@exemplo.com'}</Text>
             <TouchableOpacity style={styles.editButton}>
               <Ionicons name="create-outline" size={14} color={whitelabelConfig.colors.primary} />
               <Text style={styles.editButtonText}>Editar perfil</Text>
@@ -131,6 +234,44 @@ export default function Profile() {
 
       {/* Espaçamento final */}
       <View style={{ height: 20 }} />
+
+      {/* Modal de seleção de imagem */}
+      <Modal
+        visible={showImageModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowImageModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Alterar foto de perfil</Text>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => handlePickImage(true)}
+            >
+              <Ionicons name="camera" size={24} color={whitelabelConfig.colors.primary} />
+              <Text style={styles.modalButtonText}>Tirar foto</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => handlePickImage(false)}
+            >
+              <Ionicons name="images" size={24} color={whitelabelConfig.colors.primary} />
+              <Text style={styles.modalButtonText}>Escolher da galeria</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.modalButton, styles.modalButtonCancel]}
+              onPress={() => setShowImageModal(false)}
+            >
+              <Ionicons name="close" size={24} color={whitelabelConfig.colors.error} />
+              <Text style={[styles.modalButtonText, { color: whitelabelConfig.colors.error }]}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
@@ -150,12 +291,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  avatarContainer: {
+    position: 'relative',
+  },
   avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
     borderWidth: 3,
     borderColor: whitelabelConfig.colors.primary,
+  },
+  avatarPlaceholder: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 3,
+    borderColor: whitelabelConfig.colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarText: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: whitelabelConfig.colors.white,
+  },
+  cameraIcon: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: whitelabelConfig.colors.white,
   },
   profileInfo: {
     flex: 1,
@@ -307,5 +477,44 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: whitelabelConfig.colors.text,
+  },
+  // Modal styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: whitelabelConfig.colors.white,
+    borderRadius: 16,
+    padding: 24,
+    width: '80%',
+    maxWidth: 400,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: whitelabelConfig.colors.text,
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  modalButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    backgroundColor: whitelabelConfig.colors.background,
+    marginBottom: 12,
+  },
+  modalButtonCancel: {
+    backgroundColor: '#FFE5E5',
+  },
+  modalButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: whitelabelConfig.colors.text,
+    marginLeft: 16,
   },
 });

@@ -12,9 +12,10 @@ interface AuthState {
   // Actions
   login: (credentials: LoginCredentials) => Promise<boolean>;
   loginWithBiometric: () => Promise<boolean>;
-  register: (data: RegisterData) => Promise<boolean>;
+  register: (data: RegisterData) => Promise<any>; // Return full response data with token
   logout: () => Promise<void>;
   loadUser: () => Promise<void>;
+  updateUser: (user: User) => void;
   clearError: () => void;
 }
 
@@ -136,7 +137,8 @@ export const useAuthStore = create<AuthState>((set) => ({
           error: null,
         });
 
-        return true;
+        // Retornar os dados completos incluindo o token de confirmação
+        return response.data;
       }
 
       set({
@@ -228,6 +230,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       });
     }
   },
+
+  updateUser: (user: User) => set({ user }),
 
   clearError: () => set({ error: null }),
 }));

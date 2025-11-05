@@ -10,12 +10,15 @@ import {
   Alert,
   Image,
   Clipboard,
+  Linking,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { whitelabelConfig } from '@/config/whitelabel';
 import { useAuthStore } from '@/store/authStore';
 import { depositService } from '@/services/deposit';
+import BottomNav from '@/components/BottomNav';
+import { BLOCKCHAIN_CONFIG } from '@/constants/api';
 
 export default function DepositScreen() {
   const router = useRouter();
@@ -142,6 +145,20 @@ export default function DepositScreen() {
     if (txHash) {
       Clipboard.setString(txHash);
       Alert.alert('Copiado!', 'TX Hash copiado para a área de transferência');
+    }
+  };
+
+  const handleOpenExplorer = async () => {
+    if (txHash) {
+      // URL do explorer baseado na rede configurada (testnet ou mainnet)
+      const explorerUrl = BLOCKCHAIN_CONFIG.getTxUrl(txHash);
+
+      const canOpen = await Linking.canOpenURL(explorerUrl);
+      if (canOpen) {
+        await Linking.openURL(explorerUrl);
+      } else {
+        Alert.alert('Erro', 'Não foi possível abrir o explorador');
+      }
     }
   };
 
@@ -272,7 +289,7 @@ export default function DepositScreen() {
             <Ionicons
               name="checkmark-circle"
               size={24}
-              color={depositStatus.pixPaid ? whitelabelConfig.colors.primary : '#CCC'}
+              color={depositStatus.pixPaid ? whitelabelConfig.colors.secondary : '#CCC'}
             />
             <Text style={[
               styles.processingStepText,
@@ -313,7 +330,7 @@ export default function DepositScreen() {
   const renderSuccessStep = () => (
     <View style={styles.stepContainer}>
       <View style={styles.successContainer}>
-        <View style={[styles.successIcon, { backgroundColor: whitelabelConfig.colors.primary }]}>
+        <View style={[styles.successIcon, { backgroundColor: whitelabelConfig.colors.secondary }]}>
           <Ionicons name="checkmark" size={60} color="#FFF" />
         </View>
         <Text style={styles.successTitle}>Depósito realizado!</Text>
@@ -337,7 +354,7 @@ export default function DepositScreen() {
           {txHash && (
             <View style={styles.detailRow}>
               <Text style={styles.detailLabel}>TX Hash</Text>
-              <TouchableOpacity onPress={() => handleCopyTxHash()}>
+              <TouchableOpacity onPress={handleOpenExplorer}>
                 <Text style={[styles.detailValue, styles.txHashValue]} numberOfLines={1} ellipsizeMode="middle">
                   {txHash}
                 </Text>
@@ -382,6 +399,7 @@ export default function DepositScreen() {
         {step === 'processing' && renderProcessingStep()}
         {step === 'success' && renderSuccessStep()}
       </ScrollView>
+      <BottomNav />
     </View>
   );
 }

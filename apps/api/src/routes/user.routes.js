@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const userController = require('../controllers/user.controller');
 const { authenticateJWT } = require('../middleware/jwt.middleware');
 const jwtMiddleware = require('../middleware/jwt.middleware');
@@ -7,6 +8,21 @@ const { userCacheMiddleware, clearUserCacheMiddleware, updateBalancesCacheMiddle
 const { body } = require('express-validator');
 const { validateRequest } = require('../middleware/validation.middleware');
 const prismaConfig = require('../config/prisma');
+
+// Configurar multer para upload de imagens
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Apenas imagens são permitidas'));
+    }
+  }
+});
 
 /**
  * @swagger
@@ -880,6 +896,34 @@ router.put('/:id/role', jwtMiddleware.authenticateToken, userController.updateUs
  *         description: Usuário não encontrado ou saldos não salvos
  */
 router.get('/:id/saved-balances', jwtMiddleware.authenticateToken, userController.getUserSavedBalances);
+
+/**
+ * @swagger
+ * /api/users/profile-picture:
+ *   post:
+ *     summary: Upload de foto de perfil
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               profilePicture:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Foto atualizada com sucesso
+ *       400:
+ *         description: Nenhuma imagem enviada ou formato inválido
+ *       401:
+ *         description: Não autenticado
+ */
+router.post('/profile-picture', authenticateJWT, upload.single('profilePicture'), userController.uploadProfilePicture);
 
 /**
  * @swagger

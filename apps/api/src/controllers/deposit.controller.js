@@ -644,18 +644,18 @@ class DepositController {
 
             console.log(`🔄 [DEBUG] Iniciando mint real na testnet...`);
 
-            // Buscar usuário para pegar endereço blockchain
+            // Buscar usuário para pegar chave pública (endereço blockchain)
             const user = await prisma.user.findUnique({
               where: { id: result.userId },
-              select: { blockchainAddress: true, publicKey: true, name: true }
+              select: { publicKey: true, name: true }
             });
 
-            const recipientAddress = user?.blockchainAddress || user?.publicKey;
+            const recipientAddress = user?.publicKey;
             if (!recipientAddress) {
-              throw new Error('Usuário não possui endereço blockchain');
+              throw new Error('Usuário não possui chave pública (publicKey) configurada');
             }
 
-            console.log(`   📍 Endereço: ${recipientAddress}`);
+            console.log(`   📍 PublicKey (Endereço): ${recipientAddress}`);
             console.log(`   💰 Valor: ${result.net_amount} cBRL`);
 
             // Executar mint REAL na testnet

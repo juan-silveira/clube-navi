@@ -763,4 +763,96 @@ router.put('/referral/description', authenticateToken, authController.updateRefe
  */
 router.get('/referral/stats', authenticateToken, authController.getReferralStats);
 
+/**
+ * @swagger
+ * /auth/referral/validate:
+ *   post:
+ *     summary: Validar código de indicação
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - referralCode
+ *             properties:
+ *               referralCode:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Código válido
+ *       404:
+ *         description: Código não encontrado
+ */
+router.post('/referral/validate', authController.validateReferralCode);
+
+/**
+ * @swagger
+ * /auth/confirm-email/{token}:
+ *   get:
+ *     summary: Confirmar email do usuário via token
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Token de confirmação de email
+ *     responses:
+ *       200:
+ *         description: Email confirmado com sucesso
+ *       400:
+ *         description: Token inválido ou expirado
+ *       404:
+ *         description: Usuário não encontrado
+ */
+router.get('/confirm-email/:token', authController.confirmEmail);
+
+/**
+ * @swagger
+ * /auth/resend-confirmation:
+ *   post:
+ *     summary: Reenviar email de confirmação
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *     responses:
+ *       200:
+ *         description: Email reenviado com sucesso
+ *       400:
+ *         description: Email já confirmado
+ *       404:
+ *         description: Usuário não encontrado
+ */
+router.post('/resend-confirmation', authController.resendConfirmationEmail);
+
+/**
+ * @swagger
+ * /auth/check-email-confirmation:
+ *   get:
+ *     summary: Verificar status de confirmação de email
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Status de confirmação retornado
+ *       401:
+ *         description: Não autorizado
+ */
+router.get('/check-email-confirmation', authenticateToken, authController.checkEmailConfirmation);
+
 module.exports = router; 

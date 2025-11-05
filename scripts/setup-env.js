@@ -108,7 +108,7 @@ GOOGLE_MAPS_API_KEY=${env.GOOGLE_MAPS_API_KEY || ''}
 
 # Email
 SENDGRID_API_KEY=${env.SENDGRID_API_KEY || ''}
-FROM_EMAIL=${env.FROM_EMAIL || 'noreply@clubenavi.com'}
+FROM_EMAIL=${env.FROM_EMAIL || 'noreply@clubedigital.com.br'}
 
 # Security
 ENCRYPTION_KEY=${env.ENCRYPTION_KEY}
@@ -131,7 +131,7 @@ RATE_LIMIT_MAX_REQUESTS=${env.RATE_LIMIT_MAX_REQUESTS || '100'}
 EXPO_PUBLIC_API_URL=${env.API_URL || 'http://localhost:3001'}
 
 # Whitelabel
-EXPO_PUBLIC_WHITELABEL_SLUG=${env.WHITELABEL_SLUG || 'clube-navi'}
+EXPO_PUBLIC_WHITELABEL_SLUG=${env.WHITELABEL_SLUG || 'clube-digital'}
 
 # Google Maps
 EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=${env.GOOGLE_MAPS_API_KEY || ''}

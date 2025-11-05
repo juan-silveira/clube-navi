@@ -1,4 +1,4 @@
-// Main entry point for @clube-navi/shared package
+// Main entry point for @clube-digital/shared package
 export * from './types';
 export * from './utils';
 export * from './constants';

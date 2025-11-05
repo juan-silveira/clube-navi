@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { transactionsService, type Transaction } from '@/services/transactions';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import BottomNav from '@/components/BottomNav';
 
 export default function Statement() {
   const router = useRouter();
@@ -289,6 +290,7 @@ export default function Statement() {
           <View style={styles.bottomSpacer} />
         </ScrollView>
       )}
+      <BottomNav />
     </View>
   );
 }

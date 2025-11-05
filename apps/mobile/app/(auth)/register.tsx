@@ -7,10 +7,11 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  Image,
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import { whitelabelConfig } from '@/config/whitelabel';
+import { whitelabelConfig, getLogo } from '@/config/whitelabel';
 import { useAuthStore } from '@/store/authStore';
 import {
   validateCPF,
@@ -27,8 +28,15 @@ import type { RegisterData } from '@/types/user';
 
 export default function Register() {
   const router = useRouter();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0); // Começa no step 0 (código de indicação)
   const [personType, setPersonType] = useState<'PF' | 'PJ'>('PF');
+
+  // Código de indicação (Step 0)
+  const [referralCode, setReferralCode] = useState('');
+  const [referrerId, setReferrerId] = useState('');
+  const [referrerName, setReferrerName] = useState('');
+  const [referralDescription, setReferralDescription] = useState('');
+  const [validatingCode, setValidatingCode] = useState(false);
 
   // Dados básicos
   const [email, setEmail] = useState('');
@@ -71,6 +79,65 @@ export default function Register() {
       ]);
     }
   }, [error]);
+
+  // Validar código de indicação
+  const validateReferralCode = async () => {
+    if (!referralCode.trim()) {
+      Alert.alert('Erro', 'Por favor, digite o código de indicação');
+      return;
+    }
+
+    setValidatingCode(true);
+
+    try {
+      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/api/auth/referral/validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ referralCode: referralCode.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.data) {
+        // Código válido - mostrar confirmação
+        Alert.alert(
+          'Código Encontrado',
+          `Você foi indicado por:\n\n@${data.data.referrerUsername}\n\n${data.data.referralDescription}\n\nConfirma que foi indicado por esta pessoa?`,
+          [
+            {
+              text: 'Não',
+              style: 'cancel',
+              onPress: () => {
+                setReferralCode('');
+                setReferrerId('');
+                setReferrerName('');
+                setReferralDescription('');
+              }
+            },
+            {
+              text: 'Sim',
+              onPress: () => {
+                setReferrerId(data.data.referrerId);
+                setReferrerName(data.data.referrerName);
+                setReferralDescription(data.data.referralDescription);
+                setStep(1); // Avançar para próximo step
+              }
+            }
+          ]
+        );
+      } else {
+        Alert.alert('Erro', data.message || 'Código de indicação não encontrado');
+      }
+    } catch (error) {
+      console.error('Erro ao validar código:', error);
+      Alert.alert('Erro', 'Não foi possível validar o código. Tente novamente.');
+    } finally {
+      setValidatingCode(false);
+    }
+  };
+
 
   const validateStep1 = (): boolean => {
     if (!email || !username || !password || !confirmPassword) {
@@ -169,6 +236,7 @@ export default function Register() {
       phone: phone ? phone.replace(/\D/g, '') : undefined,
       password,
       personType,
+      referralCode: referralCode || undefined, // Enviar o código (username) de quem indicou
       address: {
         zipCode: zipCode.replace(/\D/g, ''),
         street,
@@ -190,12 +258,70 @@ export default function Register() {
       registerData.legalRepDocumentType = legalRepDocumentType;
     }
 
-    const success = await register(registerData);
+    const result = await register(registerData);
 
-    if (success) {
-      router.replace('/(tabs)');
+    if (result && result.user) {
+      // Redirecionar para tela de confirmação de email com token
+      router.replace({
+        pathname: '/(auth)/email-confirmation',
+        params: {
+          email: registerData.email,
+          userId: result.user.id,
+          confirmationToken: result.confirmationToken || '' // Token para debug
+        }
+      });
     }
   };
+
+  const renderStep0 = () => (
+    <>
+      <View style={styles.stepHeader}>
+        <Text style={[styles.stepTitle, { color: whitelabelConfig.colors.white }]}>Código de Indicação</Text>
+        <Text style={[styles.stepDescription, { color: whitelabelConfig.colors.white }]}>
+          Para criar sua conta no {whitelabelConfig.branding.companyName}, você precisa de um código de indicação.
+        </Text>
+        <Text style={[styles.stepSubDescription, { color: whitelabelConfig.colors.white }]}>
+          Digite o código de quem te convidou:
+        </Text>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={[styles.input, styles.referralInput]}
+          placeholder="Digite o código aqui"
+          value={referralCode}
+          onChangeText={setReferralCode}
+          autoCapitalize="none"
+          editable={!validatingCode}
+          autoFocus={true}
+          placeholderTextColor="#999"
+        />
+      </View>
+
+      <TouchableOpacity
+        style={[
+          styles.button,
+          styles.primaryButton,
+          { backgroundColor: whitelabelConfig.colors.primary },
+          validatingCode && styles.buttonDisabled,
+        ]}
+        onPress={validateReferralCode}
+        disabled={validatingCode}
+      >
+        {validatingCode ? (
+          <ActivityIndicator color={whitelabelConfig.colors.white} />
+        ) : (
+          <Text style={styles.buttonText}>Continuar</Text>
+        )}
+      </TouchableOpacity>
+
+      <View style={styles.helpContainer}>
+        <Text style={[styles.helpText, { color: whitelabelConfig.colors.white }]}>
+          Não tem um código? Entre em contato com quem te convidou ou procure um representante do {whitelabelConfig.branding.companyName}.
+        </Text>
+      </View>
+    </>
+  );
 
   const renderStep1 = () => (
     <>
@@ -509,20 +635,32 @@ export default function Register() {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Criar Conta</Text>
-      <Text style={styles.subtitle}>Passo {step} de 3</Text>
+    <ScrollView contentContainerStyle={[styles.container, step === 0 && { backgroundColor: whitelabelConfig.colors.secondary }]}>
+      {step === 0 && (
+        <View style={styles.logoContainer}>
+          <Image
+            source={getLogo('secondary', 'full')}
+            style={styles.topLogo}
+            resizeMode="contain"
+          />
+        </View>
+      )}
+      <Text style={[styles.title, step === 0 && { color: whitelabelConfig.colors.white }]}>Criar Conta</Text>
+      <Text style={[styles.subtitle, step === 0 && { color: whitelabelConfig.colors.white }]}>
+        {step === 0 ? 'Bem-vindo!' : `Passo ${step} de 3`}
+      </Text>
 
       <View style={styles.form}>
+        {step === 0 && renderStep0()}
         {step === 1 && renderStep1()}
         {step === 2 && renderStep2()}
         {step === 3 && renderStep3()}
       </View>
 
       <View style={styles.loginContainer}>
-        <Text style={styles.loginText}>Já tem uma conta? </Text>
+        <Text style={[styles.loginText, step === 0 && { color: whitelabelConfig.colors.white }]}>Já tem uma conta? </Text>
         <TouchableOpacity onPress={() => router.back()}>
-          <Text style={[styles.loginLink, { color: whitelabelConfig.colors.primary }]}>
+          <Text style={[styles.loginLink, { color: step === 0 ? whitelabelConfig.colors.white : whitelabelConfig.colors.primary }]}>
             Faça login
           </Text>
         </TouchableOpacity>
@@ -537,6 +675,14 @@ const styles = StyleSheet.create({
     backgroundColor: whitelabelConfig.colors.background,
     padding: 20,
     paddingTop: 60,
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  topLogo: {
+    width: 200,
+    height: 80,
   },
   title: {
     fontSize: 32,
@@ -667,5 +813,63 @@ const styles = StyleSheet.create({
   loginLink: {
     fontSize: 14,
     fontWeight: '600',
+  },
+  stepDescription: {
+    fontSize: 14,
+    color: whitelabelConfig.colors.textSecondary,
+    marginBottom: 12,
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  stepSubDescription: {
+    fontSize: 15,
+    color: whitelabelConfig.colors.text,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  stepHeader: {
+    alignItems: 'center',
+    marginBottom: 32,
+  },
+  stepLogo: {
+    width: 200,
+    height: 80,
+    marginBottom: 20,
+  },
+  iconContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  iconText: {
+    fontSize: 40,
+  },
+  inputContainer: {
+    marginBottom: 24,
+  },
+  referralInput: {
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: '600',
+    letterSpacing: 1,
+    textTransform: 'lowercase',
+  },
+  primaryButton: {
+    marginTop: 8,
+  },
+  helpContainer: {
+    marginTop: 24,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+  },
+  helpText: {
+    fontSize: 13,
+    color: whitelabelConfig.colors.textSecondary,
+    textAlign: 'center',
+    lineHeight: 20,
   },
 });

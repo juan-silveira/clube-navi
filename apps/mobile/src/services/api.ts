@@ -14,9 +14,9 @@ import type {
 
 // Keys para AsyncStorage
 const STORAGE_KEYS = {
-  ACCESS_TOKEN: '@clube_navi:access_token',
-  REFRESH_TOKEN: '@clube_navi:refresh_token',
-  USER: '@clube_navi:user',
+  ACCESS_TOKEN: '@clube_digital:access_token',
+  REFRESH_TOKEN: '@clube_digital:refresh_token',
+  USER: '@clube_digital:user',
 };
 
 class ApiService {
@@ -254,6 +254,43 @@ class ApiService {
   async isAuthenticated(): Promise<boolean> {
     const token = await this.getAccessToken();
     return !!token;
+  }
+
+  // Métodos genéricos HTTP
+  async get<T = any>(url: string): Promise<ApiResponse<T>> {
+    try {
+      const response = await this.api.get(url);
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse<T>>(error);
+    }
+  }
+
+  async post<T = any>(url: string, data?: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await this.api.post(url, data);
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse<T>>(error);
+    }
+  }
+
+  async put<T = any>(url: string, data?: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await this.api.put(url, data);
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse<T>>(error);
+    }
+  }
+
+  async delete<T = any>(url: string): Promise<ApiResponse<T>> {
+    try {
+      const response = await this.api.delete(url);
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse<T>>(error);
+    }
   }
 
   private async clearStorage(): Promise<void> {

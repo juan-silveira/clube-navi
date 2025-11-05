@@ -29,6 +29,9 @@ export interface RegisterData {
   // Tipo de pessoa
   personType: 'PF' | 'PJ'; // Pessoa Física ou Jurídica
 
+  // Código de indicação (username de quem indicou)
+  referralCode?: string;
+
   // Dados de Pessoa Física
   cpf?: string;
   name?: string; // Nome completo

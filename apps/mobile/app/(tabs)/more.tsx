@@ -4,11 +4,44 @@ import { useRouter, usePathname } from 'expo-router';
 import { whitelabelConfig } from '@/config/whitelabel';
 import { useAuthStore } from '@/store/authStore';
 import { serializeBreadcrumb } from '@/utils/navigationHelper';
+import { useState, useEffect } from 'react';
+import { blockchainService, BlockchainBalance } from '@/services/blockchain';
+import BalanceCard from '@/components/BalanceCard';
 
 export default function More() {
   const router = useRouter();
   const currentPath = usePathname();
   const { user, logout } = useAuthStore();
+  const [balance, setBalance] = useState<BlockchainBalance | null>(null);
+  const [loadingBalance, setLoadingBalance] = useState(true);
+
+  // Função para buscar saldo
+  const fetchBalance = async () => {
+    const balanceData = await blockchainService.getCBRLBalance();
+    setBalance(balanceData);
+  };
+
+  // Buscar saldo da blockchain na montagem do componente
+  useEffect(() => {
+    // Só buscar saldo se o usuário estiver autenticado
+    if (!user) {
+      setLoadingBalance(false);
+      return;
+    }
+
+    const loadInitialBalance = async () => {
+      setLoadingBalance(true);
+      await fetchBalance();
+      setLoadingBalance(false);
+    };
+
+    loadInitialBalance();
+
+    // Atualizar saldo a cada 30 segundos
+    const interval = setInterval(fetchBalance, 30000);
+
+    return () => clearInterval(interval);
+  }, [user]);
 
   const handleLogout = async () => {
     Alert.alert(
@@ -62,15 +95,8 @@ export default function More() {
           </View>
         </View>
 
-        {/* Card de informações - Similar ao Mercado Pago */}
-        <View style={styles.infoCard}>
-          <View style={styles.infoRow}>
-            <Ionicons name="wallet-outline" size={20} color={whitelabelConfig.colors.primary} />
-            <Text style={styles.infoTitle}>Saldo disponível</Text>
-          </View>
-          <Text style={styles.infoValue}>R$ 0,00</Text>
-          <Text style={styles.infoSubtitle}>A conta que mais rende do Brasil</Text>
-        </View>
+        {/* Card de saldo */}
+        <BalanceCard balance={balance} loadingBalance={loadingBalance} />
       </View>
 
       {/* Lista de opções de navegação */}
@@ -154,32 +180,6 @@ const styles = StyleSheet.create({
   viewProfile: {
     fontSize: 14,
     color: whitelabelConfig.colors.white,
-  },
-  infoCard: {
-    backgroundColor: whitelabelConfig.colors.white,
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 8,
-  },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  infoTitle: {
-    fontSize: 14,
-    color: whitelabelConfig.colors.text,
-    marginLeft: 8,
-  },
-  infoValue: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: whitelabelConfig.colors.text,
-    marginBottom: 4,
-  },
-  infoSubtitle: {
-    fontSize: 12,
-    color: whitelabelConfig.colors.textSecondary,
   },
   menu: {
     backgroundColor: whitelabelConfig.colors.white,

@@ -94,7 +94,7 @@ class DepositService {
           netAmount: parseFloat(netAmount),
           currency: 'BRL',
           fromAddress: ADMIN_ADDRESS,
-          toAddress: user?.blockchainAddress || user?.publicKey,
+          toAddress: user?.publicKey,
           operationType: 'deposit',
           metadata: {
             type: 'deposit',
@@ -109,7 +109,7 @@ class DepositService {
             totalAmount: totalAmount,
             netAmount: netAmount,
             adminAddress: ADMIN_ADDRESS,
-            userAddress: user?.blockchainAddress || user?.publicKey,
+            userAddress: user?.publicKey,
             pixStatus: 'pending',
             pixKey: 'contato@coinage.com.br',
             pixKeyType: 'EMAIL',
@@ -136,7 +136,7 @@ class DepositService {
           email: true,
           cpf: true,
           phone: true,
-          blockchainAddress: true
+          publicKey: true
         }
       });
 
@@ -360,12 +360,12 @@ class DepositService {
         // Buscar endereço blockchain do usuário
         const user = await this.prisma.user.findUnique({
           where: { id: transaction.userId },
-          select: { blockchainAddress: true, publicKey: true }
+          select: { publicKey: true }
         });
-        
-        const recipientAddress = user?.blockchainAddress || user?.publicKey;
+
+        const recipientAddress = user?.publicKey;
         if (!recipientAddress) {
-          throw new Error('Usuário não possui endereço blockchain configurado');
+          throw new Error('Usuário não possui chave pública (publicKey) configurada');
         }
 
         // EXECUTAR MINT DIRETAMENTE AO INVÉS DE USAR FILA
@@ -691,20 +691,19 @@ class DepositService {
       const user = await this.prisma.user.findUnique({
         where: { id: transaction.userId },
         select: {
-          blockchainAddress: true,
           publicKey: true,
           email: true
         }
       });
 
-      const recipientAddress = user?.blockchainAddress || user?.publicKey;
+      const recipientAddress = user?.publicKey;
 
       if (!recipientAddress) {
-        console.error('❌ [MINT] Usuário não possui endereço blockchain:', user?.email);
-        throw new Error('Usuário não possui endereço blockchain configurado');
+        console.error('❌ [MINT] Usuário não possui chave pública (publicKey):', user?.email);
+        throw new Error('Usuário não possui chave pública (publicKey) configurada');
       }
 
-      console.log('✅ [MINT] Endereço encontrado para', user.email, ':', recipientAddress);
+      console.log('✅ [MINT] Chave pública encontrada para', user.email, ':', recipientAddress);
 
       // Enviar para fila de mint
       const amqp = require('amqplib');

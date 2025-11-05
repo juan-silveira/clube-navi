@@ -9,7 +9,7 @@ module.exports = function (api) {
           root: ['./'],
           alias: {
             '@': './src',
-            '@clube-navi/shared-assets': '../../packages/shared-assets',
+            '@clube-digital/shared-assets': '../../packages/shared-assets',
           },
           extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
         },
