@@ -71,6 +71,7 @@ const confirmLinking = async (req, res) => {
  */
 const authenticateUser = async (req, res) => {
   try {
+    const prisma = req.tenantPrisma;
     const { email, password, companyId } = req.body;
 
     if (!email || !password || !companyId) {
@@ -84,7 +85,7 @@ const authenticateUser = async (req, res) => {
     let actualCompanyId = companyId;
     let companyInfo = null;
     console.log('🔍 Debug companyId recebido:', companyId);
-    
+
     if (companyId && !companyId.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i)) {
       console.log('🔍 CompanyId é um alias, convertendo para UUID...');
       // É um alias, precisa buscar o ID real usando o método de branding
@@ -92,9 +93,8 @@ const authenticateUser = async (req, res) => {
         const companyBranding = await whitelabelService.getCompanyBrandingByAlias(companyId);
         actualCompanyId = companyBranding.company_id;
         console.log('🔍 UUID da empresa encontrado:', actualCompanyId);
-        
+
         // Buscar informações completas da empresa para o log
-        const prisma = require('../config/prisma').getPrisma();
         companyInfo = await prisma.company.findUnique({
           where: { id: actualCompanyId },
           select: { id: true, name: true, alias: true }
@@ -109,7 +109,6 @@ const authenticateUser = async (req, res) => {
     } else {
       // É um UUID, buscar informações da empresa
       try {
-        const prisma = require('../config/prisma').getPrisma();
         companyInfo = await prisma.company.findUnique({
           where: { id: companyId },
           select: { id: true, name: true, alias: true }
@@ -136,7 +135,7 @@ const authenticateUser = async (req, res) => {
       try {
         if (result.message === 'Credenciais incorretas') {
           // Only log if we found the user but password is wrong
-          const userQuery = await require('../config/prisma').getPrisma().user.findUnique({
+          const userQuery = await prisma.user.findUnique({
             where: { email: email.toLowerCase() }
           });
           if (userQuery) {

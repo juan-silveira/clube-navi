@@ -1,4 +1,3 @@
-const prismaConfig = require('../config/prisma');
 const axios = require('axios');
 
 // Templates de mensagens pré-definidas
@@ -45,6 +44,7 @@ const MESSAGE_TEMPLATES = {
  */
 const sendMessages = async (req, res) => {
   try {
+    const prisma = req.tenantPrisma;
     const { recipientUserIds, message, templateId } = req.body;
     const senderUserId = req.user.id;
 
@@ -62,8 +62,6 @@ const sendMessages = async (req, res) => {
         message: 'A mensagem não pode estar vazia'
       });
     }
-
-    const prisma = prismaConfig.getPrisma();
 
     // Buscar dados dos usuários destinatários
     const users = await prisma.user.findMany({
@@ -195,10 +193,9 @@ const getTemplates = async (req, res) => {
  */
 const getMessageHistory = async (req, res) => {
   try {
+    const prisma = req.tenantPrisma;
     const { page = 1, limit = 20 } = req.query;
     const skip = (parseInt(page) - 1) * parseInt(limit);
-
-    const prisma = prismaConfig.getPrisma();
 
     const [messages, total] = await Promise.all([
       prisma.whatsAppMessage.findMany({

@@ -1,0 +1,383 @@
+// ==========================================
+// MASTER DATABASE SCHEMA
+// ==========================================
+// Banco de dados central que gerencia todos os tenants
+// Cada tenant tem seu próprio database isolado
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma-master"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("MASTER_DATABASE_URL")
+}
+
+// ==========================================
+// TENANT MANAGEMENT
+// ==========================================
+
+model Tenant {
+  id              String       @id @default(uuid()) @db.Uuid
+  slug            String       @unique @db.VarChar(50)
+  companyName     String       @map("company_name") @db.VarChar(255)
+  companyDocument String       @unique @map("company_document") @db.VarChar(18)
+  status          TenantStatus @default(trial)
+
+  // Database connection
+  databaseHost     String @map("database_host") @db.VarChar(255)
+  databasePort     Int    @default(5432) @map("database_port")
+  databaseName     String @map("database_name") @db.VarChar(100)
+  databaseUser     String @map("database_user") @db.VarChar(100)
+  databasePassword String @map("database_password") @db.VarChar(255)
+
+  // URLs
+  subdomain      String? @unique @db.VarChar(50)
+  customDomain   String? @unique @map("custom_domain") @db.VarChar(255)
+  adminSubdomain String? @unique @map("admin_subdomain") @db.VarChar(50)
+
+  // Limits
+  maxUsers     Int @default(1000) @map("max_users")
+  maxAdmins    Int @default(10) @map("max_admins")
+  maxStorageGB Int @default(50) @map("max_storage_gb")
+
+  // Billing & Subscription
+  subscriptionPlan   SubscriptionPlan   @default(BASIC) @map("subscription_plan")
+  subscriptionStatus SubscriptionStatus @default(TRIAL) @map("subscription_status")
+  monthlyFee         Decimal            @default(0) @map("monthly_fee") @db.Decimal(10, 2)
+
+  // Datas de cobrança
+  trialEndsAt     DateTime? @map("trial_ends_at") @db.Timestamptz(6)
+  nextBillingDate DateTime? @map("next_billing_date") @db.Timestamptz(6)
+  lastBillingDate DateTime? @map("last_billing_date") @db.Timestamptz(6)
+
+  // Controle financeiro
+  totalBilled        Decimal @default(0) @map("total_billed") @db.Decimal(15, 2)
+  outstandingBalance Decimal @default(0) @map("outstanding_balance") @db.Decimal(15, 2)
+
+  // Contact
+  contactName  String @map("contact_name") @db.VarChar(255)
+  contactEmail String @map("contact_email") @db.VarChar(255)
+  contactPhone String @map("contact_phone") @db.VarChar(20)
+
+  // Metadata
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  branding         TenantBranding?
+  modules          TenantModule[]
+  admins           TenantAdmin[]
+  apiKeys          TenantApiKey[]
+  usageStats       TenantUsageStats[]
+  stats            TenantStats?
+  cashbackConfig   TenantCashbackConfig?
+  withdrawalConfig TenantWithdrawalConfig?
+
+  @@index([slug])
+  @@index([subdomain])
+  @@index([status])
+  @@index([subscriptionStatus], map: "idx_tenants_subscription_status")
+  @@map("tenants")
+}
+
+// ==========================================
+// TENANT BRANDING
+// ==========================================
+
+model TenantBranding {
+  id       String @id @default(uuid()) @db.Uuid
+  tenantId String @unique @map("tenant_id") @db.Uuid
+
+  // Logos
+  logoUrl     String? @map("logo_url") @db.VarChar(500)
+  logoIconUrl String? @map("logo_icon_url") @db.VarChar(500)
+  faviconUrl  String? @map("favicon_url") @db.VarChar(500)
+
+  // Colors
+  primaryColor    String @default("#3B82F6") @map("primary_color") @db.VarChar(7)
+  secondaryColor  String @default("#10B981") @map("secondary_color") @db.VarChar(7)
+  accentColor     String @default("#F59E0B") @map("accent_color") @db.VarChar(7)
+  backgroundColor String @default("#FFFFFF") @map("background_color") @db.VarChar(7)
+  textColor       String @default("#1F2937") @map("text_color") @db.VarChar(7)
+
+  // App Info
+  appName        String  @map("app_name") @db.VarChar(100)
+  appDescription String? @map("app_description") @db.Text
+  appStoreUrl    String? @map("app_store_url") @db.VarChar(500)
+  playStoreUrl   String? @map("play_store_url") @db.VarChar(500)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_brandings")
+}
+
+// ==========================================
+// MODULES SYSTEM
+// ==========================================
+
+model TenantModule {
+  id                 String    @id @default(uuid()) @db.Uuid
+  tenantId           String    @map("tenant_id") @db.Uuid
+  moduleKey          ModuleKey @map("module_key")
+  isEnabled          Boolean   @default(true) @map("is_enabled")
+  isEnabledByDefault Boolean   @default(true) @map("is_enabled_by_default")
+
+  config      Json?   @default("{}")
+  displayName String  @map("display_name") @db.VarChar(100)
+  description String? @db.Text
+  sortOrder   Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, moduleKey])
+  @@index([tenantId])
+  @@index([isEnabled])
+  @@map("tenant_modules")
+}
+
+// ==========================================
+// ANALYTICS & STATISTICS
+// ==========================================
+
+model TenantStats {
+  id       String @id @default(uuid()) @db.Uuid
+  tenantId String @unique @map("tenant_id") @db.Uuid
+
+  // Usuários
+  totalUsers     Int @default(0) @map("total_users")
+  totalConsumers Int @default(0) @map("total_consumers")
+  totalMerchants Int @default(0) @map("total_merchants")
+  activeUsers30d Int @default(0) @map("active_users_30d")
+
+  // Transações
+  totalPurchases    Int     @default(0) @map("total_purchases")
+  totalRevenue      Decimal @default(0) @map("total_revenue") @db.Decimal(15, 2)
+  totalCashbackPaid Decimal @default(0) @map("total_cashback_paid") @db.Decimal(15, 2)
+  totalPlatformFees Decimal @default(0) @map("total_platform_fees") @db.Decimal(15, 2)
+
+  // Produtos
+  totalProducts Int @default(0) @map("total_products")
+
+  // Métricas de período (30 dias)
+  revenue30d   Decimal @default(0) @map("revenue_30d") @db.Decimal(15, 2)
+  purchases30d Int     @default(0) @map("purchases_30d")
+  cashback30d  Decimal @default(0) @map("cashback_30d") @db.Decimal(15, 2)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("tenant_stats")
+}
+
+model GlobalStats {
+  id   String   @id @default(uuid()) @db.Uuid
+  date DateTime @unique @db.Date
+
+  // Totais globais
+  totalTenants      Int     @default(0) @map("total_tenants")
+  totalUsers        Int     @default(0) @map("total_users")
+  totalConsumers    Int     @default(0) @map("total_consumers")
+  totalMerchants    Int     @default(0) @map("total_merchants")
+  totalPurchases    Int     @default(0) @map("total_purchases")
+  totalRevenue      Decimal @default(0) @map("total_revenue") @db.Decimal(15, 2)
+  totalCashbackPaid Decimal @default(0) @map("total_cashback_paid") @db.Decimal(15, 2)
+  totalPlatformFees Decimal @default(0) @map("total_platform_fees") @db.Decimal(15, 2)
+  totalProducts     Int     @default(0) @map("total_products")
+
+  // Métricas de 30 dias
+  activeUsers30d Int     @default(0) @map("active_users_30d")
+  revenue30d     Decimal @default(0) @map("revenue_30d") @db.Decimal(15, 2)
+  purchases30d   Int     @default(0) @map("purchases_30d")
+  cashback30d    Decimal @default(0) @map("cashback_30d") @db.Decimal(15, 2)
+
+  // Crescimento
+  newTenants     Int @default(0) @map("new_tenants")
+  newUsers       Int @default(0) @map("new_users")
+  churnedTenants Int @default(0) @map("churned_tenants")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([date])
+  @@map("global_stats")
+}
+
+// ==========================================
+// CASHBACK CONFIGURATION
+// ==========================================
+
+model TenantCashbackConfig {
+  id       String @id @default(uuid()) @db.Uuid
+  tenantId String @unique @map("tenant_id") @db.Uuid
+
+  // Percentuais padrão (soma deve ser 100%)
+  consumerPercent         Decimal @default(50.0) @map("consumer_percent") @db.Decimal(5, 2)
+  clubPercent             Decimal @default(25.0) @map("club_percent") @db.Decimal(5, 2)
+  consumerReferrerPercent Decimal @default(12.5) @map("consumer_referrer_percent") @db.Decimal(5, 2)
+  merchantReferrerPercent Decimal @default(12.5) @map("merchant_referrer_percent") @db.Decimal(5, 2)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_cashback_configs")
+}
+
+model TenantWithdrawalConfig {
+  id       String @id @default(uuid()) @db.Uuid
+  tenantId String @unique @map("tenant_id") @db.Uuid
+
+  // Taxa sobre saques
+  withdrawalFeePercent Decimal @default(2.5) @map("withdrawal_fee_percent") @db.Decimal(5, 2)
+  withdrawalFeeFixed   Decimal @default(0) @map("withdrawal_fee_fixed") @db.Decimal(10, 2)
+  minWithdrawalAmount  Decimal @default(50) @map("min_withdrawal_amount") @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_withdrawal_configs")
+}
+
+// ==========================================
+// ADMINS
+// ==========================================
+
+model TenantAdmin {
+  id       String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+
+  name     String    @db.VarChar(255)
+  email    String    @db.VarChar(255)
+  password String    @db.VarChar(255)
+  role     AdminRole @default(admin)
+
+  isActive    Boolean   @default(true) @map("is_active")
+  lastLoginAt DateTime? @map("last_login_at") @db.Timestamptz(6)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([email])
+  @@map("tenant_admins")
+}
+
+model SuperAdmin {
+  id       String @id @default(uuid()) @db.Uuid
+  name     String @db.VarChar(255)
+  email    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+
+  permissions Json      @default("[]")
+  isActive    Boolean   @default(true) @map("is_active")
+  lastLoginAt DateTime? @map("last_login_at") @db.Timestamptz(6)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("super_admins")
+}
+
+// ==========================================
+// API KEYS & USAGE
+// ==========================================
+
+model TenantApiKey {
+  id       String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+
+  keyName    String    @map("key_name") @db.VarChar(100)
+  apiKey     String    @unique @map("api_key") @db.VarChar(64)
+  isActive   Boolean   @default(true) @map("is_active")
+  lastUsedAt DateTime? @map("last_used_at") @db.Timestamptz(6)
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  expiresAt DateTime? @map("expires_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([apiKey])
+  @@map("tenant_api_keys")
+}
+
+model TenantUsageStats {
+  id       String   @id @default(uuid()) @db.Uuid
+  tenantId String   @map("tenant_id") @db.Uuid
+  date     DateTime @db.Date
+
+  apiCalls      Int @default(0) @map("api_calls")
+  storageUsedMB Int @default(0) @map("storage_used_mb")
+  activeUsers   Int @default(0) @map("active_users")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, date])
+  @@index([tenantId])
+  @@index([date])
+  @@map("tenant_usage_stats")
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum TenantStatus {
+  trial
+  active
+  suspended
+  cancelled
+  expired
+}
+
+enum SubscriptionPlan {
+  BASIC // Até 1.000 usuários - R$ 500/mês
+  PRO // Até 10.000 usuários - R$ 2.000/mês
+  ENTERPRISE // Ilimitado - R$ 5.000/mês
+}
+
+enum SubscriptionStatus {
+  TRIAL // 30 dias grátis
+  ACTIVE // Pagando normalmente
+  PAST_DUE // Atraso no pagamento
+  SUSPENDED // Suspenso por falta de pagamento
+  CANCELED // Cancelado pelo tenant
+}
+
+enum ModuleKey {
+  marketplace
+  internet
+  cinema
+  telemedicine
+  giftcards
+  insurance
+  streaming
+  referrals
+  cashback
+  telecom
+}
+
+enum AdminRole {
+  admin
+  manager
+  support
+}

@@ -8,11 +8,9 @@ const NOTIFICATION_DELAY = 3000; // 3 segundos de delay para agrupar
 /**
  * Envia notificações agrupadas de documentos
  */
-const sendGroupedDocumentNotifications = async (userId, userName, userEmail, documents) => {
+const sendGroupedDocumentNotifications = async (prisma, userId, userName, userEmail, documents) => {
   try {
     const axios = require('axios');
-    const prismaConfig = require('../config/prisma');
-    const prisma = prismaConfig.getPrisma();
 
     console.log('📱 [UPLOAD] Enviando notificações agrupadas...');
 
@@ -196,6 +194,7 @@ const uploadUserDocument = async (req, res) => {
 
     // Agrupar notificações de documentos
     const bufferKey = userId;
+    const prisma = req.tenantPrisma;
 
     // Cancelar timer anterior se existir
     if (documentNotificationBuffer.has(bufferKey)) {
@@ -204,7 +203,7 @@ const uploadUserDocument = async (req, res) => {
     }
 
     // Pegar documentos existentes no buffer ou criar novo array
-    const currentBuffer = documentNotificationBuffer.get(bufferKey) || { documents: [], userName: req.user?.name, userEmail: req.user?.email };
+    const currentBuffer = documentNotificationBuffer.get(bufferKey) || { documents: [], userName: req.user?.name, userEmail: req.user?.email, prisma };
     currentBuffer.documents.push(documentType);
 
     // Criar novo timer para enviar notificação agrupada
@@ -212,6 +211,7 @@ const uploadUserDocument = async (req, res) => {
       const bufferData = documentNotificationBuffer.get(bufferKey);
       if (bufferData) {
         await sendGroupedDocumentNotifications(
+          bufferData.prisma,
           userId,
           bufferData.userName,
           bufferData.userEmail,

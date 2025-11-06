@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "setup:env": "node scripts/setup-env.js",
+    "sync:env": "node scripts/sync-env.js",
     "dev": "turbo run dev",
     "dev:all": "concurrently -n \"API,FRONTEND\" -c \"blue,magenta\" \"npm run dev:api\" \"npm run dev:frontend\"",
     "dev:full": "concurrently -n \"API,FRONTEND,MOBILE\" -c \"blue,magenta,green\" \"npm run dev:api\" \"npm run dev:frontend\" \"npm run dev:mobile\"",
@@ -25,7 +26,17 @@
     "android": "cd apps/mobile && npm run android",
     "build:mobile:ios": "cd apps/mobile && eas build --platform ios",
     "build:mobile:android": "cd apps/mobile && eas build --platform android",
-    "build:mobile:all": "cd apps/mobile && eas build --platform all"
+    "build:mobile:all": "cd apps/mobile && eas build --platform all",
+    "prisma:generate:master": "npx prisma generate --schema=./apps/api/prisma/master/schema.prisma",
+    "prisma:generate:tenant": "npx prisma generate --schema=./apps/api/prisma/tenant/schema.prisma",
+    "prisma:generate:all": "npm run prisma:generate:master && npm run prisma:generate:tenant",
+    "prisma:migrate:master": "npx prisma migrate dev --schema=./apps/api/prisma/master/schema.prisma",
+    "prisma:migrate:tenant": "npx prisma migrate dev --schema=./apps/api/prisma/tenant/schema.prisma",
+    "prisma:studio:master": "npx prisma studio --schema=./apps/api/prisma/master/schema.prisma --port 5555",
+    "prisma:studio:tenant": "npx prisma studio --schema=./apps/api/prisma/tenant/schema.prisma --port 5556",
+    "tenant:create": "node scripts/create-tenant.js",
+    "tenant:migrate:all": "node scripts/migrate-all-tenants.js",
+    "tenant:list": "node scripts/list-tenants.js"
   },
   "devDependencies": {
     "@turbo/gen": "^2.0.0",

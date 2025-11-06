@@ -6,6 +6,9 @@ const userCompanyService = require('../services/userCompany.service');
 // Função helper para obter Prisma
 const getPrisma = () => prismaConfig.getPrisma();
 
+// JWT Secret com fallback (deve ser o mesmo que jwt.service.js)
+const JWT_SECRET = process.env.JWT_SECRET || 'azore-jwt-secret-key-change-in-production';
+
 // Cache em memória para evitar validações repetidas - SOLUÇÃO PRINCIPAL PARA EXCESSIVE CALLS
 const tokenCache = new Map();
 const CACHE_DURATION = 30000; // 30 segundos - tempo para reutilizar validação
@@ -99,18 +102,24 @@ const authenticateToken = async (req, res, next) => {
     }
 
     // Verificar e decodificar o token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
-    // Buscar usuário completo no banco com dados da empresa
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    // MULTI-TENANT: Usar req.tenantPrisma se disponível (rotas tenant), senão usar master
     let prisma;
-    try {
-      prisma = getPrisma();
-    } catch (error) {
-      // Se Prisma não foi inicializado, inicializar primeiro
-      await prismaConfig.initialize();
-      prisma = getPrisma();
+    if (req.tenantPrisma) {
+      console.log('🔍 JWT Middleware - Usando Tenant Prisma Client');
+      prisma = req.tenantPrisma;
+    } else {
+      console.log('🔍 JWT Middleware - Usando Master Prisma Client');
+      try {
+        prisma = getPrisma();
+      } catch (error) {
+        // Se Prisma não foi inicializado, inicializar primeiro
+        await prismaConfig.initialize();
+        prisma = getPrisma();
+      }
     }
-    
+
     const user = await prisma.user.findUnique({
       where: { id: decoded.id }
       // FUNCIONALIDADE REMOVIDA: userCompanies
@@ -198,7 +207,7 @@ const optionalJWT = async (req, res, next) => {
     }
 
     // Verificar e decodificar o token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
 
     // Buscar usuário no banco usando Prisma
     let prisma;

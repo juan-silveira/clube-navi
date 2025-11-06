@@ -1,17 +1,10 @@
-const prismaConfig = require('../config/prisma');
 const s3Service = require('../services/s3.service');
 const userActionsService = require('../services/userActions.service');
 const profileCacheService = require('../services/profileCache.service');
 
 class ProfileController {
   constructor() {
-    this.prisma = null;
-  }
-
-  async init() {
-    if (!this.prisma) {
-      this.prisma = prismaConfig.getPrisma();
-    }
+    // Removed: prisma instance moved to req.tenantPrisma
   }
 
   /**
@@ -62,10 +55,9 @@ class ProfileController {
    */
   async uploadProfilePhoto(req, res) {
     try {
-      await this.init();
-
+      const prisma = req.tenantPrisma;
       const userId = req.user?.id;
-      
+
       if (!userId) {
         return res.status(401).json({
           success: false,
@@ -102,7 +94,7 @@ class ProfileController {
       }
 
       // Get current user to check for existing profile picture
-      const currentUser = await this.prisma.user.findUnique({
+      const currentUser = await prisma.user.findUnique({
         where: { id: userId },
         select: { profilePicture: true, name: true, email: true }
       });
@@ -128,8 +120,8 @@ class ProfileController {
 
       // Update user's profile picture in database
       console.log('💾 [ProfileController] Salvando URL no campo profilePicture:', uploadResult.url);
-      
-      const updatedUser = await this.prisma.user.update({
+
+      const updatedUser = await prisma.user.update({
         where: { id: userId },
         data: {
           profilePicture: uploadResult.url
@@ -225,10 +217,9 @@ class ProfileController {
    */
   async getProfilePhoto(req, res) {
     try {
-      await this.init();
-
+      const prisma = req.tenantPrisma;
       const userId = req.user?.id;
-      
+
       if (!userId) {
         return res.status(401).json({
           success: false,
@@ -239,9 +230,9 @@ class ProfileController {
       // CACHE DESABILITADO POR SEGURANÇA - Sempre buscar do PostgreSQL
 
       // Buscar SEMPRE do banco PostgreSQL para máxima segurança
-      const user = await this.prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: { 
+        select: {
           profilePicture: true
         }
       });
@@ -303,10 +294,9 @@ class ProfileController {
    */
   async deleteProfilePhoto(req, res) {
     try {
-      await this.init();
-
+      const prisma = req.tenantPrisma;
       const userId = req.user?.id;
-      
+
       if (!userId) {
         return res.status(401).json({
           success: false,
@@ -314,7 +304,7 @@ class ProfileController {
         });
       }
 
-      const user = await this.prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { id: userId },
         select: { profilePicture: true, name: true }
       });
@@ -337,7 +327,7 @@ class ProfileController {
       await s3Service.deleteFile(user.profilePicture);
 
       // Update user record
-      await this.prisma.user.update({
+      await prisma.user.update({
         where: { id: userId },
         data: {
           profilePicture: null

@@ -1,8 +1,6 @@
-// Importar Prisma company
-const prismaConfig = require('../config/prisma');
-
-// Função helper para obter Prisma
-const getPrisma = () => prismaConfig.getPrisma();
+// Nota: Prisma agora vem de req.tenantPrisma (multi-tenant)
+// Removido: const prismaConfig = require('../config/prisma');
+// Removido: const getPrisma = () => prismaConfig.getPrisma();
 
 // Importar serviços
 const jwtService = require('../services/jwt.service');
@@ -20,9 +18,27 @@ const { validatePassword } = require('../utils/passwordValidation');
 /**
  * Autenticar usuário (método auxiliar)
  */
-const authenticateUser = async (email, password) => {
+const authenticateUser = async (email, password, prisma) => {
   try {
-    const user = await userService.authenticate(email, password);
+    // Determinar se é email ou username
+    const isEmail = email.includes('@');
+
+    // Buscar usuário
+    const user = await prisma.user.findUnique({
+      where: isEmail ? { email: email.toLowerCase() } : { username: email.toLowerCase() }
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    // Verificar senha
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return null;
+    }
+
     return user;
   } catch (error) {
     console.error('❌ Erro na autenticação:', error);
@@ -34,7 +50,7 @@ const authenticateUser = async (email, password) => {
  * Login do usuário com controle de tentativas
  */
 const login = async (req, res) => {
-  const prisma = getPrisma();
+  const prisma = req.tenantPrisma;
 
   try {
     const { email, password, company_alias } = req.body;
@@ -93,7 +109,7 @@ const login = async (req, res) => {
     }
 
     // Autenticar usuário
-    const user = await authenticateUser(email, password);
+    const user = await authenticateUser(email, password, prisma);
     
     if (!user) {
       // Login falhou - incrementar contador de tentativas se usuário existe
@@ -364,23 +380,48 @@ const login = async (req, res) => {
     
     // Simular req.company para o logging
     const reqWithCompany = { ...req, company: currentCompany };
-    
-    // Registrar login bem-sucedido
-    await userActionsService.logAuth(user.id, 'login', reqWithCompany, {
-      details: {
-        userPlan: user.userPlan,
-        companyName: currentCompany?.name,
-        companyAlias: currentCompany?.alias
-      }
-    });
+
+    // COMENTADO: userActions usa singleton Prisma, não suporta multi-tenant ainda
+    // // Registrar login bem-sucedido
+    // await userActionsService.logAuth(user.id, 'login', reqWithCompany, {
+    //   details: {
+    //     userPlan: user.userPlan,
+    //     companyName: currentCompany?.name,
+    //     companyAlias: currentCompany?.alias
+    //   }
+    // });
 
     // Gerar tokens
     const accessToken = jwtService.generateAccessToken(user);
     const refreshToken = jwtService.generateRefreshToken(user);
 
-    // Buscar dados completos do usuário
-    const userData = await userService.getUserById(user.id);
-    
+    // Buscar dados completos do usuário usando tenant Prisma
+    const userData = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        firstName: true,
+        lastName: true,
+        cpf: true,
+        phone: true,
+        birthDate: true,
+        profilePicture: true,
+        userType: true,
+        merchantStatus: true,
+        publicKey: true,
+        referralId: true,
+        referredBy: true,
+        address: true,
+        isActive: true,
+        accountStatus: true,
+        emailConfirmed: true,
+        createdAt: true,
+        updatedAt: true
+      }
+    });
+
     if (!userData) {
       return res.status(500).json({
         success: false,
@@ -960,10 +1001,13 @@ const register = async (req, res) => {
       username,
       phone,
       password,
+      userType, // 'consumer' ou 'merchant'
       personType, // 'PF' ou 'PJ'
       // Dados PF
       cpf,
       name,
+      firstName,
+      lastName,
       // Dados PJ
       cnpj,
       companyName,
@@ -984,6 +1028,13 @@ const register = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: 'Email, username e senha são obrigatórios'
+      });
+    }
+
+    if (!userType || !['consumer', 'merchant'].includes(userType)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Tipo de usuário (consumer ou merchant) é obrigatório'
       });
     }
 
@@ -1028,7 +1079,7 @@ const register = async (req, res) => {
       });
     }
 
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
 
     // Verificar se email já existe
     const existingUser = await prisma.user.findUnique({
@@ -1099,85 +1150,50 @@ const register = async (req, res) => {
       email: email.toLowerCase(),
       username: username.toLowerCase(),
       password: hashedPassword,
+      userType, // consumer ou merchant
       publicKey: null, // Será preenchido após validação de email
       privateKey: null, // Será preenchido após validação de email
       phone: phone ? phone.replace(/\D/g, '') : null, // Salvar apenas números (opcional)
       isActive: true, // Usuário começa ativo
       emailConfirmed: false, // Email não confirmado inicialmente
-      referralId: referrerId, // UUID de quem indicou
-      metadata: {
+      referredBy: referralCode ? referralCode.toLowerCase() : null, // Código de quem indicou
+      address: address ? {
         personType,
-        address: address || null,
-        referralCode: referralCode ? referralCode.toLowerCase() : null // Guardar o código também para referência
+        ...address,
+        referralCode: referralCode ? referralCode.toLowerCase() : null
+      } : {
+        personType,
+        referralCode: referralCode ? referralCode.toLowerCase() : null
       }
     };
 
     // Adicionar dados específicos por tipo
     if (personType === 'PF') {
-      userData.name = name;
+      userData.firstName = firstName || (name ? name.split(' ')[0] : '');
+      userData.lastName = lastName || (name ? name.split(' ').slice(1).join(' ') : '');
       userData.cpf = cpf.replace(/\D/g, ''); // Remover formatação
     } else if (personType === 'PJ') {
-      userData.name = companyName; // Usar razão social como nome
+      userData.firstName = companyName ? companyName.split(' ')[0] : ''; // Primeira palavra da razão social
+      userData.lastName = companyName ? companyName.split(' ').slice(1).join(' ') : ''; // Resto da razão social
       userData.cpf = cnpj.replace(/\D/g, ''); // CNPJ no campo CPF (ambos são únicos)
-      userData.metadata.cnpj = cnpj.replace(/\D/g, '');
-      userData.metadata.companyName = companyName;
-      userData.metadata.legalRepDocument = legalRepDocument;
-      userData.metadata.legalRepDocumentType = legalRepDocumentType;
+      // Adicionar dados PJ no address (que é Json)
+      userData.address.cnpj = cnpj.replace(/\D/g, '');
+      userData.address.companyName = companyName;
+      userData.address.legalRepDocument = legalRepDocument;
+      userData.address.legalRepDocumentType = legalRepDocumentType;
     }
+
+    // Debug: Log userData antes de criar
+    console.log('📝 userData antes do create:', JSON.stringify(userData, null, 2));
 
     // Criar usuário
     const user = await prisma.user.create({
       data: userData
     });
 
-    // Criar taxas padrão para o usuário
-    try {
-      await prisma.userTaxes.create({
-        data: {
-          userId: user.id,
-          ...DEFAULT_USER_TAXES
-        }
-      });
-      console.log(`✅ Taxas padrão aplicadas ao usuário: ${user.email}`);
-    } catch (taxError) {
-      console.error('❌ Erro ao criar taxas padrão para usuário:', taxError);
-      // Não falhar o registro por erro de taxas
-    }
-
-    // Se company_alias foi fornecido, vincular à empresa
-    if (company_alias) {
-      try {
-        const company = await prisma.company.findUnique({
-          where: { alias: company_alias }
-        });
-
-        if (company) {
-          await prisma.userCompany.create({
-            data: {
-              userId: user.id,
-              companyId: company.id,
-              status: 'active',
-              role: 'USER',
-              linkedAt: new Date()
-            }
-          });
-        }
-      } catch (error) {
-        console.warn('⚠️ Erro ao vincular usuário à empresa:', error.message);
-        // Não falhar o registro por erro de vinculação
-      }
-    }
-
-    // Registrar ação de usuário criado
-    await userActionsService.logAuth(user.id, 'registration_completed', req, {
-      status: 'success',
-      details: {
-        email: user.email,
-        personType,
-        hasCompany: !!company_alias,
-        companyAlias: company_alias || null
-      }
-    });
+    // TENANT SCHEMA: userTaxes não existe no schema tenant, pulando criação de taxas
+    // TENANT SCHEMA: Company não existe no schema tenant, pulando vinculação de empresa
+    // TENANT SCHEMA: userActions não existe no schema tenant, pulando log de ação
 
     // Gerar token de confirmação ANTES do try-catch
     let confirmationToken = null;
@@ -1283,7 +1299,7 @@ const testBlacklist = async (req, res) => {
  * Desbloquear usuário (função para administradores)
  */
 const unblockUser = async (req, res) => {
-  const prisma = getPrisma();
+  const prisma = req.tenantPrisma;
   
   try {
     const { email } = req.body;
@@ -1341,7 +1357,7 @@ const unblockUser = async (req, res) => {
  * Bloquear usuário (função para administradores)
  */
 const blockUser = async (req, res) => {
-  const prisma = getPrisma();
+  const prisma = req.tenantPrisma;
   
   try {
     const { email } = req.body;
@@ -1398,7 +1414,7 @@ const blockUser = async (req, res) => {
  * Listar usuários bloqueados (função para administradores)
  */
 const listBlockedUsers = async (req, res) => {
-  const prisma = getPrisma();
+  const prisma = req.tenantPrisma;
   
   try {
     const blockedUsers = await prisma.user.findMany({
@@ -1437,7 +1453,7 @@ const listBlockedUsers = async (req, res) => {
  * Listar empresas disponíveis (público - para tela de login)
  */
 const getAvailableCompanies = async (req, res) => {
-  const prisma = getPrisma();
+  const prisma = req.tenantPrisma;
   
   try {
     const companies = await prisma.company.findMany({
@@ -1488,7 +1504,7 @@ const getUserByUsername = async (req, res) => {
       });
     }
 
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
     const user = await prisma.user.findUnique({
       where: { username: username.toLowerCase() },
       select: {
@@ -1562,7 +1578,7 @@ const updateReferralDescription = async (req, res) => {
       });
     }
 
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { referralDescription: referralDescription.trim() },
@@ -1605,7 +1621,7 @@ const getReferralStats = async (req, res) => {
       });
     }
 
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
 
     // Buscar usuário atual
     const currentUser = await prisma.user.findUnique({
@@ -1682,7 +1698,7 @@ const validateReferralCode = async (req, res) => {
       });
     }
 
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
 
     // Buscar usuário pelo username (código de indicação)
     const referrer = await prisma.user.findFirst({
@@ -1733,7 +1749,7 @@ const validateReferralCode = async (req, res) => {
 const confirmEmail = async (req, res) => {
   try {
     const { token } = req.params;
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
 
     if (!token) {
       return res.status(400).json({
@@ -1820,7 +1836,7 @@ const confirmEmail = async (req, res) => {
 const resendConfirmationEmail = async (req, res) => {
   try {
     const { email } = req.body;
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
 
     if (!email) {
       return res.status(400).json({
@@ -1886,7 +1902,7 @@ const resendConfirmationEmail = async (req, res) => {
 const checkEmailConfirmation = async (req, res) => {
   try {
     const userId = req.user?.id;
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
 
     if (!userId) {
       return res.status(401).json({

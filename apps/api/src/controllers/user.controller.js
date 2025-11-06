@@ -1,8 +1,6 @@
-// Importar Prisma company
-const prismaConfig = require('../config/prisma');
-
-// Função helper para obter Prisma
-const getPrisma = () => prismaConfig.getPrisma();
+// Nota: Prisma agora vem de req.tenantPrisma (multi-tenant)
+// Removido: const prismaConfig = require('../config/prisma');
+// Removido: const getPrisma = () => prismaConfig.getPrisma();
 
 // Importar serviços
 const userService = require('../services/user.service');
@@ -564,7 +562,7 @@ const listUserTransactions = async (req, res) => {
       });
     }
 
-    const prisma = require('../config/prisma').getPrisma();
+    const prisma = req.tenantPrisma;
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const where = {};
 
@@ -776,7 +774,7 @@ const updateUserRole = async (req, res) => {
       });
     }
     
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
     
     // Buscar a relação user_company
     const userCompany = await prisma.userCompany.findUnique({
@@ -871,7 +869,7 @@ const updateUserLanguage = async (req, res) => {
 
     console.log(`🌐 Atualizando idioma para usuário ${userId}: ${language}`);
 
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
     const user = await prisma.user.update({
       where: { id: userId },
       data: { preferredLanguage: language },
@@ -908,7 +906,7 @@ const getUserBalance = async (req, res) => {
     const userId = req.user.id;
 
     // Buscar usuário com chave pública (endereço blockchain)
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -1013,7 +1011,7 @@ const uploadProfilePicture = async (req, res) => {
     const imageUrl = await s3Service.uploadFile(req.file.buffer, filename, req.file.mimetype);
 
     // Atualizar profilePicture do usuário no banco
-    const prisma = getPrisma();
+    const prisma = req.tenantPrisma;
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { profilePicture: imageUrl },

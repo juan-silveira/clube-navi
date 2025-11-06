@@ -46,6 +46,10 @@ const profileRoutes = require('./routes/profile.routes');
 const s3PhotoRoutes = require('./routes/s3-photo.routes');
 const backupRoutes = require('./routes/backup.routes');
 
+// Routes multi-tenant (Products & Purchases)
+const productRoutes = require('./routes/product.routes');
+const purchaseRoutes = require('./routes/purchase.routes');
+
 // Importar serviços
 const logService = require('./services/log.service');
 
@@ -200,6 +204,27 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Rota de teste para Multi-Tenant (com tenant resolution)
+const { resolveTenantMiddleware } = require('./middleware/tenant-resolution.middleware');
+app.get('/api/tenant-info', resolveTenantMiddleware, (req, res) => {
+  res.json({
+    success: true,
+    tenant: {
+      id: req.tenant.id,
+      slug: req.tenant.slug,
+      companyName: req.tenant.companyName,
+      status: req.tenant.status,
+      plan: req.tenant.subscriptionPlan,
+      subdomain: req.tenant.subdomain
+    },
+    database: {
+      name: req.tenant.databaseName,
+      host: req.tenant.databaseHost
+    },
+    message: '✅ Tenant resolution working!'
   });
 });
 
@@ -735,8 +760,8 @@ app.get('/api/companies/:id', apiRateLimiter, async (req, res, next) => {
 // REMOVIDO - arquivos de rotas não existem mais
 // app.use('/api/contracts', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, contractsInteractRoutes);
 
-// Rotas de autenticação (públicas)
-app.use('/api/auth', loginRateLimiter, authRoutes);
+// Rotas de autenticação (públicas com tenant resolution)
+app.use('/api/auth', resolveTenantMiddleware, loginRateLimiter, authRoutes);
 
 // Rotas de recuperação de senha (públicas)
 app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
@@ -745,8 +770,12 @@ app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
 const emailConfirmationRoutes = require('./routes/emailConfirmation.routes');
 app.use('/api/email-confirmation', loginRateLimiter, emailConfirmationRoutes);
 
-// Rotas de usuários (com autenticação JWT e refresh de cache)
-app.use('/api/users', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, CacheRefreshMiddleware.refreshAfterWrite, userRoutes);
+// Rotas de usuários (com tenant resolution, autenticação JWT e refresh de cache)
+app.use('/api/users', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, CacheRefreshMiddleware.refreshAfterWrite, userRoutes);
+
+// Rotas multi-tenant de produtos e compras
+app.use('/api/products', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, productRoutes);
+app.use('/api/purchases', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, purchaseRoutes);
 
 // Rotas de contratos (com autenticação e sistema de fila) - COMENTADO PARA DEBUG
 // app.use('/api/contracts', authenticateApiKey, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, contractRoutes);
@@ -847,9 +876,9 @@ const depositRoutes = require('./routes/deposit.routes');
 // const mintRoutes = require('./routes/mint.routes'); // REMOVIDO - arquivo não existe mais
 const pixRoutes = require('./routes/pix.routes');
 const { requireEmailConfirmation } = require('./middleware/emailConfirmed.middleware');
-// IMPORTANTE: Rotas de desenvolvimento SEM autenticação devem vir ANTES
-app.use('/api/pix/dev', pixRoutes);
-app.use('/api/deposits/dev', depositRoutes);
+// IMPORTANTE: Rotas de desenvolvimento SEM autenticação devem vir ANTES (COM tenant resolution)
+app.use('/api/pix/dev', resolveTenantMiddleware, pixRoutes);
+app.use('/api/deposits/dev', resolveTenantMiddleware, depositRoutes);
 // app.use('/api/mint/dev', mintRoutes); // REMOVIDO - arquivo não existe mais
 
 // Rota de debug direta (sem autenticação)
@@ -901,10 +930,10 @@ app.get('/api/debug/pix/:transactionId', async (req, res) => {
   }
 });
 
-// Rotas com autenticação JWT
-app.use('/api/deposits', authenticateJWT, depositRoutes);
+// Rotas com tenant resolution e autenticação JWT
+app.use('/api/deposits', resolveTenantMiddleware, authenticateJWT, depositRoutes);
 // app.use('/api/mint', authenticateJWT, mintRoutes); // REMOVIDO - arquivo não existe mais
-app.use('/api/pix', authenticateJWT, pixRoutes);
+app.use('/api/pix', resolveTenantMiddleware, authenticateJWT, pixRoutes);
 
 // Exchange Matching System API
 // REMOVIDO - arquivo não existe mais
@@ -926,7 +955,7 @@ app.use('/api/pix', authenticateJWT, pixRoutes);
 app.use('/api/logs', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, logRoutes);
 
 // Rotas de documentos (com autenticação JWT)
-app.use('/api/documents', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, documentRoutes);
+app.use('/api/documents', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, documentRoutes);
 
 // Rotas de webhooks (com autenticação JWT)
 // app.use('/api/webhooks', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, webhookRoutes); // Temporariamente desabilitado
@@ -1147,7 +1176,7 @@ app.use('/api/2fa', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticat
 app.use('/api/cache', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, cacheRoutes);
 
 // Rotas de notificações (com autenticação JWT)
-app.use('/api/notifications', notificationRoutes);
+app.use('/api/notifications', resolveTenantMiddleware, notificationRoutes);
 
 // Rotas de sincronização de balances (com autenticação JWT)
 // REMOVIDO - arquivo não existe mais
@@ -1182,7 +1211,7 @@ app.use('/api/config', configRoutes);
 // app.use('/api/smart-contracts', smartContractRoutes);
 
 // User Documents Routes (com autenticação JWT)
-app.use('/api/user-documents', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userDocumentRoutes);
+app.use('/api/user-documents', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userDocumentRoutes);
 
 // User Actions Routes
 app.use('/api/user-actions', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userActionsRoutes);
@@ -1198,7 +1227,7 @@ app.use('/api/workers', workersRoutes);
 // app.use('/api/pix', pixRoutes);
 
 // Rotas do Profile
-app.use('/api/profile', profileRoutes);
+app.use('/api/profile', resolveTenantMiddleware, profileRoutes);
 app.use('/api/s3-photos', authenticateJWT, s3PhotoRoutes);
 // REMOVIDO - arquivo não existe mais
 // app.use('/api/company-branding', authenticateJWT, companyBrandingRoutes);

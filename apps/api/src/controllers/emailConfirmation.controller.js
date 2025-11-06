@@ -1,17 +1,10 @@
-const prismaConfig = require('../config/prisma');
 const emailService = require('../services/email.service');
 const userActionsService = require('../services/userActions.service');
 const userService = require('../services/user.service');
 
 class EmailConfirmationController {
   constructor() {
-    this.prisma = null;
-  }
-
-  async init() {
-    if (!this.prisma) {
-      this.prisma = prismaConfig.getPrisma();
-    }
+    // Removed: prisma instance moved to req.tenantPrisma
   }
 
   /**
@@ -68,8 +61,7 @@ class EmailConfirmationController {
    */
   async confirmEmail(req, res) {
     try {
-      await this.init();
-      
+      const prisma = req.tenantPrisma;
       const { token, company } = req.query;
       
       if (!token) {
@@ -114,7 +106,7 @@ class EmailConfirmationController {
       }
 
       // Buscar usuário
-      const user = await this.prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { id: tokenData.userId }
       });
 
@@ -159,7 +151,7 @@ class EmailConfirmationController {
       }
 
       // Ativar usuário e atualizar chaves blockchain
-      const updatedUser = await this.prisma.user.update({
+      const updatedUser = await prisma.user.update({
         where: { id: user.id },
         data: {
           isActive: true,
@@ -183,7 +175,7 @@ class EmailConfirmationController {
       });
 
       // Invalidar token (marcar como usado)
-      await this.invalidateToken(token);
+      await this.invalidateToken(prisma, token);
 
       // Enviar email de boas-vindas
       try {
@@ -229,8 +221,7 @@ class EmailConfirmationController {
    */
   async resendConfirmationEmail(req, res) {
     try {
-      await this.init();
-      
+      const prisma = req.tenantPrisma;
       const { email, companyAlias } = req.body;
       
       if (!email) {
@@ -242,7 +233,7 @@ class EmailConfirmationController {
       }
 
       // Buscar usuário
-      const user = await this.prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { email: email.toLowerCase() }
       });
 
@@ -266,7 +257,7 @@ class EmailConfirmationController {
 
       // Verificar rate limiting (max 3 emails por hora)
       const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-      const recentResends = await this.prisma.userAction.count({
+      const recentResends = await prisma.userAction.count({
         where: {
           userId: user.id,
           action: 'email_sent',
@@ -336,8 +327,7 @@ class EmailConfirmationController {
    */
   async getEmailStatus(req, res) {
     try {
-      await this.init();
-      
+      const prisma = req.tenantPrisma;
       const { userId } = req.params;
       
       if (!userId) {
@@ -348,7 +338,7 @@ class EmailConfirmationController {
         });
       }
 
-      const user = await this.prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { id: userId },
         select: {
           id: true,
@@ -369,7 +359,7 @@ class EmailConfirmationController {
 
       // Buscar tentativas recentes de reenvio
       const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-      const recentResends = await this.prisma.userAction.count({
+      const recentResends = await prisma.userAction.count({
         where: {
           userId: user.id,
           action: 'email_sent',
@@ -412,8 +402,7 @@ class EmailConfirmationController {
    */
   async manualConfirmEmail(req, res) {
     try {
-      await this.init();
-
+      const prisma = req.tenantPrisma;
       const userId = req.user?.id;
 
       if (!userId) {
@@ -424,7 +413,7 @@ class EmailConfirmationController {
       }
 
       // Buscar usuário atual
-      const user = await this.prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { id: userId },
         select: {
           id: true,
@@ -456,7 +445,7 @@ class EmailConfirmationController {
       }
 
       // Atualizar ambas as flags
-      await this.prisma.user.update({
+      await prisma.user.update({
         where: { id: userId },
         data: {
           emailConfirmed: true,
@@ -498,9 +487,9 @@ class EmailConfirmationController {
   /**
    * Invalidar token usado
    */
-  async invalidateToken(token) {
+  async invalidateToken(prisma, token) {
     try {
-      await this.prisma.emailLog.updateMany({
+      await prisma.emailLog.updateMany({
         where: {
           subject: 'Email Confirmation Token',
           metadata: {
