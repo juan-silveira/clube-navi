@@ -130,6 +130,35 @@ class ProductService {
       search,
     });
   }
+
+  /**
+   * Upload de imagem do produto
+   */
+  async uploadProductImage(productId: string, imageUri: string): Promise<ApiResponse<{ productId: string; imageUrl: string }>> {
+    const formData = new FormData();
+
+    // Extrair o nome do arquivo da URI
+    const filename = imageUri.split('/').pop() || 'photo.jpg';
+    const match = /\.(\w+)$/.exec(filename);
+    const type = match ? `image/${match[1]}` : 'image/jpeg';
+
+    // @ts-ignore - FormData aceita blob no React Native
+    formData.append('image', {
+      uri: imageUri,
+      name: filename,
+      type,
+    });
+
+    return await apiService.post<{ productId: string; imageUrl: string }>(
+      `${API_ENDPOINTS.PRODUCT_BY_ID(productId)}/upload-image`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+  }
 }
 
 // Exportar instância única
