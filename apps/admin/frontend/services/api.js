@@ -116,6 +116,45 @@ api.interceptors.request.use(
   }
 );
 
+// Interceptor de requisição para prevenir chamadas desnecessárias de super admin
+api.interceptors.request.use(
+  (config) => {
+    const user = useAuthStore.getState().user;
+    const isSuperAdmin = user?.email?.includes('@clubedigital.com');
+
+    // Bloquear chamadas específicas para super admins
+    if (isSuperAdmin) {
+      const blockedEndpoints = [
+        '/api/whitelabel/user/current-company',
+        '/api/profile/photo',
+        '/api/notifications/unread-count',
+        '/api/notifications/unread',
+        '/api/notifications/preferences',
+        '/api/auth/me'
+      ];
+
+      const isBlocked = blockedEndpoints.some(endpoint => config.url?.includes(endpoint));
+
+      if (isBlocked) {
+        // Cancelar a requisição e retornar uma promise que resolve imediatamente
+        config.adapter = () => {
+          return Promise.resolve({
+            data: { success: true, data: null },
+            status: 200,
+            statusText: 'OK',
+            headers: {},
+            config,
+            request: {}
+          });
+        };
+      }
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 // Interceptor para tratamento de respostas
 api.interceptors.response.use(
   (response) => response,
@@ -194,6 +233,12 @@ api.interceptors.response.use(
         if (isAuthenticated && refreshToken) {
           try {
             // console.log('🔄 [API] Tentando renovar token para sync...');
+            // Super admins não usam refresh token por enquanto
+            const user = useAuthStore.getState().user;
+            if (user?.email?.includes('@clubedigital.com')) {
+              throw new Error('Super admin - skip refresh');
+            }
+
             const response = await axios.post(`${API_BASE_URL}/api/auth/refresh`, {
               refreshToken
             });
@@ -224,6 +269,15 @@ api.interceptors.response.use(
       if (isAuthenticated && refreshToken) {
         try {
           // console.log('🔄 [API] Tentando renovar token...');
+          // Super admins não usam refresh token por enquanto
+          const user = useAuthStore.getState().user;
+          if (user?.email?.includes('@clubedigital.com')) {
+            // Para super admins, fazer logout e redirecionar para login
+            useAuthStore.getState().logout();
+            window.location.href = '/login';
+            return Promise.reject(error);
+          }
+
           // Tentar renovar o token
           const response = await axios.post(`${API_BASE_URL}/api/auth/refresh`, {
             refreshToken
@@ -291,7 +345,7 @@ api.interceptors.response.use(
 
 // Serviços de autenticação
 export const authService = {
-  // Login regular
+  // Login regular (Super Admin)
   login: async (email, password, twoFactorCode = null) => {
     try {
       const payload = {
@@ -303,8 +357,20 @@ export const authService = {
         payload.twoFactorCode = twoFactorCode;
       }
 
-      const response = await api.post('/api/auth/login', payload);
-      // O backend retorna { success: true, data: { user, accessToken, ... } }
+      const response = await api.post('/api/super-admin-auth/login', payload);
+      // O backend retorna { success: true, data: { admin, token } }
+      // Adaptar para o formato esperado pelo frontend
+      if (response.data.success && response.data.data) {
+        return {
+          success: true,
+          data: {
+            user: response.data.data.admin,
+            accessToken: response.data.data.token,
+            refreshToken: response.data.data.token,
+            isFirstAccess: false
+          }
+        };
+      }
       return response.data;
     } catch (error) {
       throw error;
@@ -904,6 +970,142 @@ export const adminService = {
       success: true,
       data: []
     };
+  }
+};
+
+// Serviço de gerenciamento de clubes (super admin)
+export const clubsService = {
+  // Listar todos os clubes
+  list: async (params = {}) => {
+    const response = await api.get('/api/super-admin/clubs', { params });
+    return response.data;
+  },
+
+  // Obter clube por ID
+  getById: async (id) => {
+    const response = await api.get(`/api/super-admin/clubs/${id}`);
+    return response.data;
+  },
+
+  // Obter estatísticas do clube
+  getStats: async (id) => {
+    const response = await api.get(`/api/super-admin/clubs/${id}/stats`);
+    return response.data;
+  },
+
+  // Atualizar status do clube
+  updateStatus: async (id, status) => {
+    const response = await api.patch(`/api/super-admin/clubs/${id}/status`, { status });
+    return response.data;
+  },
+
+  // Obter estatísticas do dashboard
+  getDashboardStats: async () => {
+    const response = await api.get('/api/super-admin/clubs/dashboard/stats');
+    return response.data;
+  }
+};
+
+// Club Admins Service
+export const clubAdminsService = {
+  // Listar todos os administradores de clubes
+  list: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-admins', { params });
+    return response.data;
+  },
+
+  // Obter admin por ID
+  getById: async (id) => {
+    const response = await api.get(`/api/super-admin/club-admins/${id}`);
+    return response.data;
+  },
+
+  // Atualizar status do admin
+  updateStatus: async (id, isActive) => {
+    const response = await api.patch(`/api/super-admin/club-admins/${id}/status`, { isActive });
+    return response.data;
+  },
+
+  // Obter estatísticas dos admins
+  getStats: async () => {
+    const response = await api.get('/api/super-admin/club-admins/stats');
+    return response.data;
+  }
+};
+
+// Notifications Service
+export const notificationsService = {
+  send: async (data) => {
+    const response = await api.post('/api/super-admin/notifications/send', data);
+    return response.data;
+  },
+  getHistory: async (params = {}) => {
+    const response = await api.get('/api/super-admin/notifications/history', { params });
+    return response.data;
+  }
+};
+
+// WhatsApp Service
+export const whatsappService = {
+  send: async (data) => {
+    const response = await api.post('/api/super-admin/whatsapp/send', data);
+    return response.data;
+  },
+  getHistory: async (params = {}) => {
+    const response = await api.get('/api/super-admin/whatsapp/history', { params });
+    return response.data;
+  }
+};
+
+// Club Users Service
+export const clubUsersService = {
+  list: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-users', { params });
+    return response.data;
+  },
+  getStats: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-users/stats', { params });
+    return response.data;
+  }
+};
+
+// Club Groups Service
+export const clubGroupsService = {
+  list: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-groups', { params });
+    return response.data;
+  },
+  getStats: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-groups/stats', { params });
+    return response.data;
+  }
+};
+
+// Billing Service
+export const billingService = {
+  list: async (params = {}) => {
+    const response = await api.get('/api/super-admin/billing', { params });
+    return response.data;
+  },
+  getStats: async () => {
+    const response = await api.get('/api/super-admin/billing/stats');
+    return response.data;
+  },
+  updateStatus: async (clubId, status) => {
+    const response = await api.patch(`/api/super-admin/billing/${clubId}/status`, { status });
+    return response.data;
+  }
+};
+
+// Club Transactions Service
+export const clubTransactionsService = {
+  list: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-transactions', { params });
+    return response.data;
+  },
+  getStats: async (params = {}) => {
+    const response = await api.get('/api/super-admin/club-transactions/stats', { params });
+    return response.data;
   }
 };
 

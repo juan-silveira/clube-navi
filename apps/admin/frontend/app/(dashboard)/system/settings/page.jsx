@@ -148,7 +148,7 @@ const SystemSettingsPage = () => {
 
   const [settings, setSettings] = useState({
     general: {
-      platformName: 'Coinage',
+      platformName: 'Clube Digital',
       platformDescription: 'Plataforma líder em criptomoedas',
       timezone: 'America/Sao_Paulo',
       language: 'pt-BR',
@@ -179,7 +179,7 @@ const SystemSettingsPage = () => {
       smtpUser: 'noreply@coinage.com',
       smtpPassword: '••••••••',
       fromEmail: 'noreply@coinage.com',
-      fromName: 'Coinage',
+      fromName: 'Clube Digital',
       enableNotifications: true
     },
     api: {

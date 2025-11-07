@@ -46,7 +46,7 @@ const profileRoutes = require('./routes/profile.routes');
 const s3PhotoRoutes = require('./routes/s3-photo.routes');
 const backupRoutes = require('./routes/backup.routes');
 
-// Routes multi-tenant (Products, Purchases & Cashback)
+// Routes multi-clube (Products, Purchases & Cashback)
 const productRoutes = require('./routes/product.routes');
 const purchaseRoutes = require('./routes/purchase.routes');
 const cashbackRoutes = require('./routes/cashback.routes');
@@ -57,9 +57,6 @@ const pixValidationRoutes = require('./routes/pix-validation.routes');
 // Importar serviços
 const logService = require('./services/log.service');
 
-// Iniciar processador de campanhas agendadas
-require('./services/scheduledCampaignProcessor.service');
-
 // Importar middlewares
 const { 
   authenticateApiKey, 
@@ -69,7 +66,7 @@ const {
   addUserInfo,
   logAuthenticatedRequest 
 } = require('./middleware/auth.middleware');
-const { authenticateJWT } = require('./middleware/jwt.middleware');
+const { authenticateJWT, authenticateToken } = require('./middleware/jwt.middleware');
 const {
   requireApiAdmin,
   requireCompanyAdmin,
@@ -214,24 +211,24 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Rota de teste para Multi-Tenant (com tenant resolution)
-const { resolveTenantMiddleware } = require('./middleware/tenant-resolution.middleware');
-app.get('/api/tenant-info', resolveTenantMiddleware, (req, res) => {
+// Rota de teste para Multi-Clube (com clube resolution)
+const { resolveClubMiddleware } = require('./middleware/club-resolution.middleware');
+app.get('/api/clube-info', resolveClubMiddleware, (req, res) => {
   res.json({
     success: true,
-    tenant: {
-      id: req.tenant.id,
-      slug: req.tenant.slug,
-      companyName: req.tenant.companyName,
-      status: req.tenant.status,
-      plan: req.tenant.subscriptionPlan,
-      subdomain: req.tenant.subdomain
+    clube: {
+      id: req.club.id,
+      slug: req.club.slug,
+      companyName: req.club.companyName,
+      status: req.club.status,
+      plan: req.club.subscriptionPlan,
+      subdomain: req.club.subdomain
     },
     database: {
-      name: req.tenant.databaseName,
-      host: req.tenant.databaseHost
+      name: req.club.databaseName,
+      host: req.club.databaseHost
     },
-    message: '✅ Tenant resolution working!'
+    message: '✅ Clube resolution working!'
   });
 });
 
@@ -408,10 +405,10 @@ app.post('/api/send-test-email', async (req, res) => {
         email: to,
         name: 'Test User'
       },
-      subject: 'Teste MailerSend - Coinage System',
+      subject: 'Teste MailerSend - Clube Digital System',
       htmlContent: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #2563eb;">🏦 Coinage - Teste de Email</h1>
+          <h1 style="color: #2563eb;">🏦 Clube Digital - Teste de Email</h1>
           <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <p>✅ <strong>MailerSend está funcionando!</strong></p>
             <p>Este email foi enviado via MailerSend API em ambiente de desenvolvimento/testnet.</p>
@@ -425,7 +422,7 @@ app.post('/api/send-test-email', async (req, res) => {
           <p style="color: #6b7280; font-size: 14px;">Data: ${new Date().toLocaleString('pt-BR')}</p>
         </div>
       `,
-      textContent: `Coinage - Teste de Email\n\n✅ MailerSend está funcionando!\n\nEste email foi enviado via MailerSend API em ambiente de desenvolvimento/testnet.\n\nProvider: ${emailService.activeProvider}\nNetwork: ${process.env.DEFAULT_NETWORK}\nEnvironment: ${process.env.NODE_ENV}\n\nData: ${new Date().toLocaleString('pt-BR')}`
+      textContent: `Clube Digital - Teste de Email\n\n✅ MailerSend está funcionando!\n\nEste email foi enviado via MailerSend API em ambiente de desenvolvimento/testnet.\n\nProvider: ${emailService.activeProvider}\nNetwork: ${process.env.DEFAULT_NETWORK}\nEnvironment: ${process.env.NODE_ENV}\n\nData: ${new Date().toLocaleString('pt-BR')}`
     });
 
     console.log('📧 Resultado do envio:', result);
@@ -767,8 +764,48 @@ app.get('/api/companies/:id', apiRateLimiter, async (req, res, next) => {
 // REMOVIDO - arquivos de rotas não existem mais
 // app.use('/api/contracts', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, contractsInteractRoutes);
 
-// Rotas de autenticação (públicas com tenant resolution)
-app.use('/api/auth', resolveTenantMiddleware, loginRateLimiter, authRoutes);
+// Rotas de autenticação (públicas com clube resolution)
+app.use('/api/auth', resolveClubMiddleware, loginRateLimiter, authRoutes);
+
+// Rotas de autenticação para club admins (públicas - sem clube resolution)
+const clubAuthRoutes = require('./routes/clubAuth.routes');
+app.use('/api/club-auth', loginRateLimiter, clubAuthRoutes);
+
+// Rotas de autenticação para super admins (públicas - sem clube resolution)
+const superAdminAuthRoutes = require('./routes/superAdminAuth.routes');
+app.use('/api/super-admin-auth', loginRateLimiter, superAdminAuthRoutes);
+
+// Rotas de gerenciamento de clubes (super admin apenas)
+const clubsRoutes = require('./routes/clubs.routes');
+app.use('/api/super-admin/clubs', clubsRoutes);
+
+// Rotas de gerenciamento de administradores de clubes (super admin apenas)
+const clubAdminsRoutes = require('./routes/clubAdmins.routes');
+app.use('/api/super-admin/club-admins', clubAdminsRoutes);
+
+// Rotas de notificações (super admin apenas)
+const notificationsRoutes = require('./routes/notifications.routes');
+app.use('/api/super-admin/notifications', notificationsRoutes);
+
+// Rotas de WhatsApp (super admin apenas)
+const whatsappRoutes = require('./routes/whatsapp.routes');
+app.use('/api/super-admin/whatsapp', whatsappRoutes);
+
+// Rotas de usuários dos clubes (super admin apenas)
+const clubUsersRoutes = require('./routes/clubUsers.routes');
+app.use('/api/super-admin/club-users', clubUsersRoutes);
+
+// Rotas de grupos dos clubes (super admin apenas)
+const clubGroupsRoutes = require('./routes/clubGroups.routes');
+app.use('/api/super-admin/club-groups', clubGroupsRoutes);
+
+// Rotas de billing (super admin apenas)
+const billingRoutes = require('./routes/billing.routes');
+app.use('/api/super-admin/billing', billingRoutes);
+
+// Rotas de transações dos clubes (super admin apenas)
+const clubTransactionsRoutes = require('./routes/clubTransactions.routes');
+app.use('/api/super-admin/club-transactions', clubTransactionsRoutes);
 
 // Rotas de recuperação de senha (públicas)
 app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
@@ -777,20 +814,20 @@ app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
 const emailConfirmationRoutes = require('./routes/emailConfirmation.routes');
 app.use('/api/email-confirmation', loginRateLimiter, emailConfirmationRoutes);
 
-// Rotas de usuários (com tenant resolution, autenticação JWT e refresh de cache)
-app.use('/api/users', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, CacheRefreshMiddleware.refreshAfterWrite, userRoutes);
+// Rotas de usuários (com clube resolution, autenticação JWT e refresh de cache)
+app.use('/api/users', resolveClubMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, CacheRefreshMiddleware.refreshAfterWrite, userRoutes);
 
-// Rotas multi-tenant de produtos, compras e cashback
-app.use('/api/products', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, productRoutes);
-app.use('/api/purchases', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, purchaseRoutes);
-app.use('/api/cashback', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, cashbackRoutes);
+// Rotas multi-clube de produtos, compras e cashback
+app.use('/api/products', resolveClubMiddleware, authenticateJWT, apiRateLimiter, productRoutes);
+app.use('/api/purchases', resolveClubMiddleware, authenticateJWT, apiRateLimiter, purchaseRoutes);
+app.use('/api/cashback', resolveClubMiddleware, authenticateJWT, apiRateLimiter, cashbackRoutes);
 
 // Rotas de saldo e saques
-app.use('/api/balance', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, balanceRoutes);
-app.use('/api/withdrawals', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, withdrawalRoutes);
+app.use('/api/balance', resolveClubMiddleware, authenticateJWT, apiRateLimiter, balanceRoutes);
+app.use('/api/withdrawals', resolveClubMiddleware, authenticateJWT, apiRateLimiter, withdrawalRoutes);
 
 // Rotas de validação PIX
-app.use('/api/pix/validation', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, pixValidationRoutes);
+app.use('/api/pix/validation', resolveClubMiddleware, authenticateJWT, apiRateLimiter, pixValidationRoutes);
 
 // Rotas de contratos (com autenticação e sistema de fila) - COMENTADO PARA DEBUG
 // app.use('/api/contracts', authenticateApiKey, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, contractRoutes);
@@ -891,9 +928,9 @@ const depositRoutes = require('./routes/deposit.routes');
 // const mintRoutes = require('./routes/mint.routes'); // REMOVIDO - arquivo não existe mais
 const pixRoutes = require('./routes/pix.routes');
 const { requireEmailConfirmation } = require('./middleware/emailConfirmed.middleware');
-// IMPORTANTE: Rotas de desenvolvimento SEM autenticação devem vir ANTES (COM tenant resolution)
-app.use('/api/pix/dev', resolveTenantMiddleware, pixRoutes);
-app.use('/api/deposits/dev', resolveTenantMiddleware, depositRoutes);
+// IMPORTANTE: Rotas de desenvolvimento SEM autenticação devem vir ANTES (COM clube resolution)
+app.use('/api/pix/dev', resolveClubMiddleware, pixRoutes);
+app.use('/api/deposits/dev', resolveClubMiddleware, depositRoutes);
 // app.use('/api/mint/dev', mintRoutes); // REMOVIDO - arquivo não existe mais
 
 // Rota de debug direta (sem autenticação)
@@ -945,10 +982,10 @@ app.get('/api/debug/pix/:transactionId', async (req, res) => {
   }
 });
 
-// Rotas com tenant resolution e autenticação JWT
-app.use('/api/deposits', resolveTenantMiddleware, authenticateJWT, depositRoutes);
+// Rotas com clube resolution e autenticação JWT
+app.use('/api/deposits', resolveClubMiddleware, authenticateJWT, depositRoutes);
 // app.use('/api/mint', authenticateJWT, mintRoutes); // REMOVIDO - arquivo não existe mais
-app.use('/api/pix', resolveTenantMiddleware, authenticateJWT, pixRoutes);
+app.use('/api/pix', resolveClubMiddleware, authenticateJWT, pixRoutes);
 
 // Exchange Matching System API
 // REMOVIDO - arquivo não existe mais
@@ -970,7 +1007,7 @@ app.use('/api/pix', resolveTenantMiddleware, authenticateJWT, pixRoutes);
 app.use('/api/logs', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, logRoutes);
 
 // Rotas de documentos (com autenticação JWT)
-app.use('/api/documents', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, documentRoutes);
+app.use('/api/documents', resolveClubMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, documentRoutes);
 
 // Rotas de webhooks (com autenticação JWT)
 // app.use('/api/webhooks', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, webhookRoutes); // Temporariamente desabilitado
@@ -1107,7 +1144,8 @@ app.get('/api/admin/stats', authenticateJWT, requireSuperAdmin, async (req, res)
 // Financial report usa JWT (para acesso via dashboard web)
 // REMOVIDO - arquivo não existe mais
 // app.use('/api/admin/financial-report', authenticateJWT, financialReportRoutes);
-app.use('/api/admin', authenticateApiKey, requireApiAdmin, apiRateLimiter, addAdminUserInfo, logAdminRequest, adminRoutes);
+// Usar authenticateToken (JWT) para permitir acesso via frontend com Bearer token
+app.use('/api/admin', authenticateToken, requireApiAdmin, apiRateLimiter, addAdminUserInfo, logAdminRequest, adminRoutes);
 
 // Rota para estatísticas de rate limiting (admin)
 app.get('/api/admin/rate-limit-stats', authenticateApiKey, requireApiAdmin, (req, res) => {
@@ -1191,7 +1229,7 @@ app.use('/api/2fa', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticat
 app.use('/api/cache', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, cacheRoutes);
 
 // Rotas de notificações (com autenticação JWT)
-app.use('/api/notifications', resolveTenantMiddleware, notificationRoutes);
+app.use('/api/notifications', resolveClubMiddleware, notificationRoutes);
 
 // Rotas de sincronização de balances (com autenticação JWT)
 // REMOVIDO - arquivo não existe mais
@@ -1226,7 +1264,7 @@ app.use('/api/config', configRoutes);
 // app.use('/api/smart-contracts', smartContractRoutes);
 
 // User Documents Routes (com autenticação JWT)
-app.use('/api/user-documents', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userDocumentRoutes);
+app.use('/api/user-documents', resolveClubMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userDocumentRoutes);
 
 // User Actions Routes
 app.use('/api/user-actions', authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, userActionsRoutes);
@@ -1242,7 +1280,7 @@ app.use('/api/workers', workersRoutes);
 // app.use('/api/pix', pixRoutes);
 
 // Rotas do Profile
-app.use('/api/profile', resolveTenantMiddleware, profileRoutes);
+app.use('/api/profile', resolveClubMiddleware, profileRoutes);
 app.use('/api/s3-photos', authenticateJWT, s3PhotoRoutes);
 // REMOVIDO - arquivo não existe mais
 // app.use('/api/company-branding', authenticateJWT, companyBrandingRoutes);
@@ -1295,25 +1333,17 @@ app.use('/api/notification-config', authenticateJWT, notificationConfigRoutes);
 const { router: whatsappMessageRoutes } = require('./routes/whatsappMessage.routes');
 app.use('/api/whatsapp-messages', authenticateJWT, whatsappMessageRoutes);
 
-// Rotas de notificações Push
-const pushNotificationRoutes = require('./routes/pushNotification.routes');
-app.use('/api/push-notifications', authenticateJWT, pushNotificationRoutes);
-
-// Rotas de tokens Push
-const pushTokenRoutes = require('./routes/pushToken.routes');
-app.use('/api/push-tokens', pushTokenRoutes);
-
 // Rotas de Analytics
 const analyticsRoutes = require('./routes/analytics.routes');
-app.use('/api/analytics', resolveTenantMiddleware, analyticsRoutes);
+app.use('/api/analytics', resolveClubMiddleware, analyticsRoutes);
 
 // Rotas de Roles e Permissões
 const roleRoutes = require('./routes/role.routes');
-app.use('/api/roles', resolveTenantMiddleware, authenticateJWT, roleRoutes);
+app.use('/api/roles', resolveClubMiddleware, authenticateJWT, roleRoutes);
 
 // Rotas de Grupos
 const groupRoutes = require('./routes/group.routes');
-app.use('/api/groups', resolveTenantMiddleware, authenticateJWT, groupRoutes);
+app.use('/api/groups', resolveClubMiddleware, authenticateJWT, groupRoutes);
 
 // Rotas de taxas de usuários (com autenticação JWT)
 const userTaxesRoutes = require('./routes/userTaxes.routes');

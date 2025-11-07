@@ -7,12 +7,14 @@ export const getMenuItems = (t) => [
   {
     isHeadr: true,
     title: t('menu:sections.menu'),
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.dashboard'),
     icon: "heroicons-outline:home",
     isHide: true,
     link: "/dashboard",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.adminDashboard'),
@@ -24,85 +26,100 @@ export const getMenuItems = (t) => [
   {
     isHeadr: true,
     title: t('menu:sections.financial'),
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.withdraw'),
     isHide: true,
     icon: "fa6-brands:pix",
     link: "/withdraw",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.deposit'),
     isHide: true,
     icon: "heroicons-outline:arrow-down-on-square",
     link: "/deposit",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.transfer'),
     isHide: true,
     icon: "heroicons-outline:switch-horizontal",
     link: "/transfer",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.exchange'),
     isHide: true,
     icon: "material-symbols:currency-exchange-rounded",
     link: "/exchange",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.statement'),
     isHide: true,
     icon: "heroicons-outline:banknotes",
     link: "/statement",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.incomeReport'),
     isHide: true,
     icon: "heroicons-outline:document-chart-bar",
     link: "/tax-reports/income",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     isHeadr: true,
     title: t('menu:sections.investments'),
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.investments'),
     isHide: true,
     icon: "heroicons-outline:trending-up",
     link: "/investments",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     isHeadr: true,
     title: t('menu:sections.userSettings'),
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.accountData'),
     isHide: true,
     icon: "heroicons-outline:user-circle",
     link: "/profile",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.documentValidation'),
     isHide: true,
     icon: "heroicons-outline:identification",
     link: "/document-validation",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.feesAndDeadlines'),
     isHide: true,
     icon: "heroicons-outline:currency-dollar",
     link: "/fees",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.security'),
     isHide: true,
     icon: "heroicons-outline:shield-check",
-    link: "/security"
+    link: "/security",
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     isHeadr: true,
     title: t('menu:sections.companySettings'),
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.userSearch'),
@@ -110,6 +127,7 @@ export const getMenuItems = (t) => [
     icon: "heroicons-outline:search",
     link: "/admin/users",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.companyTransactions'),
@@ -117,6 +135,7 @@ export const getMenuItems = (t) => [
     icon: "heroicons-outline:credit-card",
     link: "/admin/transactions",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: t('menu:items.stakesManagement'),
@@ -124,11 +143,13 @@ export const getMenuItems = (t) => [
     icon: "heroicons-outline:chart-pie",
     link: "/admin/company-stakes",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     isHeadr: true,
     title: "Marketplace",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: "Analytics",
@@ -136,6 +157,7 @@ export const getMenuItems = (t) => [
     icon: "heroicons:chart-bar",
     link: "/marketplace-analytics",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: "Produtos",
@@ -143,6 +165,7 @@ export const getMenuItems = (t) => [
     icon: "heroicons:shopping-bag",
     link: "/products",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     title: "Merchants",
@@ -150,6 +173,7 @@ export const getMenuItems = (t) => [
     icon: "heroicons:building-storefront",
     link: "/merchants",
     requiredPermissions: ["canViewCompanySettings"],
+    hideForSystemAdmin: true, // Ocultar para super admins do sistema
   },
   {
     isHeadr: true,
@@ -157,83 +181,80 @@ export const getMenuItems = (t) => [
     requiredPermissions: ["canViewSystemSettings"],
   },
   {
-    title: t('menu:items.userManagement'),
+    title: t('menu:items.clubs'),
     isHide: true,
-    icon: "heroicons-outline:users",
-    link: "/system/users",
+    icon: "heroicons-outline:building-office-2",
+    link: "/system/clubs",
     requiredPermissions: ["canViewSystemSettings"],
   },
   {
-    title: t('menu:items.companyManagement'),
+    title: t('menu:items.clubAdmins'),
     isHide: true,
-    icon: "heroicons-outline:building-office",
-    link: "/admin/companies",
+    icon: "heroicons-outline:user-group",
+    link: "/system/club-admins",
     requiredPermissions: ["canViewSystemSettings"],
   },
   {
-    title: t('menu:items.documentValidationSystem'),
+    title: t('menu:items.superAdmins'),
     isHide: true,
-    icon: "heroicons-outline:identification",
-    link: "/system/document-validation",
+    icon: "heroicons-outline:shield-check",
+    link: "/system/super-admins",
     requiredPermissions: ["canViewSystemSettings"],
   },
   {
-    title: t('menu:items.withdrawalManagement'),
+    title: "Usuários dos Clubes",
     isHide: true,
-    icon: "heroicons-outline:banknotes",
-    link: "/system/withdrawals",
+    icon: "heroicons:users",
+    link: "/system/club-users",
     requiredPermissions: ["canViewSystemSettings"],
   },
   {
-    title: t('menu:items.whatsappMessages'),
+    title: "Gestão de Grupos",
+    isHide: true,
+    icon: "heroicons:user-group",
+    link: "/system/club-groups",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: "Cobrança dos Clubes",
+    isHide: true,
+    icon: "heroicons:credit-card",
+    link: "/system/billing",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: "Transações dos Clubes",
+    isHide: true,
+    icon: "heroicons:arrow-path",
+    link: "/system/club-transactions",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: "Layout do App",
+    isHide: true,
+    icon: "heroicons:device-phone-mobile",
+    link: "/system/app-layout",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: t('menu:items.modules'),
+    isHide: true,
+    icon: "heroicons:squares-2x2",
+    link: "/system/modules",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+    {
+    title: "Notificações Push",
+    isHide: true,
+    icon: "heroicons:bell",
+    link: "/system/notifications",
+    requiredPermissions: ["canViewSystemSettings"],
+  },
+  {
+    title: "Envio WhatsApp",
     isHide: true,
     icon: "fa6-brands:whatsapp",
     link: "/system/whatsapp",
     requiredPermissions: ["canViewSystemSettings"],
-  },
-  {
-    title: t('menu:items.financialReports'),
-    isHide: true,
-    icon: "heroicons-outline:document-chart-bar",
-    link: "/system/financial-report",
-    requiredPermissions: ["canViewSystemSettings"],
-  },
-  {
-    title: t('menu:items.globalSettings'),
-    isHide: true,
-    icon: "heroicons-outline:cog-6-tooth",
-    link: "/system/settings",
-    requiredPermissions: ["canViewSystemSettings"],
-  },
-  {
-    title: t('menu:items.contractDeploy'),
-    isHide: true,
-    icon: "heroicons:rocket-launch",
-    link: "/system/contracts/deploy",
-    requiredPermissions: ["canViewSystemSettings"],
-  },
-  {
-    title: t('menu:items.contractInteraction'),
-    isHide: true,
-    icon: "heroicons-outline:code-bracket",
-    link: "/contracts/interact",
-    requiredPermissions: ["canViewSystemSettings"],
-  },
-  {
-    title: t('menu:items.translations'),
-    isHide: true,
-    icon: "heroicons-outline:language",
-    link: "/system/translations",
-    requiredPermissions: ["canViewSystemSettings"],
-  },
-  {
-    isHeadr: true,
-    title: t('menu:sections.support'),
-  },
-  {
-    title: t('menu:items.helpCenter'),
-    isHide: true,
-    icon: "heroicons-outline:question-mark-circle",
-    link: "/help",
   },
 ];

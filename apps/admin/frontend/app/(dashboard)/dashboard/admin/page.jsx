@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Card from "@/components/ui/Card";
-import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 import { Icon } from "@iconify/react";
 import useAuthStore from "@/store/authStore";
 import { useRouter } from "next/navigation";
@@ -54,8 +53,14 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Verificar se usuário é APP_ADMIN ou SUPER_ADMIN
+  // Verificar se usuário é APP_ADMIN, SUPER_ADMIN ou Super Admin do Sistema
   const isSuperAdmin = React.useMemo(() => {
+    // Super admins do sistema (email @clubedigital.com)
+    if (user?.email?.includes('@clubedigital.com')) {
+      return true;
+    }
+
+    // Clube admins com role APP_ADMIN ou SUPER_ADMIN
     if (!user?.userCompanies || !Array.isArray(user.userCompanies)) {
       return false;
     }
@@ -80,21 +85,11 @@ const AdminDashboard = () => {
       setLoading(true);
       setError(null);
 
-      // Buscar estatísticas gerais
-      const response = await api.get('/api/admin/stats');
-
-      // Buscar estatísticas de documentos
-      const documentsResponse = await api.get('/api/user-documents/stats');
+      // Buscar estatísticas gerais (incluindo global_stats)
+      const response = await api.get('/api/admin/dashboard/stats');
 
       if (response.data.success) {
-        const statsData = response.data.data;
-
-        // Adicionar estatísticas de documentos se disponíveis
-        if (documentsResponse.data.success) {
-          statsData.documents = documentsResponse.data.data;
-        }
-
-        setStats(statsData);
+        setStats(response.data.data);
       } else {
         throw new Error(response.data.message || 'Erro ao buscar estatísticas');
       }
@@ -167,7 +162,6 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <div className="space-y-5">
-        <HomeBredCurbs title={t('dashboard.pageTitle')} />
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <Icon icon="eos-icons:loading" className="w-12 h-12 text-primary-500 mx-auto mb-2" />
@@ -181,7 +175,6 @@ const AdminDashboard = () => {
   if (error) {
     return (
       <div className="space-y-5">
-        <HomeBredCurbs title={t('dashboard.pageTitle')} />
         <Card>
           <div className="text-center py-12">
             <Icon icon="heroicons:exclamation-triangle" className="w-16 h-16 text-danger-500 mx-auto mb-4" />
@@ -203,86 +196,117 @@ const AdminDashboard = () => {
 
   return (
     <div className="space-y-5">
-      <HomeBredCurbs title={t('dashboard.pageTitle')} />
-
-      {/* Estatísticas principais */}
+      {/* Estatísticas Globais - Linha 1 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title={t('dashboard.stats.users.title')}
-          value={stats?.users?.total || 0}
-          subtitle={`${stats?.users?.active || 0} ${t('dashboard.stats.users.active')} (${stats?.users?.activePercentage || 0}%)`}
+          title="Total de Usuários"
+          value={stats?.globalStats?.totalUsers || 0}
+          subtitle={`${stats?.globalStats?.activeUsers30d || 0} ativos nos últimos 30 dias`}
           icon="heroicons:users"
           color="primary"
           trend={{
             direction: 'up',
-            value: `+${stats?.users?.newLast7Days || 0} ${t('dashboard.stats.users.newLast7Days')}`
+            value: `+${stats?.globalStats?.newUsers || 0} novos`
           }}
         />
 
         <StatCard
-          title={t('dashboard.stats.companies.title')}
-          value={stats?.companies?.total || 0}
-          subtitle={`${stats?.companies?.active || 0} ${t('dashboard.stats.companies.active')} (${stats?.companies?.activePercentage || 0}%)`}
-          icon="heroicons:building-office-2"
-          color="success"
-          trend={{
-            direction: 'up',
-            value: `+${stats?.companies?.newLast7Days || 0} ${t('dashboard.stats.companies.newLast7Days')}`
-          }}
-        />
-
-        <StatCard
-          title={t('dashboard.stats.withdrawals.title')}
-          value={stats?.withdrawals?.pending || 0}
-          subtitle={`${stats?.withdrawals?.completed || 0} ${t('dashboard.stats.withdrawals.completed')}`}
-          icon="heroicons:banknotes"
-          color="warning"
-        />
-
-        <StatCard
-          title={t('dashboard.stats.transactions.title')}
-          value={stats?.transactions?.total || 0}
-          subtitle={`${stats?.transactions?.successRate || 0}% ${t('dashboard.stats.transactions.successRate')}`}
-          icon="heroicons:chart-bar"
+          title="Total de Consumidores"
+          value={stats?.globalStats?.totalConsumers || 0}
+          subtitle="Usuários consumidores"
+          icon="heroicons:user-group"
           color="info"
+        />
+
+        <StatCard
+          title="Total de Comerciantes"
+          value={stats?.globalStats?.totalMerchants || 0}
+          subtitle="Estabelecimentos parceiros"
+          icon="heroicons:building-storefront"
+          color="success"
+        />
+
+        <StatCard
+          title="Total de Produtos"
+          value={stats?.globalStats?.totalProducts || 0}
+          subtitle="Produtos cadastrados"
+          icon="heroicons:cube"
+          color="warning"
         />
       </div>
 
-      {/* Estatísticas de documentos */}
+      {/* Estatísticas Globais - Linha 2: Financeiro */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title={t('dashboard.stats.documents.pending')}
-          value={stats?.documents?.pending || 0}
-          subtitle={`${stats?.documents?.total || 0} ${t('dashboard.stats.documents.total')}`}
-          icon="heroicons:document-check"
-          color="warning"
-        />
-
-        <StatCard
-          title={t('dashboard.stats.documents.approved')}
-          value={stats?.documents?.approved || 0}
-          subtitle={t('dashboard.stats.documents.approvedSubtitle')}
-          icon="heroicons:check-circle"
+          title="Receita Total"
+          value={`R$ ${(stats?.globalStats?.totalRevenue || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
+          subtitle={`R$ ${(stats?.globalStats?.revenue30d || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} últimos 30 dias`}
+          icon="heroicons:banknotes"
           color="success"
         />
 
         <StatCard
-          title={t('dashboard.stats.documents.rejected')}
-          value={stats?.documents?.rejected || 0}
-          subtitle={t('dashboard.stats.documents.rejectedSubtitle')}
-          icon="heroicons:x-circle"
+          title="Cashback Pago"
+          value={`R$ ${(stats?.globalStats?.totalCashbackPaid || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
+          subtitle={`R$ ${(stats?.globalStats?.cashback30d || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} últimos 30 dias`}
+          icon="heroicons:gift"
+          color="warning"
+        />
+
+        <StatCard
+          title="Taxas da Plataforma"
+          value={`R$ ${(stats?.globalStats?.totalPlatformFees || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
+          subtitle="Total arrecadado"
+          icon="heroicons:receipt-percent"
+          color="info"
+        />
+
+        <StatCard
+          title="Total de Compras"
+          value={stats?.globalStats?.totalPurchases || 0}
+          subtitle={`${stats?.globalStats?.purchases30d || 0} últimos 30 dias`}
+          icon="heroicons:shopping-cart"
+          color="primary"
+        />
+      </div>
+
+      {/* Estatísticas Globais - Linha 3: Clubes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard
+          title="Total de Clubes"
+          value={stats?.totalClubs || 0}
+          subtitle={`${stats?.activeClubs || 0} ativos`}
+          icon="heroicons:building-office-2"
+          color="primary"
+        />
+
+        <StatCard
+          title="Novos Clubes"
+          value={stats?.globalStats?.newClubs || 0}
+          subtitle="Período recente"
+          icon="heroicons:plus-circle"
+          color="success"
+          trend={{
+            direction: 'up',
+            value: `+${stats?.globalStats?.newClubs || 0}`
+          }}
+        />
+
+        <StatCard
+          title="Clubes Inativos"
+          value={stats?.globalStats?.churnedClubs || 0}
+          subtitle="Clubes que saíram"
+          icon="heroicons:minus-circle"
           color="danger"
         />
 
-        <div className="flex items-center justify-center">
-          <button
-            onClick={() => router.push('/system/document-validation')}
-            className="btn btn-outline-primary w-full h-full min-h-[100px] flex flex-col items-center justify-center gap-2 hover:bg-primary-500 hover:text-white transition-all"
-          >
-            <Icon icon="heroicons:arrow-right-circle" className="w-8 h-8" />
-            <span className="text-sm font-medium">{t('dashboard.stats.documents.viewAll')}</span>
-          </button>
-        </div>
+        <StatCard
+          title="Data dos Dados"
+          value={stats?.globalStats?.date ? new Date(stats.globalStats.date).toLocaleDateString('pt-BR') : 'N/A'}
+          subtitle="Última atualização"
+          icon="heroicons:calendar"
+          color="info"
+        />
       </div>
 
       {/* Gráfico e métricas */}

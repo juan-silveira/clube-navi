@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Gerenciamento de Saques - Coinage',
+  title: 'Gerenciamento de Saques - Clube Digital',
   description: 'Painel administrativo para gerenciar saques pendentes.',
 }
 
