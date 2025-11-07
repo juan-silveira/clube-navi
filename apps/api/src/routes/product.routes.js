@@ -71,6 +71,12 @@ router.patch('/:id/stock', authenticateToken, productController.updateStock);
 router.post('/:id/upload-image', authenticateToken, upload.single('image'), productController.uploadProductImage);
 
 /**
+ * GET /api/products/stats
+ * Obter estatísticas gerais de produtos (Admin)
+ */
+router.get('/stats', authenticateToken, productController.getProductStats);
+
+/**
  * GET /api/products/categories/list
  * Listar categorias disponíveis
  */

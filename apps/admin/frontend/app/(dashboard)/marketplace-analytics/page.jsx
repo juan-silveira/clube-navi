@@ -5,6 +5,8 @@ import Icon from "@/components/ui/Icon";
 import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 import productService from "@/services/productService";
 import merchantService from "@/services/merchantService";
+import purchaseService from "@/services/purchaseService";
+import cashbackService from "@/services/cashbackService";
 
 const MarketplaceAnalytics = () => {
   const [loading, setLoading] = useState(true);
@@ -41,11 +43,14 @@ const MarketplaceAnalytics = () => {
   const loadAnalytics = async () => {
     setLoading(true);
     try {
-      // Carregar stats de produtos
-      const productStatsResponse = await productService.getProductStats();
-
-      // Carregar stats de merchants
-      const merchantStatsResponse = await merchantService.getMerchantStats();
+      // Carregar todas as stats em paralelo
+      const [productStatsResponse, merchantStatsResponse, purchaseStatsResponse, cashbackStatsResponse] =
+        await Promise.all([
+          productService.getProductStats(),
+          merchantService.getMerchantStats(),
+          purchaseService.getPurchaseStats(),
+          cashbackService.getCashbackStats(),
+        ]);
 
       // Montar objeto de stats com dados reais
       setStats({
@@ -61,13 +66,13 @@ const MarketplaceAnalytics = () => {
           approved: 0,
           rejected: 0,
         },
-        purchases: {
+        purchases: purchaseStatsResponse.data || {
           total: 0,
           pending: 0,
           confirmed: 0,
           totalAmount: 0,
         },
-        cashback: {
+        cashback: cashbackStatsResponse.data || {
           totalDistributed: 0,
           totalPending: 0,
           averagePercentage: 0,

@@ -489,6 +489,55 @@ const getMerchantStats = async (req, res) => {
   }
 };
 
+/**
+ * Obter estatísticas gerais de produtos (Admin)
+ */
+const getProductStats = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+
+    // Contar total de produtos
+    const total = await prisma.product.count();
+
+    // Contar produtos ativos
+    const active = await prisma.product.count({
+      where: { isActive: true }
+    });
+
+    // Contar produtos com estoque baixo (menos de 10 unidades, mas maior que 0)
+    const lowStock = await prisma.product.count({
+      where: {
+        stock: {
+          gt: 0,
+          lt: 10
+        }
+      }
+    });
+
+    // Contar produtos sem estoque
+    const outOfStock = await prisma.product.count({
+      where: { stock: 0 }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        total,
+        active,
+        lowStock,
+        outOfStock
+      }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao obter estatísticas de produtos:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao obter estatísticas de produtos',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createProduct,
   listProducts,
@@ -499,5 +548,6 @@ module.exports = {
   uploadProductImage,
   getCategories,
   getFeaturedProducts,
-  getMerchantStats
+  getMerchantStats,
+  getProductStats
 };

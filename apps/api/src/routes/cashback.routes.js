@@ -20,6 +20,12 @@ router.get('/config', authenticateToken, cashbackController.getTenantConfig);
 router.get('/stats', authenticateToken, cashbackController.getUserStats);
 
 /**
+ * GET /api/cashback/admin/stats
+ * Obter estatísticas gerais de cashback (Admin)
+ */
+router.get('/admin/stats', authenticateToken, cashbackController.getCashbackStats);
+
+/**
  * POST /api/cashback/calculate
  * Calcular distribuição de cashback (simulação)
  * Body: { totalAmount, cashbackPercentage }

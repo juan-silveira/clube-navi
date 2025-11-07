@@ -1047,6 +1047,61 @@ const uploadProfilePicture = async (req, res) => {
   }
 };
 
+/**
+ * Obter estatísticas de merchants
+ */
+const getMerchantStats = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+
+    // Contar total de merchants
+    const total = await prisma.user.count({
+      where: { userType: 'merchant' }
+    });
+
+    // Contar merchants pendentes
+    const pending = await prisma.user.count({
+      where: {
+        userType: 'merchant',
+        merchantStatus: 'pending'
+      }
+    });
+
+    // Contar merchants aprovados
+    const approved = await prisma.user.count({
+      where: {
+        userType: 'merchant',
+        merchantStatus: 'approved'
+      }
+    });
+
+    // Contar merchants rejeitados
+    const rejected = await prisma.user.count({
+      where: {
+        userType: 'merchant',
+        merchantStatus: 'rejected'
+      }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        total,
+        pending,
+        approved,
+        rejected
+      }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao obter estatísticas de merchants:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao obter estatísticas de merchants',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getUserById,
@@ -1068,5 +1123,6 @@ module.exports = {
   getUserSavedBalances,
   updateUserLanguage,
   getUserBalance,
-  uploadProfilePicture
+  uploadProfilePicture,
+  getMerchantStats
 };

@@ -282,10 +282,66 @@ const getCashbackHistory = async (req, res) => {
   }
 };
 
+/**
+ * Obter estatísticas gerais de cashback (Admin)
+ */
+const getCashbackStats = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+
+    // Somar total de cashback distribuído aos consumidores
+    const totalDistributedResult = await prisma.cashbackTransaction.aggregate({
+      where: {
+        type: 'consumer_cashback',
+        status: 'completed'
+      },
+      _sum: {
+        amount: true
+      }
+    });
+
+    // Somar cashback pendente
+    const totalPendingResult = await prisma.cashbackTransaction.aggregate({
+      where: {
+        type: 'consumer_cashback',
+        status: 'pending'
+      },
+      _sum: {
+        amount: true
+      }
+    });
+
+    // Calcular média de porcentagem de cashback dos produtos
+    const averagePercentageResult = await prisma.product.aggregate({
+      where: { isActive: true },
+      _avg: {
+        cashbackPercentage: true
+      }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        totalDistributed: totalDistributedResult._sum.amount || 0,
+        totalPending: totalPendingResult._sum.amount || 0,
+        averagePercentage: averagePercentageResult._avg.cashbackPercentage || 0
+      }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao obter estatísticas de cashback:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao obter estatísticas de cashback',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   getTenantConfig,
   getUserStats,
   calculateDistribution,
   processPurchaseCashback,
-  getCashbackHistory
+  getCashbackHistory,
+  getCashbackStats
 };

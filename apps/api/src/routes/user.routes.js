@@ -950,4 +950,25 @@ router.post('/profile-picture', authenticateJWT, upload.single('profilePicture')
  */
 router.put('/language', jwtMiddleware.authenticateToken, userController.updateUserLanguage);
 
+/**
+ * GET /api/users/merchants/stats
+ * Obter estatísticas de merchants (Admin)
+ * @route GET /api/users/merchants/stats
+ * @group User - Operações de usuário
+ * @security JWT
+ * @returns {object} 200 - Estatísticas de merchants
+ *     example:
+ *       {
+ *         "success": true,
+ *         "data": {
+ *           "total": 48,
+ *           "pending": 12,
+ *           "approved": 34,
+ *           "rejected": 2
+ *         }
+ *       }
+ * @returns {object} 500 - Erro interno
+ */
+router.get('/merchants/stats', jwtMiddleware.authenticateToken, userController.getMerchantStats);
+
 module.exports = router; 
