@@ -5,6 +5,8 @@
  */
 
 const { v4: uuidv4 } = require('uuid');
+const s3Service = require('../services/s3.service');
+const productService = require('../services/product.service');
 
 /**
  * Criar novo produto (apenas merchants)
@@ -12,73 +14,10 @@ const { v4: uuidv4 } = require('uuid');
 const createProduct = async (req, res) => {
   try {
     const prisma = req.tenantPrisma;
-    const userId = req.user.id; // Do middleware de autenticação
-    const {
-      name,
-      description,
-      price,
-      cashbackPercentage,
-      imageUrl,
-      category,
-      stock
-    } = req.body;
+    const userId = req.user.id;
+    const productData = req.body;
 
-    // Validações
-    if (!name || !description || !price) {
-      return res.status(400).json({
-        success: false,
-        message: 'Nome, descrição e preço são obrigatórios'
-      });
-    }
-
-    if (price <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'Preço deve ser maior que zero'
-      });
-    }
-
-    if (cashbackPercentage < 0 || cashbackPercentage > 100) {
-      return res.status(400).json({
-        success: false,
-        message: 'Percentual de cashback deve estar entre 0 e 100'
-      });
-    }
-
-    // Verificar se usuário é merchant
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { userType: true, merchantStatus: true }
-    });
-
-    if (!user || user.userType !== 'merchant') {
-      return res.status(403).json({
-        success: false,
-        message: 'Apenas comerciantes podem criar produtos'
-      });
-    }
-
-    if (user.merchantStatus !== 'approved') {
-      return res.status(403).json({
-        success: false,
-        message: 'Comerciante precisa estar aprovado para criar produtos'
-      });
-    }
-
-    // Criar produto
-    const product = await prisma.product.create({
-      data: {
-        merchantId: userId,
-        name,
-        description,
-        price,
-        cashbackPercentage: cashbackPercentage || 0,
-        imageUrl: imageUrl || null,
-        category: category || null,
-        stock: stock || 0,
-        isActive: true
-      }
-    });
+    const product = await productService.createProduct(prisma, userId, productData);
 
     console.log(`✅ Produto criado: ${product.name} (ID: ${product.id})`);
 
@@ -89,6 +28,26 @@ const createProduct = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao criar produto:', error);
+
+    // Handle validation errors with 400 status
+    if (error.message.includes('obrigatórios') ||
+        error.message.includes('maior que zero') ||
+        error.message.includes('entre 0 e 100')) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('comerciantes') ||
+        error.message.includes('aprovado')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao criar produto',
@@ -109,74 +68,32 @@ const listProducts = async (req, res) => {
     const {
       merchantId,
       category,
-      isActive,
+      minPrice,
+      maxPrice,
       search,
+      page = 1,
       limit = 20,
-      offset = 0
+      orderBy = 'createdAt',
+      order = 'desc'
     } = req.query;
 
-    // Construir filtros
-    const where = {};
+    const filters = {
+      merchantId,
+      category,
+      minPrice,
+      maxPrice,
+      search,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      orderBy,
+      order
+    };
 
-    // Se usuário é merchant, mostrar apenas seus produtos
-    if (req.user?.userType === 'merchant') {
-      where.merchantId = userId;
-    } else {
-      // Consumers veem apenas produtos ativos
-      where.isActive = true;
-
-      // Pode filtrar por merchant específico
-      if (merchantId) {
-        where.merchantId = merchantId;
-      }
-    }
-
-    // Filtros adicionais
-    if (category) {
-      where.category = category;
-    }
-
-    if (isActive !== undefined) {
-      where.isActive = isActive === 'true';
-    }
-
-    if (search) {
-      where.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { description: { contains: search, mode: 'insensitive' } }
-      ];
-    }
-
-    // Buscar produtos
-    const [products, total] = await Promise.all([
-      prisma.product.findMany({
-        where,
-        take: parseInt(limit),
-        skip: parseInt(offset),
-        orderBy: { createdAt: 'desc' },
-        include: {
-          merchant: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              email: true,
-              profilePicture: true
-            }
-          }
-        }
-      }),
-      prisma.product.count({ where })
-    ]);
+    const result = await productService.listProducts(prisma, userId, filters);
 
     res.json({
       success: true,
-      data: {
-        products,
-        total,
-        limit: parseInt(limit),
-        offset: parseInt(offset)
-      }
+      data: result
     });
   } catch (error) {
     console.error('❌ Erro ao listar produtos:', error);
@@ -195,37 +112,9 @@ const getProductById = async (req, res) => {
   try {
     const prisma = req.tenantPrisma;
     const { id } = req.params;
+    const userId = req.user?.id;
 
-    const product = await prisma.product.findUnique({
-      where: { id },
-      include: {
-        merchant: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-            profilePicture: true,
-            merchantStatus: true
-          }
-        }
-      }
-    });
-
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produto não encontrado'
-      });
-    }
-
-    // Verificar permissão (merchants só veem seus próprios produtos inativos)
-    if (!product.isActive && req.user?.userType === 'consumer') {
-      return res.status(404).json({
-        success: false,
-        message: 'Produto não encontrado'
-      });
-    }
+    const product = await productService.getProductById(prisma, id, userId);
 
     res.json({
       success: true,
@@ -233,6 +122,17 @@ const getProductById = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao buscar produto:', error);
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrado') ||
+        error.message.includes('não disponível') ||
+        error.message.includes('não tem permissão')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao buscar produto',
@@ -251,51 +151,7 @@ const updateProduct = async (req, res) => {
     const { id } = req.params;
     const updateData = req.body;
 
-    // Verificar se produto existe e pertence ao merchant
-    const product = await prisma.product.findUnique({
-      where: { id }
-    });
-
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produto não encontrado'
-      });
-    }
-
-    if (product.merchantId !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: 'Você não tem permissão para editar este produto'
-      });
-    }
-
-    // Validar cashbackPercentage se fornecido
-    if (updateData.cashbackPercentage !== undefined) {
-      if (updateData.cashbackPercentage < 0 || updateData.cashbackPercentage > 100) {
-        return res.status(400).json({
-          success: false,
-          message: 'Percentual de cashback deve estar entre 0 e 100'
-        });
-      }
-    }
-
-    // Validar price se fornecido
-    if (updateData.price !== undefined && updateData.price <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'Preço deve ser maior que zero'
-      });
-    }
-
-    // Atualizar produto
-    const updatedProduct = await prisma.product.update({
-      where: { id },
-      data: {
-        ...updateData,
-        updatedAt: new Date()
-      }
-    });
+    const updatedProduct = await productService.updateProduct(prisma, id, userId, updateData);
 
     console.log(`✅ Produto atualizado: ${updatedProduct.name} (ID: ${id})`);
 
@@ -306,6 +162,32 @@ const updateProduct = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao atualizar produto:', error);
+
+    // Handle validation errors with 400 status
+    if (error.message.includes('maior que zero') ||
+        error.message.includes('entre 0 e 100')) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrado')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('não tem permissão')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao atualizar produto',
@@ -323,32 +205,9 @@ const deleteProduct = async (req, res) => {
     const userId = req.user.id;
     const { id } = req.params;
 
-    // Verificar se produto existe e pertence ao merchant
-    const product = await prisma.product.findUnique({
-      where: { id }
-    });
+    const deletedProduct = await productService.deleteProduct(prisma, id, userId);
 
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produto não encontrado'
-      });
-    }
-
-    if (product.merchantId !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: 'Você não tem permissão para deletar este produto'
-      });
-    }
-
-    // Desativar ao invés de deletar (soft delete)
-    await prisma.product.update({
-      where: { id },
-      data: { isActive: false }
-    });
-
-    console.log(`🗑️ Produto desativado: ${product.name} (ID: ${id})`);
+    console.log(`🗑️ Produto desativado: ${deletedProduct.name} (ID: ${id})`);
 
     res.json({
       success: true,
@@ -356,6 +215,23 @@ const deleteProduct = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao deletar produto:', error);
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrado')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('não tem permissão')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao deletar produto',
@@ -374,9 +250,90 @@ const updateStock = async (req, res) => {
     const { id } = req.params;
     const { stock, operation } = req.body; // operation: 'set', 'add', 'subtract'
 
-    // Verificar se produto existe e pertence ao merchant
+    // Get current product stock for comparison
+    const currentProduct = await prisma.product.findUnique({
+      where: { id },
+      select: { stock: true }
+    });
+
+    if (!currentProduct) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produto não encontrado'
+      });
+    }
+
+    const updatedProduct = await productService.updateStock(prisma, id, userId, stock, operation);
+
+    console.log(`📦 Estoque atualizado: ${updatedProduct.name} - ${updatedProduct.stock} unidades`);
+
+    res.json({
+      success: true,
+      message: 'Estoque atualizado com sucesso',
+      data: {
+        product: updatedProduct,
+        previousStock: currentProduct.stock,
+        newStock: updatedProduct.stock
+      }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao atualizar estoque:', error);
+
+    // Handle validation errors with 400 status
+    if (error.message.includes('Quantidade inválida') ||
+        error.message.includes('Operação inválida') ||
+        error.message.includes('não pode ser negativo')) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrado')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('não tem permissão')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao atualizar estoque',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Upload de imagem do produto
+ */
+const uploadProductImage = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+    const userId = req.user.id;
+    const { id: productId } = req.params;
+
+    // Verificar se arquivo foi enviado
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: 'Nenhuma imagem foi enviada'
+      });
+    }
+
+    // Buscar produto
     const product = await prisma.product.findUnique({
-      where: { id }
+      where: { id: productId },
+      select: { merchantId: true, imageUrl: true }
     });
 
     if (!product) {
@@ -386,45 +343,147 @@ const updateStock = async (req, res) => {
       });
     }
 
+    // Verificar se usuário é o dono do produto
     if (product.merchantId !== userId) {
       return res.status(403).json({
         success: false,
-        message: 'Você não tem permissão para atualizar este produto'
+        message: 'Você não tem permissão para alterar este produto'
       });
     }
 
-    let newStock = product.stock;
+    // Upload da imagem para S3
+    const fileName = `products/${req.tenant?.slug || 'default'}/${productId}/${uuidv4()}-${req.file.originalname}`;
+    const imageUrl = await s3Service.uploadBuffer(
+      req.file.buffer,
+      fileName,
+      req.file.mimetype
+    );
 
-    if (operation === 'set') {
-      newStock = stock;
-    } else if (operation === 'add') {
-      newStock = product.stock + stock;
-    } else if (operation === 'subtract') {
-      newStock = Math.max(0, product.stock - stock);
-    }
+    console.log(`✅ Imagem do produto enviada para S3: ${imageUrl}`);
 
-    // Atualizar estoque
+    // Atualizar URL da imagem no produto
     const updatedProduct = await prisma.product.update({
-      where: { id },
-      data: { stock: newStock }
+      where: { id: productId },
+      data: { imageUrl }
     });
 
-    console.log(`📦 Estoque atualizado: ${updatedProduct.name} - ${newStock} unidades`);
+    // Se havia imagem anterior, deletar do S3 (opcional)
+    if (product.imageUrl) {
+      try {
+        const oldKey = product.imageUrl.split('.com/')[1];
+        if (oldKey) {
+          await s3Service.deleteFile(oldKey);
+          console.log(`🗑️ Imagem antiga deletada: ${oldKey}`);
+        }
+      } catch (deleteError) {
+        console.warn('⚠️ Erro ao deletar imagem antiga:', deleteError.message);
+        // Não falhar a requisição se não conseguir deletar a imagem antiga
+      }
+    }
 
     res.json({
       success: true,
-      message: 'Estoque atualizado com sucesso',
+      message: 'Imagem do produto atualizada com sucesso',
       data: {
-        product: updatedProduct,
-        previousStock: product.stock,
-        newStock
+        productId: updatedProduct.id,
+        imageUrl: updatedProduct.imageUrl
       }
     });
+
   } catch (error) {
-    console.error('❌ Erro ao atualizar estoque:', error);
+    console.error('❌ Erro ao fazer upload da imagem:', error);
     res.status(500).json({
       success: false,
-      message: 'Erro ao atualizar estoque',
+      message: 'Erro ao fazer upload da imagem',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Listar categorias disponíveis
+ */
+const getCategories = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+
+    const categories = await productService.getCategories(prisma);
+
+    res.json({
+      success: true,
+      data: { categories }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao listar categorias:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao listar categorias',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Listar produtos em destaque
+ */
+const getFeaturedProducts = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+    const { limit = 10, sortBy = 'cashback' } = req.query;
+
+    const products = await productService.getFeaturedProducts(
+      prisma,
+      parseInt(limit),
+      sortBy
+    );
+
+    res.json({
+      success: true,
+      data: { products, count: products.length }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao listar produtos em destaque:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao listar produtos em destaque',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Obter estatísticas de produtos do merchant
+ */
+const getMerchantStats = async (req, res) => {
+  try {
+    const prisma = req.tenantPrisma;
+    const { merchantId } = req.params;
+    const userId = req.user.id;
+
+    // Verificar se usuário tem permissão (só pode ver próprias stats ou se for admin)
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { userType: true }
+    });
+
+    if (merchantId !== userId && user.userType !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Você não tem permissão para visualizar estas estatísticas'
+      });
+    }
+
+    const stats = await productService.getMerchantProductStats(prisma, merchantId);
+
+    res.json({
+      success: true,
+      data: { stats }
+    });
+  } catch (error) {
+    console.error('❌ Erro ao obter estatísticas:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao obter estatísticas',
       error: error.message
     });
   }
@@ -436,5 +495,9 @@ module.exports = {
   getProductById,
   updateProduct,
   deleteProduct,
-  updateStock
+  updateStock,
+  uploadProductImage,
+  getCategories,
+  getFeaturedProducts,
+  getMerchantStats
 };

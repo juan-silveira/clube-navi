@@ -2,6 +2,7 @@ const blockchainWorker = require('./blockchain.worker');
 const depositWorker = require('./deposit.worker');
 const withdrawWorker = require('./withdraw.worker');
 const notificationWorker = require('./notification.worker');
+const cashbackWorker = require('./cashback.worker');
 const rabbitmqConfig = require('../config/rabbitmq');
 
 /**
@@ -14,7 +15,8 @@ class WorkerManager {
       blockchain: blockchainWorker,
       deposit: depositWorker,
       withdraw: withdrawWorker,
-      notification: notificationWorker
+      notification: notificationWorker,
+      cashback: cashbackWorker
     };
     
     this.isRunning = false;
@@ -210,6 +212,7 @@ module.exports = {
     blockchainWorker,
     depositWorker,
     withdrawWorker,
-    notificationWorker
+    notificationWorker,
+    cashbackWorker
   }
 };

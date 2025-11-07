@@ -46,9 +46,10 @@ const profileRoutes = require('./routes/profile.routes');
 const s3PhotoRoutes = require('./routes/s3-photo.routes');
 const backupRoutes = require('./routes/backup.routes');
 
-// Routes multi-tenant (Products & Purchases)
+// Routes multi-tenant (Products, Purchases & Cashback)
 const productRoutes = require('./routes/product.routes');
 const purchaseRoutes = require('./routes/purchase.routes');
+const cashbackRoutes = require('./routes/cashback.routes');
 
 // Importar serviços
 const logService = require('./services/log.service');
@@ -773,9 +774,10 @@ app.use('/api/email-confirmation', loginRateLimiter, emailConfirmationRoutes);
 // Rotas de usuários (com tenant resolution, autenticação JWT e refresh de cache)
 app.use('/api/users', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, addUserInfo, logAuthenticatedRequest, CacheRefreshMiddleware.refreshAfterWrite, userRoutes);
 
-// Rotas multi-tenant de produtos e compras
+// Rotas multi-tenant de produtos, compras e cashback
 app.use('/api/products', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, productRoutes);
 app.use('/api/purchases', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, purchaseRoutes);
+app.use('/api/cashback', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, cashbackRoutes);
 
 // Rotas de contratos (com autenticação e sistema de fila) - COMENTADO PARA DEBUG
 // app.use('/api/contracts', authenticateApiKey, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, contractRoutes);

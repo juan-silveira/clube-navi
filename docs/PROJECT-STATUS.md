@@ -56,6 +56,15 @@ Multi-Tenant:         ███░░░░░░░ 30% implementado (Fase 1 co
 
 ### Últimas Atualizações
 
+- ✅ **Arquitetura Service Layer e Endpoints de Cashback IMPLEMENTADOS** (2025-11-06)
+  - ✅ Refatoração completa: product.controller.js → product.service.js
+  - ✅ Refatoração completa: purchase.controller.js → purchase.service.js
+  - ✅ Novo cashback.controller.js com 5 endpoints
+  - ✅ Novo cashback.routes.js registrado em /api/cashback
+  - ✅ Service layer pattern implementado (separação business logic / HTTP)
+  - ✅ Endpoints de cashback: /config, /stats, /calculate, /history, /process
+  - ✅ Error handling consistente com status codes apropriados
+  - ✅ Melhor testabilidade e manutenibilidade do código
 - ✅ **Sistema de Produtos e Cashback Multi-Tenant IMPLEMENTADO** (2025-11-06)
   - ✅ product.controller.js - CRUD completo de produtos
   - ✅ purchase.controller.js - Sistema de compras com cashback
@@ -141,6 +150,15 @@ Multi-Tenant:         ███░░░░░░░ 30% implementado (Fase 1 co
   - [x] Distribuição automática (Consumer 50%, Platform 25%, Referrers 15%+10%)
   - [x] Suporte multi-tenant (configuração por tenant)
   - [x] Teste E2E validado
+  - [x] **Service Layer Architecture** (NOVO 2025-11-06)
+  - [x] **cashback.service.js** - Lógica de negócio centralizada
+  - [x] **cashback.controller.js** - 5 endpoints REST
+  - [x] **Endpoints de Cashback** ✅ (NOVO 2025-11-06)
+    - [x] GET /api/cashback/config - Configuração do tenant
+    - [x] GET /api/cashback/stats - Estatísticas do usuário
+    - [x] POST /api/cashback/calculate - Simulação de distribuição
+    - [x] GET /api/cashback/history - Histórico de transações (paginado)
+    - [x] POST /api/cashback/process/:purchaseId - Processar cashback
 - [ ] **Saques via PIX** ⚠️
 - [ ] **Validação de chave PIX** ⚠️
 
@@ -227,13 +245,19 @@ apps/api/
 ├── src/
 │   ├── config/                    ✅ Configurações OK
 │   ├── controllers/
-│   │   ├── product.controller.js  ✅ CRUD de produtos (NOVO 2025-11-06)
-│   │   ├── purchase.controller.js ✅ Sistema de compras (NOVO 2025-11-06)
+│   │   ├── product.controller.js  ✅ CRUD de produtos (REFATORADO 2025-11-06)
+│   │   ├── purchase.controller.js ✅ Sistema de compras (REFATORADO 2025-11-06)
+│   │   ├── cashback.controller.js ✅ Endpoints de cashback (NOVO 2025-11-06)
 │   │   └── auth.controller.js     ✅ Auth atualizado (limpo de legacy)
-│   ├── services/                  ✅ Services OK
+│   ├── services/
+│   │   ├── product.service.js     ✅ Lógica de produtos (NOVO 2025-11-06)
+│   │   ├── purchase.service.js    ✅ Lógica de compras (NOVO 2025-11-06)
+│   │   ├── cashback.service.js    ✅ Lógica de cashback (NOVO 2025-11-06)
+│   │   └── [outros services...]   ✅ Services OK
 │   ├── routes/
 │   │   ├── product.routes.js      ✅ Rotas de produtos (NOVO 2025-11-06)
-│   │   └── purchase.routes.js     ✅ Rotas de compras (NOVO 2025-11-06)
+│   │   ├── purchase.routes.js     ✅ Rotas de compras (NOVO 2025-11-06)
+│   │   └── cashback.routes.js     ✅ Rotas de cashback (NOVO 2025-11-06)
 │   ├── middleware/
 │   │   ├── auth.middleware.js     ✅ Auth OK (ATUALIZADO)
 │   │   ├── jwt.middleware.js      ✅ JWT multi-tenant (ATUALIZADO)

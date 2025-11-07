@@ -4,31 +4,7 @@
  * Usa req.tenantPrisma para isolamento de dados por tenant
  */
 
-const { Decimal } = require('@prisma/client/runtime/library');
-
-/**
- * Calcula distribuição de cashback
- * Segue as regras do tenant (configurações em tenant_cashback_configs)
- */
-const calculateCashbackDistribution = async (prisma, tenantConfig, totalAmount, cashbackPercentage) => {
-  // Total de cashback sobre o valor da compra
-  const totalCashback = totalAmount * (cashbackPercentage / 100);
-
-  // Configurações padrão (podem ser customizadas por tenant)
-  const config = tenantConfig.cashbackConfig || {
-    consumerPercent: 50,    // 50% do cashback vai para o consumidor
-    clubPercent: 25,         // 25% fica com o clube
-    consumerReferrerPercent: 15,  // 15% para quem indicou o consumidor
-    merchantReferrerPercent: 10   // 10% para quem indicou o comerciante
-  };
-
-  return {
-    consumerCashback: totalCashback * (config.consumerPercent / 100),
-    platformFee: totalCashback * (config.clubPercent / 100),
-    consumerReferrerFee: totalCashback * (config.consumerReferrerPercent / 100),
-    merchantReferrerFee: totalCashback * (config.merchantReferrerPercent / 100)
-  };
-};
+const purchaseService = require('../services/purchase.service');
 
 /**
  * Criar nova compra
@@ -38,175 +14,66 @@ const createPurchase = async (req, res) => {
     const prisma = req.tenantPrisma;
     const consumerId = req.user.id;
     const { productId, quantity = 1 } = req.body;
-
-    // Validações
-    if (!productId) {
-      return res.status(400).json({
-        success: false,
-        message: 'ID do produto é obrigatório'
-      });
-    }
-
-    // Verificar se usuário é consumer
-    const consumer = await prisma.user.findUnique({
-      where: { id: consumerId },
-      select: {
-        userType: true,
-        referredBy: true,
-        isActive: true
-      }
-    });
-
-    if (!consumer || consumer.userType !== 'consumer') {
-      return res.status(403).json({
-        success: false,
-        message: 'Apenas consumidores podem realizar compras'
-      });
-    }
-
-    if (!consumer.isActive) {
-      return res.status(403).json({
-        success: false,
-        message: 'Usuário inativo não pode realizar compras'
-      });
-    }
-
-    // Buscar produto
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-      include: {
-        merchant: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            merchantStatus: true,
-            referredBy: true
-          }
-        }
-      }
-    });
-
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produto não encontrado'
-      });
-    }
-
-    if (!product.isActive) {
-      return res.status(400).json({
-        success: false,
-        message: 'Produto não está ativo'
-      });
-    }
-
-    if (product.merchant.merchantStatus !== 'approved') {
-      return res.status(400).json({
-        success: false,
-        message: 'Comerciante não está aprovado'
-      });
-    }
-
-    // Verificar estoque
-    if (product.stock < quantity) {
-      return res.status(400).json({
-        success: false,
-        message: `Estoque insuficiente. Disponível: ${product.stock}`
-      });
-    }
-
-    // Calcular valores
-    const totalAmount = parseFloat(product.price) * quantity;
-
-    // Buscar configuração de cashback do tenant (do req.tenant)
     const tenantConfig = req.tenant || {};
 
-    // Calcular distribuição de cashback
-    const distribution = await calculateCashbackDistribution(
-      prisma,
-      tenantConfig,
-      totalAmount,
-      parseFloat(product.cashbackPercentage)
-    );
+    const data = {
+      consumerId,
+      productId,
+      quantity,
+      tenantConfig
+    };
 
-    const merchantAmount = totalAmount - (
-      distribution.consumerCashback +
-      distribution.platformFee +
-      distribution.consumerReferrerFee +
-      distribution.merchantReferrerFee
-    );
+    const result = await purchaseService.createPurchase(prisma, data);
 
-    // Criar compra em transação
-    const purchase = await prisma.$transaction(async (tx) => {
-      // Criar registro de compra
-      const newPurchase = await tx.purchase.create({
-        data: {
-          consumerId,
-          merchantId: product.merchantId,
-          productId: product.id,
-          totalAmount,
-          merchantAmount,
-          consumerCashback: distribution.consumerCashback,
-          platformFee: distribution.platformFee,
-          consumerReferrerFee: distribution.consumerReferrerFee,
-          merchantReferrerFee: distribution.merchantReferrerFee,
-          status: 'pending',
-          txHash: null // Será preenchido após confirmação blockchain
-        },
-        include: {
-          product: {
-            select: {
-              name: true,
-              price: true,
-              cashbackPercentage: true,
-              imageUrl: true
-            }
-          },
-          merchant: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              email: true
-            }
-          }
-        }
-      });
-
-      // Decrementar estoque
-      await tx.product.update({
-        where: { id: productId },
-        data: {
-          stock: {
-            decrement: quantity
-          }
-        }
-      });
-
-      return newPurchase;
-    });
-
-    console.log(`✅ Compra criada: ${purchase.id}`);
-    console.log(`   Produto: ${purchase.product.name}`);
-    console.log(`   Valor Total: R$ ${totalAmount.toFixed(2)}`);
-    console.log(`   Cashback Consumidor: R$ ${distribution.consumerCashback.toFixed(2)}`);
+    console.log(`✅ Compra criada: ${result.purchase.id}`);
+    console.log(`   Produto: ${result.purchase.product.name}`);
+    console.log(`   Valor Total: R$ ${result.totalAmount.toFixed(2)}`);
+    console.log(`   Cashback Consumidor: R$ ${result.distribution.consumerCashback.toFixed(2)}`);
 
     res.status(201).json({
       success: true,
       message: 'Compra criada com sucesso',
       data: {
-        purchase,
+        purchase: result.purchase,
         cashbackDistribution: {
-          consumer: distribution.consumerCashback,
-          platform: distribution.platformFee,
-          consumerReferrer: distribution.consumerReferrerFee,
-          merchantReferrer: distribution.merchantReferrerFee
+          consumer: result.distribution.consumerCashback,
+          platform: result.distribution.platformFee,
+          consumerReferrer: result.distribution.consumerReferrerFee,
+          merchantReferrer: result.distribution.merchantReferrerFee
         }
       }
     });
   } catch (error) {
     console.error('❌ Erro ao criar compra:', error);
+
+    // Handle validation errors with 400 status
+    if (error.message.includes('obrigatório') ||
+        error.message.includes('não está ativo') ||
+        error.message.includes('não está aprovado') ||
+        error.message.includes('Estoque insuficiente')) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('Apenas consumidores') ||
+        error.message.includes('inativo não pode')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrado')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao criar compra',
@@ -222,67 +89,20 @@ const listPurchases = async (req, res) => {
   try {
     const prisma = req.tenantPrisma;
     const userId = req.user.id;
-    const { status, limit = 20, offset = 0 } = req.query;
+    const userType = req.user.userType;
+    const { status, page = 1, limit = 20 } = req.query;
 
-    // Construir filtro baseado no tipo de usuário
-    const where = {};
+    const filters = {
+      status,
+      page: parseInt(page),
+      limit: parseInt(limit)
+    };
 
-    if (req.user.userType === 'consumer') {
-      where.consumerId = userId;
-    } else if (req.user.userType === 'merchant') {
-      where.merchantId = userId;
-    }
-
-    if (status) {
-      where.status = status;
-    }
-
-    // Buscar compras
-    const [purchases, total] = await Promise.all([
-      prisma.purchase.findMany({
-        where,
-        take: parseInt(limit),
-        skip: parseInt(offset),
-        orderBy: { createdAt: 'desc' },
-        include: {
-          product: {
-            select: {
-              name: true,
-              price: true,
-              cashbackPercentage: true,
-              imageUrl: true,
-              category: true
-            }
-          },
-          consumer: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              email: true
-            }
-          },
-          merchant: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              email: true
-            }
-          }
-        }
-      }),
-      prisma.purchase.count({ where })
-    ]);
+    const result = await purchaseService.listUserPurchases(prisma, userId, userType, filters);
 
     res.json({
       success: true,
-      data: {
-        purchases,
-        total,
-        limit: parseInt(limit),
-        offset: parseInt(offset)
-      }
+      data: result
     });
   } catch (error) {
     console.error('❌ Erro ao listar compras:', error);
@@ -303,44 +123,7 @@ const getPurchaseById = async (req, res) => {
     const userId = req.user.id;
     const { id } = req.params;
 
-    const purchase = await prisma.purchase.findUnique({
-      where: { id },
-      include: {
-        product: true,
-        consumer: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-            cpf: true
-          }
-        },
-        merchant: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true
-          }
-        }
-      }
-    });
-
-    if (!purchase) {
-      return res.status(404).json({
-        success: false,
-        message: 'Compra não encontrada'
-      });
-    }
-
-    // Verificar permissão (apenas consumer ou merchant da compra pode ver)
-    if (purchase.consumerId !== userId && purchase.merchantId !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: 'Você não tem permissão para ver esta compra'
-      });
-    }
+    const purchase = await purchaseService.getPurchaseById(prisma, id, userId);
 
     res.json({
       success: true,
@@ -348,6 +131,23 @@ const getPurchaseById = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao buscar compra:', error);
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrada')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('não tem permissão')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao buscar compra',
@@ -364,35 +164,9 @@ const confirmPurchase = async (req, res) => {
   try {
     const prisma = req.tenantPrisma;
     const { id } = req.params;
-    const { txHash } = req.body; // Hash da transação blockchain (opcional)
+    const { txHash } = req.body;
 
-    const purchase = await prisma.purchase.findUnique({
-      where: { id }
-    });
-
-    if (!purchase) {
-      return res.status(404).json({
-        success: false,
-        message: 'Compra não encontrada'
-      });
-    }
-
-    if (purchase.status === 'completed') {
-      return res.status(400).json({
-        success: false,
-        message: 'Compra já foi confirmada'
-      });
-    }
-
-    // Atualizar status
-    const updatedPurchase = await prisma.purchase.update({
-      where: { id },
-      data: {
-        status: 'completed',
-        txHash: txHash || null,
-        completedAt: new Date()
-      }
-    });
+    const updatedPurchase = await purchaseService.confirmPurchase(prisma, id, txHash);
 
     console.log(`✅ Compra confirmada: ${id}`);
 
@@ -409,6 +183,23 @@ const confirmPurchase = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao confirmar compra:', error);
+
+    // Handle validation errors with 400 status
+    if (error.message.includes('já foi confirmada')) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrada')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao confirmar compra',
@@ -427,59 +218,7 @@ const cancelPurchase = async (req, res) => {
     const { id } = req.params;
     const { reason } = req.body;
 
-    const purchase = await prisma.purchase.findUnique({
-      where: { id },
-      include: {
-        product: true
-      }
-    });
-
-    if (!purchase) {
-      return res.status(404).json({
-        success: false,
-        message: 'Compra não encontrada'
-      });
-    }
-
-    // Apenas o consumidor pode cancelar
-    if (purchase.consumerId !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: 'Você não tem permissão para cancelar esta compra'
-      });
-    }
-
-    // Não pode cancelar compra já completada
-    if (purchase.status === 'completed') {
-      return res.status(400).json({
-        success: false,
-        message: 'Não é possível cancelar uma compra já confirmada'
-      });
-    }
-
-    // Cancelar em transação (devolver estoque)
-    const canceledPurchase = await prisma.$transaction(async (tx) => {
-      // Atualizar status
-      const updated = await tx.purchase.update({
-        where: { id },
-        data: {
-          status: 'refunded',
-          completedAt: new Date()
-        }
-      });
-
-      // Devolver estoque
-      await tx.product.update({
-        where: { id: purchase.productId },
-        data: {
-          stock: {
-            increment: 1 // TODO: Usar quantity quando adicionar ao schema
-          }
-        }
-      });
-
-      return updated;
-    });
+    const canceledPurchase = await purchaseService.cancelPurchase(prisma, id, userId, reason);
 
     console.log(`🔄 Compra cancelada: ${id} - Motivo: ${reason || 'Não informado'}`);
 
@@ -490,6 +229,32 @@ const cancelPurchase = async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Erro ao cancelar compra:', error);
+
+    // Handle validation errors with 400 status
+    if (error.message.includes('não é possível cancelar') ||
+        error.message.includes('já confirmada')) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle permission errors with 403 status
+    if (error.message.includes('não tem permissão')) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    // Handle not found errors with 404 status
+    if (error.message.includes('não encontrada')) {
+      return res.status(404).json({
+        success: false,
+        message: error.message
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Erro ao cancelar compra',
@@ -505,44 +270,13 @@ const getPurchaseStats = async (req, res) => {
   try {
     const prisma = req.tenantPrisma;
     const userId = req.user.id;
+    const userType = req.user.userType;
 
-    const where = req.user.userType === 'consumer'
-      ? { consumerId: userId }
-      : { merchantId: userId };
-
-    const [
-      totalPurchases,
-      completedPurchases,
-      totalSpent,
-      totalCashback
-    ] = await Promise.all([
-      prisma.purchase.count({ where }),
-      prisma.purchase.count({
-        where: { ...where, status: 'completed' }
-      }),
-      prisma.purchase.aggregate({
-        where: { ...where, status: 'completed' },
-        _sum: {
-          totalAmount: true
-        }
-      }),
-      prisma.purchase.aggregate({
-        where: { ...where, status: 'completed' },
-        _sum: {
-          consumerCashback: true
-        }
-      })
-    ]);
+    const stats = await purchaseService.getPurchaseStats(prisma, userId, userType);
 
     res.json({
       success: true,
-      data: {
-        totalPurchases,
-        completedPurchases,
-        pendingPurchases: totalPurchases - completedPurchases,
-        totalSpent: totalSpent._sum.totalAmount || 0,
-        totalCashback: totalCashback._sum.consumerCashback || 0
-      }
+      data: stats
     });
   } catch (error) {
     console.error('❌ Erro ao buscar estatísticas:', error);
