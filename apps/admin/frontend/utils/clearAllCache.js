@@ -26,9 +26,9 @@ export const clearAllCache = () => {
     // 3. Limpar IndexedDB
     if (typeof window !== 'undefined' && window.indexedDB) {
       const databases = [
-        'CoinageBalanceBackup',
-        'CoinageImages',
-        'CoinageCache'
+        'Clube DigitalBalanceBackup',
+        'Clube DigitalImages',
+        'Clube DigitalCache'
       ];
       
       databases.forEach(dbName => {

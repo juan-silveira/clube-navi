@@ -1,6 +1,6 @@
-# Documentação - Coinage Backend
+# Documentação - Clube Digital Backend
 
-Bem-vindo à documentação completa do sistema Coinage Backend.
+Bem-vindo à documentação completa do sistema Clube Digital Backend.
 
 ## 📚 Documentos Disponíveis
 
@@ -12,7 +12,7 @@ Bem-vindo à documentação completa do sistema Coinage Backend.
 
 ## 🏗️ Arquitetura do Sistema
 
-O Coinage Backend é um sistema completo para operações financeiras com blockchain, incluindo:
+O Clube Digital Backend é um sistema completo para operações financeiras com blockchain, incluindo:
 
 ### Componentes Principais
 

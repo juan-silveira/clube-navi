@@ -120,7 +120,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.TenantScalarFieldEnum = {
+exports.Prisma.ClubScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
   companyName: 'companyName',
@@ -152,9 +152,9 @@ exports.Prisma.TenantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TenantBrandingScalarFieldEnum = {
+exports.Prisma.ClubBrandingScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   logoUrl: 'logoUrl',
   logoIconUrl: 'logoIconUrl',
   faviconUrl: 'faviconUrl',
@@ -171,9 +171,9 @@ exports.Prisma.TenantBrandingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TenantModuleScalarFieldEnum = {
+exports.Prisma.ClubModuleScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   moduleKey: 'moduleKey',
   isEnabled: 'isEnabled',
   isEnabledByDefault: 'isEnabledByDefault',
@@ -185,9 +185,9 @@ exports.Prisma.TenantModuleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TenantStatsScalarFieldEnum = {
+exports.Prisma.ClubStatsScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   totalUsers: 'totalUsers',
   totalConsumers: 'totalConsumers',
   totalMerchants: 'totalMerchants',
@@ -207,7 +207,7 @@ exports.Prisma.TenantStatsScalarFieldEnum = {
 exports.Prisma.GlobalStatsScalarFieldEnum = {
   id: 'id',
   date: 'date',
-  totalTenants: 'totalTenants',
+  totalClubs: 'totalClubs',
   totalUsers: 'totalUsers',
   totalConsumers: 'totalConsumers',
   totalMerchants: 'totalMerchants',
@@ -220,15 +220,15 @@ exports.Prisma.GlobalStatsScalarFieldEnum = {
   revenue30d: 'revenue30d',
   purchases30d: 'purchases30d',
   cashback30d: 'cashback30d',
-  newTenants: 'newTenants',
+  newClubs: 'newClubs',
   newUsers: 'newUsers',
-  churnedTenants: 'churnedTenants',
+  churnedClubs: 'churnedClubs',
   createdAt: 'createdAt'
 };
 
-exports.Prisma.TenantCashbackConfigScalarFieldEnum = {
+exports.Prisma.ClubCashbackConfigScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   consumerPercent: 'consumerPercent',
   clubPercent: 'clubPercent',
   consumerReferrerPercent: 'consumerReferrerPercent',
@@ -237,9 +237,9 @@ exports.Prisma.TenantCashbackConfigScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TenantWithdrawalConfigScalarFieldEnum = {
+exports.Prisma.ClubWithdrawalConfigScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   withdrawalFeePercent: 'withdrawalFeePercent',
   withdrawalFeeFixed: 'withdrawalFeeFixed',
   minWithdrawalAmount: 'minWithdrawalAmount',
@@ -247,9 +247,9 @@ exports.Prisma.TenantWithdrawalConfigScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TenantAdminScalarFieldEnum = {
+exports.Prisma.ClubAdminScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   name: 'name',
   email: 'email',
   password: 'password',
@@ -272,9 +272,9 @@ exports.Prisma.SuperAdminScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TenantApiKeyScalarFieldEnum = {
+exports.Prisma.ClubApiKeyScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   keyName: 'keyName',
   apiKey: 'apiKey',
   isActive: 'isActive',
@@ -283,9 +283,9 @@ exports.Prisma.TenantApiKeyScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
-exports.Prisma.TenantUsageStatsScalarFieldEnum = {
+exports.Prisma.ClubUsageStatsScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   date: 'date',
   apiCalls: 'apiCalls',
   storageUsedMB: 'storageUsedMB',
@@ -322,7 +322,7 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
-exports.TenantStatus = exports.$Enums.TenantStatus = {
+exports.ClubStatus = exports.$Enums.ClubStatus = {
   trial: 'trial',
   active: 'active',
   suspended: 'suspended',
@@ -364,17 +364,17 @@ exports.AdminRole = exports.$Enums.AdminRole = {
 };
 
 exports.Prisma.ModelName = {
-  Tenant: 'Tenant',
-  TenantBranding: 'TenantBranding',
-  TenantModule: 'TenantModule',
-  TenantStats: 'TenantStats',
+  Club: 'Club',
+  ClubBranding: 'ClubBranding',
+  ClubModule: 'ClubModule',
+  ClubStats: 'ClubStats',
   GlobalStats: 'GlobalStats',
-  TenantCashbackConfig: 'TenantCashbackConfig',
-  TenantWithdrawalConfig: 'TenantWithdrawalConfig',
-  TenantAdmin: 'TenantAdmin',
+  ClubCashbackConfig: 'ClubCashbackConfig',
+  ClubWithdrawalConfig: 'ClubWithdrawalConfig',
+  ClubAdmin: 'ClubAdmin',
   SuperAdmin: 'SuperAdmin',
-  TenantApiKey: 'TenantApiKey',
-  TenantUsageStats: 'TenantUsageStats'
+  ClubApiKey: 'ClubApiKey',
+  ClubUsageStats: 'ClubUsageStats'
 };
 
 /**

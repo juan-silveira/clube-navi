@@ -27,7 +27,7 @@ class SecureRedisManager {
 
         const connection = new Redis({
             ...this.config,
-            keyPrefix: `coinage:${namespace}:`,
+            keyPrefix: `club:${namespace}:`,
             // Isolamento por database para namespaces críticos
             db: this.getDbForNamespace(namespace)
         });
@@ -73,11 +73,11 @@ class SecureRedisManager {
         setInterval(async () => {
             try {
                 // Limpar chaves expiradas específicas do namespace
-                const expiredKeys = await connection.keys(`coinage:${namespace}:temp:*`);
+                const expiredKeys = await connection.keys(`club:${namespace}:temp:*`);
                 if (expiredKeys.length > 0) {
                     const pipeline = connection.pipeline();
                     expiredKeys.forEach(key => {
-                        pipeline.del(key.replace(`coinage:${namespace}:`, ''));
+                        pipeline.del(key.replace(`club:${namespace}:`, ''));
                     });
                     await pipeline.exec();
                 }
@@ -155,7 +155,7 @@ class SecureRedisManager {
         if (userKeys.length > 0) {
             const pipeline = connection.pipeline();
             userKeys.forEach(key => {
-                pipeline.del(key.replace('coinage:user_cache:', ''));
+                pipeline.del(key.replace('club:user_cache:', ''));
             });
             await pipeline.exec();
         }

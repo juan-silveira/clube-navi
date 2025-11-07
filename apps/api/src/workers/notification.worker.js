@@ -161,7 +161,7 @@ class NotificationWorker {
         url,
         headers: {
           'Content-Type': 'application/json',
-          'User-Agent': 'Coinage-Webhook/1.0',
+          'User-Agent': 'Clube Digital-Webhook/1.0',
           'X-Webhook-Event': event,
           'X-Webhook-Timestamp': new Date().toISOString(),
           ...headers

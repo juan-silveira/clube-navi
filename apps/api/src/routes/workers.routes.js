@@ -179,7 +179,7 @@ router.post('/test/email', authenticateToken, requireAnyAdmin, async (req, res) 
     
     const result = await blockchainQueueService.queueEmailNotification({
       to,
-      subject: 'Test Email from Coinage',
+      subject: 'Test Email from Clube Digital',
       template,
       data: {
         userName: req.user.name,

@@ -54,7 +54,7 @@ O Clube Digital opera como **sistema central** que cria aplicações whitelabel 
 - **Token**: cBRL (ERC-20)
 - **Blockchain**: Azore Network
 - **Paridade**: 1 cBRL = 1 BRL
-- **Origem**: Mesma moeda utilizada pela [Coinage.trade](https://coinage.trade), corretora e tokenizadora de ativos digitais
+- **Origem**: Mesma moeda utilizada pela [Clube Digital.trade](https://coinage.trade), corretora e tokenizadora de ativos digitais
 - **Cashback**: Sempre creditado em cBRL
 - **Compras**: Sempre processadas em cBRL
 - **Saques**: Convertidos de cBRL para BRL via PIX
@@ -1041,7 +1041,7 @@ Todos os planos incluem:
 // Master DB - Configuração global por tenant
 model TenantWithdrawalConfig {
   id                   String   @id @default(uuid()) @db.Uuid
-  tenantId             String   @unique @map("tenant_id") @db.Uuid
+  tenantId             String   @unique @map("club_id") @db.Uuid
 
   // Taxa sobre saques
   withdrawalFeePercent Decimal  @default(2.5) @map("withdrawal_fee_percent") @db.Decimal(5, 2)
@@ -1050,7 +1050,7 @@ model TenantWithdrawalConfig {
 
   tenant               Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_withdrawal_configs")
+  @@map("club_withdrawal_configs")
 }
 ```
 
@@ -1093,7 +1093,7 @@ Plataforma recebe: R$ 25,00 (receita SaaS)
 // Master DB - Padrão do Tenant
 model TenantCashbackConfig {
   id                        String   @id @default(uuid()) @db.Uuid
-  tenantId                  String   @unique @map("tenant_id") @db.Uuid
+  tenantId                  String   @unique @map("club_id") @db.Uuid
 
   // Percentuais padrão (soma deve ser 100%)
   consumerPercent           Decimal  @default(50.0) @map("consumer_percent") @db.Decimal(5, 2)
@@ -1107,7 +1107,7 @@ model TenantCashbackConfig {
 
   tenant                    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_cashback_configs")
+  @@map("club_cashback_configs")
 }
 
 // Tenant DB - Configuração Individual por Usuário
@@ -1169,7 +1169,7 @@ class CashbackConfigService {
     });
 
     return {
-      source: 'tenant_default',
+      source: 'club_default',
       consumerPercent: parseFloat(tenantConfig.consumerPercent),
       clubPercent: parseFloat(tenantConfig.clubPercent),
       consumerReferrerPercent: parseFloat(tenantConfig.consumerReferrerPercent),
@@ -1657,7 +1657,7 @@ export default function UserCashbackConfigPage({ params }) {
     <div className="user-cashback-config">
       <h1>Configuração de Cashback - Usuário</h1>
 
-      {config.source === 'tenant_default' && (
+      {config.source === 'club_default' && (
         <div className="alert alert-info">
           Este usuário está usando o <strong>padrão do tenant</strong>.
         </div>
@@ -2479,7 +2479,7 @@ GET /api/admin/users/:userId/modules
       "isEnabledForTenant": false,     // Módulo desabilitado no tenant
       "isEnabledByDefault": false,
       "isEnabledForUser": false,
-      "source": "tenant_disabled"      // Não pode habilitar
+      "source": "club_disabled"      // Não pode habilitar
     }
   ]
 }
@@ -2813,7 +2813,7 @@ async function getCampaignTargetUsers(campaignId) {
 // Master DB - TenantStats (atualizado em tempo real)
 model TenantStats {
   id                    String    @id @default(uuid()) @db.Uuid
-  tenantId              String    @unique @map("tenant_id") @db.Uuid
+  tenantId              String    @unique @map("club_id") @db.Uuid
 
   // Usuários
   totalUsers            Int       @default(0) @map("total_users")
@@ -2842,7 +2842,7 @@ model TenantStats {
   tenant                Tenant    @relation(fields: [tenantId], references: [id])
 
   @@index([tenantId])
-  @@map("tenant_stats")
+  @@map("club_stats")
 }
 
 // Master DB - GlobalStats (snapshot diário)

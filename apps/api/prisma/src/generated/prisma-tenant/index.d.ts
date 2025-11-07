@@ -12729,7 +12729,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     title: string | null
     description: string | null
     pageTitle: string | null
@@ -12754,7 +12754,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     title: string | null
     description: string | null
     pageTitle: string | null
@@ -12779,7 +12779,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     title: number
     description: number
     pageTitle: number
@@ -12819,7 +12819,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     title?: true
     description?: true
     pageTitle?: true
@@ -12844,7 +12844,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     title?: true
     description?: true
     pageTitle?: true
@@ -12869,7 +12869,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     title?: true
     description?: true
     pageTitle?: true
@@ -12982,7 +12982,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     title: string
     description: string
     pageTitle: string | null
@@ -13027,7 +13027,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13055,7 +13055,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13081,7 +13081,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13107,7 +13107,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13131,7 +13131,7 @@ export namespace Prisma {
     completedAt?: boolean
   }
 
-  export type PushNotificationCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "title" | "description" | "pageTitle" | "pageDescription" | "code" | "rules" | "logoUrl" | "bannerUrl" | "enableButton" | "buttonType" | "targetModule" | "externalLink" | "buttonText" | "geolocation" | "targetUserCount" | "sentCount" | "failedCount" | "status" | "scheduledAt" | "createdAt" | "completedAt", ExtArgs["result"]["pushNotificationCampaign"]>
+  export type PushNotificationCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "title" | "description" | "pageTitle" | "pageDescription" | "code" | "rules" | "logoUrl" | "bannerUrl" | "enableButton" | "buttonType" | "targetModule" | "externalLink" | "buttonText" | "geolocation" | "targetUserCount" | "sentCount" | "failedCount" | "status" | "scheduledAt" | "createdAt" | "completedAt", ExtArgs["result"]["pushNotificationCampaign"]>
   export type PushNotificationCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     logs?: boolean | PushNotificationCampaign$logsArgs<ExtArgs>
     _count?: boolean | PushNotificationCampaignCountOutputTypeDefaultArgs<ExtArgs>
@@ -13146,7 +13146,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       title: string
       description: string
       pageTitle: string | null
@@ -13593,7 +13593,7 @@ export namespace Prisma {
    */
   interface PushNotificationCampaignFieldRefs {
     readonly id: FieldRef<"PushNotificationCampaign", 'String'>
-    readonly tenantId: FieldRef<"PushNotificationCampaign", 'String'>
+    readonly clubId: FieldRef<"PushNotificationCampaign", 'String'>
     readonly title: FieldRef<"PushNotificationCampaign", 'String'>
     readonly description: FieldRef<"PushNotificationCampaign", 'String'>
     readonly pageTitle: FieldRef<"PushNotificationCampaign", 'String'>
@@ -24346,7 +24346,7 @@ export namespace Prisma {
 
   export const PushNotificationCampaignScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     title: 'title',
     description: 'description',
     pageTitle: 'pageTitle',
@@ -25636,7 +25636,7 @@ export namespace Prisma {
     OR?: PushNotificationCampaignWhereInput[]
     NOT?: PushNotificationCampaignWhereInput | PushNotificationCampaignWhereInput[]
     id?: UuidFilter<"PushNotificationCampaign"> | string
-    tenantId?: UuidFilter<"PushNotificationCampaign"> | string
+    clubId?: UuidFilter<"PushNotificationCampaign"> | string
     title?: StringFilter<"PushNotificationCampaign"> | string
     description?: StringFilter<"PushNotificationCampaign"> | string
     pageTitle?: StringNullableFilter<"PushNotificationCampaign"> | string | null
@@ -25663,7 +25663,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrderInput | SortOrder
@@ -25693,7 +25693,7 @@ export namespace Prisma {
     AND?: PushNotificationCampaignWhereInput | PushNotificationCampaignWhereInput[]
     OR?: PushNotificationCampaignWhereInput[]
     NOT?: PushNotificationCampaignWhereInput | PushNotificationCampaignWhereInput[]
-    tenantId?: UuidFilter<"PushNotificationCampaign"> | string
+    clubId?: UuidFilter<"PushNotificationCampaign"> | string
     title?: StringFilter<"PushNotificationCampaign"> | string
     description?: StringFilter<"PushNotificationCampaign"> | string
     pageTitle?: StringNullableFilter<"PushNotificationCampaign"> | string | null
@@ -25720,7 +25720,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrderInput | SortOrder
@@ -25754,7 +25754,7 @@ export namespace Prisma {
     OR?: PushNotificationCampaignScalarWhereWithAggregatesInput[]
     NOT?: PushNotificationCampaignScalarWhereWithAggregatesInput | PushNotificationCampaignScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"PushNotificationCampaign"> | string
-    tenantId?: UuidWithAggregatesFilter<"PushNotificationCampaign"> | string
+    clubId?: UuidWithAggregatesFilter<"PushNotificationCampaign"> | string
     title?: StringWithAggregatesFilter<"PushNotificationCampaign"> | string
     description?: StringWithAggregatesFilter<"PushNotificationCampaign"> | string
     pageTitle?: StringNullableWithAggregatesFilter<"PushNotificationCampaign"> | string | null
@@ -27407,7 +27407,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCreateInput = {
     id?: string
-    tenantId: string
+    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -27434,7 +27434,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUncheckedCreateInput = {
     id?: string
-    tenantId: string
+    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -27461,7 +27461,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27488,7 +27488,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27515,7 +27515,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCreateManyInput = {
     id?: string
-    tenantId: string
+    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -27541,7 +27541,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27567,7 +27567,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29322,7 +29322,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrder
@@ -29354,7 +29354,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrder
@@ -29379,7 +29379,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrder
@@ -33718,7 +33718,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCreateWithoutLogsInput = {
     id?: string
-    tenantId: string
+    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -33744,7 +33744,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUncheckedCreateWithoutLogsInput = {
     id?: string
-    tenantId: string
+    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -33873,7 +33873,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUpdateWithoutLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33899,7 +33899,7 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUncheckedUpdateWithoutLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null

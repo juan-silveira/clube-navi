@@ -4,7 +4,7 @@ const userService = require('../services/user.service');
 
 class EmailConfirmationController {
   constructor() {
-    // Removed: prisma instance moved to req.tenantPrisma
+    // Removed: prisma instance moved to req.clubPrisma
   }
 
   /**
@@ -61,7 +61,7 @@ class EmailConfirmationController {
    */
   async confirmEmail(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const { token, company } = req.query;
       
       if (!token) {
@@ -181,7 +181,7 @@ class EmailConfirmationController {
       try {
         await emailService.sendTemplateEmail('welcome', user.email, {
           userName: user.name,
-          companyName: company || 'Coinage',
+          companyName: company || 'Clube Digital',
           publicKey: user.publicKey,
           loginUrl: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/login`
         });
@@ -221,7 +221,7 @@ class EmailConfirmationController {
    */
   async resendConfirmationEmail(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const { email, companyAlias } = req.body;
       
       if (!email) {
@@ -281,7 +281,7 @@ class EmailConfirmationController {
       // Enviar email
       await emailService.sendEmailConfirmation(user.email, {
         userName: user.name,
-        companyName: companyAlias || 'Coinage',
+        companyName: companyAlias || 'Clube Digital',
         token,
         userId: user.id,
         companyAlias: companyAlias || 'default',
@@ -327,7 +327,7 @@ class EmailConfirmationController {
    */
   async getEmailStatus(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const { userId } = req.params;
       
       if (!userId) {
@@ -402,7 +402,7 @@ class EmailConfirmationController {
    */
   async manualConfirmEmail(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const userId = req.user?.id;
 
       if (!userId) {

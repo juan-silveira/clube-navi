@@ -3,7 +3,7 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
 const rabbitmqConfig = require('../config/rabbitmq');
-const { getTenantClient } = require('../database/tenant-client');
+const { getClubClient } = require('../database/club-client');
 
 /**
  * Cashback Worker
@@ -94,13 +94,13 @@ class CashbackWorker {
 
       console.log('💰 CashbackWorker: Processing cashback...', {
         purchaseId: data.purchaseId,
-        tenantSlug: data.tenantSlug
+        clubeSlug: data.clubeSlug
       });
 
-      // Obter Prisma client do tenant
-      const prisma = await getTenantClient({
-        slug: data.tenantSlug,
-        databaseName: data.tenantDatabase
+      // Obter Prisma client do clube
+      const prisma = await getClubClient({
+        slug: data.clubeSlug,
+        databaseName: data.clubeDatabase
       });
 
       // Buscar compra
@@ -181,15 +181,15 @@ class CashbackWorker {
   /**
    * Enfileirar processamento de cashback
    */
-  static async enqueueCashback(tenantSlug, tenantDatabase, purchaseId) {
+  static async enqueueCashback(clubeSlug, clubeDatabase, purchaseId) {
     try {
       const channel = rabbitmqConfig.getChannel();
       const QUEUE_NAME = 'cashback-processing';
 
       const message = {
         purchaseId,
-        tenantSlug,
-        tenantDatabase,
+        clubeSlug,
+        clubeDatabase,
         timestamp: new Date().toISOString()
       };
 
@@ -203,7 +203,7 @@ class CashbackWorker {
 
       console.log('📤 CashbackWorker: Cashback enqueued', {
         purchaseId,
-        tenantSlug
+        clubeSlug
       });
 
     } catch (error) {

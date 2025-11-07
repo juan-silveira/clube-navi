@@ -15,10 +15,10 @@ export const useFAQData = () => {
   const faqs = {
     'general': [
       {
-        question: t('faq.categories.general.questions.whatIsCoinage.question'),
-        answer: t('faq.categories.general.questions.whatIsCoinage.answer'),
+        question: t('faq.categories.general.questions.whatIsClube Digital.question'),
+        answer: t('faq.categories.general.questions.whatIsClube Digital.answer'),
         relatedLinks: [
-          { label: t('faq.categories.general.questions.whatIsCoinage.links.tutorials'), path: '/help/tutorials' }
+          { label: t('faq.categories.general.questions.whatIsClube Digital.links.tutorials'), path: '/help/tutorials' }
         ]
       },
       {

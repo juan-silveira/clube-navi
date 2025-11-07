@@ -8,15 +8,15 @@ const { getMasterClient } = require('../database/master-client');
 
 class CashbackService {
   /**
-   * Obter configuração de cashback do tenant
-   * @param {String} tenantId - ID do tenant
+   * Obter configuração de cashback do clube
+   * @param {String} clubId - ID do clube
    * @returns {Object} Configuração de cashback
    */
-  async getTenantCashbackConfig(tenantId) {
+  async getClubeCashbackConfig(clubId) {
     const masterPrisma = getMasterClient();
 
-    const config = await masterPrisma.tenantCashbackConfig.findUnique({
-      where: { tenantId }
+    const config = await masterPrisma.clubeCashbackConfig.findUnique({
+      where: { clubId }
     });
 
     // Retornar configuração ou valores padrão
@@ -51,7 +51,7 @@ class CashbackService {
 
   /**
    * Distribuir cashback após compra
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} purchaseId - ID da compra
    * @param {Object} distribution - Distribuição de cashback
    * @returns {Object} Resultado da distribuição
@@ -151,12 +151,12 @@ class CashbackService {
 
   /**
    * Processar cashback completo (calcular + distribuir)
-   * @param {Object} prisma - Prisma client do tenant
-   * @param {String} tenantId - ID do tenant
+   * @param {Object} prisma - Prisma client do clube
+   * @param {String} clubId - ID do clube
    * @param {String} purchaseId - ID da compra
    * @returns {Object} Resultado completo
    */
-  async processCashback(prisma, tenantId, purchaseId) {
+  async processCashback(prisma, clubId, purchaseId) {
     // Buscar compra
     const purchase = await prisma.purchase.findUnique({
       where: { id: purchaseId },
@@ -169,8 +169,8 @@ class CashbackService {
       throw new Error('Compra não encontrada');
     }
 
-    // Obter configuração do tenant
-    const config = await this.getTenantCashbackConfig(tenantId);
+    // Obter configuração do clube
+    const config = await this.getClubeCashbackConfig(clubId);
 
     // Calcular distribuição
     const distribution = this.calculateDistribution(
@@ -196,7 +196,7 @@ class CashbackService {
 
   /**
    * Obter estatísticas de cashback do usuário
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} userId - ID do usuário
    * @returns {Object} Estatísticas
    */
@@ -247,7 +247,7 @@ class CashbackService {
 
   /**
    * Obter configuração personalizada de cashback do usuário (se houver)
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} userId - ID do usuário
    * @returns {Object|null} Configuração personalizada ou null
    */

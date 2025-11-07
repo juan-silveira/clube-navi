@@ -4,7 +4,7 @@ const profileCacheService = require('../services/profileCache.service');
 
 class ProfileController {
   constructor() {
-    // Removed: prisma instance moved to req.tenantPrisma
+    // Removed: prisma instance moved to req.clubPrisma
   }
 
   /**
@@ -55,7 +55,7 @@ class ProfileController {
    */
   async uploadProfilePhoto(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const userId = req.user?.id;
 
       if (!userId) {
@@ -217,7 +217,7 @@ class ProfileController {
    */
   async getProfilePhoto(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const userId = req.user?.id;
 
       if (!userId) {
@@ -294,7 +294,7 @@ class ProfileController {
    */
   async deleteProfilePhoto(req, res) {
     try {
-      const prisma = req.tenantPrisma;
+      const prisma = req.clubPrisma;
       const userId = req.user?.id;
 
       if (!userId) {

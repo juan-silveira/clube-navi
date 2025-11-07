@@ -1,26 +1,26 @@
 /**
- * Cashback Controller - Multi-Tenant
+ * Cashback Controller - Multi-Clube
  * Gerencia estatísticas e consultas de cashback
- * Usa req.tenantPrisma para isolamento de dados por tenant
+ * Usa req.clubPrisma para isolamento de dados por clube
  */
 
 const cashbackService = require('../services/cashback.service');
 
 /**
- * Obter configuração de cashback do tenant
+ * Obter configuração de cashback do clube
  */
-const getTenantConfig = async (req, res) => {
+const getClubeConfig = async (req, res) => {
   try {
-    const tenantId = req.tenant?.id;
+    const clubId = req.club?.id;
 
-    if (!tenantId) {
+    if (!clubId) {
       return res.status(400).json({
         success: false,
-        message: 'Tenant não identificado'
+        message: 'Clube não identificado'
       });
     }
 
-    const config = await cashbackService.getTenantCashbackConfig(tenantId);
+    const config = await cashbackService.getClubeCashbackConfig(clubId);
 
     res.json({
       success: true,
@@ -41,7 +41,7 @@ const getTenantConfig = async (req, res) => {
  */
 const getUserStats = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
 
     const stats = await cashbackService.getUserCashbackStats(prisma, userId);
@@ -67,7 +67,7 @@ const getUserStats = async (req, res) => {
 const calculateDistribution = async (req, res) => {
   try {
     const { totalAmount, cashbackPercentage } = req.body;
-    const tenantId = req.tenant?.id;
+    const clubId = req.club?.id;
 
     // Validações
     if (!totalAmount || !cashbackPercentage) {
@@ -91,8 +91,8 @@ const calculateDistribution = async (req, res) => {
       });
     }
 
-    // Obter configuração do tenant
-    const config = await cashbackService.getTenantCashbackConfig(tenantId);
+    // Obter configuração do clube
+    const config = await cashbackService.getClubeCashbackConfig(clubId);
 
     // Calcular distribuição
     const distribution = cashbackService.calculateDistribution(
@@ -129,8 +129,8 @@ const calculateDistribution = async (req, res) => {
  */
 const processPurchaseCashback = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
-    const tenantId = req.tenant?.id;
+    const prisma = req.clubPrisma;
+    const clubId = req.club?.id;
     const { purchaseId } = req.params;
 
     if (!purchaseId) {
@@ -140,7 +140,7 @@ const processPurchaseCashback = async (req, res) => {
       });
     }
 
-    const result = await cashbackService.processCashback(prisma, tenantId, purchaseId);
+    const result = await cashbackService.processCashback(prisma, clubId, purchaseId);
 
     console.log(`✅ Cashback processado para compra: ${purchaseId}`);
     console.log(`   Total Cashback: R$ ${result.distribution.totalCashback.toFixed(2)}`);
@@ -175,7 +175,7 @@ const processPurchaseCashback = async (req, res) => {
  */
 const getCashbackHistory = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { page = 1, limit = 20, type } = req.query; // type: 'received' ou 'paid'
 
@@ -287,7 +287,7 @@ const getCashbackHistory = async (req, res) => {
  */
 const getCashbackStats = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Somar total de cashback distribuído aos consumidores
     const totalDistributedResult = await prisma.cashbackTransaction.aggregate({
@@ -338,7 +338,7 @@ const getCashbackStats = async (req, res) => {
 };
 
 module.exports = {
-  getTenantConfig,
+  getClubeConfig,
   getUserStats,
   calculateDistribution,
   processPurchaseCashback,

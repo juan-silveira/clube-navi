@@ -20,7 +20,7 @@ interface PratiqueCoin is IERC20 {
  * Funcionalidades principais:
  * - Criação de contratos de garantia com valor fixo
  * - Sistema de whitelist por contrato
- * - Aprovação dupla (landlord + tenant) para unstake
+ * - Aprovação dupla (landlord + club) para unstake
  * - Multa por unstake antecipado
  * - Gestão centralizada de múltiplos contratos
  */
@@ -34,7 +34,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     struct RentalContract {
         uint256 id;
         address landlord;           // Proprietário/criador do contrato
-        address tenant;             // Inquilino (quem fez o stake)
+        address club;             // Inquilino (quem fez o stake)
         uint256 exactStakeAmount;   // Valor exato requerido para stake
         uint256 endDate;            // Data de encerramento do contrato (timestamp)
         uint256 penaltyAmount;      // Valor de multa para unstake antecipado
@@ -44,7 +44,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         bool isActive;              // Contrato está ativo?
         bool hasStake;              // Já possui stake?
         bool landlordApproval;      // Proprietário aprovou unstake?
-        bool tenantApproval;        // Inquilino aprovou unstake?
+        bool clubApproval;        // Inquilino aprovou unstake?
         uint256 createdAt;          // Timestamp de criação
     }
 
@@ -73,7 +73,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     event RentalContractCreated(
         uint256 indexed contractId,
         address indexed landlord,
-        address indexed tenant,
+        address indexed club,
         uint256 exactStakeAmount,
         uint256 endDate,
         uint256 penaltyAmount
@@ -81,7 +81,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
 
     event StakeDeposited(
         uint256 indexed contractId,
-        address indexed tenant,
+        address indexed club,
         uint256 amount
     );
 
@@ -179,21 +179,21 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     /**
      * @dev Cria um novo contrato de garantia de locação
      * @param _landlord Endereço do proprietário
-     * @param _tenant Endereço do inquilino (quem fará o stake)
+     * @param _club Endereço do inquilino (quem fará o stake)
      * @param _exactStakeAmount Valor exato requerido para stake
      * @param _endDate Data de encerramento (timestamp)
      * @param _penaltyAmount Valor de multa para unstake antecipado
      */
     function createRentalContract(
         address _landlord,
-        address _tenant,
+        address _club,
         uint256 _exactStakeAmount,
         uint256 _endDate,
         uint256 _penaltyAmount
     ) external onlyRole(DEFAULT_ADMIN_ROLE) returns (uint256) {
         require(_landlord != address(0), "Landlord invalido");
-        require(_tenant != address(0), "Tenant invalido");
-        require(_tenant != _landlord, "Tenant nao pode ser o landlord");
+        require(_club != address(0), "Tenant invalido");
+        require(_club != _landlord, "Tenant nao pode ser o landlord");
         require(_exactStakeAmount > 0, "Stake amount deve ser maior que zero");
         require(_endDate > block.timestamp, "Data de encerramento deve ser futura");
         require(_penaltyAmount <= _exactStakeAmount, "Multa nao pode exceder valor do stake");
@@ -204,7 +204,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         rentalContracts[contractId] = RentalContract({
             id: contractId,
             landlord: _landlord,
-            tenant: _tenant,
+            club: _club,
             exactStakeAmount: _exactStakeAmount,
             endDate: _endDate,
             penaltyAmount: _penaltyAmount,
@@ -214,14 +214,14 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
             isActive: true,
             hasStake: false,
             landlordApproval: false,
-            tenantApproval: false,
+            clubApproval: false,
             createdAt: block.timestamp
         });
 
         // Adiciona à lista de contratos ativos
         _addToActiveList(contractId);
 
-        emit RentalContractCreated(contractId, _landlord, _tenant, _exactStakeAmount, _endDate, _penaltyAmount);
+        emit RentalContractCreated(contractId, _landlord, _club, _exactStakeAmount, _endDate, _penaltyAmount);
         return contractId;
     }
 
@@ -229,7 +229,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
 
     /**
      * @dev Deposita stake/garantia em um contrato de locação
-     * @param _caller Endereço que está chamando (deve ser o tenant do contrato)
+     * @param _caller Endereço que está chamando (deve ser o club do contrato)
      * @param _contractId ID do contrato
      */
     function stake(address _caller, uint256 _contractId)
@@ -242,7 +242,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         require(rental.isActive, "Contrato nao existe ou inativo");
         require(!rental.hasStake, "Contrato ja possui stake");
         require(block.timestamp < rental.endDate, "Contrato ja expirou");
-        require(_caller == rental.tenant, "Apenas o tenant definido pode fazer stake");
+        require(_caller == rental.club, "Apenas o club definido pode fazer stake");
 
         // Transfere o valor EXATO
         guaranteeToken.transferFromGasless(_caller, address(this), rental.exactStakeAmount);
@@ -254,7 +254,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         // Atualiza o total supply global
         _totalSupply += rental.exactStakeAmount;
 
-        emit StakeDeposited(_contractId, rental.tenant, rental.exactStakeAmount);
+        emit StakeDeposited(_contractId, rental.club, rental.exactStakeAmount);
     }
 
     // ========== FUNÇÕES DE APROVAÇÃO PARA UNSTAKE ==========
@@ -285,10 +285,10 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         RentalContract storage rental = rentalContracts[_contractId];
         require(rental.isActive, "Contrato nao existe ou inativo");
         require(rental.hasStake, "Contrato nao possui stake");
-        require(_caller == rental.tenant, "Apenas tenant pode aprovar");
+        require(_caller == rental.club, "Apenas club pode aprovar");
 
-        rental.tenantApproval = true;
-        emit ApprovalGranted(_contractId, rental.tenant, false);
+        rental.clubApproval = true;
+        emit ApprovalGranted(_contractId, rental.club, false);
     }
 
     /**
@@ -307,7 +307,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     }
 
     /**
-     * @dev Revoga aprovação do tenant
+     * @dev Revoga aprovação do club
      */
     function revokeTenantApproval(uint256 _contractId, address _caller)
         external
@@ -315,10 +315,10 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     {
         RentalContract storage rental = rentalContracts[_contractId];
         require(rental.isActive, "Contrato nao existe ou inativo");
-        require(_caller == rental.tenant, "Apenas tenant pode revogar");
+        require(_caller == rental.club, "Apenas club pode revogar");
 
-        rental.tenantApproval = false;
-        emit ApprovalRevoked(_contractId, rental.tenant, false);
+        rental.clubApproval = false;
+        emit ApprovalRevoked(_contractId, rental.club, false);
     }
 
     // ========== FUNÇÕES DE UNSTAKE ==========
@@ -339,7 +339,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         require(rental.hasStake, "Contrato nao possui stake");
         require(_recipient != address(0), "Recipient invalido");
         require(rental.landlordApproval, "Falta aprovacao do landlord");
-        require(rental.tenantApproval, "Falta aprovacao do tenant");
+        require(rental.clubApproval, "Falta aprovacao do club");
 
         uint256 amountToTransfer = rental.stakedAmount;
         bool hadPenalty = false;
@@ -595,7 +595,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     }
 
     /**
-     * @dev Permite que tenant resgate apenas as recompensas sem fazer unstake
+     * @dev Permite que club resgate apenas as recompensas sem fazer unstake
      * @param _contractId ID do contrato
      */
     function claimReward(uint256 _contractId)
@@ -612,9 +612,9 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         require(reward > 0, "Nenhuma recompensa pendente");
 
         rental.pendingReward = 0;
-        guaranteeToken.transfer(rental.tenant, reward);
+        guaranteeToken.transfer(rental.club, reward);
 
-        emit RewardClaimed(_contractId, rental.tenant, reward);
+        emit RewardClaimed(_contractId, rental.club, reward);
     }
 
     /**
@@ -692,7 +692,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         return rental.isActive &&
                rental.hasStake &&
                rental.landlordApproval &&
-               rental.tenantApproval;
+               rental.clubApproval;
     }
 
     /**
@@ -701,10 +701,10 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     function getApprovalStatus(uint256 _contractId)
         external
         view
-        returns (bool landlordApproval, bool tenantApproval)
+        returns (bool landlordApproval, bool clubApproval)
     {
         RentalContract memory rental = rentalContracts[_contractId];
-        return (rental.landlordApproval, rental.tenantApproval);
+        return (rental.landlordApproval, rental.clubApproval);
     }
 
     /**
@@ -735,16 +735,16 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
     }
 
     /**
-     * @dev Retorna contratos onde um endereço é tenant
+     * @dev Retorna contratos onde um endereço é club
      */
-    function getContractsByTenant(address _tenant)
+    function getContractsByTenant(address _club)
         external
         view
         returns (uint256[] memory)
     {
         uint256 count = 0;
         for (uint256 i = 0; i < activeContractIds.length; i++) {
-            if (rentalContracts[activeContractIds[i]].tenant == _tenant) {
+            if (rentalContracts[activeContractIds[i]].club == _club) {
                 count++;
             }
         }
@@ -752,7 +752,7 @@ contract RentalGuaranteeManager is AccessControl, ReentrancyGuard {
         uint256[] memory result = new uint256[](count);
         uint256 index = 0;
         for (uint256 i = 0; i < activeContractIds.length; i++) {
-            if (rentalContracts[activeContractIds[i]].tenant == _tenant) {
+            if (rentalContracts[activeContractIds[i]].club == _club) {
                 result[index] = activeContractIds[i];
                 index++;
             }

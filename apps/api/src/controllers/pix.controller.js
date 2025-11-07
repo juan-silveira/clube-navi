@@ -24,12 +24,12 @@ class PixController {
         amount: 17.65, // Valor + taxa
         originalAmount: 14.65,
         fee: 3.00,
-        qrCode: `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Coinage Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
+        qrCode: `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Clube Digital Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
         pixKey: 'contato@coinage.com.br',
         
         // Dados da instituição
         bankData: {
-          name: 'Coinage Tecnologia Ltda',
+          name: 'Clube Digital Tecnologia Ltda',
           cnpj: '12.345.678/0001-90',
           bank: 'Banco Inter',
           agency: '0001',

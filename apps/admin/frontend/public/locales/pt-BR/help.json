@@ -38,9 +38,9 @@
             "answer": "Para criar uma conta, clique em 'Cadastrar' no topo da página, preencha seus dados pessoais (nome, e-mail, telefone e CPF), crie uma senha forte e siga as instruções de verificação de e-mail. Após confirmar seu e-mail, você já pode começar a usar a plataforma.",
             "question": "Como criar uma conta?"
           },
-          "whatIsCoinage": {
-            "answer": "A Coinage é uma plataforma de ativos digitais que permite comprar, vender e gerenciar seus investimentos em tokens de forma segura e intuitiva. Nossa plataforma oferece recursos como depósitos instantâneos via PIX, exchange de tokens e carteira digital segura.",
-            "question": "O que é a Coinage?",
+          "whatIsClube Digital": {
+            "answer": "A Clube Digital é uma plataforma de ativos digitais que permite comprar, vender e gerenciar seus investimentos em tokens de forma segura e intuitiva. Nossa plataforma oferece recursos como depósitos instantâneos via PIX, exchange de tokens e carteira digital segura.",
+            "question": "O que é a Clube Digital?",
             "links": {
               "tutorials": "Ver tutoriais"
             }
@@ -149,14 +149,14 @@
         "questions": {
           "howToTransfer": {
             "answer": "Acesse 'Transferir' no menu, digite o e-mail ou CPF do destinatário, informe o valor e o token que deseja transferir, revise os dados e confirme a operação. Transferências internas são instantâneas e sem taxa.",
-            "question": "Como transferir para outro usuário da Coinage?",
+            "question": "Como transferir para outro usuário da Clube Digital?",
             "links": {
               "tutorial": "Ver tutorial",
               "makeTransfer": "Fazer transferência"
             }
           },
           "transferLimit": {
-            "answer": "Não há limite para transferências entre usuários da Coinage. Você pode transferir qualquer valor disponível na sua carteira, desde que tenha saldo suficiente.",
+            "answer": "Não há limite para transferências entre usuários da Clube Digital. Você pode transferir qualquer valor disponível na sua carteira, desde que tenha saldo suficiente.",
             "question": "Há limite para transferências?"
           },
           "cancelTransfer": {

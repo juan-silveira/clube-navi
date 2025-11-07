@@ -22,14 +22,20 @@ class S3PhotoService {
    */
   async hasS3Photo(userId) {
     if (!this.useS3) return false;
-    
+
+    // Super admins não têm foto de perfil
+    const user = useAuthStore.getState().user;
+    if (user?.email?.includes('@clubedigital.com')) {
+      return false;
+    }
+
     try {
       const response = await fetch(`${this.baseUrl}/api/profile/photo`, {
         headers: {
           'Authorization': `Bearer ${useAuthStore.getState().accessToken}`
         }
       });
-      
+
       if (response.ok) {
         const result = await response.json();
         return result.success && result.data?.url !== null;
@@ -135,6 +141,12 @@ class S3PhotoService {
    * Método interno para buscar URL (sem cache)
    */
   async _fetchPhotoUrl(userId) {
+    // Super admins não têm foto de perfil
+    const user = useAuthStore.getState().user;
+    if (user?.email?.includes('@clubedigital.com')) {
+      return null;
+    }
+
     try {
       const response = await fetch(`${this.baseUrl}/api/profile/photo`, {
         headers: {

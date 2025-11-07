@@ -14,66 +14,66 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Tenant
+ * Model Club
  * 
  */
-export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
+export type Club = $Result.DefaultSelection<Prisma.$ClubPayload>
 /**
- * Model TenantBranding
+ * Model ClubBranding
  * 
  */
-export type TenantBranding = $Result.DefaultSelection<Prisma.$TenantBrandingPayload>
+export type ClubBranding = $Result.DefaultSelection<Prisma.$ClubBrandingPayload>
 /**
- * Model TenantModule
+ * Model ClubModule
  * 
  */
-export type TenantModule = $Result.DefaultSelection<Prisma.$TenantModulePayload>
+export type ClubModule = $Result.DefaultSelection<Prisma.$ClubModulePayload>
 /**
- * Model TenantStats
+ * Model ClubStats
  * 
  */
-export type TenantStats = $Result.DefaultSelection<Prisma.$TenantStatsPayload>
+export type ClubStats = $Result.DefaultSelection<Prisma.$ClubStatsPayload>
 /**
  * Model GlobalStats
  * 
  */
 export type GlobalStats = $Result.DefaultSelection<Prisma.$GlobalStatsPayload>
 /**
- * Model TenantCashbackConfig
+ * Model ClubCashbackConfig
  * 
  */
-export type TenantCashbackConfig = $Result.DefaultSelection<Prisma.$TenantCashbackConfigPayload>
+export type ClubCashbackConfig = $Result.DefaultSelection<Prisma.$ClubCashbackConfigPayload>
 /**
- * Model TenantWithdrawalConfig
+ * Model ClubWithdrawalConfig
  * 
  */
-export type TenantWithdrawalConfig = $Result.DefaultSelection<Prisma.$TenantWithdrawalConfigPayload>
+export type ClubWithdrawalConfig = $Result.DefaultSelection<Prisma.$ClubWithdrawalConfigPayload>
 /**
- * Model TenantAdmin
+ * Model ClubAdmin
  * 
  */
-export type TenantAdmin = $Result.DefaultSelection<Prisma.$TenantAdminPayload>
+export type ClubAdmin = $Result.DefaultSelection<Prisma.$ClubAdminPayload>
 /**
  * Model SuperAdmin
  * 
  */
 export type SuperAdmin = $Result.DefaultSelection<Prisma.$SuperAdminPayload>
 /**
- * Model TenantApiKey
+ * Model ClubApiKey
  * 
  */
-export type TenantApiKey = $Result.DefaultSelection<Prisma.$TenantApiKeyPayload>
+export type ClubApiKey = $Result.DefaultSelection<Prisma.$ClubApiKeyPayload>
 /**
- * Model TenantUsageStats
+ * Model ClubUsageStats
  * 
  */
-export type TenantUsageStats = $Result.DefaultSelection<Prisma.$TenantUsageStatsPayload>
+export type ClubUsageStats = $Result.DefaultSelection<Prisma.$ClubUsageStatsPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const TenantStatus: {
+  export const ClubStatus: {
   trial: 'trial',
   active: 'active',
   suspended: 'suspended',
@@ -81,7 +81,7 @@ export namespace $Enums {
   expired: 'expired'
 };
 
-export type TenantStatus = (typeof TenantStatus)[keyof typeof TenantStatus]
+export type ClubStatus = (typeof ClubStatus)[keyof typeof ClubStatus]
 
 
 export const SubscriptionPlan: {
@@ -130,9 +130,9 @@ export type AdminRole = (typeof AdminRole)[keyof typeof AdminRole]
 
 }
 
-export type TenantStatus = $Enums.TenantStatus
+export type ClubStatus = $Enums.ClubStatus
 
-export const TenantStatus: typeof $Enums.TenantStatus
+export const ClubStatus: typeof $Enums.ClubStatus
 
 export type SubscriptionPlan = $Enums.SubscriptionPlan
 
@@ -157,8 +157,8 @@ export const AdminRole: typeof $Enums.AdminRole
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Tenants
- * const tenants = await prisma.tenant.findMany()
+ * // Fetch zero or more Clubs
+ * const clubs = await prisma.club.findMany()
  * ```
  *
  *
@@ -178,8 +178,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Tenants
-   * const tenants = await prisma.tenant.findMany()
+   * // Fetch zero or more Clubs
+   * const clubs = await prisma.club.findMany()
    * ```
    *
    *
@@ -269,44 +269,44 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.tenant`: Exposes CRUD operations for the **Tenant** model.
+   * `prisma.club`: Exposes CRUD operations for the **Club** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Tenants
-    * const tenants = await prisma.tenant.findMany()
+    * // Fetch zero or more Clubs
+    * const clubs = await prisma.club.findMany()
     * ```
     */
-  get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+  get club(): Prisma.ClubDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantBranding`: Exposes CRUD operations for the **TenantBranding** model.
+   * `prisma.clubBranding`: Exposes CRUD operations for the **ClubBranding** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantBrandings
-    * const tenantBrandings = await prisma.tenantBranding.findMany()
+    * // Fetch zero or more ClubBrandings
+    * const clubBrandings = await prisma.clubBranding.findMany()
     * ```
     */
-  get tenantBranding(): Prisma.TenantBrandingDelegate<ExtArgs, ClientOptions>;
+  get clubBranding(): Prisma.ClubBrandingDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantModule`: Exposes CRUD operations for the **TenantModule** model.
+   * `prisma.clubModule`: Exposes CRUD operations for the **ClubModule** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantModules
-    * const tenantModules = await prisma.tenantModule.findMany()
+    * // Fetch zero or more ClubModules
+    * const clubModules = await prisma.clubModule.findMany()
     * ```
     */
-  get tenantModule(): Prisma.TenantModuleDelegate<ExtArgs, ClientOptions>;
+  get clubModule(): Prisma.ClubModuleDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantStats`: Exposes CRUD operations for the **TenantStats** model.
+   * `prisma.clubStats`: Exposes CRUD operations for the **ClubStats** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantStats
-    * const tenantStats = await prisma.tenantStats.findMany()
+    * // Fetch zero or more ClubStats
+    * const clubStats = await prisma.clubStats.findMany()
     * ```
     */
-  get tenantStats(): Prisma.TenantStatsDelegate<ExtArgs, ClientOptions>;
+  get clubStats(): Prisma.ClubStatsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.globalStats`: Exposes CRUD operations for the **GlobalStats** model.
@@ -319,34 +319,34 @@ export class PrismaClient<
   get globalStats(): Prisma.GlobalStatsDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantCashbackConfig`: Exposes CRUD operations for the **TenantCashbackConfig** model.
+   * `prisma.clubCashbackConfig`: Exposes CRUD operations for the **ClubCashbackConfig** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantCashbackConfigs
-    * const tenantCashbackConfigs = await prisma.tenantCashbackConfig.findMany()
+    * // Fetch zero or more ClubCashbackConfigs
+    * const clubCashbackConfigs = await prisma.clubCashbackConfig.findMany()
     * ```
     */
-  get tenantCashbackConfig(): Prisma.TenantCashbackConfigDelegate<ExtArgs, ClientOptions>;
+  get clubCashbackConfig(): Prisma.ClubCashbackConfigDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantWithdrawalConfig`: Exposes CRUD operations for the **TenantWithdrawalConfig** model.
+   * `prisma.clubWithdrawalConfig`: Exposes CRUD operations for the **ClubWithdrawalConfig** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantWithdrawalConfigs
-    * const tenantWithdrawalConfigs = await prisma.tenantWithdrawalConfig.findMany()
+    * // Fetch zero or more ClubWithdrawalConfigs
+    * const clubWithdrawalConfigs = await prisma.clubWithdrawalConfig.findMany()
     * ```
     */
-  get tenantWithdrawalConfig(): Prisma.TenantWithdrawalConfigDelegate<ExtArgs, ClientOptions>;
+  get clubWithdrawalConfig(): Prisma.ClubWithdrawalConfigDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantAdmin`: Exposes CRUD operations for the **TenantAdmin** model.
+   * `prisma.clubAdmin`: Exposes CRUD operations for the **ClubAdmin** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantAdmins
-    * const tenantAdmins = await prisma.tenantAdmin.findMany()
+    * // Fetch zero or more ClubAdmins
+    * const clubAdmins = await prisma.clubAdmin.findMany()
     * ```
     */
-  get tenantAdmin(): Prisma.TenantAdminDelegate<ExtArgs, ClientOptions>;
+  get clubAdmin(): Prisma.ClubAdminDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.superAdmin`: Exposes CRUD operations for the **SuperAdmin** model.
@@ -359,24 +359,24 @@ export class PrismaClient<
   get superAdmin(): Prisma.SuperAdminDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantApiKey`: Exposes CRUD operations for the **TenantApiKey** model.
+   * `prisma.clubApiKey`: Exposes CRUD operations for the **ClubApiKey** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantApiKeys
-    * const tenantApiKeys = await prisma.tenantApiKey.findMany()
+    * // Fetch zero or more ClubApiKeys
+    * const clubApiKeys = await prisma.clubApiKey.findMany()
     * ```
     */
-  get tenantApiKey(): Prisma.TenantApiKeyDelegate<ExtArgs, ClientOptions>;
+  get clubApiKey(): Prisma.ClubApiKeyDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tenantUsageStats`: Exposes CRUD operations for the **TenantUsageStats** model.
+   * `prisma.clubUsageStats`: Exposes CRUD operations for the **ClubUsageStats** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more TenantUsageStats
-    * const tenantUsageStats = await prisma.tenantUsageStats.findMany()
+    * // Fetch zero or more ClubUsageStats
+    * const clubUsageStats = await prisma.clubUsageStats.findMany()
     * ```
     */
-  get tenantUsageStats(): Prisma.TenantUsageStatsDelegate<ExtArgs, ClientOptions>;
+  get clubUsageStats(): Prisma.ClubUsageStatsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -818,17 +818,17 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Tenant: 'Tenant',
-    TenantBranding: 'TenantBranding',
-    TenantModule: 'TenantModule',
-    TenantStats: 'TenantStats',
+    Club: 'Club',
+    ClubBranding: 'ClubBranding',
+    ClubModule: 'ClubModule',
+    ClubStats: 'ClubStats',
     GlobalStats: 'GlobalStats',
-    TenantCashbackConfig: 'TenantCashbackConfig',
-    TenantWithdrawalConfig: 'TenantWithdrawalConfig',
-    TenantAdmin: 'TenantAdmin',
+    ClubCashbackConfig: 'ClubCashbackConfig',
+    ClubWithdrawalConfig: 'ClubWithdrawalConfig',
+    ClubAdmin: 'ClubAdmin',
     SuperAdmin: 'SuperAdmin',
-    TenantApiKey: 'TenantApiKey',
-    TenantUsageStats: 'TenantUsageStats'
+    ClubApiKey: 'ClubApiKey',
+    ClubUsageStats: 'ClubUsageStats'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -847,303 +847,303 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "tenantBranding" | "tenantModule" | "tenantStats" | "globalStats" | "tenantCashbackConfig" | "tenantWithdrawalConfig" | "tenantAdmin" | "superAdmin" | "tenantApiKey" | "tenantUsageStats"
+      modelProps: "club" | "clubBranding" | "clubModule" | "clubStats" | "globalStats" | "clubCashbackConfig" | "clubWithdrawalConfig" | "clubAdmin" | "superAdmin" | "clubApiKey" | "clubUsageStats"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Tenant: {
-        payload: Prisma.$TenantPayload<ExtArgs>
-        fields: Prisma.TenantFieldRefs
+      Club: {
+        payload: Prisma.$ClubPayload<ExtArgs>
+        fields: Prisma.ClubFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload> | null
+            args: Prisma.ClubFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+            args: Prisma.ClubFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
           }
           findFirst: {
-            args: Prisma.TenantFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload> | null
+            args: Prisma.ClubFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+            args: Prisma.ClubFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
           }
           findMany: {
-            args: Prisma.TenantFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+            args: Prisma.ClubFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>[]
           }
           create: {
-            args: Prisma.TenantCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+            args: Prisma.ClubCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
           }
           createMany: {
-            args: Prisma.TenantCreateManyArgs<ExtArgs>
+            args: Prisma.ClubCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+            args: Prisma.ClubCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>[]
           }
           delete: {
-            args: Prisma.TenantDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+            args: Prisma.ClubDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
           }
           update: {
-            args: Prisma.TenantUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+            args: Prisma.ClubUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
           }
           deleteMany: {
-            args: Prisma.TenantDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+            args: Prisma.ClubUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>[]
           }
           upsert: {
-            args: Prisma.TenantUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+            args: Prisma.ClubUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
           }
           aggregate: {
-            args: Prisma.TenantAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenant>
+            args: Prisma.ClubAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClub>
           }
           groupBy: {
-            args: Prisma.TenantGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantGroupByOutputType>[]
+            args: Prisma.ClubGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantCountAggregateOutputType> | number
+            args: Prisma.ClubCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubCountAggregateOutputType> | number
           }
         }
       }
-      TenantBranding: {
-        payload: Prisma.$TenantBrandingPayload<ExtArgs>
-        fields: Prisma.TenantBrandingFieldRefs
+      ClubBranding: {
+        payload: Prisma.$ClubBrandingPayload<ExtArgs>
+        fields: Prisma.ClubBrandingFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantBrandingFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload> | null
+            args: Prisma.ClubBrandingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantBrandingFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+            args: Prisma.ClubBrandingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
           }
           findFirst: {
-            args: Prisma.TenantBrandingFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload> | null
+            args: Prisma.ClubBrandingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantBrandingFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+            args: Prisma.ClubBrandingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
           }
           findMany: {
-            args: Prisma.TenantBrandingFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>[]
+            args: Prisma.ClubBrandingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>[]
           }
           create: {
-            args: Prisma.TenantBrandingCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+            args: Prisma.ClubBrandingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
           }
           createMany: {
-            args: Prisma.TenantBrandingCreateManyArgs<ExtArgs>
+            args: Prisma.ClubBrandingCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantBrandingCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>[]
+            args: Prisma.ClubBrandingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>[]
           }
           delete: {
-            args: Prisma.TenantBrandingDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+            args: Prisma.ClubBrandingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
           }
           update: {
-            args: Prisma.TenantBrandingUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+            args: Prisma.ClubBrandingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
           }
           deleteMany: {
-            args: Prisma.TenantBrandingDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubBrandingDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantBrandingUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubBrandingUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantBrandingUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>[]
+            args: Prisma.ClubBrandingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>[]
           }
           upsert: {
-            args: Prisma.TenantBrandingUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+            args: Prisma.ClubBrandingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
           }
           aggregate: {
-            args: Prisma.TenantBrandingAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantBranding>
+            args: Prisma.ClubBrandingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubBranding>
           }
           groupBy: {
-            args: Prisma.TenantBrandingGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantBrandingGroupByOutputType>[]
+            args: Prisma.ClubBrandingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubBrandingGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantBrandingCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantBrandingCountAggregateOutputType> | number
+            args: Prisma.ClubBrandingCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubBrandingCountAggregateOutputType> | number
           }
         }
       }
-      TenantModule: {
-        payload: Prisma.$TenantModulePayload<ExtArgs>
-        fields: Prisma.TenantModuleFieldRefs
+      ClubModule: {
+        payload: Prisma.$ClubModulePayload<ExtArgs>
+        fields: Prisma.ClubModuleFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantModuleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload> | null
+            args: Prisma.ClubModuleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantModuleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>
+            args: Prisma.ClubModuleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>
           }
           findFirst: {
-            args: Prisma.TenantModuleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload> | null
+            args: Prisma.ClubModuleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantModuleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>
+            args: Prisma.ClubModuleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>
           }
           findMany: {
-            args: Prisma.TenantModuleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>[]
+            args: Prisma.ClubModuleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>[]
           }
           create: {
-            args: Prisma.TenantModuleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>
+            args: Prisma.ClubModuleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>
           }
           createMany: {
-            args: Prisma.TenantModuleCreateManyArgs<ExtArgs>
+            args: Prisma.ClubModuleCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantModuleCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>[]
+            args: Prisma.ClubModuleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>[]
           }
           delete: {
-            args: Prisma.TenantModuleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>
+            args: Prisma.ClubModuleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>
           }
           update: {
-            args: Prisma.TenantModuleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>
+            args: Prisma.ClubModuleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>
           }
           deleteMany: {
-            args: Prisma.TenantModuleDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubModuleDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantModuleUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubModuleUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantModuleUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>[]
+            args: Prisma.ClubModuleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>[]
           }
           upsert: {
-            args: Prisma.TenantModuleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantModulePayload>
+            args: Prisma.ClubModuleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubModulePayload>
           }
           aggregate: {
-            args: Prisma.TenantModuleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantModule>
+            args: Prisma.ClubModuleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubModule>
           }
           groupBy: {
-            args: Prisma.TenantModuleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantModuleGroupByOutputType>[]
+            args: Prisma.ClubModuleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubModuleGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantModuleCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantModuleCountAggregateOutputType> | number
+            args: Prisma.ClubModuleCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubModuleCountAggregateOutputType> | number
           }
         }
       }
-      TenantStats: {
-        payload: Prisma.$TenantStatsPayload<ExtArgs>
-        fields: Prisma.TenantStatsFieldRefs
+      ClubStats: {
+        payload: Prisma.$ClubStatsPayload<ExtArgs>
+        fields: Prisma.ClubStatsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantStatsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload> | null
+            args: Prisma.ClubStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantStatsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>
+            args: Prisma.ClubStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>
           }
           findFirst: {
-            args: Prisma.TenantStatsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload> | null
+            args: Prisma.ClubStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantStatsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>
+            args: Prisma.ClubStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>
           }
           findMany: {
-            args: Prisma.TenantStatsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>[]
+            args: Prisma.ClubStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>[]
           }
           create: {
-            args: Prisma.TenantStatsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>
+            args: Prisma.ClubStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>
           }
           createMany: {
-            args: Prisma.TenantStatsCreateManyArgs<ExtArgs>
+            args: Prisma.ClubStatsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantStatsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>[]
+            args: Prisma.ClubStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>[]
           }
           delete: {
-            args: Prisma.TenantStatsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>
+            args: Prisma.ClubStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>
           }
           update: {
-            args: Prisma.TenantStatsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>
+            args: Prisma.ClubStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>
           }
           deleteMany: {
-            args: Prisma.TenantStatsDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubStatsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantStatsUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubStatsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantStatsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>[]
+            args: Prisma.ClubStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>[]
           }
           upsert: {
-            args: Prisma.TenantStatsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantStatsPayload>
+            args: Prisma.ClubStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubStatsPayload>
           }
           aggregate: {
-            args: Prisma.TenantStatsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantStats>
+            args: Prisma.ClubStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubStats>
           }
           groupBy: {
-            args: Prisma.TenantStatsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantStatsGroupByOutputType>[]
+            args: Prisma.ClubStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubStatsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantStatsCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantStatsCountAggregateOutputType> | number
+            args: Prisma.ClubStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubStatsCountAggregateOutputType> | number
           }
         }
       }
@@ -1221,225 +1221,225 @@ export namespace Prisma {
           }
         }
       }
-      TenantCashbackConfig: {
-        payload: Prisma.$TenantCashbackConfigPayload<ExtArgs>
-        fields: Prisma.TenantCashbackConfigFieldRefs
+      ClubCashbackConfig: {
+        payload: Prisma.$ClubCashbackConfigPayload<ExtArgs>
+        fields: Prisma.ClubCashbackConfigFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantCashbackConfigFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload> | null
+            args: Prisma.ClubCashbackConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantCashbackConfigFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>
+            args: Prisma.ClubCashbackConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>
           }
           findFirst: {
-            args: Prisma.TenantCashbackConfigFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload> | null
+            args: Prisma.ClubCashbackConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantCashbackConfigFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>
+            args: Prisma.ClubCashbackConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>
           }
           findMany: {
-            args: Prisma.TenantCashbackConfigFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>[]
+            args: Prisma.ClubCashbackConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>[]
           }
           create: {
-            args: Prisma.TenantCashbackConfigCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>
+            args: Prisma.ClubCashbackConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>
           }
           createMany: {
-            args: Prisma.TenantCashbackConfigCreateManyArgs<ExtArgs>
+            args: Prisma.ClubCashbackConfigCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantCashbackConfigCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>[]
+            args: Prisma.ClubCashbackConfigCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>[]
           }
           delete: {
-            args: Prisma.TenantCashbackConfigDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>
+            args: Prisma.ClubCashbackConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>
           }
           update: {
-            args: Prisma.TenantCashbackConfigUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>
+            args: Prisma.ClubCashbackConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>
           }
           deleteMany: {
-            args: Prisma.TenantCashbackConfigDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubCashbackConfigDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantCashbackConfigUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubCashbackConfigUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantCashbackConfigUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>[]
+            args: Prisma.ClubCashbackConfigUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>[]
           }
           upsert: {
-            args: Prisma.TenantCashbackConfigUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantCashbackConfigPayload>
+            args: Prisma.ClubCashbackConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubCashbackConfigPayload>
           }
           aggregate: {
-            args: Prisma.TenantCashbackConfigAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantCashbackConfig>
+            args: Prisma.ClubCashbackConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubCashbackConfig>
           }
           groupBy: {
-            args: Prisma.TenantCashbackConfigGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantCashbackConfigGroupByOutputType>[]
+            args: Prisma.ClubCashbackConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubCashbackConfigGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantCashbackConfigCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantCashbackConfigCountAggregateOutputType> | number
+            args: Prisma.ClubCashbackConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubCashbackConfigCountAggregateOutputType> | number
           }
         }
       }
-      TenantWithdrawalConfig: {
-        payload: Prisma.$TenantWithdrawalConfigPayload<ExtArgs>
-        fields: Prisma.TenantWithdrawalConfigFieldRefs
+      ClubWithdrawalConfig: {
+        payload: Prisma.$ClubWithdrawalConfigPayload<ExtArgs>
+        fields: Prisma.ClubWithdrawalConfigFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantWithdrawalConfigFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload> | null
+            args: Prisma.ClubWithdrawalConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantWithdrawalConfigFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>
+            args: Prisma.ClubWithdrawalConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>
           }
           findFirst: {
-            args: Prisma.TenantWithdrawalConfigFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload> | null
+            args: Prisma.ClubWithdrawalConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantWithdrawalConfigFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>
+            args: Prisma.ClubWithdrawalConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>
           }
           findMany: {
-            args: Prisma.TenantWithdrawalConfigFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>[]
+            args: Prisma.ClubWithdrawalConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>[]
           }
           create: {
-            args: Prisma.TenantWithdrawalConfigCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>
+            args: Prisma.ClubWithdrawalConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>
           }
           createMany: {
-            args: Prisma.TenantWithdrawalConfigCreateManyArgs<ExtArgs>
+            args: Prisma.ClubWithdrawalConfigCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantWithdrawalConfigCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>[]
+            args: Prisma.ClubWithdrawalConfigCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>[]
           }
           delete: {
-            args: Prisma.TenantWithdrawalConfigDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>
+            args: Prisma.ClubWithdrawalConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>
           }
           update: {
-            args: Prisma.TenantWithdrawalConfigUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>
+            args: Prisma.ClubWithdrawalConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>
           }
           deleteMany: {
-            args: Prisma.TenantWithdrawalConfigDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubWithdrawalConfigDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantWithdrawalConfigUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubWithdrawalConfigUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantWithdrawalConfigUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>[]
+            args: Prisma.ClubWithdrawalConfigUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>[]
           }
           upsert: {
-            args: Prisma.TenantWithdrawalConfigUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantWithdrawalConfigPayload>
+            args: Prisma.ClubWithdrawalConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubWithdrawalConfigPayload>
           }
           aggregate: {
-            args: Prisma.TenantWithdrawalConfigAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantWithdrawalConfig>
+            args: Prisma.ClubWithdrawalConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubWithdrawalConfig>
           }
           groupBy: {
-            args: Prisma.TenantWithdrawalConfigGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantWithdrawalConfigGroupByOutputType>[]
+            args: Prisma.ClubWithdrawalConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubWithdrawalConfigGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantWithdrawalConfigCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantWithdrawalConfigCountAggregateOutputType> | number
+            args: Prisma.ClubWithdrawalConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubWithdrawalConfigCountAggregateOutputType> | number
           }
         }
       }
-      TenantAdmin: {
-        payload: Prisma.$TenantAdminPayload<ExtArgs>
-        fields: Prisma.TenantAdminFieldRefs
+      ClubAdmin: {
+        payload: Prisma.$ClubAdminPayload<ExtArgs>
+        fields: Prisma.ClubAdminFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantAdminFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload> | null
+            args: Prisma.ClubAdminFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantAdminFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>
+            args: Prisma.ClubAdminFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>
           }
           findFirst: {
-            args: Prisma.TenantAdminFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload> | null
+            args: Prisma.ClubAdminFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantAdminFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>
+            args: Prisma.ClubAdminFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>
           }
           findMany: {
-            args: Prisma.TenantAdminFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>[]
+            args: Prisma.ClubAdminFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>[]
           }
           create: {
-            args: Prisma.TenantAdminCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>
+            args: Prisma.ClubAdminCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>
           }
           createMany: {
-            args: Prisma.TenantAdminCreateManyArgs<ExtArgs>
+            args: Prisma.ClubAdminCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantAdminCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>[]
+            args: Prisma.ClubAdminCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>[]
           }
           delete: {
-            args: Prisma.TenantAdminDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>
+            args: Prisma.ClubAdminDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>
           }
           update: {
-            args: Prisma.TenantAdminUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>
+            args: Prisma.ClubAdminUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>
           }
           deleteMany: {
-            args: Prisma.TenantAdminDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubAdminDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantAdminUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubAdminUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantAdminUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>[]
+            args: Prisma.ClubAdminUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>[]
           }
           upsert: {
-            args: Prisma.TenantAdminUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantAdminPayload>
+            args: Prisma.ClubAdminUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAdminPayload>
           }
           aggregate: {
-            args: Prisma.TenantAdminAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantAdmin>
+            args: Prisma.ClubAdminAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubAdmin>
           }
           groupBy: {
-            args: Prisma.TenantAdminGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantAdminGroupByOutputType>[]
+            args: Prisma.ClubAdminGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubAdminGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantAdminCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantAdminCountAggregateOutputType> | number
+            args: Prisma.ClubAdminCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubAdminCountAggregateOutputType> | number
           }
         }
       }
@@ -1517,151 +1517,151 @@ export namespace Prisma {
           }
         }
       }
-      TenantApiKey: {
-        payload: Prisma.$TenantApiKeyPayload<ExtArgs>
-        fields: Prisma.TenantApiKeyFieldRefs
+      ClubApiKey: {
+        payload: Prisma.$ClubApiKeyPayload<ExtArgs>
+        fields: Prisma.ClubApiKeyFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantApiKeyFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload> | null
+            args: Prisma.ClubApiKeyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantApiKeyFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>
+            args: Prisma.ClubApiKeyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>
           }
           findFirst: {
-            args: Prisma.TenantApiKeyFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload> | null
+            args: Prisma.ClubApiKeyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantApiKeyFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>
+            args: Prisma.ClubApiKeyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>
           }
           findMany: {
-            args: Prisma.TenantApiKeyFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>[]
+            args: Prisma.ClubApiKeyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>[]
           }
           create: {
-            args: Prisma.TenantApiKeyCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>
+            args: Prisma.ClubApiKeyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>
           }
           createMany: {
-            args: Prisma.TenantApiKeyCreateManyArgs<ExtArgs>
+            args: Prisma.ClubApiKeyCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantApiKeyCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>[]
+            args: Prisma.ClubApiKeyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>[]
           }
           delete: {
-            args: Prisma.TenantApiKeyDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>
+            args: Prisma.ClubApiKeyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>
           }
           update: {
-            args: Prisma.TenantApiKeyUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>
+            args: Prisma.ClubApiKeyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>
           }
           deleteMany: {
-            args: Prisma.TenantApiKeyDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubApiKeyDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantApiKeyUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubApiKeyUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantApiKeyUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>[]
+            args: Prisma.ClubApiKeyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>[]
           }
           upsert: {
-            args: Prisma.TenantApiKeyUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantApiKeyPayload>
+            args: Prisma.ClubApiKeyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubApiKeyPayload>
           }
           aggregate: {
-            args: Prisma.TenantApiKeyAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantApiKey>
+            args: Prisma.ClubApiKeyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubApiKey>
           }
           groupBy: {
-            args: Prisma.TenantApiKeyGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantApiKeyGroupByOutputType>[]
+            args: Prisma.ClubApiKeyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubApiKeyGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantApiKeyCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantApiKeyCountAggregateOutputType> | number
+            args: Prisma.ClubApiKeyCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubApiKeyCountAggregateOutputType> | number
           }
         }
       }
-      TenantUsageStats: {
-        payload: Prisma.$TenantUsageStatsPayload<ExtArgs>
-        fields: Prisma.TenantUsageStatsFieldRefs
+      ClubUsageStats: {
+        payload: Prisma.$ClubUsageStatsPayload<ExtArgs>
+        fields: Prisma.ClubUsageStatsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TenantUsageStatsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload> | null
+            args: Prisma.ClubUsageStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TenantUsageStatsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>
+            args: Prisma.ClubUsageStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>
           }
           findFirst: {
-            args: Prisma.TenantUsageStatsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload> | null
+            args: Prisma.ClubUsageStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TenantUsageStatsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>
+            args: Prisma.ClubUsageStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>
           }
           findMany: {
-            args: Prisma.TenantUsageStatsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>[]
+            args: Prisma.ClubUsageStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>[]
           }
           create: {
-            args: Prisma.TenantUsageStatsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>
+            args: Prisma.ClubUsageStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>
           }
           createMany: {
-            args: Prisma.TenantUsageStatsCreateManyArgs<ExtArgs>
+            args: Prisma.ClubUsageStatsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.TenantUsageStatsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>[]
+            args: Prisma.ClubUsageStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>[]
           }
           delete: {
-            args: Prisma.TenantUsageStatsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>
+            args: Prisma.ClubUsageStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>
           }
           update: {
-            args: Prisma.TenantUsageStatsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>
+            args: Prisma.ClubUsageStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>
           }
           deleteMany: {
-            args: Prisma.TenantUsageStatsDeleteManyArgs<ExtArgs>
+            args: Prisma.ClubUsageStatsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.TenantUsageStatsUpdateManyArgs<ExtArgs>
+            args: Prisma.ClubUsageStatsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.TenantUsageStatsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>[]
+            args: Prisma.ClubUsageStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>[]
           }
           upsert: {
-            args: Prisma.TenantUsageStatsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TenantUsageStatsPayload>
+            args: Prisma.ClubUsageStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubUsageStatsPayload>
           }
           aggregate: {
-            args: Prisma.TenantUsageStatsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTenantUsageStats>
+            args: Prisma.ClubUsageStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubUsageStats>
           }
           groupBy: {
-            args: Prisma.TenantUsageStatsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TenantUsageStatsGroupByOutputType>[]
+            args: Prisma.ClubUsageStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubUsageStatsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TenantUsageStatsCountArgs<ExtArgs>
-            result: $Utils.Optional<TenantUsageStatsCountAggregateOutputType> | number
+            args: Prisma.ClubUsageStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubUsageStatsCountAggregateOutputType> | number
           }
         }
       }
@@ -1761,17 +1761,17 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    tenant?: TenantOmit
-    tenantBranding?: TenantBrandingOmit
-    tenantModule?: TenantModuleOmit
-    tenantStats?: TenantStatsOmit
+    club?: ClubOmit
+    clubBranding?: ClubBrandingOmit
+    clubModule?: ClubModuleOmit
+    clubStats?: ClubStatsOmit
     globalStats?: GlobalStatsOmit
-    tenantCashbackConfig?: TenantCashbackConfigOmit
-    tenantWithdrawalConfig?: TenantWithdrawalConfigOmit
-    tenantAdmin?: TenantAdminOmit
+    clubCashbackConfig?: ClubCashbackConfigOmit
+    clubWithdrawalConfig?: ClubWithdrawalConfigOmit
+    clubAdmin?: ClubAdminOmit
     superAdmin?: SuperAdminOmit
-    tenantApiKey?: TenantApiKeyOmit
-    tenantUsageStats?: TenantUsageStatsOmit
+    clubApiKey?: ClubApiKeyOmit
+    clubUsageStats?: ClubUsageStatsOmit
   }
 
   /* Types for Logging */
@@ -1848,60 +1848,60 @@ export namespace Prisma {
 
 
   /**
-   * Count Type TenantCountOutputType
+   * Count Type ClubCountOutputType
    */
 
-  export type TenantCountOutputType = {
+  export type ClubCountOutputType = {
     modules: number
     admins: number
     apiKeys: number
     usageStats: number
   }
 
-  export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    modules?: boolean | TenantCountOutputTypeCountModulesArgs
-    admins?: boolean | TenantCountOutputTypeCountAdminsArgs
-    apiKeys?: boolean | TenantCountOutputTypeCountApiKeysArgs
-    usageStats?: boolean | TenantCountOutputTypeCountUsageStatsArgs
+  export type ClubCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modules?: boolean | ClubCountOutputTypeCountModulesArgs
+    admins?: boolean | ClubCountOutputTypeCountAdminsArgs
+    apiKeys?: boolean | ClubCountOutputTypeCountApiKeysArgs
+    usageStats?: boolean | ClubCountOutputTypeCountUsageStatsArgs
   }
 
   // Custom InputTypes
   /**
-   * TenantCountOutputType without action
+   * ClubCountOutputType without action
    */
-  export type TenantCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCountOutputType
+     * Select specific fields to fetch from the ClubCountOutputType
      */
-    select?: TenantCountOutputTypeSelect<ExtArgs> | null
+    select?: ClubCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * TenantCountOutputType without action
+   * ClubCountOutputType without action
    */
-  export type TenantCountOutputTypeCountModulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantModuleWhereInput
+  export type ClubCountOutputTypeCountModulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubModuleWhereInput
   }
 
   /**
-   * TenantCountOutputType without action
+   * ClubCountOutputType without action
    */
-  export type TenantCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantAdminWhereInput
+  export type ClubCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubAdminWhereInput
   }
 
   /**
-   * TenantCountOutputType without action
+   * ClubCountOutputType without action
    */
-  export type TenantCountOutputTypeCountApiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantApiKeyWhereInput
+  export type ClubCountOutputTypeCountApiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubApiKeyWhereInput
   }
 
   /**
-   * TenantCountOutputType without action
+   * ClubCountOutputType without action
    */
-  export type TenantCountOutputTypeCountUsageStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantUsageStatsWhereInput
+  export type ClubCountOutputTypeCountUsageStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubUsageStatsWhereInput
   }
 
 
@@ -1910,18 +1910,18 @@ export namespace Prisma {
    */
 
   /**
-   * Model Tenant
+   * Model Club
    */
 
-  export type AggregateTenant = {
-    _count: TenantCountAggregateOutputType | null
-    _avg: TenantAvgAggregateOutputType | null
-    _sum: TenantSumAggregateOutputType | null
-    _min: TenantMinAggregateOutputType | null
-    _max: TenantMaxAggregateOutputType | null
+  export type AggregateClub = {
+    _count: ClubCountAggregateOutputType | null
+    _avg: ClubAvgAggregateOutputType | null
+    _sum: ClubSumAggregateOutputType | null
+    _min: ClubMinAggregateOutputType | null
+    _max: ClubMaxAggregateOutputType | null
   }
 
-  export type TenantAvgAggregateOutputType = {
+  export type ClubAvgAggregateOutputType = {
     databasePort: number | null
     maxUsers: number | null
     maxAdmins: number | null
@@ -1931,7 +1931,7 @@ export namespace Prisma {
     outstandingBalance: Decimal | null
   }
 
-  export type TenantSumAggregateOutputType = {
+  export type ClubSumAggregateOutputType = {
     databasePort: number | null
     maxUsers: number | null
     maxAdmins: number | null
@@ -1941,12 +1941,12 @@ export namespace Prisma {
     outstandingBalance: Decimal | null
   }
 
-  export type TenantMinAggregateOutputType = {
+  export type ClubMinAggregateOutputType = {
     id: string | null
     slug: string | null
     companyName: string | null
     companyDocument: string | null
-    status: $Enums.TenantStatus | null
+    status: $Enums.ClubStatus | null
     databaseHost: string | null
     databasePort: number | null
     databaseName: string | null
@@ -1973,12 +1973,12 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantMaxAggregateOutputType = {
+  export type ClubMaxAggregateOutputType = {
     id: string | null
     slug: string | null
     companyName: string | null
     companyDocument: string | null
-    status: $Enums.TenantStatus | null
+    status: $Enums.ClubStatus | null
     databaseHost: string | null
     databasePort: number | null
     databaseName: string | null
@@ -2005,7 +2005,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantCountAggregateOutputType = {
+  export type ClubCountAggregateOutputType = {
     id: number
     slug: number
     companyName: number
@@ -2039,7 +2039,7 @@ export namespace Prisma {
   }
 
 
-  export type TenantAvgAggregateInputType = {
+  export type ClubAvgAggregateInputType = {
     databasePort?: true
     maxUsers?: true
     maxAdmins?: true
@@ -2049,7 +2049,7 @@ export namespace Prisma {
     outstandingBalance?: true
   }
 
-  export type TenantSumAggregateInputType = {
+  export type ClubSumAggregateInputType = {
     databasePort?: true
     maxUsers?: true
     maxAdmins?: true
@@ -2059,7 +2059,7 @@ export namespace Prisma {
     outstandingBalance?: true
   }
 
-  export type TenantMinAggregateInputType = {
+  export type ClubMinAggregateInputType = {
     id?: true
     slug?: true
     companyName?: true
@@ -2091,7 +2091,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantMaxAggregateInputType = {
+  export type ClubMaxAggregateInputType = {
     id?: true
     slug?: true
     companyName?: true
@@ -2123,7 +2123,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantCountAggregateInputType = {
+  export type ClubCountAggregateInputType = {
     id?: true
     slug?: true
     companyName?: true
@@ -2156,98 +2156,98 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Tenant to aggregate.
+     * Filter which Club to aggregate.
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tenants to fetch.
+     * Determine the order of Clubs to fetch.
      */
-    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantWhereUniqueInput
+    cursor?: ClubWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` Clubs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tenants.
+     * Skip the first `n` Clubs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Tenants
+     * Count returned Clubs
     **/
-    _count?: true | TenantCountAggregateInputType
+    _count?: true | ClubCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TenantAvgAggregateInputType
+    _avg?: ClubAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TenantSumAggregateInputType
+    _sum?: ClubSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantMinAggregateInputType
+    _min?: ClubMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantMaxAggregateInputType
+    _max?: ClubMaxAggregateInputType
   }
 
-  export type GetTenantAggregateType<T extends TenantAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenant]: P extends '_count' | 'count'
+  export type GetClubAggregateType<T extends ClubAggregateArgs> = {
+        [P in keyof T & keyof AggregateClub]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenant[P]>
-      : GetScalarType<T[P], AggregateTenant[P]>
+        : GetScalarType<T[P], AggregateClub[P]>
+      : GetScalarType<T[P], AggregateClub[P]>
   }
 
 
 
 
-  export type TenantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantWhereInput
-    orderBy?: TenantOrderByWithAggregationInput | TenantOrderByWithAggregationInput[]
-    by: TenantScalarFieldEnum[] | TenantScalarFieldEnum
-    having?: TenantScalarWhereWithAggregatesInput
+  export type ClubGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubWhereInput
+    orderBy?: ClubOrderByWithAggregationInput | ClubOrderByWithAggregationInput[]
+    by: ClubScalarFieldEnum[] | ClubScalarFieldEnum
+    having?: ClubScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantCountAggregateInputType | true
-    _avg?: TenantAvgAggregateInputType
-    _sum?: TenantSumAggregateInputType
-    _min?: TenantMinAggregateInputType
-    _max?: TenantMaxAggregateInputType
+    _count?: ClubCountAggregateInputType | true
+    _avg?: ClubAvgAggregateInputType
+    _sum?: ClubSumAggregateInputType
+    _min?: ClubMinAggregateInputType
+    _max?: ClubMaxAggregateInputType
   }
 
-  export type TenantGroupByOutputType = {
+  export type ClubGroupByOutputType = {
     id: string
     slug: string
     companyName: string
     companyDocument: string
-    status: $Enums.TenantStatus
+    status: $Enums.ClubStatus
     databaseHost: string
     databasePort: number
     databaseName: string
@@ -2272,28 +2272,28 @@ export namespace Prisma {
     contactPhone: string
     createdAt: Date
     updatedAt: Date
-    _count: TenantCountAggregateOutputType | null
-    _avg: TenantAvgAggregateOutputType | null
-    _sum: TenantSumAggregateOutputType | null
-    _min: TenantMinAggregateOutputType | null
-    _max: TenantMaxAggregateOutputType | null
+    _count: ClubCountAggregateOutputType | null
+    _avg: ClubAvgAggregateOutputType | null
+    _sum: ClubSumAggregateOutputType | null
+    _min: ClubMinAggregateOutputType | null
+    _max: ClubMaxAggregateOutputType | null
   }
 
-  type GetTenantGroupByPayload<T extends TenantGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubGroupByPayload<T extends ClubGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantGroupByOutputType, T['by']> &
+      PickEnumerable<ClubGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     slug?: boolean
     companyName?: boolean
@@ -2323,18 +2323,18 @@ export namespace Prisma {
     contactPhone?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    branding?: boolean | Tenant$brandingArgs<ExtArgs>
-    modules?: boolean | Tenant$modulesArgs<ExtArgs>
-    admins?: boolean | Tenant$adminsArgs<ExtArgs>
-    apiKeys?: boolean | Tenant$apiKeysArgs<ExtArgs>
-    usageStats?: boolean | Tenant$usageStatsArgs<ExtArgs>
-    stats?: boolean | Tenant$statsArgs<ExtArgs>
-    cashbackConfig?: boolean | Tenant$cashbackConfigArgs<ExtArgs>
-    withdrawalConfig?: boolean | Tenant$withdrawalConfigArgs<ExtArgs>
-    _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenant"]>
+    branding?: boolean | Club$brandingArgs<ExtArgs>
+    modules?: boolean | Club$modulesArgs<ExtArgs>
+    admins?: boolean | Club$adminsArgs<ExtArgs>
+    apiKeys?: boolean | Club$apiKeysArgs<ExtArgs>
+    usageStats?: boolean | Club$usageStatsArgs<ExtArgs>
+    stats?: boolean | Club$statsArgs<ExtArgs>
+    cashbackConfig?: boolean | Club$cashbackConfigArgs<ExtArgs>
+    withdrawalConfig?: boolean | Club$withdrawalConfigArgs<ExtArgs>
+    _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["club"]>
 
-  export type TenantSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     slug?: boolean
     companyName?: boolean
@@ -2364,9 +2364,9 @@ export namespace Prisma {
     contactPhone?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["tenant"]>
+  }, ExtArgs["result"]["club"]>
 
-  export type TenantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     slug?: boolean
     companyName?: boolean
@@ -2396,9 +2396,9 @@ export namespace Prisma {
     contactPhone?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["tenant"]>
+  }, ExtArgs["result"]["club"]>
 
-  export type TenantSelectScalar = {
+  export type ClubSelectScalar = {
     id?: boolean
     slug?: boolean
     companyName?: boolean
@@ -2430,39 +2430,39 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "companyName" | "companyDocument" | "status" | "databaseHost" | "databasePort" | "databaseName" | "databaseUser" | "databasePassword" | "subdomain" | "customDomain" | "adminSubdomain" | "maxUsers" | "maxAdmins" | "maxStorageGB" | "subscriptionPlan" | "subscriptionStatus" | "monthlyFee" | "trialEndsAt" | "nextBillingDate" | "lastBillingDate" | "totalBilled" | "outstandingBalance" | "contactName" | "contactEmail" | "contactPhone" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
-  export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    branding?: boolean | Tenant$brandingArgs<ExtArgs>
-    modules?: boolean | Tenant$modulesArgs<ExtArgs>
-    admins?: boolean | Tenant$adminsArgs<ExtArgs>
-    apiKeys?: boolean | Tenant$apiKeysArgs<ExtArgs>
-    usageStats?: boolean | Tenant$usageStatsArgs<ExtArgs>
-    stats?: boolean | Tenant$statsArgs<ExtArgs>
-    cashbackConfig?: boolean | Tenant$cashbackConfigArgs<ExtArgs>
-    withdrawalConfig?: boolean | Tenant$withdrawalConfigArgs<ExtArgs>
-    _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
+  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "companyName" | "companyDocument" | "status" | "databaseHost" | "databasePort" | "databaseName" | "databaseUser" | "databasePassword" | "subdomain" | "customDomain" | "adminSubdomain" | "maxUsers" | "maxAdmins" | "maxStorageGB" | "subscriptionPlan" | "subscriptionStatus" | "monthlyFee" | "trialEndsAt" | "nextBillingDate" | "lastBillingDate" | "totalBilled" | "outstandingBalance" | "contactName" | "contactEmail" | "contactPhone" | "createdAt" | "updatedAt", ExtArgs["result"]["club"]>
+  export type ClubInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    branding?: boolean | Club$brandingArgs<ExtArgs>
+    modules?: boolean | Club$modulesArgs<ExtArgs>
+    admins?: boolean | Club$adminsArgs<ExtArgs>
+    apiKeys?: boolean | Club$apiKeysArgs<ExtArgs>
+    usageStats?: boolean | Club$usageStatsArgs<ExtArgs>
+    stats?: boolean | Club$statsArgs<ExtArgs>
+    cashbackConfig?: boolean | Club$cashbackConfigArgs<ExtArgs>
+    withdrawalConfig?: boolean | Club$withdrawalConfigArgs<ExtArgs>
+    _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type TenantIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ClubIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ClubIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $TenantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Tenant"
+  export type $ClubPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Club"
     objects: {
-      branding: Prisma.$TenantBrandingPayload<ExtArgs> | null
-      modules: Prisma.$TenantModulePayload<ExtArgs>[]
-      admins: Prisma.$TenantAdminPayload<ExtArgs>[]
-      apiKeys: Prisma.$TenantApiKeyPayload<ExtArgs>[]
-      usageStats: Prisma.$TenantUsageStatsPayload<ExtArgs>[]
-      stats: Prisma.$TenantStatsPayload<ExtArgs> | null
-      cashbackConfig: Prisma.$TenantCashbackConfigPayload<ExtArgs> | null
-      withdrawalConfig: Prisma.$TenantWithdrawalConfigPayload<ExtArgs> | null
+      branding: Prisma.$ClubBrandingPayload<ExtArgs> | null
+      modules: Prisma.$ClubModulePayload<ExtArgs>[]
+      admins: Prisma.$ClubAdminPayload<ExtArgs>[]
+      apiKeys: Prisma.$ClubApiKeyPayload<ExtArgs>[]
+      usageStats: Prisma.$ClubUsageStatsPayload<ExtArgs>[]
+      stats: Prisma.$ClubStatsPayload<ExtArgs> | null
+      cashbackConfig: Prisma.$ClubCashbackConfigPayload<ExtArgs> | null
+      withdrawalConfig: Prisma.$ClubWithdrawalConfigPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       slug: string
       companyName: string
       companyDocument: string
-      status: $Enums.TenantStatus
+      status: $Enums.ClubStatus
       databaseHost: string
       databasePort: number
       databaseName: string
@@ -2487,136 +2487,136 @@ export namespace Prisma {
       contactPhone: string
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenant"]>
+    }, ExtArgs["result"]["club"]>
     composites: {}
   }
 
-  type TenantGetPayload<S extends boolean | null | undefined | TenantDefaultArgs> = $Result.GetResult<Prisma.$TenantPayload, S>
+  type ClubGetPayload<S extends boolean | null | undefined | ClubDefaultArgs> = $Result.GetResult<Prisma.$ClubPayload, S>
 
-  type TenantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantCountAggregateInputType | true
+  type ClubCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubCountAggregateInputType | true
     }
 
-  export interface TenantDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tenant'], meta: { name: 'Tenant' } }
+  export interface ClubDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Club'], meta: { name: 'Club' } }
     /**
-     * Find zero or one Tenant that matches the filter.
-     * @param {TenantFindUniqueArgs} args - Arguments to find a Tenant
+     * Find zero or one Club that matches the filter.
+     * @param {ClubFindUniqueArgs} args - Arguments to find a Club
      * @example
-     * // Get one Tenant
-     * const tenant = await prisma.tenant.findUnique({
+     * // Get one Club
+     * const club = await prisma.club.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantFindUniqueArgs>(args: SelectSubset<T, TenantFindUniqueArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubFindUniqueArgs>(args: SelectSubset<T, ClubFindUniqueArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Tenant that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Club that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantFindUniqueOrThrowArgs} args - Arguments to find a Tenant
+     * @param {ClubFindUniqueOrThrowArgs} args - Arguments to find a Club
      * @example
-     * // Get one Tenant
-     * const tenant = await prisma.tenant.findUniqueOrThrow({
+     * // Get one Club
+     * const club = await prisma.club.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Tenant that matches the filter.
+     * Find the first Club that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantFindFirstArgs} args - Arguments to find a Tenant
+     * @param {ClubFindFirstArgs} args - Arguments to find a Club
      * @example
-     * // Get one Tenant
-     * const tenant = await prisma.tenant.findFirst({
+     * // Get one Club
+     * const club = await prisma.club.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantFindFirstArgs>(args?: SelectSubset<T, TenantFindFirstArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubFindFirstArgs>(args?: SelectSubset<T, ClubFindFirstArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Tenant that matches the filter or
+     * Find the first Club that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantFindFirstOrThrowArgs} args - Arguments to find a Tenant
+     * @param {ClubFindFirstOrThrowArgs} args - Arguments to find a Club
      * @example
-     * // Get one Tenant
-     * const tenant = await prisma.tenant.findFirstOrThrow({
+     * // Get one Club
+     * const club = await prisma.club.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Tenants that matches the filter.
+     * Find zero or more Clubs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Tenants
-     * const tenants = await prisma.tenant.findMany()
+     * // Get all Clubs
+     * const clubs = await prisma.club.findMany()
      * 
-     * // Get first 10 Tenants
-     * const tenants = await prisma.tenant.findMany({ take: 10 })
+     * // Get first 10 Clubs
+     * const clubs = await prisma.club.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantWithIdOnly = await prisma.tenant.findMany({ select: { id: true } })
+     * const clubWithIdOnly = await prisma.club.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantFindManyArgs>(args?: SelectSubset<T, TenantFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubFindManyArgs>(args?: SelectSubset<T, ClubFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Tenant.
-     * @param {TenantCreateArgs} args - Arguments to create a Tenant.
+     * Create a Club.
+     * @param {ClubCreateArgs} args - Arguments to create a Club.
      * @example
-     * // Create one Tenant
-     * const Tenant = await prisma.tenant.create({
+     * // Create one Club
+     * const Club = await prisma.club.create({
      *   data: {
-     *     // ... data to create a Tenant
+     *     // ... data to create a Club
      *   }
      * })
      * 
      */
-    create<T extends TenantCreateArgs>(args: SelectSubset<T, TenantCreateArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubCreateArgs>(args: SelectSubset<T, ClubCreateArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Tenants.
-     * @param {TenantCreateManyArgs} args - Arguments to create many Tenants.
+     * Create many Clubs.
+     * @param {ClubCreateManyArgs} args - Arguments to create many Clubs.
      * @example
-     * // Create many Tenants
-     * const tenant = await prisma.tenant.createMany({
+     * // Create many Clubs
+     * const club = await prisma.club.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantCreateManyArgs>(args?: SelectSubset<T, TenantCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubCreateManyArgs>(args?: SelectSubset<T, ClubCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Tenants and returns the data saved in the database.
-     * @param {TenantCreateManyAndReturnArgs} args - Arguments to create many Tenants.
+     * Create many Clubs and returns the data saved in the database.
+     * @param {ClubCreateManyAndReturnArgs} args - Arguments to create many Clubs.
      * @example
-     * // Create many Tenants
-     * const tenant = await prisma.tenant.createManyAndReturn({
+     * // Create many Clubs
+     * const club = await prisma.club.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Tenants and only return the `id`
-     * const tenantWithIdOnly = await prisma.tenant.createManyAndReturn({
+     * // Create many Clubs and only return the `id`
+     * const clubWithIdOnly = await prisma.club.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2626,28 +2626,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Tenant.
-     * @param {TenantDeleteArgs} args - Arguments to delete one Tenant.
+     * Delete a Club.
+     * @param {ClubDeleteArgs} args - Arguments to delete one Club.
      * @example
-     * // Delete one Tenant
-     * const Tenant = await prisma.tenant.delete({
+     * // Delete one Club
+     * const Club = await prisma.club.delete({
      *   where: {
-     *     // ... filter to delete one Tenant
+     *     // ... filter to delete one Club
      *   }
      * })
      * 
      */
-    delete<T extends TenantDeleteArgs>(args: SelectSubset<T, TenantDeleteArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubDeleteArgs>(args: SelectSubset<T, ClubDeleteArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Tenant.
-     * @param {TenantUpdateArgs} args - Arguments to update one Tenant.
+     * Update one Club.
+     * @param {ClubUpdateArgs} args - Arguments to update one Club.
      * @example
-     * // Update one Tenant
-     * const tenant = await prisma.tenant.update({
+     * // Update one Club
+     * const club = await prisma.club.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2657,30 +2657,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantUpdateArgs>(args: SelectSubset<T, TenantUpdateArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubUpdateArgs>(args: SelectSubset<T, ClubUpdateArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Tenants.
-     * @param {TenantDeleteManyArgs} args - Arguments to filter Tenants to delete.
+     * Delete zero or more Clubs.
+     * @param {ClubDeleteManyArgs} args - Arguments to filter Clubs to delete.
      * @example
-     * // Delete a few Tenants
-     * const { count } = await prisma.tenant.deleteMany({
+     * // Delete a few Clubs
+     * const { count } = await prisma.club.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantDeleteManyArgs>(args?: SelectSubset<T, TenantDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubDeleteManyArgs>(args?: SelectSubset<T, ClubDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Tenants.
+     * Update zero or more Clubs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Tenants
-     * const tenant = await prisma.tenant.updateMany({
+     * // Update many Clubs
+     * const club = await prisma.club.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2690,14 +2690,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantUpdateManyArgs>(args: SelectSubset<T, TenantUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubUpdateManyArgs>(args: SelectSubset<T, ClubUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Tenants and returns the data updated in the database.
-     * @param {TenantUpdateManyAndReturnArgs} args - Arguments to update many Tenants.
+     * Update zero or more Clubs and returns the data updated in the database.
+     * @param {ClubUpdateManyAndReturnArgs} args - Arguments to update many Clubs.
      * @example
-     * // Update many Tenants
-     * const tenant = await prisma.tenant.updateManyAndReturn({
+     * // Update many Clubs
+     * const club = await prisma.club.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2706,8 +2706,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Tenants and only return the `id`
-     * const tenantWithIdOnly = await prisma.tenant.updateManyAndReturn({
+     * // Update zero or more Clubs and only return the `id`
+     * const clubWithIdOnly = await prisma.club.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2720,56 +2720,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Tenant.
-     * @param {TenantUpsertArgs} args - Arguments to update or create a Tenant.
+     * Create or update one Club.
+     * @param {ClubUpsertArgs} args - Arguments to update or create a Club.
      * @example
-     * // Update or create a Tenant
-     * const tenant = await prisma.tenant.upsert({
+     * // Update or create a Club
+     * const club = await prisma.club.upsert({
      *   create: {
-     *     // ... data to create a Tenant
+     *     // ... data to create a Club
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Tenant we want to update
+     *     // ... the filter for the Club we want to update
      *   }
      * })
      */
-    upsert<T extends TenantUpsertArgs>(args: SelectSubset<T, TenantUpsertArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubUpsertArgs>(args: SelectSubset<T, ClubUpsertArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Tenants.
+     * Count the number of Clubs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCountArgs} args - Arguments to filter Tenants to count.
+     * @param {ClubCountArgs} args - Arguments to filter Clubs to count.
      * @example
-     * // Count the number of Tenants
-     * const count = await prisma.tenant.count({
+     * // Count the number of Clubs
+     * const count = await prisma.club.count({
      *   where: {
-     *     // ... the filter for the Tenants we want to count
+     *     // ... the filter for the Clubs we want to count
      *   }
      * })
     **/
-    count<T extends TenantCountArgs>(
-      args?: Subset<T, TenantCountArgs>,
+    count<T extends ClubCountArgs>(
+      args?: Subset<T, ClubCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Tenant.
+     * Allows you to perform aggregations operations on a Club.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2789,13 +2789,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantAggregateArgs>(args: Subset<T, TenantAggregateArgs>): Prisma.PrismaPromise<GetTenantAggregateType<T>>
+    aggregate<T extends ClubAggregateArgs>(args: Subset<T, ClubAggregateArgs>): Prisma.PrismaPromise<GetClubAggregateType<T>>
 
     /**
-     * Group by Tenant.
+     * Group by Club.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantGroupByArgs} args - Group by arguments.
+     * @param {ClubGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2810,14 +2810,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantGroupByArgs,
+      T extends ClubGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantGroupByArgs['orderBy'] }
-        : { orderBy?: TenantGroupByArgs['orderBy'] },
+        ? { orderBy: ClubGroupByArgs['orderBy'] }
+        : { orderBy?: ClubGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2866,29 +2866,29 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Tenant model
+   * Fields of the Club model
    */
-  readonly fields: TenantFieldRefs;
+  readonly fields: ClubFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Tenant.
+   * The delegate class that acts as a "Promise-like" for Club.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    branding<T extends Tenant$brandingArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$brandingArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    modules<T extends Tenant$modulesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$modulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    admins<T extends Tenant$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    apiKeys<T extends Tenant$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    usageStats<T extends Tenant$usageStatsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$usageStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    stats<T extends Tenant$statsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$statsArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    cashbackConfig<T extends Tenant$cashbackConfigArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$cashbackConfigArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    withdrawalConfig<T extends Tenant$withdrawalConfigArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$withdrawalConfigArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    branding<T extends Club$brandingArgs<ExtArgs> = {}>(args?: Subset<T, Club$brandingArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    modules<T extends Club$modulesArgs<ExtArgs> = {}>(args?: Subset<T, Club$modulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    admins<T extends Club$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Club$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    apiKeys<T extends Club$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, Club$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    usageStats<T extends Club$usageStatsArgs<ExtArgs> = {}>(args?: Subset<T, Club$usageStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stats<T extends Club$statsArgs<ExtArgs> = {}>(args?: Subset<T, Club$statsArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    cashbackConfig<T extends Club$cashbackConfigArgs<ExtArgs> = {}>(args?: Subset<T, Club$cashbackConfigArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    withdrawalConfig<T extends Club$withdrawalConfigArgs<ExtArgs> = {}>(args?: Subset<T, Club$withdrawalConfigArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2915,629 +2915,629 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Tenant model
+   * Fields of the Club model
    */
-  interface TenantFieldRefs {
-    readonly id: FieldRef<"Tenant", 'String'>
-    readonly slug: FieldRef<"Tenant", 'String'>
-    readonly companyName: FieldRef<"Tenant", 'String'>
-    readonly companyDocument: FieldRef<"Tenant", 'String'>
-    readonly status: FieldRef<"Tenant", 'TenantStatus'>
-    readonly databaseHost: FieldRef<"Tenant", 'String'>
-    readonly databasePort: FieldRef<"Tenant", 'Int'>
-    readonly databaseName: FieldRef<"Tenant", 'String'>
-    readonly databaseUser: FieldRef<"Tenant", 'String'>
-    readonly databasePassword: FieldRef<"Tenant", 'String'>
-    readonly subdomain: FieldRef<"Tenant", 'String'>
-    readonly customDomain: FieldRef<"Tenant", 'String'>
-    readonly adminSubdomain: FieldRef<"Tenant", 'String'>
-    readonly maxUsers: FieldRef<"Tenant", 'Int'>
-    readonly maxAdmins: FieldRef<"Tenant", 'Int'>
-    readonly maxStorageGB: FieldRef<"Tenant", 'Int'>
-    readonly subscriptionPlan: FieldRef<"Tenant", 'SubscriptionPlan'>
-    readonly subscriptionStatus: FieldRef<"Tenant", 'SubscriptionStatus'>
-    readonly monthlyFee: FieldRef<"Tenant", 'Decimal'>
-    readonly trialEndsAt: FieldRef<"Tenant", 'DateTime'>
-    readonly nextBillingDate: FieldRef<"Tenant", 'DateTime'>
-    readonly lastBillingDate: FieldRef<"Tenant", 'DateTime'>
-    readonly totalBilled: FieldRef<"Tenant", 'Decimal'>
-    readonly outstandingBalance: FieldRef<"Tenant", 'Decimal'>
-    readonly contactName: FieldRef<"Tenant", 'String'>
-    readonly contactEmail: FieldRef<"Tenant", 'String'>
-    readonly contactPhone: FieldRef<"Tenant", 'String'>
-    readonly createdAt: FieldRef<"Tenant", 'DateTime'>
-    readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
+  interface ClubFieldRefs {
+    readonly id: FieldRef<"Club", 'String'>
+    readonly slug: FieldRef<"Club", 'String'>
+    readonly companyName: FieldRef<"Club", 'String'>
+    readonly companyDocument: FieldRef<"Club", 'String'>
+    readonly status: FieldRef<"Club", 'ClubStatus'>
+    readonly databaseHost: FieldRef<"Club", 'String'>
+    readonly databasePort: FieldRef<"Club", 'Int'>
+    readonly databaseName: FieldRef<"Club", 'String'>
+    readonly databaseUser: FieldRef<"Club", 'String'>
+    readonly databasePassword: FieldRef<"Club", 'String'>
+    readonly subdomain: FieldRef<"Club", 'String'>
+    readonly customDomain: FieldRef<"Club", 'String'>
+    readonly adminSubdomain: FieldRef<"Club", 'String'>
+    readonly maxUsers: FieldRef<"Club", 'Int'>
+    readonly maxAdmins: FieldRef<"Club", 'Int'>
+    readonly maxStorageGB: FieldRef<"Club", 'Int'>
+    readonly subscriptionPlan: FieldRef<"Club", 'SubscriptionPlan'>
+    readonly subscriptionStatus: FieldRef<"Club", 'SubscriptionStatus'>
+    readonly monthlyFee: FieldRef<"Club", 'Decimal'>
+    readonly trialEndsAt: FieldRef<"Club", 'DateTime'>
+    readonly nextBillingDate: FieldRef<"Club", 'DateTime'>
+    readonly lastBillingDate: FieldRef<"Club", 'DateTime'>
+    readonly totalBilled: FieldRef<"Club", 'Decimal'>
+    readonly outstandingBalance: FieldRef<"Club", 'Decimal'>
+    readonly contactName: FieldRef<"Club", 'String'>
+    readonly contactEmail: FieldRef<"Club", 'String'>
+    readonly contactPhone: FieldRef<"Club", 'String'>
+    readonly createdAt: FieldRef<"Club", 'DateTime'>
+    readonly updatedAt: FieldRef<"Club", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Tenant findUnique
+   * Club findUnique
    */
-  export type TenantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * Filter, which Tenant to fetch.
+     * Filter, which Club to fetch.
      */
-    where: TenantWhereUniqueInput
+    where: ClubWhereUniqueInput
   }
 
   /**
-   * Tenant findUniqueOrThrow
+   * Club findUniqueOrThrow
    */
-  export type TenantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * Filter, which Tenant to fetch.
+     * Filter, which Club to fetch.
      */
-    where: TenantWhereUniqueInput
+    where: ClubWhereUniqueInput
   }
 
   /**
-   * Tenant findFirst
+   * Club findFirst
    */
-  export type TenantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * Filter, which Tenant to fetch.
+     * Filter, which Club to fetch.
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tenants to fetch.
+     * Determine the order of Clubs to fetch.
      */
-    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Tenants.
+     * Sets the position for searching for Clubs.
      */
-    cursor?: TenantWhereUniqueInput
+    cursor?: ClubWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` Clubs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tenants.
+     * Skip the first `n` Clubs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Tenants.
+     * Filter by unique combinations of Clubs.
      */
-    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+    distinct?: ClubScalarFieldEnum | ClubScalarFieldEnum[]
   }
 
   /**
-   * Tenant findFirstOrThrow
+   * Club findFirstOrThrow
    */
-  export type TenantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * Filter, which Tenant to fetch.
+     * Filter, which Club to fetch.
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tenants to fetch.
+     * Determine the order of Clubs to fetch.
      */
-    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Tenants.
+     * Sets the position for searching for Clubs.
      */
-    cursor?: TenantWhereUniqueInput
+    cursor?: ClubWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` Clubs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tenants.
+     * Skip the first `n` Clubs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Tenants.
+     * Filter by unique combinations of Clubs.
      */
-    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+    distinct?: ClubScalarFieldEnum | ClubScalarFieldEnum[]
   }
 
   /**
-   * Tenant findMany
+   * Club findMany
    */
-  export type TenantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * Filter, which Tenants to fetch.
+     * Filter, which Clubs to fetch.
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tenants to fetch.
+     * Determine the order of Clubs to fetch.
      */
-    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Tenants.
+     * Sets the position for listing Clubs.
      */
-    cursor?: TenantWhereUniqueInput
+    cursor?: ClubWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` Clubs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tenants.
+     * Skip the first `n` Clubs.
      */
     skip?: number
-    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+    distinct?: ClubScalarFieldEnum | ClubScalarFieldEnum[]
   }
 
   /**
-   * Tenant create
+   * Club create
    */
-  export type TenantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * The data needed to create a Tenant.
+     * The data needed to create a Club.
      */
-    data: XOR<TenantCreateInput, TenantUncheckedCreateInput>
+    data: XOR<ClubCreateInput, ClubUncheckedCreateInput>
   }
 
   /**
-   * Tenant createMany
+   * Club createMany
    */
-  export type TenantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Tenants.
+     * The data used to create many Clubs.
      */
-    data: TenantCreateManyInput | TenantCreateManyInput[]
+    data: ClubCreateManyInput | ClubCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Tenant createManyAndReturn
+   * Club createManyAndReturn
    */
-  export type TenantCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
-     * The data used to create many Tenants.
+     * The data used to create many Clubs.
      */
-    data: TenantCreateManyInput | TenantCreateManyInput[]
+    data: ClubCreateManyInput | ClubCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Tenant update
+   * Club update
    */
-  export type TenantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * The data needed to update a Tenant.
+     * The data needed to update a Club.
      */
-    data: XOR<TenantUpdateInput, TenantUncheckedUpdateInput>
+    data: XOR<ClubUpdateInput, ClubUncheckedUpdateInput>
     /**
-     * Choose, which Tenant to update.
+     * Choose, which Club to update.
      */
-    where: TenantWhereUniqueInput
+    where: ClubWhereUniqueInput
   }
 
   /**
-   * Tenant updateMany
+   * Club updateMany
    */
-  export type TenantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Tenants.
+     * The data used to update Clubs.
      */
-    data: XOR<TenantUpdateManyMutationInput, TenantUncheckedUpdateManyInput>
+    data: XOR<ClubUpdateManyMutationInput, ClubUncheckedUpdateManyInput>
     /**
-     * Filter which Tenants to update
+     * Filter which Clubs to update
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
-     * Limit how many Tenants to update.
+     * Limit how many Clubs to update.
      */
     limit?: number
   }
 
   /**
-   * Tenant updateManyAndReturn
+   * Club updateManyAndReturn
    */
-  export type TenantUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
-     * The data used to update Tenants.
+     * The data used to update Clubs.
      */
-    data: XOR<TenantUpdateManyMutationInput, TenantUncheckedUpdateManyInput>
+    data: XOR<ClubUpdateManyMutationInput, ClubUncheckedUpdateManyInput>
     /**
-     * Filter which Tenants to update
+     * Filter which Clubs to update
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
-     * Limit how many Tenants to update.
+     * Limit how many Clubs to update.
      */
     limit?: number
   }
 
   /**
-   * Tenant upsert
+   * Club upsert
    */
-  export type TenantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * The filter to search for the Tenant to update in case it exists.
+     * The filter to search for the Club to update in case it exists.
      */
-    where: TenantWhereUniqueInput
+    where: ClubWhereUniqueInput
     /**
-     * In case the Tenant found by the `where` argument doesn't exist, create a new Tenant with this data.
+     * In case the Club found by the `where` argument doesn't exist, create a new Club with this data.
      */
-    create: XOR<TenantCreateInput, TenantUncheckedCreateInput>
+    create: XOR<ClubCreateInput, ClubUncheckedCreateInput>
     /**
-     * In case the Tenant was found with the provided `where` argument, update it with this data.
+     * In case the Club was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantUpdateInput, TenantUncheckedUpdateInput>
+    update: XOR<ClubUpdateInput, ClubUncheckedUpdateInput>
   }
 
   /**
-   * Tenant delete
+   * Club delete
    */
-  export type TenantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
     /**
-     * Filter which Tenant to delete.
+     * Filter which Club to delete.
      */
-    where: TenantWhereUniqueInput
+    where: ClubWhereUniqueInput
   }
 
   /**
-   * Tenant deleteMany
+   * Club deleteMany
    */
-  export type TenantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Tenants to delete
+     * Filter which Clubs to delete
      */
-    where?: TenantWhereInput
+    where?: ClubWhereInput
     /**
-     * Limit how many Tenants to delete.
+     * Limit how many Clubs to delete.
      */
     limit?: number
   }
 
   /**
-   * Tenant.branding
+   * Club.branding
    */
-  export type Tenant$brandingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$brandingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
-    where?: TenantBrandingWhereInput
+    include?: ClubBrandingInclude<ExtArgs> | null
+    where?: ClubBrandingWhereInput
   }
 
   /**
-   * Tenant.modules
+   * Club.modules
    */
-  export type Tenant$modulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$modulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
-    where?: TenantModuleWhereInput
-    orderBy?: TenantModuleOrderByWithRelationInput | TenantModuleOrderByWithRelationInput[]
-    cursor?: TenantModuleWhereUniqueInput
+    include?: ClubModuleInclude<ExtArgs> | null
+    where?: ClubModuleWhereInput
+    orderBy?: ClubModuleOrderByWithRelationInput | ClubModuleOrderByWithRelationInput[]
+    cursor?: ClubModuleWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: TenantModuleScalarFieldEnum | TenantModuleScalarFieldEnum[]
+    distinct?: ClubModuleScalarFieldEnum | ClubModuleScalarFieldEnum[]
   }
 
   /**
-   * Tenant.admins
+   * Club.admins
    */
-  export type Tenant$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
-    where?: TenantAdminWhereInput
-    orderBy?: TenantAdminOrderByWithRelationInput | TenantAdminOrderByWithRelationInput[]
-    cursor?: TenantAdminWhereUniqueInput
+    include?: ClubAdminInclude<ExtArgs> | null
+    where?: ClubAdminWhereInput
+    orderBy?: ClubAdminOrderByWithRelationInput | ClubAdminOrderByWithRelationInput[]
+    cursor?: ClubAdminWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: TenantAdminScalarFieldEnum | TenantAdminScalarFieldEnum[]
+    distinct?: ClubAdminScalarFieldEnum | ClubAdminScalarFieldEnum[]
   }
 
   /**
-   * Tenant.apiKeys
+   * Club.apiKeys
    */
-  export type Tenant$apiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$apiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
-    where?: TenantApiKeyWhereInput
-    orderBy?: TenantApiKeyOrderByWithRelationInput | TenantApiKeyOrderByWithRelationInput[]
-    cursor?: TenantApiKeyWhereUniqueInput
+    include?: ClubApiKeyInclude<ExtArgs> | null
+    where?: ClubApiKeyWhereInput
+    orderBy?: ClubApiKeyOrderByWithRelationInput | ClubApiKeyOrderByWithRelationInput[]
+    cursor?: ClubApiKeyWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: TenantApiKeyScalarFieldEnum | TenantApiKeyScalarFieldEnum[]
+    distinct?: ClubApiKeyScalarFieldEnum | ClubApiKeyScalarFieldEnum[]
   }
 
   /**
-   * Tenant.usageStats
+   * Club.usageStats
    */
-  export type Tenant$usageStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$usageStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
-    where?: TenantUsageStatsWhereInput
-    orderBy?: TenantUsageStatsOrderByWithRelationInput | TenantUsageStatsOrderByWithRelationInput[]
-    cursor?: TenantUsageStatsWhereUniqueInput
+    include?: ClubUsageStatsInclude<ExtArgs> | null
+    where?: ClubUsageStatsWhereInput
+    orderBy?: ClubUsageStatsOrderByWithRelationInput | ClubUsageStatsOrderByWithRelationInput[]
+    cursor?: ClubUsageStatsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: TenantUsageStatsScalarFieldEnum | TenantUsageStatsScalarFieldEnum[]
+    distinct?: ClubUsageStatsScalarFieldEnum | ClubUsageStatsScalarFieldEnum[]
   }
 
   /**
-   * Tenant.stats
+   * Club.stats
    */
-  export type Tenant$statsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$statsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
-    where?: TenantStatsWhereInput
+    include?: ClubStatsInclude<ExtArgs> | null
+    where?: ClubStatsWhereInput
   }
 
   /**
-   * Tenant.cashbackConfig
+   * Club.cashbackConfig
    */
-  export type Tenant$cashbackConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$cashbackConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
-    where?: TenantCashbackConfigWhereInput
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
+    where?: ClubCashbackConfigWhereInput
   }
 
   /**
-   * Tenant.withdrawalConfig
+   * Club.withdrawalConfig
    */
-  export type Tenant$withdrawalConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Club$withdrawalConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
-    where?: TenantWithdrawalConfigWhereInput
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
+    where?: ClubWithdrawalConfigWhereInput
   }
 
   /**
-   * Tenant without action
+   * Club without action
    */
-  export type TenantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Tenant
+     * Select specific fields to fetch from the Club
      */
-    select?: TenantSelect<ExtArgs> | null
+    select?: ClubSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Tenant
+     * Omit specific fields from the Club
      */
-    omit?: TenantOmit<ExtArgs> | null
+    omit?: ClubOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantInclude<ExtArgs> | null
+    include?: ClubInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model TenantBranding
+   * Model ClubBranding
    */
 
-  export type AggregateTenantBranding = {
-    _count: TenantBrandingCountAggregateOutputType | null
-    _min: TenantBrandingMinAggregateOutputType | null
-    _max: TenantBrandingMaxAggregateOutputType | null
+  export type AggregateClubBranding = {
+    _count: ClubBrandingCountAggregateOutputType | null
+    _min: ClubBrandingMinAggregateOutputType | null
+    _max: ClubBrandingMaxAggregateOutputType | null
   }
 
-  export type TenantBrandingMinAggregateOutputType = {
+  export type ClubBrandingMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     logoUrl: string | null
     logoIconUrl: string | null
     faviconUrl: string | null
@@ -3554,9 +3554,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantBrandingMaxAggregateOutputType = {
+  export type ClubBrandingMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     logoUrl: string | null
     logoIconUrl: string | null
     faviconUrl: string | null
@@ -3573,9 +3573,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantBrandingCountAggregateOutputType = {
+  export type ClubBrandingCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     logoUrl: number
     logoIconUrl: number
     faviconUrl: number
@@ -3594,9 +3594,9 @@ export namespace Prisma {
   }
 
 
-  export type TenantBrandingMinAggregateInputType = {
+  export type ClubBrandingMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     logoUrl?: true
     logoIconUrl?: true
     faviconUrl?: true
@@ -3613,9 +3613,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantBrandingMaxAggregateInputType = {
+  export type ClubBrandingMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     logoUrl?: true
     logoIconUrl?: true
     faviconUrl?: true
@@ -3632,9 +3632,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantBrandingCountAggregateInputType = {
+  export type ClubBrandingCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     logoUrl?: true
     logoIconUrl?: true
     faviconUrl?: true
@@ -3652,81 +3652,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantBrandingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantBranding to aggregate.
+     * Filter which ClubBranding to aggregate.
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantBrandings to fetch.
+     * Determine the order of ClubBrandings to fetch.
      */
-    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantBrandingWhereUniqueInput
+    cursor?: ClubBrandingWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantBrandings from the position of the cursor.
+     * Take `±n` ClubBrandings from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantBrandings.
+     * Skip the first `n` ClubBrandings.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantBrandings
+     * Count returned ClubBrandings
     **/
-    _count?: true | TenantBrandingCountAggregateInputType
+    _count?: true | ClubBrandingCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantBrandingMinAggregateInputType
+    _min?: ClubBrandingMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantBrandingMaxAggregateInputType
+    _max?: ClubBrandingMaxAggregateInputType
   }
 
-  export type GetTenantBrandingAggregateType<T extends TenantBrandingAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantBranding]: P extends '_count' | 'count'
+  export type GetClubBrandingAggregateType<T extends ClubBrandingAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubBranding]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantBranding[P]>
-      : GetScalarType<T[P], AggregateTenantBranding[P]>
+        : GetScalarType<T[P], AggregateClubBranding[P]>
+      : GetScalarType<T[P], AggregateClubBranding[P]>
   }
 
 
 
 
-  export type TenantBrandingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantBrandingWhereInput
-    orderBy?: TenantBrandingOrderByWithAggregationInput | TenantBrandingOrderByWithAggregationInput[]
-    by: TenantBrandingScalarFieldEnum[] | TenantBrandingScalarFieldEnum
-    having?: TenantBrandingScalarWhereWithAggregatesInput
+  export type ClubBrandingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubBrandingWhereInput
+    orderBy?: ClubBrandingOrderByWithAggregationInput | ClubBrandingOrderByWithAggregationInput[]
+    by: ClubBrandingScalarFieldEnum[] | ClubBrandingScalarFieldEnum
+    having?: ClubBrandingScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantBrandingCountAggregateInputType | true
-    _min?: TenantBrandingMinAggregateInputType
-    _max?: TenantBrandingMaxAggregateInputType
+    _count?: ClubBrandingCountAggregateInputType | true
+    _min?: ClubBrandingMinAggregateInputType
+    _max?: ClubBrandingMaxAggregateInputType
   }
 
-  export type TenantBrandingGroupByOutputType = {
+  export type ClubBrandingGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     logoUrl: string | null
     logoIconUrl: string | null
     faviconUrl: string | null
@@ -3741,28 +3741,28 @@ export namespace Prisma {
     playStoreUrl: string | null
     createdAt: Date
     updatedAt: Date
-    _count: TenantBrandingCountAggregateOutputType | null
-    _min: TenantBrandingMinAggregateOutputType | null
-    _max: TenantBrandingMaxAggregateOutputType | null
+    _count: ClubBrandingCountAggregateOutputType | null
+    _min: ClubBrandingMinAggregateOutputType | null
+    _max: ClubBrandingMaxAggregateOutputType | null
   }
 
-  type GetTenantBrandingGroupByPayload<T extends TenantBrandingGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubBrandingGroupByPayload<T extends ClubBrandingGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantBrandingGroupByOutputType, T['by']> &
+      PickEnumerable<ClubBrandingGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantBrandingGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubBrandingGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantBrandingGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantBrandingGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubBrandingGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubBrandingGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantBrandingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubBrandingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     logoUrl?: boolean
     logoIconUrl?: boolean
     faviconUrl?: boolean
@@ -3777,12 +3777,12 @@ export namespace Prisma {
     playStoreUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantBranding"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubBranding"]>
 
-  export type TenantBrandingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubBrandingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     logoUrl?: boolean
     logoIconUrl?: boolean
     faviconUrl?: boolean
@@ -3797,12 +3797,12 @@ export namespace Prisma {
     playStoreUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantBranding"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubBranding"]>
 
-  export type TenantBrandingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubBrandingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     logoUrl?: boolean
     logoIconUrl?: boolean
     faviconUrl?: boolean
@@ -3817,12 +3817,12 @@ export namespace Prisma {
     playStoreUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantBranding"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubBranding"]>
 
-  export type TenantBrandingSelectScalar = {
+  export type ClubBrandingSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     logoUrl?: boolean
     logoIconUrl?: boolean
     faviconUrl?: boolean
@@ -3839,25 +3839,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantBrandingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "logoUrl" | "logoIconUrl" | "faviconUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "textColor" | "appName" | "appDescription" | "appStoreUrl" | "playStoreUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantBranding"]>
-  export type TenantBrandingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubBrandingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "logoUrl" | "logoIconUrl" | "faviconUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "textColor" | "appName" | "appDescription" | "appStoreUrl" | "playStoreUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["clubBranding"]>
+  export type ClubBrandingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantBrandingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubBrandingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantBrandingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubBrandingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantBrandingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantBranding"
+  export type $ClubBrandingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubBranding"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       logoUrl: string | null
       logoIconUrl: string | null
       faviconUrl: string | null
@@ -3872,136 +3872,136 @@ export namespace Prisma {
       playStoreUrl: string | null
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenantBranding"]>
+    }, ExtArgs["result"]["clubBranding"]>
     composites: {}
   }
 
-  type TenantBrandingGetPayload<S extends boolean | null | undefined | TenantBrandingDefaultArgs> = $Result.GetResult<Prisma.$TenantBrandingPayload, S>
+  type ClubBrandingGetPayload<S extends boolean | null | undefined | ClubBrandingDefaultArgs> = $Result.GetResult<Prisma.$ClubBrandingPayload, S>
 
-  type TenantBrandingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantBrandingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantBrandingCountAggregateInputType | true
+  type ClubBrandingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubBrandingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubBrandingCountAggregateInputType | true
     }
 
-  export interface TenantBrandingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantBranding'], meta: { name: 'TenantBranding' } }
+  export interface ClubBrandingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubBranding'], meta: { name: 'ClubBranding' } }
     /**
-     * Find zero or one TenantBranding that matches the filter.
-     * @param {TenantBrandingFindUniqueArgs} args - Arguments to find a TenantBranding
+     * Find zero or one ClubBranding that matches the filter.
+     * @param {ClubBrandingFindUniqueArgs} args - Arguments to find a ClubBranding
      * @example
-     * // Get one TenantBranding
-     * const tenantBranding = await prisma.tenantBranding.findUnique({
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantBrandingFindUniqueArgs>(args: SelectSubset<T, TenantBrandingFindUniqueArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubBrandingFindUniqueArgs>(args: SelectSubset<T, ClubBrandingFindUniqueArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantBranding that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubBranding that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantBrandingFindUniqueOrThrowArgs} args - Arguments to find a TenantBranding
+     * @param {ClubBrandingFindUniqueOrThrowArgs} args - Arguments to find a ClubBranding
      * @example
-     * // Get one TenantBranding
-     * const tenantBranding = await prisma.tenantBranding.findUniqueOrThrow({
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantBrandingFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantBrandingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubBrandingFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubBrandingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantBranding that matches the filter.
+     * Find the first ClubBranding that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingFindFirstArgs} args - Arguments to find a TenantBranding
+     * @param {ClubBrandingFindFirstArgs} args - Arguments to find a ClubBranding
      * @example
-     * // Get one TenantBranding
-     * const tenantBranding = await prisma.tenantBranding.findFirst({
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantBrandingFindFirstArgs>(args?: SelectSubset<T, TenantBrandingFindFirstArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubBrandingFindFirstArgs>(args?: SelectSubset<T, ClubBrandingFindFirstArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantBranding that matches the filter or
+     * Find the first ClubBranding that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingFindFirstOrThrowArgs} args - Arguments to find a TenantBranding
+     * @param {ClubBrandingFindFirstOrThrowArgs} args - Arguments to find a ClubBranding
      * @example
-     * // Get one TenantBranding
-     * const tenantBranding = await prisma.tenantBranding.findFirstOrThrow({
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantBrandingFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantBrandingFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubBrandingFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubBrandingFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantBrandings that matches the filter.
+     * Find zero or more ClubBrandings that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubBrandingFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantBrandings
-     * const tenantBrandings = await prisma.tenantBranding.findMany()
+     * // Get all ClubBrandings
+     * const clubBrandings = await prisma.clubBranding.findMany()
      * 
-     * // Get first 10 TenantBrandings
-     * const tenantBrandings = await prisma.tenantBranding.findMany({ take: 10 })
+     * // Get first 10 ClubBrandings
+     * const clubBrandings = await prisma.clubBranding.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantBrandingWithIdOnly = await prisma.tenantBranding.findMany({ select: { id: true } })
+     * const clubBrandingWithIdOnly = await prisma.clubBranding.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantBrandingFindManyArgs>(args?: SelectSubset<T, TenantBrandingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubBrandingFindManyArgs>(args?: SelectSubset<T, ClubBrandingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantBranding.
-     * @param {TenantBrandingCreateArgs} args - Arguments to create a TenantBranding.
+     * Create a ClubBranding.
+     * @param {ClubBrandingCreateArgs} args - Arguments to create a ClubBranding.
      * @example
-     * // Create one TenantBranding
-     * const TenantBranding = await prisma.tenantBranding.create({
+     * // Create one ClubBranding
+     * const ClubBranding = await prisma.clubBranding.create({
      *   data: {
-     *     // ... data to create a TenantBranding
+     *     // ... data to create a ClubBranding
      *   }
      * })
      * 
      */
-    create<T extends TenantBrandingCreateArgs>(args: SelectSubset<T, TenantBrandingCreateArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubBrandingCreateArgs>(args: SelectSubset<T, ClubBrandingCreateArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantBrandings.
-     * @param {TenantBrandingCreateManyArgs} args - Arguments to create many TenantBrandings.
+     * Create many ClubBrandings.
+     * @param {ClubBrandingCreateManyArgs} args - Arguments to create many ClubBrandings.
      * @example
-     * // Create many TenantBrandings
-     * const tenantBranding = await prisma.tenantBranding.createMany({
+     * // Create many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantBrandingCreateManyArgs>(args?: SelectSubset<T, TenantBrandingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubBrandingCreateManyArgs>(args?: SelectSubset<T, ClubBrandingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantBrandings and returns the data saved in the database.
-     * @param {TenantBrandingCreateManyAndReturnArgs} args - Arguments to create many TenantBrandings.
+     * Create many ClubBrandings and returns the data saved in the database.
+     * @param {ClubBrandingCreateManyAndReturnArgs} args - Arguments to create many ClubBrandings.
      * @example
-     * // Create many TenantBrandings
-     * const tenantBranding = await prisma.tenantBranding.createManyAndReturn({
+     * // Create many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantBrandings and only return the `id`
-     * const tenantBrandingWithIdOnly = await prisma.tenantBranding.createManyAndReturn({
+     * // Create many ClubBrandings and only return the `id`
+     * const clubBrandingWithIdOnly = await prisma.clubBranding.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -4011,28 +4011,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantBrandingCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantBrandingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubBrandingCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubBrandingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantBranding.
-     * @param {TenantBrandingDeleteArgs} args - Arguments to delete one TenantBranding.
+     * Delete a ClubBranding.
+     * @param {ClubBrandingDeleteArgs} args - Arguments to delete one ClubBranding.
      * @example
-     * // Delete one TenantBranding
-     * const TenantBranding = await prisma.tenantBranding.delete({
+     * // Delete one ClubBranding
+     * const ClubBranding = await prisma.clubBranding.delete({
      *   where: {
-     *     // ... filter to delete one TenantBranding
+     *     // ... filter to delete one ClubBranding
      *   }
      * })
      * 
      */
-    delete<T extends TenantBrandingDeleteArgs>(args: SelectSubset<T, TenantBrandingDeleteArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubBrandingDeleteArgs>(args: SelectSubset<T, ClubBrandingDeleteArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantBranding.
-     * @param {TenantBrandingUpdateArgs} args - Arguments to update one TenantBranding.
+     * Update one ClubBranding.
+     * @param {ClubBrandingUpdateArgs} args - Arguments to update one ClubBranding.
      * @example
-     * // Update one TenantBranding
-     * const tenantBranding = await prisma.tenantBranding.update({
+     * // Update one ClubBranding
+     * const clubBranding = await prisma.clubBranding.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4042,30 +4042,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantBrandingUpdateArgs>(args: SelectSubset<T, TenantBrandingUpdateArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubBrandingUpdateArgs>(args: SelectSubset<T, ClubBrandingUpdateArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantBrandings.
-     * @param {TenantBrandingDeleteManyArgs} args - Arguments to filter TenantBrandings to delete.
+     * Delete zero or more ClubBrandings.
+     * @param {ClubBrandingDeleteManyArgs} args - Arguments to filter ClubBrandings to delete.
      * @example
-     * // Delete a few TenantBrandings
-     * const { count } = await prisma.tenantBranding.deleteMany({
+     * // Delete a few ClubBrandings
+     * const { count } = await prisma.clubBranding.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantBrandingDeleteManyArgs>(args?: SelectSubset<T, TenantBrandingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubBrandingDeleteManyArgs>(args?: SelectSubset<T, ClubBrandingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantBrandings.
+     * Update zero or more ClubBrandings.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubBrandingUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantBrandings
-     * const tenantBranding = await prisma.tenantBranding.updateMany({
+     * // Update many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4075,14 +4075,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantBrandingUpdateManyArgs>(args: SelectSubset<T, TenantBrandingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubBrandingUpdateManyArgs>(args: SelectSubset<T, ClubBrandingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantBrandings and returns the data updated in the database.
-     * @param {TenantBrandingUpdateManyAndReturnArgs} args - Arguments to update many TenantBrandings.
+     * Update zero or more ClubBrandings and returns the data updated in the database.
+     * @param {ClubBrandingUpdateManyAndReturnArgs} args - Arguments to update many ClubBrandings.
      * @example
-     * // Update many TenantBrandings
-     * const tenantBranding = await prisma.tenantBranding.updateManyAndReturn({
+     * // Update many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4091,8 +4091,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantBrandings and only return the `id`
-     * const tenantBrandingWithIdOnly = await prisma.tenantBranding.updateManyAndReturn({
+     * // Update zero or more ClubBrandings and only return the `id`
+     * const clubBrandingWithIdOnly = await prisma.clubBranding.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -4105,56 +4105,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantBrandingUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantBrandingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubBrandingUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubBrandingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantBranding.
-     * @param {TenantBrandingUpsertArgs} args - Arguments to update or create a TenantBranding.
+     * Create or update one ClubBranding.
+     * @param {ClubBrandingUpsertArgs} args - Arguments to update or create a ClubBranding.
      * @example
-     * // Update or create a TenantBranding
-     * const tenantBranding = await prisma.tenantBranding.upsert({
+     * // Update or create a ClubBranding
+     * const clubBranding = await prisma.clubBranding.upsert({
      *   create: {
-     *     // ... data to create a TenantBranding
+     *     // ... data to create a ClubBranding
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantBranding we want to update
+     *     // ... the filter for the ClubBranding we want to update
      *   }
      * })
      */
-    upsert<T extends TenantBrandingUpsertArgs>(args: SelectSubset<T, TenantBrandingUpsertArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubBrandingUpsertArgs>(args: SelectSubset<T, ClubBrandingUpsertArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantBrandings.
+     * Count the number of ClubBrandings.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingCountArgs} args - Arguments to filter TenantBrandings to count.
+     * @param {ClubBrandingCountArgs} args - Arguments to filter ClubBrandings to count.
      * @example
-     * // Count the number of TenantBrandings
-     * const count = await prisma.tenantBranding.count({
+     * // Count the number of ClubBrandings
+     * const count = await prisma.clubBranding.count({
      *   where: {
-     *     // ... the filter for the TenantBrandings we want to count
+     *     // ... the filter for the ClubBrandings we want to count
      *   }
      * })
     **/
-    count<T extends TenantBrandingCountArgs>(
-      args?: Subset<T, TenantBrandingCountArgs>,
+    count<T extends ClubBrandingCountArgs>(
+      args?: Subset<T, ClubBrandingCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantBrandingCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubBrandingCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantBranding.
+     * Allows you to perform aggregations operations on a ClubBranding.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubBrandingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -4174,13 +4174,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantBrandingAggregateArgs>(args: Subset<T, TenantBrandingAggregateArgs>): Prisma.PrismaPromise<GetTenantBrandingAggregateType<T>>
+    aggregate<T extends ClubBrandingAggregateArgs>(args: Subset<T, ClubBrandingAggregateArgs>): Prisma.PrismaPromise<GetClubBrandingAggregateType<T>>
 
     /**
-     * Group by TenantBranding.
+     * Group by ClubBranding.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantBrandingGroupByArgs} args - Group by arguments.
+     * @param {ClubBrandingGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -4195,14 +4195,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantBrandingGroupByArgs,
+      T extends ClubBrandingGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantBrandingGroupByArgs['orderBy'] }
-        : { orderBy?: TenantBrandingGroupByArgs['orderBy'] },
+        ? { orderBy: ClubBrandingGroupByArgs['orderBy'] }
+        : { orderBy?: ClubBrandingGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -4251,22 +4251,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantBrandingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantBrandingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubBrandingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubBrandingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantBranding model
+   * Fields of the ClubBranding model
    */
-  readonly fields: TenantBrandingFieldRefs;
+  readonly fields: ClubBrandingFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantBranding.
+   * The delegate class that acts as a "Promise-like" for ClubBranding.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantBrandingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubBrandingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4293,462 +4293,462 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantBranding model
+   * Fields of the ClubBranding model
    */
-  interface TenantBrandingFieldRefs {
-    readonly id: FieldRef<"TenantBranding", 'String'>
-    readonly tenantId: FieldRef<"TenantBranding", 'String'>
-    readonly logoUrl: FieldRef<"TenantBranding", 'String'>
-    readonly logoIconUrl: FieldRef<"TenantBranding", 'String'>
-    readonly faviconUrl: FieldRef<"TenantBranding", 'String'>
-    readonly primaryColor: FieldRef<"TenantBranding", 'String'>
-    readonly secondaryColor: FieldRef<"TenantBranding", 'String'>
-    readonly accentColor: FieldRef<"TenantBranding", 'String'>
-    readonly backgroundColor: FieldRef<"TenantBranding", 'String'>
-    readonly textColor: FieldRef<"TenantBranding", 'String'>
-    readonly appName: FieldRef<"TenantBranding", 'String'>
-    readonly appDescription: FieldRef<"TenantBranding", 'String'>
-    readonly appStoreUrl: FieldRef<"TenantBranding", 'String'>
-    readonly playStoreUrl: FieldRef<"TenantBranding", 'String'>
-    readonly createdAt: FieldRef<"TenantBranding", 'DateTime'>
-    readonly updatedAt: FieldRef<"TenantBranding", 'DateTime'>
+  interface ClubBrandingFieldRefs {
+    readonly id: FieldRef<"ClubBranding", 'String'>
+    readonly clubId: FieldRef<"ClubBranding", 'String'>
+    readonly logoUrl: FieldRef<"ClubBranding", 'String'>
+    readonly logoIconUrl: FieldRef<"ClubBranding", 'String'>
+    readonly faviconUrl: FieldRef<"ClubBranding", 'String'>
+    readonly primaryColor: FieldRef<"ClubBranding", 'String'>
+    readonly secondaryColor: FieldRef<"ClubBranding", 'String'>
+    readonly accentColor: FieldRef<"ClubBranding", 'String'>
+    readonly backgroundColor: FieldRef<"ClubBranding", 'String'>
+    readonly textColor: FieldRef<"ClubBranding", 'String'>
+    readonly appName: FieldRef<"ClubBranding", 'String'>
+    readonly appDescription: FieldRef<"ClubBranding", 'String'>
+    readonly appStoreUrl: FieldRef<"ClubBranding", 'String'>
+    readonly playStoreUrl: FieldRef<"ClubBranding", 'String'>
+    readonly createdAt: FieldRef<"ClubBranding", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubBranding", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantBranding findUnique
+   * ClubBranding findUnique
    */
-  export type TenantBrandingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * Filter, which TenantBranding to fetch.
+     * Filter, which ClubBranding to fetch.
      */
-    where: TenantBrandingWhereUniqueInput
+    where: ClubBrandingWhereUniqueInput
   }
 
   /**
-   * TenantBranding findUniqueOrThrow
+   * ClubBranding findUniqueOrThrow
    */
-  export type TenantBrandingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * Filter, which TenantBranding to fetch.
+     * Filter, which ClubBranding to fetch.
      */
-    where: TenantBrandingWhereUniqueInput
+    where: ClubBrandingWhereUniqueInput
   }
 
   /**
-   * TenantBranding findFirst
+   * ClubBranding findFirst
    */
-  export type TenantBrandingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * Filter, which TenantBranding to fetch.
+     * Filter, which ClubBranding to fetch.
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantBrandings to fetch.
+     * Determine the order of ClubBrandings to fetch.
      */
-    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantBrandings.
+     * Sets the position for searching for ClubBrandings.
      */
-    cursor?: TenantBrandingWhereUniqueInput
+    cursor?: ClubBrandingWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantBrandings from the position of the cursor.
+     * Take `±n` ClubBrandings from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantBrandings.
+     * Skip the first `n` ClubBrandings.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantBrandings.
+     * Filter by unique combinations of ClubBrandings.
      */
-    distinct?: TenantBrandingScalarFieldEnum | TenantBrandingScalarFieldEnum[]
+    distinct?: ClubBrandingScalarFieldEnum | ClubBrandingScalarFieldEnum[]
   }
 
   /**
-   * TenantBranding findFirstOrThrow
+   * ClubBranding findFirstOrThrow
    */
-  export type TenantBrandingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * Filter, which TenantBranding to fetch.
+     * Filter, which ClubBranding to fetch.
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantBrandings to fetch.
+     * Determine the order of ClubBrandings to fetch.
      */
-    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantBrandings.
+     * Sets the position for searching for ClubBrandings.
      */
-    cursor?: TenantBrandingWhereUniqueInput
+    cursor?: ClubBrandingWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantBrandings from the position of the cursor.
+     * Take `±n` ClubBrandings from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantBrandings.
+     * Skip the first `n` ClubBrandings.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantBrandings.
+     * Filter by unique combinations of ClubBrandings.
      */
-    distinct?: TenantBrandingScalarFieldEnum | TenantBrandingScalarFieldEnum[]
+    distinct?: ClubBrandingScalarFieldEnum | ClubBrandingScalarFieldEnum[]
   }
 
   /**
-   * TenantBranding findMany
+   * ClubBranding findMany
    */
-  export type TenantBrandingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * Filter, which TenantBrandings to fetch.
+     * Filter, which ClubBrandings to fetch.
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantBrandings to fetch.
+     * Determine the order of ClubBrandings to fetch.
      */
-    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantBrandings.
+     * Sets the position for listing ClubBrandings.
      */
-    cursor?: TenantBrandingWhereUniqueInput
+    cursor?: ClubBrandingWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantBrandings from the position of the cursor.
+     * Take `±n` ClubBrandings from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantBrandings.
+     * Skip the first `n` ClubBrandings.
      */
     skip?: number
-    distinct?: TenantBrandingScalarFieldEnum | TenantBrandingScalarFieldEnum[]
+    distinct?: ClubBrandingScalarFieldEnum | ClubBrandingScalarFieldEnum[]
   }
 
   /**
-   * TenantBranding create
+   * ClubBranding create
    */
-  export type TenantBrandingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantBranding.
+     * The data needed to create a ClubBranding.
      */
-    data: XOR<TenantBrandingCreateInput, TenantBrandingUncheckedCreateInput>
+    data: XOR<ClubBrandingCreateInput, ClubBrandingUncheckedCreateInput>
   }
 
   /**
-   * TenantBranding createMany
+   * ClubBranding createMany
    */
-  export type TenantBrandingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantBrandings.
+     * The data used to create many ClubBrandings.
      */
-    data: TenantBrandingCreateManyInput | TenantBrandingCreateManyInput[]
+    data: ClubBrandingCreateManyInput | ClubBrandingCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantBranding createManyAndReturn
+   * ClubBranding createManyAndReturn
    */
-  export type TenantBrandingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubBrandingSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantBrandings.
+     * The data used to create many ClubBrandings.
      */
-    data: TenantBrandingCreateManyInput | TenantBrandingCreateManyInput[]
+    data: ClubBrandingCreateManyInput | ClubBrandingCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubBrandingIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantBranding update
+   * ClubBranding update
    */
-  export type TenantBrandingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantBranding.
+     * The data needed to update a ClubBranding.
      */
-    data: XOR<TenantBrandingUpdateInput, TenantBrandingUncheckedUpdateInput>
+    data: XOR<ClubBrandingUpdateInput, ClubBrandingUncheckedUpdateInput>
     /**
-     * Choose, which TenantBranding to update.
+     * Choose, which ClubBranding to update.
      */
-    where: TenantBrandingWhereUniqueInput
+    where: ClubBrandingWhereUniqueInput
   }
 
   /**
-   * TenantBranding updateMany
+   * ClubBranding updateMany
    */
-  export type TenantBrandingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantBrandings.
+     * The data used to update ClubBrandings.
      */
-    data: XOR<TenantBrandingUpdateManyMutationInput, TenantBrandingUncheckedUpdateManyInput>
+    data: XOR<ClubBrandingUpdateManyMutationInput, ClubBrandingUncheckedUpdateManyInput>
     /**
-     * Filter which TenantBrandings to update
+     * Filter which ClubBrandings to update
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
-     * Limit how many TenantBrandings to update.
+     * Limit how many ClubBrandings to update.
      */
     limit?: number
   }
 
   /**
-   * TenantBranding updateManyAndReturn
+   * ClubBranding updateManyAndReturn
    */
-  export type TenantBrandingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubBrandingSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
-     * The data used to update TenantBrandings.
+     * The data used to update ClubBrandings.
      */
-    data: XOR<TenantBrandingUpdateManyMutationInput, TenantBrandingUncheckedUpdateManyInput>
+    data: XOR<ClubBrandingUpdateManyMutationInput, ClubBrandingUncheckedUpdateManyInput>
     /**
-     * Filter which TenantBrandings to update
+     * Filter which ClubBrandings to update
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
-     * Limit how many TenantBrandings to update.
+     * Limit how many ClubBrandings to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubBrandingIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantBranding upsert
+   * ClubBranding upsert
    */
-  export type TenantBrandingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantBranding to update in case it exists.
+     * The filter to search for the ClubBranding to update in case it exists.
      */
-    where: TenantBrandingWhereUniqueInput
+    where: ClubBrandingWhereUniqueInput
     /**
-     * In case the TenantBranding found by the `where` argument doesn't exist, create a new TenantBranding with this data.
+     * In case the ClubBranding found by the `where` argument doesn't exist, create a new ClubBranding with this data.
      */
-    create: XOR<TenantBrandingCreateInput, TenantBrandingUncheckedCreateInput>
+    create: XOR<ClubBrandingCreateInput, ClubBrandingUncheckedCreateInput>
     /**
-     * In case the TenantBranding was found with the provided `where` argument, update it with this data.
+     * In case the ClubBranding was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantBrandingUpdateInput, TenantBrandingUncheckedUpdateInput>
+    update: XOR<ClubBrandingUpdateInput, ClubBrandingUncheckedUpdateInput>
   }
 
   /**
-   * TenantBranding delete
+   * ClubBranding delete
    */
-  export type TenantBrandingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
     /**
-     * Filter which TenantBranding to delete.
+     * Filter which ClubBranding to delete.
      */
-    where: TenantBrandingWhereUniqueInput
+    where: ClubBrandingWhereUniqueInput
   }
 
   /**
-   * TenantBranding deleteMany
+   * ClubBranding deleteMany
    */
-  export type TenantBrandingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantBrandings to delete
+     * Filter which ClubBrandings to delete
      */
-    where?: TenantBrandingWhereInput
+    where?: ClubBrandingWhereInput
     /**
-     * Limit how many TenantBrandings to delete.
+     * Limit how many ClubBrandings to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantBranding without action
+   * ClubBranding without action
    */
-  export type TenantBrandingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubBrandingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantBranding
+     * Select specific fields to fetch from the ClubBranding
      */
-    select?: TenantBrandingSelect<ExtArgs> | null
+    select?: ClubBrandingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantBranding
+     * Omit specific fields from the ClubBranding
      */
-    omit?: TenantBrandingOmit<ExtArgs> | null
+    omit?: ClubBrandingOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantBrandingInclude<ExtArgs> | null
+    include?: ClubBrandingInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model TenantModule
+   * Model ClubModule
    */
 
-  export type AggregateTenantModule = {
-    _count: TenantModuleCountAggregateOutputType | null
-    _avg: TenantModuleAvgAggregateOutputType | null
-    _sum: TenantModuleSumAggregateOutputType | null
-    _min: TenantModuleMinAggregateOutputType | null
-    _max: TenantModuleMaxAggregateOutputType | null
+  export type AggregateClubModule = {
+    _count: ClubModuleCountAggregateOutputType | null
+    _avg: ClubModuleAvgAggregateOutputType | null
+    _sum: ClubModuleSumAggregateOutputType | null
+    _min: ClubModuleMinAggregateOutputType | null
+    _max: ClubModuleMaxAggregateOutputType | null
   }
 
-  export type TenantModuleAvgAggregateOutputType = {
+  export type ClubModuleAvgAggregateOutputType = {
     sortOrder: number | null
   }
 
-  export type TenantModuleSumAggregateOutputType = {
+  export type ClubModuleSumAggregateOutputType = {
     sortOrder: number | null
   }
 
-  export type TenantModuleMinAggregateOutputType = {
+  export type ClubModuleMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     moduleKey: $Enums.ModuleKey | null
     isEnabled: boolean | null
     isEnabledByDefault: boolean | null
@@ -4759,9 +4759,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantModuleMaxAggregateOutputType = {
+  export type ClubModuleMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     moduleKey: $Enums.ModuleKey | null
     isEnabled: boolean | null
     isEnabledByDefault: boolean | null
@@ -4772,9 +4772,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantModuleCountAggregateOutputType = {
+  export type ClubModuleCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     moduleKey: number
     isEnabled: number
     isEnabledByDefault: number
@@ -4788,17 +4788,17 @@ export namespace Prisma {
   }
 
 
-  export type TenantModuleAvgAggregateInputType = {
+  export type ClubModuleAvgAggregateInputType = {
     sortOrder?: true
   }
 
-  export type TenantModuleSumAggregateInputType = {
+  export type ClubModuleSumAggregateInputType = {
     sortOrder?: true
   }
 
-  export type TenantModuleMinAggregateInputType = {
+  export type ClubModuleMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     moduleKey?: true
     isEnabled?: true
     isEnabledByDefault?: true
@@ -4809,9 +4809,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantModuleMaxAggregateInputType = {
+  export type ClubModuleMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     moduleKey?: true
     isEnabled?: true
     isEnabledByDefault?: true
@@ -4822,9 +4822,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantModuleCountAggregateInputType = {
+  export type ClubModuleCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     moduleKey?: true
     isEnabled?: true
     isEnabledByDefault?: true
@@ -4837,95 +4837,95 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantModuleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantModule to aggregate.
+     * Filter which ClubModule to aggregate.
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantModules to fetch.
+     * Determine the order of ClubModules to fetch.
      */
-    orderBy?: TenantModuleOrderByWithRelationInput | TenantModuleOrderByWithRelationInput[]
+    orderBy?: ClubModuleOrderByWithRelationInput | ClubModuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantModuleWhereUniqueInput
+    cursor?: ClubModuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantModules from the position of the cursor.
+     * Take `±n` ClubModules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantModules.
+     * Skip the first `n` ClubModules.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantModules
+     * Count returned ClubModules
     **/
-    _count?: true | TenantModuleCountAggregateInputType
+    _count?: true | ClubModuleCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TenantModuleAvgAggregateInputType
+    _avg?: ClubModuleAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TenantModuleSumAggregateInputType
+    _sum?: ClubModuleSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantModuleMinAggregateInputType
+    _min?: ClubModuleMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantModuleMaxAggregateInputType
+    _max?: ClubModuleMaxAggregateInputType
   }
 
-  export type GetTenantModuleAggregateType<T extends TenantModuleAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantModule]: P extends '_count' | 'count'
+  export type GetClubModuleAggregateType<T extends ClubModuleAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubModule]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantModule[P]>
-      : GetScalarType<T[P], AggregateTenantModule[P]>
+        : GetScalarType<T[P], AggregateClubModule[P]>
+      : GetScalarType<T[P], AggregateClubModule[P]>
   }
 
 
 
 
-  export type TenantModuleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantModuleWhereInput
-    orderBy?: TenantModuleOrderByWithAggregationInput | TenantModuleOrderByWithAggregationInput[]
-    by: TenantModuleScalarFieldEnum[] | TenantModuleScalarFieldEnum
-    having?: TenantModuleScalarWhereWithAggregatesInput
+  export type ClubModuleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubModuleWhereInput
+    orderBy?: ClubModuleOrderByWithAggregationInput | ClubModuleOrderByWithAggregationInput[]
+    by: ClubModuleScalarFieldEnum[] | ClubModuleScalarFieldEnum
+    having?: ClubModuleScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantModuleCountAggregateInputType | true
-    _avg?: TenantModuleAvgAggregateInputType
-    _sum?: TenantModuleSumAggregateInputType
-    _min?: TenantModuleMinAggregateInputType
-    _max?: TenantModuleMaxAggregateInputType
+    _count?: ClubModuleCountAggregateInputType | true
+    _avg?: ClubModuleAvgAggregateInputType
+    _sum?: ClubModuleSumAggregateInputType
+    _min?: ClubModuleMinAggregateInputType
+    _max?: ClubModuleMaxAggregateInputType
   }
 
-  export type TenantModuleGroupByOutputType = {
+  export type ClubModuleGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     moduleKey: $Enums.ModuleKey
     isEnabled: boolean
     isEnabledByDefault: boolean
@@ -4935,30 +4935,30 @@ export namespace Prisma {
     sortOrder: number
     createdAt: Date
     updatedAt: Date
-    _count: TenantModuleCountAggregateOutputType | null
-    _avg: TenantModuleAvgAggregateOutputType | null
-    _sum: TenantModuleSumAggregateOutputType | null
-    _min: TenantModuleMinAggregateOutputType | null
-    _max: TenantModuleMaxAggregateOutputType | null
+    _count: ClubModuleCountAggregateOutputType | null
+    _avg: ClubModuleAvgAggregateOutputType | null
+    _sum: ClubModuleSumAggregateOutputType | null
+    _min: ClubModuleMinAggregateOutputType | null
+    _max: ClubModuleMaxAggregateOutputType | null
   }
 
-  type GetTenantModuleGroupByPayload<T extends TenantModuleGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubModuleGroupByPayload<T extends ClubModuleGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantModuleGroupByOutputType, T['by']> &
+      PickEnumerable<ClubModuleGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantModuleGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubModuleGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantModuleGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantModuleGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubModuleGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubModuleGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantModuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubModuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     moduleKey?: boolean
     isEnabled?: boolean
     isEnabledByDefault?: boolean
@@ -4968,12 +4968,12 @@ export namespace Prisma {
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantModule"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubModule"]>
 
-  export type TenantModuleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubModuleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     moduleKey?: boolean
     isEnabled?: boolean
     isEnabledByDefault?: boolean
@@ -4983,12 +4983,12 @@ export namespace Prisma {
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantModule"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubModule"]>
 
-  export type TenantModuleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubModuleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     moduleKey?: boolean
     isEnabled?: boolean
     isEnabledByDefault?: boolean
@@ -4998,12 +4998,12 @@ export namespace Prisma {
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantModule"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubModule"]>
 
-  export type TenantModuleSelectScalar = {
+  export type ClubModuleSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     moduleKey?: boolean
     isEnabled?: boolean
     isEnabledByDefault?: boolean
@@ -5015,25 +5015,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantModuleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "moduleKey" | "isEnabled" | "isEnabledByDefault" | "config" | "displayName" | "description" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantModule"]>
-  export type TenantModuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubModuleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "moduleKey" | "isEnabled" | "isEnabledByDefault" | "config" | "displayName" | "description" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["clubModule"]>
+  export type ClubModuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantModuleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubModuleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantModuleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubModuleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantModulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantModule"
+  export type $ClubModulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubModule"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       moduleKey: $Enums.ModuleKey
       isEnabled: boolean
       isEnabledByDefault: boolean
@@ -5043,136 +5043,136 @@ export namespace Prisma {
       sortOrder: number
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenantModule"]>
+    }, ExtArgs["result"]["clubModule"]>
     composites: {}
   }
 
-  type TenantModuleGetPayload<S extends boolean | null | undefined | TenantModuleDefaultArgs> = $Result.GetResult<Prisma.$TenantModulePayload, S>
+  type ClubModuleGetPayload<S extends boolean | null | undefined | ClubModuleDefaultArgs> = $Result.GetResult<Prisma.$ClubModulePayload, S>
 
-  type TenantModuleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantModuleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantModuleCountAggregateInputType | true
+  type ClubModuleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubModuleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubModuleCountAggregateInputType | true
     }
 
-  export interface TenantModuleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantModule'], meta: { name: 'TenantModule' } }
+  export interface ClubModuleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubModule'], meta: { name: 'ClubModule' } }
     /**
-     * Find zero or one TenantModule that matches the filter.
-     * @param {TenantModuleFindUniqueArgs} args - Arguments to find a TenantModule
+     * Find zero or one ClubModule that matches the filter.
+     * @param {ClubModuleFindUniqueArgs} args - Arguments to find a ClubModule
      * @example
-     * // Get one TenantModule
-     * const tenantModule = await prisma.tenantModule.findUnique({
+     * // Get one ClubModule
+     * const clubModule = await prisma.clubModule.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantModuleFindUniqueArgs>(args: SelectSubset<T, TenantModuleFindUniqueArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubModuleFindUniqueArgs>(args: SelectSubset<T, ClubModuleFindUniqueArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantModule that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubModule that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantModuleFindUniqueOrThrowArgs} args - Arguments to find a TenantModule
+     * @param {ClubModuleFindUniqueOrThrowArgs} args - Arguments to find a ClubModule
      * @example
-     * // Get one TenantModule
-     * const tenantModule = await prisma.tenantModule.findUniqueOrThrow({
+     * // Get one ClubModule
+     * const clubModule = await prisma.clubModule.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantModuleFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantModuleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubModuleFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubModuleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantModule that matches the filter.
+     * Find the first ClubModule that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleFindFirstArgs} args - Arguments to find a TenantModule
+     * @param {ClubModuleFindFirstArgs} args - Arguments to find a ClubModule
      * @example
-     * // Get one TenantModule
-     * const tenantModule = await prisma.tenantModule.findFirst({
+     * // Get one ClubModule
+     * const clubModule = await prisma.clubModule.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantModuleFindFirstArgs>(args?: SelectSubset<T, TenantModuleFindFirstArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubModuleFindFirstArgs>(args?: SelectSubset<T, ClubModuleFindFirstArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantModule that matches the filter or
+     * Find the first ClubModule that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleFindFirstOrThrowArgs} args - Arguments to find a TenantModule
+     * @param {ClubModuleFindFirstOrThrowArgs} args - Arguments to find a ClubModule
      * @example
-     * // Get one TenantModule
-     * const tenantModule = await prisma.tenantModule.findFirstOrThrow({
+     * // Get one ClubModule
+     * const clubModule = await prisma.clubModule.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantModuleFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantModuleFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubModuleFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubModuleFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantModules that matches the filter.
+     * Find zero or more ClubModules that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubModuleFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantModules
-     * const tenantModules = await prisma.tenantModule.findMany()
+     * // Get all ClubModules
+     * const clubModules = await prisma.clubModule.findMany()
      * 
-     * // Get first 10 TenantModules
-     * const tenantModules = await prisma.tenantModule.findMany({ take: 10 })
+     * // Get first 10 ClubModules
+     * const clubModules = await prisma.clubModule.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantModuleWithIdOnly = await prisma.tenantModule.findMany({ select: { id: true } })
+     * const clubModuleWithIdOnly = await prisma.clubModule.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantModuleFindManyArgs>(args?: SelectSubset<T, TenantModuleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubModuleFindManyArgs>(args?: SelectSubset<T, ClubModuleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantModule.
-     * @param {TenantModuleCreateArgs} args - Arguments to create a TenantModule.
+     * Create a ClubModule.
+     * @param {ClubModuleCreateArgs} args - Arguments to create a ClubModule.
      * @example
-     * // Create one TenantModule
-     * const TenantModule = await prisma.tenantModule.create({
+     * // Create one ClubModule
+     * const ClubModule = await prisma.clubModule.create({
      *   data: {
-     *     // ... data to create a TenantModule
+     *     // ... data to create a ClubModule
      *   }
      * })
      * 
      */
-    create<T extends TenantModuleCreateArgs>(args: SelectSubset<T, TenantModuleCreateArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubModuleCreateArgs>(args: SelectSubset<T, ClubModuleCreateArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantModules.
-     * @param {TenantModuleCreateManyArgs} args - Arguments to create many TenantModules.
+     * Create many ClubModules.
+     * @param {ClubModuleCreateManyArgs} args - Arguments to create many ClubModules.
      * @example
-     * // Create many TenantModules
-     * const tenantModule = await prisma.tenantModule.createMany({
+     * // Create many ClubModules
+     * const clubModule = await prisma.clubModule.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantModuleCreateManyArgs>(args?: SelectSubset<T, TenantModuleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubModuleCreateManyArgs>(args?: SelectSubset<T, ClubModuleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantModules and returns the data saved in the database.
-     * @param {TenantModuleCreateManyAndReturnArgs} args - Arguments to create many TenantModules.
+     * Create many ClubModules and returns the data saved in the database.
+     * @param {ClubModuleCreateManyAndReturnArgs} args - Arguments to create many ClubModules.
      * @example
-     * // Create many TenantModules
-     * const tenantModule = await prisma.tenantModule.createManyAndReturn({
+     * // Create many ClubModules
+     * const clubModule = await prisma.clubModule.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantModules and only return the `id`
-     * const tenantModuleWithIdOnly = await prisma.tenantModule.createManyAndReturn({
+     * // Create many ClubModules and only return the `id`
+     * const clubModuleWithIdOnly = await prisma.clubModule.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5182,28 +5182,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantModuleCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantModuleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubModuleCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubModuleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantModule.
-     * @param {TenantModuleDeleteArgs} args - Arguments to delete one TenantModule.
+     * Delete a ClubModule.
+     * @param {ClubModuleDeleteArgs} args - Arguments to delete one ClubModule.
      * @example
-     * // Delete one TenantModule
-     * const TenantModule = await prisma.tenantModule.delete({
+     * // Delete one ClubModule
+     * const ClubModule = await prisma.clubModule.delete({
      *   where: {
-     *     // ... filter to delete one TenantModule
+     *     // ... filter to delete one ClubModule
      *   }
      * })
      * 
      */
-    delete<T extends TenantModuleDeleteArgs>(args: SelectSubset<T, TenantModuleDeleteArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubModuleDeleteArgs>(args: SelectSubset<T, ClubModuleDeleteArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantModule.
-     * @param {TenantModuleUpdateArgs} args - Arguments to update one TenantModule.
+     * Update one ClubModule.
+     * @param {ClubModuleUpdateArgs} args - Arguments to update one ClubModule.
      * @example
-     * // Update one TenantModule
-     * const tenantModule = await prisma.tenantModule.update({
+     * // Update one ClubModule
+     * const clubModule = await prisma.clubModule.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5213,30 +5213,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantModuleUpdateArgs>(args: SelectSubset<T, TenantModuleUpdateArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubModuleUpdateArgs>(args: SelectSubset<T, ClubModuleUpdateArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantModules.
-     * @param {TenantModuleDeleteManyArgs} args - Arguments to filter TenantModules to delete.
+     * Delete zero or more ClubModules.
+     * @param {ClubModuleDeleteManyArgs} args - Arguments to filter ClubModules to delete.
      * @example
-     * // Delete a few TenantModules
-     * const { count } = await prisma.tenantModule.deleteMany({
+     * // Delete a few ClubModules
+     * const { count } = await prisma.clubModule.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantModuleDeleteManyArgs>(args?: SelectSubset<T, TenantModuleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubModuleDeleteManyArgs>(args?: SelectSubset<T, ClubModuleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantModules.
+     * Update zero or more ClubModules.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubModuleUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantModules
-     * const tenantModule = await prisma.tenantModule.updateMany({
+     * // Update many ClubModules
+     * const clubModule = await prisma.clubModule.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5246,14 +5246,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantModuleUpdateManyArgs>(args: SelectSubset<T, TenantModuleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubModuleUpdateManyArgs>(args: SelectSubset<T, ClubModuleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantModules and returns the data updated in the database.
-     * @param {TenantModuleUpdateManyAndReturnArgs} args - Arguments to update many TenantModules.
+     * Update zero or more ClubModules and returns the data updated in the database.
+     * @param {ClubModuleUpdateManyAndReturnArgs} args - Arguments to update many ClubModules.
      * @example
-     * // Update many TenantModules
-     * const tenantModule = await prisma.tenantModule.updateManyAndReturn({
+     * // Update many ClubModules
+     * const clubModule = await prisma.clubModule.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5262,8 +5262,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantModules and only return the `id`
-     * const tenantModuleWithIdOnly = await prisma.tenantModule.updateManyAndReturn({
+     * // Update zero or more ClubModules and only return the `id`
+     * const clubModuleWithIdOnly = await prisma.clubModule.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5276,56 +5276,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantModuleUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantModuleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubModuleUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubModuleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantModule.
-     * @param {TenantModuleUpsertArgs} args - Arguments to update or create a TenantModule.
+     * Create or update one ClubModule.
+     * @param {ClubModuleUpsertArgs} args - Arguments to update or create a ClubModule.
      * @example
-     * // Update or create a TenantModule
-     * const tenantModule = await prisma.tenantModule.upsert({
+     * // Update or create a ClubModule
+     * const clubModule = await prisma.clubModule.upsert({
      *   create: {
-     *     // ... data to create a TenantModule
+     *     // ... data to create a ClubModule
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantModule we want to update
+     *     // ... the filter for the ClubModule we want to update
      *   }
      * })
      */
-    upsert<T extends TenantModuleUpsertArgs>(args: SelectSubset<T, TenantModuleUpsertArgs<ExtArgs>>): Prisma__TenantModuleClient<$Result.GetResult<Prisma.$TenantModulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubModuleUpsertArgs>(args: SelectSubset<T, ClubModuleUpsertArgs<ExtArgs>>): Prisma__ClubModuleClient<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantModules.
+     * Count the number of ClubModules.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleCountArgs} args - Arguments to filter TenantModules to count.
+     * @param {ClubModuleCountArgs} args - Arguments to filter ClubModules to count.
      * @example
-     * // Count the number of TenantModules
-     * const count = await prisma.tenantModule.count({
+     * // Count the number of ClubModules
+     * const count = await prisma.clubModule.count({
      *   where: {
-     *     // ... the filter for the TenantModules we want to count
+     *     // ... the filter for the ClubModules we want to count
      *   }
      * })
     **/
-    count<T extends TenantModuleCountArgs>(
-      args?: Subset<T, TenantModuleCountArgs>,
+    count<T extends ClubModuleCountArgs>(
+      args?: Subset<T, ClubModuleCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantModuleCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubModuleCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantModule.
+     * Allows you to perform aggregations operations on a ClubModule.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubModuleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5345,13 +5345,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantModuleAggregateArgs>(args: Subset<T, TenantModuleAggregateArgs>): Prisma.PrismaPromise<GetTenantModuleAggregateType<T>>
+    aggregate<T extends ClubModuleAggregateArgs>(args: Subset<T, ClubModuleAggregateArgs>): Prisma.PrismaPromise<GetClubModuleAggregateType<T>>
 
     /**
-     * Group by TenantModule.
+     * Group by ClubModule.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantModuleGroupByArgs} args - Group by arguments.
+     * @param {ClubModuleGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5366,14 +5366,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantModuleGroupByArgs,
+      T extends ClubModuleGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantModuleGroupByArgs['orderBy'] }
-        : { orderBy?: TenantModuleGroupByArgs['orderBy'] },
+        ? { orderBy: ClubModuleGroupByArgs['orderBy'] }
+        : { orderBy?: ClubModuleGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5422,22 +5422,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantModuleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantModuleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubModuleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubModuleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantModule model
+   * Fields of the ClubModule model
    */
-  readonly fields: TenantModuleFieldRefs;
+  readonly fields: ClubModuleFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantModule.
+   * The delegate class that acts as a "Promise-like" for ClubModule.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantModuleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubModuleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5464,447 +5464,447 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantModule model
+   * Fields of the ClubModule model
    */
-  interface TenantModuleFieldRefs {
-    readonly id: FieldRef<"TenantModule", 'String'>
-    readonly tenantId: FieldRef<"TenantModule", 'String'>
-    readonly moduleKey: FieldRef<"TenantModule", 'ModuleKey'>
-    readonly isEnabled: FieldRef<"TenantModule", 'Boolean'>
-    readonly isEnabledByDefault: FieldRef<"TenantModule", 'Boolean'>
-    readonly config: FieldRef<"TenantModule", 'Json'>
-    readonly displayName: FieldRef<"TenantModule", 'String'>
-    readonly description: FieldRef<"TenantModule", 'String'>
-    readonly sortOrder: FieldRef<"TenantModule", 'Int'>
-    readonly createdAt: FieldRef<"TenantModule", 'DateTime'>
-    readonly updatedAt: FieldRef<"TenantModule", 'DateTime'>
+  interface ClubModuleFieldRefs {
+    readonly id: FieldRef<"ClubModule", 'String'>
+    readonly clubId: FieldRef<"ClubModule", 'String'>
+    readonly moduleKey: FieldRef<"ClubModule", 'ModuleKey'>
+    readonly isEnabled: FieldRef<"ClubModule", 'Boolean'>
+    readonly isEnabledByDefault: FieldRef<"ClubModule", 'Boolean'>
+    readonly config: FieldRef<"ClubModule", 'Json'>
+    readonly displayName: FieldRef<"ClubModule", 'String'>
+    readonly description: FieldRef<"ClubModule", 'String'>
+    readonly sortOrder: FieldRef<"ClubModule", 'Int'>
+    readonly createdAt: FieldRef<"ClubModule", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubModule", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantModule findUnique
+   * ClubModule findUnique
    */
-  export type TenantModuleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * Filter, which TenantModule to fetch.
+     * Filter, which ClubModule to fetch.
      */
-    where: TenantModuleWhereUniqueInput
+    where: ClubModuleWhereUniqueInput
   }
 
   /**
-   * TenantModule findUniqueOrThrow
+   * ClubModule findUniqueOrThrow
    */
-  export type TenantModuleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * Filter, which TenantModule to fetch.
+     * Filter, which ClubModule to fetch.
      */
-    where: TenantModuleWhereUniqueInput
+    where: ClubModuleWhereUniqueInput
   }
 
   /**
-   * TenantModule findFirst
+   * ClubModule findFirst
    */
-  export type TenantModuleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * Filter, which TenantModule to fetch.
+     * Filter, which ClubModule to fetch.
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantModules to fetch.
+     * Determine the order of ClubModules to fetch.
      */
-    orderBy?: TenantModuleOrderByWithRelationInput | TenantModuleOrderByWithRelationInput[]
+    orderBy?: ClubModuleOrderByWithRelationInput | ClubModuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantModules.
+     * Sets the position for searching for ClubModules.
      */
-    cursor?: TenantModuleWhereUniqueInput
+    cursor?: ClubModuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantModules from the position of the cursor.
+     * Take `±n` ClubModules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantModules.
+     * Skip the first `n` ClubModules.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantModules.
+     * Filter by unique combinations of ClubModules.
      */
-    distinct?: TenantModuleScalarFieldEnum | TenantModuleScalarFieldEnum[]
+    distinct?: ClubModuleScalarFieldEnum | ClubModuleScalarFieldEnum[]
   }
 
   /**
-   * TenantModule findFirstOrThrow
+   * ClubModule findFirstOrThrow
    */
-  export type TenantModuleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * Filter, which TenantModule to fetch.
+     * Filter, which ClubModule to fetch.
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantModules to fetch.
+     * Determine the order of ClubModules to fetch.
      */
-    orderBy?: TenantModuleOrderByWithRelationInput | TenantModuleOrderByWithRelationInput[]
+    orderBy?: ClubModuleOrderByWithRelationInput | ClubModuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantModules.
+     * Sets the position for searching for ClubModules.
      */
-    cursor?: TenantModuleWhereUniqueInput
+    cursor?: ClubModuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantModules from the position of the cursor.
+     * Take `±n` ClubModules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantModules.
+     * Skip the first `n` ClubModules.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantModules.
+     * Filter by unique combinations of ClubModules.
      */
-    distinct?: TenantModuleScalarFieldEnum | TenantModuleScalarFieldEnum[]
+    distinct?: ClubModuleScalarFieldEnum | ClubModuleScalarFieldEnum[]
   }
 
   /**
-   * TenantModule findMany
+   * ClubModule findMany
    */
-  export type TenantModuleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * Filter, which TenantModules to fetch.
+     * Filter, which ClubModules to fetch.
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantModules to fetch.
+     * Determine the order of ClubModules to fetch.
      */
-    orderBy?: TenantModuleOrderByWithRelationInput | TenantModuleOrderByWithRelationInput[]
+    orderBy?: ClubModuleOrderByWithRelationInput | ClubModuleOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantModules.
+     * Sets the position for listing ClubModules.
      */
-    cursor?: TenantModuleWhereUniqueInput
+    cursor?: ClubModuleWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantModules from the position of the cursor.
+     * Take `±n` ClubModules from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantModules.
+     * Skip the first `n` ClubModules.
      */
     skip?: number
-    distinct?: TenantModuleScalarFieldEnum | TenantModuleScalarFieldEnum[]
+    distinct?: ClubModuleScalarFieldEnum | ClubModuleScalarFieldEnum[]
   }
 
   /**
-   * TenantModule create
+   * ClubModule create
    */
-  export type TenantModuleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantModule.
+     * The data needed to create a ClubModule.
      */
-    data: XOR<TenantModuleCreateInput, TenantModuleUncheckedCreateInput>
+    data: XOR<ClubModuleCreateInput, ClubModuleUncheckedCreateInput>
   }
 
   /**
-   * TenantModule createMany
+   * ClubModule createMany
    */
-  export type TenantModuleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantModules.
+     * The data used to create many ClubModules.
      */
-    data: TenantModuleCreateManyInput | TenantModuleCreateManyInput[]
+    data: ClubModuleCreateManyInput | ClubModuleCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantModule createManyAndReturn
+   * ClubModule createManyAndReturn
    */
-  export type TenantModuleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubModuleSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantModules.
+     * The data used to create many ClubModules.
      */
-    data: TenantModuleCreateManyInput | TenantModuleCreateManyInput[]
+    data: ClubModuleCreateManyInput | ClubModuleCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubModuleIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantModule update
+   * ClubModule update
    */
-  export type TenantModuleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantModule.
+     * The data needed to update a ClubModule.
      */
-    data: XOR<TenantModuleUpdateInput, TenantModuleUncheckedUpdateInput>
+    data: XOR<ClubModuleUpdateInput, ClubModuleUncheckedUpdateInput>
     /**
-     * Choose, which TenantModule to update.
+     * Choose, which ClubModule to update.
      */
-    where: TenantModuleWhereUniqueInput
+    where: ClubModuleWhereUniqueInput
   }
 
   /**
-   * TenantModule updateMany
+   * ClubModule updateMany
    */
-  export type TenantModuleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantModules.
+     * The data used to update ClubModules.
      */
-    data: XOR<TenantModuleUpdateManyMutationInput, TenantModuleUncheckedUpdateManyInput>
+    data: XOR<ClubModuleUpdateManyMutationInput, ClubModuleUncheckedUpdateManyInput>
     /**
-     * Filter which TenantModules to update
+     * Filter which ClubModules to update
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
-     * Limit how many TenantModules to update.
+     * Limit how many ClubModules to update.
      */
     limit?: number
   }
 
   /**
-   * TenantModule updateManyAndReturn
+   * ClubModule updateManyAndReturn
    */
-  export type TenantModuleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubModuleSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
-     * The data used to update TenantModules.
+     * The data used to update ClubModules.
      */
-    data: XOR<TenantModuleUpdateManyMutationInput, TenantModuleUncheckedUpdateManyInput>
+    data: XOR<ClubModuleUpdateManyMutationInput, ClubModuleUncheckedUpdateManyInput>
     /**
-     * Filter which TenantModules to update
+     * Filter which ClubModules to update
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
-     * Limit how many TenantModules to update.
+     * Limit how many ClubModules to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubModuleIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantModule upsert
+   * ClubModule upsert
    */
-  export type TenantModuleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantModule to update in case it exists.
+     * The filter to search for the ClubModule to update in case it exists.
      */
-    where: TenantModuleWhereUniqueInput
+    where: ClubModuleWhereUniqueInput
     /**
-     * In case the TenantModule found by the `where` argument doesn't exist, create a new TenantModule with this data.
+     * In case the ClubModule found by the `where` argument doesn't exist, create a new ClubModule with this data.
      */
-    create: XOR<TenantModuleCreateInput, TenantModuleUncheckedCreateInput>
+    create: XOR<ClubModuleCreateInput, ClubModuleUncheckedCreateInput>
     /**
-     * In case the TenantModule was found with the provided `where` argument, update it with this data.
+     * In case the ClubModule was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantModuleUpdateInput, TenantModuleUncheckedUpdateInput>
+    update: XOR<ClubModuleUpdateInput, ClubModuleUncheckedUpdateInput>
   }
 
   /**
-   * TenantModule delete
+   * ClubModule delete
    */
-  export type TenantModuleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
     /**
-     * Filter which TenantModule to delete.
+     * Filter which ClubModule to delete.
      */
-    where: TenantModuleWhereUniqueInput
+    where: ClubModuleWhereUniqueInput
   }
 
   /**
-   * TenantModule deleteMany
+   * ClubModule deleteMany
    */
-  export type TenantModuleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantModules to delete
+     * Filter which ClubModules to delete
      */
-    where?: TenantModuleWhereInput
+    where?: ClubModuleWhereInput
     /**
-     * Limit how many TenantModules to delete.
+     * Limit how many ClubModules to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantModule without action
+   * ClubModule without action
    */
-  export type TenantModuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubModuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantModule
+     * Select specific fields to fetch from the ClubModule
      */
-    select?: TenantModuleSelect<ExtArgs> | null
+    select?: ClubModuleSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantModule
+     * Omit specific fields from the ClubModule
      */
-    omit?: TenantModuleOmit<ExtArgs> | null
+    omit?: ClubModuleOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantModuleInclude<ExtArgs> | null
+    include?: ClubModuleInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model TenantStats
+   * Model ClubStats
    */
 
-  export type AggregateTenantStats = {
-    _count: TenantStatsCountAggregateOutputType | null
-    _avg: TenantStatsAvgAggregateOutputType | null
-    _sum: TenantStatsSumAggregateOutputType | null
-    _min: TenantStatsMinAggregateOutputType | null
-    _max: TenantStatsMaxAggregateOutputType | null
+  export type AggregateClubStats = {
+    _count: ClubStatsCountAggregateOutputType | null
+    _avg: ClubStatsAvgAggregateOutputType | null
+    _sum: ClubStatsSumAggregateOutputType | null
+    _min: ClubStatsMinAggregateOutputType | null
+    _max: ClubStatsMaxAggregateOutputType | null
   }
 
-  export type TenantStatsAvgAggregateOutputType = {
+  export type ClubStatsAvgAggregateOutputType = {
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -5919,7 +5919,7 @@ export namespace Prisma {
     cashback30d: Decimal | null
   }
 
-  export type TenantStatsSumAggregateOutputType = {
+  export type ClubStatsSumAggregateOutputType = {
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -5934,9 +5934,9 @@ export namespace Prisma {
     cashback30d: Decimal | null
   }
 
-  export type TenantStatsMinAggregateOutputType = {
+  export type ClubStatsMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -5953,9 +5953,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantStatsMaxAggregateOutputType = {
+  export type ClubStatsMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -5972,9 +5972,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantStatsCountAggregateOutputType = {
+  export type ClubStatsCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     totalUsers: number
     totalConsumers: number
     totalMerchants: number
@@ -5993,7 +5993,7 @@ export namespace Prisma {
   }
 
 
-  export type TenantStatsAvgAggregateInputType = {
+  export type ClubStatsAvgAggregateInputType = {
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -6008,7 +6008,7 @@ export namespace Prisma {
     cashback30d?: true
   }
 
-  export type TenantStatsSumAggregateInputType = {
+  export type ClubStatsSumAggregateInputType = {
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -6023,9 +6023,9 @@ export namespace Prisma {
     cashback30d?: true
   }
 
-  export type TenantStatsMinAggregateInputType = {
+  export type ClubStatsMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -6042,9 +6042,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantStatsMaxAggregateInputType = {
+  export type ClubStatsMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -6061,9 +6061,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantStatsCountAggregateInputType = {
+  export type ClubStatsCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -6081,95 +6081,95 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantStats to aggregate.
+     * Filter which ClubStats to aggregate.
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantStats to fetch.
+     * Determine the order of ClubStats to fetch.
      */
-    orderBy?: TenantStatsOrderByWithRelationInput | TenantStatsOrderByWithRelationInput[]
+    orderBy?: ClubStatsOrderByWithRelationInput | ClubStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantStatsWhereUniqueInput
+    cursor?: ClubStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantStats from the position of the cursor.
+     * Take `±n` ClubStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantStats.
+     * Skip the first `n` ClubStats.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantStats
+     * Count returned ClubStats
     **/
-    _count?: true | TenantStatsCountAggregateInputType
+    _count?: true | ClubStatsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TenantStatsAvgAggregateInputType
+    _avg?: ClubStatsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TenantStatsSumAggregateInputType
+    _sum?: ClubStatsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantStatsMinAggregateInputType
+    _min?: ClubStatsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantStatsMaxAggregateInputType
+    _max?: ClubStatsMaxAggregateInputType
   }
 
-  export type GetTenantStatsAggregateType<T extends TenantStatsAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantStats]: P extends '_count' | 'count'
+  export type GetClubStatsAggregateType<T extends ClubStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubStats]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantStats[P]>
-      : GetScalarType<T[P], AggregateTenantStats[P]>
+        : GetScalarType<T[P], AggregateClubStats[P]>
+      : GetScalarType<T[P], AggregateClubStats[P]>
   }
 
 
 
 
-  export type TenantStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantStatsWhereInput
-    orderBy?: TenantStatsOrderByWithAggregationInput | TenantStatsOrderByWithAggregationInput[]
-    by: TenantStatsScalarFieldEnum[] | TenantStatsScalarFieldEnum
-    having?: TenantStatsScalarWhereWithAggregatesInput
+  export type ClubStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubStatsWhereInput
+    orderBy?: ClubStatsOrderByWithAggregationInput | ClubStatsOrderByWithAggregationInput[]
+    by: ClubStatsScalarFieldEnum[] | ClubStatsScalarFieldEnum
+    having?: ClubStatsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantStatsCountAggregateInputType | true
-    _avg?: TenantStatsAvgAggregateInputType
-    _sum?: TenantStatsSumAggregateInputType
-    _min?: TenantStatsMinAggregateInputType
-    _max?: TenantStatsMaxAggregateInputType
+    _count?: ClubStatsCountAggregateInputType | true
+    _avg?: ClubStatsAvgAggregateInputType
+    _sum?: ClubStatsSumAggregateInputType
+    _min?: ClubStatsMinAggregateInputType
+    _max?: ClubStatsMaxAggregateInputType
   }
 
-  export type TenantStatsGroupByOutputType = {
+  export type ClubStatsGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     totalUsers: number
     totalConsumers: number
     totalMerchants: number
@@ -6184,30 +6184,30 @@ export namespace Prisma {
     cashback30d: Decimal
     createdAt: Date
     updatedAt: Date
-    _count: TenantStatsCountAggregateOutputType | null
-    _avg: TenantStatsAvgAggregateOutputType | null
-    _sum: TenantStatsSumAggregateOutputType | null
-    _min: TenantStatsMinAggregateOutputType | null
-    _max: TenantStatsMaxAggregateOutputType | null
+    _count: ClubStatsCountAggregateOutputType | null
+    _avg: ClubStatsAvgAggregateOutputType | null
+    _sum: ClubStatsSumAggregateOutputType | null
+    _min: ClubStatsMinAggregateOutputType | null
+    _max: ClubStatsMaxAggregateOutputType | null
   }
 
-  type GetTenantStatsGroupByPayload<T extends TenantStatsGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubStatsGroupByPayload<T extends ClubStatsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantStatsGroupByOutputType, T['by']> &
+      PickEnumerable<ClubStatsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantStatsGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubStatsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantStatsGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantStatsGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubStatsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -6222,12 +6222,12 @@ export namespace Prisma {
     cashback30d?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantStats"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubStats"]>
 
-  export type TenantStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -6242,12 +6242,12 @@ export namespace Prisma {
     cashback30d?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantStats"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubStats"]>
 
-  export type TenantStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -6262,12 +6262,12 @@ export namespace Prisma {
     cashback30d?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantStats"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubStats"]>
 
-  export type TenantStatsSelectScalar = {
+  export type ClubStatsSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -6284,25 +6284,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "totalUsers" | "totalConsumers" | "totalMerchants" | "activeUsers30d" | "totalPurchases" | "totalRevenue" | "totalCashbackPaid" | "totalPlatformFees" | "totalProducts" | "revenue30d" | "purchases30d" | "cashback30d" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantStats"]>
-  export type TenantStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "totalUsers" | "totalConsumers" | "totalMerchants" | "activeUsers30d" | "totalPurchases" | "totalRevenue" | "totalCashbackPaid" | "totalPlatformFees" | "totalProducts" | "revenue30d" | "purchases30d" | "cashback30d" | "createdAt" | "updatedAt", ExtArgs["result"]["clubStats"]>
+  export type ClubStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantStats"
+  export type $ClubStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubStats"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       totalUsers: number
       totalConsumers: number
       totalMerchants: number
@@ -6317,136 +6317,136 @@ export namespace Prisma {
       cashback30d: Prisma.Decimal
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenantStats"]>
+    }, ExtArgs["result"]["clubStats"]>
     composites: {}
   }
 
-  type TenantStatsGetPayload<S extends boolean | null | undefined | TenantStatsDefaultArgs> = $Result.GetResult<Prisma.$TenantStatsPayload, S>
+  type ClubStatsGetPayload<S extends boolean | null | undefined | ClubStatsDefaultArgs> = $Result.GetResult<Prisma.$ClubStatsPayload, S>
 
-  type TenantStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantStatsCountAggregateInputType | true
+  type ClubStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubStatsCountAggregateInputType | true
     }
 
-  export interface TenantStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantStats'], meta: { name: 'TenantStats' } }
+  export interface ClubStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubStats'], meta: { name: 'ClubStats' } }
     /**
-     * Find zero or one TenantStats that matches the filter.
-     * @param {TenantStatsFindUniqueArgs} args - Arguments to find a TenantStats
+     * Find zero or one ClubStats that matches the filter.
+     * @param {ClubStatsFindUniqueArgs} args - Arguments to find a ClubStats
      * @example
-     * // Get one TenantStats
-     * const tenantStats = await prisma.tenantStats.findUnique({
+     * // Get one ClubStats
+     * const clubStats = await prisma.clubStats.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantStatsFindUniqueArgs>(args: SelectSubset<T, TenantStatsFindUniqueArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubStatsFindUniqueArgs>(args: SelectSubset<T, ClubStatsFindUniqueArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantStats that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubStats that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantStatsFindUniqueOrThrowArgs} args - Arguments to find a TenantStats
+     * @param {ClubStatsFindUniqueOrThrowArgs} args - Arguments to find a ClubStats
      * @example
-     * // Get one TenantStats
-     * const tenantStats = await prisma.tenantStats.findUniqueOrThrow({
+     * // Get one ClubStats
+     * const clubStats = await prisma.clubStats.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantStats that matches the filter.
+     * Find the first ClubStats that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsFindFirstArgs} args - Arguments to find a TenantStats
+     * @param {ClubStatsFindFirstArgs} args - Arguments to find a ClubStats
      * @example
-     * // Get one TenantStats
-     * const tenantStats = await prisma.tenantStats.findFirst({
+     * // Get one ClubStats
+     * const clubStats = await prisma.clubStats.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantStatsFindFirstArgs>(args?: SelectSubset<T, TenantStatsFindFirstArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubStatsFindFirstArgs>(args?: SelectSubset<T, ClubStatsFindFirstArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantStats that matches the filter or
+     * Find the first ClubStats that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsFindFirstOrThrowArgs} args - Arguments to find a TenantStats
+     * @param {ClubStatsFindFirstOrThrowArgs} args - Arguments to find a ClubStats
      * @example
-     * // Get one TenantStats
-     * const tenantStats = await prisma.tenantStats.findFirstOrThrow({
+     * // Get one ClubStats
+     * const clubStats = await prisma.clubStats.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantStats that matches the filter.
+     * Find zero or more ClubStats that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubStatsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantStats
-     * const tenantStats = await prisma.tenantStats.findMany()
+     * // Get all ClubStats
+     * const clubStats = await prisma.clubStats.findMany()
      * 
-     * // Get first 10 TenantStats
-     * const tenantStats = await prisma.tenantStats.findMany({ take: 10 })
+     * // Get first 10 ClubStats
+     * const clubStats = await prisma.clubStats.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantStatsWithIdOnly = await prisma.tenantStats.findMany({ select: { id: true } })
+     * const clubStatsWithIdOnly = await prisma.clubStats.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantStatsFindManyArgs>(args?: SelectSubset<T, TenantStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubStatsFindManyArgs>(args?: SelectSubset<T, ClubStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantStats.
-     * @param {TenantStatsCreateArgs} args - Arguments to create a TenantStats.
+     * Create a ClubStats.
+     * @param {ClubStatsCreateArgs} args - Arguments to create a ClubStats.
      * @example
-     * // Create one TenantStats
-     * const TenantStats = await prisma.tenantStats.create({
+     * // Create one ClubStats
+     * const ClubStats = await prisma.clubStats.create({
      *   data: {
-     *     // ... data to create a TenantStats
+     *     // ... data to create a ClubStats
      *   }
      * })
      * 
      */
-    create<T extends TenantStatsCreateArgs>(args: SelectSubset<T, TenantStatsCreateArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubStatsCreateArgs>(args: SelectSubset<T, ClubStatsCreateArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantStats.
-     * @param {TenantStatsCreateManyArgs} args - Arguments to create many TenantStats.
+     * Create many ClubStats.
+     * @param {ClubStatsCreateManyArgs} args - Arguments to create many ClubStats.
      * @example
-     * // Create many TenantStats
-     * const tenantStats = await prisma.tenantStats.createMany({
+     * // Create many ClubStats
+     * const clubStats = await prisma.clubStats.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantStatsCreateManyArgs>(args?: SelectSubset<T, TenantStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubStatsCreateManyArgs>(args?: SelectSubset<T, ClubStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantStats and returns the data saved in the database.
-     * @param {TenantStatsCreateManyAndReturnArgs} args - Arguments to create many TenantStats.
+     * Create many ClubStats and returns the data saved in the database.
+     * @param {ClubStatsCreateManyAndReturnArgs} args - Arguments to create many ClubStats.
      * @example
-     * // Create many TenantStats
-     * const tenantStats = await prisma.tenantStats.createManyAndReturn({
+     * // Create many ClubStats
+     * const clubStats = await prisma.clubStats.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantStats and only return the `id`
-     * const tenantStatsWithIdOnly = await prisma.tenantStats.createManyAndReturn({
+     * // Create many ClubStats and only return the `id`
+     * const clubStatsWithIdOnly = await prisma.clubStats.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -6456,28 +6456,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantStats.
-     * @param {TenantStatsDeleteArgs} args - Arguments to delete one TenantStats.
+     * Delete a ClubStats.
+     * @param {ClubStatsDeleteArgs} args - Arguments to delete one ClubStats.
      * @example
-     * // Delete one TenantStats
-     * const TenantStats = await prisma.tenantStats.delete({
+     * // Delete one ClubStats
+     * const ClubStats = await prisma.clubStats.delete({
      *   where: {
-     *     // ... filter to delete one TenantStats
+     *     // ... filter to delete one ClubStats
      *   }
      * })
      * 
      */
-    delete<T extends TenantStatsDeleteArgs>(args: SelectSubset<T, TenantStatsDeleteArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubStatsDeleteArgs>(args: SelectSubset<T, ClubStatsDeleteArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantStats.
-     * @param {TenantStatsUpdateArgs} args - Arguments to update one TenantStats.
+     * Update one ClubStats.
+     * @param {ClubStatsUpdateArgs} args - Arguments to update one ClubStats.
      * @example
-     * // Update one TenantStats
-     * const tenantStats = await prisma.tenantStats.update({
+     * // Update one ClubStats
+     * const clubStats = await prisma.clubStats.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6487,30 +6487,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantStatsUpdateArgs>(args: SelectSubset<T, TenantStatsUpdateArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubStatsUpdateArgs>(args: SelectSubset<T, ClubStatsUpdateArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantStats.
-     * @param {TenantStatsDeleteManyArgs} args - Arguments to filter TenantStats to delete.
+     * Delete zero or more ClubStats.
+     * @param {ClubStatsDeleteManyArgs} args - Arguments to filter ClubStats to delete.
      * @example
-     * // Delete a few TenantStats
-     * const { count } = await prisma.tenantStats.deleteMany({
+     * // Delete a few ClubStats
+     * const { count } = await prisma.clubStats.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantStatsDeleteManyArgs>(args?: SelectSubset<T, TenantStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubStatsDeleteManyArgs>(args?: SelectSubset<T, ClubStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantStats.
+     * Update zero or more ClubStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubStatsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantStats
-     * const tenantStats = await prisma.tenantStats.updateMany({
+     * // Update many ClubStats
+     * const clubStats = await prisma.clubStats.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6520,14 +6520,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantStatsUpdateManyArgs>(args: SelectSubset<T, TenantStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubStatsUpdateManyArgs>(args: SelectSubset<T, ClubStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantStats and returns the data updated in the database.
-     * @param {TenantStatsUpdateManyAndReturnArgs} args - Arguments to update many TenantStats.
+     * Update zero or more ClubStats and returns the data updated in the database.
+     * @param {ClubStatsUpdateManyAndReturnArgs} args - Arguments to update many ClubStats.
      * @example
-     * // Update many TenantStats
-     * const tenantStats = await prisma.tenantStats.updateManyAndReturn({
+     * // Update many ClubStats
+     * const clubStats = await prisma.clubStats.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6536,8 +6536,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantStats and only return the `id`
-     * const tenantStatsWithIdOnly = await prisma.tenantStats.updateManyAndReturn({
+     * // Update zero or more ClubStats and only return the `id`
+     * const clubStatsWithIdOnly = await prisma.clubStats.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -6550,56 +6550,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantStats.
-     * @param {TenantStatsUpsertArgs} args - Arguments to update or create a TenantStats.
+     * Create or update one ClubStats.
+     * @param {ClubStatsUpsertArgs} args - Arguments to update or create a ClubStats.
      * @example
-     * // Update or create a TenantStats
-     * const tenantStats = await prisma.tenantStats.upsert({
+     * // Update or create a ClubStats
+     * const clubStats = await prisma.clubStats.upsert({
      *   create: {
-     *     // ... data to create a TenantStats
+     *     // ... data to create a ClubStats
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantStats we want to update
+     *     // ... the filter for the ClubStats we want to update
      *   }
      * })
      */
-    upsert<T extends TenantStatsUpsertArgs>(args: SelectSubset<T, TenantStatsUpsertArgs<ExtArgs>>): Prisma__TenantStatsClient<$Result.GetResult<Prisma.$TenantStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubStatsUpsertArgs>(args: SelectSubset<T, ClubStatsUpsertArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantStats.
+     * Count the number of ClubStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsCountArgs} args - Arguments to filter TenantStats to count.
+     * @param {ClubStatsCountArgs} args - Arguments to filter ClubStats to count.
      * @example
-     * // Count the number of TenantStats
-     * const count = await prisma.tenantStats.count({
+     * // Count the number of ClubStats
+     * const count = await prisma.clubStats.count({
      *   where: {
-     *     // ... the filter for the TenantStats we want to count
+     *     // ... the filter for the ClubStats we want to count
      *   }
      * })
     **/
-    count<T extends TenantStatsCountArgs>(
-      args?: Subset<T, TenantStatsCountArgs>,
+    count<T extends ClubStatsCountArgs>(
+      args?: Subset<T, ClubStatsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantStatsCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubStatsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantStats.
+     * Allows you to perform aggregations operations on a ClubStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -6619,13 +6619,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantStatsAggregateArgs>(args: Subset<T, TenantStatsAggregateArgs>): Prisma.PrismaPromise<GetTenantStatsAggregateType<T>>
+    aggregate<T extends ClubStatsAggregateArgs>(args: Subset<T, ClubStatsAggregateArgs>): Prisma.PrismaPromise<GetClubStatsAggregateType<T>>
 
     /**
-     * Group by TenantStats.
+     * Group by ClubStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantStatsGroupByArgs} args - Group by arguments.
+     * @param {ClubStatsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -6640,14 +6640,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantStatsGroupByArgs,
+      T extends ClubStatsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantStatsGroupByArgs['orderBy'] }
-        : { orderBy?: TenantStatsGroupByArgs['orderBy'] },
+        ? { orderBy: ClubStatsGroupByArgs['orderBy'] }
+        : { orderBy?: ClubStatsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6696,22 +6696,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantStats model
+   * Fields of the ClubStats model
    */
-  readonly fields: TenantStatsFieldRefs;
+  readonly fields: ClubStatsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantStats.
+   * The delegate class that acts as a "Promise-like" for ClubStats.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6738,436 +6738,436 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantStats model
+   * Fields of the ClubStats model
    */
-  interface TenantStatsFieldRefs {
-    readonly id: FieldRef<"TenantStats", 'String'>
-    readonly tenantId: FieldRef<"TenantStats", 'String'>
-    readonly totalUsers: FieldRef<"TenantStats", 'Int'>
-    readonly totalConsumers: FieldRef<"TenantStats", 'Int'>
-    readonly totalMerchants: FieldRef<"TenantStats", 'Int'>
-    readonly activeUsers30d: FieldRef<"TenantStats", 'Int'>
-    readonly totalPurchases: FieldRef<"TenantStats", 'Int'>
-    readonly totalRevenue: FieldRef<"TenantStats", 'Decimal'>
-    readonly totalCashbackPaid: FieldRef<"TenantStats", 'Decimal'>
-    readonly totalPlatformFees: FieldRef<"TenantStats", 'Decimal'>
-    readonly totalProducts: FieldRef<"TenantStats", 'Int'>
-    readonly revenue30d: FieldRef<"TenantStats", 'Decimal'>
-    readonly purchases30d: FieldRef<"TenantStats", 'Int'>
-    readonly cashback30d: FieldRef<"TenantStats", 'Decimal'>
-    readonly createdAt: FieldRef<"TenantStats", 'DateTime'>
-    readonly updatedAt: FieldRef<"TenantStats", 'DateTime'>
+  interface ClubStatsFieldRefs {
+    readonly id: FieldRef<"ClubStats", 'String'>
+    readonly clubId: FieldRef<"ClubStats", 'String'>
+    readonly totalUsers: FieldRef<"ClubStats", 'Int'>
+    readonly totalConsumers: FieldRef<"ClubStats", 'Int'>
+    readonly totalMerchants: FieldRef<"ClubStats", 'Int'>
+    readonly activeUsers30d: FieldRef<"ClubStats", 'Int'>
+    readonly totalPurchases: FieldRef<"ClubStats", 'Int'>
+    readonly totalRevenue: FieldRef<"ClubStats", 'Decimal'>
+    readonly totalCashbackPaid: FieldRef<"ClubStats", 'Decimal'>
+    readonly totalPlatformFees: FieldRef<"ClubStats", 'Decimal'>
+    readonly totalProducts: FieldRef<"ClubStats", 'Int'>
+    readonly revenue30d: FieldRef<"ClubStats", 'Decimal'>
+    readonly purchases30d: FieldRef<"ClubStats", 'Int'>
+    readonly cashback30d: FieldRef<"ClubStats", 'Decimal'>
+    readonly createdAt: FieldRef<"ClubStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubStats", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantStats findUnique
+   * ClubStats findUnique
    */
-  export type TenantStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantStats to fetch.
+     * Filter, which ClubStats to fetch.
      */
-    where: TenantStatsWhereUniqueInput
+    where: ClubStatsWhereUniqueInput
   }
 
   /**
-   * TenantStats findUniqueOrThrow
+   * ClubStats findUniqueOrThrow
    */
-  export type TenantStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantStats to fetch.
+     * Filter, which ClubStats to fetch.
      */
-    where: TenantStatsWhereUniqueInput
+    where: ClubStatsWhereUniqueInput
   }
 
   /**
-   * TenantStats findFirst
+   * ClubStats findFirst
    */
-  export type TenantStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantStats to fetch.
+     * Filter, which ClubStats to fetch.
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantStats to fetch.
+     * Determine the order of ClubStats to fetch.
      */
-    orderBy?: TenantStatsOrderByWithRelationInput | TenantStatsOrderByWithRelationInput[]
+    orderBy?: ClubStatsOrderByWithRelationInput | ClubStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantStats.
+     * Sets the position for searching for ClubStats.
      */
-    cursor?: TenantStatsWhereUniqueInput
+    cursor?: ClubStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantStats from the position of the cursor.
+     * Take `±n` ClubStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantStats.
+     * Skip the first `n` ClubStats.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantStats.
+     * Filter by unique combinations of ClubStats.
      */
-    distinct?: TenantStatsScalarFieldEnum | TenantStatsScalarFieldEnum[]
+    distinct?: ClubStatsScalarFieldEnum | ClubStatsScalarFieldEnum[]
   }
 
   /**
-   * TenantStats findFirstOrThrow
+   * ClubStats findFirstOrThrow
    */
-  export type TenantStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantStats to fetch.
+     * Filter, which ClubStats to fetch.
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantStats to fetch.
+     * Determine the order of ClubStats to fetch.
      */
-    orderBy?: TenantStatsOrderByWithRelationInput | TenantStatsOrderByWithRelationInput[]
+    orderBy?: ClubStatsOrderByWithRelationInput | ClubStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantStats.
+     * Sets the position for searching for ClubStats.
      */
-    cursor?: TenantStatsWhereUniqueInput
+    cursor?: ClubStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantStats from the position of the cursor.
+     * Take `±n` ClubStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantStats.
+     * Skip the first `n` ClubStats.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantStats.
+     * Filter by unique combinations of ClubStats.
      */
-    distinct?: TenantStatsScalarFieldEnum | TenantStatsScalarFieldEnum[]
+    distinct?: ClubStatsScalarFieldEnum | ClubStatsScalarFieldEnum[]
   }
 
   /**
-   * TenantStats findMany
+   * ClubStats findMany
    */
-  export type TenantStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantStats to fetch.
+     * Filter, which ClubStats to fetch.
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantStats to fetch.
+     * Determine the order of ClubStats to fetch.
      */
-    orderBy?: TenantStatsOrderByWithRelationInput | TenantStatsOrderByWithRelationInput[]
+    orderBy?: ClubStatsOrderByWithRelationInput | ClubStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantStats.
+     * Sets the position for listing ClubStats.
      */
-    cursor?: TenantStatsWhereUniqueInput
+    cursor?: ClubStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantStats from the position of the cursor.
+     * Take `±n` ClubStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantStats.
+     * Skip the first `n` ClubStats.
      */
     skip?: number
-    distinct?: TenantStatsScalarFieldEnum | TenantStatsScalarFieldEnum[]
+    distinct?: ClubStatsScalarFieldEnum | ClubStatsScalarFieldEnum[]
   }
 
   /**
-   * TenantStats create
+   * ClubStats create
    */
-  export type TenantStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantStats.
+     * The data needed to create a ClubStats.
      */
-    data: XOR<TenantStatsCreateInput, TenantStatsUncheckedCreateInput>
+    data: XOR<ClubStatsCreateInput, ClubStatsUncheckedCreateInput>
   }
 
   /**
-   * TenantStats createMany
+   * ClubStats createMany
    */
-  export type TenantStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantStats.
+     * The data used to create many ClubStats.
      */
-    data: TenantStatsCreateManyInput | TenantStatsCreateManyInput[]
+    data: ClubStatsCreateManyInput | ClubStatsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantStats createManyAndReturn
+   * ClubStats createManyAndReturn
    */
-  export type TenantStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubStatsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantStats.
+     * The data used to create many ClubStats.
      */
-    data: TenantStatsCreateManyInput | TenantStatsCreateManyInput[]
+    data: ClubStatsCreateManyInput | ClubStatsCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubStatsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantStats update
+   * ClubStats update
    */
-  export type TenantStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantStats.
+     * The data needed to update a ClubStats.
      */
-    data: XOR<TenantStatsUpdateInput, TenantStatsUncheckedUpdateInput>
+    data: XOR<ClubStatsUpdateInput, ClubStatsUncheckedUpdateInput>
     /**
-     * Choose, which TenantStats to update.
+     * Choose, which ClubStats to update.
      */
-    where: TenantStatsWhereUniqueInput
+    where: ClubStatsWhereUniqueInput
   }
 
   /**
-   * TenantStats updateMany
+   * ClubStats updateMany
    */
-  export type TenantStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantStats.
+     * The data used to update ClubStats.
      */
-    data: XOR<TenantStatsUpdateManyMutationInput, TenantStatsUncheckedUpdateManyInput>
+    data: XOR<ClubStatsUpdateManyMutationInput, ClubStatsUncheckedUpdateManyInput>
     /**
-     * Filter which TenantStats to update
+     * Filter which ClubStats to update
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
-     * Limit how many TenantStats to update.
+     * Limit how many ClubStats to update.
      */
     limit?: number
   }
 
   /**
-   * TenantStats updateManyAndReturn
+   * ClubStats updateManyAndReturn
    */
-  export type TenantStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubStatsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
-     * The data used to update TenantStats.
+     * The data used to update ClubStats.
      */
-    data: XOR<TenantStatsUpdateManyMutationInput, TenantStatsUncheckedUpdateManyInput>
+    data: XOR<ClubStatsUpdateManyMutationInput, ClubStatsUncheckedUpdateManyInput>
     /**
-     * Filter which TenantStats to update
+     * Filter which ClubStats to update
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
-     * Limit how many TenantStats to update.
+     * Limit how many ClubStats to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubStatsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantStats upsert
+   * ClubStats upsert
    */
-  export type TenantStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantStats to update in case it exists.
+     * The filter to search for the ClubStats to update in case it exists.
      */
-    where: TenantStatsWhereUniqueInput
+    where: ClubStatsWhereUniqueInput
     /**
-     * In case the TenantStats found by the `where` argument doesn't exist, create a new TenantStats with this data.
+     * In case the ClubStats found by the `where` argument doesn't exist, create a new ClubStats with this data.
      */
-    create: XOR<TenantStatsCreateInput, TenantStatsUncheckedCreateInput>
+    create: XOR<ClubStatsCreateInput, ClubStatsUncheckedCreateInput>
     /**
-     * In case the TenantStats was found with the provided `where` argument, update it with this data.
+     * In case the ClubStats was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantStatsUpdateInput, TenantStatsUncheckedUpdateInput>
+    update: XOR<ClubStatsUpdateInput, ClubStatsUncheckedUpdateInput>
   }
 
   /**
-   * TenantStats delete
+   * ClubStats delete
    */
-  export type TenantStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
     /**
-     * Filter which TenantStats to delete.
+     * Filter which ClubStats to delete.
      */
-    where: TenantStatsWhereUniqueInput
+    where: ClubStatsWhereUniqueInput
   }
 
   /**
-   * TenantStats deleteMany
+   * ClubStats deleteMany
    */
-  export type TenantStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantStats to delete
+     * Filter which ClubStats to delete
      */
-    where?: TenantStatsWhereInput
+    where?: ClubStatsWhereInput
     /**
-     * Limit how many TenantStats to delete.
+     * Limit how many ClubStats to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantStats without action
+   * ClubStats without action
    */
-  export type TenantStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantStats
+     * Select specific fields to fetch from the ClubStats
      */
-    select?: TenantStatsSelect<ExtArgs> | null
+    select?: ClubStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantStats
+     * Omit specific fields from the ClubStats
      */
-    omit?: TenantStatsOmit<ExtArgs> | null
+    omit?: ClubStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantStatsInclude<ExtArgs> | null
+    include?: ClubStatsInclude<ExtArgs> | null
   }
 
 
@@ -7184,7 +7184,7 @@ export namespace Prisma {
   }
 
   export type GlobalStatsAvgAggregateOutputType = {
-    totalTenants: number | null
+    totalClubs: number | null
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -7197,13 +7197,13 @@ export namespace Prisma {
     revenue30d: Decimal | null
     purchases30d: number | null
     cashback30d: Decimal | null
-    newTenants: number | null
+    newClubs: number | null
     newUsers: number | null
-    churnedTenants: number | null
+    churnedClubs: number | null
   }
 
   export type GlobalStatsSumAggregateOutputType = {
-    totalTenants: number | null
+    totalClubs: number | null
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -7216,15 +7216,15 @@ export namespace Prisma {
     revenue30d: Decimal | null
     purchases30d: number | null
     cashback30d: Decimal | null
-    newTenants: number | null
+    newClubs: number | null
     newUsers: number | null
-    churnedTenants: number | null
+    churnedClubs: number | null
   }
 
   export type GlobalStatsMinAggregateOutputType = {
     id: string | null
     date: Date | null
-    totalTenants: number | null
+    totalClubs: number | null
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -7237,16 +7237,16 @@ export namespace Prisma {
     revenue30d: Decimal | null
     purchases30d: number | null
     cashback30d: Decimal | null
-    newTenants: number | null
+    newClubs: number | null
     newUsers: number | null
-    churnedTenants: number | null
+    churnedClubs: number | null
     createdAt: Date | null
   }
 
   export type GlobalStatsMaxAggregateOutputType = {
     id: string | null
     date: Date | null
-    totalTenants: number | null
+    totalClubs: number | null
     totalUsers: number | null
     totalConsumers: number | null
     totalMerchants: number | null
@@ -7259,16 +7259,16 @@ export namespace Prisma {
     revenue30d: Decimal | null
     purchases30d: number | null
     cashback30d: Decimal | null
-    newTenants: number | null
+    newClubs: number | null
     newUsers: number | null
-    churnedTenants: number | null
+    churnedClubs: number | null
     createdAt: Date | null
   }
 
   export type GlobalStatsCountAggregateOutputType = {
     id: number
     date: number
-    totalTenants: number
+    totalClubs: number
     totalUsers: number
     totalConsumers: number
     totalMerchants: number
@@ -7281,16 +7281,16 @@ export namespace Prisma {
     revenue30d: number
     purchases30d: number
     cashback30d: number
-    newTenants: number
+    newClubs: number
     newUsers: number
-    churnedTenants: number
+    churnedClubs: number
     createdAt: number
     _all: number
   }
 
 
   export type GlobalStatsAvgAggregateInputType = {
-    totalTenants?: true
+    totalClubs?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -7303,13 +7303,13 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
-    newTenants?: true
+    newClubs?: true
     newUsers?: true
-    churnedTenants?: true
+    churnedClubs?: true
   }
 
   export type GlobalStatsSumAggregateInputType = {
-    totalTenants?: true
+    totalClubs?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -7322,15 +7322,15 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
-    newTenants?: true
+    newClubs?: true
     newUsers?: true
-    churnedTenants?: true
+    churnedClubs?: true
   }
 
   export type GlobalStatsMinAggregateInputType = {
     id?: true
     date?: true
-    totalTenants?: true
+    totalClubs?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -7343,16 +7343,16 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
-    newTenants?: true
+    newClubs?: true
     newUsers?: true
-    churnedTenants?: true
+    churnedClubs?: true
     createdAt?: true
   }
 
   export type GlobalStatsMaxAggregateInputType = {
     id?: true
     date?: true
-    totalTenants?: true
+    totalClubs?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -7365,16 +7365,16 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
-    newTenants?: true
+    newClubs?: true
     newUsers?: true
-    churnedTenants?: true
+    churnedClubs?: true
     createdAt?: true
   }
 
   export type GlobalStatsCountAggregateInputType = {
     id?: true
     date?: true
-    totalTenants?: true
+    totalClubs?: true
     totalUsers?: true
     totalConsumers?: true
     totalMerchants?: true
@@ -7387,9 +7387,9 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
-    newTenants?: true
+    newClubs?: true
     newUsers?: true
-    churnedTenants?: true
+    churnedClubs?: true
     createdAt?: true
     _all?: true
   }
@@ -7483,7 +7483,7 @@ export namespace Prisma {
   export type GlobalStatsGroupByOutputType = {
     id: string
     date: Date
-    totalTenants: number
+    totalClubs: number
     totalUsers: number
     totalConsumers: number
     totalMerchants: number
@@ -7496,9 +7496,9 @@ export namespace Prisma {
     revenue30d: Decimal
     purchases30d: number
     cashback30d: Decimal
-    newTenants: number
+    newClubs: number
     newUsers: number
-    churnedTenants: number
+    churnedClubs: number
     createdAt: Date
     _count: GlobalStatsCountAggregateOutputType | null
     _avg: GlobalStatsAvgAggregateOutputType | null
@@ -7524,7 +7524,7 @@ export namespace Prisma {
   export type GlobalStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     date?: boolean
-    totalTenants?: boolean
+    totalClubs?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -7537,16 +7537,16 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
-    newTenants?: boolean
+    newClubs?: boolean
     newUsers?: boolean
-    churnedTenants?: boolean
+    churnedClubs?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["globalStats"]>
 
   export type GlobalStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     date?: boolean
-    totalTenants?: boolean
+    totalClubs?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -7559,16 +7559,16 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
-    newTenants?: boolean
+    newClubs?: boolean
     newUsers?: boolean
-    churnedTenants?: boolean
+    churnedClubs?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["globalStats"]>
 
   export type GlobalStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     date?: boolean
-    totalTenants?: boolean
+    totalClubs?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -7581,16 +7581,16 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
-    newTenants?: boolean
+    newClubs?: boolean
     newUsers?: boolean
-    churnedTenants?: boolean
+    churnedClubs?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["globalStats"]>
 
   export type GlobalStatsSelectScalar = {
     id?: boolean
     date?: boolean
-    totalTenants?: boolean
+    totalClubs?: boolean
     totalUsers?: boolean
     totalConsumers?: boolean
     totalMerchants?: boolean
@@ -7603,13 +7603,13 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
-    newTenants?: boolean
+    newClubs?: boolean
     newUsers?: boolean
-    churnedTenants?: boolean
+    churnedClubs?: boolean
     createdAt?: boolean
   }
 
-  export type GlobalStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "totalTenants" | "totalUsers" | "totalConsumers" | "totalMerchants" | "totalPurchases" | "totalRevenue" | "totalCashbackPaid" | "totalPlatformFees" | "totalProducts" | "activeUsers30d" | "revenue30d" | "purchases30d" | "cashback30d" | "newTenants" | "newUsers" | "churnedTenants" | "createdAt", ExtArgs["result"]["globalStats"]>
+  export type GlobalStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "totalClubs" | "totalUsers" | "totalConsumers" | "totalMerchants" | "totalPurchases" | "totalRevenue" | "totalCashbackPaid" | "totalPlatformFees" | "totalProducts" | "activeUsers30d" | "revenue30d" | "purchases30d" | "cashback30d" | "newClubs" | "newUsers" | "churnedClubs" | "createdAt", ExtArgs["result"]["globalStats"]>
 
   export type $GlobalStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GlobalStats"
@@ -7617,7 +7617,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       date: Date
-      totalTenants: number
+      totalClubs: number
       totalUsers: number
       totalConsumers: number
       totalMerchants: number
@@ -7630,9 +7630,9 @@ export namespace Prisma {
       revenue30d: Prisma.Decimal
       purchases30d: number
       cashback30d: Prisma.Decimal
-      newTenants: number
+      newClubs: number
       newUsers: number
-      churnedTenants: number
+      churnedClubs: number
       createdAt: Date
     }, ExtArgs["result"]["globalStats"]>
     composites: {}
@@ -8059,7 +8059,7 @@ export namespace Prisma {
   interface GlobalStatsFieldRefs {
     readonly id: FieldRef<"GlobalStats", 'String'>
     readonly date: FieldRef<"GlobalStats", 'DateTime'>
-    readonly totalTenants: FieldRef<"GlobalStats", 'Int'>
+    readonly totalClubs: FieldRef<"GlobalStats", 'Int'>
     readonly totalUsers: FieldRef<"GlobalStats", 'Int'>
     readonly totalConsumers: FieldRef<"GlobalStats", 'Int'>
     readonly totalMerchants: FieldRef<"GlobalStats", 'Int'>
@@ -8072,9 +8072,9 @@ export namespace Prisma {
     readonly revenue30d: FieldRef<"GlobalStats", 'Decimal'>
     readonly purchases30d: FieldRef<"GlobalStats", 'Int'>
     readonly cashback30d: FieldRef<"GlobalStats", 'Decimal'>
-    readonly newTenants: FieldRef<"GlobalStats", 'Int'>
+    readonly newClubs: FieldRef<"GlobalStats", 'Int'>
     readonly newUsers: FieldRef<"GlobalStats", 'Int'>
-    readonly churnedTenants: FieldRef<"GlobalStats", 'Int'>
+    readonly churnedClubs: FieldRef<"GlobalStats", 'Int'>
     readonly createdAt: FieldRef<"GlobalStats", 'DateTime'>
   }
     
@@ -8443,34 +8443,34 @@ export namespace Prisma {
 
 
   /**
-   * Model TenantCashbackConfig
+   * Model ClubCashbackConfig
    */
 
-  export type AggregateTenantCashbackConfig = {
-    _count: TenantCashbackConfigCountAggregateOutputType | null
-    _avg: TenantCashbackConfigAvgAggregateOutputType | null
-    _sum: TenantCashbackConfigSumAggregateOutputType | null
-    _min: TenantCashbackConfigMinAggregateOutputType | null
-    _max: TenantCashbackConfigMaxAggregateOutputType | null
+  export type AggregateClubCashbackConfig = {
+    _count: ClubCashbackConfigCountAggregateOutputType | null
+    _avg: ClubCashbackConfigAvgAggregateOutputType | null
+    _sum: ClubCashbackConfigSumAggregateOutputType | null
+    _min: ClubCashbackConfigMinAggregateOutputType | null
+    _max: ClubCashbackConfigMaxAggregateOutputType | null
   }
 
-  export type TenantCashbackConfigAvgAggregateOutputType = {
+  export type ClubCashbackConfigAvgAggregateOutputType = {
     consumerPercent: Decimal | null
     clubPercent: Decimal | null
     consumerReferrerPercent: Decimal | null
     merchantReferrerPercent: Decimal | null
   }
 
-  export type TenantCashbackConfigSumAggregateOutputType = {
+  export type ClubCashbackConfigSumAggregateOutputType = {
     consumerPercent: Decimal | null
     clubPercent: Decimal | null
     consumerReferrerPercent: Decimal | null
     merchantReferrerPercent: Decimal | null
   }
 
-  export type TenantCashbackConfigMinAggregateOutputType = {
+  export type ClubCashbackConfigMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     consumerPercent: Decimal | null
     clubPercent: Decimal | null
     consumerReferrerPercent: Decimal | null
@@ -8479,9 +8479,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantCashbackConfigMaxAggregateOutputType = {
+  export type ClubCashbackConfigMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     consumerPercent: Decimal | null
     clubPercent: Decimal | null
     consumerReferrerPercent: Decimal | null
@@ -8490,9 +8490,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantCashbackConfigCountAggregateOutputType = {
+  export type ClubCashbackConfigCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     consumerPercent: number
     clubPercent: number
     consumerReferrerPercent: number
@@ -8503,23 +8503,23 @@ export namespace Prisma {
   }
 
 
-  export type TenantCashbackConfigAvgAggregateInputType = {
+  export type ClubCashbackConfigAvgAggregateInputType = {
     consumerPercent?: true
     clubPercent?: true
     consumerReferrerPercent?: true
     merchantReferrerPercent?: true
   }
 
-  export type TenantCashbackConfigSumAggregateInputType = {
+  export type ClubCashbackConfigSumAggregateInputType = {
     consumerPercent?: true
     clubPercent?: true
     consumerReferrerPercent?: true
     merchantReferrerPercent?: true
   }
 
-  export type TenantCashbackConfigMinAggregateInputType = {
+  export type ClubCashbackConfigMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     consumerPercent?: true
     clubPercent?: true
     consumerReferrerPercent?: true
@@ -8528,9 +8528,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantCashbackConfigMaxAggregateInputType = {
+  export type ClubCashbackConfigMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     consumerPercent?: true
     clubPercent?: true
     consumerReferrerPercent?: true
@@ -8539,9 +8539,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantCashbackConfigCountAggregateInputType = {
+  export type ClubCashbackConfigCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     consumerPercent?: true
     clubPercent?: true
     consumerReferrerPercent?: true
@@ -8551,161 +8551,161 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantCashbackConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantCashbackConfig to aggregate.
+     * Filter which ClubCashbackConfig to aggregate.
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantCashbackConfigs to fetch.
+     * Determine the order of ClubCashbackConfigs to fetch.
      */
-    orderBy?: TenantCashbackConfigOrderByWithRelationInput | TenantCashbackConfigOrderByWithRelationInput[]
+    orderBy?: ClubCashbackConfigOrderByWithRelationInput | ClubCashbackConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantCashbackConfigWhereUniqueInput
+    cursor?: ClubCashbackConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantCashbackConfigs from the position of the cursor.
+     * Take `±n` ClubCashbackConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantCashbackConfigs.
+     * Skip the first `n` ClubCashbackConfigs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantCashbackConfigs
+     * Count returned ClubCashbackConfigs
     **/
-    _count?: true | TenantCashbackConfigCountAggregateInputType
+    _count?: true | ClubCashbackConfigCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TenantCashbackConfigAvgAggregateInputType
+    _avg?: ClubCashbackConfigAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TenantCashbackConfigSumAggregateInputType
+    _sum?: ClubCashbackConfigSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantCashbackConfigMinAggregateInputType
+    _min?: ClubCashbackConfigMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantCashbackConfigMaxAggregateInputType
+    _max?: ClubCashbackConfigMaxAggregateInputType
   }
 
-  export type GetTenantCashbackConfigAggregateType<T extends TenantCashbackConfigAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantCashbackConfig]: P extends '_count' | 'count'
+  export type GetClubCashbackConfigAggregateType<T extends ClubCashbackConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubCashbackConfig]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantCashbackConfig[P]>
-      : GetScalarType<T[P], AggregateTenantCashbackConfig[P]>
+        : GetScalarType<T[P], AggregateClubCashbackConfig[P]>
+      : GetScalarType<T[P], AggregateClubCashbackConfig[P]>
   }
 
 
 
 
-  export type TenantCashbackConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantCashbackConfigWhereInput
-    orderBy?: TenantCashbackConfigOrderByWithAggregationInput | TenantCashbackConfigOrderByWithAggregationInput[]
-    by: TenantCashbackConfigScalarFieldEnum[] | TenantCashbackConfigScalarFieldEnum
-    having?: TenantCashbackConfigScalarWhereWithAggregatesInput
+  export type ClubCashbackConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubCashbackConfigWhereInput
+    orderBy?: ClubCashbackConfigOrderByWithAggregationInput | ClubCashbackConfigOrderByWithAggregationInput[]
+    by: ClubCashbackConfigScalarFieldEnum[] | ClubCashbackConfigScalarFieldEnum
+    having?: ClubCashbackConfigScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantCashbackConfigCountAggregateInputType | true
-    _avg?: TenantCashbackConfigAvgAggregateInputType
-    _sum?: TenantCashbackConfigSumAggregateInputType
-    _min?: TenantCashbackConfigMinAggregateInputType
-    _max?: TenantCashbackConfigMaxAggregateInputType
+    _count?: ClubCashbackConfigCountAggregateInputType | true
+    _avg?: ClubCashbackConfigAvgAggregateInputType
+    _sum?: ClubCashbackConfigSumAggregateInputType
+    _min?: ClubCashbackConfigMinAggregateInputType
+    _max?: ClubCashbackConfigMaxAggregateInputType
   }
 
-  export type TenantCashbackConfigGroupByOutputType = {
+  export type ClubCashbackConfigGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     consumerPercent: Decimal
     clubPercent: Decimal
     consumerReferrerPercent: Decimal
     merchantReferrerPercent: Decimal
     createdAt: Date
     updatedAt: Date
-    _count: TenantCashbackConfigCountAggregateOutputType | null
-    _avg: TenantCashbackConfigAvgAggregateOutputType | null
-    _sum: TenantCashbackConfigSumAggregateOutputType | null
-    _min: TenantCashbackConfigMinAggregateOutputType | null
-    _max: TenantCashbackConfigMaxAggregateOutputType | null
+    _count: ClubCashbackConfigCountAggregateOutputType | null
+    _avg: ClubCashbackConfigAvgAggregateOutputType | null
+    _sum: ClubCashbackConfigSumAggregateOutputType | null
+    _min: ClubCashbackConfigMinAggregateOutputType | null
+    _max: ClubCashbackConfigMaxAggregateOutputType | null
   }
 
-  type GetTenantCashbackConfigGroupByPayload<T extends TenantCashbackConfigGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubCashbackConfigGroupByPayload<T extends ClubCashbackConfigGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantCashbackConfigGroupByOutputType, T['by']> &
+      PickEnumerable<ClubCashbackConfigGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantCashbackConfigGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubCashbackConfigGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantCashbackConfigGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantCashbackConfigGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubCashbackConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubCashbackConfigGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantCashbackConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubCashbackConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     consumerPercent?: boolean
     clubPercent?: boolean
     consumerReferrerPercent?: boolean
     merchantReferrerPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantCashbackConfig"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubCashbackConfig"]>
 
-  export type TenantCashbackConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubCashbackConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     consumerPercent?: boolean
     clubPercent?: boolean
     consumerReferrerPercent?: boolean
     merchantReferrerPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantCashbackConfig"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubCashbackConfig"]>
 
-  export type TenantCashbackConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubCashbackConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     consumerPercent?: boolean
     clubPercent?: boolean
     consumerReferrerPercent?: boolean
     merchantReferrerPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantCashbackConfig"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubCashbackConfig"]>
 
-  export type TenantCashbackConfigSelectScalar = {
+  export type ClubCashbackConfigSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     consumerPercent?: boolean
     clubPercent?: boolean
     consumerReferrerPercent?: boolean
@@ -8714,161 +8714,161 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantCashbackConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "consumerPercent" | "clubPercent" | "consumerReferrerPercent" | "merchantReferrerPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantCashbackConfig"]>
-  export type TenantCashbackConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubCashbackConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "consumerPercent" | "clubPercent" | "consumerReferrerPercent" | "merchantReferrerPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["clubCashbackConfig"]>
+  export type ClubCashbackConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantCashbackConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubCashbackConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantCashbackConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubCashbackConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantCashbackConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantCashbackConfig"
+  export type $ClubCashbackConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubCashbackConfig"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       consumerPercent: Prisma.Decimal
       clubPercent: Prisma.Decimal
       consumerReferrerPercent: Prisma.Decimal
       merchantReferrerPercent: Prisma.Decimal
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenantCashbackConfig"]>
+    }, ExtArgs["result"]["clubCashbackConfig"]>
     composites: {}
   }
 
-  type TenantCashbackConfigGetPayload<S extends boolean | null | undefined | TenantCashbackConfigDefaultArgs> = $Result.GetResult<Prisma.$TenantCashbackConfigPayload, S>
+  type ClubCashbackConfigGetPayload<S extends boolean | null | undefined | ClubCashbackConfigDefaultArgs> = $Result.GetResult<Prisma.$ClubCashbackConfigPayload, S>
 
-  type TenantCashbackConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantCashbackConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantCashbackConfigCountAggregateInputType | true
+  type ClubCashbackConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubCashbackConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubCashbackConfigCountAggregateInputType | true
     }
 
-  export interface TenantCashbackConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantCashbackConfig'], meta: { name: 'TenantCashbackConfig' } }
+  export interface ClubCashbackConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubCashbackConfig'], meta: { name: 'ClubCashbackConfig' } }
     /**
-     * Find zero or one TenantCashbackConfig that matches the filter.
-     * @param {TenantCashbackConfigFindUniqueArgs} args - Arguments to find a TenantCashbackConfig
+     * Find zero or one ClubCashbackConfig that matches the filter.
+     * @param {ClubCashbackConfigFindUniqueArgs} args - Arguments to find a ClubCashbackConfig
      * @example
-     * // Get one TenantCashbackConfig
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.findUnique({
+     * // Get one ClubCashbackConfig
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantCashbackConfigFindUniqueArgs>(args: SelectSubset<T, TenantCashbackConfigFindUniqueArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubCashbackConfigFindUniqueArgs>(args: SelectSubset<T, ClubCashbackConfigFindUniqueArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantCashbackConfig that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubCashbackConfig that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantCashbackConfigFindUniqueOrThrowArgs} args - Arguments to find a TenantCashbackConfig
+     * @param {ClubCashbackConfigFindUniqueOrThrowArgs} args - Arguments to find a ClubCashbackConfig
      * @example
-     * // Get one TenantCashbackConfig
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.findUniqueOrThrow({
+     * // Get one ClubCashbackConfig
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantCashbackConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantCashbackConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubCashbackConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubCashbackConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantCashbackConfig that matches the filter.
+     * Find the first ClubCashbackConfig that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigFindFirstArgs} args - Arguments to find a TenantCashbackConfig
+     * @param {ClubCashbackConfigFindFirstArgs} args - Arguments to find a ClubCashbackConfig
      * @example
-     * // Get one TenantCashbackConfig
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.findFirst({
+     * // Get one ClubCashbackConfig
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantCashbackConfigFindFirstArgs>(args?: SelectSubset<T, TenantCashbackConfigFindFirstArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubCashbackConfigFindFirstArgs>(args?: SelectSubset<T, ClubCashbackConfigFindFirstArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantCashbackConfig that matches the filter or
+     * Find the first ClubCashbackConfig that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigFindFirstOrThrowArgs} args - Arguments to find a TenantCashbackConfig
+     * @param {ClubCashbackConfigFindFirstOrThrowArgs} args - Arguments to find a ClubCashbackConfig
      * @example
-     * // Get one TenantCashbackConfig
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.findFirstOrThrow({
+     * // Get one ClubCashbackConfig
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantCashbackConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantCashbackConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubCashbackConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubCashbackConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantCashbackConfigs that matches the filter.
+     * Find zero or more ClubCashbackConfigs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubCashbackConfigFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantCashbackConfigs
-     * const tenantCashbackConfigs = await prisma.tenantCashbackConfig.findMany()
+     * // Get all ClubCashbackConfigs
+     * const clubCashbackConfigs = await prisma.clubCashbackConfig.findMany()
      * 
-     * // Get first 10 TenantCashbackConfigs
-     * const tenantCashbackConfigs = await prisma.tenantCashbackConfig.findMany({ take: 10 })
+     * // Get first 10 ClubCashbackConfigs
+     * const clubCashbackConfigs = await prisma.clubCashbackConfig.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantCashbackConfigWithIdOnly = await prisma.tenantCashbackConfig.findMany({ select: { id: true } })
+     * const clubCashbackConfigWithIdOnly = await prisma.clubCashbackConfig.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantCashbackConfigFindManyArgs>(args?: SelectSubset<T, TenantCashbackConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubCashbackConfigFindManyArgs>(args?: SelectSubset<T, ClubCashbackConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantCashbackConfig.
-     * @param {TenantCashbackConfigCreateArgs} args - Arguments to create a TenantCashbackConfig.
+     * Create a ClubCashbackConfig.
+     * @param {ClubCashbackConfigCreateArgs} args - Arguments to create a ClubCashbackConfig.
      * @example
-     * // Create one TenantCashbackConfig
-     * const TenantCashbackConfig = await prisma.tenantCashbackConfig.create({
+     * // Create one ClubCashbackConfig
+     * const ClubCashbackConfig = await prisma.clubCashbackConfig.create({
      *   data: {
-     *     // ... data to create a TenantCashbackConfig
+     *     // ... data to create a ClubCashbackConfig
      *   }
      * })
      * 
      */
-    create<T extends TenantCashbackConfigCreateArgs>(args: SelectSubset<T, TenantCashbackConfigCreateArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubCashbackConfigCreateArgs>(args: SelectSubset<T, ClubCashbackConfigCreateArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantCashbackConfigs.
-     * @param {TenantCashbackConfigCreateManyArgs} args - Arguments to create many TenantCashbackConfigs.
+     * Create many ClubCashbackConfigs.
+     * @param {ClubCashbackConfigCreateManyArgs} args - Arguments to create many ClubCashbackConfigs.
      * @example
-     * // Create many TenantCashbackConfigs
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.createMany({
+     * // Create many ClubCashbackConfigs
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantCashbackConfigCreateManyArgs>(args?: SelectSubset<T, TenantCashbackConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubCashbackConfigCreateManyArgs>(args?: SelectSubset<T, ClubCashbackConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantCashbackConfigs and returns the data saved in the database.
-     * @param {TenantCashbackConfigCreateManyAndReturnArgs} args - Arguments to create many TenantCashbackConfigs.
+     * Create many ClubCashbackConfigs and returns the data saved in the database.
+     * @param {ClubCashbackConfigCreateManyAndReturnArgs} args - Arguments to create many ClubCashbackConfigs.
      * @example
-     * // Create many TenantCashbackConfigs
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.createManyAndReturn({
+     * // Create many ClubCashbackConfigs
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantCashbackConfigs and only return the `id`
-     * const tenantCashbackConfigWithIdOnly = await prisma.tenantCashbackConfig.createManyAndReturn({
+     * // Create many ClubCashbackConfigs and only return the `id`
+     * const clubCashbackConfigWithIdOnly = await prisma.clubCashbackConfig.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -8878,28 +8878,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantCashbackConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantCashbackConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubCashbackConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubCashbackConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantCashbackConfig.
-     * @param {TenantCashbackConfigDeleteArgs} args - Arguments to delete one TenantCashbackConfig.
+     * Delete a ClubCashbackConfig.
+     * @param {ClubCashbackConfigDeleteArgs} args - Arguments to delete one ClubCashbackConfig.
      * @example
-     * // Delete one TenantCashbackConfig
-     * const TenantCashbackConfig = await prisma.tenantCashbackConfig.delete({
+     * // Delete one ClubCashbackConfig
+     * const ClubCashbackConfig = await prisma.clubCashbackConfig.delete({
      *   where: {
-     *     // ... filter to delete one TenantCashbackConfig
+     *     // ... filter to delete one ClubCashbackConfig
      *   }
      * })
      * 
      */
-    delete<T extends TenantCashbackConfigDeleteArgs>(args: SelectSubset<T, TenantCashbackConfigDeleteArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubCashbackConfigDeleteArgs>(args: SelectSubset<T, ClubCashbackConfigDeleteArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantCashbackConfig.
-     * @param {TenantCashbackConfigUpdateArgs} args - Arguments to update one TenantCashbackConfig.
+     * Update one ClubCashbackConfig.
+     * @param {ClubCashbackConfigUpdateArgs} args - Arguments to update one ClubCashbackConfig.
      * @example
-     * // Update one TenantCashbackConfig
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.update({
+     * // Update one ClubCashbackConfig
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8909,30 +8909,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantCashbackConfigUpdateArgs>(args: SelectSubset<T, TenantCashbackConfigUpdateArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubCashbackConfigUpdateArgs>(args: SelectSubset<T, ClubCashbackConfigUpdateArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantCashbackConfigs.
-     * @param {TenantCashbackConfigDeleteManyArgs} args - Arguments to filter TenantCashbackConfigs to delete.
+     * Delete zero or more ClubCashbackConfigs.
+     * @param {ClubCashbackConfigDeleteManyArgs} args - Arguments to filter ClubCashbackConfigs to delete.
      * @example
-     * // Delete a few TenantCashbackConfigs
-     * const { count } = await prisma.tenantCashbackConfig.deleteMany({
+     * // Delete a few ClubCashbackConfigs
+     * const { count } = await prisma.clubCashbackConfig.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantCashbackConfigDeleteManyArgs>(args?: SelectSubset<T, TenantCashbackConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubCashbackConfigDeleteManyArgs>(args?: SelectSubset<T, ClubCashbackConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantCashbackConfigs.
+     * Update zero or more ClubCashbackConfigs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubCashbackConfigUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantCashbackConfigs
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.updateMany({
+     * // Update many ClubCashbackConfigs
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8942,14 +8942,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantCashbackConfigUpdateManyArgs>(args: SelectSubset<T, TenantCashbackConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubCashbackConfigUpdateManyArgs>(args: SelectSubset<T, ClubCashbackConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantCashbackConfigs and returns the data updated in the database.
-     * @param {TenantCashbackConfigUpdateManyAndReturnArgs} args - Arguments to update many TenantCashbackConfigs.
+     * Update zero or more ClubCashbackConfigs and returns the data updated in the database.
+     * @param {ClubCashbackConfigUpdateManyAndReturnArgs} args - Arguments to update many ClubCashbackConfigs.
      * @example
-     * // Update many TenantCashbackConfigs
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.updateManyAndReturn({
+     * // Update many ClubCashbackConfigs
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8958,8 +8958,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantCashbackConfigs and only return the `id`
-     * const tenantCashbackConfigWithIdOnly = await prisma.tenantCashbackConfig.updateManyAndReturn({
+     * // Update zero or more ClubCashbackConfigs and only return the `id`
+     * const clubCashbackConfigWithIdOnly = await prisma.clubCashbackConfig.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -8972,56 +8972,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantCashbackConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantCashbackConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubCashbackConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubCashbackConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantCashbackConfig.
-     * @param {TenantCashbackConfigUpsertArgs} args - Arguments to update or create a TenantCashbackConfig.
+     * Create or update one ClubCashbackConfig.
+     * @param {ClubCashbackConfigUpsertArgs} args - Arguments to update or create a ClubCashbackConfig.
      * @example
-     * // Update or create a TenantCashbackConfig
-     * const tenantCashbackConfig = await prisma.tenantCashbackConfig.upsert({
+     * // Update or create a ClubCashbackConfig
+     * const clubCashbackConfig = await prisma.clubCashbackConfig.upsert({
      *   create: {
-     *     // ... data to create a TenantCashbackConfig
+     *     // ... data to create a ClubCashbackConfig
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantCashbackConfig we want to update
+     *     // ... the filter for the ClubCashbackConfig we want to update
      *   }
      * })
      */
-    upsert<T extends TenantCashbackConfigUpsertArgs>(args: SelectSubset<T, TenantCashbackConfigUpsertArgs<ExtArgs>>): Prisma__TenantCashbackConfigClient<$Result.GetResult<Prisma.$TenantCashbackConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubCashbackConfigUpsertArgs>(args: SelectSubset<T, ClubCashbackConfigUpsertArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantCashbackConfigs.
+     * Count the number of ClubCashbackConfigs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigCountArgs} args - Arguments to filter TenantCashbackConfigs to count.
+     * @param {ClubCashbackConfigCountArgs} args - Arguments to filter ClubCashbackConfigs to count.
      * @example
-     * // Count the number of TenantCashbackConfigs
-     * const count = await prisma.tenantCashbackConfig.count({
+     * // Count the number of ClubCashbackConfigs
+     * const count = await prisma.clubCashbackConfig.count({
      *   where: {
-     *     // ... the filter for the TenantCashbackConfigs we want to count
+     *     // ... the filter for the ClubCashbackConfigs we want to count
      *   }
      * })
     **/
-    count<T extends TenantCashbackConfigCountArgs>(
-      args?: Subset<T, TenantCashbackConfigCountArgs>,
+    count<T extends ClubCashbackConfigCountArgs>(
+      args?: Subset<T, ClubCashbackConfigCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantCashbackConfigCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubCashbackConfigCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantCashbackConfig.
+     * Allows you to perform aggregations operations on a ClubCashbackConfig.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubCashbackConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -9041,13 +9041,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantCashbackConfigAggregateArgs>(args: Subset<T, TenantCashbackConfigAggregateArgs>): Prisma.PrismaPromise<GetTenantCashbackConfigAggregateType<T>>
+    aggregate<T extends ClubCashbackConfigAggregateArgs>(args: Subset<T, ClubCashbackConfigAggregateArgs>): Prisma.PrismaPromise<GetClubCashbackConfigAggregateType<T>>
 
     /**
-     * Group by TenantCashbackConfig.
+     * Group by ClubCashbackConfig.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantCashbackConfigGroupByArgs} args - Group by arguments.
+     * @param {ClubCashbackConfigGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -9062,14 +9062,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantCashbackConfigGroupByArgs,
+      T extends ClubCashbackConfigGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantCashbackConfigGroupByArgs['orderBy'] }
-        : { orderBy?: TenantCashbackConfigGroupByArgs['orderBy'] },
+        ? { orderBy: ClubCashbackConfigGroupByArgs['orderBy'] }
+        : { orderBy?: ClubCashbackConfigGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -9118,22 +9118,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantCashbackConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantCashbackConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubCashbackConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubCashbackConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantCashbackConfig model
+   * Fields of the ClubCashbackConfig model
    */
-  readonly fields: TenantCashbackConfigFieldRefs;
+  readonly fields: ClubCashbackConfigFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantCashbackConfig.
+   * The delegate class that acts as a "Promise-like" for ClubCashbackConfig.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantCashbackConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubCashbackConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9160,458 +9160,458 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantCashbackConfig model
+   * Fields of the ClubCashbackConfig model
    */
-  interface TenantCashbackConfigFieldRefs {
-    readonly id: FieldRef<"TenantCashbackConfig", 'String'>
-    readonly tenantId: FieldRef<"TenantCashbackConfig", 'String'>
-    readonly consumerPercent: FieldRef<"TenantCashbackConfig", 'Decimal'>
-    readonly clubPercent: FieldRef<"TenantCashbackConfig", 'Decimal'>
-    readonly consumerReferrerPercent: FieldRef<"TenantCashbackConfig", 'Decimal'>
-    readonly merchantReferrerPercent: FieldRef<"TenantCashbackConfig", 'Decimal'>
-    readonly createdAt: FieldRef<"TenantCashbackConfig", 'DateTime'>
-    readonly updatedAt: FieldRef<"TenantCashbackConfig", 'DateTime'>
+  interface ClubCashbackConfigFieldRefs {
+    readonly id: FieldRef<"ClubCashbackConfig", 'String'>
+    readonly clubId: FieldRef<"ClubCashbackConfig", 'String'>
+    readonly consumerPercent: FieldRef<"ClubCashbackConfig", 'Decimal'>
+    readonly clubPercent: FieldRef<"ClubCashbackConfig", 'Decimal'>
+    readonly consumerReferrerPercent: FieldRef<"ClubCashbackConfig", 'Decimal'>
+    readonly merchantReferrerPercent: FieldRef<"ClubCashbackConfig", 'Decimal'>
+    readonly createdAt: FieldRef<"ClubCashbackConfig", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubCashbackConfig", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantCashbackConfig findUnique
+   * ClubCashbackConfig findUnique
    */
-  export type TenantCashbackConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantCashbackConfig to fetch.
+     * Filter, which ClubCashbackConfig to fetch.
      */
-    where: TenantCashbackConfigWhereUniqueInput
+    where: ClubCashbackConfigWhereUniqueInput
   }
 
   /**
-   * TenantCashbackConfig findUniqueOrThrow
+   * ClubCashbackConfig findUniqueOrThrow
    */
-  export type TenantCashbackConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantCashbackConfig to fetch.
+     * Filter, which ClubCashbackConfig to fetch.
      */
-    where: TenantCashbackConfigWhereUniqueInput
+    where: ClubCashbackConfigWhereUniqueInput
   }
 
   /**
-   * TenantCashbackConfig findFirst
+   * ClubCashbackConfig findFirst
    */
-  export type TenantCashbackConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantCashbackConfig to fetch.
+     * Filter, which ClubCashbackConfig to fetch.
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantCashbackConfigs to fetch.
+     * Determine the order of ClubCashbackConfigs to fetch.
      */
-    orderBy?: TenantCashbackConfigOrderByWithRelationInput | TenantCashbackConfigOrderByWithRelationInput[]
+    orderBy?: ClubCashbackConfigOrderByWithRelationInput | ClubCashbackConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantCashbackConfigs.
+     * Sets the position for searching for ClubCashbackConfigs.
      */
-    cursor?: TenantCashbackConfigWhereUniqueInput
+    cursor?: ClubCashbackConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantCashbackConfigs from the position of the cursor.
+     * Take `±n` ClubCashbackConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantCashbackConfigs.
+     * Skip the first `n` ClubCashbackConfigs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantCashbackConfigs.
+     * Filter by unique combinations of ClubCashbackConfigs.
      */
-    distinct?: TenantCashbackConfigScalarFieldEnum | TenantCashbackConfigScalarFieldEnum[]
+    distinct?: ClubCashbackConfigScalarFieldEnum | ClubCashbackConfigScalarFieldEnum[]
   }
 
   /**
-   * TenantCashbackConfig findFirstOrThrow
+   * ClubCashbackConfig findFirstOrThrow
    */
-  export type TenantCashbackConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantCashbackConfig to fetch.
+     * Filter, which ClubCashbackConfig to fetch.
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantCashbackConfigs to fetch.
+     * Determine the order of ClubCashbackConfigs to fetch.
      */
-    orderBy?: TenantCashbackConfigOrderByWithRelationInput | TenantCashbackConfigOrderByWithRelationInput[]
+    orderBy?: ClubCashbackConfigOrderByWithRelationInput | ClubCashbackConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantCashbackConfigs.
+     * Sets the position for searching for ClubCashbackConfigs.
      */
-    cursor?: TenantCashbackConfigWhereUniqueInput
+    cursor?: ClubCashbackConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantCashbackConfigs from the position of the cursor.
+     * Take `±n` ClubCashbackConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantCashbackConfigs.
+     * Skip the first `n` ClubCashbackConfigs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantCashbackConfigs.
+     * Filter by unique combinations of ClubCashbackConfigs.
      */
-    distinct?: TenantCashbackConfigScalarFieldEnum | TenantCashbackConfigScalarFieldEnum[]
+    distinct?: ClubCashbackConfigScalarFieldEnum | ClubCashbackConfigScalarFieldEnum[]
   }
 
   /**
-   * TenantCashbackConfig findMany
+   * ClubCashbackConfig findMany
    */
-  export type TenantCashbackConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantCashbackConfigs to fetch.
+     * Filter, which ClubCashbackConfigs to fetch.
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantCashbackConfigs to fetch.
+     * Determine the order of ClubCashbackConfigs to fetch.
      */
-    orderBy?: TenantCashbackConfigOrderByWithRelationInput | TenantCashbackConfigOrderByWithRelationInput[]
+    orderBy?: ClubCashbackConfigOrderByWithRelationInput | ClubCashbackConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantCashbackConfigs.
+     * Sets the position for listing ClubCashbackConfigs.
      */
-    cursor?: TenantCashbackConfigWhereUniqueInput
+    cursor?: ClubCashbackConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantCashbackConfigs from the position of the cursor.
+     * Take `±n` ClubCashbackConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantCashbackConfigs.
+     * Skip the first `n` ClubCashbackConfigs.
      */
     skip?: number
-    distinct?: TenantCashbackConfigScalarFieldEnum | TenantCashbackConfigScalarFieldEnum[]
+    distinct?: ClubCashbackConfigScalarFieldEnum | ClubCashbackConfigScalarFieldEnum[]
   }
 
   /**
-   * TenantCashbackConfig create
+   * ClubCashbackConfig create
    */
-  export type TenantCashbackConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantCashbackConfig.
+     * The data needed to create a ClubCashbackConfig.
      */
-    data: XOR<TenantCashbackConfigCreateInput, TenantCashbackConfigUncheckedCreateInput>
+    data: XOR<ClubCashbackConfigCreateInput, ClubCashbackConfigUncheckedCreateInput>
   }
 
   /**
-   * TenantCashbackConfig createMany
+   * ClubCashbackConfig createMany
    */
-  export type TenantCashbackConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantCashbackConfigs.
+     * The data used to create many ClubCashbackConfigs.
      */
-    data: TenantCashbackConfigCreateManyInput | TenantCashbackConfigCreateManyInput[]
+    data: ClubCashbackConfigCreateManyInput | ClubCashbackConfigCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantCashbackConfig createManyAndReturn
+   * ClubCashbackConfig createManyAndReturn
    */
-  export type TenantCashbackConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubCashbackConfigSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantCashbackConfigs.
+     * The data used to create many ClubCashbackConfigs.
      */
-    data: TenantCashbackConfigCreateManyInput | TenantCashbackConfigCreateManyInput[]
+    data: ClubCashbackConfigCreateManyInput | ClubCashbackConfigCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubCashbackConfigIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantCashbackConfig update
+   * ClubCashbackConfig update
    */
-  export type TenantCashbackConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantCashbackConfig.
+     * The data needed to update a ClubCashbackConfig.
      */
-    data: XOR<TenantCashbackConfigUpdateInput, TenantCashbackConfigUncheckedUpdateInput>
+    data: XOR<ClubCashbackConfigUpdateInput, ClubCashbackConfigUncheckedUpdateInput>
     /**
-     * Choose, which TenantCashbackConfig to update.
+     * Choose, which ClubCashbackConfig to update.
      */
-    where: TenantCashbackConfigWhereUniqueInput
+    where: ClubCashbackConfigWhereUniqueInput
   }
 
   /**
-   * TenantCashbackConfig updateMany
+   * ClubCashbackConfig updateMany
    */
-  export type TenantCashbackConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantCashbackConfigs.
+     * The data used to update ClubCashbackConfigs.
      */
-    data: XOR<TenantCashbackConfigUpdateManyMutationInput, TenantCashbackConfigUncheckedUpdateManyInput>
+    data: XOR<ClubCashbackConfigUpdateManyMutationInput, ClubCashbackConfigUncheckedUpdateManyInput>
     /**
-     * Filter which TenantCashbackConfigs to update
+     * Filter which ClubCashbackConfigs to update
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
-     * Limit how many TenantCashbackConfigs to update.
+     * Limit how many ClubCashbackConfigs to update.
      */
     limit?: number
   }
 
   /**
-   * TenantCashbackConfig updateManyAndReturn
+   * ClubCashbackConfig updateManyAndReturn
    */
-  export type TenantCashbackConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubCashbackConfigSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
-     * The data used to update TenantCashbackConfigs.
+     * The data used to update ClubCashbackConfigs.
      */
-    data: XOR<TenantCashbackConfigUpdateManyMutationInput, TenantCashbackConfigUncheckedUpdateManyInput>
+    data: XOR<ClubCashbackConfigUpdateManyMutationInput, ClubCashbackConfigUncheckedUpdateManyInput>
     /**
-     * Filter which TenantCashbackConfigs to update
+     * Filter which ClubCashbackConfigs to update
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
-     * Limit how many TenantCashbackConfigs to update.
+     * Limit how many ClubCashbackConfigs to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubCashbackConfigIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantCashbackConfig upsert
+   * ClubCashbackConfig upsert
    */
-  export type TenantCashbackConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantCashbackConfig to update in case it exists.
+     * The filter to search for the ClubCashbackConfig to update in case it exists.
      */
-    where: TenantCashbackConfigWhereUniqueInput
+    where: ClubCashbackConfigWhereUniqueInput
     /**
-     * In case the TenantCashbackConfig found by the `where` argument doesn't exist, create a new TenantCashbackConfig with this data.
+     * In case the ClubCashbackConfig found by the `where` argument doesn't exist, create a new ClubCashbackConfig with this data.
      */
-    create: XOR<TenantCashbackConfigCreateInput, TenantCashbackConfigUncheckedCreateInput>
+    create: XOR<ClubCashbackConfigCreateInput, ClubCashbackConfigUncheckedCreateInput>
     /**
-     * In case the TenantCashbackConfig was found with the provided `where` argument, update it with this data.
+     * In case the ClubCashbackConfig was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantCashbackConfigUpdateInput, TenantCashbackConfigUncheckedUpdateInput>
+    update: XOR<ClubCashbackConfigUpdateInput, ClubCashbackConfigUncheckedUpdateInput>
   }
 
   /**
-   * TenantCashbackConfig delete
+   * ClubCashbackConfig delete
    */
-  export type TenantCashbackConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
     /**
-     * Filter which TenantCashbackConfig to delete.
+     * Filter which ClubCashbackConfig to delete.
      */
-    where: TenantCashbackConfigWhereUniqueInput
+    where: ClubCashbackConfigWhereUniqueInput
   }
 
   /**
-   * TenantCashbackConfig deleteMany
+   * ClubCashbackConfig deleteMany
    */
-  export type TenantCashbackConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantCashbackConfigs to delete
+     * Filter which ClubCashbackConfigs to delete
      */
-    where?: TenantCashbackConfigWhereInput
+    where?: ClubCashbackConfigWhereInput
     /**
-     * Limit how many TenantCashbackConfigs to delete.
+     * Limit how many ClubCashbackConfigs to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantCashbackConfig without action
+   * ClubCashbackConfig without action
    */
-  export type TenantCashbackConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubCashbackConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantCashbackConfig
+     * Select specific fields to fetch from the ClubCashbackConfig
      */
-    select?: TenantCashbackConfigSelect<ExtArgs> | null
+    select?: ClubCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantCashbackConfig
+     * Omit specific fields from the ClubCashbackConfig
      */
-    omit?: TenantCashbackConfigOmit<ExtArgs> | null
+    omit?: ClubCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantCashbackConfigInclude<ExtArgs> | null
+    include?: ClubCashbackConfigInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model TenantWithdrawalConfig
+   * Model ClubWithdrawalConfig
    */
 
-  export type AggregateTenantWithdrawalConfig = {
-    _count: TenantWithdrawalConfigCountAggregateOutputType | null
-    _avg: TenantWithdrawalConfigAvgAggregateOutputType | null
-    _sum: TenantWithdrawalConfigSumAggregateOutputType | null
-    _min: TenantWithdrawalConfigMinAggregateOutputType | null
-    _max: TenantWithdrawalConfigMaxAggregateOutputType | null
+  export type AggregateClubWithdrawalConfig = {
+    _count: ClubWithdrawalConfigCountAggregateOutputType | null
+    _avg: ClubWithdrawalConfigAvgAggregateOutputType | null
+    _sum: ClubWithdrawalConfigSumAggregateOutputType | null
+    _min: ClubWithdrawalConfigMinAggregateOutputType | null
+    _max: ClubWithdrawalConfigMaxAggregateOutputType | null
   }
 
-  export type TenantWithdrawalConfigAvgAggregateOutputType = {
+  export type ClubWithdrawalConfigAvgAggregateOutputType = {
     withdrawalFeePercent: Decimal | null
     withdrawalFeeFixed: Decimal | null
     minWithdrawalAmount: Decimal | null
   }
 
-  export type TenantWithdrawalConfigSumAggregateOutputType = {
+  export type ClubWithdrawalConfigSumAggregateOutputType = {
     withdrawalFeePercent: Decimal | null
     withdrawalFeeFixed: Decimal | null
     minWithdrawalAmount: Decimal | null
   }
 
-  export type TenantWithdrawalConfigMinAggregateOutputType = {
+  export type ClubWithdrawalConfigMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     withdrawalFeePercent: Decimal | null
     withdrawalFeeFixed: Decimal | null
     minWithdrawalAmount: Decimal | null
@@ -9619,9 +9619,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantWithdrawalConfigMaxAggregateOutputType = {
+  export type ClubWithdrawalConfigMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     withdrawalFeePercent: Decimal | null
     withdrawalFeeFixed: Decimal | null
     minWithdrawalAmount: Decimal | null
@@ -9629,9 +9629,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantWithdrawalConfigCountAggregateOutputType = {
+  export type ClubWithdrawalConfigCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     withdrawalFeePercent: number
     withdrawalFeeFixed: number
     minWithdrawalAmount: number
@@ -9641,21 +9641,21 @@ export namespace Prisma {
   }
 
 
-  export type TenantWithdrawalConfigAvgAggregateInputType = {
+  export type ClubWithdrawalConfigAvgAggregateInputType = {
     withdrawalFeePercent?: true
     withdrawalFeeFixed?: true
     minWithdrawalAmount?: true
   }
 
-  export type TenantWithdrawalConfigSumAggregateInputType = {
+  export type ClubWithdrawalConfigSumAggregateInputType = {
     withdrawalFeePercent?: true
     withdrawalFeeFixed?: true
     minWithdrawalAmount?: true
   }
 
-  export type TenantWithdrawalConfigMinAggregateInputType = {
+  export type ClubWithdrawalConfigMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     withdrawalFeePercent?: true
     withdrawalFeeFixed?: true
     minWithdrawalAmount?: true
@@ -9663,9 +9663,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantWithdrawalConfigMaxAggregateInputType = {
+  export type ClubWithdrawalConfigMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     withdrawalFeePercent?: true
     withdrawalFeeFixed?: true
     minWithdrawalAmount?: true
@@ -9673,9 +9673,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantWithdrawalConfigCountAggregateInputType = {
+  export type ClubWithdrawalConfigCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     withdrawalFeePercent?: true
     withdrawalFeeFixed?: true
     minWithdrawalAmount?: true
@@ -9684,157 +9684,157 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantWithdrawalConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantWithdrawalConfig to aggregate.
+     * Filter which ClubWithdrawalConfig to aggregate.
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantWithdrawalConfigs to fetch.
+     * Determine the order of ClubWithdrawalConfigs to fetch.
      */
-    orderBy?: TenantWithdrawalConfigOrderByWithRelationInput | TenantWithdrawalConfigOrderByWithRelationInput[]
+    orderBy?: ClubWithdrawalConfigOrderByWithRelationInput | ClubWithdrawalConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantWithdrawalConfigWhereUniqueInput
+    cursor?: ClubWithdrawalConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantWithdrawalConfigs from the position of the cursor.
+     * Take `±n` ClubWithdrawalConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantWithdrawalConfigs.
+     * Skip the first `n` ClubWithdrawalConfigs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantWithdrawalConfigs
+     * Count returned ClubWithdrawalConfigs
     **/
-    _count?: true | TenantWithdrawalConfigCountAggregateInputType
+    _count?: true | ClubWithdrawalConfigCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TenantWithdrawalConfigAvgAggregateInputType
+    _avg?: ClubWithdrawalConfigAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TenantWithdrawalConfigSumAggregateInputType
+    _sum?: ClubWithdrawalConfigSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantWithdrawalConfigMinAggregateInputType
+    _min?: ClubWithdrawalConfigMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantWithdrawalConfigMaxAggregateInputType
+    _max?: ClubWithdrawalConfigMaxAggregateInputType
   }
 
-  export type GetTenantWithdrawalConfigAggregateType<T extends TenantWithdrawalConfigAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantWithdrawalConfig]: P extends '_count' | 'count'
+  export type GetClubWithdrawalConfigAggregateType<T extends ClubWithdrawalConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubWithdrawalConfig]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantWithdrawalConfig[P]>
-      : GetScalarType<T[P], AggregateTenantWithdrawalConfig[P]>
+        : GetScalarType<T[P], AggregateClubWithdrawalConfig[P]>
+      : GetScalarType<T[P], AggregateClubWithdrawalConfig[P]>
   }
 
 
 
 
-  export type TenantWithdrawalConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantWithdrawalConfigWhereInput
-    orderBy?: TenantWithdrawalConfigOrderByWithAggregationInput | TenantWithdrawalConfigOrderByWithAggregationInput[]
-    by: TenantWithdrawalConfigScalarFieldEnum[] | TenantWithdrawalConfigScalarFieldEnum
-    having?: TenantWithdrawalConfigScalarWhereWithAggregatesInput
+  export type ClubWithdrawalConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubWithdrawalConfigWhereInput
+    orderBy?: ClubWithdrawalConfigOrderByWithAggregationInput | ClubWithdrawalConfigOrderByWithAggregationInput[]
+    by: ClubWithdrawalConfigScalarFieldEnum[] | ClubWithdrawalConfigScalarFieldEnum
+    having?: ClubWithdrawalConfigScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantWithdrawalConfigCountAggregateInputType | true
-    _avg?: TenantWithdrawalConfigAvgAggregateInputType
-    _sum?: TenantWithdrawalConfigSumAggregateInputType
-    _min?: TenantWithdrawalConfigMinAggregateInputType
-    _max?: TenantWithdrawalConfigMaxAggregateInputType
+    _count?: ClubWithdrawalConfigCountAggregateInputType | true
+    _avg?: ClubWithdrawalConfigAvgAggregateInputType
+    _sum?: ClubWithdrawalConfigSumAggregateInputType
+    _min?: ClubWithdrawalConfigMinAggregateInputType
+    _max?: ClubWithdrawalConfigMaxAggregateInputType
   }
 
-  export type TenantWithdrawalConfigGroupByOutputType = {
+  export type ClubWithdrawalConfigGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     withdrawalFeePercent: Decimal
     withdrawalFeeFixed: Decimal
     minWithdrawalAmount: Decimal
     createdAt: Date
     updatedAt: Date
-    _count: TenantWithdrawalConfigCountAggregateOutputType | null
-    _avg: TenantWithdrawalConfigAvgAggregateOutputType | null
-    _sum: TenantWithdrawalConfigSumAggregateOutputType | null
-    _min: TenantWithdrawalConfigMinAggregateOutputType | null
-    _max: TenantWithdrawalConfigMaxAggregateOutputType | null
+    _count: ClubWithdrawalConfigCountAggregateOutputType | null
+    _avg: ClubWithdrawalConfigAvgAggregateOutputType | null
+    _sum: ClubWithdrawalConfigSumAggregateOutputType | null
+    _min: ClubWithdrawalConfigMinAggregateOutputType | null
+    _max: ClubWithdrawalConfigMaxAggregateOutputType | null
   }
 
-  type GetTenantWithdrawalConfigGroupByPayload<T extends TenantWithdrawalConfigGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubWithdrawalConfigGroupByPayload<T extends ClubWithdrawalConfigGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantWithdrawalConfigGroupByOutputType, T['by']> &
+      PickEnumerable<ClubWithdrawalConfigGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantWithdrawalConfigGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubWithdrawalConfigGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantWithdrawalConfigGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantWithdrawalConfigGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubWithdrawalConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubWithdrawalConfigGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantWithdrawalConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubWithdrawalConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     withdrawalFeePercent?: boolean
     withdrawalFeeFixed?: boolean
     minWithdrawalAmount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantWithdrawalConfig"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubWithdrawalConfig"]>
 
-  export type TenantWithdrawalConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubWithdrawalConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     withdrawalFeePercent?: boolean
     withdrawalFeeFixed?: boolean
     minWithdrawalAmount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantWithdrawalConfig"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubWithdrawalConfig"]>
 
-  export type TenantWithdrawalConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubWithdrawalConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     withdrawalFeePercent?: boolean
     withdrawalFeeFixed?: boolean
     minWithdrawalAmount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantWithdrawalConfig"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubWithdrawalConfig"]>
 
-  export type TenantWithdrawalConfigSelectScalar = {
+  export type ClubWithdrawalConfigSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     withdrawalFeePercent?: boolean
     withdrawalFeeFixed?: boolean
     minWithdrawalAmount?: boolean
@@ -9842,160 +9842,160 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantWithdrawalConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "withdrawalFeePercent" | "withdrawalFeeFixed" | "minWithdrawalAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantWithdrawalConfig"]>
-  export type TenantWithdrawalConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubWithdrawalConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "withdrawalFeePercent" | "withdrawalFeeFixed" | "minWithdrawalAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["clubWithdrawalConfig"]>
+  export type ClubWithdrawalConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantWithdrawalConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubWithdrawalConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantWithdrawalConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubWithdrawalConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantWithdrawalConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantWithdrawalConfig"
+  export type $ClubWithdrawalConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubWithdrawalConfig"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       withdrawalFeePercent: Prisma.Decimal
       withdrawalFeeFixed: Prisma.Decimal
       minWithdrawalAmount: Prisma.Decimal
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenantWithdrawalConfig"]>
+    }, ExtArgs["result"]["clubWithdrawalConfig"]>
     composites: {}
   }
 
-  type TenantWithdrawalConfigGetPayload<S extends boolean | null | undefined | TenantWithdrawalConfigDefaultArgs> = $Result.GetResult<Prisma.$TenantWithdrawalConfigPayload, S>
+  type ClubWithdrawalConfigGetPayload<S extends boolean | null | undefined | ClubWithdrawalConfigDefaultArgs> = $Result.GetResult<Prisma.$ClubWithdrawalConfigPayload, S>
 
-  type TenantWithdrawalConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantWithdrawalConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantWithdrawalConfigCountAggregateInputType | true
+  type ClubWithdrawalConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubWithdrawalConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubWithdrawalConfigCountAggregateInputType | true
     }
 
-  export interface TenantWithdrawalConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantWithdrawalConfig'], meta: { name: 'TenantWithdrawalConfig' } }
+  export interface ClubWithdrawalConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubWithdrawalConfig'], meta: { name: 'ClubWithdrawalConfig' } }
     /**
-     * Find zero or one TenantWithdrawalConfig that matches the filter.
-     * @param {TenantWithdrawalConfigFindUniqueArgs} args - Arguments to find a TenantWithdrawalConfig
+     * Find zero or one ClubWithdrawalConfig that matches the filter.
+     * @param {ClubWithdrawalConfigFindUniqueArgs} args - Arguments to find a ClubWithdrawalConfig
      * @example
-     * // Get one TenantWithdrawalConfig
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.findUnique({
+     * // Get one ClubWithdrawalConfig
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantWithdrawalConfigFindUniqueArgs>(args: SelectSubset<T, TenantWithdrawalConfigFindUniqueArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubWithdrawalConfigFindUniqueArgs>(args: SelectSubset<T, ClubWithdrawalConfigFindUniqueArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantWithdrawalConfig that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubWithdrawalConfig that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantWithdrawalConfigFindUniqueOrThrowArgs} args - Arguments to find a TenantWithdrawalConfig
+     * @param {ClubWithdrawalConfigFindUniqueOrThrowArgs} args - Arguments to find a ClubWithdrawalConfig
      * @example
-     * // Get one TenantWithdrawalConfig
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.findUniqueOrThrow({
+     * // Get one ClubWithdrawalConfig
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantWithdrawalConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantWithdrawalConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubWithdrawalConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubWithdrawalConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantWithdrawalConfig that matches the filter.
+     * Find the first ClubWithdrawalConfig that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigFindFirstArgs} args - Arguments to find a TenantWithdrawalConfig
+     * @param {ClubWithdrawalConfigFindFirstArgs} args - Arguments to find a ClubWithdrawalConfig
      * @example
-     * // Get one TenantWithdrawalConfig
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.findFirst({
+     * // Get one ClubWithdrawalConfig
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantWithdrawalConfigFindFirstArgs>(args?: SelectSubset<T, TenantWithdrawalConfigFindFirstArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubWithdrawalConfigFindFirstArgs>(args?: SelectSubset<T, ClubWithdrawalConfigFindFirstArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantWithdrawalConfig that matches the filter or
+     * Find the first ClubWithdrawalConfig that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigFindFirstOrThrowArgs} args - Arguments to find a TenantWithdrawalConfig
+     * @param {ClubWithdrawalConfigFindFirstOrThrowArgs} args - Arguments to find a ClubWithdrawalConfig
      * @example
-     * // Get one TenantWithdrawalConfig
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.findFirstOrThrow({
+     * // Get one ClubWithdrawalConfig
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantWithdrawalConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantWithdrawalConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubWithdrawalConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubWithdrawalConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantWithdrawalConfigs that matches the filter.
+     * Find zero or more ClubWithdrawalConfigs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubWithdrawalConfigFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantWithdrawalConfigs
-     * const tenantWithdrawalConfigs = await prisma.tenantWithdrawalConfig.findMany()
+     * // Get all ClubWithdrawalConfigs
+     * const clubWithdrawalConfigs = await prisma.clubWithdrawalConfig.findMany()
      * 
-     * // Get first 10 TenantWithdrawalConfigs
-     * const tenantWithdrawalConfigs = await prisma.tenantWithdrawalConfig.findMany({ take: 10 })
+     * // Get first 10 ClubWithdrawalConfigs
+     * const clubWithdrawalConfigs = await prisma.clubWithdrawalConfig.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantWithdrawalConfigWithIdOnly = await prisma.tenantWithdrawalConfig.findMany({ select: { id: true } })
+     * const clubWithdrawalConfigWithIdOnly = await prisma.clubWithdrawalConfig.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantWithdrawalConfigFindManyArgs>(args?: SelectSubset<T, TenantWithdrawalConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubWithdrawalConfigFindManyArgs>(args?: SelectSubset<T, ClubWithdrawalConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantWithdrawalConfig.
-     * @param {TenantWithdrawalConfigCreateArgs} args - Arguments to create a TenantWithdrawalConfig.
+     * Create a ClubWithdrawalConfig.
+     * @param {ClubWithdrawalConfigCreateArgs} args - Arguments to create a ClubWithdrawalConfig.
      * @example
-     * // Create one TenantWithdrawalConfig
-     * const TenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.create({
+     * // Create one ClubWithdrawalConfig
+     * const ClubWithdrawalConfig = await prisma.clubWithdrawalConfig.create({
      *   data: {
-     *     // ... data to create a TenantWithdrawalConfig
+     *     // ... data to create a ClubWithdrawalConfig
      *   }
      * })
      * 
      */
-    create<T extends TenantWithdrawalConfigCreateArgs>(args: SelectSubset<T, TenantWithdrawalConfigCreateArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubWithdrawalConfigCreateArgs>(args: SelectSubset<T, ClubWithdrawalConfigCreateArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantWithdrawalConfigs.
-     * @param {TenantWithdrawalConfigCreateManyArgs} args - Arguments to create many TenantWithdrawalConfigs.
+     * Create many ClubWithdrawalConfigs.
+     * @param {ClubWithdrawalConfigCreateManyArgs} args - Arguments to create many ClubWithdrawalConfigs.
      * @example
-     * // Create many TenantWithdrawalConfigs
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.createMany({
+     * // Create many ClubWithdrawalConfigs
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantWithdrawalConfigCreateManyArgs>(args?: SelectSubset<T, TenantWithdrawalConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubWithdrawalConfigCreateManyArgs>(args?: SelectSubset<T, ClubWithdrawalConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantWithdrawalConfigs and returns the data saved in the database.
-     * @param {TenantWithdrawalConfigCreateManyAndReturnArgs} args - Arguments to create many TenantWithdrawalConfigs.
+     * Create many ClubWithdrawalConfigs and returns the data saved in the database.
+     * @param {ClubWithdrawalConfigCreateManyAndReturnArgs} args - Arguments to create many ClubWithdrawalConfigs.
      * @example
-     * // Create many TenantWithdrawalConfigs
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.createManyAndReturn({
+     * // Create many ClubWithdrawalConfigs
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantWithdrawalConfigs and only return the `id`
-     * const tenantWithdrawalConfigWithIdOnly = await prisma.tenantWithdrawalConfig.createManyAndReturn({
+     * // Create many ClubWithdrawalConfigs and only return the `id`
+     * const clubWithdrawalConfigWithIdOnly = await prisma.clubWithdrawalConfig.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -10005,28 +10005,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantWithdrawalConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantWithdrawalConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubWithdrawalConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubWithdrawalConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantWithdrawalConfig.
-     * @param {TenantWithdrawalConfigDeleteArgs} args - Arguments to delete one TenantWithdrawalConfig.
+     * Delete a ClubWithdrawalConfig.
+     * @param {ClubWithdrawalConfigDeleteArgs} args - Arguments to delete one ClubWithdrawalConfig.
      * @example
-     * // Delete one TenantWithdrawalConfig
-     * const TenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.delete({
+     * // Delete one ClubWithdrawalConfig
+     * const ClubWithdrawalConfig = await prisma.clubWithdrawalConfig.delete({
      *   where: {
-     *     // ... filter to delete one TenantWithdrawalConfig
+     *     // ... filter to delete one ClubWithdrawalConfig
      *   }
      * })
      * 
      */
-    delete<T extends TenantWithdrawalConfigDeleteArgs>(args: SelectSubset<T, TenantWithdrawalConfigDeleteArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubWithdrawalConfigDeleteArgs>(args: SelectSubset<T, ClubWithdrawalConfigDeleteArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantWithdrawalConfig.
-     * @param {TenantWithdrawalConfigUpdateArgs} args - Arguments to update one TenantWithdrawalConfig.
+     * Update one ClubWithdrawalConfig.
+     * @param {ClubWithdrawalConfigUpdateArgs} args - Arguments to update one ClubWithdrawalConfig.
      * @example
-     * // Update one TenantWithdrawalConfig
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.update({
+     * // Update one ClubWithdrawalConfig
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10036,30 +10036,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantWithdrawalConfigUpdateArgs>(args: SelectSubset<T, TenantWithdrawalConfigUpdateArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubWithdrawalConfigUpdateArgs>(args: SelectSubset<T, ClubWithdrawalConfigUpdateArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantWithdrawalConfigs.
-     * @param {TenantWithdrawalConfigDeleteManyArgs} args - Arguments to filter TenantWithdrawalConfigs to delete.
+     * Delete zero or more ClubWithdrawalConfigs.
+     * @param {ClubWithdrawalConfigDeleteManyArgs} args - Arguments to filter ClubWithdrawalConfigs to delete.
      * @example
-     * // Delete a few TenantWithdrawalConfigs
-     * const { count } = await prisma.tenantWithdrawalConfig.deleteMany({
+     * // Delete a few ClubWithdrawalConfigs
+     * const { count } = await prisma.clubWithdrawalConfig.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantWithdrawalConfigDeleteManyArgs>(args?: SelectSubset<T, TenantWithdrawalConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubWithdrawalConfigDeleteManyArgs>(args?: SelectSubset<T, ClubWithdrawalConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantWithdrawalConfigs.
+     * Update zero or more ClubWithdrawalConfigs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubWithdrawalConfigUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantWithdrawalConfigs
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.updateMany({
+     * // Update many ClubWithdrawalConfigs
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10069,14 +10069,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantWithdrawalConfigUpdateManyArgs>(args: SelectSubset<T, TenantWithdrawalConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubWithdrawalConfigUpdateManyArgs>(args: SelectSubset<T, ClubWithdrawalConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantWithdrawalConfigs and returns the data updated in the database.
-     * @param {TenantWithdrawalConfigUpdateManyAndReturnArgs} args - Arguments to update many TenantWithdrawalConfigs.
+     * Update zero or more ClubWithdrawalConfigs and returns the data updated in the database.
+     * @param {ClubWithdrawalConfigUpdateManyAndReturnArgs} args - Arguments to update many ClubWithdrawalConfigs.
      * @example
-     * // Update many TenantWithdrawalConfigs
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.updateManyAndReturn({
+     * // Update many ClubWithdrawalConfigs
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10085,8 +10085,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantWithdrawalConfigs and only return the `id`
-     * const tenantWithdrawalConfigWithIdOnly = await prisma.tenantWithdrawalConfig.updateManyAndReturn({
+     * // Update zero or more ClubWithdrawalConfigs and only return the `id`
+     * const clubWithdrawalConfigWithIdOnly = await prisma.clubWithdrawalConfig.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -10099,56 +10099,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantWithdrawalConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantWithdrawalConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubWithdrawalConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubWithdrawalConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantWithdrawalConfig.
-     * @param {TenantWithdrawalConfigUpsertArgs} args - Arguments to update or create a TenantWithdrawalConfig.
+     * Create or update one ClubWithdrawalConfig.
+     * @param {ClubWithdrawalConfigUpsertArgs} args - Arguments to update or create a ClubWithdrawalConfig.
      * @example
-     * // Update or create a TenantWithdrawalConfig
-     * const tenantWithdrawalConfig = await prisma.tenantWithdrawalConfig.upsert({
+     * // Update or create a ClubWithdrawalConfig
+     * const clubWithdrawalConfig = await prisma.clubWithdrawalConfig.upsert({
      *   create: {
-     *     // ... data to create a TenantWithdrawalConfig
+     *     // ... data to create a ClubWithdrawalConfig
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantWithdrawalConfig we want to update
+     *     // ... the filter for the ClubWithdrawalConfig we want to update
      *   }
      * })
      */
-    upsert<T extends TenantWithdrawalConfigUpsertArgs>(args: SelectSubset<T, TenantWithdrawalConfigUpsertArgs<ExtArgs>>): Prisma__TenantWithdrawalConfigClient<$Result.GetResult<Prisma.$TenantWithdrawalConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubWithdrawalConfigUpsertArgs>(args: SelectSubset<T, ClubWithdrawalConfigUpsertArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantWithdrawalConfigs.
+     * Count the number of ClubWithdrawalConfigs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigCountArgs} args - Arguments to filter TenantWithdrawalConfigs to count.
+     * @param {ClubWithdrawalConfigCountArgs} args - Arguments to filter ClubWithdrawalConfigs to count.
      * @example
-     * // Count the number of TenantWithdrawalConfigs
-     * const count = await prisma.tenantWithdrawalConfig.count({
+     * // Count the number of ClubWithdrawalConfigs
+     * const count = await prisma.clubWithdrawalConfig.count({
      *   where: {
-     *     // ... the filter for the TenantWithdrawalConfigs we want to count
+     *     // ... the filter for the ClubWithdrawalConfigs we want to count
      *   }
      * })
     **/
-    count<T extends TenantWithdrawalConfigCountArgs>(
-      args?: Subset<T, TenantWithdrawalConfigCountArgs>,
+    count<T extends ClubWithdrawalConfigCountArgs>(
+      args?: Subset<T, ClubWithdrawalConfigCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantWithdrawalConfigCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubWithdrawalConfigCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantWithdrawalConfig.
+     * Allows you to perform aggregations operations on a ClubWithdrawalConfig.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubWithdrawalConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -10168,13 +10168,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantWithdrawalConfigAggregateArgs>(args: Subset<T, TenantWithdrawalConfigAggregateArgs>): Prisma.PrismaPromise<GetTenantWithdrawalConfigAggregateType<T>>
+    aggregate<T extends ClubWithdrawalConfigAggregateArgs>(args: Subset<T, ClubWithdrawalConfigAggregateArgs>): Prisma.PrismaPromise<GetClubWithdrawalConfigAggregateType<T>>
 
     /**
-     * Group by TenantWithdrawalConfig.
+     * Group by ClubWithdrawalConfig.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantWithdrawalConfigGroupByArgs} args - Group by arguments.
+     * @param {ClubWithdrawalConfigGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -10189,14 +10189,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantWithdrawalConfigGroupByArgs,
+      T extends ClubWithdrawalConfigGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantWithdrawalConfigGroupByArgs['orderBy'] }
-        : { orderBy?: TenantWithdrawalConfigGroupByArgs['orderBy'] },
+        ? { orderBy: ClubWithdrawalConfigGroupByArgs['orderBy'] }
+        : { orderBy?: ClubWithdrawalConfigGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -10245,22 +10245,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantWithdrawalConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantWithdrawalConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubWithdrawalConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubWithdrawalConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantWithdrawalConfig model
+   * Fields of the ClubWithdrawalConfig model
    */
-  readonly fields: TenantWithdrawalConfigFieldRefs;
+  readonly fields: ClubWithdrawalConfigFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantWithdrawalConfig.
+   * The delegate class that acts as a "Promise-like" for ClubWithdrawalConfig.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantWithdrawalConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubWithdrawalConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10287,443 +10287,443 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantWithdrawalConfig model
+   * Fields of the ClubWithdrawalConfig model
    */
-  interface TenantWithdrawalConfigFieldRefs {
-    readonly id: FieldRef<"TenantWithdrawalConfig", 'String'>
-    readonly tenantId: FieldRef<"TenantWithdrawalConfig", 'String'>
-    readonly withdrawalFeePercent: FieldRef<"TenantWithdrawalConfig", 'Decimal'>
-    readonly withdrawalFeeFixed: FieldRef<"TenantWithdrawalConfig", 'Decimal'>
-    readonly minWithdrawalAmount: FieldRef<"TenantWithdrawalConfig", 'Decimal'>
-    readonly createdAt: FieldRef<"TenantWithdrawalConfig", 'DateTime'>
-    readonly updatedAt: FieldRef<"TenantWithdrawalConfig", 'DateTime'>
+  interface ClubWithdrawalConfigFieldRefs {
+    readonly id: FieldRef<"ClubWithdrawalConfig", 'String'>
+    readonly clubId: FieldRef<"ClubWithdrawalConfig", 'String'>
+    readonly withdrawalFeePercent: FieldRef<"ClubWithdrawalConfig", 'Decimal'>
+    readonly withdrawalFeeFixed: FieldRef<"ClubWithdrawalConfig", 'Decimal'>
+    readonly minWithdrawalAmount: FieldRef<"ClubWithdrawalConfig", 'Decimal'>
+    readonly createdAt: FieldRef<"ClubWithdrawalConfig", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubWithdrawalConfig", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantWithdrawalConfig findUnique
+   * ClubWithdrawalConfig findUnique
    */
-  export type TenantWithdrawalConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantWithdrawalConfig to fetch.
+     * Filter, which ClubWithdrawalConfig to fetch.
      */
-    where: TenantWithdrawalConfigWhereUniqueInput
+    where: ClubWithdrawalConfigWhereUniqueInput
   }
 
   /**
-   * TenantWithdrawalConfig findUniqueOrThrow
+   * ClubWithdrawalConfig findUniqueOrThrow
    */
-  export type TenantWithdrawalConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantWithdrawalConfig to fetch.
+     * Filter, which ClubWithdrawalConfig to fetch.
      */
-    where: TenantWithdrawalConfigWhereUniqueInput
+    where: ClubWithdrawalConfigWhereUniqueInput
   }
 
   /**
-   * TenantWithdrawalConfig findFirst
+   * ClubWithdrawalConfig findFirst
    */
-  export type TenantWithdrawalConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantWithdrawalConfig to fetch.
+     * Filter, which ClubWithdrawalConfig to fetch.
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantWithdrawalConfigs to fetch.
+     * Determine the order of ClubWithdrawalConfigs to fetch.
      */
-    orderBy?: TenantWithdrawalConfigOrderByWithRelationInput | TenantWithdrawalConfigOrderByWithRelationInput[]
+    orderBy?: ClubWithdrawalConfigOrderByWithRelationInput | ClubWithdrawalConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantWithdrawalConfigs.
+     * Sets the position for searching for ClubWithdrawalConfigs.
      */
-    cursor?: TenantWithdrawalConfigWhereUniqueInput
+    cursor?: ClubWithdrawalConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantWithdrawalConfigs from the position of the cursor.
+     * Take `±n` ClubWithdrawalConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantWithdrawalConfigs.
+     * Skip the first `n` ClubWithdrawalConfigs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantWithdrawalConfigs.
+     * Filter by unique combinations of ClubWithdrawalConfigs.
      */
-    distinct?: TenantWithdrawalConfigScalarFieldEnum | TenantWithdrawalConfigScalarFieldEnum[]
+    distinct?: ClubWithdrawalConfigScalarFieldEnum | ClubWithdrawalConfigScalarFieldEnum[]
   }
 
   /**
-   * TenantWithdrawalConfig findFirstOrThrow
+   * ClubWithdrawalConfig findFirstOrThrow
    */
-  export type TenantWithdrawalConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantWithdrawalConfig to fetch.
+     * Filter, which ClubWithdrawalConfig to fetch.
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantWithdrawalConfigs to fetch.
+     * Determine the order of ClubWithdrawalConfigs to fetch.
      */
-    orderBy?: TenantWithdrawalConfigOrderByWithRelationInput | TenantWithdrawalConfigOrderByWithRelationInput[]
+    orderBy?: ClubWithdrawalConfigOrderByWithRelationInput | ClubWithdrawalConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantWithdrawalConfigs.
+     * Sets the position for searching for ClubWithdrawalConfigs.
      */
-    cursor?: TenantWithdrawalConfigWhereUniqueInput
+    cursor?: ClubWithdrawalConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantWithdrawalConfigs from the position of the cursor.
+     * Take `±n` ClubWithdrawalConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantWithdrawalConfigs.
+     * Skip the first `n` ClubWithdrawalConfigs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantWithdrawalConfigs.
+     * Filter by unique combinations of ClubWithdrawalConfigs.
      */
-    distinct?: TenantWithdrawalConfigScalarFieldEnum | TenantWithdrawalConfigScalarFieldEnum[]
+    distinct?: ClubWithdrawalConfigScalarFieldEnum | ClubWithdrawalConfigScalarFieldEnum[]
   }
 
   /**
-   * TenantWithdrawalConfig findMany
+   * ClubWithdrawalConfig findMany
    */
-  export type TenantWithdrawalConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * Filter, which TenantWithdrawalConfigs to fetch.
+     * Filter, which ClubWithdrawalConfigs to fetch.
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantWithdrawalConfigs to fetch.
+     * Determine the order of ClubWithdrawalConfigs to fetch.
      */
-    orderBy?: TenantWithdrawalConfigOrderByWithRelationInput | TenantWithdrawalConfigOrderByWithRelationInput[]
+    orderBy?: ClubWithdrawalConfigOrderByWithRelationInput | ClubWithdrawalConfigOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantWithdrawalConfigs.
+     * Sets the position for listing ClubWithdrawalConfigs.
      */
-    cursor?: TenantWithdrawalConfigWhereUniqueInput
+    cursor?: ClubWithdrawalConfigWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantWithdrawalConfigs from the position of the cursor.
+     * Take `±n` ClubWithdrawalConfigs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantWithdrawalConfigs.
+     * Skip the first `n` ClubWithdrawalConfigs.
      */
     skip?: number
-    distinct?: TenantWithdrawalConfigScalarFieldEnum | TenantWithdrawalConfigScalarFieldEnum[]
+    distinct?: ClubWithdrawalConfigScalarFieldEnum | ClubWithdrawalConfigScalarFieldEnum[]
   }
 
   /**
-   * TenantWithdrawalConfig create
+   * ClubWithdrawalConfig create
    */
-  export type TenantWithdrawalConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantWithdrawalConfig.
+     * The data needed to create a ClubWithdrawalConfig.
      */
-    data: XOR<TenantWithdrawalConfigCreateInput, TenantWithdrawalConfigUncheckedCreateInput>
+    data: XOR<ClubWithdrawalConfigCreateInput, ClubWithdrawalConfigUncheckedCreateInput>
   }
 
   /**
-   * TenantWithdrawalConfig createMany
+   * ClubWithdrawalConfig createMany
    */
-  export type TenantWithdrawalConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantWithdrawalConfigs.
+     * The data used to create many ClubWithdrawalConfigs.
      */
-    data: TenantWithdrawalConfigCreateManyInput | TenantWithdrawalConfigCreateManyInput[]
+    data: ClubWithdrawalConfigCreateManyInput | ClubWithdrawalConfigCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantWithdrawalConfig createManyAndReturn
+   * ClubWithdrawalConfig createManyAndReturn
    */
-  export type TenantWithdrawalConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantWithdrawalConfigs.
+     * The data used to create many ClubWithdrawalConfigs.
      */
-    data: TenantWithdrawalConfigCreateManyInput | TenantWithdrawalConfigCreateManyInput[]
+    data: ClubWithdrawalConfigCreateManyInput | ClubWithdrawalConfigCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubWithdrawalConfigIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantWithdrawalConfig update
+   * ClubWithdrawalConfig update
    */
-  export type TenantWithdrawalConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantWithdrawalConfig.
+     * The data needed to update a ClubWithdrawalConfig.
      */
-    data: XOR<TenantWithdrawalConfigUpdateInput, TenantWithdrawalConfigUncheckedUpdateInput>
+    data: XOR<ClubWithdrawalConfigUpdateInput, ClubWithdrawalConfigUncheckedUpdateInput>
     /**
-     * Choose, which TenantWithdrawalConfig to update.
+     * Choose, which ClubWithdrawalConfig to update.
      */
-    where: TenantWithdrawalConfigWhereUniqueInput
+    where: ClubWithdrawalConfigWhereUniqueInput
   }
 
   /**
-   * TenantWithdrawalConfig updateMany
+   * ClubWithdrawalConfig updateMany
    */
-  export type TenantWithdrawalConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantWithdrawalConfigs.
+     * The data used to update ClubWithdrawalConfigs.
      */
-    data: XOR<TenantWithdrawalConfigUpdateManyMutationInput, TenantWithdrawalConfigUncheckedUpdateManyInput>
+    data: XOR<ClubWithdrawalConfigUpdateManyMutationInput, ClubWithdrawalConfigUncheckedUpdateManyInput>
     /**
-     * Filter which TenantWithdrawalConfigs to update
+     * Filter which ClubWithdrawalConfigs to update
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
-     * Limit how many TenantWithdrawalConfigs to update.
+     * Limit how many ClubWithdrawalConfigs to update.
      */
     limit?: number
   }
 
   /**
-   * TenantWithdrawalConfig updateManyAndReturn
+   * ClubWithdrawalConfig updateManyAndReturn
    */
-  export type TenantWithdrawalConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
-     * The data used to update TenantWithdrawalConfigs.
+     * The data used to update ClubWithdrawalConfigs.
      */
-    data: XOR<TenantWithdrawalConfigUpdateManyMutationInput, TenantWithdrawalConfigUncheckedUpdateManyInput>
+    data: XOR<ClubWithdrawalConfigUpdateManyMutationInput, ClubWithdrawalConfigUncheckedUpdateManyInput>
     /**
-     * Filter which TenantWithdrawalConfigs to update
+     * Filter which ClubWithdrawalConfigs to update
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
-     * Limit how many TenantWithdrawalConfigs to update.
+     * Limit how many ClubWithdrawalConfigs to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubWithdrawalConfigIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantWithdrawalConfig upsert
+   * ClubWithdrawalConfig upsert
    */
-  export type TenantWithdrawalConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantWithdrawalConfig to update in case it exists.
+     * The filter to search for the ClubWithdrawalConfig to update in case it exists.
      */
-    where: TenantWithdrawalConfigWhereUniqueInput
+    where: ClubWithdrawalConfigWhereUniqueInput
     /**
-     * In case the TenantWithdrawalConfig found by the `where` argument doesn't exist, create a new TenantWithdrawalConfig with this data.
+     * In case the ClubWithdrawalConfig found by the `where` argument doesn't exist, create a new ClubWithdrawalConfig with this data.
      */
-    create: XOR<TenantWithdrawalConfigCreateInput, TenantWithdrawalConfigUncheckedCreateInput>
+    create: XOR<ClubWithdrawalConfigCreateInput, ClubWithdrawalConfigUncheckedCreateInput>
     /**
-     * In case the TenantWithdrawalConfig was found with the provided `where` argument, update it with this data.
+     * In case the ClubWithdrawalConfig was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantWithdrawalConfigUpdateInput, TenantWithdrawalConfigUncheckedUpdateInput>
+    update: XOR<ClubWithdrawalConfigUpdateInput, ClubWithdrawalConfigUncheckedUpdateInput>
   }
 
   /**
-   * TenantWithdrawalConfig delete
+   * ClubWithdrawalConfig delete
    */
-  export type TenantWithdrawalConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     /**
-     * Filter which TenantWithdrawalConfig to delete.
+     * Filter which ClubWithdrawalConfig to delete.
      */
-    where: TenantWithdrawalConfigWhereUniqueInput
+    where: ClubWithdrawalConfigWhereUniqueInput
   }
 
   /**
-   * TenantWithdrawalConfig deleteMany
+   * ClubWithdrawalConfig deleteMany
    */
-  export type TenantWithdrawalConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantWithdrawalConfigs to delete
+     * Filter which ClubWithdrawalConfigs to delete
      */
-    where?: TenantWithdrawalConfigWhereInput
+    where?: ClubWithdrawalConfigWhereInput
     /**
-     * Limit how many TenantWithdrawalConfigs to delete.
+     * Limit how many ClubWithdrawalConfigs to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantWithdrawalConfig without action
+   * ClubWithdrawalConfig without action
    */
-  export type TenantWithdrawalConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubWithdrawalConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantWithdrawalConfig
+     * Select specific fields to fetch from the ClubWithdrawalConfig
      */
-    select?: TenantWithdrawalConfigSelect<ExtArgs> | null
+    select?: ClubWithdrawalConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantWithdrawalConfig
+     * Omit specific fields from the ClubWithdrawalConfig
      */
-    omit?: TenantWithdrawalConfigOmit<ExtArgs> | null
+    omit?: ClubWithdrawalConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantWithdrawalConfigInclude<ExtArgs> | null
+    include?: ClubWithdrawalConfigInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model TenantAdmin
+   * Model ClubAdmin
    */
 
-  export type AggregateTenantAdmin = {
-    _count: TenantAdminCountAggregateOutputType | null
-    _min: TenantAdminMinAggregateOutputType | null
-    _max: TenantAdminMaxAggregateOutputType | null
+  export type AggregateClubAdmin = {
+    _count: ClubAdminCountAggregateOutputType | null
+    _min: ClubAdminMinAggregateOutputType | null
+    _max: ClubAdminMaxAggregateOutputType | null
   }
 
-  export type TenantAdminMinAggregateOutputType = {
+  export type ClubAdminMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     name: string | null
     email: string | null
     password: string | null
@@ -10734,9 +10734,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantAdminMaxAggregateOutputType = {
+  export type ClubAdminMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     name: string | null
     email: string | null
     password: string | null
@@ -10747,9 +10747,9 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type TenantAdminCountAggregateOutputType = {
+  export type ClubAdminCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     name: number
     email: number
     password: number
@@ -10762,9 +10762,9 @@ export namespace Prisma {
   }
 
 
-  export type TenantAdminMinAggregateInputType = {
+  export type ClubAdminMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     name?: true
     email?: true
     password?: true
@@ -10775,9 +10775,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantAdminMaxAggregateInputType = {
+  export type ClubAdminMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     name?: true
     email?: true
     password?: true
@@ -10788,9 +10788,9 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type TenantAdminCountAggregateInputType = {
+  export type ClubAdminCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     name?: true
     email?: true
     password?: true
@@ -10802,81 +10802,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantAdminAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantAdmin to aggregate.
+     * Filter which ClubAdmin to aggregate.
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantAdmins to fetch.
+     * Determine the order of ClubAdmins to fetch.
      */
-    orderBy?: TenantAdminOrderByWithRelationInput | TenantAdminOrderByWithRelationInput[]
+    orderBy?: ClubAdminOrderByWithRelationInput | ClubAdminOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantAdminWhereUniqueInput
+    cursor?: ClubAdminWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantAdmins from the position of the cursor.
+     * Take `±n` ClubAdmins from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantAdmins.
+     * Skip the first `n` ClubAdmins.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantAdmins
+     * Count returned ClubAdmins
     **/
-    _count?: true | TenantAdminCountAggregateInputType
+    _count?: true | ClubAdminCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantAdminMinAggregateInputType
+    _min?: ClubAdminMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantAdminMaxAggregateInputType
+    _max?: ClubAdminMaxAggregateInputType
   }
 
-  export type GetTenantAdminAggregateType<T extends TenantAdminAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantAdmin]: P extends '_count' | 'count'
+  export type GetClubAdminAggregateType<T extends ClubAdminAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubAdmin]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantAdmin[P]>
-      : GetScalarType<T[P], AggregateTenantAdmin[P]>
+        : GetScalarType<T[P], AggregateClubAdmin[P]>
+      : GetScalarType<T[P], AggregateClubAdmin[P]>
   }
 
 
 
 
-  export type TenantAdminGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantAdminWhereInput
-    orderBy?: TenantAdminOrderByWithAggregationInput | TenantAdminOrderByWithAggregationInput[]
-    by: TenantAdminScalarFieldEnum[] | TenantAdminScalarFieldEnum
-    having?: TenantAdminScalarWhereWithAggregatesInput
+  export type ClubAdminGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubAdminWhereInput
+    orderBy?: ClubAdminOrderByWithAggregationInput | ClubAdminOrderByWithAggregationInput[]
+    by: ClubAdminScalarFieldEnum[] | ClubAdminScalarFieldEnum
+    having?: ClubAdminScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantAdminCountAggregateInputType | true
-    _min?: TenantAdminMinAggregateInputType
-    _max?: TenantAdminMaxAggregateInputType
+    _count?: ClubAdminCountAggregateInputType | true
+    _min?: ClubAdminMinAggregateInputType
+    _max?: ClubAdminMaxAggregateInputType
   }
 
-  export type TenantAdminGroupByOutputType = {
+  export type ClubAdminGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     name: string
     email: string
     password: string
@@ -10885,28 +10885,28 @@ export namespace Prisma {
     lastLoginAt: Date | null
     createdAt: Date
     updatedAt: Date
-    _count: TenantAdminCountAggregateOutputType | null
-    _min: TenantAdminMinAggregateOutputType | null
-    _max: TenantAdminMaxAggregateOutputType | null
+    _count: ClubAdminCountAggregateOutputType | null
+    _min: ClubAdminMinAggregateOutputType | null
+    _max: ClubAdminMaxAggregateOutputType | null
   }
 
-  type GetTenantAdminGroupByPayload<T extends TenantAdminGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubAdminGroupByPayload<T extends ClubAdminGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantAdminGroupByOutputType, T['by']> &
+      PickEnumerable<ClubAdminGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantAdminGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubAdminGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantAdminGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantAdminGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubAdminGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubAdminGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantAdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubAdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     name?: boolean
     email?: boolean
     password?: boolean
@@ -10915,12 +10915,12 @@ export namespace Prisma {
     lastLoginAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantAdmin"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubAdmin"]>
 
-  export type TenantAdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubAdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     name?: boolean
     email?: boolean
     password?: boolean
@@ -10929,12 +10929,12 @@ export namespace Prisma {
     lastLoginAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantAdmin"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubAdmin"]>
 
-  export type TenantAdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubAdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     name?: boolean
     email?: boolean
     password?: boolean
@@ -10943,12 +10943,12 @@ export namespace Prisma {
     lastLoginAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantAdmin"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubAdmin"]>
 
-  export type TenantAdminSelectScalar = {
+  export type ClubAdminSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     name?: boolean
     email?: boolean
     password?: boolean
@@ -10959,25 +10959,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TenantAdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "email" | "password" | "role" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantAdmin"]>
-  export type TenantAdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubAdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "name" | "email" | "password" | "role" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["clubAdmin"]>
+  export type ClubAdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantAdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubAdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantAdminIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubAdminIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantAdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantAdmin"
+  export type $ClubAdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubAdmin"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       name: string
       email: string
       password: string
@@ -10986,136 +10986,136 @@ export namespace Prisma {
       lastLoginAt: Date | null
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["tenantAdmin"]>
+    }, ExtArgs["result"]["clubAdmin"]>
     composites: {}
   }
 
-  type TenantAdminGetPayload<S extends boolean | null | undefined | TenantAdminDefaultArgs> = $Result.GetResult<Prisma.$TenantAdminPayload, S>
+  type ClubAdminGetPayload<S extends boolean | null | undefined | ClubAdminDefaultArgs> = $Result.GetResult<Prisma.$ClubAdminPayload, S>
 
-  type TenantAdminCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantAdminFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantAdminCountAggregateInputType | true
+  type ClubAdminCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubAdminFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubAdminCountAggregateInputType | true
     }
 
-  export interface TenantAdminDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantAdmin'], meta: { name: 'TenantAdmin' } }
+  export interface ClubAdminDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubAdmin'], meta: { name: 'ClubAdmin' } }
     /**
-     * Find zero or one TenantAdmin that matches the filter.
-     * @param {TenantAdminFindUniqueArgs} args - Arguments to find a TenantAdmin
+     * Find zero or one ClubAdmin that matches the filter.
+     * @param {ClubAdminFindUniqueArgs} args - Arguments to find a ClubAdmin
      * @example
-     * // Get one TenantAdmin
-     * const tenantAdmin = await prisma.tenantAdmin.findUnique({
+     * // Get one ClubAdmin
+     * const clubAdmin = await prisma.clubAdmin.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantAdminFindUniqueArgs>(args: SelectSubset<T, TenantAdminFindUniqueArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubAdminFindUniqueArgs>(args: SelectSubset<T, ClubAdminFindUniqueArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantAdmin that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubAdmin that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantAdminFindUniqueOrThrowArgs} args - Arguments to find a TenantAdmin
+     * @param {ClubAdminFindUniqueOrThrowArgs} args - Arguments to find a ClubAdmin
      * @example
-     * // Get one TenantAdmin
-     * const tenantAdmin = await prisma.tenantAdmin.findUniqueOrThrow({
+     * // Get one ClubAdmin
+     * const clubAdmin = await prisma.clubAdmin.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantAdminFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantAdminFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubAdminFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubAdminFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantAdmin that matches the filter.
+     * Find the first ClubAdmin that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminFindFirstArgs} args - Arguments to find a TenantAdmin
+     * @param {ClubAdminFindFirstArgs} args - Arguments to find a ClubAdmin
      * @example
-     * // Get one TenantAdmin
-     * const tenantAdmin = await prisma.tenantAdmin.findFirst({
+     * // Get one ClubAdmin
+     * const clubAdmin = await prisma.clubAdmin.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantAdminFindFirstArgs>(args?: SelectSubset<T, TenantAdminFindFirstArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubAdminFindFirstArgs>(args?: SelectSubset<T, ClubAdminFindFirstArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantAdmin that matches the filter or
+     * Find the first ClubAdmin that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminFindFirstOrThrowArgs} args - Arguments to find a TenantAdmin
+     * @param {ClubAdminFindFirstOrThrowArgs} args - Arguments to find a ClubAdmin
      * @example
-     * // Get one TenantAdmin
-     * const tenantAdmin = await prisma.tenantAdmin.findFirstOrThrow({
+     * // Get one ClubAdmin
+     * const clubAdmin = await prisma.clubAdmin.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantAdminFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantAdminFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubAdminFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubAdminFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantAdmins that matches the filter.
+     * Find zero or more ClubAdmins that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubAdminFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantAdmins
-     * const tenantAdmins = await prisma.tenantAdmin.findMany()
+     * // Get all ClubAdmins
+     * const clubAdmins = await prisma.clubAdmin.findMany()
      * 
-     * // Get first 10 TenantAdmins
-     * const tenantAdmins = await prisma.tenantAdmin.findMany({ take: 10 })
+     * // Get first 10 ClubAdmins
+     * const clubAdmins = await prisma.clubAdmin.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantAdminWithIdOnly = await prisma.tenantAdmin.findMany({ select: { id: true } })
+     * const clubAdminWithIdOnly = await prisma.clubAdmin.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantAdminFindManyArgs>(args?: SelectSubset<T, TenantAdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubAdminFindManyArgs>(args?: SelectSubset<T, ClubAdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantAdmin.
-     * @param {TenantAdminCreateArgs} args - Arguments to create a TenantAdmin.
+     * Create a ClubAdmin.
+     * @param {ClubAdminCreateArgs} args - Arguments to create a ClubAdmin.
      * @example
-     * // Create one TenantAdmin
-     * const TenantAdmin = await prisma.tenantAdmin.create({
+     * // Create one ClubAdmin
+     * const ClubAdmin = await prisma.clubAdmin.create({
      *   data: {
-     *     // ... data to create a TenantAdmin
+     *     // ... data to create a ClubAdmin
      *   }
      * })
      * 
      */
-    create<T extends TenantAdminCreateArgs>(args: SelectSubset<T, TenantAdminCreateArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubAdminCreateArgs>(args: SelectSubset<T, ClubAdminCreateArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantAdmins.
-     * @param {TenantAdminCreateManyArgs} args - Arguments to create many TenantAdmins.
+     * Create many ClubAdmins.
+     * @param {ClubAdminCreateManyArgs} args - Arguments to create many ClubAdmins.
      * @example
-     * // Create many TenantAdmins
-     * const tenantAdmin = await prisma.tenantAdmin.createMany({
+     * // Create many ClubAdmins
+     * const clubAdmin = await prisma.clubAdmin.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantAdminCreateManyArgs>(args?: SelectSubset<T, TenantAdminCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubAdminCreateManyArgs>(args?: SelectSubset<T, ClubAdminCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantAdmins and returns the data saved in the database.
-     * @param {TenantAdminCreateManyAndReturnArgs} args - Arguments to create many TenantAdmins.
+     * Create many ClubAdmins and returns the data saved in the database.
+     * @param {ClubAdminCreateManyAndReturnArgs} args - Arguments to create many ClubAdmins.
      * @example
-     * // Create many TenantAdmins
-     * const tenantAdmin = await prisma.tenantAdmin.createManyAndReturn({
+     * // Create many ClubAdmins
+     * const clubAdmin = await prisma.clubAdmin.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantAdmins and only return the `id`
-     * const tenantAdminWithIdOnly = await prisma.tenantAdmin.createManyAndReturn({
+     * // Create many ClubAdmins and only return the `id`
+     * const clubAdminWithIdOnly = await prisma.clubAdmin.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -11125,28 +11125,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantAdminCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantAdminCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubAdminCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubAdminCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantAdmin.
-     * @param {TenantAdminDeleteArgs} args - Arguments to delete one TenantAdmin.
+     * Delete a ClubAdmin.
+     * @param {ClubAdminDeleteArgs} args - Arguments to delete one ClubAdmin.
      * @example
-     * // Delete one TenantAdmin
-     * const TenantAdmin = await prisma.tenantAdmin.delete({
+     * // Delete one ClubAdmin
+     * const ClubAdmin = await prisma.clubAdmin.delete({
      *   where: {
-     *     // ... filter to delete one TenantAdmin
+     *     // ... filter to delete one ClubAdmin
      *   }
      * })
      * 
      */
-    delete<T extends TenantAdminDeleteArgs>(args: SelectSubset<T, TenantAdminDeleteArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubAdminDeleteArgs>(args: SelectSubset<T, ClubAdminDeleteArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantAdmin.
-     * @param {TenantAdminUpdateArgs} args - Arguments to update one TenantAdmin.
+     * Update one ClubAdmin.
+     * @param {ClubAdminUpdateArgs} args - Arguments to update one ClubAdmin.
      * @example
-     * // Update one TenantAdmin
-     * const tenantAdmin = await prisma.tenantAdmin.update({
+     * // Update one ClubAdmin
+     * const clubAdmin = await prisma.clubAdmin.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11156,30 +11156,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantAdminUpdateArgs>(args: SelectSubset<T, TenantAdminUpdateArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubAdminUpdateArgs>(args: SelectSubset<T, ClubAdminUpdateArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantAdmins.
-     * @param {TenantAdminDeleteManyArgs} args - Arguments to filter TenantAdmins to delete.
+     * Delete zero or more ClubAdmins.
+     * @param {ClubAdminDeleteManyArgs} args - Arguments to filter ClubAdmins to delete.
      * @example
-     * // Delete a few TenantAdmins
-     * const { count } = await prisma.tenantAdmin.deleteMany({
+     * // Delete a few ClubAdmins
+     * const { count } = await prisma.clubAdmin.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantAdminDeleteManyArgs>(args?: SelectSubset<T, TenantAdminDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubAdminDeleteManyArgs>(args?: SelectSubset<T, ClubAdminDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantAdmins.
+     * Update zero or more ClubAdmins.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubAdminUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantAdmins
-     * const tenantAdmin = await prisma.tenantAdmin.updateMany({
+     * // Update many ClubAdmins
+     * const clubAdmin = await prisma.clubAdmin.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11189,14 +11189,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantAdminUpdateManyArgs>(args: SelectSubset<T, TenantAdminUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubAdminUpdateManyArgs>(args: SelectSubset<T, ClubAdminUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantAdmins and returns the data updated in the database.
-     * @param {TenantAdminUpdateManyAndReturnArgs} args - Arguments to update many TenantAdmins.
+     * Update zero or more ClubAdmins and returns the data updated in the database.
+     * @param {ClubAdminUpdateManyAndReturnArgs} args - Arguments to update many ClubAdmins.
      * @example
-     * // Update many TenantAdmins
-     * const tenantAdmin = await prisma.tenantAdmin.updateManyAndReturn({
+     * // Update many ClubAdmins
+     * const clubAdmin = await prisma.clubAdmin.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11205,8 +11205,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantAdmins and only return the `id`
-     * const tenantAdminWithIdOnly = await prisma.tenantAdmin.updateManyAndReturn({
+     * // Update zero or more ClubAdmins and only return the `id`
+     * const clubAdminWithIdOnly = await prisma.clubAdmin.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -11219,56 +11219,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantAdminUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantAdminUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubAdminUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubAdminUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantAdmin.
-     * @param {TenantAdminUpsertArgs} args - Arguments to update or create a TenantAdmin.
+     * Create or update one ClubAdmin.
+     * @param {ClubAdminUpsertArgs} args - Arguments to update or create a ClubAdmin.
      * @example
-     * // Update or create a TenantAdmin
-     * const tenantAdmin = await prisma.tenantAdmin.upsert({
+     * // Update or create a ClubAdmin
+     * const clubAdmin = await prisma.clubAdmin.upsert({
      *   create: {
-     *     // ... data to create a TenantAdmin
+     *     // ... data to create a ClubAdmin
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantAdmin we want to update
+     *     // ... the filter for the ClubAdmin we want to update
      *   }
      * })
      */
-    upsert<T extends TenantAdminUpsertArgs>(args: SelectSubset<T, TenantAdminUpsertArgs<ExtArgs>>): Prisma__TenantAdminClient<$Result.GetResult<Prisma.$TenantAdminPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubAdminUpsertArgs>(args: SelectSubset<T, ClubAdminUpsertArgs<ExtArgs>>): Prisma__ClubAdminClient<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantAdmins.
+     * Count the number of ClubAdmins.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminCountArgs} args - Arguments to filter TenantAdmins to count.
+     * @param {ClubAdminCountArgs} args - Arguments to filter ClubAdmins to count.
      * @example
-     * // Count the number of TenantAdmins
-     * const count = await prisma.tenantAdmin.count({
+     * // Count the number of ClubAdmins
+     * const count = await prisma.clubAdmin.count({
      *   where: {
-     *     // ... the filter for the TenantAdmins we want to count
+     *     // ... the filter for the ClubAdmins we want to count
      *   }
      * })
     **/
-    count<T extends TenantAdminCountArgs>(
-      args?: Subset<T, TenantAdminCountArgs>,
+    count<T extends ClubAdminCountArgs>(
+      args?: Subset<T, ClubAdminCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantAdminCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubAdminCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantAdmin.
+     * Allows you to perform aggregations operations on a ClubAdmin.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubAdminAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -11288,13 +11288,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantAdminAggregateArgs>(args: Subset<T, TenantAdminAggregateArgs>): Prisma.PrismaPromise<GetTenantAdminAggregateType<T>>
+    aggregate<T extends ClubAdminAggregateArgs>(args: Subset<T, ClubAdminAggregateArgs>): Prisma.PrismaPromise<GetClubAdminAggregateType<T>>
 
     /**
-     * Group by TenantAdmin.
+     * Group by ClubAdmin.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantAdminGroupByArgs} args - Group by arguments.
+     * @param {ClubAdminGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -11309,14 +11309,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantAdminGroupByArgs,
+      T extends ClubAdminGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantAdminGroupByArgs['orderBy'] }
-        : { orderBy?: TenantAdminGroupByArgs['orderBy'] },
+        ? { orderBy: ClubAdminGroupByArgs['orderBy'] }
+        : { orderBy?: ClubAdminGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -11365,22 +11365,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantAdminGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantAdminGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubAdminGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubAdminGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantAdmin model
+   * Fields of the ClubAdmin model
    */
-  readonly fields: TenantAdminFieldRefs;
+  readonly fields: ClubAdminFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantAdmin.
+   * The delegate class that acts as a "Promise-like" for ClubAdmin.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantAdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubAdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11407,430 +11407,430 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantAdmin model
+   * Fields of the ClubAdmin model
    */
-  interface TenantAdminFieldRefs {
-    readonly id: FieldRef<"TenantAdmin", 'String'>
-    readonly tenantId: FieldRef<"TenantAdmin", 'String'>
-    readonly name: FieldRef<"TenantAdmin", 'String'>
-    readonly email: FieldRef<"TenantAdmin", 'String'>
-    readonly password: FieldRef<"TenantAdmin", 'String'>
-    readonly role: FieldRef<"TenantAdmin", 'AdminRole'>
-    readonly isActive: FieldRef<"TenantAdmin", 'Boolean'>
-    readonly lastLoginAt: FieldRef<"TenantAdmin", 'DateTime'>
-    readonly createdAt: FieldRef<"TenantAdmin", 'DateTime'>
-    readonly updatedAt: FieldRef<"TenantAdmin", 'DateTime'>
+  interface ClubAdminFieldRefs {
+    readonly id: FieldRef<"ClubAdmin", 'String'>
+    readonly clubId: FieldRef<"ClubAdmin", 'String'>
+    readonly name: FieldRef<"ClubAdmin", 'String'>
+    readonly email: FieldRef<"ClubAdmin", 'String'>
+    readonly password: FieldRef<"ClubAdmin", 'String'>
+    readonly role: FieldRef<"ClubAdmin", 'AdminRole'>
+    readonly isActive: FieldRef<"ClubAdmin", 'Boolean'>
+    readonly lastLoginAt: FieldRef<"ClubAdmin", 'DateTime'>
+    readonly createdAt: FieldRef<"ClubAdmin", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubAdmin", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantAdmin findUnique
+   * ClubAdmin findUnique
    */
-  export type TenantAdminFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * Filter, which TenantAdmin to fetch.
+     * Filter, which ClubAdmin to fetch.
      */
-    where: TenantAdminWhereUniqueInput
+    where: ClubAdminWhereUniqueInput
   }
 
   /**
-   * TenantAdmin findUniqueOrThrow
+   * ClubAdmin findUniqueOrThrow
    */
-  export type TenantAdminFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * Filter, which TenantAdmin to fetch.
+     * Filter, which ClubAdmin to fetch.
      */
-    where: TenantAdminWhereUniqueInput
+    where: ClubAdminWhereUniqueInput
   }
 
   /**
-   * TenantAdmin findFirst
+   * ClubAdmin findFirst
    */
-  export type TenantAdminFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * Filter, which TenantAdmin to fetch.
+     * Filter, which ClubAdmin to fetch.
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantAdmins to fetch.
+     * Determine the order of ClubAdmins to fetch.
      */
-    orderBy?: TenantAdminOrderByWithRelationInput | TenantAdminOrderByWithRelationInput[]
+    orderBy?: ClubAdminOrderByWithRelationInput | ClubAdminOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantAdmins.
+     * Sets the position for searching for ClubAdmins.
      */
-    cursor?: TenantAdminWhereUniqueInput
+    cursor?: ClubAdminWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantAdmins from the position of the cursor.
+     * Take `±n` ClubAdmins from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantAdmins.
+     * Skip the first `n` ClubAdmins.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantAdmins.
+     * Filter by unique combinations of ClubAdmins.
      */
-    distinct?: TenantAdminScalarFieldEnum | TenantAdminScalarFieldEnum[]
+    distinct?: ClubAdminScalarFieldEnum | ClubAdminScalarFieldEnum[]
   }
 
   /**
-   * TenantAdmin findFirstOrThrow
+   * ClubAdmin findFirstOrThrow
    */
-  export type TenantAdminFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * Filter, which TenantAdmin to fetch.
+     * Filter, which ClubAdmin to fetch.
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantAdmins to fetch.
+     * Determine the order of ClubAdmins to fetch.
      */
-    orderBy?: TenantAdminOrderByWithRelationInput | TenantAdminOrderByWithRelationInput[]
+    orderBy?: ClubAdminOrderByWithRelationInput | ClubAdminOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantAdmins.
+     * Sets the position for searching for ClubAdmins.
      */
-    cursor?: TenantAdminWhereUniqueInput
+    cursor?: ClubAdminWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantAdmins from the position of the cursor.
+     * Take `±n` ClubAdmins from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantAdmins.
+     * Skip the first `n` ClubAdmins.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantAdmins.
+     * Filter by unique combinations of ClubAdmins.
      */
-    distinct?: TenantAdminScalarFieldEnum | TenantAdminScalarFieldEnum[]
+    distinct?: ClubAdminScalarFieldEnum | ClubAdminScalarFieldEnum[]
   }
 
   /**
-   * TenantAdmin findMany
+   * ClubAdmin findMany
    */
-  export type TenantAdminFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * Filter, which TenantAdmins to fetch.
+     * Filter, which ClubAdmins to fetch.
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantAdmins to fetch.
+     * Determine the order of ClubAdmins to fetch.
      */
-    orderBy?: TenantAdminOrderByWithRelationInput | TenantAdminOrderByWithRelationInput[]
+    orderBy?: ClubAdminOrderByWithRelationInput | ClubAdminOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantAdmins.
+     * Sets the position for listing ClubAdmins.
      */
-    cursor?: TenantAdminWhereUniqueInput
+    cursor?: ClubAdminWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantAdmins from the position of the cursor.
+     * Take `±n` ClubAdmins from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantAdmins.
+     * Skip the first `n` ClubAdmins.
      */
     skip?: number
-    distinct?: TenantAdminScalarFieldEnum | TenantAdminScalarFieldEnum[]
+    distinct?: ClubAdminScalarFieldEnum | ClubAdminScalarFieldEnum[]
   }
 
   /**
-   * TenantAdmin create
+   * ClubAdmin create
    */
-  export type TenantAdminCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantAdmin.
+     * The data needed to create a ClubAdmin.
      */
-    data: XOR<TenantAdminCreateInput, TenantAdminUncheckedCreateInput>
+    data: XOR<ClubAdminCreateInput, ClubAdminUncheckedCreateInput>
   }
 
   /**
-   * TenantAdmin createMany
+   * ClubAdmin createMany
    */
-  export type TenantAdminCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantAdmins.
+     * The data used to create many ClubAdmins.
      */
-    data: TenantAdminCreateManyInput | TenantAdminCreateManyInput[]
+    data: ClubAdminCreateManyInput | ClubAdminCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantAdmin createManyAndReturn
+   * ClubAdmin createManyAndReturn
    */
-  export type TenantAdminCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubAdminSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantAdmins.
+     * The data used to create many ClubAdmins.
      */
-    data: TenantAdminCreateManyInput | TenantAdminCreateManyInput[]
+    data: ClubAdminCreateManyInput | ClubAdminCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubAdminIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantAdmin update
+   * ClubAdmin update
    */
-  export type TenantAdminUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantAdmin.
+     * The data needed to update a ClubAdmin.
      */
-    data: XOR<TenantAdminUpdateInput, TenantAdminUncheckedUpdateInput>
+    data: XOR<ClubAdminUpdateInput, ClubAdminUncheckedUpdateInput>
     /**
-     * Choose, which TenantAdmin to update.
+     * Choose, which ClubAdmin to update.
      */
-    where: TenantAdminWhereUniqueInput
+    where: ClubAdminWhereUniqueInput
   }
 
   /**
-   * TenantAdmin updateMany
+   * ClubAdmin updateMany
    */
-  export type TenantAdminUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantAdmins.
+     * The data used to update ClubAdmins.
      */
-    data: XOR<TenantAdminUpdateManyMutationInput, TenantAdminUncheckedUpdateManyInput>
+    data: XOR<ClubAdminUpdateManyMutationInput, ClubAdminUncheckedUpdateManyInput>
     /**
-     * Filter which TenantAdmins to update
+     * Filter which ClubAdmins to update
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
-     * Limit how many TenantAdmins to update.
+     * Limit how many ClubAdmins to update.
      */
     limit?: number
   }
 
   /**
-   * TenantAdmin updateManyAndReturn
+   * ClubAdmin updateManyAndReturn
    */
-  export type TenantAdminUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubAdminSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
-     * The data used to update TenantAdmins.
+     * The data used to update ClubAdmins.
      */
-    data: XOR<TenantAdminUpdateManyMutationInput, TenantAdminUncheckedUpdateManyInput>
+    data: XOR<ClubAdminUpdateManyMutationInput, ClubAdminUncheckedUpdateManyInput>
     /**
-     * Filter which TenantAdmins to update
+     * Filter which ClubAdmins to update
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
-     * Limit how many TenantAdmins to update.
+     * Limit how many ClubAdmins to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubAdminIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantAdmin upsert
+   * ClubAdmin upsert
    */
-  export type TenantAdminUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantAdmin to update in case it exists.
+     * The filter to search for the ClubAdmin to update in case it exists.
      */
-    where: TenantAdminWhereUniqueInput
+    where: ClubAdminWhereUniqueInput
     /**
-     * In case the TenantAdmin found by the `where` argument doesn't exist, create a new TenantAdmin with this data.
+     * In case the ClubAdmin found by the `where` argument doesn't exist, create a new ClubAdmin with this data.
      */
-    create: XOR<TenantAdminCreateInput, TenantAdminUncheckedCreateInput>
+    create: XOR<ClubAdminCreateInput, ClubAdminUncheckedCreateInput>
     /**
-     * In case the TenantAdmin was found with the provided `where` argument, update it with this data.
+     * In case the ClubAdmin was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantAdminUpdateInput, TenantAdminUncheckedUpdateInput>
+    update: XOR<ClubAdminUpdateInput, ClubAdminUncheckedUpdateInput>
   }
 
   /**
-   * TenantAdmin delete
+   * ClubAdmin delete
    */
-  export type TenantAdminDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
     /**
-     * Filter which TenantAdmin to delete.
+     * Filter which ClubAdmin to delete.
      */
-    where: TenantAdminWhereUniqueInput
+    where: ClubAdminWhereUniqueInput
   }
 
   /**
-   * TenantAdmin deleteMany
+   * ClubAdmin deleteMany
    */
-  export type TenantAdminDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantAdmins to delete
+     * Filter which ClubAdmins to delete
      */
-    where?: TenantAdminWhereInput
+    where?: ClubAdminWhereInput
     /**
-     * Limit how many TenantAdmins to delete.
+     * Limit how many ClubAdmins to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantAdmin without action
+   * ClubAdmin without action
    */
-  export type TenantAdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubAdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantAdmin
+     * Select specific fields to fetch from the ClubAdmin
      */
-    select?: TenantAdminSelect<ExtArgs> | null
+    select?: ClubAdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantAdmin
+     * Omit specific fields from the ClubAdmin
      */
-    omit?: TenantAdminOmit<ExtArgs> | null
+    omit?: ClubAdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantAdminInclude<ExtArgs> | null
+    include?: ClubAdminInclude<ExtArgs> | null
   }
 
 
@@ -12878,18 +12878,18 @@ export namespace Prisma {
 
 
   /**
-   * Model TenantApiKey
+   * Model ClubApiKey
    */
 
-  export type AggregateTenantApiKey = {
-    _count: TenantApiKeyCountAggregateOutputType | null
-    _min: TenantApiKeyMinAggregateOutputType | null
-    _max: TenantApiKeyMaxAggregateOutputType | null
+  export type AggregateClubApiKey = {
+    _count: ClubApiKeyCountAggregateOutputType | null
+    _min: ClubApiKeyMinAggregateOutputType | null
+    _max: ClubApiKeyMaxAggregateOutputType | null
   }
 
-  export type TenantApiKeyMinAggregateOutputType = {
+  export type ClubApiKeyMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     keyName: string | null
     apiKey: string | null
     isActive: boolean | null
@@ -12898,9 +12898,9 @@ export namespace Prisma {
     expiresAt: Date | null
   }
 
-  export type TenantApiKeyMaxAggregateOutputType = {
+  export type ClubApiKeyMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     keyName: string | null
     apiKey: string | null
     isActive: boolean | null
@@ -12909,9 +12909,9 @@ export namespace Prisma {
     expiresAt: Date | null
   }
 
-  export type TenantApiKeyCountAggregateOutputType = {
+  export type ClubApiKeyCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     keyName: number
     apiKey: number
     isActive: number
@@ -12922,9 +12922,9 @@ export namespace Prisma {
   }
 
 
-  export type TenantApiKeyMinAggregateInputType = {
+  export type ClubApiKeyMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     keyName?: true
     apiKey?: true
     isActive?: true
@@ -12933,9 +12933,9 @@ export namespace Prisma {
     expiresAt?: true
   }
 
-  export type TenantApiKeyMaxAggregateInputType = {
+  export type ClubApiKeyMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     keyName?: true
     apiKey?: true
     isActive?: true
@@ -12944,9 +12944,9 @@ export namespace Prisma {
     expiresAt?: true
   }
 
-  export type TenantApiKeyCountAggregateInputType = {
+  export type ClubApiKeyCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     keyName?: true
     apiKey?: true
     isActive?: true
@@ -12956,145 +12956,145 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantApiKeyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantApiKey to aggregate.
+     * Filter which ClubApiKey to aggregate.
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantApiKeys to fetch.
+     * Determine the order of ClubApiKeys to fetch.
      */
-    orderBy?: TenantApiKeyOrderByWithRelationInput | TenantApiKeyOrderByWithRelationInput[]
+    orderBy?: ClubApiKeyOrderByWithRelationInput | ClubApiKeyOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantApiKeyWhereUniqueInput
+    cursor?: ClubApiKeyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantApiKeys from the position of the cursor.
+     * Take `±n` ClubApiKeys from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantApiKeys.
+     * Skip the first `n` ClubApiKeys.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantApiKeys
+     * Count returned ClubApiKeys
     **/
-    _count?: true | TenantApiKeyCountAggregateInputType
+    _count?: true | ClubApiKeyCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantApiKeyMinAggregateInputType
+    _min?: ClubApiKeyMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantApiKeyMaxAggregateInputType
+    _max?: ClubApiKeyMaxAggregateInputType
   }
 
-  export type GetTenantApiKeyAggregateType<T extends TenantApiKeyAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantApiKey]: P extends '_count' | 'count'
+  export type GetClubApiKeyAggregateType<T extends ClubApiKeyAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubApiKey]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantApiKey[P]>
-      : GetScalarType<T[P], AggregateTenantApiKey[P]>
+        : GetScalarType<T[P], AggregateClubApiKey[P]>
+      : GetScalarType<T[P], AggregateClubApiKey[P]>
   }
 
 
 
 
-  export type TenantApiKeyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantApiKeyWhereInput
-    orderBy?: TenantApiKeyOrderByWithAggregationInput | TenantApiKeyOrderByWithAggregationInput[]
-    by: TenantApiKeyScalarFieldEnum[] | TenantApiKeyScalarFieldEnum
-    having?: TenantApiKeyScalarWhereWithAggregatesInput
+  export type ClubApiKeyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubApiKeyWhereInput
+    orderBy?: ClubApiKeyOrderByWithAggregationInput | ClubApiKeyOrderByWithAggregationInput[]
+    by: ClubApiKeyScalarFieldEnum[] | ClubApiKeyScalarFieldEnum
+    having?: ClubApiKeyScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantApiKeyCountAggregateInputType | true
-    _min?: TenantApiKeyMinAggregateInputType
-    _max?: TenantApiKeyMaxAggregateInputType
+    _count?: ClubApiKeyCountAggregateInputType | true
+    _min?: ClubApiKeyMinAggregateInputType
+    _max?: ClubApiKeyMaxAggregateInputType
   }
 
-  export type TenantApiKeyGroupByOutputType = {
+  export type ClubApiKeyGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     keyName: string
     apiKey: string
     isActive: boolean
     lastUsedAt: Date | null
     createdAt: Date
     expiresAt: Date | null
-    _count: TenantApiKeyCountAggregateOutputType | null
-    _min: TenantApiKeyMinAggregateOutputType | null
-    _max: TenantApiKeyMaxAggregateOutputType | null
+    _count: ClubApiKeyCountAggregateOutputType | null
+    _min: ClubApiKeyMinAggregateOutputType | null
+    _max: ClubApiKeyMaxAggregateOutputType | null
   }
 
-  type GetTenantApiKeyGroupByPayload<T extends TenantApiKeyGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubApiKeyGroupByPayload<T extends ClubApiKeyGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantApiKeyGroupByOutputType, T['by']> &
+      PickEnumerable<ClubApiKeyGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantApiKeyGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubApiKeyGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantApiKeyGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantApiKeyGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubApiKeyGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubApiKeyGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantApiKeySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubApiKeySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     keyName?: boolean
     apiKey?: boolean
     isActive?: boolean
     lastUsedAt?: boolean
     createdAt?: boolean
     expiresAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantApiKey"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubApiKey"]>
 
-  export type TenantApiKeySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubApiKeySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     keyName?: boolean
     apiKey?: boolean
     isActive?: boolean
     lastUsedAt?: boolean
     createdAt?: boolean
     expiresAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantApiKey"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubApiKey"]>
 
-  export type TenantApiKeySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubApiKeySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     keyName?: boolean
     apiKey?: boolean
     isActive?: boolean
     lastUsedAt?: boolean
     createdAt?: boolean
     expiresAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantApiKey"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubApiKey"]>
 
-  export type TenantApiKeySelectScalar = {
+  export type ClubApiKeySelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     keyName?: boolean
     apiKey?: boolean
     isActive?: boolean
@@ -13103,161 +13103,161 @@ export namespace Prisma {
     expiresAt?: boolean
   }
 
-  export type TenantApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "keyName" | "apiKey" | "isActive" | "lastUsedAt" | "createdAt" | "expiresAt", ExtArgs["result"]["tenantApiKey"]>
-  export type TenantApiKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "keyName" | "apiKey" | "isActive" | "lastUsedAt" | "createdAt" | "expiresAt", ExtArgs["result"]["clubApiKey"]>
+  export type ClubApiKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantApiKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubApiKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantApiKeyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubApiKeyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantApiKeyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantApiKey"
+  export type $ClubApiKeyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubApiKey"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       keyName: string
       apiKey: string
       isActive: boolean
       lastUsedAt: Date | null
       createdAt: Date
       expiresAt: Date | null
-    }, ExtArgs["result"]["tenantApiKey"]>
+    }, ExtArgs["result"]["clubApiKey"]>
     composites: {}
   }
 
-  type TenantApiKeyGetPayload<S extends boolean | null | undefined | TenantApiKeyDefaultArgs> = $Result.GetResult<Prisma.$TenantApiKeyPayload, S>
+  type ClubApiKeyGetPayload<S extends boolean | null | undefined | ClubApiKeyDefaultArgs> = $Result.GetResult<Prisma.$ClubApiKeyPayload, S>
 
-  type TenantApiKeyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantApiKeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantApiKeyCountAggregateInputType | true
+  type ClubApiKeyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubApiKeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubApiKeyCountAggregateInputType | true
     }
 
-  export interface TenantApiKeyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantApiKey'], meta: { name: 'TenantApiKey' } }
+  export interface ClubApiKeyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubApiKey'], meta: { name: 'ClubApiKey' } }
     /**
-     * Find zero or one TenantApiKey that matches the filter.
-     * @param {TenantApiKeyFindUniqueArgs} args - Arguments to find a TenantApiKey
+     * Find zero or one ClubApiKey that matches the filter.
+     * @param {ClubApiKeyFindUniqueArgs} args - Arguments to find a ClubApiKey
      * @example
-     * // Get one TenantApiKey
-     * const tenantApiKey = await prisma.tenantApiKey.findUnique({
+     * // Get one ClubApiKey
+     * const clubApiKey = await prisma.clubApiKey.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantApiKeyFindUniqueArgs>(args: SelectSubset<T, TenantApiKeyFindUniqueArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubApiKeyFindUniqueArgs>(args: SelectSubset<T, ClubApiKeyFindUniqueArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantApiKey that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubApiKey that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantApiKeyFindUniqueOrThrowArgs} args - Arguments to find a TenantApiKey
+     * @param {ClubApiKeyFindUniqueOrThrowArgs} args - Arguments to find a ClubApiKey
      * @example
-     * // Get one TenantApiKey
-     * const tenantApiKey = await prisma.tenantApiKey.findUniqueOrThrow({
+     * // Get one ClubApiKey
+     * const clubApiKey = await prisma.clubApiKey.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantApiKeyFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantApiKeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubApiKeyFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubApiKeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantApiKey that matches the filter.
+     * Find the first ClubApiKey that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyFindFirstArgs} args - Arguments to find a TenantApiKey
+     * @param {ClubApiKeyFindFirstArgs} args - Arguments to find a ClubApiKey
      * @example
-     * // Get one TenantApiKey
-     * const tenantApiKey = await prisma.tenantApiKey.findFirst({
+     * // Get one ClubApiKey
+     * const clubApiKey = await prisma.clubApiKey.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantApiKeyFindFirstArgs>(args?: SelectSubset<T, TenantApiKeyFindFirstArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubApiKeyFindFirstArgs>(args?: SelectSubset<T, ClubApiKeyFindFirstArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantApiKey that matches the filter or
+     * Find the first ClubApiKey that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyFindFirstOrThrowArgs} args - Arguments to find a TenantApiKey
+     * @param {ClubApiKeyFindFirstOrThrowArgs} args - Arguments to find a ClubApiKey
      * @example
-     * // Get one TenantApiKey
-     * const tenantApiKey = await prisma.tenantApiKey.findFirstOrThrow({
+     * // Get one ClubApiKey
+     * const clubApiKey = await prisma.clubApiKey.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantApiKeyFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantApiKeyFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubApiKeyFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubApiKeyFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantApiKeys that matches the filter.
+     * Find zero or more ClubApiKeys that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubApiKeyFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantApiKeys
-     * const tenantApiKeys = await prisma.tenantApiKey.findMany()
+     * // Get all ClubApiKeys
+     * const clubApiKeys = await prisma.clubApiKey.findMany()
      * 
-     * // Get first 10 TenantApiKeys
-     * const tenantApiKeys = await prisma.tenantApiKey.findMany({ take: 10 })
+     * // Get first 10 ClubApiKeys
+     * const clubApiKeys = await prisma.clubApiKey.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantApiKeyWithIdOnly = await prisma.tenantApiKey.findMany({ select: { id: true } })
+     * const clubApiKeyWithIdOnly = await prisma.clubApiKey.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantApiKeyFindManyArgs>(args?: SelectSubset<T, TenantApiKeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubApiKeyFindManyArgs>(args?: SelectSubset<T, ClubApiKeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantApiKey.
-     * @param {TenantApiKeyCreateArgs} args - Arguments to create a TenantApiKey.
+     * Create a ClubApiKey.
+     * @param {ClubApiKeyCreateArgs} args - Arguments to create a ClubApiKey.
      * @example
-     * // Create one TenantApiKey
-     * const TenantApiKey = await prisma.tenantApiKey.create({
+     * // Create one ClubApiKey
+     * const ClubApiKey = await prisma.clubApiKey.create({
      *   data: {
-     *     // ... data to create a TenantApiKey
+     *     // ... data to create a ClubApiKey
      *   }
      * })
      * 
      */
-    create<T extends TenantApiKeyCreateArgs>(args: SelectSubset<T, TenantApiKeyCreateArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubApiKeyCreateArgs>(args: SelectSubset<T, ClubApiKeyCreateArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantApiKeys.
-     * @param {TenantApiKeyCreateManyArgs} args - Arguments to create many TenantApiKeys.
+     * Create many ClubApiKeys.
+     * @param {ClubApiKeyCreateManyArgs} args - Arguments to create many ClubApiKeys.
      * @example
-     * // Create many TenantApiKeys
-     * const tenantApiKey = await prisma.tenantApiKey.createMany({
+     * // Create many ClubApiKeys
+     * const clubApiKey = await prisma.clubApiKey.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantApiKeyCreateManyArgs>(args?: SelectSubset<T, TenantApiKeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubApiKeyCreateManyArgs>(args?: SelectSubset<T, ClubApiKeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantApiKeys and returns the data saved in the database.
-     * @param {TenantApiKeyCreateManyAndReturnArgs} args - Arguments to create many TenantApiKeys.
+     * Create many ClubApiKeys and returns the data saved in the database.
+     * @param {ClubApiKeyCreateManyAndReturnArgs} args - Arguments to create many ClubApiKeys.
      * @example
-     * // Create many TenantApiKeys
-     * const tenantApiKey = await prisma.tenantApiKey.createManyAndReturn({
+     * // Create many ClubApiKeys
+     * const clubApiKey = await prisma.clubApiKey.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantApiKeys and only return the `id`
-     * const tenantApiKeyWithIdOnly = await prisma.tenantApiKey.createManyAndReturn({
+     * // Create many ClubApiKeys and only return the `id`
+     * const clubApiKeyWithIdOnly = await prisma.clubApiKey.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -13267,28 +13267,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantApiKeyCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantApiKeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubApiKeyCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubApiKeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantApiKey.
-     * @param {TenantApiKeyDeleteArgs} args - Arguments to delete one TenantApiKey.
+     * Delete a ClubApiKey.
+     * @param {ClubApiKeyDeleteArgs} args - Arguments to delete one ClubApiKey.
      * @example
-     * // Delete one TenantApiKey
-     * const TenantApiKey = await prisma.tenantApiKey.delete({
+     * // Delete one ClubApiKey
+     * const ClubApiKey = await prisma.clubApiKey.delete({
      *   where: {
-     *     // ... filter to delete one TenantApiKey
+     *     // ... filter to delete one ClubApiKey
      *   }
      * })
      * 
      */
-    delete<T extends TenantApiKeyDeleteArgs>(args: SelectSubset<T, TenantApiKeyDeleteArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubApiKeyDeleteArgs>(args: SelectSubset<T, ClubApiKeyDeleteArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantApiKey.
-     * @param {TenantApiKeyUpdateArgs} args - Arguments to update one TenantApiKey.
+     * Update one ClubApiKey.
+     * @param {ClubApiKeyUpdateArgs} args - Arguments to update one ClubApiKey.
      * @example
-     * // Update one TenantApiKey
-     * const tenantApiKey = await prisma.tenantApiKey.update({
+     * // Update one ClubApiKey
+     * const clubApiKey = await prisma.clubApiKey.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13298,30 +13298,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantApiKeyUpdateArgs>(args: SelectSubset<T, TenantApiKeyUpdateArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubApiKeyUpdateArgs>(args: SelectSubset<T, ClubApiKeyUpdateArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantApiKeys.
-     * @param {TenantApiKeyDeleteManyArgs} args - Arguments to filter TenantApiKeys to delete.
+     * Delete zero or more ClubApiKeys.
+     * @param {ClubApiKeyDeleteManyArgs} args - Arguments to filter ClubApiKeys to delete.
      * @example
-     * // Delete a few TenantApiKeys
-     * const { count } = await prisma.tenantApiKey.deleteMany({
+     * // Delete a few ClubApiKeys
+     * const { count } = await prisma.clubApiKey.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantApiKeyDeleteManyArgs>(args?: SelectSubset<T, TenantApiKeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubApiKeyDeleteManyArgs>(args?: SelectSubset<T, ClubApiKeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantApiKeys.
+     * Update zero or more ClubApiKeys.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubApiKeyUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantApiKeys
-     * const tenantApiKey = await prisma.tenantApiKey.updateMany({
+     * // Update many ClubApiKeys
+     * const clubApiKey = await prisma.clubApiKey.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13331,14 +13331,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantApiKeyUpdateManyArgs>(args: SelectSubset<T, TenantApiKeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubApiKeyUpdateManyArgs>(args: SelectSubset<T, ClubApiKeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantApiKeys and returns the data updated in the database.
-     * @param {TenantApiKeyUpdateManyAndReturnArgs} args - Arguments to update many TenantApiKeys.
+     * Update zero or more ClubApiKeys and returns the data updated in the database.
+     * @param {ClubApiKeyUpdateManyAndReturnArgs} args - Arguments to update many ClubApiKeys.
      * @example
-     * // Update many TenantApiKeys
-     * const tenantApiKey = await prisma.tenantApiKey.updateManyAndReturn({
+     * // Update many ClubApiKeys
+     * const clubApiKey = await prisma.clubApiKey.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13347,8 +13347,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantApiKeys and only return the `id`
-     * const tenantApiKeyWithIdOnly = await prisma.tenantApiKey.updateManyAndReturn({
+     * // Update zero or more ClubApiKeys and only return the `id`
+     * const clubApiKeyWithIdOnly = await prisma.clubApiKey.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -13361,56 +13361,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantApiKeyUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantApiKeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubApiKeyUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubApiKeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantApiKey.
-     * @param {TenantApiKeyUpsertArgs} args - Arguments to update or create a TenantApiKey.
+     * Create or update one ClubApiKey.
+     * @param {ClubApiKeyUpsertArgs} args - Arguments to update or create a ClubApiKey.
      * @example
-     * // Update or create a TenantApiKey
-     * const tenantApiKey = await prisma.tenantApiKey.upsert({
+     * // Update or create a ClubApiKey
+     * const clubApiKey = await prisma.clubApiKey.upsert({
      *   create: {
-     *     // ... data to create a TenantApiKey
+     *     // ... data to create a ClubApiKey
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantApiKey we want to update
+     *     // ... the filter for the ClubApiKey we want to update
      *   }
      * })
      */
-    upsert<T extends TenantApiKeyUpsertArgs>(args: SelectSubset<T, TenantApiKeyUpsertArgs<ExtArgs>>): Prisma__TenantApiKeyClient<$Result.GetResult<Prisma.$TenantApiKeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubApiKeyUpsertArgs>(args: SelectSubset<T, ClubApiKeyUpsertArgs<ExtArgs>>): Prisma__ClubApiKeyClient<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantApiKeys.
+     * Count the number of ClubApiKeys.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyCountArgs} args - Arguments to filter TenantApiKeys to count.
+     * @param {ClubApiKeyCountArgs} args - Arguments to filter ClubApiKeys to count.
      * @example
-     * // Count the number of TenantApiKeys
-     * const count = await prisma.tenantApiKey.count({
+     * // Count the number of ClubApiKeys
+     * const count = await prisma.clubApiKey.count({
      *   where: {
-     *     // ... the filter for the TenantApiKeys we want to count
+     *     // ... the filter for the ClubApiKeys we want to count
      *   }
      * })
     **/
-    count<T extends TenantApiKeyCountArgs>(
-      args?: Subset<T, TenantApiKeyCountArgs>,
+    count<T extends ClubApiKeyCountArgs>(
+      args?: Subset<T, ClubApiKeyCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantApiKeyCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubApiKeyCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantApiKey.
+     * Allows you to perform aggregations operations on a ClubApiKey.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubApiKeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -13430,13 +13430,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantApiKeyAggregateArgs>(args: Subset<T, TenantApiKeyAggregateArgs>): Prisma.PrismaPromise<GetTenantApiKeyAggregateType<T>>
+    aggregate<T extends ClubApiKeyAggregateArgs>(args: Subset<T, ClubApiKeyAggregateArgs>): Prisma.PrismaPromise<GetClubApiKeyAggregateType<T>>
 
     /**
-     * Group by TenantApiKey.
+     * Group by ClubApiKey.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantApiKeyGroupByArgs} args - Group by arguments.
+     * @param {ClubApiKeyGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -13451,14 +13451,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantApiKeyGroupByArgs,
+      T extends ClubApiKeyGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantApiKeyGroupByArgs['orderBy'] }
-        : { orderBy?: TenantApiKeyGroupByArgs['orderBy'] },
+        ? { orderBy: ClubApiKeyGroupByArgs['orderBy'] }
+        : { orderBy?: ClubApiKeyGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -13507,22 +13507,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantApiKeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantApiKeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubApiKeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubApiKeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantApiKey model
+   * Fields of the ClubApiKey model
    */
-  readonly fields: TenantApiKeyFieldRefs;
+  readonly fields: ClubApiKeyFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantApiKey.
+   * The delegate class that acts as a "Promise-like" for ClubApiKey.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantApiKeyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubApiKeyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13549,458 +13549,458 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantApiKey model
+   * Fields of the ClubApiKey model
    */
-  interface TenantApiKeyFieldRefs {
-    readonly id: FieldRef<"TenantApiKey", 'String'>
-    readonly tenantId: FieldRef<"TenantApiKey", 'String'>
-    readonly keyName: FieldRef<"TenantApiKey", 'String'>
-    readonly apiKey: FieldRef<"TenantApiKey", 'String'>
-    readonly isActive: FieldRef<"TenantApiKey", 'Boolean'>
-    readonly lastUsedAt: FieldRef<"TenantApiKey", 'DateTime'>
-    readonly createdAt: FieldRef<"TenantApiKey", 'DateTime'>
-    readonly expiresAt: FieldRef<"TenantApiKey", 'DateTime'>
+  interface ClubApiKeyFieldRefs {
+    readonly id: FieldRef<"ClubApiKey", 'String'>
+    readonly clubId: FieldRef<"ClubApiKey", 'String'>
+    readonly keyName: FieldRef<"ClubApiKey", 'String'>
+    readonly apiKey: FieldRef<"ClubApiKey", 'String'>
+    readonly isActive: FieldRef<"ClubApiKey", 'Boolean'>
+    readonly lastUsedAt: FieldRef<"ClubApiKey", 'DateTime'>
+    readonly createdAt: FieldRef<"ClubApiKey", 'DateTime'>
+    readonly expiresAt: FieldRef<"ClubApiKey", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantApiKey findUnique
+   * ClubApiKey findUnique
    */
-  export type TenantApiKeyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * Filter, which TenantApiKey to fetch.
+     * Filter, which ClubApiKey to fetch.
      */
-    where: TenantApiKeyWhereUniqueInput
+    where: ClubApiKeyWhereUniqueInput
   }
 
   /**
-   * TenantApiKey findUniqueOrThrow
+   * ClubApiKey findUniqueOrThrow
    */
-  export type TenantApiKeyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * Filter, which TenantApiKey to fetch.
+     * Filter, which ClubApiKey to fetch.
      */
-    where: TenantApiKeyWhereUniqueInput
+    where: ClubApiKeyWhereUniqueInput
   }
 
   /**
-   * TenantApiKey findFirst
+   * ClubApiKey findFirst
    */
-  export type TenantApiKeyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * Filter, which TenantApiKey to fetch.
+     * Filter, which ClubApiKey to fetch.
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantApiKeys to fetch.
+     * Determine the order of ClubApiKeys to fetch.
      */
-    orderBy?: TenantApiKeyOrderByWithRelationInput | TenantApiKeyOrderByWithRelationInput[]
+    orderBy?: ClubApiKeyOrderByWithRelationInput | ClubApiKeyOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantApiKeys.
+     * Sets the position for searching for ClubApiKeys.
      */
-    cursor?: TenantApiKeyWhereUniqueInput
+    cursor?: ClubApiKeyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantApiKeys from the position of the cursor.
+     * Take `±n` ClubApiKeys from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantApiKeys.
+     * Skip the first `n` ClubApiKeys.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantApiKeys.
+     * Filter by unique combinations of ClubApiKeys.
      */
-    distinct?: TenantApiKeyScalarFieldEnum | TenantApiKeyScalarFieldEnum[]
+    distinct?: ClubApiKeyScalarFieldEnum | ClubApiKeyScalarFieldEnum[]
   }
 
   /**
-   * TenantApiKey findFirstOrThrow
+   * ClubApiKey findFirstOrThrow
    */
-  export type TenantApiKeyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * Filter, which TenantApiKey to fetch.
+     * Filter, which ClubApiKey to fetch.
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantApiKeys to fetch.
+     * Determine the order of ClubApiKeys to fetch.
      */
-    orderBy?: TenantApiKeyOrderByWithRelationInput | TenantApiKeyOrderByWithRelationInput[]
+    orderBy?: ClubApiKeyOrderByWithRelationInput | ClubApiKeyOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantApiKeys.
+     * Sets the position for searching for ClubApiKeys.
      */
-    cursor?: TenantApiKeyWhereUniqueInput
+    cursor?: ClubApiKeyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantApiKeys from the position of the cursor.
+     * Take `±n` ClubApiKeys from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantApiKeys.
+     * Skip the first `n` ClubApiKeys.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantApiKeys.
+     * Filter by unique combinations of ClubApiKeys.
      */
-    distinct?: TenantApiKeyScalarFieldEnum | TenantApiKeyScalarFieldEnum[]
+    distinct?: ClubApiKeyScalarFieldEnum | ClubApiKeyScalarFieldEnum[]
   }
 
   /**
-   * TenantApiKey findMany
+   * ClubApiKey findMany
    */
-  export type TenantApiKeyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * Filter, which TenantApiKeys to fetch.
+     * Filter, which ClubApiKeys to fetch.
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantApiKeys to fetch.
+     * Determine the order of ClubApiKeys to fetch.
      */
-    orderBy?: TenantApiKeyOrderByWithRelationInput | TenantApiKeyOrderByWithRelationInput[]
+    orderBy?: ClubApiKeyOrderByWithRelationInput | ClubApiKeyOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantApiKeys.
+     * Sets the position for listing ClubApiKeys.
      */
-    cursor?: TenantApiKeyWhereUniqueInput
+    cursor?: ClubApiKeyWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantApiKeys from the position of the cursor.
+     * Take `±n` ClubApiKeys from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantApiKeys.
+     * Skip the first `n` ClubApiKeys.
      */
     skip?: number
-    distinct?: TenantApiKeyScalarFieldEnum | TenantApiKeyScalarFieldEnum[]
+    distinct?: ClubApiKeyScalarFieldEnum | ClubApiKeyScalarFieldEnum[]
   }
 
   /**
-   * TenantApiKey create
+   * ClubApiKey create
    */
-  export type TenantApiKeyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantApiKey.
+     * The data needed to create a ClubApiKey.
      */
-    data: XOR<TenantApiKeyCreateInput, TenantApiKeyUncheckedCreateInput>
+    data: XOR<ClubApiKeyCreateInput, ClubApiKeyUncheckedCreateInput>
   }
 
   /**
-   * TenantApiKey createMany
+   * ClubApiKey createMany
    */
-  export type TenantApiKeyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantApiKeys.
+     * The data used to create many ClubApiKeys.
      */
-    data: TenantApiKeyCreateManyInput | TenantApiKeyCreateManyInput[]
+    data: ClubApiKeyCreateManyInput | ClubApiKeyCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantApiKey createManyAndReturn
+   * ClubApiKey createManyAndReturn
    */
-  export type TenantApiKeyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubApiKeySelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantApiKeys.
+     * The data used to create many ClubApiKeys.
      */
-    data: TenantApiKeyCreateManyInput | TenantApiKeyCreateManyInput[]
+    data: ClubApiKeyCreateManyInput | ClubApiKeyCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubApiKeyIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantApiKey update
+   * ClubApiKey update
    */
-  export type TenantApiKeyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantApiKey.
+     * The data needed to update a ClubApiKey.
      */
-    data: XOR<TenantApiKeyUpdateInput, TenantApiKeyUncheckedUpdateInput>
+    data: XOR<ClubApiKeyUpdateInput, ClubApiKeyUncheckedUpdateInput>
     /**
-     * Choose, which TenantApiKey to update.
+     * Choose, which ClubApiKey to update.
      */
-    where: TenantApiKeyWhereUniqueInput
+    where: ClubApiKeyWhereUniqueInput
   }
 
   /**
-   * TenantApiKey updateMany
+   * ClubApiKey updateMany
    */
-  export type TenantApiKeyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantApiKeys.
+     * The data used to update ClubApiKeys.
      */
-    data: XOR<TenantApiKeyUpdateManyMutationInput, TenantApiKeyUncheckedUpdateManyInput>
+    data: XOR<ClubApiKeyUpdateManyMutationInput, ClubApiKeyUncheckedUpdateManyInput>
     /**
-     * Filter which TenantApiKeys to update
+     * Filter which ClubApiKeys to update
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
-     * Limit how many TenantApiKeys to update.
+     * Limit how many ClubApiKeys to update.
      */
     limit?: number
   }
 
   /**
-   * TenantApiKey updateManyAndReturn
+   * ClubApiKey updateManyAndReturn
    */
-  export type TenantApiKeyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubApiKeySelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
-     * The data used to update TenantApiKeys.
+     * The data used to update ClubApiKeys.
      */
-    data: XOR<TenantApiKeyUpdateManyMutationInput, TenantApiKeyUncheckedUpdateManyInput>
+    data: XOR<ClubApiKeyUpdateManyMutationInput, ClubApiKeyUncheckedUpdateManyInput>
     /**
-     * Filter which TenantApiKeys to update
+     * Filter which ClubApiKeys to update
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
-     * Limit how many TenantApiKeys to update.
+     * Limit how many ClubApiKeys to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubApiKeyIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantApiKey upsert
+   * ClubApiKey upsert
    */
-  export type TenantApiKeyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantApiKey to update in case it exists.
+     * The filter to search for the ClubApiKey to update in case it exists.
      */
-    where: TenantApiKeyWhereUniqueInput
+    where: ClubApiKeyWhereUniqueInput
     /**
-     * In case the TenantApiKey found by the `where` argument doesn't exist, create a new TenantApiKey with this data.
+     * In case the ClubApiKey found by the `where` argument doesn't exist, create a new ClubApiKey with this data.
      */
-    create: XOR<TenantApiKeyCreateInput, TenantApiKeyUncheckedCreateInput>
+    create: XOR<ClubApiKeyCreateInput, ClubApiKeyUncheckedCreateInput>
     /**
-     * In case the TenantApiKey was found with the provided `where` argument, update it with this data.
+     * In case the ClubApiKey was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantApiKeyUpdateInput, TenantApiKeyUncheckedUpdateInput>
+    update: XOR<ClubApiKeyUpdateInput, ClubApiKeyUncheckedUpdateInput>
   }
 
   /**
-   * TenantApiKey delete
+   * ClubApiKey delete
    */
-  export type TenantApiKeyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
     /**
-     * Filter which TenantApiKey to delete.
+     * Filter which ClubApiKey to delete.
      */
-    where: TenantApiKeyWhereUniqueInput
+    where: ClubApiKeyWhereUniqueInput
   }
 
   /**
-   * TenantApiKey deleteMany
+   * ClubApiKey deleteMany
    */
-  export type TenantApiKeyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantApiKeys to delete
+     * Filter which ClubApiKeys to delete
      */
-    where?: TenantApiKeyWhereInput
+    where?: ClubApiKeyWhereInput
     /**
-     * Limit how many TenantApiKeys to delete.
+     * Limit how many ClubApiKeys to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantApiKey without action
+   * ClubApiKey without action
    */
-  export type TenantApiKeyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubApiKeyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantApiKey
+     * Select specific fields to fetch from the ClubApiKey
      */
-    select?: TenantApiKeySelect<ExtArgs> | null
+    select?: ClubApiKeySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantApiKey
+     * Omit specific fields from the ClubApiKey
      */
-    omit?: TenantApiKeyOmit<ExtArgs> | null
+    omit?: ClubApiKeyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantApiKeyInclude<ExtArgs> | null
+    include?: ClubApiKeyInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model TenantUsageStats
+   * Model ClubUsageStats
    */
 
-  export type AggregateTenantUsageStats = {
-    _count: TenantUsageStatsCountAggregateOutputType | null
-    _avg: TenantUsageStatsAvgAggregateOutputType | null
-    _sum: TenantUsageStatsSumAggregateOutputType | null
-    _min: TenantUsageStatsMinAggregateOutputType | null
-    _max: TenantUsageStatsMaxAggregateOutputType | null
+  export type AggregateClubUsageStats = {
+    _count: ClubUsageStatsCountAggregateOutputType | null
+    _avg: ClubUsageStatsAvgAggregateOutputType | null
+    _sum: ClubUsageStatsSumAggregateOutputType | null
+    _min: ClubUsageStatsMinAggregateOutputType | null
+    _max: ClubUsageStatsMaxAggregateOutputType | null
   }
 
-  export type TenantUsageStatsAvgAggregateOutputType = {
+  export type ClubUsageStatsAvgAggregateOutputType = {
     apiCalls: number | null
     storageUsedMB: number | null
     activeUsers: number | null
   }
 
-  export type TenantUsageStatsSumAggregateOutputType = {
+  export type ClubUsageStatsSumAggregateOutputType = {
     apiCalls: number | null
     storageUsedMB: number | null
     activeUsers: number | null
   }
 
-  export type TenantUsageStatsMinAggregateOutputType = {
+  export type ClubUsageStatsMinAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     date: Date | null
     apiCalls: number | null
     storageUsedMB: number | null
@@ -14008,9 +14008,9 @@ export namespace Prisma {
     createdAt: Date | null
   }
 
-  export type TenantUsageStatsMaxAggregateOutputType = {
+  export type ClubUsageStatsMaxAggregateOutputType = {
     id: string | null
-    tenantId: string | null
+    clubId: string | null
     date: Date | null
     apiCalls: number | null
     storageUsedMB: number | null
@@ -14018,9 +14018,9 @@ export namespace Prisma {
     createdAt: Date | null
   }
 
-  export type TenantUsageStatsCountAggregateOutputType = {
+  export type ClubUsageStatsCountAggregateOutputType = {
     id: number
-    tenantId: number
+    clubId: number
     date: number
     apiCalls: number
     storageUsedMB: number
@@ -14030,21 +14030,21 @@ export namespace Prisma {
   }
 
 
-  export type TenantUsageStatsAvgAggregateInputType = {
+  export type ClubUsageStatsAvgAggregateInputType = {
     apiCalls?: true
     storageUsedMB?: true
     activeUsers?: true
   }
 
-  export type TenantUsageStatsSumAggregateInputType = {
+  export type ClubUsageStatsSumAggregateInputType = {
     apiCalls?: true
     storageUsedMB?: true
     activeUsers?: true
   }
 
-  export type TenantUsageStatsMinAggregateInputType = {
+  export type ClubUsageStatsMinAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     date?: true
     apiCalls?: true
     storageUsedMB?: true
@@ -14052,9 +14052,9 @@ export namespace Prisma {
     createdAt?: true
   }
 
-  export type TenantUsageStatsMaxAggregateInputType = {
+  export type ClubUsageStatsMaxAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     date?: true
     apiCalls?: true
     storageUsedMB?: true
@@ -14062,9 +14062,9 @@ export namespace Prisma {
     createdAt?: true
   }
 
-  export type TenantUsageStatsCountAggregateInputType = {
+  export type ClubUsageStatsCountAggregateInputType = {
     id?: true
-    tenantId?: true
+    clubId?: true
     date?: true
     apiCalls?: true
     storageUsedMB?: true
@@ -14073,157 +14073,157 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type TenantUsageStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantUsageStats to aggregate.
+     * Filter which ClubUsageStats to aggregate.
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantUsageStats to fetch.
+     * Determine the order of ClubUsageStats to fetch.
      */
-    orderBy?: TenantUsageStatsOrderByWithRelationInput | TenantUsageStatsOrderByWithRelationInput[]
+    orderBy?: ClubUsageStatsOrderByWithRelationInput | ClubUsageStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TenantUsageStatsWhereUniqueInput
+    cursor?: ClubUsageStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantUsageStats from the position of the cursor.
+     * Take `±n` ClubUsageStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantUsageStats.
+     * Skip the first `n` ClubUsageStats.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned TenantUsageStats
+     * Count returned ClubUsageStats
     **/
-    _count?: true | TenantUsageStatsCountAggregateInputType
+    _count?: true | ClubUsageStatsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TenantUsageStatsAvgAggregateInputType
+    _avg?: ClubUsageStatsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TenantUsageStatsSumAggregateInputType
+    _sum?: ClubUsageStatsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TenantUsageStatsMinAggregateInputType
+    _min?: ClubUsageStatsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TenantUsageStatsMaxAggregateInputType
+    _max?: ClubUsageStatsMaxAggregateInputType
   }
 
-  export type GetTenantUsageStatsAggregateType<T extends TenantUsageStatsAggregateArgs> = {
-        [P in keyof T & keyof AggregateTenantUsageStats]: P extends '_count' | 'count'
+  export type GetClubUsageStatsAggregateType<T extends ClubUsageStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubUsageStats]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenantUsageStats[P]>
-      : GetScalarType<T[P], AggregateTenantUsageStats[P]>
+        : GetScalarType<T[P], AggregateClubUsageStats[P]>
+      : GetScalarType<T[P], AggregateClubUsageStats[P]>
   }
 
 
 
 
-  export type TenantUsageStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TenantUsageStatsWhereInput
-    orderBy?: TenantUsageStatsOrderByWithAggregationInput | TenantUsageStatsOrderByWithAggregationInput[]
-    by: TenantUsageStatsScalarFieldEnum[] | TenantUsageStatsScalarFieldEnum
-    having?: TenantUsageStatsScalarWhereWithAggregatesInput
+  export type ClubUsageStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubUsageStatsWhereInput
+    orderBy?: ClubUsageStatsOrderByWithAggregationInput | ClubUsageStatsOrderByWithAggregationInput[]
+    by: ClubUsageStatsScalarFieldEnum[] | ClubUsageStatsScalarFieldEnum
+    having?: ClubUsageStatsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TenantUsageStatsCountAggregateInputType | true
-    _avg?: TenantUsageStatsAvgAggregateInputType
-    _sum?: TenantUsageStatsSumAggregateInputType
-    _min?: TenantUsageStatsMinAggregateInputType
-    _max?: TenantUsageStatsMaxAggregateInputType
+    _count?: ClubUsageStatsCountAggregateInputType | true
+    _avg?: ClubUsageStatsAvgAggregateInputType
+    _sum?: ClubUsageStatsSumAggregateInputType
+    _min?: ClubUsageStatsMinAggregateInputType
+    _max?: ClubUsageStatsMaxAggregateInputType
   }
 
-  export type TenantUsageStatsGroupByOutputType = {
+  export type ClubUsageStatsGroupByOutputType = {
     id: string
-    tenantId: string
+    clubId: string
     date: Date
     apiCalls: number
     storageUsedMB: number
     activeUsers: number
     createdAt: Date
-    _count: TenantUsageStatsCountAggregateOutputType | null
-    _avg: TenantUsageStatsAvgAggregateOutputType | null
-    _sum: TenantUsageStatsSumAggregateOutputType | null
-    _min: TenantUsageStatsMinAggregateOutputType | null
-    _max: TenantUsageStatsMaxAggregateOutputType | null
+    _count: ClubUsageStatsCountAggregateOutputType | null
+    _avg: ClubUsageStatsAvgAggregateOutputType | null
+    _sum: ClubUsageStatsSumAggregateOutputType | null
+    _min: ClubUsageStatsMinAggregateOutputType | null
+    _max: ClubUsageStatsMaxAggregateOutputType | null
   }
 
-  type GetTenantUsageStatsGroupByPayload<T extends TenantUsageStatsGroupByArgs> = Prisma.PrismaPromise<
+  type GetClubUsageStatsGroupByPayload<T extends ClubUsageStatsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantUsageStatsGroupByOutputType, T['by']> &
+      PickEnumerable<ClubUsageStatsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TenantUsageStatsGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ClubUsageStatsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TenantUsageStatsGroupByOutputType[P]>
-            : GetScalarType<T[P], TenantUsageStatsGroupByOutputType[P]>
+              : GetScalarType<T[P], ClubUsageStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubUsageStatsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TenantUsageStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubUsageStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     date?: boolean
     apiCalls?: boolean
     storageUsedMB?: boolean
     activeUsers?: boolean
     createdAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantUsageStats"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubUsageStats"]>
 
-  export type TenantUsageStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubUsageStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     date?: boolean
     apiCalls?: boolean
     storageUsedMB?: boolean
     activeUsers?: boolean
     createdAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantUsageStats"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubUsageStats"]>
 
-  export type TenantUsageStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ClubUsageStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     date?: boolean
     apiCalls?: boolean
     storageUsedMB?: boolean
     activeUsers?: boolean
     createdAt?: boolean
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tenantUsageStats"]>
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubUsageStats"]>
 
-  export type TenantUsageStatsSelectScalar = {
+  export type ClubUsageStatsSelectScalar = {
     id?: boolean
-    tenantId?: boolean
+    clubId?: boolean
     date?: boolean
     apiCalls?: boolean
     storageUsedMB?: boolean
@@ -14231,160 +14231,160 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type TenantUsageStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "date" | "apiCalls" | "storageUsedMB" | "activeUsers" | "createdAt", ExtArgs["result"]["tenantUsageStats"]>
-  export type TenantUsageStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubUsageStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "date" | "apiCalls" | "storageUsedMB" | "activeUsers" | "createdAt", ExtArgs["result"]["clubUsageStats"]>
+  export type ClubUsageStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantUsageStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubUsageStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
-  export type TenantUsageStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  export type ClubUsageStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
   }
 
-  export type $TenantUsageStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TenantUsageStats"
+  export type $ClubUsageStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubUsageStats"
     objects: {
-      tenant: Prisma.$TenantPayload<ExtArgs>
+      club: Prisma.$ClubPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tenantId: string
+      clubId: string
       date: Date
       apiCalls: number
       storageUsedMB: number
       activeUsers: number
       createdAt: Date
-    }, ExtArgs["result"]["tenantUsageStats"]>
+    }, ExtArgs["result"]["clubUsageStats"]>
     composites: {}
   }
 
-  type TenantUsageStatsGetPayload<S extends boolean | null | undefined | TenantUsageStatsDefaultArgs> = $Result.GetResult<Prisma.$TenantUsageStatsPayload, S>
+  type ClubUsageStatsGetPayload<S extends boolean | null | undefined | ClubUsageStatsDefaultArgs> = $Result.GetResult<Prisma.$ClubUsageStatsPayload, S>
 
-  type TenantUsageStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TenantUsageStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TenantUsageStatsCountAggregateInputType | true
+  type ClubUsageStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubUsageStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubUsageStatsCountAggregateInputType | true
     }
 
-  export interface TenantUsageStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantUsageStats'], meta: { name: 'TenantUsageStats' } }
+  export interface ClubUsageStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubUsageStats'], meta: { name: 'ClubUsageStats' } }
     /**
-     * Find zero or one TenantUsageStats that matches the filter.
-     * @param {TenantUsageStatsFindUniqueArgs} args - Arguments to find a TenantUsageStats
+     * Find zero or one ClubUsageStats that matches the filter.
+     * @param {ClubUsageStatsFindUniqueArgs} args - Arguments to find a ClubUsageStats
      * @example
-     * // Get one TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.findUnique({
+     * // Get one ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends TenantUsageStatsFindUniqueArgs>(args: SelectSubset<T, TenantUsageStatsFindUniqueArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ClubUsageStatsFindUniqueArgs>(args: SelectSubset<T, ClubUsageStatsFindUniqueArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one TenantUsageStats that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ClubUsageStats that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {TenantUsageStatsFindUniqueOrThrowArgs} args - Arguments to find a TenantUsageStats
+     * @param {ClubUsageStatsFindUniqueOrThrowArgs} args - Arguments to find a ClubUsageStats
      * @example
-     * // Get one TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.findUniqueOrThrow({
+     * // Get one ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TenantUsageStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantUsageStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ClubUsageStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubUsageStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantUsageStats that matches the filter.
+     * Find the first ClubUsageStats that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsFindFirstArgs} args - Arguments to find a TenantUsageStats
+     * @param {ClubUsageStatsFindFirstArgs} args - Arguments to find a ClubUsageStats
      * @example
-     * // Get one TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.findFirst({
+     * // Get one ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends TenantUsageStatsFindFirstArgs>(args?: SelectSubset<T, TenantUsageStatsFindFirstArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ClubUsageStatsFindFirstArgs>(args?: SelectSubset<T, ClubUsageStatsFindFirstArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first TenantUsageStats that matches the filter or
+     * Find the first ClubUsageStats that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsFindFirstOrThrowArgs} args - Arguments to find a TenantUsageStats
+     * @param {ClubUsageStatsFindFirstOrThrowArgs} args - Arguments to find a ClubUsageStats
      * @example
-     * // Get one TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.findFirstOrThrow({
+     * // Get one ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends TenantUsageStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantUsageStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ClubUsageStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubUsageStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more TenantUsageStats that matches the filter.
+     * Find zero or more ClubUsageStats that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ClubUsageStatsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.findMany()
+     * // Get all ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.findMany()
      * 
-     * // Get first 10 TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.findMany({ take: 10 })
+     * // Get first 10 ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tenantUsageStatsWithIdOnly = await prisma.tenantUsageStats.findMany({ select: { id: true } })
+     * const clubUsageStatsWithIdOnly = await prisma.clubUsageStats.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TenantUsageStatsFindManyArgs>(args?: SelectSubset<T, TenantUsageStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ClubUsageStatsFindManyArgs>(args?: SelectSubset<T, ClubUsageStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a TenantUsageStats.
-     * @param {TenantUsageStatsCreateArgs} args - Arguments to create a TenantUsageStats.
+     * Create a ClubUsageStats.
+     * @param {ClubUsageStatsCreateArgs} args - Arguments to create a ClubUsageStats.
      * @example
-     * // Create one TenantUsageStats
-     * const TenantUsageStats = await prisma.tenantUsageStats.create({
+     * // Create one ClubUsageStats
+     * const ClubUsageStats = await prisma.clubUsageStats.create({
      *   data: {
-     *     // ... data to create a TenantUsageStats
+     *     // ... data to create a ClubUsageStats
      *   }
      * })
      * 
      */
-    create<T extends TenantUsageStatsCreateArgs>(args: SelectSubset<T, TenantUsageStatsCreateArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ClubUsageStatsCreateArgs>(args: SelectSubset<T, ClubUsageStatsCreateArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many TenantUsageStats.
-     * @param {TenantUsageStatsCreateManyArgs} args - Arguments to create many TenantUsageStats.
+     * Create many ClubUsageStats.
+     * @param {ClubUsageStatsCreateManyArgs} args - Arguments to create many ClubUsageStats.
      * @example
-     * // Create many TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.createMany({
+     * // Create many ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends TenantUsageStatsCreateManyArgs>(args?: SelectSubset<T, TenantUsageStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ClubUsageStatsCreateManyArgs>(args?: SelectSubset<T, ClubUsageStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many TenantUsageStats and returns the data saved in the database.
-     * @param {TenantUsageStatsCreateManyAndReturnArgs} args - Arguments to create many TenantUsageStats.
+     * Create many ClubUsageStats and returns the data saved in the database.
+     * @param {ClubUsageStatsCreateManyAndReturnArgs} args - Arguments to create many ClubUsageStats.
      * @example
-     * // Create many TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.createManyAndReturn({
+     * // Create many ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many TenantUsageStats and only return the `id`
-     * const tenantUsageStatsWithIdOnly = await prisma.tenantUsageStats.createManyAndReturn({
+     * // Create many ClubUsageStats and only return the `id`
+     * const clubUsageStatsWithIdOnly = await prisma.clubUsageStats.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -14394,28 +14394,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TenantUsageStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantUsageStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ClubUsageStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubUsageStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a TenantUsageStats.
-     * @param {TenantUsageStatsDeleteArgs} args - Arguments to delete one TenantUsageStats.
+     * Delete a ClubUsageStats.
+     * @param {ClubUsageStatsDeleteArgs} args - Arguments to delete one ClubUsageStats.
      * @example
-     * // Delete one TenantUsageStats
-     * const TenantUsageStats = await prisma.tenantUsageStats.delete({
+     * // Delete one ClubUsageStats
+     * const ClubUsageStats = await prisma.clubUsageStats.delete({
      *   where: {
-     *     // ... filter to delete one TenantUsageStats
+     *     // ... filter to delete one ClubUsageStats
      *   }
      * })
      * 
      */
-    delete<T extends TenantUsageStatsDeleteArgs>(args: SelectSubset<T, TenantUsageStatsDeleteArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ClubUsageStatsDeleteArgs>(args: SelectSubset<T, ClubUsageStatsDeleteArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one TenantUsageStats.
-     * @param {TenantUsageStatsUpdateArgs} args - Arguments to update one TenantUsageStats.
+     * Update one ClubUsageStats.
+     * @param {ClubUsageStatsUpdateArgs} args - Arguments to update one ClubUsageStats.
      * @example
-     * // Update one TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.update({
+     * // Update one ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -14425,30 +14425,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TenantUsageStatsUpdateArgs>(args: SelectSubset<T, TenantUsageStatsUpdateArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ClubUsageStatsUpdateArgs>(args: SelectSubset<T, ClubUsageStatsUpdateArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more TenantUsageStats.
-     * @param {TenantUsageStatsDeleteManyArgs} args - Arguments to filter TenantUsageStats to delete.
+     * Delete zero or more ClubUsageStats.
+     * @param {ClubUsageStatsDeleteManyArgs} args - Arguments to filter ClubUsageStats to delete.
      * @example
-     * // Delete a few TenantUsageStats
-     * const { count } = await prisma.tenantUsageStats.deleteMany({
+     * // Delete a few ClubUsageStats
+     * const { count } = await prisma.clubUsageStats.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends TenantUsageStatsDeleteManyArgs>(args?: SelectSubset<T, TenantUsageStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ClubUsageStatsDeleteManyArgs>(args?: SelectSubset<T, ClubUsageStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantUsageStats.
+     * Update zero or more ClubUsageStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ClubUsageStatsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.updateMany({
+     * // Update many ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -14458,14 +14458,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends TenantUsageStatsUpdateManyArgs>(args: SelectSubset<T, TenantUsageStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ClubUsageStatsUpdateManyArgs>(args: SelectSubset<T, ClubUsageStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more TenantUsageStats and returns the data updated in the database.
-     * @param {TenantUsageStatsUpdateManyAndReturnArgs} args - Arguments to update many TenantUsageStats.
+     * Update zero or more ClubUsageStats and returns the data updated in the database.
+     * @param {ClubUsageStatsUpdateManyAndReturnArgs} args - Arguments to update many ClubUsageStats.
      * @example
-     * // Update many TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.updateManyAndReturn({
+     * // Update many ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -14474,8 +14474,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TenantUsageStats and only return the `id`
-     * const tenantUsageStatsWithIdOnly = await prisma.tenantUsageStats.updateManyAndReturn({
+     * // Update zero or more ClubUsageStats and only return the `id`
+     * const clubUsageStatsWithIdOnly = await prisma.clubUsageStats.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -14488,56 +14488,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TenantUsageStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantUsageStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ClubUsageStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubUsageStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one TenantUsageStats.
-     * @param {TenantUsageStatsUpsertArgs} args - Arguments to update or create a TenantUsageStats.
+     * Create or update one ClubUsageStats.
+     * @param {ClubUsageStatsUpsertArgs} args - Arguments to update or create a ClubUsageStats.
      * @example
-     * // Update or create a TenantUsageStats
-     * const tenantUsageStats = await prisma.tenantUsageStats.upsert({
+     * // Update or create a ClubUsageStats
+     * const clubUsageStats = await prisma.clubUsageStats.upsert({
      *   create: {
-     *     // ... data to create a TenantUsageStats
+     *     // ... data to create a ClubUsageStats
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the TenantUsageStats we want to update
+     *     // ... the filter for the ClubUsageStats we want to update
      *   }
      * })
      */
-    upsert<T extends TenantUsageStatsUpsertArgs>(args: SelectSubset<T, TenantUsageStatsUpsertArgs<ExtArgs>>): Prisma__TenantUsageStatsClient<$Result.GetResult<Prisma.$TenantUsageStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ClubUsageStatsUpsertArgs>(args: SelectSubset<T, ClubUsageStatsUpsertArgs<ExtArgs>>): Prisma__ClubUsageStatsClient<$Result.GetResult<Prisma.$ClubUsageStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of TenantUsageStats.
+     * Count the number of ClubUsageStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsCountArgs} args - Arguments to filter TenantUsageStats to count.
+     * @param {ClubUsageStatsCountArgs} args - Arguments to filter ClubUsageStats to count.
      * @example
-     * // Count the number of TenantUsageStats
-     * const count = await prisma.tenantUsageStats.count({
+     * // Count the number of ClubUsageStats
+     * const count = await prisma.clubUsageStats.count({
      *   where: {
-     *     // ... the filter for the TenantUsageStats we want to count
+     *     // ... the filter for the ClubUsageStats we want to count
      *   }
      * })
     **/
-    count<T extends TenantUsageStatsCountArgs>(
-      args?: Subset<T, TenantUsageStatsCountArgs>,
+    count<T extends ClubUsageStatsCountArgs>(
+      args?: Subset<T, ClubUsageStatsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantUsageStatsCountAggregateOutputType>
+          : GetScalarType<T['select'], ClubUsageStatsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a TenantUsageStats.
+     * Allows you to perform aggregations operations on a ClubUsageStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ClubUsageStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -14557,13 +14557,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TenantUsageStatsAggregateArgs>(args: Subset<T, TenantUsageStatsAggregateArgs>): Prisma.PrismaPromise<GetTenantUsageStatsAggregateType<T>>
+    aggregate<T extends ClubUsageStatsAggregateArgs>(args: Subset<T, ClubUsageStatsAggregateArgs>): Prisma.PrismaPromise<GetClubUsageStatsAggregateType<T>>
 
     /**
-     * Group by TenantUsageStats.
+     * Group by ClubUsageStats.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantUsageStatsGroupByArgs} args - Group by arguments.
+     * @param {ClubUsageStatsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -14578,14 +14578,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TenantUsageStatsGroupByArgs,
+      T extends ClubUsageStatsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantUsageStatsGroupByArgs['orderBy'] }
-        : { orderBy?: TenantUsageStatsGroupByArgs['orderBy'] },
+        ? { orderBy: ClubUsageStatsGroupByArgs['orderBy'] }
+        : { orderBy?: ClubUsageStatsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -14634,22 +14634,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TenantUsageStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantUsageStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ClubUsageStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubUsageStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the TenantUsageStats model
+   * Fields of the ClubUsageStats model
    */
-  readonly fields: TenantUsageStatsFieldRefs;
+  readonly fields: ClubUsageStatsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for TenantUsageStats.
+   * The delegate class that acts as a "Promise-like" for ClubUsageStats.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantUsageStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ClubUsageStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14676,427 +14676,427 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the TenantUsageStats model
+   * Fields of the ClubUsageStats model
    */
-  interface TenantUsageStatsFieldRefs {
-    readonly id: FieldRef<"TenantUsageStats", 'String'>
-    readonly tenantId: FieldRef<"TenantUsageStats", 'String'>
-    readonly date: FieldRef<"TenantUsageStats", 'DateTime'>
-    readonly apiCalls: FieldRef<"TenantUsageStats", 'Int'>
-    readonly storageUsedMB: FieldRef<"TenantUsageStats", 'Int'>
-    readonly activeUsers: FieldRef<"TenantUsageStats", 'Int'>
-    readonly createdAt: FieldRef<"TenantUsageStats", 'DateTime'>
+  interface ClubUsageStatsFieldRefs {
+    readonly id: FieldRef<"ClubUsageStats", 'String'>
+    readonly clubId: FieldRef<"ClubUsageStats", 'String'>
+    readonly date: FieldRef<"ClubUsageStats", 'DateTime'>
+    readonly apiCalls: FieldRef<"ClubUsageStats", 'Int'>
+    readonly storageUsedMB: FieldRef<"ClubUsageStats", 'Int'>
+    readonly activeUsers: FieldRef<"ClubUsageStats", 'Int'>
+    readonly createdAt: FieldRef<"ClubUsageStats", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * TenantUsageStats findUnique
+   * ClubUsageStats findUnique
    */
-  export type TenantUsageStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantUsageStats to fetch.
+     * Filter, which ClubUsageStats to fetch.
      */
-    where: TenantUsageStatsWhereUniqueInput
+    where: ClubUsageStatsWhereUniqueInput
   }
 
   /**
-   * TenantUsageStats findUniqueOrThrow
+   * ClubUsageStats findUniqueOrThrow
    */
-  export type TenantUsageStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantUsageStats to fetch.
+     * Filter, which ClubUsageStats to fetch.
      */
-    where: TenantUsageStatsWhereUniqueInput
+    where: ClubUsageStatsWhereUniqueInput
   }
 
   /**
-   * TenantUsageStats findFirst
+   * ClubUsageStats findFirst
    */
-  export type TenantUsageStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantUsageStats to fetch.
+     * Filter, which ClubUsageStats to fetch.
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantUsageStats to fetch.
+     * Determine the order of ClubUsageStats to fetch.
      */
-    orderBy?: TenantUsageStatsOrderByWithRelationInput | TenantUsageStatsOrderByWithRelationInput[]
+    orderBy?: ClubUsageStatsOrderByWithRelationInput | ClubUsageStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantUsageStats.
+     * Sets the position for searching for ClubUsageStats.
      */
-    cursor?: TenantUsageStatsWhereUniqueInput
+    cursor?: ClubUsageStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantUsageStats from the position of the cursor.
+     * Take `±n` ClubUsageStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantUsageStats.
+     * Skip the first `n` ClubUsageStats.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantUsageStats.
+     * Filter by unique combinations of ClubUsageStats.
      */
-    distinct?: TenantUsageStatsScalarFieldEnum | TenantUsageStatsScalarFieldEnum[]
+    distinct?: ClubUsageStatsScalarFieldEnum | ClubUsageStatsScalarFieldEnum[]
   }
 
   /**
-   * TenantUsageStats findFirstOrThrow
+   * ClubUsageStats findFirstOrThrow
    */
-  export type TenantUsageStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantUsageStats to fetch.
+     * Filter, which ClubUsageStats to fetch.
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantUsageStats to fetch.
+     * Determine the order of ClubUsageStats to fetch.
      */
-    orderBy?: TenantUsageStatsOrderByWithRelationInput | TenantUsageStatsOrderByWithRelationInput[]
+    orderBy?: ClubUsageStatsOrderByWithRelationInput | ClubUsageStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for TenantUsageStats.
+     * Sets the position for searching for ClubUsageStats.
      */
-    cursor?: TenantUsageStatsWhereUniqueInput
+    cursor?: ClubUsageStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantUsageStats from the position of the cursor.
+     * Take `±n` ClubUsageStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantUsageStats.
+     * Skip the first `n` ClubUsageStats.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of TenantUsageStats.
+     * Filter by unique combinations of ClubUsageStats.
      */
-    distinct?: TenantUsageStatsScalarFieldEnum | TenantUsageStatsScalarFieldEnum[]
+    distinct?: ClubUsageStatsScalarFieldEnum | ClubUsageStatsScalarFieldEnum[]
   }
 
   /**
-   * TenantUsageStats findMany
+   * ClubUsageStats findMany
    */
-  export type TenantUsageStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * Filter, which TenantUsageStats to fetch.
+     * Filter, which ClubUsageStats to fetch.
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of TenantUsageStats to fetch.
+     * Determine the order of ClubUsageStats to fetch.
      */
-    orderBy?: TenantUsageStatsOrderByWithRelationInput | TenantUsageStatsOrderByWithRelationInput[]
+    orderBy?: ClubUsageStatsOrderByWithRelationInput | ClubUsageStatsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing TenantUsageStats.
+     * Sets the position for listing ClubUsageStats.
      */
-    cursor?: TenantUsageStatsWhereUniqueInput
+    cursor?: ClubUsageStatsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` TenantUsageStats from the position of the cursor.
+     * Take `±n` ClubUsageStats from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` TenantUsageStats.
+     * Skip the first `n` ClubUsageStats.
      */
     skip?: number
-    distinct?: TenantUsageStatsScalarFieldEnum | TenantUsageStatsScalarFieldEnum[]
+    distinct?: ClubUsageStatsScalarFieldEnum | ClubUsageStatsScalarFieldEnum[]
   }
 
   /**
-   * TenantUsageStats create
+   * ClubUsageStats create
    */
-  export type TenantUsageStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * The data needed to create a TenantUsageStats.
+     * The data needed to create a ClubUsageStats.
      */
-    data: XOR<TenantUsageStatsCreateInput, TenantUsageStatsUncheckedCreateInput>
+    data: XOR<ClubUsageStatsCreateInput, ClubUsageStatsUncheckedCreateInput>
   }
 
   /**
-   * TenantUsageStats createMany
+   * ClubUsageStats createMany
    */
-  export type TenantUsageStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many TenantUsageStats.
+     * The data used to create many ClubUsageStats.
      */
-    data: TenantUsageStatsCreateManyInput | TenantUsageStatsCreateManyInput[]
+    data: ClubUsageStatsCreateManyInput | ClubUsageStatsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * TenantUsageStats createManyAndReturn
+   * ClubUsageStats createManyAndReturn
    */
-  export type TenantUsageStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ClubUsageStatsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
-     * The data used to create many TenantUsageStats.
+     * The data used to create many ClubUsageStats.
      */
-    data: TenantUsageStatsCreateManyInput | TenantUsageStatsCreateManyInput[]
+    data: ClubUsageStatsCreateManyInput | ClubUsageStatsCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ClubUsageStatsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantUsageStats update
+   * ClubUsageStats update
    */
-  export type TenantUsageStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * The data needed to update a TenantUsageStats.
+     * The data needed to update a ClubUsageStats.
      */
-    data: XOR<TenantUsageStatsUpdateInput, TenantUsageStatsUncheckedUpdateInput>
+    data: XOR<ClubUsageStatsUpdateInput, ClubUsageStatsUncheckedUpdateInput>
     /**
-     * Choose, which TenantUsageStats to update.
+     * Choose, which ClubUsageStats to update.
      */
-    where: TenantUsageStatsWhereUniqueInput
+    where: ClubUsageStatsWhereUniqueInput
   }
 
   /**
-   * TenantUsageStats updateMany
+   * ClubUsageStats updateMany
    */
-  export type TenantUsageStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update TenantUsageStats.
+     * The data used to update ClubUsageStats.
      */
-    data: XOR<TenantUsageStatsUpdateManyMutationInput, TenantUsageStatsUncheckedUpdateManyInput>
+    data: XOR<ClubUsageStatsUpdateManyMutationInput, ClubUsageStatsUncheckedUpdateManyInput>
     /**
-     * Filter which TenantUsageStats to update
+     * Filter which ClubUsageStats to update
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
-     * Limit how many TenantUsageStats to update.
+     * Limit how many ClubUsageStats to update.
      */
     limit?: number
   }
 
   /**
-   * TenantUsageStats updateManyAndReturn
+   * ClubUsageStats updateManyAndReturn
    */
-  export type TenantUsageStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ClubUsageStatsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
-     * The data used to update TenantUsageStats.
+     * The data used to update ClubUsageStats.
      */
-    data: XOR<TenantUsageStatsUpdateManyMutationInput, TenantUsageStatsUncheckedUpdateManyInput>
+    data: XOR<ClubUsageStatsUpdateManyMutationInput, ClubUsageStatsUncheckedUpdateManyInput>
     /**
-     * Filter which TenantUsageStats to update
+     * Filter which ClubUsageStats to update
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
-     * Limit how many TenantUsageStats to update.
+     * Limit how many ClubUsageStats to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ClubUsageStatsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * TenantUsageStats upsert
+   * ClubUsageStats upsert
    */
-  export type TenantUsageStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * The filter to search for the TenantUsageStats to update in case it exists.
+     * The filter to search for the ClubUsageStats to update in case it exists.
      */
-    where: TenantUsageStatsWhereUniqueInput
+    where: ClubUsageStatsWhereUniqueInput
     /**
-     * In case the TenantUsageStats found by the `where` argument doesn't exist, create a new TenantUsageStats with this data.
+     * In case the ClubUsageStats found by the `where` argument doesn't exist, create a new ClubUsageStats with this data.
      */
-    create: XOR<TenantUsageStatsCreateInput, TenantUsageStatsUncheckedCreateInput>
+    create: XOR<ClubUsageStatsCreateInput, ClubUsageStatsUncheckedCreateInput>
     /**
-     * In case the TenantUsageStats was found with the provided `where` argument, update it with this data.
+     * In case the ClubUsageStats was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantUsageStatsUpdateInput, TenantUsageStatsUncheckedUpdateInput>
+    update: XOR<ClubUsageStatsUpdateInput, ClubUsageStatsUncheckedUpdateInput>
   }
 
   /**
-   * TenantUsageStats delete
+   * ClubUsageStats delete
    */
-  export type TenantUsageStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
     /**
-     * Filter which TenantUsageStats to delete.
+     * Filter which ClubUsageStats to delete.
      */
-    where: TenantUsageStatsWhereUniqueInput
+    where: ClubUsageStatsWhereUniqueInput
   }
 
   /**
-   * TenantUsageStats deleteMany
+   * ClubUsageStats deleteMany
    */
-  export type TenantUsageStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which TenantUsageStats to delete
+     * Filter which ClubUsageStats to delete
      */
-    where?: TenantUsageStatsWhereInput
+    where?: ClubUsageStatsWhereInput
     /**
-     * Limit how many TenantUsageStats to delete.
+     * Limit how many ClubUsageStats to delete.
      */
     limit?: number
   }
 
   /**
-   * TenantUsageStats without action
+   * ClubUsageStats without action
    */
-  export type TenantUsageStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClubUsageStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TenantUsageStats
+     * Select specific fields to fetch from the ClubUsageStats
      */
-    select?: TenantUsageStatsSelect<ExtArgs> | null
+    select?: ClubUsageStatsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TenantUsageStats
+     * Omit specific fields from the ClubUsageStats
      */
-    omit?: TenantUsageStatsOmit<ExtArgs> | null
+    omit?: ClubUsageStatsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TenantUsageStatsInclude<ExtArgs> | null
+    include?: ClubUsageStatsInclude<ExtArgs> | null
   }
 
 
@@ -15114,7 +15114,7 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const TenantScalarFieldEnum: {
+  export const ClubScalarFieldEnum: {
     id: 'id',
     slug: 'slug',
     companyName: 'companyName',
@@ -15146,12 +15146,12 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+  export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]
 
 
-  export const TenantBrandingScalarFieldEnum: {
+  export const ClubBrandingScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     logoUrl: 'logoUrl',
     logoIconUrl: 'logoIconUrl',
     faviconUrl: 'faviconUrl',
@@ -15168,12 +15168,12 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantBrandingScalarFieldEnum = (typeof TenantBrandingScalarFieldEnum)[keyof typeof TenantBrandingScalarFieldEnum]
+  export type ClubBrandingScalarFieldEnum = (typeof ClubBrandingScalarFieldEnum)[keyof typeof ClubBrandingScalarFieldEnum]
 
 
-  export const TenantModuleScalarFieldEnum: {
+  export const ClubModuleScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     moduleKey: 'moduleKey',
     isEnabled: 'isEnabled',
     isEnabledByDefault: 'isEnabledByDefault',
@@ -15185,12 +15185,12 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantModuleScalarFieldEnum = (typeof TenantModuleScalarFieldEnum)[keyof typeof TenantModuleScalarFieldEnum]
+  export type ClubModuleScalarFieldEnum = (typeof ClubModuleScalarFieldEnum)[keyof typeof ClubModuleScalarFieldEnum]
 
 
-  export const TenantStatsScalarFieldEnum: {
+  export const ClubStatsScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     totalUsers: 'totalUsers',
     totalConsumers: 'totalConsumers',
     totalMerchants: 'totalMerchants',
@@ -15207,13 +15207,13 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantStatsScalarFieldEnum = (typeof TenantStatsScalarFieldEnum)[keyof typeof TenantStatsScalarFieldEnum]
+  export type ClubStatsScalarFieldEnum = (typeof ClubStatsScalarFieldEnum)[keyof typeof ClubStatsScalarFieldEnum]
 
 
   export const GlobalStatsScalarFieldEnum: {
     id: 'id',
     date: 'date',
-    totalTenants: 'totalTenants',
+    totalClubs: 'totalClubs',
     totalUsers: 'totalUsers',
     totalConsumers: 'totalConsumers',
     totalMerchants: 'totalMerchants',
@@ -15226,18 +15226,18 @@ export namespace Prisma {
     revenue30d: 'revenue30d',
     purchases30d: 'purchases30d',
     cashback30d: 'cashback30d',
-    newTenants: 'newTenants',
+    newClubs: 'newClubs',
     newUsers: 'newUsers',
-    churnedTenants: 'churnedTenants',
+    churnedClubs: 'churnedClubs',
     createdAt: 'createdAt'
   };
 
   export type GlobalStatsScalarFieldEnum = (typeof GlobalStatsScalarFieldEnum)[keyof typeof GlobalStatsScalarFieldEnum]
 
 
-  export const TenantCashbackConfigScalarFieldEnum: {
+  export const ClubCashbackConfigScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     consumerPercent: 'consumerPercent',
     clubPercent: 'clubPercent',
     consumerReferrerPercent: 'consumerReferrerPercent',
@@ -15246,12 +15246,12 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantCashbackConfigScalarFieldEnum = (typeof TenantCashbackConfigScalarFieldEnum)[keyof typeof TenantCashbackConfigScalarFieldEnum]
+  export type ClubCashbackConfigScalarFieldEnum = (typeof ClubCashbackConfigScalarFieldEnum)[keyof typeof ClubCashbackConfigScalarFieldEnum]
 
 
-  export const TenantWithdrawalConfigScalarFieldEnum: {
+  export const ClubWithdrawalConfigScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     withdrawalFeePercent: 'withdrawalFeePercent',
     withdrawalFeeFixed: 'withdrawalFeeFixed',
     minWithdrawalAmount: 'minWithdrawalAmount',
@@ -15259,12 +15259,12 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantWithdrawalConfigScalarFieldEnum = (typeof TenantWithdrawalConfigScalarFieldEnum)[keyof typeof TenantWithdrawalConfigScalarFieldEnum]
+  export type ClubWithdrawalConfigScalarFieldEnum = (typeof ClubWithdrawalConfigScalarFieldEnum)[keyof typeof ClubWithdrawalConfigScalarFieldEnum]
 
 
-  export const TenantAdminScalarFieldEnum: {
+  export const ClubAdminScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     name: 'name',
     email: 'email',
     password: 'password',
@@ -15275,7 +15275,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type TenantAdminScalarFieldEnum = (typeof TenantAdminScalarFieldEnum)[keyof typeof TenantAdminScalarFieldEnum]
+  export type ClubAdminScalarFieldEnum = (typeof ClubAdminScalarFieldEnum)[keyof typeof ClubAdminScalarFieldEnum]
 
 
   export const SuperAdminScalarFieldEnum: {
@@ -15293,9 +15293,9 @@ export namespace Prisma {
   export type SuperAdminScalarFieldEnum = (typeof SuperAdminScalarFieldEnum)[keyof typeof SuperAdminScalarFieldEnum]
 
 
-  export const TenantApiKeyScalarFieldEnum: {
+  export const ClubApiKeyScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     keyName: 'keyName',
     apiKey: 'apiKey',
     isActive: 'isActive',
@@ -15304,12 +15304,12 @@ export namespace Prisma {
     expiresAt: 'expiresAt'
   };
 
-  export type TenantApiKeyScalarFieldEnum = (typeof TenantApiKeyScalarFieldEnum)[keyof typeof TenantApiKeyScalarFieldEnum]
+  export type ClubApiKeyScalarFieldEnum = (typeof ClubApiKeyScalarFieldEnum)[keyof typeof ClubApiKeyScalarFieldEnum]
 
 
-  export const TenantUsageStatsScalarFieldEnum: {
+  export const ClubUsageStatsScalarFieldEnum: {
     id: 'id',
-    tenantId: 'tenantId',
+    clubId: 'clubId',
     date: 'date',
     apiCalls: 'apiCalls',
     storageUsedMB: 'storageUsedMB',
@@ -15317,7 +15317,7 @@ export namespace Prisma {
     createdAt: 'createdAt'
   };
 
-  export type TenantUsageStatsScalarFieldEnum = (typeof TenantUsageStatsScalarFieldEnum)[keyof typeof TenantUsageStatsScalarFieldEnum]
+  export type ClubUsageStatsScalarFieldEnum = (typeof ClubUsageStatsScalarFieldEnum)[keyof typeof ClubUsageStatsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15388,16 +15388,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TenantStatus'
+   * Reference to a field of type 'ClubStatus'
    */
-  export type EnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus'>
+  export type EnumClubStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClubStatus'>
     
 
 
   /**
-   * Reference to a field of type 'TenantStatus[]'
+   * Reference to a field of type 'ClubStatus[]'
    */
-  export type ListEnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus[]'>
+  export type ListEnumClubStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClubStatus[]'>
     
 
 
@@ -15537,50 +15537,50 @@ export namespace Prisma {
    */
 
 
-  export type TenantWhereInput = {
-    AND?: TenantWhereInput | TenantWhereInput[]
-    OR?: TenantWhereInput[]
-    NOT?: TenantWhereInput | TenantWhereInput[]
-    id?: UuidFilter<"Tenant"> | string
-    slug?: StringFilter<"Tenant"> | string
-    companyName?: StringFilter<"Tenant"> | string
-    companyDocument?: StringFilter<"Tenant"> | string
-    status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
-    databaseHost?: StringFilter<"Tenant"> | string
-    databasePort?: IntFilter<"Tenant"> | number
-    databaseName?: StringFilter<"Tenant"> | string
-    databaseUser?: StringFilter<"Tenant"> | string
-    databasePassword?: StringFilter<"Tenant"> | string
-    subdomain?: StringNullableFilter<"Tenant"> | string | null
-    customDomain?: StringNullableFilter<"Tenant"> | string | null
-    adminSubdomain?: StringNullableFilter<"Tenant"> | string | null
-    maxUsers?: IntFilter<"Tenant"> | number
-    maxAdmins?: IntFilter<"Tenant"> | number
-    maxStorageGB?: IntFilter<"Tenant"> | number
-    subscriptionPlan?: EnumSubscriptionPlanFilter<"Tenant"> | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFilter<"Tenant"> | $Enums.SubscriptionStatus
-    monthlyFee?: DecimalFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    trialEndsAt?: DateTimeNullableFilter<"Tenant"> | Date | string | null
-    nextBillingDate?: DateTimeNullableFilter<"Tenant"> | Date | string | null
-    lastBillingDate?: DateTimeNullableFilter<"Tenant"> | Date | string | null
-    totalBilled?: DecimalFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    outstandingBalance?: DecimalFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    contactName?: StringFilter<"Tenant"> | string
-    contactEmail?: StringFilter<"Tenant"> | string
-    contactPhone?: StringFilter<"Tenant"> | string
-    createdAt?: DateTimeFilter<"Tenant"> | Date | string
-    updatedAt?: DateTimeFilter<"Tenant"> | Date | string
-    branding?: XOR<TenantBrandingNullableScalarRelationFilter, TenantBrandingWhereInput> | null
-    modules?: TenantModuleListRelationFilter
-    admins?: TenantAdminListRelationFilter
-    apiKeys?: TenantApiKeyListRelationFilter
-    usageStats?: TenantUsageStatsListRelationFilter
-    stats?: XOR<TenantStatsNullableScalarRelationFilter, TenantStatsWhereInput> | null
-    cashbackConfig?: XOR<TenantCashbackConfigNullableScalarRelationFilter, TenantCashbackConfigWhereInput> | null
-    withdrawalConfig?: XOR<TenantWithdrawalConfigNullableScalarRelationFilter, TenantWithdrawalConfigWhereInput> | null
+  export type ClubWhereInput = {
+    AND?: ClubWhereInput | ClubWhereInput[]
+    OR?: ClubWhereInput[]
+    NOT?: ClubWhereInput | ClubWhereInput[]
+    id?: UuidFilter<"Club"> | string
+    slug?: StringFilter<"Club"> | string
+    companyName?: StringFilter<"Club"> | string
+    companyDocument?: StringFilter<"Club"> | string
+    status?: EnumClubStatusFilter<"Club"> | $Enums.ClubStatus
+    databaseHost?: StringFilter<"Club"> | string
+    databasePort?: IntFilter<"Club"> | number
+    databaseName?: StringFilter<"Club"> | string
+    databaseUser?: StringFilter<"Club"> | string
+    databasePassword?: StringFilter<"Club"> | string
+    subdomain?: StringNullableFilter<"Club"> | string | null
+    customDomain?: StringNullableFilter<"Club"> | string | null
+    adminSubdomain?: StringNullableFilter<"Club"> | string | null
+    maxUsers?: IntFilter<"Club"> | number
+    maxAdmins?: IntFilter<"Club"> | number
+    maxStorageGB?: IntFilter<"Club"> | number
+    subscriptionPlan?: EnumSubscriptionPlanFilter<"Club"> | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusFilter<"Club"> | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: DateTimeNullableFilter<"Club"> | Date | string | null
+    nextBillingDate?: DateTimeNullableFilter<"Club"> | Date | string | null
+    lastBillingDate?: DateTimeNullableFilter<"Club"> | Date | string | null
+    totalBilled?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    contactName?: StringFilter<"Club"> | string
+    contactEmail?: StringFilter<"Club"> | string
+    contactPhone?: StringFilter<"Club"> | string
+    createdAt?: DateTimeFilter<"Club"> | Date | string
+    updatedAt?: DateTimeFilter<"Club"> | Date | string
+    branding?: XOR<ClubBrandingNullableScalarRelationFilter, ClubBrandingWhereInput> | null
+    modules?: ClubModuleListRelationFilter
+    admins?: ClubAdminListRelationFilter
+    apiKeys?: ClubApiKeyListRelationFilter
+    usageStats?: ClubUsageStatsListRelationFilter
+    stats?: XOR<ClubStatsNullableScalarRelationFilter, ClubStatsWhereInput> | null
+    cashbackConfig?: XOR<ClubCashbackConfigNullableScalarRelationFilter, ClubCashbackConfigWhereInput> | null
+    withdrawalConfig?: XOR<ClubWithdrawalConfigNullableScalarRelationFilter, ClubWithdrawalConfigWhereInput> | null
   }
 
-  export type TenantOrderByWithRelationInput = {
+  export type ClubOrderByWithRelationInput = {
     id?: SortOrder
     slug?: SortOrder
     companyName?: SortOrder
@@ -15610,60 +15610,60 @@ export namespace Prisma {
     contactPhone?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    branding?: TenantBrandingOrderByWithRelationInput
-    modules?: TenantModuleOrderByRelationAggregateInput
-    admins?: TenantAdminOrderByRelationAggregateInput
-    apiKeys?: TenantApiKeyOrderByRelationAggregateInput
-    usageStats?: TenantUsageStatsOrderByRelationAggregateInput
-    stats?: TenantStatsOrderByWithRelationInput
-    cashbackConfig?: TenantCashbackConfigOrderByWithRelationInput
-    withdrawalConfig?: TenantWithdrawalConfigOrderByWithRelationInput
+    branding?: ClubBrandingOrderByWithRelationInput
+    modules?: ClubModuleOrderByRelationAggregateInput
+    admins?: ClubAdminOrderByRelationAggregateInput
+    apiKeys?: ClubApiKeyOrderByRelationAggregateInput
+    usageStats?: ClubUsageStatsOrderByRelationAggregateInput
+    stats?: ClubStatsOrderByWithRelationInput
+    cashbackConfig?: ClubCashbackConfigOrderByWithRelationInput
+    withdrawalConfig?: ClubWithdrawalConfigOrderByWithRelationInput
   }
 
-  export type TenantWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     slug?: string
     companyDocument?: string
     subdomain?: string
     customDomain?: string
     adminSubdomain?: string
-    AND?: TenantWhereInput | TenantWhereInput[]
-    OR?: TenantWhereInput[]
-    NOT?: TenantWhereInput | TenantWhereInput[]
-    companyName?: StringFilter<"Tenant"> | string
-    status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
-    databaseHost?: StringFilter<"Tenant"> | string
-    databasePort?: IntFilter<"Tenant"> | number
-    databaseName?: StringFilter<"Tenant"> | string
-    databaseUser?: StringFilter<"Tenant"> | string
-    databasePassword?: StringFilter<"Tenant"> | string
-    maxUsers?: IntFilter<"Tenant"> | number
-    maxAdmins?: IntFilter<"Tenant"> | number
-    maxStorageGB?: IntFilter<"Tenant"> | number
-    subscriptionPlan?: EnumSubscriptionPlanFilter<"Tenant"> | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFilter<"Tenant"> | $Enums.SubscriptionStatus
-    monthlyFee?: DecimalFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    trialEndsAt?: DateTimeNullableFilter<"Tenant"> | Date | string | null
-    nextBillingDate?: DateTimeNullableFilter<"Tenant"> | Date | string | null
-    lastBillingDate?: DateTimeNullableFilter<"Tenant"> | Date | string | null
-    totalBilled?: DecimalFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    outstandingBalance?: DecimalFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    contactName?: StringFilter<"Tenant"> | string
-    contactEmail?: StringFilter<"Tenant"> | string
-    contactPhone?: StringFilter<"Tenant"> | string
-    createdAt?: DateTimeFilter<"Tenant"> | Date | string
-    updatedAt?: DateTimeFilter<"Tenant"> | Date | string
-    branding?: XOR<TenantBrandingNullableScalarRelationFilter, TenantBrandingWhereInput> | null
-    modules?: TenantModuleListRelationFilter
-    admins?: TenantAdminListRelationFilter
-    apiKeys?: TenantApiKeyListRelationFilter
-    usageStats?: TenantUsageStatsListRelationFilter
-    stats?: XOR<TenantStatsNullableScalarRelationFilter, TenantStatsWhereInput> | null
-    cashbackConfig?: XOR<TenantCashbackConfigNullableScalarRelationFilter, TenantCashbackConfigWhereInput> | null
-    withdrawalConfig?: XOR<TenantWithdrawalConfigNullableScalarRelationFilter, TenantWithdrawalConfigWhereInput> | null
+    AND?: ClubWhereInput | ClubWhereInput[]
+    OR?: ClubWhereInput[]
+    NOT?: ClubWhereInput | ClubWhereInput[]
+    companyName?: StringFilter<"Club"> | string
+    status?: EnumClubStatusFilter<"Club"> | $Enums.ClubStatus
+    databaseHost?: StringFilter<"Club"> | string
+    databasePort?: IntFilter<"Club"> | number
+    databaseName?: StringFilter<"Club"> | string
+    databaseUser?: StringFilter<"Club"> | string
+    databasePassword?: StringFilter<"Club"> | string
+    maxUsers?: IntFilter<"Club"> | number
+    maxAdmins?: IntFilter<"Club"> | number
+    maxStorageGB?: IntFilter<"Club"> | number
+    subscriptionPlan?: EnumSubscriptionPlanFilter<"Club"> | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusFilter<"Club"> | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: DateTimeNullableFilter<"Club"> | Date | string | null
+    nextBillingDate?: DateTimeNullableFilter<"Club"> | Date | string | null
+    lastBillingDate?: DateTimeNullableFilter<"Club"> | Date | string | null
+    totalBilled?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    contactName?: StringFilter<"Club"> | string
+    contactEmail?: StringFilter<"Club"> | string
+    contactPhone?: StringFilter<"Club"> | string
+    createdAt?: DateTimeFilter<"Club"> | Date | string
+    updatedAt?: DateTimeFilter<"Club"> | Date | string
+    branding?: XOR<ClubBrandingNullableScalarRelationFilter, ClubBrandingWhereInput> | null
+    modules?: ClubModuleListRelationFilter
+    admins?: ClubAdminListRelationFilter
+    apiKeys?: ClubApiKeyListRelationFilter
+    usageStats?: ClubUsageStatsListRelationFilter
+    stats?: XOR<ClubStatsNullableScalarRelationFilter, ClubStatsWhereInput> | null
+    cashbackConfig?: XOR<ClubCashbackConfigNullableScalarRelationFilter, ClubCashbackConfigWhereInput> | null
+    withdrawalConfig?: XOR<ClubWithdrawalConfigNullableScalarRelationFilter, ClubWithdrawalConfigWhereInput> | null
   }, "id" | "slug" | "companyDocument" | "subdomain" | "customDomain" | "adminSubdomain">
 
-  export type TenantOrderByWithAggregationInput = {
+  export type ClubOrderByWithAggregationInput = {
     id?: SortOrder
     slug?: SortOrder
     companyName?: SortOrder
@@ -15693,74 +15693,74 @@ export namespace Prisma {
     contactPhone?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantCountOrderByAggregateInput
-    _avg?: TenantAvgOrderByAggregateInput
-    _max?: TenantMaxOrderByAggregateInput
-    _min?: TenantMinOrderByAggregateInput
-    _sum?: TenantSumOrderByAggregateInput
+    _count?: ClubCountOrderByAggregateInput
+    _avg?: ClubAvgOrderByAggregateInput
+    _max?: ClubMaxOrderByAggregateInput
+    _min?: ClubMinOrderByAggregateInput
+    _sum?: ClubSumOrderByAggregateInput
   }
 
-  export type TenantScalarWhereWithAggregatesInput = {
-    AND?: TenantScalarWhereWithAggregatesInput | TenantScalarWhereWithAggregatesInput[]
-    OR?: TenantScalarWhereWithAggregatesInput[]
-    NOT?: TenantScalarWhereWithAggregatesInput | TenantScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Tenant"> | string
-    slug?: StringWithAggregatesFilter<"Tenant"> | string
-    companyName?: StringWithAggregatesFilter<"Tenant"> | string
-    companyDocument?: StringWithAggregatesFilter<"Tenant"> | string
-    status?: EnumTenantStatusWithAggregatesFilter<"Tenant"> | $Enums.TenantStatus
-    databaseHost?: StringWithAggregatesFilter<"Tenant"> | string
-    databasePort?: IntWithAggregatesFilter<"Tenant"> | number
-    databaseName?: StringWithAggregatesFilter<"Tenant"> | string
-    databaseUser?: StringWithAggregatesFilter<"Tenant"> | string
-    databasePassword?: StringWithAggregatesFilter<"Tenant"> | string
-    subdomain?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
-    customDomain?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
-    adminSubdomain?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
-    maxUsers?: IntWithAggregatesFilter<"Tenant"> | number
-    maxAdmins?: IntWithAggregatesFilter<"Tenant"> | number
-    maxStorageGB?: IntWithAggregatesFilter<"Tenant"> | number
-    subscriptionPlan?: EnumSubscriptionPlanWithAggregatesFilter<"Tenant"> | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusWithAggregatesFilter<"Tenant"> | $Enums.SubscriptionStatus
-    monthlyFee?: DecimalWithAggregatesFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    trialEndsAt?: DateTimeNullableWithAggregatesFilter<"Tenant"> | Date | string | null
-    nextBillingDate?: DateTimeNullableWithAggregatesFilter<"Tenant"> | Date | string | null
-    lastBillingDate?: DateTimeNullableWithAggregatesFilter<"Tenant"> | Date | string | null
-    totalBilled?: DecimalWithAggregatesFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    outstandingBalance?: DecimalWithAggregatesFilter<"Tenant"> | Decimal | DecimalJsLike | number | string
-    contactName?: StringWithAggregatesFilter<"Tenant"> | string
-    contactEmail?: StringWithAggregatesFilter<"Tenant"> | string
-    contactPhone?: StringWithAggregatesFilter<"Tenant"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+  export type ClubScalarWhereWithAggregatesInput = {
+    AND?: ClubScalarWhereWithAggregatesInput | ClubScalarWhereWithAggregatesInput[]
+    OR?: ClubScalarWhereWithAggregatesInput[]
+    NOT?: ClubScalarWhereWithAggregatesInput | ClubScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Club"> | string
+    slug?: StringWithAggregatesFilter<"Club"> | string
+    companyName?: StringWithAggregatesFilter<"Club"> | string
+    companyDocument?: StringWithAggregatesFilter<"Club"> | string
+    status?: EnumClubStatusWithAggregatesFilter<"Club"> | $Enums.ClubStatus
+    databaseHost?: StringWithAggregatesFilter<"Club"> | string
+    databasePort?: IntWithAggregatesFilter<"Club"> | number
+    databaseName?: StringWithAggregatesFilter<"Club"> | string
+    databaseUser?: StringWithAggregatesFilter<"Club"> | string
+    databasePassword?: StringWithAggregatesFilter<"Club"> | string
+    subdomain?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    customDomain?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    adminSubdomain?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    maxUsers?: IntWithAggregatesFilter<"Club"> | number
+    maxAdmins?: IntWithAggregatesFilter<"Club"> | number
+    maxStorageGB?: IntWithAggregatesFilter<"Club"> | number
+    subscriptionPlan?: EnumSubscriptionPlanWithAggregatesFilter<"Club"> | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusWithAggregatesFilter<"Club"> | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalWithAggregatesFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: DateTimeNullableWithAggregatesFilter<"Club"> | Date | string | null
+    nextBillingDate?: DateTimeNullableWithAggregatesFilter<"Club"> | Date | string | null
+    lastBillingDate?: DateTimeNullableWithAggregatesFilter<"Club"> | Date | string | null
+    totalBilled?: DecimalWithAggregatesFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalWithAggregatesFilter<"Club"> | Decimal | DecimalJsLike | number | string
+    contactName?: StringWithAggregatesFilter<"Club"> | string
+    contactEmail?: StringWithAggregatesFilter<"Club"> | string
+    contactPhone?: StringWithAggregatesFilter<"Club"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Club"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Club"> | Date | string
   }
 
-  export type TenantBrandingWhereInput = {
-    AND?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
-    OR?: TenantBrandingWhereInput[]
-    NOT?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
-    id?: UuidFilter<"TenantBranding"> | string
-    tenantId?: UuidFilter<"TenantBranding"> | string
-    logoUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    logoIconUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    faviconUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    primaryColor?: StringFilter<"TenantBranding"> | string
-    secondaryColor?: StringFilter<"TenantBranding"> | string
-    accentColor?: StringFilter<"TenantBranding"> | string
-    backgroundColor?: StringFilter<"TenantBranding"> | string
-    textColor?: StringFilter<"TenantBranding"> | string
-    appName?: StringFilter<"TenantBranding"> | string
-    appDescription?: StringNullableFilter<"TenantBranding"> | string | null
-    appStoreUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    playStoreUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    createdAt?: DateTimeFilter<"TenantBranding"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantBranding"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubBrandingWhereInput = {
+    AND?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    OR?: ClubBrandingWhereInput[]
+    NOT?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    id?: UuidFilter<"ClubBranding"> | string
+    clubId?: UuidFilter<"ClubBranding"> | string
+    logoUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    logoIconUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    faviconUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    primaryColor?: StringFilter<"ClubBranding"> | string
+    secondaryColor?: StringFilter<"ClubBranding"> | string
+    accentColor?: StringFilter<"ClubBranding"> | string
+    backgroundColor?: StringFilter<"ClubBranding"> | string
+    textColor?: StringFilter<"ClubBranding"> | string
+    appName?: StringFilter<"ClubBranding"> | string
+    appDescription?: StringNullableFilter<"ClubBranding"> | string | null
+    appStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    playStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    createdAt?: DateTimeFilter<"ClubBranding"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubBranding"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantBrandingOrderByWithRelationInput = {
+  export type ClubBrandingOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     logoIconUrl?: SortOrderInput | SortOrder
     faviconUrl?: SortOrderInput | SortOrder
@@ -15775,35 +15775,35 @@ export namespace Prisma {
     playStoreUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantBrandingWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubBrandingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId?: string
-    AND?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
-    OR?: TenantBrandingWhereInput[]
-    NOT?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
-    logoUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    logoIconUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    faviconUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    primaryColor?: StringFilter<"TenantBranding"> | string
-    secondaryColor?: StringFilter<"TenantBranding"> | string
-    accentColor?: StringFilter<"TenantBranding"> | string
-    backgroundColor?: StringFilter<"TenantBranding"> | string
-    textColor?: StringFilter<"TenantBranding"> | string
-    appName?: StringFilter<"TenantBranding"> | string
-    appDescription?: StringNullableFilter<"TenantBranding"> | string | null
-    appStoreUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    playStoreUrl?: StringNullableFilter<"TenantBranding"> | string | null
-    createdAt?: DateTimeFilter<"TenantBranding"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantBranding"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId">
+    clubId?: string
+    AND?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    OR?: ClubBrandingWhereInput[]
+    NOT?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    logoUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    logoIconUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    faviconUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    primaryColor?: StringFilter<"ClubBranding"> | string
+    secondaryColor?: StringFilter<"ClubBranding"> | string
+    accentColor?: StringFilter<"ClubBranding"> | string
+    backgroundColor?: StringFilter<"ClubBranding"> | string
+    textColor?: StringFilter<"ClubBranding"> | string
+    appName?: StringFilter<"ClubBranding"> | string
+    appDescription?: StringNullableFilter<"ClubBranding"> | string | null
+    appStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    playStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    createdAt?: DateTimeFilter<"ClubBranding"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubBranding"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId">
 
-  export type TenantBrandingOrderByWithAggregationInput = {
+  export type ClubBrandingOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     logoIconUrl?: SortOrderInput | SortOrder
     faviconUrl?: SortOrderInput | SortOrder
@@ -15818,54 +15818,54 @@ export namespace Prisma {
     playStoreUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantBrandingCountOrderByAggregateInput
-    _max?: TenantBrandingMaxOrderByAggregateInput
-    _min?: TenantBrandingMinOrderByAggregateInput
+    _count?: ClubBrandingCountOrderByAggregateInput
+    _max?: ClubBrandingMaxOrderByAggregateInput
+    _min?: ClubBrandingMinOrderByAggregateInput
   }
 
-  export type TenantBrandingScalarWhereWithAggregatesInput = {
-    AND?: TenantBrandingScalarWhereWithAggregatesInput | TenantBrandingScalarWhereWithAggregatesInput[]
-    OR?: TenantBrandingScalarWhereWithAggregatesInput[]
-    NOT?: TenantBrandingScalarWhereWithAggregatesInput | TenantBrandingScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantBranding"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantBranding"> | string
-    logoUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
-    logoIconUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
-    faviconUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
-    primaryColor?: StringWithAggregatesFilter<"TenantBranding"> | string
-    secondaryColor?: StringWithAggregatesFilter<"TenantBranding"> | string
-    accentColor?: StringWithAggregatesFilter<"TenantBranding"> | string
-    backgroundColor?: StringWithAggregatesFilter<"TenantBranding"> | string
-    textColor?: StringWithAggregatesFilter<"TenantBranding"> | string
-    appName?: StringWithAggregatesFilter<"TenantBranding"> | string
-    appDescription?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
-    appStoreUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
-    playStoreUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"TenantBranding"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TenantBranding"> | Date | string
+  export type ClubBrandingScalarWhereWithAggregatesInput = {
+    AND?: ClubBrandingScalarWhereWithAggregatesInput | ClubBrandingScalarWhereWithAggregatesInput[]
+    OR?: ClubBrandingScalarWhereWithAggregatesInput[]
+    NOT?: ClubBrandingScalarWhereWithAggregatesInput | ClubBrandingScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubBranding"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubBranding"> | string
+    logoUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    logoIconUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    faviconUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    primaryColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    secondaryColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    accentColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    backgroundColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    textColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    appName?: StringWithAggregatesFilter<"ClubBranding"> | string
+    appDescription?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    appStoreUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    playStoreUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
   }
 
-  export type TenantModuleWhereInput = {
-    AND?: TenantModuleWhereInput | TenantModuleWhereInput[]
-    OR?: TenantModuleWhereInput[]
-    NOT?: TenantModuleWhereInput | TenantModuleWhereInput[]
-    id?: UuidFilter<"TenantModule"> | string
-    tenantId?: UuidFilter<"TenantModule"> | string
-    moduleKey?: EnumModuleKeyFilter<"TenantModule"> | $Enums.ModuleKey
-    isEnabled?: BoolFilter<"TenantModule"> | boolean
-    isEnabledByDefault?: BoolFilter<"TenantModule"> | boolean
-    config?: JsonNullableFilter<"TenantModule">
-    displayName?: StringFilter<"TenantModule"> | string
-    description?: StringNullableFilter<"TenantModule"> | string | null
-    sortOrder?: IntFilter<"TenantModule"> | number
-    createdAt?: DateTimeFilter<"TenantModule"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantModule"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubModuleWhereInput = {
+    AND?: ClubModuleWhereInput | ClubModuleWhereInput[]
+    OR?: ClubModuleWhereInput[]
+    NOT?: ClubModuleWhereInput | ClubModuleWhereInput[]
+    id?: UuidFilter<"ClubModule"> | string
+    clubId?: UuidFilter<"ClubModule"> | string
+    moduleKey?: EnumModuleKeyFilter<"ClubModule"> | $Enums.ModuleKey
+    isEnabled?: BoolFilter<"ClubModule"> | boolean
+    isEnabledByDefault?: BoolFilter<"ClubModule"> | boolean
+    config?: JsonNullableFilter<"ClubModule">
+    displayName?: StringFilter<"ClubModule"> | string
+    description?: StringNullableFilter<"ClubModule"> | string | null
+    sortOrder?: IntFilter<"ClubModule"> | number
+    createdAt?: DateTimeFilter<"ClubModule"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubModule"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantModuleOrderByWithRelationInput = {
+  export type ClubModuleOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     moduleKey?: SortOrder
     isEnabled?: SortOrder
     isEnabledByDefault?: SortOrder
@@ -15875,31 +15875,31 @@ export namespace Prisma {
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantModuleWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubModuleWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId_moduleKey?: TenantModuleTenantIdModuleKeyCompoundUniqueInput
-    AND?: TenantModuleWhereInput | TenantModuleWhereInput[]
-    OR?: TenantModuleWhereInput[]
-    NOT?: TenantModuleWhereInput | TenantModuleWhereInput[]
-    tenantId?: UuidFilter<"TenantModule"> | string
-    moduleKey?: EnumModuleKeyFilter<"TenantModule"> | $Enums.ModuleKey
-    isEnabled?: BoolFilter<"TenantModule"> | boolean
-    isEnabledByDefault?: BoolFilter<"TenantModule"> | boolean
-    config?: JsonNullableFilter<"TenantModule">
-    displayName?: StringFilter<"TenantModule"> | string
-    description?: StringNullableFilter<"TenantModule"> | string | null
-    sortOrder?: IntFilter<"TenantModule"> | number
-    createdAt?: DateTimeFilter<"TenantModule"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantModule"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId_moduleKey">
+    clubId_moduleKey?: ClubModuleClubIdModuleKeyCompoundUniqueInput
+    AND?: ClubModuleWhereInput | ClubModuleWhereInput[]
+    OR?: ClubModuleWhereInput[]
+    NOT?: ClubModuleWhereInput | ClubModuleWhereInput[]
+    clubId?: UuidFilter<"ClubModule"> | string
+    moduleKey?: EnumModuleKeyFilter<"ClubModule"> | $Enums.ModuleKey
+    isEnabled?: BoolFilter<"ClubModule"> | boolean
+    isEnabledByDefault?: BoolFilter<"ClubModule"> | boolean
+    config?: JsonNullableFilter<"ClubModule">
+    displayName?: StringFilter<"ClubModule"> | string
+    description?: StringNullableFilter<"ClubModule"> | string | null
+    sortOrder?: IntFilter<"ClubModule"> | number
+    createdAt?: DateTimeFilter<"ClubModule"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubModule"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId_moduleKey">
 
-  export type TenantModuleOrderByWithAggregationInput = {
+  export type ClubModuleOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     moduleKey?: SortOrder
     isEnabled?: SortOrder
     isEnabledByDefault?: SortOrder
@@ -15909,56 +15909,56 @@ export namespace Prisma {
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantModuleCountOrderByAggregateInput
-    _avg?: TenantModuleAvgOrderByAggregateInput
-    _max?: TenantModuleMaxOrderByAggregateInput
-    _min?: TenantModuleMinOrderByAggregateInput
-    _sum?: TenantModuleSumOrderByAggregateInput
+    _count?: ClubModuleCountOrderByAggregateInput
+    _avg?: ClubModuleAvgOrderByAggregateInput
+    _max?: ClubModuleMaxOrderByAggregateInput
+    _min?: ClubModuleMinOrderByAggregateInput
+    _sum?: ClubModuleSumOrderByAggregateInput
   }
 
-  export type TenantModuleScalarWhereWithAggregatesInput = {
-    AND?: TenantModuleScalarWhereWithAggregatesInput | TenantModuleScalarWhereWithAggregatesInput[]
-    OR?: TenantModuleScalarWhereWithAggregatesInput[]
-    NOT?: TenantModuleScalarWhereWithAggregatesInput | TenantModuleScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantModule"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantModule"> | string
-    moduleKey?: EnumModuleKeyWithAggregatesFilter<"TenantModule"> | $Enums.ModuleKey
-    isEnabled?: BoolWithAggregatesFilter<"TenantModule"> | boolean
-    isEnabledByDefault?: BoolWithAggregatesFilter<"TenantModule"> | boolean
-    config?: JsonNullableWithAggregatesFilter<"TenantModule">
-    displayName?: StringWithAggregatesFilter<"TenantModule"> | string
-    description?: StringNullableWithAggregatesFilter<"TenantModule"> | string | null
-    sortOrder?: IntWithAggregatesFilter<"TenantModule"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"TenantModule"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TenantModule"> | Date | string
+  export type ClubModuleScalarWhereWithAggregatesInput = {
+    AND?: ClubModuleScalarWhereWithAggregatesInput | ClubModuleScalarWhereWithAggregatesInput[]
+    OR?: ClubModuleScalarWhereWithAggregatesInput[]
+    NOT?: ClubModuleScalarWhereWithAggregatesInput | ClubModuleScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubModule"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubModule"> | string
+    moduleKey?: EnumModuleKeyWithAggregatesFilter<"ClubModule"> | $Enums.ModuleKey
+    isEnabled?: BoolWithAggregatesFilter<"ClubModule"> | boolean
+    isEnabledByDefault?: BoolWithAggregatesFilter<"ClubModule"> | boolean
+    config?: JsonNullableWithAggregatesFilter<"ClubModule">
+    displayName?: StringWithAggregatesFilter<"ClubModule"> | string
+    description?: StringNullableWithAggregatesFilter<"ClubModule"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"ClubModule"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ClubModule"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubModule"> | Date | string
   }
 
-  export type TenantStatsWhereInput = {
-    AND?: TenantStatsWhereInput | TenantStatsWhereInput[]
-    OR?: TenantStatsWhereInput[]
-    NOT?: TenantStatsWhereInput | TenantStatsWhereInput[]
-    id?: UuidFilter<"TenantStats"> | string
-    tenantId?: UuidFilter<"TenantStats"> | string
-    totalUsers?: IntFilter<"TenantStats"> | number
-    totalConsumers?: IntFilter<"TenantStats"> | number
-    totalMerchants?: IntFilter<"TenantStats"> | number
-    activeUsers30d?: IntFilter<"TenantStats"> | number
-    totalPurchases?: IntFilter<"TenantStats"> | number
-    totalRevenue?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalCashbackPaid?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalPlatformFees?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalProducts?: IntFilter<"TenantStats"> | number
-    revenue30d?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    purchases30d?: IntFilter<"TenantStats"> | number
-    cashback30d?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TenantStats"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantStats"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubStatsWhereInput = {
+    AND?: ClubStatsWhereInput | ClubStatsWhereInput[]
+    OR?: ClubStatsWhereInput[]
+    NOT?: ClubStatsWhereInput | ClubStatsWhereInput[]
+    id?: UuidFilter<"ClubStats"> | string
+    clubId?: UuidFilter<"ClubStats"> | string
+    totalUsers?: IntFilter<"ClubStats"> | number
+    totalConsumers?: IntFilter<"ClubStats"> | number
+    totalMerchants?: IntFilter<"ClubStats"> | number
+    activeUsers30d?: IntFilter<"ClubStats"> | number
+    totalPurchases?: IntFilter<"ClubStats"> | number
+    totalRevenue?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalCashbackPaid?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalPlatformFees?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFilter<"ClubStats"> | number
+    revenue30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    purchases30d?: IntFilter<"ClubStats"> | number
+    cashback30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"ClubStats"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubStats"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantStatsOrderByWithRelationInput = {
+  export type ClubStatsOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -15973,35 +15973,35 @@ export namespace Prisma {
     cashback30d?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantStatsWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubStatsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId?: string
-    AND?: TenantStatsWhereInput | TenantStatsWhereInput[]
-    OR?: TenantStatsWhereInput[]
-    NOT?: TenantStatsWhereInput | TenantStatsWhereInput[]
-    totalUsers?: IntFilter<"TenantStats"> | number
-    totalConsumers?: IntFilter<"TenantStats"> | number
-    totalMerchants?: IntFilter<"TenantStats"> | number
-    activeUsers30d?: IntFilter<"TenantStats"> | number
-    totalPurchases?: IntFilter<"TenantStats"> | number
-    totalRevenue?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalCashbackPaid?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalPlatformFees?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalProducts?: IntFilter<"TenantStats"> | number
-    revenue30d?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    purchases30d?: IntFilter<"TenantStats"> | number
-    cashback30d?: DecimalFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TenantStats"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantStats"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId">
+    clubId?: string
+    AND?: ClubStatsWhereInput | ClubStatsWhereInput[]
+    OR?: ClubStatsWhereInput[]
+    NOT?: ClubStatsWhereInput | ClubStatsWhereInput[]
+    totalUsers?: IntFilter<"ClubStats"> | number
+    totalConsumers?: IntFilter<"ClubStats"> | number
+    totalMerchants?: IntFilter<"ClubStats"> | number
+    activeUsers30d?: IntFilter<"ClubStats"> | number
+    totalPurchases?: IntFilter<"ClubStats"> | number
+    totalRevenue?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalCashbackPaid?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalPlatformFees?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFilter<"ClubStats"> | number
+    revenue30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    purchases30d?: IntFilter<"ClubStats"> | number
+    cashback30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"ClubStats"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubStats"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId">
 
-  export type TenantStatsOrderByWithAggregationInput = {
+  export type ClubStatsOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -16016,33 +16016,33 @@ export namespace Prisma {
     cashback30d?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantStatsCountOrderByAggregateInput
-    _avg?: TenantStatsAvgOrderByAggregateInput
-    _max?: TenantStatsMaxOrderByAggregateInput
-    _min?: TenantStatsMinOrderByAggregateInput
-    _sum?: TenantStatsSumOrderByAggregateInput
+    _count?: ClubStatsCountOrderByAggregateInput
+    _avg?: ClubStatsAvgOrderByAggregateInput
+    _max?: ClubStatsMaxOrderByAggregateInput
+    _min?: ClubStatsMinOrderByAggregateInput
+    _sum?: ClubStatsSumOrderByAggregateInput
   }
 
-  export type TenantStatsScalarWhereWithAggregatesInput = {
-    AND?: TenantStatsScalarWhereWithAggregatesInput | TenantStatsScalarWhereWithAggregatesInput[]
-    OR?: TenantStatsScalarWhereWithAggregatesInput[]
-    NOT?: TenantStatsScalarWhereWithAggregatesInput | TenantStatsScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantStats"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantStats"> | string
-    totalUsers?: IntWithAggregatesFilter<"TenantStats"> | number
-    totalConsumers?: IntWithAggregatesFilter<"TenantStats"> | number
-    totalMerchants?: IntWithAggregatesFilter<"TenantStats"> | number
-    activeUsers30d?: IntWithAggregatesFilter<"TenantStats"> | number
-    totalPurchases?: IntWithAggregatesFilter<"TenantStats"> | number
-    totalRevenue?: DecimalWithAggregatesFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalCashbackPaid?: DecimalWithAggregatesFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalPlatformFees?: DecimalWithAggregatesFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    totalProducts?: IntWithAggregatesFilter<"TenantStats"> | number
-    revenue30d?: DecimalWithAggregatesFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    purchases30d?: IntWithAggregatesFilter<"TenantStats"> | number
-    cashback30d?: DecimalWithAggregatesFilter<"TenantStats"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeWithAggregatesFilter<"TenantStats"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TenantStats"> | Date | string
+  export type ClubStatsScalarWhereWithAggregatesInput = {
+    AND?: ClubStatsScalarWhereWithAggregatesInput | ClubStatsScalarWhereWithAggregatesInput[]
+    OR?: ClubStatsScalarWhereWithAggregatesInput[]
+    NOT?: ClubStatsScalarWhereWithAggregatesInput | ClubStatsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubStats"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubStats"> | string
+    totalUsers?: IntWithAggregatesFilter<"ClubStats"> | number
+    totalConsumers?: IntWithAggregatesFilter<"ClubStats"> | number
+    totalMerchants?: IntWithAggregatesFilter<"ClubStats"> | number
+    activeUsers30d?: IntWithAggregatesFilter<"ClubStats"> | number
+    totalPurchases?: IntWithAggregatesFilter<"ClubStats"> | number
+    totalRevenue?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalCashbackPaid?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalPlatformFees?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntWithAggregatesFilter<"ClubStats"> | number
+    revenue30d?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    purchases30d?: IntWithAggregatesFilter<"ClubStats"> | number
+    cashback30d?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"ClubStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubStats"> | Date | string
   }
 
   export type GlobalStatsWhereInput = {
@@ -16051,7 +16051,7 @@ export namespace Prisma {
     NOT?: GlobalStatsWhereInput | GlobalStatsWhereInput[]
     id?: UuidFilter<"GlobalStats"> | string
     date?: DateTimeFilter<"GlobalStats"> | Date | string
-    totalTenants?: IntFilter<"GlobalStats"> | number
+    totalClubs?: IntFilter<"GlobalStats"> | number
     totalUsers?: IntFilter<"GlobalStats"> | number
     totalConsumers?: IntFilter<"GlobalStats"> | number
     totalMerchants?: IntFilter<"GlobalStats"> | number
@@ -16064,16 +16064,16 @@ export namespace Prisma {
     revenue30d?: DecimalFilter<"GlobalStats"> | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFilter<"GlobalStats"> | number
     cashback30d?: DecimalFilter<"GlobalStats"> | Decimal | DecimalJsLike | number | string
-    newTenants?: IntFilter<"GlobalStats"> | number
+    newClubs?: IntFilter<"GlobalStats"> | number
     newUsers?: IntFilter<"GlobalStats"> | number
-    churnedTenants?: IntFilter<"GlobalStats"> | number
+    churnedClubs?: IntFilter<"GlobalStats"> | number
     createdAt?: DateTimeFilter<"GlobalStats"> | Date | string
   }
 
   export type GlobalStatsOrderByWithRelationInput = {
     id?: SortOrder
     date?: SortOrder
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -16086,9 +16086,9 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16098,7 +16098,7 @@ export namespace Prisma {
     AND?: GlobalStatsWhereInput | GlobalStatsWhereInput[]
     OR?: GlobalStatsWhereInput[]
     NOT?: GlobalStatsWhereInput | GlobalStatsWhereInput[]
-    totalTenants?: IntFilter<"GlobalStats"> | number
+    totalClubs?: IntFilter<"GlobalStats"> | number
     totalUsers?: IntFilter<"GlobalStats"> | number
     totalConsumers?: IntFilter<"GlobalStats"> | number
     totalMerchants?: IntFilter<"GlobalStats"> | number
@@ -16111,16 +16111,16 @@ export namespace Prisma {
     revenue30d?: DecimalFilter<"GlobalStats"> | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFilter<"GlobalStats"> | number
     cashback30d?: DecimalFilter<"GlobalStats"> | Decimal | DecimalJsLike | number | string
-    newTenants?: IntFilter<"GlobalStats"> | number
+    newClubs?: IntFilter<"GlobalStats"> | number
     newUsers?: IntFilter<"GlobalStats"> | number
-    churnedTenants?: IntFilter<"GlobalStats"> | number
+    churnedClubs?: IntFilter<"GlobalStats"> | number
     createdAt?: DateTimeFilter<"GlobalStats"> | Date | string
   }, "id" | "date">
 
   export type GlobalStatsOrderByWithAggregationInput = {
     id?: SortOrder
     date?: SortOrder
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -16133,9 +16133,9 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
     createdAt?: SortOrder
     _count?: GlobalStatsCountOrderByAggregateInput
     _avg?: GlobalStatsAvgOrderByAggregateInput
@@ -16150,7 +16150,7 @@ export namespace Prisma {
     NOT?: GlobalStatsScalarWhereWithAggregatesInput | GlobalStatsScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"GlobalStats"> | string
     date?: DateTimeWithAggregatesFilter<"GlobalStats"> | Date | string
-    totalTenants?: IntWithAggregatesFilter<"GlobalStats"> | number
+    totalClubs?: IntWithAggregatesFilter<"GlobalStats"> | number
     totalUsers?: IntWithAggregatesFilter<"GlobalStats"> | number
     totalConsumers?: IntWithAggregatesFilter<"GlobalStats"> | number
     totalMerchants?: IntWithAggregatesFilter<"GlobalStats"> | number
@@ -16163,171 +16163,171 @@ export namespace Prisma {
     revenue30d?: DecimalWithAggregatesFilter<"GlobalStats"> | Decimal | DecimalJsLike | number | string
     purchases30d?: IntWithAggregatesFilter<"GlobalStats"> | number
     cashback30d?: DecimalWithAggregatesFilter<"GlobalStats"> | Decimal | DecimalJsLike | number | string
-    newTenants?: IntWithAggregatesFilter<"GlobalStats"> | number
+    newClubs?: IntWithAggregatesFilter<"GlobalStats"> | number
     newUsers?: IntWithAggregatesFilter<"GlobalStats"> | number
-    churnedTenants?: IntWithAggregatesFilter<"GlobalStats"> | number
+    churnedClubs?: IntWithAggregatesFilter<"GlobalStats"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GlobalStats"> | Date | string
   }
 
-  export type TenantCashbackConfigWhereInput = {
-    AND?: TenantCashbackConfigWhereInput | TenantCashbackConfigWhereInput[]
-    OR?: TenantCashbackConfigWhereInput[]
-    NOT?: TenantCashbackConfigWhereInput | TenantCashbackConfigWhereInput[]
-    id?: UuidFilter<"TenantCashbackConfig"> | string
-    tenantId?: UuidFilter<"TenantCashbackConfig"> | string
-    consumerPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    clubPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    consumerReferrerPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    merchantReferrerPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TenantCashbackConfig"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantCashbackConfig"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubCashbackConfigWhereInput = {
+    AND?: ClubCashbackConfigWhereInput | ClubCashbackConfigWhereInput[]
+    OR?: ClubCashbackConfigWhereInput[]
+    NOT?: ClubCashbackConfigWhereInput | ClubCashbackConfigWhereInput[]
+    id?: UuidFilter<"ClubCashbackConfig"> | string
+    clubId?: UuidFilter<"ClubCashbackConfig"> | string
+    consumerPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    clubPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    consumerReferrerPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    merchantReferrerPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"ClubCashbackConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubCashbackConfig"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantCashbackConfigOrderByWithRelationInput = {
+  export type ClubCashbackConfigOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
     merchantReferrerPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantCashbackConfigWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubCashbackConfigWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId?: string
-    AND?: TenantCashbackConfigWhereInput | TenantCashbackConfigWhereInput[]
-    OR?: TenantCashbackConfigWhereInput[]
-    NOT?: TenantCashbackConfigWhereInput | TenantCashbackConfigWhereInput[]
-    consumerPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    clubPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    consumerReferrerPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    merchantReferrerPercent?: DecimalFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TenantCashbackConfig"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantCashbackConfig"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId">
+    clubId?: string
+    AND?: ClubCashbackConfigWhereInput | ClubCashbackConfigWhereInput[]
+    OR?: ClubCashbackConfigWhereInput[]
+    NOT?: ClubCashbackConfigWhereInput | ClubCashbackConfigWhereInput[]
+    consumerPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    clubPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    consumerReferrerPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    merchantReferrerPercent?: DecimalFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"ClubCashbackConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubCashbackConfig"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId">
 
-  export type TenantCashbackConfigOrderByWithAggregationInput = {
+  export type ClubCashbackConfigOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
     merchantReferrerPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantCashbackConfigCountOrderByAggregateInput
-    _avg?: TenantCashbackConfigAvgOrderByAggregateInput
-    _max?: TenantCashbackConfigMaxOrderByAggregateInput
-    _min?: TenantCashbackConfigMinOrderByAggregateInput
-    _sum?: TenantCashbackConfigSumOrderByAggregateInput
+    _count?: ClubCashbackConfigCountOrderByAggregateInput
+    _avg?: ClubCashbackConfigAvgOrderByAggregateInput
+    _max?: ClubCashbackConfigMaxOrderByAggregateInput
+    _min?: ClubCashbackConfigMinOrderByAggregateInput
+    _sum?: ClubCashbackConfigSumOrderByAggregateInput
   }
 
-  export type TenantCashbackConfigScalarWhereWithAggregatesInput = {
-    AND?: TenantCashbackConfigScalarWhereWithAggregatesInput | TenantCashbackConfigScalarWhereWithAggregatesInput[]
-    OR?: TenantCashbackConfigScalarWhereWithAggregatesInput[]
-    NOT?: TenantCashbackConfigScalarWhereWithAggregatesInput | TenantCashbackConfigScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantCashbackConfig"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantCashbackConfig"> | string
-    consumerPercent?: DecimalWithAggregatesFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    clubPercent?: DecimalWithAggregatesFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    consumerReferrerPercent?: DecimalWithAggregatesFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    merchantReferrerPercent?: DecimalWithAggregatesFilter<"TenantCashbackConfig"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeWithAggregatesFilter<"TenantCashbackConfig"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TenantCashbackConfig"> | Date | string
+  export type ClubCashbackConfigScalarWhereWithAggregatesInput = {
+    AND?: ClubCashbackConfigScalarWhereWithAggregatesInput | ClubCashbackConfigScalarWhereWithAggregatesInput[]
+    OR?: ClubCashbackConfigScalarWhereWithAggregatesInput[]
+    NOT?: ClubCashbackConfigScalarWhereWithAggregatesInput | ClubCashbackConfigScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubCashbackConfig"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubCashbackConfig"> | string
+    consumerPercent?: DecimalWithAggregatesFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    clubPercent?: DecimalWithAggregatesFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    consumerReferrerPercent?: DecimalWithAggregatesFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    merchantReferrerPercent?: DecimalWithAggregatesFilter<"ClubCashbackConfig"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"ClubCashbackConfig"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubCashbackConfig"> | Date | string
   }
 
-  export type TenantWithdrawalConfigWhereInput = {
-    AND?: TenantWithdrawalConfigWhereInput | TenantWithdrawalConfigWhereInput[]
-    OR?: TenantWithdrawalConfigWhereInput[]
-    NOT?: TenantWithdrawalConfigWhereInput | TenantWithdrawalConfigWhereInput[]
-    id?: UuidFilter<"TenantWithdrawalConfig"> | string
-    tenantId?: UuidFilter<"TenantWithdrawalConfig"> | string
-    withdrawalFeePercent?: DecimalFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    withdrawalFeeFixed?: DecimalFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    minWithdrawalAmount?: DecimalFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TenantWithdrawalConfig"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantWithdrawalConfig"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubWithdrawalConfigWhereInput = {
+    AND?: ClubWithdrawalConfigWhereInput | ClubWithdrawalConfigWhereInput[]
+    OR?: ClubWithdrawalConfigWhereInput[]
+    NOT?: ClubWithdrawalConfigWhereInput | ClubWithdrawalConfigWhereInput[]
+    id?: UuidFilter<"ClubWithdrawalConfig"> | string
+    clubId?: UuidFilter<"ClubWithdrawalConfig"> | string
+    withdrawalFeePercent?: DecimalFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    withdrawalFeeFixed?: DecimalFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    minWithdrawalAmount?: DecimalFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"ClubWithdrawalConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubWithdrawalConfig"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantWithdrawalConfigOrderByWithRelationInput = {
+  export type ClubWithdrawalConfigOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantWithdrawalConfigWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubWithdrawalConfigWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId?: string
-    AND?: TenantWithdrawalConfigWhereInput | TenantWithdrawalConfigWhereInput[]
-    OR?: TenantWithdrawalConfigWhereInput[]
-    NOT?: TenantWithdrawalConfigWhereInput | TenantWithdrawalConfigWhereInput[]
-    withdrawalFeePercent?: DecimalFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    withdrawalFeeFixed?: DecimalFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    minWithdrawalAmount?: DecimalFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TenantWithdrawalConfig"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantWithdrawalConfig"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId">
+    clubId?: string
+    AND?: ClubWithdrawalConfigWhereInput | ClubWithdrawalConfigWhereInput[]
+    OR?: ClubWithdrawalConfigWhereInput[]
+    NOT?: ClubWithdrawalConfigWhereInput | ClubWithdrawalConfigWhereInput[]
+    withdrawalFeePercent?: DecimalFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    withdrawalFeeFixed?: DecimalFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    minWithdrawalAmount?: DecimalFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"ClubWithdrawalConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubWithdrawalConfig"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId">
 
-  export type TenantWithdrawalConfigOrderByWithAggregationInput = {
+  export type ClubWithdrawalConfigOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantWithdrawalConfigCountOrderByAggregateInput
-    _avg?: TenantWithdrawalConfigAvgOrderByAggregateInput
-    _max?: TenantWithdrawalConfigMaxOrderByAggregateInput
-    _min?: TenantWithdrawalConfigMinOrderByAggregateInput
-    _sum?: TenantWithdrawalConfigSumOrderByAggregateInput
+    _count?: ClubWithdrawalConfigCountOrderByAggregateInput
+    _avg?: ClubWithdrawalConfigAvgOrderByAggregateInput
+    _max?: ClubWithdrawalConfigMaxOrderByAggregateInput
+    _min?: ClubWithdrawalConfigMinOrderByAggregateInput
+    _sum?: ClubWithdrawalConfigSumOrderByAggregateInput
   }
 
-  export type TenantWithdrawalConfigScalarWhereWithAggregatesInput = {
-    AND?: TenantWithdrawalConfigScalarWhereWithAggregatesInput | TenantWithdrawalConfigScalarWhereWithAggregatesInput[]
-    OR?: TenantWithdrawalConfigScalarWhereWithAggregatesInput[]
-    NOT?: TenantWithdrawalConfigScalarWhereWithAggregatesInput | TenantWithdrawalConfigScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantWithdrawalConfig"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantWithdrawalConfig"> | string
-    withdrawalFeePercent?: DecimalWithAggregatesFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    withdrawalFeeFixed?: DecimalWithAggregatesFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    minWithdrawalAmount?: DecimalWithAggregatesFilter<"TenantWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeWithAggregatesFilter<"TenantWithdrawalConfig"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TenantWithdrawalConfig"> | Date | string
+  export type ClubWithdrawalConfigScalarWhereWithAggregatesInput = {
+    AND?: ClubWithdrawalConfigScalarWhereWithAggregatesInput | ClubWithdrawalConfigScalarWhereWithAggregatesInput[]
+    OR?: ClubWithdrawalConfigScalarWhereWithAggregatesInput[]
+    NOT?: ClubWithdrawalConfigScalarWhereWithAggregatesInput | ClubWithdrawalConfigScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubWithdrawalConfig"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubWithdrawalConfig"> | string
+    withdrawalFeePercent?: DecimalWithAggregatesFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    withdrawalFeeFixed?: DecimalWithAggregatesFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    minWithdrawalAmount?: DecimalWithAggregatesFilter<"ClubWithdrawalConfig"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"ClubWithdrawalConfig"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubWithdrawalConfig"> | Date | string
   }
 
-  export type TenantAdminWhereInput = {
-    AND?: TenantAdminWhereInput | TenantAdminWhereInput[]
-    OR?: TenantAdminWhereInput[]
-    NOT?: TenantAdminWhereInput | TenantAdminWhereInput[]
-    id?: UuidFilter<"TenantAdmin"> | string
-    tenantId?: UuidFilter<"TenantAdmin"> | string
-    name?: StringFilter<"TenantAdmin"> | string
-    email?: StringFilter<"TenantAdmin"> | string
-    password?: StringFilter<"TenantAdmin"> | string
-    role?: EnumAdminRoleFilter<"TenantAdmin"> | $Enums.AdminRole
-    isActive?: BoolFilter<"TenantAdmin"> | boolean
-    lastLoginAt?: DateTimeNullableFilter<"TenantAdmin"> | Date | string | null
-    createdAt?: DateTimeFilter<"TenantAdmin"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantAdmin"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubAdminWhereInput = {
+    AND?: ClubAdminWhereInput | ClubAdminWhereInput[]
+    OR?: ClubAdminWhereInput[]
+    NOT?: ClubAdminWhereInput | ClubAdminWhereInput[]
+    id?: UuidFilter<"ClubAdmin"> | string
+    clubId?: UuidFilter<"ClubAdmin"> | string
+    name?: StringFilter<"ClubAdmin"> | string
+    email?: StringFilter<"ClubAdmin"> | string
+    password?: StringFilter<"ClubAdmin"> | string
+    role?: EnumAdminRoleFilter<"ClubAdmin"> | $Enums.AdminRole
+    isActive?: BoolFilter<"ClubAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableFilter<"ClubAdmin"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClubAdmin"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubAdmin"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantAdminOrderByWithRelationInput = {
+  export type ClubAdminOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -16336,30 +16336,30 @@ export namespace Prisma {
     lastLoginAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantAdminWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubAdminWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId_email?: TenantAdminTenantIdEmailCompoundUniqueInput
-    AND?: TenantAdminWhereInput | TenantAdminWhereInput[]
-    OR?: TenantAdminWhereInput[]
-    NOT?: TenantAdminWhereInput | TenantAdminWhereInput[]
-    tenantId?: UuidFilter<"TenantAdmin"> | string
-    name?: StringFilter<"TenantAdmin"> | string
-    email?: StringFilter<"TenantAdmin"> | string
-    password?: StringFilter<"TenantAdmin"> | string
-    role?: EnumAdminRoleFilter<"TenantAdmin"> | $Enums.AdminRole
-    isActive?: BoolFilter<"TenantAdmin"> | boolean
-    lastLoginAt?: DateTimeNullableFilter<"TenantAdmin"> | Date | string | null
-    createdAt?: DateTimeFilter<"TenantAdmin"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantAdmin"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId_email">
+    clubId_email?: ClubAdminClubIdEmailCompoundUniqueInput
+    AND?: ClubAdminWhereInput | ClubAdminWhereInput[]
+    OR?: ClubAdminWhereInput[]
+    NOT?: ClubAdminWhereInput | ClubAdminWhereInput[]
+    clubId?: UuidFilter<"ClubAdmin"> | string
+    name?: StringFilter<"ClubAdmin"> | string
+    email?: StringFilter<"ClubAdmin"> | string
+    password?: StringFilter<"ClubAdmin"> | string
+    role?: EnumAdminRoleFilter<"ClubAdmin"> | $Enums.AdminRole
+    isActive?: BoolFilter<"ClubAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableFilter<"ClubAdmin"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClubAdmin"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubAdmin"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId_email">
 
-  export type TenantAdminOrderByWithAggregationInput = {
+  export type ClubAdminOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -16368,25 +16368,25 @@ export namespace Prisma {
     lastLoginAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: TenantAdminCountOrderByAggregateInput
-    _max?: TenantAdminMaxOrderByAggregateInput
-    _min?: TenantAdminMinOrderByAggregateInput
+    _count?: ClubAdminCountOrderByAggregateInput
+    _max?: ClubAdminMaxOrderByAggregateInput
+    _min?: ClubAdminMinOrderByAggregateInput
   }
 
-  export type TenantAdminScalarWhereWithAggregatesInput = {
-    AND?: TenantAdminScalarWhereWithAggregatesInput | TenantAdminScalarWhereWithAggregatesInput[]
-    OR?: TenantAdminScalarWhereWithAggregatesInput[]
-    NOT?: TenantAdminScalarWhereWithAggregatesInput | TenantAdminScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantAdmin"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantAdmin"> | string
-    name?: StringWithAggregatesFilter<"TenantAdmin"> | string
-    email?: StringWithAggregatesFilter<"TenantAdmin"> | string
-    password?: StringWithAggregatesFilter<"TenantAdmin"> | string
-    role?: EnumAdminRoleWithAggregatesFilter<"TenantAdmin"> | $Enums.AdminRole
-    isActive?: BoolWithAggregatesFilter<"TenantAdmin"> | boolean
-    lastLoginAt?: DateTimeNullableWithAggregatesFilter<"TenantAdmin"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"TenantAdmin"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TenantAdmin"> | Date | string
+  export type ClubAdminScalarWhereWithAggregatesInput = {
+    AND?: ClubAdminScalarWhereWithAggregatesInput | ClubAdminScalarWhereWithAggregatesInput[]
+    OR?: ClubAdminScalarWhereWithAggregatesInput[]
+    NOT?: ClubAdminScalarWhereWithAggregatesInput | ClubAdminScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubAdmin"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubAdmin"> | string
+    name?: StringWithAggregatesFilter<"ClubAdmin"> | string
+    email?: StringWithAggregatesFilter<"ClubAdmin"> | string
+    password?: StringWithAggregatesFilter<"ClubAdmin"> | string
+    role?: EnumAdminRoleWithAggregatesFilter<"ClubAdmin"> | $Enums.AdminRole
+    isActive?: BoolWithAggregatesFilter<"ClubAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableWithAggregatesFilter<"ClubAdmin"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ClubAdmin"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubAdmin"> | Date | string
   }
 
   export type SuperAdminWhereInput = {
@@ -16461,150 +16461,150 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"SuperAdmin"> | Date | string
   }
 
-  export type TenantApiKeyWhereInput = {
-    AND?: TenantApiKeyWhereInput | TenantApiKeyWhereInput[]
-    OR?: TenantApiKeyWhereInput[]
-    NOT?: TenantApiKeyWhereInput | TenantApiKeyWhereInput[]
-    id?: UuidFilter<"TenantApiKey"> | string
-    tenantId?: UuidFilter<"TenantApiKey"> | string
-    keyName?: StringFilter<"TenantApiKey"> | string
-    apiKey?: StringFilter<"TenantApiKey"> | string
-    isActive?: BoolFilter<"TenantApiKey"> | boolean
-    lastUsedAt?: DateTimeNullableFilter<"TenantApiKey"> | Date | string | null
-    createdAt?: DateTimeFilter<"TenantApiKey"> | Date | string
-    expiresAt?: DateTimeNullableFilter<"TenantApiKey"> | Date | string | null
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubApiKeyWhereInput = {
+    AND?: ClubApiKeyWhereInput | ClubApiKeyWhereInput[]
+    OR?: ClubApiKeyWhereInput[]
+    NOT?: ClubApiKeyWhereInput | ClubApiKeyWhereInput[]
+    id?: UuidFilter<"ClubApiKey"> | string
+    clubId?: UuidFilter<"ClubApiKey"> | string
+    keyName?: StringFilter<"ClubApiKey"> | string
+    apiKey?: StringFilter<"ClubApiKey"> | string
+    isActive?: BoolFilter<"ClubApiKey"> | boolean
+    lastUsedAt?: DateTimeNullableFilter<"ClubApiKey"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClubApiKey"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"ClubApiKey"> | Date | string | null
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantApiKeyOrderByWithRelationInput = {
+  export type ClubApiKeyOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     keyName?: SortOrder
     apiKey?: SortOrder
     isActive?: SortOrder
     lastUsedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrderInput | SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantApiKeyWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubApiKeyWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     apiKey?: string
-    AND?: TenantApiKeyWhereInput | TenantApiKeyWhereInput[]
-    OR?: TenantApiKeyWhereInput[]
-    NOT?: TenantApiKeyWhereInput | TenantApiKeyWhereInput[]
-    tenantId?: UuidFilter<"TenantApiKey"> | string
-    keyName?: StringFilter<"TenantApiKey"> | string
-    isActive?: BoolFilter<"TenantApiKey"> | boolean
-    lastUsedAt?: DateTimeNullableFilter<"TenantApiKey"> | Date | string | null
-    createdAt?: DateTimeFilter<"TenantApiKey"> | Date | string
-    expiresAt?: DateTimeNullableFilter<"TenantApiKey"> | Date | string | null
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    AND?: ClubApiKeyWhereInput | ClubApiKeyWhereInput[]
+    OR?: ClubApiKeyWhereInput[]
+    NOT?: ClubApiKeyWhereInput | ClubApiKeyWhereInput[]
+    clubId?: UuidFilter<"ClubApiKey"> | string
+    keyName?: StringFilter<"ClubApiKey"> | string
+    isActive?: BoolFilter<"ClubApiKey"> | boolean
+    lastUsedAt?: DateTimeNullableFilter<"ClubApiKey"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClubApiKey"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"ClubApiKey"> | Date | string | null
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }, "id" | "apiKey">
 
-  export type TenantApiKeyOrderByWithAggregationInput = {
+  export type ClubApiKeyOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     keyName?: SortOrder
     apiKey?: SortOrder
     isActive?: SortOrder
     lastUsedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrderInput | SortOrder
-    _count?: TenantApiKeyCountOrderByAggregateInput
-    _max?: TenantApiKeyMaxOrderByAggregateInput
-    _min?: TenantApiKeyMinOrderByAggregateInput
+    _count?: ClubApiKeyCountOrderByAggregateInput
+    _max?: ClubApiKeyMaxOrderByAggregateInput
+    _min?: ClubApiKeyMinOrderByAggregateInput
   }
 
-  export type TenantApiKeyScalarWhereWithAggregatesInput = {
-    AND?: TenantApiKeyScalarWhereWithAggregatesInput | TenantApiKeyScalarWhereWithAggregatesInput[]
-    OR?: TenantApiKeyScalarWhereWithAggregatesInput[]
-    NOT?: TenantApiKeyScalarWhereWithAggregatesInput | TenantApiKeyScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantApiKey"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantApiKey"> | string
-    keyName?: StringWithAggregatesFilter<"TenantApiKey"> | string
-    apiKey?: StringWithAggregatesFilter<"TenantApiKey"> | string
-    isActive?: BoolWithAggregatesFilter<"TenantApiKey"> | boolean
-    lastUsedAt?: DateTimeNullableWithAggregatesFilter<"TenantApiKey"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"TenantApiKey"> | Date | string
-    expiresAt?: DateTimeNullableWithAggregatesFilter<"TenantApiKey"> | Date | string | null
+  export type ClubApiKeyScalarWhereWithAggregatesInput = {
+    AND?: ClubApiKeyScalarWhereWithAggregatesInput | ClubApiKeyScalarWhereWithAggregatesInput[]
+    OR?: ClubApiKeyScalarWhereWithAggregatesInput[]
+    NOT?: ClubApiKeyScalarWhereWithAggregatesInput | ClubApiKeyScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubApiKey"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubApiKey"> | string
+    keyName?: StringWithAggregatesFilter<"ClubApiKey"> | string
+    apiKey?: StringWithAggregatesFilter<"ClubApiKey"> | string
+    isActive?: BoolWithAggregatesFilter<"ClubApiKey"> | boolean
+    lastUsedAt?: DateTimeNullableWithAggregatesFilter<"ClubApiKey"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ClubApiKey"> | Date | string
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"ClubApiKey"> | Date | string | null
   }
 
-  export type TenantUsageStatsWhereInput = {
-    AND?: TenantUsageStatsWhereInput | TenantUsageStatsWhereInput[]
-    OR?: TenantUsageStatsWhereInput[]
-    NOT?: TenantUsageStatsWhereInput | TenantUsageStatsWhereInput[]
-    id?: UuidFilter<"TenantUsageStats"> | string
-    tenantId?: UuidFilter<"TenantUsageStats"> | string
-    date?: DateTimeFilter<"TenantUsageStats"> | Date | string
-    apiCalls?: IntFilter<"TenantUsageStats"> | number
-    storageUsedMB?: IntFilter<"TenantUsageStats"> | number
-    activeUsers?: IntFilter<"TenantUsageStats"> | number
-    createdAt?: DateTimeFilter<"TenantUsageStats"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  export type ClubUsageStatsWhereInput = {
+    AND?: ClubUsageStatsWhereInput | ClubUsageStatsWhereInput[]
+    OR?: ClubUsageStatsWhereInput[]
+    NOT?: ClubUsageStatsWhereInput | ClubUsageStatsWhereInput[]
+    id?: UuidFilter<"ClubUsageStats"> | string
+    clubId?: UuidFilter<"ClubUsageStats"> | string
+    date?: DateTimeFilter<"ClubUsageStats"> | Date | string
+    apiCalls?: IntFilter<"ClubUsageStats"> | number
+    storageUsedMB?: IntFilter<"ClubUsageStats"> | number
+    activeUsers?: IntFilter<"ClubUsageStats"> | number
+    createdAt?: DateTimeFilter<"ClubUsageStats"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
-  export type TenantUsageStatsOrderByWithRelationInput = {
+  export type ClubUsageStatsOrderByWithRelationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     date?: SortOrder
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
     activeUsers?: SortOrder
     createdAt?: SortOrder
-    tenant?: TenantOrderByWithRelationInput
+    club?: ClubOrderByWithRelationInput
   }
 
-  export type TenantUsageStatsWhereUniqueInput = Prisma.AtLeast<{
+  export type ClubUsageStatsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tenantId_date?: TenantUsageStatsTenantIdDateCompoundUniqueInput
-    AND?: TenantUsageStatsWhereInput | TenantUsageStatsWhereInput[]
-    OR?: TenantUsageStatsWhereInput[]
-    NOT?: TenantUsageStatsWhereInput | TenantUsageStatsWhereInput[]
-    tenantId?: UuidFilter<"TenantUsageStats"> | string
-    date?: DateTimeFilter<"TenantUsageStats"> | Date | string
-    apiCalls?: IntFilter<"TenantUsageStats"> | number
-    storageUsedMB?: IntFilter<"TenantUsageStats"> | number
-    activeUsers?: IntFilter<"TenantUsageStats"> | number
-    createdAt?: DateTimeFilter<"TenantUsageStats"> | Date | string
-    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-  }, "id" | "tenantId_date">
+    clubId_date?: ClubUsageStatsClubIdDateCompoundUniqueInput
+    AND?: ClubUsageStatsWhereInput | ClubUsageStatsWhereInput[]
+    OR?: ClubUsageStatsWhereInput[]
+    NOT?: ClubUsageStatsWhereInput | ClubUsageStatsWhereInput[]
+    clubId?: UuidFilter<"ClubUsageStats"> | string
+    date?: DateTimeFilter<"ClubUsageStats"> | Date | string
+    apiCalls?: IntFilter<"ClubUsageStats"> | number
+    storageUsedMB?: IntFilter<"ClubUsageStats"> | number
+    activeUsers?: IntFilter<"ClubUsageStats"> | number
+    createdAt?: DateTimeFilter<"ClubUsageStats"> | Date | string
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId_date">
 
-  export type TenantUsageStatsOrderByWithAggregationInput = {
+  export type ClubUsageStatsOrderByWithAggregationInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     date?: SortOrder
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
     activeUsers?: SortOrder
     createdAt?: SortOrder
-    _count?: TenantUsageStatsCountOrderByAggregateInput
-    _avg?: TenantUsageStatsAvgOrderByAggregateInput
-    _max?: TenantUsageStatsMaxOrderByAggregateInput
-    _min?: TenantUsageStatsMinOrderByAggregateInput
-    _sum?: TenantUsageStatsSumOrderByAggregateInput
+    _count?: ClubUsageStatsCountOrderByAggregateInput
+    _avg?: ClubUsageStatsAvgOrderByAggregateInput
+    _max?: ClubUsageStatsMaxOrderByAggregateInput
+    _min?: ClubUsageStatsMinOrderByAggregateInput
+    _sum?: ClubUsageStatsSumOrderByAggregateInput
   }
 
-  export type TenantUsageStatsScalarWhereWithAggregatesInput = {
-    AND?: TenantUsageStatsScalarWhereWithAggregatesInput | TenantUsageStatsScalarWhereWithAggregatesInput[]
-    OR?: TenantUsageStatsScalarWhereWithAggregatesInput[]
-    NOT?: TenantUsageStatsScalarWhereWithAggregatesInput | TenantUsageStatsScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"TenantUsageStats"> | string
-    tenantId?: UuidWithAggregatesFilter<"TenantUsageStats"> | string
-    date?: DateTimeWithAggregatesFilter<"TenantUsageStats"> | Date | string
-    apiCalls?: IntWithAggregatesFilter<"TenantUsageStats"> | number
-    storageUsedMB?: IntWithAggregatesFilter<"TenantUsageStats"> | number
-    activeUsers?: IntWithAggregatesFilter<"TenantUsageStats"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"TenantUsageStats"> | Date | string
+  export type ClubUsageStatsScalarWhereWithAggregatesInput = {
+    AND?: ClubUsageStatsScalarWhereWithAggregatesInput | ClubUsageStatsScalarWhereWithAggregatesInput[]
+    OR?: ClubUsageStatsScalarWhereWithAggregatesInput[]
+    NOT?: ClubUsageStatsScalarWhereWithAggregatesInput | ClubUsageStatsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubUsageStats"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubUsageStats"> | string
+    date?: DateTimeWithAggregatesFilter<"ClubUsageStats"> | Date | string
+    apiCalls?: IntWithAggregatesFilter<"ClubUsageStats"> | number
+    storageUsedMB?: IntWithAggregatesFilter<"ClubUsageStats"> | number
+    activeUsers?: IntWithAggregatesFilter<"ClubUsageStats"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ClubUsageStats"> | Date | string
   }
 
-  export type TenantCreateInput = {
+  export type ClubCreateInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -16629,22 +16629,22 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateInput = {
+  export type ClubUncheckedCreateInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -16669,22 +16669,22 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUpdateInput = {
+  export type ClubUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -16709,22 +16709,22 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateInput = {
+  export type ClubUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -16749,22 +16749,22 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateManyInput = {
+  export type ClubCreateManyInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -16791,12 +16791,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantUpdateManyMutationInput = {
+  export type ClubUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -16823,12 +16823,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantUncheckedUpdateManyInput = {
+  export type ClubUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -16855,7 +16855,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantBrandingCreateInput = {
+  export type ClubBrandingCreateInput = {
     id?: string
     logoUrl?: string | null
     logoIconUrl?: string | null
@@ -16871,69 +16871,12 @@ export namespace Prisma {
     playStoreUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutBrandingInput
+    club: ClubCreateNestedOneWithoutBrandingInput
   }
 
-  export type TenantBrandingUncheckedCreateInput = {
+  export type ClubBrandingUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    logoUrl?: string | null
-    logoIconUrl?: string | null
-    faviconUrl?: string | null
-    primaryColor?: string
-    secondaryColor?: string
-    accentColor?: string
-    backgroundColor?: string
-    textColor?: string
-    appName: string
-    appDescription?: string | null
-    appStoreUrl?: string | null
-    playStoreUrl?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TenantBrandingUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    secondaryColor?: StringFieldUpdateOperationsInput | string
-    accentColor?: StringFieldUpdateOperationsInput | string
-    backgroundColor?: StringFieldUpdateOperationsInput | string
-    textColor?: StringFieldUpdateOperationsInput | string
-    appName?: StringFieldUpdateOperationsInput | string
-    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutBrandingNestedInput
-  }
-
-  export type TenantBrandingUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    secondaryColor?: StringFieldUpdateOperationsInput | string
-    accentColor?: StringFieldUpdateOperationsInput | string
-    backgroundColor?: StringFieldUpdateOperationsInput | string
-    textColor?: StringFieldUpdateOperationsInput | string
-    appName?: StringFieldUpdateOperationsInput | string
-    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantBrandingCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     logoUrl?: string | null
     logoIconUrl?: string | null
     faviconUrl?: string | null
@@ -16950,7 +16893,64 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantBrandingUpdateManyMutationInput = {
+  export type ClubBrandingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    secondaryColor?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    textColor?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutBrandingNestedInput
+  }
+
+  export type ClubBrandingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    secondaryColor?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    textColor?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubBrandingCreateManyInput = {
+    id?: string
+    clubId: string
+    logoUrl?: string | null
+    logoIconUrl?: string | null
+    faviconUrl?: string | null
+    primaryColor?: string
+    secondaryColor?: string
+    accentColor?: string
+    backgroundColor?: string
+    textColor?: string
+    appName: string
+    appDescription?: string | null
+    appStoreUrl?: string | null
+    playStoreUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubBrandingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16968,9 +16968,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantBrandingUncheckedUpdateManyInput = {
+  export type ClubBrandingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
     faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16987,7 +16987,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantModuleCreateInput = {
+  export type ClubModuleCreateInput = {
     id?: string
     moduleKey: $Enums.ModuleKey
     isEnabled?: boolean
@@ -16998,54 +16998,12 @@ export namespace Prisma {
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutModulesInput
+    club: ClubCreateNestedOneWithoutModulesInput
   }
 
-  export type TenantModuleUncheckedCreateInput = {
+  export type ClubModuleUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    moduleKey: $Enums.ModuleKey
-    isEnabled?: boolean
-    isEnabledByDefault?: boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    displayName: string
-    description?: string | null
-    sortOrder?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TenantModuleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
-    isEnabled?: BoolFieldUpdateOperationsInput | boolean
-    isEnabledByDefault?: BoolFieldUpdateOperationsInput | boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    displayName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutModulesNestedInput
-  }
-
-  export type TenantModuleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
-    isEnabled?: BoolFieldUpdateOperationsInput | boolean
-    isEnabledByDefault?: BoolFieldUpdateOperationsInput | boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    displayName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantModuleCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     moduleKey: $Enums.ModuleKey
     isEnabled?: boolean
     isEnabledByDefault?: boolean
@@ -17057,7 +17015,49 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantModuleUpdateManyMutationInput = {
+  export type ClubModuleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    isEnabledByDefault?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    displayName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutModulesNestedInput
+  }
+
+  export type ClubModuleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    isEnabledByDefault?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    displayName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubModuleCreateManyInput = {
+    id?: string
+    clubId: string
+    moduleKey: $Enums.ModuleKey
+    isEnabled?: boolean
+    isEnabledByDefault?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    displayName: string
+    description?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubModuleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -17070,9 +17070,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantModuleUncheckedUpdateManyInput = {
+  export type ClubModuleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     isEnabledByDefault?: BoolFieldUpdateOperationsInput | boolean
@@ -17084,7 +17084,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantStatsCreateInput = {
+  export type ClubStatsCreateInput = {
     id?: string
     totalUsers?: number
     totalConsumers?: number
@@ -17100,69 +17100,12 @@ export namespace Prisma {
     cashback30d?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutStatsInput
+    club: ClubCreateNestedOneWithoutStatsInput
   }
 
-  export type TenantStatsUncheckedCreateInput = {
+  export type ClubStatsUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    totalUsers?: number
-    totalConsumers?: number
-    totalMerchants?: number
-    activeUsers30d?: number
-    totalPurchases?: number
-    totalRevenue?: Decimal | DecimalJsLike | number | string
-    totalCashbackPaid?: Decimal | DecimalJsLike | number | string
-    totalPlatformFees?: Decimal | DecimalJsLike | number | string
-    totalProducts?: number
-    revenue30d?: Decimal | DecimalJsLike | number | string
-    purchases30d?: number
-    cashback30d?: Decimal | DecimalJsLike | number | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TenantStatsUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    totalUsers?: IntFieldUpdateOperationsInput | number
-    totalConsumers?: IntFieldUpdateOperationsInput | number
-    totalMerchants?: IntFieldUpdateOperationsInput | number
-    activeUsers30d?: IntFieldUpdateOperationsInput | number
-    totalPurchases?: IntFieldUpdateOperationsInput | number
-    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    totalCashbackPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    totalPlatformFees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    totalProducts?: IntFieldUpdateOperationsInput | number
-    revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    purchases30d?: IntFieldUpdateOperationsInput | number
-    cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutStatsNestedInput
-  }
-
-  export type TenantStatsUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    totalUsers?: IntFieldUpdateOperationsInput | number
-    totalConsumers?: IntFieldUpdateOperationsInput | number
-    totalMerchants?: IntFieldUpdateOperationsInput | number
-    activeUsers30d?: IntFieldUpdateOperationsInput | number
-    totalPurchases?: IntFieldUpdateOperationsInput | number
-    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    totalCashbackPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    totalPlatformFees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    totalProducts?: IntFieldUpdateOperationsInput | number
-    revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    purchases30d?: IntFieldUpdateOperationsInput | number
-    cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantStatsCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     totalUsers?: number
     totalConsumers?: number
     totalMerchants?: number
@@ -17179,7 +17122,64 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantStatsUpdateManyMutationInput = {
+  export type ClubStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalUsers?: IntFieldUpdateOperationsInput | number
+    totalConsumers?: IntFieldUpdateOperationsInput | number
+    totalMerchants?: IntFieldUpdateOperationsInput | number
+    activeUsers30d?: IntFieldUpdateOperationsInput | number
+    totalPurchases?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalCashbackPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPlatformFees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFieldUpdateOperationsInput | number
+    revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchases30d?: IntFieldUpdateOperationsInput | number
+    cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutStatsNestedInput
+  }
+
+  export type ClubStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    totalUsers?: IntFieldUpdateOperationsInput | number
+    totalConsumers?: IntFieldUpdateOperationsInput | number
+    totalMerchants?: IntFieldUpdateOperationsInput | number
+    activeUsers30d?: IntFieldUpdateOperationsInput | number
+    totalPurchases?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalCashbackPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPlatformFees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFieldUpdateOperationsInput | number
+    revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchases30d?: IntFieldUpdateOperationsInput | number
+    cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubStatsCreateManyInput = {
+    id?: string
+    clubId: string
+    totalUsers?: number
+    totalConsumers?: number
+    totalMerchants?: number
+    activeUsers30d?: number
+    totalPurchases?: number
+    totalRevenue?: Decimal | DecimalJsLike | number | string
+    totalCashbackPaid?: Decimal | DecimalJsLike | number | string
+    totalPlatformFees?: Decimal | DecimalJsLike | number | string
+    totalProducts?: number
+    revenue30d?: Decimal | DecimalJsLike | number | string
+    purchases30d?: number
+    cashback30d?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubStatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
@@ -17197,9 +17197,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantStatsUncheckedUpdateManyInput = {
+  export type ClubStatsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
     totalMerchants?: IntFieldUpdateOperationsInput | number
@@ -17219,7 +17219,7 @@ export namespace Prisma {
   export type GlobalStatsCreateInput = {
     id?: string
     date: Date | string
-    totalTenants?: number
+    totalClubs?: number
     totalUsers?: number
     totalConsumers?: number
     totalMerchants?: number
@@ -17232,16 +17232,16 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
-    newTenants?: number
+    newClubs?: number
     newUsers?: number
-    churnedTenants?: number
+    churnedClubs?: number
     createdAt?: Date | string
   }
 
   export type GlobalStatsUncheckedCreateInput = {
     id?: string
     date: Date | string
-    totalTenants?: number
+    totalClubs?: number
     totalUsers?: number
     totalConsumers?: number
     totalMerchants?: number
@@ -17254,16 +17254,16 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
-    newTenants?: number
+    newClubs?: number
     newUsers?: number
-    churnedTenants?: number
+    churnedClubs?: number
     createdAt?: Date | string
   }
 
   export type GlobalStatsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalTenants?: IntFieldUpdateOperationsInput | number
+    totalClubs?: IntFieldUpdateOperationsInput | number
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
     totalMerchants?: IntFieldUpdateOperationsInput | number
@@ -17276,16 +17276,16 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    newTenants?: IntFieldUpdateOperationsInput | number
+    newClubs?: IntFieldUpdateOperationsInput | number
     newUsers?: IntFieldUpdateOperationsInput | number
-    churnedTenants?: IntFieldUpdateOperationsInput | number
+    churnedClubs?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GlobalStatsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalTenants?: IntFieldUpdateOperationsInput | number
+    totalClubs?: IntFieldUpdateOperationsInput | number
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
     totalMerchants?: IntFieldUpdateOperationsInput | number
@@ -17298,16 +17298,16 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    newTenants?: IntFieldUpdateOperationsInput | number
+    newClubs?: IntFieldUpdateOperationsInput | number
     newUsers?: IntFieldUpdateOperationsInput | number
-    churnedTenants?: IntFieldUpdateOperationsInput | number
+    churnedClubs?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GlobalStatsCreateManyInput = {
     id?: string
     date: Date | string
-    totalTenants?: number
+    totalClubs?: number
     totalUsers?: number
     totalConsumers?: number
     totalMerchants?: number
@@ -17320,16 +17320,16 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
-    newTenants?: number
+    newClubs?: number
     newUsers?: number
-    churnedTenants?: number
+    churnedClubs?: number
     createdAt?: Date | string
   }
 
   export type GlobalStatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalTenants?: IntFieldUpdateOperationsInput | number
+    totalClubs?: IntFieldUpdateOperationsInput | number
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
     totalMerchants?: IntFieldUpdateOperationsInput | number
@@ -17342,16 +17342,16 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    newTenants?: IntFieldUpdateOperationsInput | number
+    newClubs?: IntFieldUpdateOperationsInput | number
     newUsers?: IntFieldUpdateOperationsInput | number
-    churnedTenants?: IntFieldUpdateOperationsInput | number
+    churnedClubs?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GlobalStatsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalTenants?: IntFieldUpdateOperationsInput | number
+    totalClubs?: IntFieldUpdateOperationsInput | number
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
     totalMerchants?: IntFieldUpdateOperationsInput | number
@@ -17364,13 +17364,13 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    newTenants?: IntFieldUpdateOperationsInput | number
+    newClubs?: IntFieldUpdateOperationsInput | number
     newUsers?: IntFieldUpdateOperationsInput | number
-    churnedTenants?: IntFieldUpdateOperationsInput | number
+    churnedClubs?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantCashbackConfigCreateInput = {
+  export type ClubCashbackConfigCreateInput = {
     id?: string
     consumerPercent?: Decimal | DecimalJsLike | number | string
     clubPercent?: Decimal | DecimalJsLike | number | string
@@ -17378,45 +17378,12 @@ export namespace Prisma {
     merchantReferrerPercent?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutCashbackConfigInput
+    club: ClubCreateNestedOneWithoutCashbackConfigInput
   }
 
-  export type TenantCashbackConfigUncheckedCreateInput = {
+  export type ClubCashbackConfigUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    consumerPercent?: Decimal | DecimalJsLike | number | string
-    clubPercent?: Decimal | DecimalJsLike | number | string
-    consumerReferrerPercent?: Decimal | DecimalJsLike | number | string
-    merchantReferrerPercent?: Decimal | DecimalJsLike | number | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TenantCashbackConfigUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    consumerReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    merchantReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutCashbackConfigNestedInput
-  }
-
-  export type TenantCashbackConfigUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    consumerReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    merchantReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantCashbackConfigCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     consumerPercent?: Decimal | DecimalJsLike | number | string
     clubPercent?: Decimal | DecimalJsLike | number | string
     consumerReferrerPercent?: Decimal | DecimalJsLike | number | string
@@ -17425,7 +17392,40 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantCashbackConfigUpdateManyMutationInput = {
+  export type ClubCashbackConfigUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    consumerReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    merchantReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutCashbackConfigNestedInput
+  }
+
+  export type ClubCashbackConfigUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    consumerReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    merchantReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubCashbackConfigCreateManyInput = {
+    id?: string
+    clubId: string
+    consumerPercent?: Decimal | DecimalJsLike | number | string
+    clubPercent?: Decimal | DecimalJsLike | number | string
+    consumerReferrerPercent?: Decimal | DecimalJsLike | number | string
+    merchantReferrerPercent?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubCashbackConfigUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -17435,9 +17435,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantCashbackConfigUncheckedUpdateManyInput = {
+  export type ClubCashbackConfigUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     consumerReferrerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -17446,49 +17446,19 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantWithdrawalConfigCreateInput = {
+  export type ClubWithdrawalConfigCreateInput = {
     id?: string
     withdrawalFeePercent?: Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: Decimal | DecimalJsLike | number | string
     minWithdrawalAmount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutWithdrawalConfigInput
+    club: ClubCreateNestedOneWithoutWithdrawalConfigInput
   }
 
-  export type TenantWithdrawalConfigUncheckedCreateInput = {
+  export type ClubWithdrawalConfigUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    withdrawalFeePercent?: Decimal | DecimalJsLike | number | string
-    withdrawalFeeFixed?: Decimal | DecimalJsLike | number | string
-    minWithdrawalAmount?: Decimal | DecimalJsLike | number | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TenantWithdrawalConfigUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWithdrawalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutWithdrawalConfigNestedInput
-  }
-
-  export type TenantWithdrawalConfigUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWithdrawalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantWithdrawalConfigCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     withdrawalFeePercent?: Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: Decimal | DecimalJsLike | number | string
     minWithdrawalAmount?: Decimal | DecimalJsLike | number | string
@@ -17496,7 +17466,37 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantWithdrawalConfigUpdateManyMutationInput = {
+  export type ClubWithdrawalConfigUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minWithdrawalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutWithdrawalConfigNestedInput
+  }
+
+  export type ClubWithdrawalConfigUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minWithdrawalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubWithdrawalConfigCreateManyInput = {
+    id?: string
+    clubId: string
+    withdrawalFeePercent?: Decimal | DecimalJsLike | number | string
+    withdrawalFeeFixed?: Decimal | DecimalJsLike | number | string
+    minWithdrawalAmount?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubWithdrawalConfigUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -17505,9 +17505,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantWithdrawalConfigUncheckedUpdateManyInput = {
+  export type ClubWithdrawalConfigUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minWithdrawalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -17515,7 +17515,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantAdminCreateInput = {
+  export type ClubAdminCreateInput = {
     id?: string
     name: string
     email: string
@@ -17525,51 +17525,12 @@ export namespace Prisma {
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutAdminsInput
+    club: ClubCreateNestedOneWithoutAdminsInput
   }
 
-  export type TenantAdminUncheckedCreateInput = {
+  export type ClubAdminUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    name: string
-    email: string
-    password: string
-    role?: $Enums.AdminRole
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TenantAdminUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutAdminsNestedInput
-  }
-
-  export type TenantAdminUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantAdminCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     name: string
     email: string
     password: string
@@ -17580,7 +17541,46 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantAdminUpdateManyMutationInput = {
+  export type ClubAdminUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutAdminsNestedInput
+  }
+
+  export type ClubAdminUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubAdminCreateManyInput = {
+    id?: string
+    clubId: string
+    name: string
+    email: string
+    password: string
+    role?: $Enums.AdminRole
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubAdminUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -17592,9 +17592,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantAdminUncheckedUpdateManyInput = {
+  export type ClubAdminUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -17689,7 +17689,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantApiKeyCreateInput = {
+  export type ClubApiKeyCreateInput = {
     id?: string
     keyName: string
     apiKey: string
@@ -17697,45 +17697,12 @@ export namespace Prisma {
     lastUsedAt?: Date | string | null
     createdAt?: Date | string
     expiresAt?: Date | string | null
-    tenant: TenantCreateNestedOneWithoutApiKeysInput
+    club: ClubCreateNestedOneWithoutApiKeysInput
   }
 
-  export type TenantApiKeyUncheckedCreateInput = {
+  export type ClubApiKeyUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    keyName: string
-    apiKey: string
-    isActive?: boolean
-    lastUsedAt?: Date | string | null
-    createdAt?: Date | string
-    expiresAt?: Date | string | null
-  }
-
-  export type TenantApiKeyUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    keyName?: StringFieldUpdateOperationsInput | string
-    apiKey?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tenant?: TenantUpdateOneRequiredWithoutApiKeysNestedInput
-  }
-
-  export type TenantApiKeyUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    keyName?: StringFieldUpdateOperationsInput | string
-    apiKey?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type TenantApiKeyCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     keyName: string
     apiKey: string
     isActive?: boolean
@@ -17744,7 +17711,40 @@ export namespace Prisma {
     expiresAt?: Date | string | null
   }
 
-  export type TenantApiKeyUpdateManyMutationInput = {
+  export type ClubApiKeyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    club?: ClubUpdateOneRequiredWithoutApiKeysNestedInput
+  }
+
+  export type ClubApiKeyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    keyName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ClubApiKeyCreateManyInput = {
+    id?: string
+    clubId: string
+    keyName: string
+    apiKey: string
+    isActive?: boolean
+    lastUsedAt?: Date | string | null
+    createdAt?: Date | string
+    expiresAt?: Date | string | null
+  }
+
+  export type ClubApiKeyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     keyName?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
@@ -17754,9 +17754,9 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TenantApiKeyUncheckedUpdateManyInput = {
+  export type ClubApiKeyUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     keyName?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17765,49 +17765,19 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TenantUsageStatsCreateInput = {
+  export type ClubUsageStatsCreateInput = {
     id?: string
     date: Date | string
     apiCalls?: number
     storageUsedMB?: number
     activeUsers?: number
     createdAt?: Date | string
-    tenant: TenantCreateNestedOneWithoutUsageStatsInput
+    club: ClubCreateNestedOneWithoutUsageStatsInput
   }
 
-  export type TenantUsageStatsUncheckedCreateInput = {
+  export type ClubUsageStatsUncheckedCreateInput = {
     id?: string
-    tenantId: string
-    date: Date | string
-    apiCalls?: number
-    storageUsedMB?: number
-    activeUsers?: number
-    createdAt?: Date | string
-  }
-
-  export type TenantUsageStatsUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    apiCalls?: IntFieldUpdateOperationsInput | number
-    storageUsedMB?: IntFieldUpdateOperationsInput | number
-    activeUsers?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneRequiredWithoutUsageStatsNestedInput
-  }
-
-  export type TenantUsageStatsUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    apiCalls?: IntFieldUpdateOperationsInput | number
-    storageUsedMB?: IntFieldUpdateOperationsInput | number
-    activeUsers?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantUsageStatsCreateManyInput = {
-    id?: string
-    tenantId: string
+    clubId: string
     date: Date | string
     apiCalls?: number
     storageUsedMB?: number
@@ -17815,7 +17785,37 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type TenantUsageStatsUpdateManyMutationInput = {
+  export type ClubUsageStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiCalls?: IntFieldUpdateOperationsInput | number
+    storageUsedMB?: IntFieldUpdateOperationsInput | number
+    activeUsers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneRequiredWithoutUsageStatsNestedInput
+  }
+
+  export type ClubUsageStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiCalls?: IntFieldUpdateOperationsInput | number
+    storageUsedMB?: IntFieldUpdateOperationsInput | number
+    activeUsers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubUsageStatsCreateManyInput = {
+    id?: string
+    clubId: string
+    date: Date | string
+    apiCalls?: number
+    storageUsedMB?: number
+    activeUsers?: number
+    createdAt?: Date | string
+  }
+
+  export type ClubUsageStatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     apiCalls?: IntFieldUpdateOperationsInput | number
@@ -17824,9 +17824,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantUsageStatsUncheckedUpdateManyInput = {
+  export type ClubUsageStatsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     apiCalls?: IntFieldUpdateOperationsInput | number
     storageUsedMB?: IntFieldUpdateOperationsInput | number
@@ -17861,11 +17861,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type EnumTenantStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
+  export type EnumClubStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumClubStatusFilter<$PrismaModel> | $Enums.ClubStatus
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -17941,48 +17941,48 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type TenantBrandingNullableScalarRelationFilter = {
-    is?: TenantBrandingWhereInput | null
-    isNot?: TenantBrandingWhereInput | null
+  export type ClubBrandingNullableScalarRelationFilter = {
+    is?: ClubBrandingWhereInput | null
+    isNot?: ClubBrandingWhereInput | null
   }
 
-  export type TenantModuleListRelationFilter = {
-    every?: TenantModuleWhereInput
-    some?: TenantModuleWhereInput
-    none?: TenantModuleWhereInput
+  export type ClubModuleListRelationFilter = {
+    every?: ClubModuleWhereInput
+    some?: ClubModuleWhereInput
+    none?: ClubModuleWhereInput
   }
 
-  export type TenantAdminListRelationFilter = {
-    every?: TenantAdminWhereInput
-    some?: TenantAdminWhereInput
-    none?: TenantAdminWhereInput
+  export type ClubAdminListRelationFilter = {
+    every?: ClubAdminWhereInput
+    some?: ClubAdminWhereInput
+    none?: ClubAdminWhereInput
   }
 
-  export type TenantApiKeyListRelationFilter = {
-    every?: TenantApiKeyWhereInput
-    some?: TenantApiKeyWhereInput
-    none?: TenantApiKeyWhereInput
+  export type ClubApiKeyListRelationFilter = {
+    every?: ClubApiKeyWhereInput
+    some?: ClubApiKeyWhereInput
+    none?: ClubApiKeyWhereInput
   }
 
-  export type TenantUsageStatsListRelationFilter = {
-    every?: TenantUsageStatsWhereInput
-    some?: TenantUsageStatsWhereInput
-    none?: TenantUsageStatsWhereInput
+  export type ClubUsageStatsListRelationFilter = {
+    every?: ClubUsageStatsWhereInput
+    some?: ClubUsageStatsWhereInput
+    none?: ClubUsageStatsWhereInput
   }
 
-  export type TenantStatsNullableScalarRelationFilter = {
-    is?: TenantStatsWhereInput | null
-    isNot?: TenantStatsWhereInput | null
+  export type ClubStatsNullableScalarRelationFilter = {
+    is?: ClubStatsWhereInput | null
+    isNot?: ClubStatsWhereInput | null
   }
 
-  export type TenantCashbackConfigNullableScalarRelationFilter = {
-    is?: TenantCashbackConfigWhereInput | null
-    isNot?: TenantCashbackConfigWhereInput | null
+  export type ClubCashbackConfigNullableScalarRelationFilter = {
+    is?: ClubCashbackConfigWhereInput | null
+    isNot?: ClubCashbackConfigWhereInput | null
   }
 
-  export type TenantWithdrawalConfigNullableScalarRelationFilter = {
-    is?: TenantWithdrawalConfigWhereInput | null
-    isNot?: TenantWithdrawalConfigWhereInput | null
+  export type ClubWithdrawalConfigNullableScalarRelationFilter = {
+    is?: ClubWithdrawalConfigWhereInput | null
+    isNot?: ClubWithdrawalConfigWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -17990,23 +17990,23 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type TenantModuleOrderByRelationAggregateInput = {
+  export type ClubModuleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type TenantAdminOrderByRelationAggregateInput = {
+  export type ClubAdminOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type TenantApiKeyOrderByRelationAggregateInput = {
+  export type ClubApiKeyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type TenantUsageStatsOrderByRelationAggregateInput = {
+  export type ClubUsageStatsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type TenantCountOrderByAggregateInput = {
+  export type ClubCountOrderByAggregateInput = {
     id?: SortOrder
     slug?: SortOrder
     companyName?: SortOrder
@@ -18038,7 +18038,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantAvgOrderByAggregateInput = {
+  export type ClubAvgOrderByAggregateInput = {
     databasePort?: SortOrder
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
@@ -18048,7 +18048,7 @@ export namespace Prisma {
     outstandingBalance?: SortOrder
   }
 
-  export type TenantMaxOrderByAggregateInput = {
+  export type ClubMaxOrderByAggregateInput = {
     id?: SortOrder
     slug?: SortOrder
     companyName?: SortOrder
@@ -18080,7 +18080,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantMinOrderByAggregateInput = {
+  export type ClubMinOrderByAggregateInput = {
     id?: SortOrder
     slug?: SortOrder
     companyName?: SortOrder
@@ -18112,7 +18112,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantSumOrderByAggregateInput = {
+  export type ClubSumOrderByAggregateInput = {
     databasePort?: SortOrder
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
@@ -18155,14 +18155,14 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type EnumTenantStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel> | $Enums.TenantStatus
+  export type EnumClubStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumClubStatusWithAggregatesFilter<$PrismaModel> | $Enums.ClubStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTenantStatusFilter<$PrismaModel>
-    _max?: NestedEnumTenantStatusFilter<$PrismaModel>
+    _min?: NestedEnumClubStatusFilter<$PrismaModel>
+    _max?: NestedEnumClubStatusFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -18263,14 +18263,14 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type TenantScalarRelationFilter = {
-    is?: TenantWhereInput
-    isNot?: TenantWhereInput
+  export type ClubScalarRelationFilter = {
+    is?: ClubWhereInput
+    isNot?: ClubWhereInput
   }
 
-  export type TenantBrandingCountOrderByAggregateInput = {
+  export type ClubBrandingCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     logoUrl?: SortOrder
     logoIconUrl?: SortOrder
     faviconUrl?: SortOrder
@@ -18287,9 +18287,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantBrandingMaxOrderByAggregateInput = {
+  export type ClubBrandingMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     logoUrl?: SortOrder
     logoIconUrl?: SortOrder
     faviconUrl?: SortOrder
@@ -18306,9 +18306,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantBrandingMinOrderByAggregateInput = {
+  export type ClubBrandingMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     logoUrl?: SortOrder
     logoIconUrl?: SortOrder
     faviconUrl?: SortOrder
@@ -18360,14 +18360,14 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type TenantModuleTenantIdModuleKeyCompoundUniqueInput = {
-    tenantId: string
+  export type ClubModuleClubIdModuleKeyCompoundUniqueInput = {
+    clubId: string
     moduleKey: $Enums.ModuleKey
   }
 
-  export type TenantModuleCountOrderByAggregateInput = {
+  export type ClubModuleCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     moduleKey?: SortOrder
     isEnabled?: SortOrder
     isEnabledByDefault?: SortOrder
@@ -18379,13 +18379,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantModuleAvgOrderByAggregateInput = {
+  export type ClubModuleAvgOrderByAggregateInput = {
     sortOrder?: SortOrder
   }
 
-  export type TenantModuleMaxOrderByAggregateInput = {
+  export type ClubModuleMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     moduleKey?: SortOrder
     isEnabled?: SortOrder
     isEnabledByDefault?: SortOrder
@@ -18396,9 +18396,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantModuleMinOrderByAggregateInput = {
+  export type ClubModuleMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     moduleKey?: SortOrder
     isEnabled?: SortOrder
     isEnabledByDefault?: SortOrder
@@ -18409,7 +18409,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantModuleSumOrderByAggregateInput = {
+  export type ClubModuleSumOrderByAggregateInput = {
     sortOrder?: SortOrder
   }
 
@@ -18457,9 +18457,9 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
-  export type TenantStatsCountOrderByAggregateInput = {
+  export type ClubStatsCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18476,7 +18476,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantStatsAvgOrderByAggregateInput = {
+  export type ClubStatsAvgOrderByAggregateInput = {
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18491,9 +18491,9 @@ export namespace Prisma {
     cashback30d?: SortOrder
   }
 
-  export type TenantStatsMaxOrderByAggregateInput = {
+  export type ClubStatsMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18510,9 +18510,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantStatsMinOrderByAggregateInput = {
+  export type ClubStatsMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18529,7 +18529,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantStatsSumOrderByAggregateInput = {
+  export type ClubStatsSumOrderByAggregateInput = {
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18547,7 +18547,7 @@ export namespace Prisma {
   export type GlobalStatsCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18560,14 +18560,14 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
     createdAt?: SortOrder
   }
 
   export type GlobalStatsAvgOrderByAggregateInput = {
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18580,15 +18580,15 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
   }
 
   export type GlobalStatsMaxOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18601,16 +18601,16 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
     createdAt?: SortOrder
   }
 
   export type GlobalStatsMinOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18623,14 +18623,14 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
     createdAt?: SortOrder
   }
 
   export type GlobalStatsSumOrderByAggregateInput = {
-    totalTenants?: SortOrder
+    totalClubs?: SortOrder
     totalUsers?: SortOrder
     totalConsumers?: SortOrder
     totalMerchants?: SortOrder
@@ -18643,14 +18643,14 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
-    newTenants?: SortOrder
+    newClubs?: SortOrder
     newUsers?: SortOrder
-    churnedTenants?: SortOrder
+    churnedClubs?: SortOrder
   }
 
-  export type TenantCashbackConfigCountOrderByAggregateInput = {
+  export type ClubCashbackConfigCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
@@ -18659,16 +18659,16 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantCashbackConfigAvgOrderByAggregateInput = {
+  export type ClubCashbackConfigAvgOrderByAggregateInput = {
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
     merchantReferrerPercent?: SortOrder
   }
 
-  export type TenantCashbackConfigMaxOrderByAggregateInput = {
+  export type ClubCashbackConfigMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
@@ -18677,9 +18677,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantCashbackConfigMinOrderByAggregateInput = {
+  export type ClubCashbackConfigMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
@@ -18688,16 +18688,16 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantCashbackConfigSumOrderByAggregateInput = {
+  export type ClubCashbackConfigSumOrderByAggregateInput = {
     consumerPercent?: SortOrder
     clubPercent?: SortOrder
     consumerReferrerPercent?: SortOrder
     merchantReferrerPercent?: SortOrder
   }
 
-  export type TenantWithdrawalConfigCountOrderByAggregateInput = {
+  export type ClubWithdrawalConfigCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
@@ -18705,15 +18705,15 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantWithdrawalConfigAvgOrderByAggregateInput = {
+  export type ClubWithdrawalConfigAvgOrderByAggregateInput = {
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
   }
 
-  export type TenantWithdrawalConfigMaxOrderByAggregateInput = {
+  export type ClubWithdrawalConfigMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
@@ -18721,9 +18721,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantWithdrawalConfigMinOrderByAggregateInput = {
+  export type ClubWithdrawalConfigMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
@@ -18731,7 +18731,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantWithdrawalConfigSumOrderByAggregateInput = {
+  export type ClubWithdrawalConfigSumOrderByAggregateInput = {
     withdrawalFeePercent?: SortOrder
     withdrawalFeeFixed?: SortOrder
     minWithdrawalAmount?: SortOrder
@@ -18744,14 +18744,14 @@ export namespace Prisma {
     not?: NestedEnumAdminRoleFilter<$PrismaModel> | $Enums.AdminRole
   }
 
-  export type TenantAdminTenantIdEmailCompoundUniqueInput = {
-    tenantId: string
+  export type ClubAdminClubIdEmailCompoundUniqueInput = {
+    clubId: string
     email: string
   }
 
-  export type TenantAdminCountOrderByAggregateInput = {
+  export type ClubAdminCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -18762,9 +18762,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantAdminMaxOrderByAggregateInput = {
+  export type ClubAdminMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -18775,9 +18775,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type TenantAdminMinOrderByAggregateInput = {
+  export type ClubAdminMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -18881,9 +18881,9 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
-  export type TenantApiKeyCountOrderByAggregateInput = {
+  export type ClubApiKeyCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     keyName?: SortOrder
     apiKey?: SortOrder
     isActive?: SortOrder
@@ -18892,9 +18892,9 @@ export namespace Prisma {
     expiresAt?: SortOrder
   }
 
-  export type TenantApiKeyMaxOrderByAggregateInput = {
+  export type ClubApiKeyMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     keyName?: SortOrder
     apiKey?: SortOrder
     isActive?: SortOrder
@@ -18903,9 +18903,9 @@ export namespace Prisma {
     expiresAt?: SortOrder
   }
 
-  export type TenantApiKeyMinOrderByAggregateInput = {
+  export type ClubApiKeyMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     keyName?: SortOrder
     apiKey?: SortOrder
     isActive?: SortOrder
@@ -18914,14 +18914,14 @@ export namespace Prisma {
     expiresAt?: SortOrder
   }
 
-  export type TenantUsageStatsTenantIdDateCompoundUniqueInput = {
-    tenantId: string
+  export type ClubUsageStatsClubIdDateCompoundUniqueInput = {
+    clubId: string
     date: Date | string
   }
 
-  export type TenantUsageStatsCountOrderByAggregateInput = {
+  export type ClubUsageStatsCountOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     date?: SortOrder
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
@@ -18929,15 +18929,15 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type TenantUsageStatsAvgOrderByAggregateInput = {
+  export type ClubUsageStatsAvgOrderByAggregateInput = {
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
     activeUsers?: SortOrder
   }
 
-  export type TenantUsageStatsMaxOrderByAggregateInput = {
+  export type ClubUsageStatsMaxOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     date?: SortOrder
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
@@ -18945,9 +18945,9 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type TenantUsageStatsMinOrderByAggregateInput = {
+  export type ClubUsageStatsMinOrderByAggregateInput = {
     id?: SortOrder
-    tenantId?: SortOrder
+    clubId?: SortOrder
     date?: SortOrder
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
@@ -18955,122 +18955,122 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type TenantUsageStatsSumOrderByAggregateInput = {
+  export type ClubUsageStatsSumOrderByAggregateInput = {
     apiCalls?: SortOrder
     storageUsedMB?: SortOrder
     activeUsers?: SortOrder
   }
 
-  export type TenantBrandingCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
-    connect?: TenantBrandingWhereUniqueInput
+  export type ClubBrandingCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
+    connect?: ClubBrandingWhereUniqueInput
   }
 
-  export type TenantModuleCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantModuleCreateWithoutTenantInput, TenantModuleUncheckedCreateWithoutTenantInput> | TenantModuleCreateWithoutTenantInput[] | TenantModuleUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantModuleCreateOrConnectWithoutTenantInput | TenantModuleCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantModuleCreateManyTenantInputEnvelope
-    connect?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
+  export type ClubModuleCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubModuleCreateWithoutClubInput, ClubModuleUncheckedCreateWithoutClubInput> | ClubModuleCreateWithoutClubInput[] | ClubModuleUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubModuleCreateOrConnectWithoutClubInput | ClubModuleCreateOrConnectWithoutClubInput[]
+    createMany?: ClubModuleCreateManyClubInputEnvelope
+    connect?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
   }
 
-  export type TenantAdminCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantAdminCreateWithoutTenantInput, TenantAdminUncheckedCreateWithoutTenantInput> | TenantAdminCreateWithoutTenantInput[] | TenantAdminUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantAdminCreateOrConnectWithoutTenantInput | TenantAdminCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantAdminCreateManyTenantInputEnvelope
-    connect?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
+  export type ClubAdminCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubAdminCreateWithoutClubInput, ClubAdminUncheckedCreateWithoutClubInput> | ClubAdminCreateWithoutClubInput[] | ClubAdminUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubAdminCreateOrConnectWithoutClubInput | ClubAdminCreateOrConnectWithoutClubInput[]
+    createMany?: ClubAdminCreateManyClubInputEnvelope
+    connect?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
   }
 
-  export type TenantApiKeyCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantApiKeyCreateWithoutTenantInput, TenantApiKeyUncheckedCreateWithoutTenantInput> | TenantApiKeyCreateWithoutTenantInput[] | TenantApiKeyUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantApiKeyCreateOrConnectWithoutTenantInput | TenantApiKeyCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantApiKeyCreateManyTenantInputEnvelope
-    connect?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
+  export type ClubApiKeyCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubApiKeyCreateWithoutClubInput, ClubApiKeyUncheckedCreateWithoutClubInput> | ClubApiKeyCreateWithoutClubInput[] | ClubApiKeyUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubApiKeyCreateOrConnectWithoutClubInput | ClubApiKeyCreateOrConnectWithoutClubInput[]
+    createMany?: ClubApiKeyCreateManyClubInputEnvelope
+    connect?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
   }
 
-  export type TenantUsageStatsCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantUsageStatsCreateWithoutTenantInput, TenantUsageStatsUncheckedCreateWithoutTenantInput> | TenantUsageStatsCreateWithoutTenantInput[] | TenantUsageStatsUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantUsageStatsCreateOrConnectWithoutTenantInput | TenantUsageStatsCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantUsageStatsCreateManyTenantInputEnvelope
-    connect?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
+  export type ClubUsageStatsCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubUsageStatsCreateWithoutClubInput, ClubUsageStatsUncheckedCreateWithoutClubInput> | ClubUsageStatsCreateWithoutClubInput[] | ClubUsageStatsUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubUsageStatsCreateOrConnectWithoutClubInput | ClubUsageStatsCreateOrConnectWithoutClubInput[]
+    createMany?: ClubUsageStatsCreateManyClubInputEnvelope
+    connect?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
   }
 
-  export type TenantStatsCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantStatsCreateWithoutTenantInput, TenantStatsUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantStatsCreateOrConnectWithoutTenantInput
-    connect?: TenantStatsWhereUniqueInput
+  export type ClubStatsCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubStatsCreateWithoutClubInput, ClubStatsUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubStatsCreateOrConnectWithoutClubInput
+    connect?: ClubStatsWhereUniqueInput
   }
 
-  export type TenantCashbackConfigCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantCashbackConfigCreateWithoutTenantInput, TenantCashbackConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantCashbackConfigCreateOrConnectWithoutTenantInput
-    connect?: TenantCashbackConfigWhereUniqueInput
+  export type ClubCashbackConfigCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubCashbackConfigCreateWithoutClubInput, ClubCashbackConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubCashbackConfigCreateOrConnectWithoutClubInput
+    connect?: ClubCashbackConfigWhereUniqueInput
   }
 
-  export type TenantWithdrawalConfigCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantWithdrawalConfigCreateWithoutTenantInput, TenantWithdrawalConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantWithdrawalConfigCreateOrConnectWithoutTenantInput
-    connect?: TenantWithdrawalConfigWhereUniqueInput
+  export type ClubWithdrawalConfigCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubWithdrawalConfigCreateOrConnectWithoutClubInput
+    connect?: ClubWithdrawalConfigWhereUniqueInput
   }
 
-  export type TenantBrandingUncheckedCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
-    connect?: TenantBrandingWhereUniqueInput
+  export type ClubBrandingUncheckedCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
+    connect?: ClubBrandingWhereUniqueInput
   }
 
-  export type TenantModuleUncheckedCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantModuleCreateWithoutTenantInput, TenantModuleUncheckedCreateWithoutTenantInput> | TenantModuleCreateWithoutTenantInput[] | TenantModuleUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantModuleCreateOrConnectWithoutTenantInput | TenantModuleCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantModuleCreateManyTenantInputEnvelope
-    connect?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
+  export type ClubModuleUncheckedCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubModuleCreateWithoutClubInput, ClubModuleUncheckedCreateWithoutClubInput> | ClubModuleCreateWithoutClubInput[] | ClubModuleUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubModuleCreateOrConnectWithoutClubInput | ClubModuleCreateOrConnectWithoutClubInput[]
+    createMany?: ClubModuleCreateManyClubInputEnvelope
+    connect?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
   }
 
-  export type TenantAdminUncheckedCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantAdminCreateWithoutTenantInput, TenantAdminUncheckedCreateWithoutTenantInput> | TenantAdminCreateWithoutTenantInput[] | TenantAdminUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantAdminCreateOrConnectWithoutTenantInput | TenantAdminCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantAdminCreateManyTenantInputEnvelope
-    connect?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
+  export type ClubAdminUncheckedCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubAdminCreateWithoutClubInput, ClubAdminUncheckedCreateWithoutClubInput> | ClubAdminCreateWithoutClubInput[] | ClubAdminUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubAdminCreateOrConnectWithoutClubInput | ClubAdminCreateOrConnectWithoutClubInput[]
+    createMany?: ClubAdminCreateManyClubInputEnvelope
+    connect?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
   }
 
-  export type TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantApiKeyCreateWithoutTenantInput, TenantApiKeyUncheckedCreateWithoutTenantInput> | TenantApiKeyCreateWithoutTenantInput[] | TenantApiKeyUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantApiKeyCreateOrConnectWithoutTenantInput | TenantApiKeyCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantApiKeyCreateManyTenantInputEnvelope
-    connect?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
+  export type ClubApiKeyUncheckedCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubApiKeyCreateWithoutClubInput, ClubApiKeyUncheckedCreateWithoutClubInput> | ClubApiKeyCreateWithoutClubInput[] | ClubApiKeyUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubApiKeyCreateOrConnectWithoutClubInput | ClubApiKeyCreateOrConnectWithoutClubInput[]
+    createMany?: ClubApiKeyCreateManyClubInputEnvelope
+    connect?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
   }
 
-  export type TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput = {
-    create?: XOR<TenantUsageStatsCreateWithoutTenantInput, TenantUsageStatsUncheckedCreateWithoutTenantInput> | TenantUsageStatsCreateWithoutTenantInput[] | TenantUsageStatsUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantUsageStatsCreateOrConnectWithoutTenantInput | TenantUsageStatsCreateOrConnectWithoutTenantInput[]
-    createMany?: TenantUsageStatsCreateManyTenantInputEnvelope
-    connect?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
+  export type ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput = {
+    create?: XOR<ClubUsageStatsCreateWithoutClubInput, ClubUsageStatsUncheckedCreateWithoutClubInput> | ClubUsageStatsCreateWithoutClubInput[] | ClubUsageStatsUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubUsageStatsCreateOrConnectWithoutClubInput | ClubUsageStatsCreateOrConnectWithoutClubInput[]
+    createMany?: ClubUsageStatsCreateManyClubInputEnvelope
+    connect?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
   }
 
-  export type TenantStatsUncheckedCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantStatsCreateWithoutTenantInput, TenantStatsUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantStatsCreateOrConnectWithoutTenantInput
-    connect?: TenantStatsWhereUniqueInput
+  export type ClubStatsUncheckedCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubStatsCreateWithoutClubInput, ClubStatsUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubStatsCreateOrConnectWithoutClubInput
+    connect?: ClubStatsWhereUniqueInput
   }
 
-  export type TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantCashbackConfigCreateWithoutTenantInput, TenantCashbackConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantCashbackConfigCreateOrConnectWithoutTenantInput
-    connect?: TenantCashbackConfigWhereUniqueInput
+  export type ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubCashbackConfigCreateWithoutClubInput, ClubCashbackConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubCashbackConfigCreateOrConnectWithoutClubInput
+    connect?: ClubCashbackConfigWhereUniqueInput
   }
 
-  export type TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput = {
-    create?: XOR<TenantWithdrawalConfigCreateWithoutTenantInput, TenantWithdrawalConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantWithdrawalConfigCreateOrConnectWithoutTenantInput
-    connect?: TenantWithdrawalConfigWhereUniqueInput
+  export type ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubWithdrawalConfigCreateOrConnectWithoutClubInput
+    connect?: ClubWithdrawalConfigWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type EnumTenantStatusFieldUpdateOperationsInput = {
-    set?: $Enums.TenantStatus
+  export type EnumClubStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ClubStatus
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -19109,216 +19109,216 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type TenantBrandingUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
-    upsert?: TenantBrandingUpsertWithoutTenantInput
-    disconnect?: TenantBrandingWhereInput | boolean
-    delete?: TenantBrandingWhereInput | boolean
-    connect?: TenantBrandingWhereUniqueInput
-    update?: XOR<XOR<TenantBrandingUpdateToOneWithWhereWithoutTenantInput, TenantBrandingUpdateWithoutTenantInput>, TenantBrandingUncheckedUpdateWithoutTenantInput>
+  export type ClubBrandingUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
+    upsert?: ClubBrandingUpsertWithoutClubInput
+    disconnect?: ClubBrandingWhereInput | boolean
+    delete?: ClubBrandingWhereInput | boolean
+    connect?: ClubBrandingWhereUniqueInput
+    update?: XOR<XOR<ClubBrandingUpdateToOneWithWhereWithoutClubInput, ClubBrandingUpdateWithoutClubInput>, ClubBrandingUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantModuleUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantModuleCreateWithoutTenantInput, TenantModuleUncheckedCreateWithoutTenantInput> | TenantModuleCreateWithoutTenantInput[] | TenantModuleUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantModuleCreateOrConnectWithoutTenantInput | TenantModuleCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantModuleUpsertWithWhereUniqueWithoutTenantInput | TenantModuleUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantModuleCreateManyTenantInputEnvelope
-    set?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    disconnect?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    delete?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    connect?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    update?: TenantModuleUpdateWithWhereUniqueWithoutTenantInput | TenantModuleUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantModuleUpdateManyWithWhereWithoutTenantInput | TenantModuleUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantModuleScalarWhereInput | TenantModuleScalarWhereInput[]
+  export type ClubModuleUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubModuleCreateWithoutClubInput, ClubModuleUncheckedCreateWithoutClubInput> | ClubModuleCreateWithoutClubInput[] | ClubModuleUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubModuleCreateOrConnectWithoutClubInput | ClubModuleCreateOrConnectWithoutClubInput[]
+    upsert?: ClubModuleUpsertWithWhereUniqueWithoutClubInput | ClubModuleUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubModuleCreateManyClubInputEnvelope
+    set?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    disconnect?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    delete?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    connect?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    update?: ClubModuleUpdateWithWhereUniqueWithoutClubInput | ClubModuleUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubModuleUpdateManyWithWhereWithoutClubInput | ClubModuleUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubModuleScalarWhereInput | ClubModuleScalarWhereInput[]
   }
 
-  export type TenantAdminUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantAdminCreateWithoutTenantInput, TenantAdminUncheckedCreateWithoutTenantInput> | TenantAdminCreateWithoutTenantInput[] | TenantAdminUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantAdminCreateOrConnectWithoutTenantInput | TenantAdminCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantAdminUpsertWithWhereUniqueWithoutTenantInput | TenantAdminUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantAdminCreateManyTenantInputEnvelope
-    set?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    disconnect?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    delete?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    connect?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    update?: TenantAdminUpdateWithWhereUniqueWithoutTenantInput | TenantAdminUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantAdminUpdateManyWithWhereWithoutTenantInput | TenantAdminUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantAdminScalarWhereInput | TenantAdminScalarWhereInput[]
+  export type ClubAdminUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubAdminCreateWithoutClubInput, ClubAdminUncheckedCreateWithoutClubInput> | ClubAdminCreateWithoutClubInput[] | ClubAdminUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubAdminCreateOrConnectWithoutClubInput | ClubAdminCreateOrConnectWithoutClubInput[]
+    upsert?: ClubAdminUpsertWithWhereUniqueWithoutClubInput | ClubAdminUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubAdminCreateManyClubInputEnvelope
+    set?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    disconnect?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    delete?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    connect?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    update?: ClubAdminUpdateWithWhereUniqueWithoutClubInput | ClubAdminUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubAdminUpdateManyWithWhereWithoutClubInput | ClubAdminUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubAdminScalarWhereInput | ClubAdminScalarWhereInput[]
   }
 
-  export type TenantApiKeyUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantApiKeyCreateWithoutTenantInput, TenantApiKeyUncheckedCreateWithoutTenantInput> | TenantApiKeyCreateWithoutTenantInput[] | TenantApiKeyUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantApiKeyCreateOrConnectWithoutTenantInput | TenantApiKeyCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantApiKeyUpsertWithWhereUniqueWithoutTenantInput | TenantApiKeyUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantApiKeyCreateManyTenantInputEnvelope
-    set?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    disconnect?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    delete?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    connect?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    update?: TenantApiKeyUpdateWithWhereUniqueWithoutTenantInput | TenantApiKeyUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantApiKeyUpdateManyWithWhereWithoutTenantInput | TenantApiKeyUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantApiKeyScalarWhereInput | TenantApiKeyScalarWhereInput[]
+  export type ClubApiKeyUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubApiKeyCreateWithoutClubInput, ClubApiKeyUncheckedCreateWithoutClubInput> | ClubApiKeyCreateWithoutClubInput[] | ClubApiKeyUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubApiKeyCreateOrConnectWithoutClubInput | ClubApiKeyCreateOrConnectWithoutClubInput[]
+    upsert?: ClubApiKeyUpsertWithWhereUniqueWithoutClubInput | ClubApiKeyUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubApiKeyCreateManyClubInputEnvelope
+    set?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    disconnect?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    delete?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    connect?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    update?: ClubApiKeyUpdateWithWhereUniqueWithoutClubInput | ClubApiKeyUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubApiKeyUpdateManyWithWhereWithoutClubInput | ClubApiKeyUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubApiKeyScalarWhereInput | ClubApiKeyScalarWhereInput[]
   }
 
-  export type TenantUsageStatsUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantUsageStatsCreateWithoutTenantInput, TenantUsageStatsUncheckedCreateWithoutTenantInput> | TenantUsageStatsCreateWithoutTenantInput[] | TenantUsageStatsUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantUsageStatsCreateOrConnectWithoutTenantInput | TenantUsageStatsCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantUsageStatsUpsertWithWhereUniqueWithoutTenantInput | TenantUsageStatsUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantUsageStatsCreateManyTenantInputEnvelope
-    set?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    disconnect?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    delete?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    connect?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    update?: TenantUsageStatsUpdateWithWhereUniqueWithoutTenantInput | TenantUsageStatsUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantUsageStatsUpdateManyWithWhereWithoutTenantInput | TenantUsageStatsUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantUsageStatsScalarWhereInput | TenantUsageStatsScalarWhereInput[]
+  export type ClubUsageStatsUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubUsageStatsCreateWithoutClubInput, ClubUsageStatsUncheckedCreateWithoutClubInput> | ClubUsageStatsCreateWithoutClubInput[] | ClubUsageStatsUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubUsageStatsCreateOrConnectWithoutClubInput | ClubUsageStatsCreateOrConnectWithoutClubInput[]
+    upsert?: ClubUsageStatsUpsertWithWhereUniqueWithoutClubInput | ClubUsageStatsUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubUsageStatsCreateManyClubInputEnvelope
+    set?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    disconnect?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    delete?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    connect?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    update?: ClubUsageStatsUpdateWithWhereUniqueWithoutClubInput | ClubUsageStatsUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubUsageStatsUpdateManyWithWhereWithoutClubInput | ClubUsageStatsUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubUsageStatsScalarWhereInput | ClubUsageStatsScalarWhereInput[]
   }
 
-  export type TenantStatsUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantStatsCreateWithoutTenantInput, TenantStatsUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantStatsCreateOrConnectWithoutTenantInput
-    upsert?: TenantStatsUpsertWithoutTenantInput
-    disconnect?: TenantStatsWhereInput | boolean
-    delete?: TenantStatsWhereInput | boolean
-    connect?: TenantStatsWhereUniqueInput
-    update?: XOR<XOR<TenantStatsUpdateToOneWithWhereWithoutTenantInput, TenantStatsUpdateWithoutTenantInput>, TenantStatsUncheckedUpdateWithoutTenantInput>
+  export type ClubStatsUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubStatsCreateWithoutClubInput, ClubStatsUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubStatsCreateOrConnectWithoutClubInput
+    upsert?: ClubStatsUpsertWithoutClubInput
+    disconnect?: ClubStatsWhereInput | boolean
+    delete?: ClubStatsWhereInput | boolean
+    connect?: ClubStatsWhereUniqueInput
+    update?: XOR<XOR<ClubStatsUpdateToOneWithWhereWithoutClubInput, ClubStatsUpdateWithoutClubInput>, ClubStatsUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantCashbackConfigUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantCashbackConfigCreateWithoutTenantInput, TenantCashbackConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantCashbackConfigCreateOrConnectWithoutTenantInput
-    upsert?: TenantCashbackConfigUpsertWithoutTenantInput
-    disconnect?: TenantCashbackConfigWhereInput | boolean
-    delete?: TenantCashbackConfigWhereInput | boolean
-    connect?: TenantCashbackConfigWhereUniqueInput
-    update?: XOR<XOR<TenantCashbackConfigUpdateToOneWithWhereWithoutTenantInput, TenantCashbackConfigUpdateWithoutTenantInput>, TenantCashbackConfigUncheckedUpdateWithoutTenantInput>
+  export type ClubCashbackConfigUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubCashbackConfigCreateWithoutClubInput, ClubCashbackConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubCashbackConfigCreateOrConnectWithoutClubInput
+    upsert?: ClubCashbackConfigUpsertWithoutClubInput
+    disconnect?: ClubCashbackConfigWhereInput | boolean
+    delete?: ClubCashbackConfigWhereInput | boolean
+    connect?: ClubCashbackConfigWhereUniqueInput
+    update?: XOR<XOR<ClubCashbackConfigUpdateToOneWithWhereWithoutClubInput, ClubCashbackConfigUpdateWithoutClubInput>, ClubCashbackConfigUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantWithdrawalConfigCreateWithoutTenantInput, TenantWithdrawalConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantWithdrawalConfigCreateOrConnectWithoutTenantInput
-    upsert?: TenantWithdrawalConfigUpsertWithoutTenantInput
-    disconnect?: TenantWithdrawalConfigWhereInput | boolean
-    delete?: TenantWithdrawalConfigWhereInput | boolean
-    connect?: TenantWithdrawalConfigWhereUniqueInput
-    update?: XOR<XOR<TenantWithdrawalConfigUpdateToOneWithWhereWithoutTenantInput, TenantWithdrawalConfigUpdateWithoutTenantInput>, TenantWithdrawalConfigUncheckedUpdateWithoutTenantInput>
+  export type ClubWithdrawalConfigUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubWithdrawalConfigCreateOrConnectWithoutClubInput
+    upsert?: ClubWithdrawalConfigUpsertWithoutClubInput
+    disconnect?: ClubWithdrawalConfigWhereInput | boolean
+    delete?: ClubWithdrawalConfigWhereInput | boolean
+    connect?: ClubWithdrawalConfigWhereUniqueInput
+    update?: XOR<XOR<ClubWithdrawalConfigUpdateToOneWithWhereWithoutClubInput, ClubWithdrawalConfigUpdateWithoutClubInput>, ClubWithdrawalConfigUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
-    upsert?: TenantBrandingUpsertWithoutTenantInput
-    disconnect?: TenantBrandingWhereInput | boolean
-    delete?: TenantBrandingWhereInput | boolean
-    connect?: TenantBrandingWhereUniqueInput
-    update?: XOR<XOR<TenantBrandingUpdateToOneWithWhereWithoutTenantInput, TenantBrandingUpdateWithoutTenantInput>, TenantBrandingUncheckedUpdateWithoutTenantInput>
+  export type ClubBrandingUncheckedUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
+    upsert?: ClubBrandingUpsertWithoutClubInput
+    disconnect?: ClubBrandingWhereInput | boolean
+    delete?: ClubBrandingWhereInput | boolean
+    connect?: ClubBrandingWhereUniqueInput
+    update?: XOR<XOR<ClubBrandingUpdateToOneWithWhereWithoutClubInput, ClubBrandingUpdateWithoutClubInput>, ClubBrandingUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantModuleUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantModuleCreateWithoutTenantInput, TenantModuleUncheckedCreateWithoutTenantInput> | TenantModuleCreateWithoutTenantInput[] | TenantModuleUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantModuleCreateOrConnectWithoutTenantInput | TenantModuleCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantModuleUpsertWithWhereUniqueWithoutTenantInput | TenantModuleUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantModuleCreateManyTenantInputEnvelope
-    set?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    disconnect?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    delete?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    connect?: TenantModuleWhereUniqueInput | TenantModuleWhereUniqueInput[]
-    update?: TenantModuleUpdateWithWhereUniqueWithoutTenantInput | TenantModuleUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantModuleUpdateManyWithWhereWithoutTenantInput | TenantModuleUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantModuleScalarWhereInput | TenantModuleScalarWhereInput[]
+  export type ClubModuleUncheckedUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubModuleCreateWithoutClubInput, ClubModuleUncheckedCreateWithoutClubInput> | ClubModuleCreateWithoutClubInput[] | ClubModuleUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubModuleCreateOrConnectWithoutClubInput | ClubModuleCreateOrConnectWithoutClubInput[]
+    upsert?: ClubModuleUpsertWithWhereUniqueWithoutClubInput | ClubModuleUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubModuleCreateManyClubInputEnvelope
+    set?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    disconnect?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    delete?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    connect?: ClubModuleWhereUniqueInput | ClubModuleWhereUniqueInput[]
+    update?: ClubModuleUpdateWithWhereUniqueWithoutClubInput | ClubModuleUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubModuleUpdateManyWithWhereWithoutClubInput | ClubModuleUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubModuleScalarWhereInput | ClubModuleScalarWhereInput[]
   }
 
-  export type TenantAdminUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantAdminCreateWithoutTenantInput, TenantAdminUncheckedCreateWithoutTenantInput> | TenantAdminCreateWithoutTenantInput[] | TenantAdminUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantAdminCreateOrConnectWithoutTenantInput | TenantAdminCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantAdminUpsertWithWhereUniqueWithoutTenantInput | TenantAdminUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantAdminCreateManyTenantInputEnvelope
-    set?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    disconnect?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    delete?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    connect?: TenantAdminWhereUniqueInput | TenantAdminWhereUniqueInput[]
-    update?: TenantAdminUpdateWithWhereUniqueWithoutTenantInput | TenantAdminUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantAdminUpdateManyWithWhereWithoutTenantInput | TenantAdminUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantAdminScalarWhereInput | TenantAdminScalarWhereInput[]
+  export type ClubAdminUncheckedUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubAdminCreateWithoutClubInput, ClubAdminUncheckedCreateWithoutClubInput> | ClubAdminCreateWithoutClubInput[] | ClubAdminUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubAdminCreateOrConnectWithoutClubInput | ClubAdminCreateOrConnectWithoutClubInput[]
+    upsert?: ClubAdminUpsertWithWhereUniqueWithoutClubInput | ClubAdminUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubAdminCreateManyClubInputEnvelope
+    set?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    disconnect?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    delete?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    connect?: ClubAdminWhereUniqueInput | ClubAdminWhereUniqueInput[]
+    update?: ClubAdminUpdateWithWhereUniqueWithoutClubInput | ClubAdminUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubAdminUpdateManyWithWhereWithoutClubInput | ClubAdminUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubAdminScalarWhereInput | ClubAdminScalarWhereInput[]
   }
 
-  export type TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantApiKeyCreateWithoutTenantInput, TenantApiKeyUncheckedCreateWithoutTenantInput> | TenantApiKeyCreateWithoutTenantInput[] | TenantApiKeyUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantApiKeyCreateOrConnectWithoutTenantInput | TenantApiKeyCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantApiKeyUpsertWithWhereUniqueWithoutTenantInput | TenantApiKeyUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantApiKeyCreateManyTenantInputEnvelope
-    set?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    disconnect?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    delete?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    connect?: TenantApiKeyWhereUniqueInput | TenantApiKeyWhereUniqueInput[]
-    update?: TenantApiKeyUpdateWithWhereUniqueWithoutTenantInput | TenantApiKeyUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantApiKeyUpdateManyWithWhereWithoutTenantInput | TenantApiKeyUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantApiKeyScalarWhereInput | TenantApiKeyScalarWhereInput[]
+  export type ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubApiKeyCreateWithoutClubInput, ClubApiKeyUncheckedCreateWithoutClubInput> | ClubApiKeyCreateWithoutClubInput[] | ClubApiKeyUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubApiKeyCreateOrConnectWithoutClubInput | ClubApiKeyCreateOrConnectWithoutClubInput[]
+    upsert?: ClubApiKeyUpsertWithWhereUniqueWithoutClubInput | ClubApiKeyUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubApiKeyCreateManyClubInputEnvelope
+    set?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    disconnect?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    delete?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    connect?: ClubApiKeyWhereUniqueInput | ClubApiKeyWhereUniqueInput[]
+    update?: ClubApiKeyUpdateWithWhereUniqueWithoutClubInput | ClubApiKeyUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubApiKeyUpdateManyWithWhereWithoutClubInput | ClubApiKeyUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubApiKeyScalarWhereInput | ClubApiKeyScalarWhereInput[]
   }
 
-  export type TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<TenantUsageStatsCreateWithoutTenantInput, TenantUsageStatsUncheckedCreateWithoutTenantInput> | TenantUsageStatsCreateWithoutTenantInput[] | TenantUsageStatsUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: TenantUsageStatsCreateOrConnectWithoutTenantInput | TenantUsageStatsCreateOrConnectWithoutTenantInput[]
-    upsert?: TenantUsageStatsUpsertWithWhereUniqueWithoutTenantInput | TenantUsageStatsUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: TenantUsageStatsCreateManyTenantInputEnvelope
-    set?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    disconnect?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    delete?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    connect?: TenantUsageStatsWhereUniqueInput | TenantUsageStatsWhereUniqueInput[]
-    update?: TenantUsageStatsUpdateWithWhereUniqueWithoutTenantInput | TenantUsageStatsUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: TenantUsageStatsUpdateManyWithWhereWithoutTenantInput | TenantUsageStatsUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: TenantUsageStatsScalarWhereInput | TenantUsageStatsScalarWhereInput[]
+  export type ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput = {
+    create?: XOR<ClubUsageStatsCreateWithoutClubInput, ClubUsageStatsUncheckedCreateWithoutClubInput> | ClubUsageStatsCreateWithoutClubInput[] | ClubUsageStatsUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: ClubUsageStatsCreateOrConnectWithoutClubInput | ClubUsageStatsCreateOrConnectWithoutClubInput[]
+    upsert?: ClubUsageStatsUpsertWithWhereUniqueWithoutClubInput | ClubUsageStatsUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: ClubUsageStatsCreateManyClubInputEnvelope
+    set?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    disconnect?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    delete?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    connect?: ClubUsageStatsWhereUniqueInput | ClubUsageStatsWhereUniqueInput[]
+    update?: ClubUsageStatsUpdateWithWhereUniqueWithoutClubInput | ClubUsageStatsUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: ClubUsageStatsUpdateManyWithWhereWithoutClubInput | ClubUsageStatsUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: ClubUsageStatsScalarWhereInput | ClubUsageStatsScalarWhereInput[]
   }
 
-  export type TenantStatsUncheckedUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantStatsCreateWithoutTenantInput, TenantStatsUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantStatsCreateOrConnectWithoutTenantInput
-    upsert?: TenantStatsUpsertWithoutTenantInput
-    disconnect?: TenantStatsWhereInput | boolean
-    delete?: TenantStatsWhereInput | boolean
-    connect?: TenantStatsWhereUniqueInput
-    update?: XOR<XOR<TenantStatsUpdateToOneWithWhereWithoutTenantInput, TenantStatsUpdateWithoutTenantInput>, TenantStatsUncheckedUpdateWithoutTenantInput>
+  export type ClubStatsUncheckedUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubStatsCreateWithoutClubInput, ClubStatsUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubStatsCreateOrConnectWithoutClubInput
+    upsert?: ClubStatsUpsertWithoutClubInput
+    disconnect?: ClubStatsWhereInput | boolean
+    delete?: ClubStatsWhereInput | boolean
+    connect?: ClubStatsWhereUniqueInput
+    update?: XOR<XOR<ClubStatsUpdateToOneWithWhereWithoutClubInput, ClubStatsUpdateWithoutClubInput>, ClubStatsUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantCashbackConfigCreateWithoutTenantInput, TenantCashbackConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantCashbackConfigCreateOrConnectWithoutTenantInput
-    upsert?: TenantCashbackConfigUpsertWithoutTenantInput
-    disconnect?: TenantCashbackConfigWhereInput | boolean
-    delete?: TenantCashbackConfigWhereInput | boolean
-    connect?: TenantCashbackConfigWhereUniqueInput
-    update?: XOR<XOR<TenantCashbackConfigUpdateToOneWithWhereWithoutTenantInput, TenantCashbackConfigUpdateWithoutTenantInput>, TenantCashbackConfigUncheckedUpdateWithoutTenantInput>
+  export type ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubCashbackConfigCreateWithoutClubInput, ClubCashbackConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubCashbackConfigCreateOrConnectWithoutClubInput
+    upsert?: ClubCashbackConfigUpsertWithoutClubInput
+    disconnect?: ClubCashbackConfigWhereInput | boolean
+    delete?: ClubCashbackConfigWhereInput | boolean
+    connect?: ClubCashbackConfigWhereUniqueInput
+    update?: XOR<XOR<ClubCashbackConfigUpdateToOneWithWhereWithoutClubInput, ClubCashbackConfigUpdateWithoutClubInput>, ClubCashbackConfigUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput = {
-    create?: XOR<TenantWithdrawalConfigCreateWithoutTenantInput, TenantWithdrawalConfigUncheckedCreateWithoutTenantInput>
-    connectOrCreate?: TenantWithdrawalConfigCreateOrConnectWithoutTenantInput
-    upsert?: TenantWithdrawalConfigUpsertWithoutTenantInput
-    disconnect?: TenantWithdrawalConfigWhereInput | boolean
-    delete?: TenantWithdrawalConfigWhereInput | boolean
-    connect?: TenantWithdrawalConfigWhereUniqueInput
-    update?: XOR<XOR<TenantWithdrawalConfigUpdateToOneWithWhereWithoutTenantInput, TenantWithdrawalConfigUpdateWithoutTenantInput>, TenantWithdrawalConfigUncheckedUpdateWithoutTenantInput>
+  export type ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubWithdrawalConfigCreateOrConnectWithoutClubInput
+    upsert?: ClubWithdrawalConfigUpsertWithoutClubInput
+    disconnect?: ClubWithdrawalConfigWhereInput | boolean
+    delete?: ClubWithdrawalConfigWhereInput | boolean
+    connect?: ClubWithdrawalConfigWhereUniqueInput
+    update?: XOR<XOR<ClubWithdrawalConfigUpdateToOneWithWhereWithoutClubInput, ClubWithdrawalConfigUpdateWithoutClubInput>, ClubWithdrawalConfigUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantCreateNestedOneWithoutBrandingInput = {
-    create?: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutBrandingInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutBrandingInput = {
+    create?: XOR<ClubCreateWithoutBrandingInput, ClubUncheckedCreateWithoutBrandingInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutBrandingInput
+    connect?: ClubWhereUniqueInput
   }
 
-  export type TenantUpdateOneRequiredWithoutBrandingNestedInput = {
-    create?: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutBrandingInput
-    upsert?: TenantUpsertWithoutBrandingInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutBrandingInput, TenantUpdateWithoutBrandingInput>, TenantUncheckedUpdateWithoutBrandingInput>
+  export type ClubUpdateOneRequiredWithoutBrandingNestedInput = {
+    create?: XOR<ClubCreateWithoutBrandingInput, ClubUncheckedCreateWithoutBrandingInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutBrandingInput
+    upsert?: ClubUpsertWithoutBrandingInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutBrandingInput, ClubUpdateWithoutBrandingInput>, ClubUncheckedUpdateWithoutBrandingInput>
   }
 
-  export type TenantCreateNestedOneWithoutModulesInput = {
-    create?: XOR<TenantCreateWithoutModulesInput, TenantUncheckedCreateWithoutModulesInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutModulesInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutModulesInput = {
+    create?: XOR<ClubCreateWithoutModulesInput, ClubUncheckedCreateWithoutModulesInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutModulesInput
+    connect?: ClubWhereUniqueInput
   }
 
   export type EnumModuleKeyFieldUpdateOperationsInput = {
@@ -19329,100 +19329,100 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type TenantUpdateOneRequiredWithoutModulesNestedInput = {
-    create?: XOR<TenantCreateWithoutModulesInput, TenantUncheckedCreateWithoutModulesInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutModulesInput
-    upsert?: TenantUpsertWithoutModulesInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutModulesInput, TenantUpdateWithoutModulesInput>, TenantUncheckedUpdateWithoutModulesInput>
+  export type ClubUpdateOneRequiredWithoutModulesNestedInput = {
+    create?: XOR<ClubCreateWithoutModulesInput, ClubUncheckedCreateWithoutModulesInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutModulesInput
+    upsert?: ClubUpsertWithoutModulesInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutModulesInput, ClubUpdateWithoutModulesInput>, ClubUncheckedUpdateWithoutModulesInput>
   }
 
-  export type TenantCreateNestedOneWithoutStatsInput = {
-    create?: XOR<TenantCreateWithoutStatsInput, TenantUncheckedCreateWithoutStatsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutStatsInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutStatsInput = {
+    create?: XOR<ClubCreateWithoutStatsInput, ClubUncheckedCreateWithoutStatsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutStatsInput
+    connect?: ClubWhereUniqueInput
   }
 
-  export type TenantUpdateOneRequiredWithoutStatsNestedInput = {
-    create?: XOR<TenantCreateWithoutStatsInput, TenantUncheckedCreateWithoutStatsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutStatsInput
-    upsert?: TenantUpsertWithoutStatsInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutStatsInput, TenantUpdateWithoutStatsInput>, TenantUncheckedUpdateWithoutStatsInput>
+  export type ClubUpdateOneRequiredWithoutStatsNestedInput = {
+    create?: XOR<ClubCreateWithoutStatsInput, ClubUncheckedCreateWithoutStatsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutStatsInput
+    upsert?: ClubUpsertWithoutStatsInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutStatsInput, ClubUpdateWithoutStatsInput>, ClubUncheckedUpdateWithoutStatsInput>
   }
 
-  export type TenantCreateNestedOneWithoutCashbackConfigInput = {
-    create?: XOR<TenantCreateWithoutCashbackConfigInput, TenantUncheckedCreateWithoutCashbackConfigInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutCashbackConfigInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutCashbackConfigInput = {
+    create?: XOR<ClubCreateWithoutCashbackConfigInput, ClubUncheckedCreateWithoutCashbackConfigInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutCashbackConfigInput
+    connect?: ClubWhereUniqueInput
   }
 
-  export type TenantUpdateOneRequiredWithoutCashbackConfigNestedInput = {
-    create?: XOR<TenantCreateWithoutCashbackConfigInput, TenantUncheckedCreateWithoutCashbackConfigInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutCashbackConfigInput
-    upsert?: TenantUpsertWithoutCashbackConfigInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutCashbackConfigInput, TenantUpdateWithoutCashbackConfigInput>, TenantUncheckedUpdateWithoutCashbackConfigInput>
+  export type ClubUpdateOneRequiredWithoutCashbackConfigNestedInput = {
+    create?: XOR<ClubCreateWithoutCashbackConfigInput, ClubUncheckedCreateWithoutCashbackConfigInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutCashbackConfigInput
+    upsert?: ClubUpsertWithoutCashbackConfigInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutCashbackConfigInput, ClubUpdateWithoutCashbackConfigInput>, ClubUncheckedUpdateWithoutCashbackConfigInput>
   }
 
-  export type TenantCreateNestedOneWithoutWithdrawalConfigInput = {
-    create?: XOR<TenantCreateWithoutWithdrawalConfigInput, TenantUncheckedCreateWithoutWithdrawalConfigInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutWithdrawalConfigInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutWithdrawalConfigInput = {
+    create?: XOR<ClubCreateWithoutWithdrawalConfigInput, ClubUncheckedCreateWithoutWithdrawalConfigInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutWithdrawalConfigInput
+    connect?: ClubWhereUniqueInput
   }
 
-  export type TenantUpdateOneRequiredWithoutWithdrawalConfigNestedInput = {
-    create?: XOR<TenantCreateWithoutWithdrawalConfigInput, TenantUncheckedCreateWithoutWithdrawalConfigInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutWithdrawalConfigInput
-    upsert?: TenantUpsertWithoutWithdrawalConfigInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutWithdrawalConfigInput, TenantUpdateWithoutWithdrawalConfigInput>, TenantUncheckedUpdateWithoutWithdrawalConfigInput>
+  export type ClubUpdateOneRequiredWithoutWithdrawalConfigNestedInput = {
+    create?: XOR<ClubCreateWithoutWithdrawalConfigInput, ClubUncheckedCreateWithoutWithdrawalConfigInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutWithdrawalConfigInput
+    upsert?: ClubUpsertWithoutWithdrawalConfigInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutWithdrawalConfigInput, ClubUpdateWithoutWithdrawalConfigInput>, ClubUncheckedUpdateWithoutWithdrawalConfigInput>
   }
 
-  export type TenantCreateNestedOneWithoutAdminsInput = {
-    create?: XOR<TenantCreateWithoutAdminsInput, TenantUncheckedCreateWithoutAdminsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutAdminsInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutAdminsInput = {
+    create?: XOR<ClubCreateWithoutAdminsInput, ClubUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutAdminsInput
+    connect?: ClubWhereUniqueInput
   }
 
   export type EnumAdminRoleFieldUpdateOperationsInput = {
     set?: $Enums.AdminRole
   }
 
-  export type TenantUpdateOneRequiredWithoutAdminsNestedInput = {
-    create?: XOR<TenantCreateWithoutAdminsInput, TenantUncheckedCreateWithoutAdminsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutAdminsInput
-    upsert?: TenantUpsertWithoutAdminsInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutAdminsInput, TenantUpdateWithoutAdminsInput>, TenantUncheckedUpdateWithoutAdminsInput>
+  export type ClubUpdateOneRequiredWithoutAdminsNestedInput = {
+    create?: XOR<ClubCreateWithoutAdminsInput, ClubUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutAdminsInput
+    upsert?: ClubUpsertWithoutAdminsInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutAdminsInput, ClubUpdateWithoutAdminsInput>, ClubUncheckedUpdateWithoutAdminsInput>
   }
 
-  export type TenantCreateNestedOneWithoutApiKeysInput = {
-    create?: XOR<TenantCreateWithoutApiKeysInput, TenantUncheckedCreateWithoutApiKeysInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutApiKeysInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutApiKeysInput = {
+    create?: XOR<ClubCreateWithoutApiKeysInput, ClubUncheckedCreateWithoutApiKeysInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutApiKeysInput
+    connect?: ClubWhereUniqueInput
   }
 
-  export type TenantUpdateOneRequiredWithoutApiKeysNestedInput = {
-    create?: XOR<TenantCreateWithoutApiKeysInput, TenantUncheckedCreateWithoutApiKeysInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutApiKeysInput
-    upsert?: TenantUpsertWithoutApiKeysInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutApiKeysInput, TenantUpdateWithoutApiKeysInput>, TenantUncheckedUpdateWithoutApiKeysInput>
+  export type ClubUpdateOneRequiredWithoutApiKeysNestedInput = {
+    create?: XOR<ClubCreateWithoutApiKeysInput, ClubUncheckedCreateWithoutApiKeysInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutApiKeysInput
+    upsert?: ClubUpsertWithoutApiKeysInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutApiKeysInput, ClubUpdateWithoutApiKeysInput>, ClubUncheckedUpdateWithoutApiKeysInput>
   }
 
-  export type TenantCreateNestedOneWithoutUsageStatsInput = {
-    create?: XOR<TenantCreateWithoutUsageStatsInput, TenantUncheckedCreateWithoutUsageStatsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutUsageStatsInput
-    connect?: TenantWhereUniqueInput
+  export type ClubCreateNestedOneWithoutUsageStatsInput = {
+    create?: XOR<ClubCreateWithoutUsageStatsInput, ClubUncheckedCreateWithoutUsageStatsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutUsageStatsInput
+    connect?: ClubWhereUniqueInput
   }
 
-  export type TenantUpdateOneRequiredWithoutUsageStatsNestedInput = {
-    create?: XOR<TenantCreateWithoutUsageStatsInput, TenantUncheckedCreateWithoutUsageStatsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutUsageStatsInput
-    upsert?: TenantUpsertWithoutUsageStatsInput
-    connect?: TenantWhereUniqueInput
-    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutUsageStatsInput, TenantUpdateWithoutUsageStatsInput>, TenantUncheckedUpdateWithoutUsageStatsInput>
+  export type ClubUpdateOneRequiredWithoutUsageStatsNestedInput = {
+    create?: XOR<ClubCreateWithoutUsageStatsInput, ClubUncheckedCreateWithoutUsageStatsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutUsageStatsInput
+    upsert?: ClubUpsertWithoutUsageStatsInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutUsageStatsInput, ClubUpdateWithoutUsageStatsInput>, ClubUncheckedUpdateWithoutUsageStatsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -19450,11 +19450,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumTenantStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
+  export type NestedEnumClubStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumClubStatusFilter<$PrismaModel> | $Enums.ClubStatus
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -19560,14 +19560,14 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel> | $Enums.TenantStatus
+  export type NestedEnumClubStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumClubStatusWithAggregatesFilter<$PrismaModel> | $Enums.ClubStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTenantStatusFilter<$PrismaModel>
-    _max?: NestedEnumTenantStatusFilter<$PrismaModel>
+    _min?: NestedEnumClubStatusFilter<$PrismaModel>
+    _max?: NestedEnumClubStatusFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -19782,7 +19782,7 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type TenantBrandingCreateWithoutTenantInput = {
+  export type ClubBrandingCreateWithoutClubInput = {
     id?: string
     logoUrl?: string | null
     logoIconUrl?: string | null
@@ -19800,7 +19800,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantBrandingUncheckedCreateWithoutTenantInput = {
+  export type ClubBrandingUncheckedCreateWithoutClubInput = {
     id?: string
     logoUrl?: string | null
     logoIconUrl?: string | null
@@ -19818,12 +19818,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantBrandingCreateOrConnectWithoutTenantInput = {
-    where: TenantBrandingWhereUniqueInput
-    create: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+  export type ClubBrandingCreateOrConnectWithoutClubInput = {
+    where: ClubBrandingWhereUniqueInput
+    create: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantModuleCreateWithoutTenantInput = {
+  export type ClubModuleCreateWithoutClubInput = {
     id?: string
     moduleKey: $Enums.ModuleKey
     isEnabled?: boolean
@@ -19836,7 +19836,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantModuleUncheckedCreateWithoutTenantInput = {
+  export type ClubModuleUncheckedCreateWithoutClubInput = {
     id?: string
     moduleKey: $Enums.ModuleKey
     isEnabled?: boolean
@@ -19849,17 +19849,17 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantModuleCreateOrConnectWithoutTenantInput = {
-    where: TenantModuleWhereUniqueInput
-    create: XOR<TenantModuleCreateWithoutTenantInput, TenantModuleUncheckedCreateWithoutTenantInput>
+  export type ClubModuleCreateOrConnectWithoutClubInput = {
+    where: ClubModuleWhereUniqueInput
+    create: XOR<ClubModuleCreateWithoutClubInput, ClubModuleUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantModuleCreateManyTenantInputEnvelope = {
-    data: TenantModuleCreateManyTenantInput | TenantModuleCreateManyTenantInput[]
+  export type ClubModuleCreateManyClubInputEnvelope = {
+    data: ClubModuleCreateManyClubInput | ClubModuleCreateManyClubInput[]
     skipDuplicates?: boolean
   }
 
-  export type TenantAdminCreateWithoutTenantInput = {
+  export type ClubAdminCreateWithoutClubInput = {
     id?: string
     name: string
     email: string
@@ -19871,7 +19871,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantAdminUncheckedCreateWithoutTenantInput = {
+  export type ClubAdminUncheckedCreateWithoutClubInput = {
     id?: string
     name: string
     email: string
@@ -19883,17 +19883,17 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantAdminCreateOrConnectWithoutTenantInput = {
-    where: TenantAdminWhereUniqueInput
-    create: XOR<TenantAdminCreateWithoutTenantInput, TenantAdminUncheckedCreateWithoutTenantInput>
+  export type ClubAdminCreateOrConnectWithoutClubInput = {
+    where: ClubAdminWhereUniqueInput
+    create: XOR<ClubAdminCreateWithoutClubInput, ClubAdminUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantAdminCreateManyTenantInputEnvelope = {
-    data: TenantAdminCreateManyTenantInput | TenantAdminCreateManyTenantInput[]
+  export type ClubAdminCreateManyClubInputEnvelope = {
+    data: ClubAdminCreateManyClubInput | ClubAdminCreateManyClubInput[]
     skipDuplicates?: boolean
   }
 
-  export type TenantApiKeyCreateWithoutTenantInput = {
+  export type ClubApiKeyCreateWithoutClubInput = {
     id?: string
     keyName: string
     apiKey: string
@@ -19903,7 +19903,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
   }
 
-  export type TenantApiKeyUncheckedCreateWithoutTenantInput = {
+  export type ClubApiKeyUncheckedCreateWithoutClubInput = {
     id?: string
     keyName: string
     apiKey: string
@@ -19913,17 +19913,17 @@ export namespace Prisma {
     expiresAt?: Date | string | null
   }
 
-  export type TenantApiKeyCreateOrConnectWithoutTenantInput = {
-    where: TenantApiKeyWhereUniqueInput
-    create: XOR<TenantApiKeyCreateWithoutTenantInput, TenantApiKeyUncheckedCreateWithoutTenantInput>
+  export type ClubApiKeyCreateOrConnectWithoutClubInput = {
+    where: ClubApiKeyWhereUniqueInput
+    create: XOR<ClubApiKeyCreateWithoutClubInput, ClubApiKeyUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantApiKeyCreateManyTenantInputEnvelope = {
-    data: TenantApiKeyCreateManyTenantInput | TenantApiKeyCreateManyTenantInput[]
+  export type ClubApiKeyCreateManyClubInputEnvelope = {
+    data: ClubApiKeyCreateManyClubInput | ClubApiKeyCreateManyClubInput[]
     skipDuplicates?: boolean
   }
 
-  export type TenantUsageStatsCreateWithoutTenantInput = {
+  export type ClubUsageStatsCreateWithoutClubInput = {
     id?: string
     date: Date | string
     apiCalls?: number
@@ -19932,7 +19932,7 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type TenantUsageStatsUncheckedCreateWithoutTenantInput = {
+  export type ClubUsageStatsUncheckedCreateWithoutClubInput = {
     id?: string
     date: Date | string
     apiCalls?: number
@@ -19941,17 +19941,17 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type TenantUsageStatsCreateOrConnectWithoutTenantInput = {
-    where: TenantUsageStatsWhereUniqueInput
-    create: XOR<TenantUsageStatsCreateWithoutTenantInput, TenantUsageStatsUncheckedCreateWithoutTenantInput>
+  export type ClubUsageStatsCreateOrConnectWithoutClubInput = {
+    where: ClubUsageStatsWhereUniqueInput
+    create: XOR<ClubUsageStatsCreateWithoutClubInput, ClubUsageStatsUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantUsageStatsCreateManyTenantInputEnvelope = {
-    data: TenantUsageStatsCreateManyTenantInput | TenantUsageStatsCreateManyTenantInput[]
+  export type ClubUsageStatsCreateManyClubInputEnvelope = {
+    data: ClubUsageStatsCreateManyClubInput | ClubUsageStatsCreateManyClubInput[]
     skipDuplicates?: boolean
   }
 
-  export type TenantStatsCreateWithoutTenantInput = {
+  export type ClubStatsCreateWithoutClubInput = {
     id?: string
     totalUsers?: number
     totalConsumers?: number
@@ -19969,7 +19969,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantStatsUncheckedCreateWithoutTenantInput = {
+  export type ClubStatsUncheckedCreateWithoutClubInput = {
     id?: string
     totalUsers?: number
     totalConsumers?: number
@@ -19987,12 +19987,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantStatsCreateOrConnectWithoutTenantInput = {
-    where: TenantStatsWhereUniqueInput
-    create: XOR<TenantStatsCreateWithoutTenantInput, TenantStatsUncheckedCreateWithoutTenantInput>
+  export type ClubStatsCreateOrConnectWithoutClubInput = {
+    where: ClubStatsWhereUniqueInput
+    create: XOR<ClubStatsCreateWithoutClubInput, ClubStatsUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantCashbackConfigCreateWithoutTenantInput = {
+  export type ClubCashbackConfigCreateWithoutClubInput = {
     id?: string
     consumerPercent?: Decimal | DecimalJsLike | number | string
     clubPercent?: Decimal | DecimalJsLike | number | string
@@ -20002,7 +20002,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantCashbackConfigUncheckedCreateWithoutTenantInput = {
+  export type ClubCashbackConfigUncheckedCreateWithoutClubInput = {
     id?: string
     consumerPercent?: Decimal | DecimalJsLike | number | string
     clubPercent?: Decimal | DecimalJsLike | number | string
@@ -20012,12 +20012,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantCashbackConfigCreateOrConnectWithoutTenantInput = {
-    where: TenantCashbackConfigWhereUniqueInput
-    create: XOR<TenantCashbackConfigCreateWithoutTenantInput, TenantCashbackConfigUncheckedCreateWithoutTenantInput>
+  export type ClubCashbackConfigCreateOrConnectWithoutClubInput = {
+    where: ClubCashbackConfigWhereUniqueInput
+    create: XOR<ClubCashbackConfigCreateWithoutClubInput, ClubCashbackConfigUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantWithdrawalConfigCreateWithoutTenantInput = {
+  export type ClubWithdrawalConfigCreateWithoutClubInput = {
     id?: string
     withdrawalFeePercent?: Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: Decimal | DecimalJsLike | number | string
@@ -20026,7 +20026,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantWithdrawalConfigUncheckedCreateWithoutTenantInput = {
+  export type ClubWithdrawalConfigUncheckedCreateWithoutClubInput = {
     id?: string
     withdrawalFeePercent?: Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: Decimal | DecimalJsLike | number | string
@@ -20035,23 +20035,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantWithdrawalConfigCreateOrConnectWithoutTenantInput = {
-    where: TenantWithdrawalConfigWhereUniqueInput
-    create: XOR<TenantWithdrawalConfigCreateWithoutTenantInput, TenantWithdrawalConfigUncheckedCreateWithoutTenantInput>
+  export type ClubWithdrawalConfigCreateOrConnectWithoutClubInput = {
+    where: ClubWithdrawalConfigWhereUniqueInput
+    create: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantBrandingUpsertWithoutTenantInput = {
-    update: XOR<TenantBrandingUpdateWithoutTenantInput, TenantBrandingUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
-    where?: TenantBrandingWhereInput
+  export type ClubBrandingUpsertWithoutClubInput = {
+    update: XOR<ClubBrandingUpdateWithoutClubInput, ClubBrandingUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
+    where?: ClubBrandingWhereInput
   }
 
-  export type TenantBrandingUpdateToOneWithWhereWithoutTenantInput = {
-    where?: TenantBrandingWhereInput
-    data: XOR<TenantBrandingUpdateWithoutTenantInput, TenantBrandingUncheckedUpdateWithoutTenantInput>
+  export type ClubBrandingUpdateToOneWithWhereWithoutClubInput = {
+    where?: ClubBrandingWhereInput
+    data: XOR<ClubBrandingUpdateWithoutClubInput, ClubBrandingUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantBrandingUpdateWithoutTenantInput = {
+  export type ClubBrandingUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20069,7 +20069,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantBrandingUncheckedUpdateWithoutTenantInput = {
+  export type ClubBrandingUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoIconUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20087,142 +20087,142 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantModuleUpsertWithWhereUniqueWithoutTenantInput = {
-    where: TenantModuleWhereUniqueInput
-    update: XOR<TenantModuleUpdateWithoutTenantInput, TenantModuleUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantModuleCreateWithoutTenantInput, TenantModuleUncheckedCreateWithoutTenantInput>
+  export type ClubModuleUpsertWithWhereUniqueWithoutClubInput = {
+    where: ClubModuleWhereUniqueInput
+    update: XOR<ClubModuleUpdateWithoutClubInput, ClubModuleUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubModuleCreateWithoutClubInput, ClubModuleUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantModuleUpdateWithWhereUniqueWithoutTenantInput = {
-    where: TenantModuleWhereUniqueInput
-    data: XOR<TenantModuleUpdateWithoutTenantInput, TenantModuleUncheckedUpdateWithoutTenantInput>
+  export type ClubModuleUpdateWithWhereUniqueWithoutClubInput = {
+    where: ClubModuleWhereUniqueInput
+    data: XOR<ClubModuleUpdateWithoutClubInput, ClubModuleUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantModuleUpdateManyWithWhereWithoutTenantInput = {
-    where: TenantModuleScalarWhereInput
-    data: XOR<TenantModuleUpdateManyMutationInput, TenantModuleUncheckedUpdateManyWithoutTenantInput>
+  export type ClubModuleUpdateManyWithWhereWithoutClubInput = {
+    where: ClubModuleScalarWhereInput
+    data: XOR<ClubModuleUpdateManyMutationInput, ClubModuleUncheckedUpdateManyWithoutClubInput>
   }
 
-  export type TenantModuleScalarWhereInput = {
-    AND?: TenantModuleScalarWhereInput | TenantModuleScalarWhereInput[]
-    OR?: TenantModuleScalarWhereInput[]
-    NOT?: TenantModuleScalarWhereInput | TenantModuleScalarWhereInput[]
-    id?: UuidFilter<"TenantModule"> | string
-    tenantId?: UuidFilter<"TenantModule"> | string
-    moduleKey?: EnumModuleKeyFilter<"TenantModule"> | $Enums.ModuleKey
-    isEnabled?: BoolFilter<"TenantModule"> | boolean
-    isEnabledByDefault?: BoolFilter<"TenantModule"> | boolean
-    config?: JsonNullableFilter<"TenantModule">
-    displayName?: StringFilter<"TenantModule"> | string
-    description?: StringNullableFilter<"TenantModule"> | string | null
-    sortOrder?: IntFilter<"TenantModule"> | number
-    createdAt?: DateTimeFilter<"TenantModule"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantModule"> | Date | string
+  export type ClubModuleScalarWhereInput = {
+    AND?: ClubModuleScalarWhereInput | ClubModuleScalarWhereInput[]
+    OR?: ClubModuleScalarWhereInput[]
+    NOT?: ClubModuleScalarWhereInput | ClubModuleScalarWhereInput[]
+    id?: UuidFilter<"ClubModule"> | string
+    clubId?: UuidFilter<"ClubModule"> | string
+    moduleKey?: EnumModuleKeyFilter<"ClubModule"> | $Enums.ModuleKey
+    isEnabled?: BoolFilter<"ClubModule"> | boolean
+    isEnabledByDefault?: BoolFilter<"ClubModule"> | boolean
+    config?: JsonNullableFilter<"ClubModule">
+    displayName?: StringFilter<"ClubModule"> | string
+    description?: StringNullableFilter<"ClubModule"> | string | null
+    sortOrder?: IntFilter<"ClubModule"> | number
+    createdAt?: DateTimeFilter<"ClubModule"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubModule"> | Date | string
   }
 
-  export type TenantAdminUpsertWithWhereUniqueWithoutTenantInput = {
-    where: TenantAdminWhereUniqueInput
-    update: XOR<TenantAdminUpdateWithoutTenantInput, TenantAdminUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantAdminCreateWithoutTenantInput, TenantAdminUncheckedCreateWithoutTenantInput>
+  export type ClubAdminUpsertWithWhereUniqueWithoutClubInput = {
+    where: ClubAdminWhereUniqueInput
+    update: XOR<ClubAdminUpdateWithoutClubInput, ClubAdminUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubAdminCreateWithoutClubInput, ClubAdminUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantAdminUpdateWithWhereUniqueWithoutTenantInput = {
-    where: TenantAdminWhereUniqueInput
-    data: XOR<TenantAdminUpdateWithoutTenantInput, TenantAdminUncheckedUpdateWithoutTenantInput>
+  export type ClubAdminUpdateWithWhereUniqueWithoutClubInput = {
+    where: ClubAdminWhereUniqueInput
+    data: XOR<ClubAdminUpdateWithoutClubInput, ClubAdminUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantAdminUpdateManyWithWhereWithoutTenantInput = {
-    where: TenantAdminScalarWhereInput
-    data: XOR<TenantAdminUpdateManyMutationInput, TenantAdminUncheckedUpdateManyWithoutTenantInput>
+  export type ClubAdminUpdateManyWithWhereWithoutClubInput = {
+    where: ClubAdminScalarWhereInput
+    data: XOR<ClubAdminUpdateManyMutationInput, ClubAdminUncheckedUpdateManyWithoutClubInput>
   }
 
-  export type TenantAdminScalarWhereInput = {
-    AND?: TenantAdminScalarWhereInput | TenantAdminScalarWhereInput[]
-    OR?: TenantAdminScalarWhereInput[]
-    NOT?: TenantAdminScalarWhereInput | TenantAdminScalarWhereInput[]
-    id?: UuidFilter<"TenantAdmin"> | string
-    tenantId?: UuidFilter<"TenantAdmin"> | string
-    name?: StringFilter<"TenantAdmin"> | string
-    email?: StringFilter<"TenantAdmin"> | string
-    password?: StringFilter<"TenantAdmin"> | string
-    role?: EnumAdminRoleFilter<"TenantAdmin"> | $Enums.AdminRole
-    isActive?: BoolFilter<"TenantAdmin"> | boolean
-    lastLoginAt?: DateTimeNullableFilter<"TenantAdmin"> | Date | string | null
-    createdAt?: DateTimeFilter<"TenantAdmin"> | Date | string
-    updatedAt?: DateTimeFilter<"TenantAdmin"> | Date | string
+  export type ClubAdminScalarWhereInput = {
+    AND?: ClubAdminScalarWhereInput | ClubAdminScalarWhereInput[]
+    OR?: ClubAdminScalarWhereInput[]
+    NOT?: ClubAdminScalarWhereInput | ClubAdminScalarWhereInput[]
+    id?: UuidFilter<"ClubAdmin"> | string
+    clubId?: UuidFilter<"ClubAdmin"> | string
+    name?: StringFilter<"ClubAdmin"> | string
+    email?: StringFilter<"ClubAdmin"> | string
+    password?: StringFilter<"ClubAdmin"> | string
+    role?: EnumAdminRoleFilter<"ClubAdmin"> | $Enums.AdminRole
+    isActive?: BoolFilter<"ClubAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableFilter<"ClubAdmin"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClubAdmin"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubAdmin"> | Date | string
   }
 
-  export type TenantApiKeyUpsertWithWhereUniqueWithoutTenantInput = {
-    where: TenantApiKeyWhereUniqueInput
-    update: XOR<TenantApiKeyUpdateWithoutTenantInput, TenantApiKeyUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantApiKeyCreateWithoutTenantInput, TenantApiKeyUncheckedCreateWithoutTenantInput>
+  export type ClubApiKeyUpsertWithWhereUniqueWithoutClubInput = {
+    where: ClubApiKeyWhereUniqueInput
+    update: XOR<ClubApiKeyUpdateWithoutClubInput, ClubApiKeyUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubApiKeyCreateWithoutClubInput, ClubApiKeyUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantApiKeyUpdateWithWhereUniqueWithoutTenantInput = {
-    where: TenantApiKeyWhereUniqueInput
-    data: XOR<TenantApiKeyUpdateWithoutTenantInput, TenantApiKeyUncheckedUpdateWithoutTenantInput>
+  export type ClubApiKeyUpdateWithWhereUniqueWithoutClubInput = {
+    where: ClubApiKeyWhereUniqueInput
+    data: XOR<ClubApiKeyUpdateWithoutClubInput, ClubApiKeyUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantApiKeyUpdateManyWithWhereWithoutTenantInput = {
-    where: TenantApiKeyScalarWhereInput
-    data: XOR<TenantApiKeyUpdateManyMutationInput, TenantApiKeyUncheckedUpdateManyWithoutTenantInput>
+  export type ClubApiKeyUpdateManyWithWhereWithoutClubInput = {
+    where: ClubApiKeyScalarWhereInput
+    data: XOR<ClubApiKeyUpdateManyMutationInput, ClubApiKeyUncheckedUpdateManyWithoutClubInput>
   }
 
-  export type TenantApiKeyScalarWhereInput = {
-    AND?: TenantApiKeyScalarWhereInput | TenantApiKeyScalarWhereInput[]
-    OR?: TenantApiKeyScalarWhereInput[]
-    NOT?: TenantApiKeyScalarWhereInput | TenantApiKeyScalarWhereInput[]
-    id?: UuidFilter<"TenantApiKey"> | string
-    tenantId?: UuidFilter<"TenantApiKey"> | string
-    keyName?: StringFilter<"TenantApiKey"> | string
-    apiKey?: StringFilter<"TenantApiKey"> | string
-    isActive?: BoolFilter<"TenantApiKey"> | boolean
-    lastUsedAt?: DateTimeNullableFilter<"TenantApiKey"> | Date | string | null
-    createdAt?: DateTimeFilter<"TenantApiKey"> | Date | string
-    expiresAt?: DateTimeNullableFilter<"TenantApiKey"> | Date | string | null
+  export type ClubApiKeyScalarWhereInput = {
+    AND?: ClubApiKeyScalarWhereInput | ClubApiKeyScalarWhereInput[]
+    OR?: ClubApiKeyScalarWhereInput[]
+    NOT?: ClubApiKeyScalarWhereInput | ClubApiKeyScalarWhereInput[]
+    id?: UuidFilter<"ClubApiKey"> | string
+    clubId?: UuidFilter<"ClubApiKey"> | string
+    keyName?: StringFilter<"ClubApiKey"> | string
+    apiKey?: StringFilter<"ClubApiKey"> | string
+    isActive?: BoolFilter<"ClubApiKey"> | boolean
+    lastUsedAt?: DateTimeNullableFilter<"ClubApiKey"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClubApiKey"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"ClubApiKey"> | Date | string | null
   }
 
-  export type TenantUsageStatsUpsertWithWhereUniqueWithoutTenantInput = {
-    where: TenantUsageStatsWhereUniqueInput
-    update: XOR<TenantUsageStatsUpdateWithoutTenantInput, TenantUsageStatsUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantUsageStatsCreateWithoutTenantInput, TenantUsageStatsUncheckedCreateWithoutTenantInput>
+  export type ClubUsageStatsUpsertWithWhereUniqueWithoutClubInput = {
+    where: ClubUsageStatsWhereUniqueInput
+    update: XOR<ClubUsageStatsUpdateWithoutClubInput, ClubUsageStatsUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubUsageStatsCreateWithoutClubInput, ClubUsageStatsUncheckedCreateWithoutClubInput>
   }
 
-  export type TenantUsageStatsUpdateWithWhereUniqueWithoutTenantInput = {
-    where: TenantUsageStatsWhereUniqueInput
-    data: XOR<TenantUsageStatsUpdateWithoutTenantInput, TenantUsageStatsUncheckedUpdateWithoutTenantInput>
+  export type ClubUsageStatsUpdateWithWhereUniqueWithoutClubInput = {
+    where: ClubUsageStatsWhereUniqueInput
+    data: XOR<ClubUsageStatsUpdateWithoutClubInput, ClubUsageStatsUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantUsageStatsUpdateManyWithWhereWithoutTenantInput = {
-    where: TenantUsageStatsScalarWhereInput
-    data: XOR<TenantUsageStatsUpdateManyMutationInput, TenantUsageStatsUncheckedUpdateManyWithoutTenantInput>
+  export type ClubUsageStatsUpdateManyWithWhereWithoutClubInput = {
+    where: ClubUsageStatsScalarWhereInput
+    data: XOR<ClubUsageStatsUpdateManyMutationInput, ClubUsageStatsUncheckedUpdateManyWithoutClubInput>
   }
 
-  export type TenantUsageStatsScalarWhereInput = {
-    AND?: TenantUsageStatsScalarWhereInput | TenantUsageStatsScalarWhereInput[]
-    OR?: TenantUsageStatsScalarWhereInput[]
-    NOT?: TenantUsageStatsScalarWhereInput | TenantUsageStatsScalarWhereInput[]
-    id?: UuidFilter<"TenantUsageStats"> | string
-    tenantId?: UuidFilter<"TenantUsageStats"> | string
-    date?: DateTimeFilter<"TenantUsageStats"> | Date | string
-    apiCalls?: IntFilter<"TenantUsageStats"> | number
-    storageUsedMB?: IntFilter<"TenantUsageStats"> | number
-    activeUsers?: IntFilter<"TenantUsageStats"> | number
-    createdAt?: DateTimeFilter<"TenantUsageStats"> | Date | string
+  export type ClubUsageStatsScalarWhereInput = {
+    AND?: ClubUsageStatsScalarWhereInput | ClubUsageStatsScalarWhereInput[]
+    OR?: ClubUsageStatsScalarWhereInput[]
+    NOT?: ClubUsageStatsScalarWhereInput | ClubUsageStatsScalarWhereInput[]
+    id?: UuidFilter<"ClubUsageStats"> | string
+    clubId?: UuidFilter<"ClubUsageStats"> | string
+    date?: DateTimeFilter<"ClubUsageStats"> | Date | string
+    apiCalls?: IntFilter<"ClubUsageStats"> | number
+    storageUsedMB?: IntFilter<"ClubUsageStats"> | number
+    activeUsers?: IntFilter<"ClubUsageStats"> | number
+    createdAt?: DateTimeFilter<"ClubUsageStats"> | Date | string
   }
 
-  export type TenantStatsUpsertWithoutTenantInput = {
-    update: XOR<TenantStatsUpdateWithoutTenantInput, TenantStatsUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantStatsCreateWithoutTenantInput, TenantStatsUncheckedCreateWithoutTenantInput>
-    where?: TenantStatsWhereInput
+  export type ClubStatsUpsertWithoutClubInput = {
+    update: XOR<ClubStatsUpdateWithoutClubInput, ClubStatsUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubStatsCreateWithoutClubInput, ClubStatsUncheckedCreateWithoutClubInput>
+    where?: ClubStatsWhereInput
   }
 
-  export type TenantStatsUpdateToOneWithWhereWithoutTenantInput = {
-    where?: TenantStatsWhereInput
-    data: XOR<TenantStatsUpdateWithoutTenantInput, TenantStatsUncheckedUpdateWithoutTenantInput>
+  export type ClubStatsUpdateToOneWithWhereWithoutClubInput = {
+    where?: ClubStatsWhereInput
+    data: XOR<ClubStatsUpdateWithoutClubInput, ClubStatsUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantStatsUpdateWithoutTenantInput = {
+  export type ClubStatsUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
@@ -20240,7 +20240,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantStatsUncheckedUpdateWithoutTenantInput = {
+  export type ClubStatsUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalUsers?: IntFieldUpdateOperationsInput | number
     totalConsumers?: IntFieldUpdateOperationsInput | number
@@ -20258,18 +20258,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantCashbackConfigUpsertWithoutTenantInput = {
-    update: XOR<TenantCashbackConfigUpdateWithoutTenantInput, TenantCashbackConfigUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantCashbackConfigCreateWithoutTenantInput, TenantCashbackConfigUncheckedCreateWithoutTenantInput>
-    where?: TenantCashbackConfigWhereInput
+  export type ClubCashbackConfigUpsertWithoutClubInput = {
+    update: XOR<ClubCashbackConfigUpdateWithoutClubInput, ClubCashbackConfigUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubCashbackConfigCreateWithoutClubInput, ClubCashbackConfigUncheckedCreateWithoutClubInput>
+    where?: ClubCashbackConfigWhereInput
   }
 
-  export type TenantCashbackConfigUpdateToOneWithWhereWithoutTenantInput = {
-    where?: TenantCashbackConfigWhereInput
-    data: XOR<TenantCashbackConfigUpdateWithoutTenantInput, TenantCashbackConfigUncheckedUpdateWithoutTenantInput>
+  export type ClubCashbackConfigUpdateToOneWithWhereWithoutClubInput = {
+    where?: ClubCashbackConfigWhereInput
+    data: XOR<ClubCashbackConfigUpdateWithoutClubInput, ClubCashbackConfigUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantCashbackConfigUpdateWithoutTenantInput = {
+  export type ClubCashbackConfigUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -20279,7 +20279,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantCashbackConfigUncheckedUpdateWithoutTenantInput = {
+  export type ClubCashbackConfigUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     consumerPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     clubPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -20289,18 +20289,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantWithdrawalConfigUpsertWithoutTenantInput = {
-    update: XOR<TenantWithdrawalConfigUpdateWithoutTenantInput, TenantWithdrawalConfigUncheckedUpdateWithoutTenantInput>
-    create: XOR<TenantWithdrawalConfigCreateWithoutTenantInput, TenantWithdrawalConfigUncheckedCreateWithoutTenantInput>
-    where?: TenantWithdrawalConfigWhereInput
+  export type ClubWithdrawalConfigUpsertWithoutClubInput = {
+    update: XOR<ClubWithdrawalConfigUpdateWithoutClubInput, ClubWithdrawalConfigUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
+    where?: ClubWithdrawalConfigWhereInput
   }
 
-  export type TenantWithdrawalConfigUpdateToOneWithWhereWithoutTenantInput = {
-    where?: TenantWithdrawalConfigWhereInput
-    data: XOR<TenantWithdrawalConfigUpdateWithoutTenantInput, TenantWithdrawalConfigUncheckedUpdateWithoutTenantInput>
+  export type ClubWithdrawalConfigUpdateToOneWithWhereWithoutClubInput = {
+    where?: ClubWithdrawalConfigWhereInput
+    data: XOR<ClubWithdrawalConfigUpdateWithoutClubInput, ClubWithdrawalConfigUncheckedUpdateWithoutClubInput>
   }
 
-  export type TenantWithdrawalConfigUpdateWithoutTenantInput = {
+  export type ClubWithdrawalConfigUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -20309,7 +20309,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantWithdrawalConfigUncheckedUpdateWithoutTenantInput = {
+  export type ClubWithdrawalConfigUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     withdrawalFeePercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdrawalFeeFixed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -20318,12 +20318,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantCreateWithoutBrandingInput = {
+  export type ClubCreateWithoutBrandingInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20348,21 +20348,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutBrandingInput = {
+  export type ClubUncheckedCreateWithoutBrandingInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20387,37 +20387,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutBrandingInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
+  export type ClubCreateOrConnectWithoutBrandingInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutBrandingInput, ClubUncheckedCreateWithoutBrandingInput>
   }
 
-  export type TenantUpsertWithoutBrandingInput = {
-    update: XOR<TenantUpdateWithoutBrandingInput, TenantUncheckedUpdateWithoutBrandingInput>
-    create: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutBrandingInput = {
+    update: XOR<ClubUpdateWithoutBrandingInput, ClubUncheckedUpdateWithoutBrandingInput>
+    create: XOR<ClubCreateWithoutBrandingInput, ClubUncheckedCreateWithoutBrandingInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutBrandingInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutBrandingInput, TenantUncheckedUpdateWithoutBrandingInput>
+  export type ClubUpdateToOneWithWhereWithoutBrandingInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutBrandingInput, ClubUncheckedUpdateWithoutBrandingInput>
   }
 
-  export type TenantUpdateWithoutBrandingInput = {
+  export type ClubUpdateWithoutBrandingInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20442,21 +20442,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutBrandingInput = {
+  export type ClubUncheckedUpdateWithoutBrandingInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20481,21 +20481,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutModulesInput = {
+  export type ClubCreateWithoutModulesInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20520,21 +20520,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutModulesInput = {
+  export type ClubUncheckedCreateWithoutModulesInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20559,37 +20559,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutModulesInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutModulesInput, TenantUncheckedCreateWithoutModulesInput>
+  export type ClubCreateOrConnectWithoutModulesInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutModulesInput, ClubUncheckedCreateWithoutModulesInput>
   }
 
-  export type TenantUpsertWithoutModulesInput = {
-    update: XOR<TenantUpdateWithoutModulesInput, TenantUncheckedUpdateWithoutModulesInput>
-    create: XOR<TenantCreateWithoutModulesInput, TenantUncheckedCreateWithoutModulesInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutModulesInput = {
+    update: XOR<ClubUpdateWithoutModulesInput, ClubUncheckedUpdateWithoutModulesInput>
+    create: XOR<ClubCreateWithoutModulesInput, ClubUncheckedCreateWithoutModulesInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutModulesInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutModulesInput, TenantUncheckedUpdateWithoutModulesInput>
+  export type ClubUpdateToOneWithWhereWithoutModulesInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutModulesInput, ClubUncheckedUpdateWithoutModulesInput>
   }
 
-  export type TenantUpdateWithoutModulesInput = {
+  export type ClubUpdateWithoutModulesInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20614,21 +20614,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutModulesInput = {
+  export type ClubUncheckedUpdateWithoutModulesInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20653,21 +20653,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutStatsInput = {
+  export type ClubCreateWithoutStatsInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20692,21 +20692,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutStatsInput = {
+  export type ClubUncheckedCreateWithoutStatsInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20731,37 +20731,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutStatsInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutStatsInput, TenantUncheckedCreateWithoutStatsInput>
+  export type ClubCreateOrConnectWithoutStatsInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutStatsInput, ClubUncheckedCreateWithoutStatsInput>
   }
 
-  export type TenantUpsertWithoutStatsInput = {
-    update: XOR<TenantUpdateWithoutStatsInput, TenantUncheckedUpdateWithoutStatsInput>
-    create: XOR<TenantCreateWithoutStatsInput, TenantUncheckedCreateWithoutStatsInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutStatsInput = {
+    update: XOR<ClubUpdateWithoutStatsInput, ClubUncheckedUpdateWithoutStatsInput>
+    create: XOR<ClubCreateWithoutStatsInput, ClubUncheckedCreateWithoutStatsInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutStatsInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutStatsInput, TenantUncheckedUpdateWithoutStatsInput>
+  export type ClubUpdateToOneWithWhereWithoutStatsInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutStatsInput, ClubUncheckedUpdateWithoutStatsInput>
   }
 
-  export type TenantUpdateWithoutStatsInput = {
+  export type ClubUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20786,21 +20786,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutStatsInput = {
+  export type ClubUncheckedUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20825,21 +20825,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutCashbackConfigInput = {
+  export type ClubCreateWithoutCashbackConfigInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20864,21 +20864,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutCashbackConfigInput = {
+  export type ClubUncheckedCreateWithoutCashbackConfigInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20903,37 +20903,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutCashbackConfigInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutCashbackConfigInput, TenantUncheckedCreateWithoutCashbackConfigInput>
+  export type ClubCreateOrConnectWithoutCashbackConfigInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutCashbackConfigInput, ClubUncheckedCreateWithoutCashbackConfigInput>
   }
 
-  export type TenantUpsertWithoutCashbackConfigInput = {
-    update: XOR<TenantUpdateWithoutCashbackConfigInput, TenantUncheckedUpdateWithoutCashbackConfigInput>
-    create: XOR<TenantCreateWithoutCashbackConfigInput, TenantUncheckedCreateWithoutCashbackConfigInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutCashbackConfigInput = {
+    update: XOR<ClubUpdateWithoutCashbackConfigInput, ClubUncheckedUpdateWithoutCashbackConfigInput>
+    create: XOR<ClubCreateWithoutCashbackConfigInput, ClubUncheckedCreateWithoutCashbackConfigInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutCashbackConfigInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutCashbackConfigInput, TenantUncheckedUpdateWithoutCashbackConfigInput>
+  export type ClubUpdateToOneWithWhereWithoutCashbackConfigInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutCashbackConfigInput, ClubUncheckedUpdateWithoutCashbackConfigInput>
   }
 
-  export type TenantUpdateWithoutCashbackConfigInput = {
+  export type ClubUpdateWithoutCashbackConfigInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20958,21 +20958,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutCashbackConfigInput = {
+  export type ClubUncheckedUpdateWithoutCashbackConfigInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20997,21 +20997,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutWithdrawalConfigInput = {
+  export type ClubCreateWithoutWithdrawalConfigInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21036,21 +21036,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutWithdrawalConfigInput = {
+  export type ClubUncheckedCreateWithoutWithdrawalConfigInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21075,37 +21075,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutWithdrawalConfigInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutWithdrawalConfigInput, TenantUncheckedCreateWithoutWithdrawalConfigInput>
+  export type ClubCreateOrConnectWithoutWithdrawalConfigInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutWithdrawalConfigInput, ClubUncheckedCreateWithoutWithdrawalConfigInput>
   }
 
-  export type TenantUpsertWithoutWithdrawalConfigInput = {
-    update: XOR<TenantUpdateWithoutWithdrawalConfigInput, TenantUncheckedUpdateWithoutWithdrawalConfigInput>
-    create: XOR<TenantCreateWithoutWithdrawalConfigInput, TenantUncheckedCreateWithoutWithdrawalConfigInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutWithdrawalConfigInput = {
+    update: XOR<ClubUpdateWithoutWithdrawalConfigInput, ClubUncheckedUpdateWithoutWithdrawalConfigInput>
+    create: XOR<ClubCreateWithoutWithdrawalConfigInput, ClubUncheckedCreateWithoutWithdrawalConfigInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutWithdrawalConfigInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutWithdrawalConfigInput, TenantUncheckedUpdateWithoutWithdrawalConfigInput>
+  export type ClubUpdateToOneWithWhereWithoutWithdrawalConfigInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutWithdrawalConfigInput, ClubUncheckedUpdateWithoutWithdrawalConfigInput>
   }
 
-  export type TenantUpdateWithoutWithdrawalConfigInput = {
+  export type ClubUpdateWithoutWithdrawalConfigInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21130,21 +21130,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutWithdrawalConfigInput = {
+  export type ClubUncheckedUpdateWithoutWithdrawalConfigInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21169,21 +21169,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutAdminsInput = {
+  export type ClubCreateWithoutAdminsInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21208,21 +21208,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutAdminsInput = {
+  export type ClubUncheckedCreateWithoutAdminsInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21247,37 +21247,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutAdminsInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutAdminsInput, TenantUncheckedCreateWithoutAdminsInput>
+  export type ClubCreateOrConnectWithoutAdminsInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutAdminsInput, ClubUncheckedCreateWithoutAdminsInput>
   }
 
-  export type TenantUpsertWithoutAdminsInput = {
-    update: XOR<TenantUpdateWithoutAdminsInput, TenantUncheckedUpdateWithoutAdminsInput>
-    create: XOR<TenantCreateWithoutAdminsInput, TenantUncheckedCreateWithoutAdminsInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutAdminsInput = {
+    update: XOR<ClubUpdateWithoutAdminsInput, ClubUncheckedUpdateWithoutAdminsInput>
+    create: XOR<ClubCreateWithoutAdminsInput, ClubUncheckedCreateWithoutAdminsInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutAdminsInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutAdminsInput, TenantUncheckedUpdateWithoutAdminsInput>
+  export type ClubUpdateToOneWithWhereWithoutAdminsInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutAdminsInput, ClubUncheckedUpdateWithoutAdminsInput>
   }
 
-  export type TenantUpdateWithoutAdminsInput = {
+  export type ClubUpdateWithoutAdminsInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21302,21 +21302,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutAdminsInput = {
+  export type ClubUncheckedUpdateWithoutAdminsInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21341,21 +21341,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutApiKeysInput = {
+  export type ClubCreateWithoutApiKeysInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21380,21 +21380,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutApiKeysInput = {
+  export type ClubUncheckedCreateWithoutApiKeysInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21419,37 +21419,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    usageStats?: TenantUsageStatsUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutApiKeysInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutApiKeysInput, TenantUncheckedCreateWithoutApiKeysInput>
+  export type ClubCreateOrConnectWithoutApiKeysInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutApiKeysInput, ClubUncheckedCreateWithoutApiKeysInput>
   }
 
-  export type TenantUpsertWithoutApiKeysInput = {
-    update: XOR<TenantUpdateWithoutApiKeysInput, TenantUncheckedUpdateWithoutApiKeysInput>
-    create: XOR<TenantCreateWithoutApiKeysInput, TenantUncheckedCreateWithoutApiKeysInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutApiKeysInput = {
+    update: XOR<ClubUpdateWithoutApiKeysInput, ClubUncheckedUpdateWithoutApiKeysInput>
+    create: XOR<ClubCreateWithoutApiKeysInput, ClubUncheckedCreateWithoutApiKeysInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutApiKeysInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutApiKeysInput, TenantUncheckedUpdateWithoutApiKeysInput>
+  export type ClubUpdateToOneWithWhereWithoutApiKeysInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutApiKeysInput, ClubUncheckedUpdateWithoutApiKeysInput>
   }
 
-  export type TenantUpdateWithoutApiKeysInput = {
+  export type ClubUpdateWithoutApiKeysInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21474,21 +21474,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutApiKeysInput = {
+  export type ClubUncheckedUpdateWithoutApiKeysInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21513,21 +21513,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    usageStats?: TenantUsageStatsUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantCreateWithoutUsageStatsInput = {
+  export type ClubCreateWithoutUsageStatsInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21552,21 +21552,21 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
   }
 
-  export type TenantUncheckedCreateWithoutUsageStatsInput = {
+  export type ClubUncheckedCreateWithoutUsageStatsInput = {
     id?: string
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.TenantStatus
+    status?: $Enums.ClubStatus
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -21591,37 +21591,37 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
-    modules?: TenantModuleUncheckedCreateNestedManyWithoutTenantInput
-    admins?: TenantAdminUncheckedCreateNestedManyWithoutTenantInput
-    apiKeys?: TenantApiKeyUncheckedCreateNestedManyWithoutTenantInput
-    stats?: TenantStatsUncheckedCreateNestedOneWithoutTenantInput
-    cashbackConfig?: TenantCashbackConfigUncheckedCreateNestedOneWithoutTenantInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedCreateNestedOneWithoutTenantInput
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
   }
 
-  export type TenantCreateOrConnectWithoutUsageStatsInput = {
-    where: TenantWhereUniqueInput
-    create: XOR<TenantCreateWithoutUsageStatsInput, TenantUncheckedCreateWithoutUsageStatsInput>
+  export type ClubCreateOrConnectWithoutUsageStatsInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutUsageStatsInput, ClubUncheckedCreateWithoutUsageStatsInput>
   }
 
-  export type TenantUpsertWithoutUsageStatsInput = {
-    update: XOR<TenantUpdateWithoutUsageStatsInput, TenantUncheckedUpdateWithoutUsageStatsInput>
-    create: XOR<TenantCreateWithoutUsageStatsInput, TenantUncheckedCreateWithoutUsageStatsInput>
-    where?: TenantWhereInput
+  export type ClubUpsertWithoutUsageStatsInput = {
+    update: XOR<ClubUpdateWithoutUsageStatsInput, ClubUncheckedUpdateWithoutUsageStatsInput>
+    create: XOR<ClubCreateWithoutUsageStatsInput, ClubUncheckedCreateWithoutUsageStatsInput>
+    where?: ClubWhereInput
   }
 
-  export type TenantUpdateToOneWithWhereWithoutUsageStatsInput = {
-    where?: TenantWhereInput
-    data: XOR<TenantUpdateWithoutUsageStatsInput, TenantUncheckedUpdateWithoutUsageStatsInput>
+  export type ClubUpdateToOneWithWhereWithoutUsageStatsInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutUsageStatsInput, ClubUncheckedUpdateWithoutUsageStatsInput>
   }
 
-  export type TenantUpdateWithoutUsageStatsInput = {
+  export type ClubUpdateWithoutUsageStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21646,21 +21646,21 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantUncheckedUpdateWithoutUsageStatsInput = {
+  export type ClubUncheckedUpdateWithoutUsageStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -21685,16 +21685,16 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
-    modules?: TenantModuleUncheckedUpdateManyWithoutTenantNestedInput
-    admins?: TenantAdminUncheckedUpdateManyWithoutTenantNestedInput
-    apiKeys?: TenantApiKeyUncheckedUpdateManyWithoutTenantNestedInput
-    stats?: TenantStatsUncheckedUpdateOneWithoutTenantNestedInput
-    cashbackConfig?: TenantCashbackConfigUncheckedUpdateOneWithoutTenantNestedInput
-    withdrawalConfig?: TenantWithdrawalConfigUncheckedUpdateOneWithoutTenantNestedInput
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
   }
 
-  export type TenantModuleCreateManyTenantInput = {
+  export type ClubModuleCreateManyClubInput = {
     id?: string
     moduleKey: $Enums.ModuleKey
     isEnabled?: boolean
@@ -21707,7 +21707,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantAdminCreateManyTenantInput = {
+  export type ClubAdminCreateManyClubInput = {
     id?: string
     name: string
     email: string
@@ -21719,7 +21719,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TenantApiKeyCreateManyTenantInput = {
+  export type ClubApiKeyCreateManyClubInput = {
     id?: string
     keyName: string
     apiKey: string
@@ -21729,7 +21729,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
   }
 
-  export type TenantUsageStatsCreateManyTenantInput = {
+  export type ClubUsageStatsCreateManyClubInput = {
     id?: string
     date: Date | string
     apiCalls?: number
@@ -21738,7 +21738,7 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type TenantModuleUpdateWithoutTenantInput = {
+  export type ClubModuleUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -21751,7 +21751,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantModuleUncheckedUpdateWithoutTenantInput = {
+  export type ClubModuleUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -21764,7 +21764,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantModuleUncheckedUpdateManyWithoutTenantInput = {
+  export type ClubModuleUncheckedUpdateManyWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     moduleKey?: EnumModuleKeyFieldUpdateOperationsInput | $Enums.ModuleKey
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -21777,7 +21777,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantAdminUpdateWithoutTenantInput = {
+  export type ClubAdminUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21789,7 +21789,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantAdminUncheckedUpdateWithoutTenantInput = {
+  export type ClubAdminUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21801,7 +21801,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantAdminUncheckedUpdateManyWithoutTenantInput = {
+  export type ClubAdminUncheckedUpdateManyWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21813,7 +21813,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantApiKeyUpdateWithoutTenantInput = {
+  export type ClubApiKeyUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     keyName?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
@@ -21823,7 +21823,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TenantApiKeyUncheckedUpdateWithoutTenantInput = {
+  export type ClubApiKeyUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     keyName?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
@@ -21833,7 +21833,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TenantApiKeyUncheckedUpdateManyWithoutTenantInput = {
+  export type ClubApiKeyUncheckedUpdateManyWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     keyName?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
@@ -21843,7 +21843,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TenantUsageStatsUpdateWithoutTenantInput = {
+  export type ClubUsageStatsUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     apiCalls?: IntFieldUpdateOperationsInput | number
@@ -21852,7 +21852,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantUsageStatsUncheckedUpdateWithoutTenantInput = {
+  export type ClubUsageStatsUncheckedUpdateWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     apiCalls?: IntFieldUpdateOperationsInput | number
@@ -21861,7 +21861,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantUsageStatsUncheckedUpdateManyWithoutTenantInput = {
+  export type ClubUsageStatsUncheckedUpdateManyWithoutClubInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     apiCalls?: IntFieldUpdateOperationsInput | number

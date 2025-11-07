@@ -99,7 +99,7 @@ const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: logFormat,
   defaultMeta: {
-    service: 'coinage-api',
+    service: 'club-api',
     version: process.env.APP_VERSION || '1.0.0',
     environment: process.env.NODE_ENV || 'development'
   },
@@ -112,7 +112,7 @@ const auditLogger = winston.createLogger({
   level: 'info',
   format: logFormat,
   defaultMeta: {
-    service: 'coinage-audit',
+    service: 'club-audit',
     type: 'audit'
   },
   transports: [
@@ -131,7 +131,7 @@ const performanceLogger = winston.createLogger({
   level: 'info',
   format: logFormat,
   defaultMeta: {
-    service: 'coinage-performance',
+    service: 'club-performance',
     type: 'performance'
   },
   transports: [
@@ -150,7 +150,7 @@ const securityLogger = winston.createLogger({
   level: 'info',
   format: logFormat,
   defaultMeta: {
-    service: 'coinage-security',
+    service: 'club-security',
     type: 'security'
   },
   transports: [

@@ -5,7 +5,7 @@
 const express = require('express');
 const router = express.Router();
 const analyticsController = require('../controllers/analytics.controller');
-const { authenticateJWT } = require('../middlewares/auth');
+const { authenticateJWT } = require('../middleware/jwt.middleware');
 
 /**
  * @route POST /api/analytics/events

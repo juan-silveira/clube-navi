@@ -223,7 +223,7 @@ class TransactionService {
         targetAddress: fromAddress,
         functionParams: [fromAddress, amountWei.toString()],
         tokenSymbol: 'cBRL',
-        tokenName: 'Coinage Real Brasil'
+        tokenName: 'Clube Digital Real Brasil'
       }
     };
 

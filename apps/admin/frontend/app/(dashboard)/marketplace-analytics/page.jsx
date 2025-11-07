@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
-import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 import productService from "@/services/productService";
 import merchantService from "@/services/merchantService";
 import purchaseService from "@/services/purchaseService";
@@ -102,8 +101,6 @@ const MarketplaceAnalytics = () => {
 
   return (
     <div>
-      <HomeBredCurbs title="Analytics do Marketplace" />
-
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
         {/* Total de Vendas */}

@@ -22,7 +22,7 @@ const Profile = () => {
   const { t } = useTranslation('profile');
 
   // Hook para gerenciar título da aba com contagem de notificações
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
   
   const { user, profilePhotoUrl, setProfilePhotoUrl } = useAuthStore();
   const { cachedUser, formatCPF, formatPhone } = useCacheData();

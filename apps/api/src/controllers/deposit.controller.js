@@ -1,8 +1,7 @@
 const depositService = require('../services/deposit.service');
 const userActionsService = require('../services/userActions.service');
 const userTaxesService = require('../services/userTaxes.service');
-const PixService = require('../services/pix.service');
-const pixService = new PixService();
+const pixService = require('../services/pix.service');
 const mintService = require('../services/mint.service');
 const { PrismaClient } = require('../generated/prisma');
 

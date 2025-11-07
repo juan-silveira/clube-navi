@@ -17,7 +17,7 @@ const Footer = ({ className = "custom-class" }) => {
     <footer className={className + " " + footerclassName()}>
       <div className="site-footer px-6 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-300 py-4">
         <div className="text-center text-sm">
-          Copyright © 2025 Coinage. All Rights Reserved.
+          Copyright © 2025 Clube Digital. All Rights Reserved.
         </div>
       </div>
     </footer>

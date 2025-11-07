@@ -50,8 +50,8 @@ process.stdout.write = function(string, encoding, fd) {
 const path = require('path');
 const fs = require('fs');
 
-// IMPORTANTE: Em produção, o .env está em /var/www/coinage/.env
-const prodEnvPath = path.join(__dirname, '../../.env');
+// IMPORTANTE: Carregar .env da raiz do projeto (clube_digital/.env)
+const prodEnvPath = path.join(__dirname, '../../../.env');
 const backupEnvPath = path.join(__dirname, '../.env');
 
 // Tentar carregar da raiz primeiro, depois do backend
@@ -113,7 +113,7 @@ const startServer = () => {
     global.websocketService = websocketService;
 
     server.listen(PORT, () => {
-      console.log('🚀 Azore Blockchain API Service iniciado com sucesso! (PRISMA)');
+      console.log('🚀 Clube Digital API Service iniciado com sucesso! (PRISMA)');
       console.log(`📍 Servidor rodando em: http://localhost:${PORT}`);
       console.log(`🌍 Ambiente: ${NODE_ENV}`);
       console.log(`🗄️ ORM: Prisma`);
@@ -123,12 +123,6 @@ const startServer = () => {
       console.log('📋 Endpoints disponíveis:');
       console.log(`   Health Check: http://localhost:${PORT}/health`);
       console.log(`   API Info: http://localhost:${PORT}/`);
-      console.log(`   Test Connection: http://localhost:${PORT}/api/test/connection`);
-      console.log(`   Network Info: http://localhost:${PORT}/api/test/network-info`);
-
-      console.log('');
-      console.log('🔗 Para testar a conexão com a blockchain:');
-      console.log(`   curl http://localhost:${PORT}/api/test/connection`);
       console.log('');
     });
   } catch (error) {
@@ -208,23 +202,10 @@ const startServer = () => {
     // Inicializar dados padrão
     console.log('🔍 Verificando dados padrão...');
     try {
-      // Verificar se existem usuários
-      const usersCount = await prisma.user.count();
-      console.log(`👥 Usuários existentes: ${usersCount}`);
-
-      // Criar usuário admin padrão se não existir
-      console.log(`🔍 Verificando se deve criar usuário admin (usersCount = ${usersCount})`);
-      if (usersCount === 0) {
-        console.log('👤 Criando usuário admin padrão...');
-        try {
-          await adminService.initializeDefaultAdmin();
-          console.log('✅ Usuário admin padrão criado com sucesso');
-        } catch (error) {
-          console.log('⚠️ Erro ao criar usuário admin padrão:', error.message);
-        }
-      } else {
-        console.log('👤 Usuário admin já existe, pulando criação');
-      }
+      // NOTE: Admin initialization disabled for multi-tenant architecture
+      // Users are now per-club in tenant databases, not in master DB
+      // ClubAdmins should be created through proper API endpoints
+      console.log('ℹ️  Admin initialization skipped (multi-tenant architecture)');
 
     } catch (error) {
       console.log('⚠️ Erro ao verificar dados padrão:', error.message);

@@ -37,7 +37,7 @@ const MarketPage = () => {
   const { defaultNetwork } = useConfig();
 
 
-  // Use cached balances hook like HomeBredCurbs
+  // Use cached balances hook
   const {
     getBalance,
     loading: isBalanceLoading,

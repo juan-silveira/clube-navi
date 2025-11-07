@@ -69,10 +69,10 @@ const WhitelabelManagementPage = () => {
     logoUrl: "/assets/images/companies/coinage.png",
     logoUrlDark: "/assets/images/companies/coinage.png",
     faviconUrl: "/assets/images/companies/coinage-favicon.ico",
-    loginTitle: "Bem-vindo à Coinage",
+    loginTitle: "Bem-vindo à Clube Digital",
     loginSubtitle: "Plataforma líder em criptomoedas",
-    welcomeMessage: "Bem-vindo à Coinage! A plataforma mais confiável para suas operações com criptomoedas.",
-    footerText: "© 2025 Coinage. Todos os direitos reservados.",
+    welcomeMessage: "Bem-vindo à Clube Digital! A plataforma mais confiável para suas operações com criptomoedas.",
+    footerText: "© 2025 Clube Digital. Todos os direitos reservados.",
     supportUrl: "https://support.coinage.com",
     privacyPolicyUrl: "https://coinage.com/privacy",
     termsOfServiceUrl: "https://coinage.com/terms",
@@ -134,7 +134,7 @@ const WhitelabelManagementPage = () => {
       const mockCompanies = [
         {
           id: 1,
-          name: "Coinage",
+          name: "Clube Digital",
           alias: "coinage",
           status: "active",
           hasCustomBranding: true,
@@ -147,7 +147,7 @@ const WhitelabelManagementPage = () => {
             primaryColor: "#10B981",
             secondaryColor: "#059669",
             logoUrl: "/assets/images/companies/coinage.png",
-            loginTitle: "Bem-vindo à Coinage"
+            loginTitle: "Bem-vindo à Clube Digital"
           }
         },
         {
@@ -840,7 +840,7 @@ const WhitelabelManagementPage = () => {
                     <Textinput
                       value={brandingData.loginTitle}
                       onChange={(e) => handleInputChange('loginTitle', e.target.value)}
-                      placeholder="Bem-vindo à Coinage"
+                      placeholder="Bem-vindo à Clube Digital"
                     />
                   </div>
                   <div className="space-y-2">

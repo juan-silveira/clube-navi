@@ -8,7 +8,7 @@ BLUE=\033[0;34m
 NC=\033[0m # No Color
 
 help: ## Mostra esta mensagem de ajuda
-	@echo "$(BLUE)Clube Navi - Comandos Disponíveis:$(NC)"
+	@echo "$(BLUE)Clube Digital - Comandos Disponíveis:$(NC)"
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  $(GREEN)%-15s$(NC) %s\n", $$1, $$2}'
 	@echo ""

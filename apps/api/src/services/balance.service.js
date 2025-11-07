@@ -10,16 +10,16 @@
  * - Apenas merchants podem sacar
  * - Merchants podem sacar apenas o saldo de vendas
  * - Consumidores NÃO podem sacar (saldo de depósito + cashback fica no app)
+ *
+ * NOTA: Este serviço é multi-clube. O prisma client deve ser passado nas chamadas.
  */
-
-const prisma = require('../config/database');
 
 class BalanceService {
   /**
    * Calcula saldo de vendas de um merchant
    * Baseado em todas as vendas confirmadas (purchases com status 'completed')
    */
-  async getMerchantSalesBalance(userId) {
+  async getMerchantSalesBalance(prisma, userId) {
     try {
       // Buscar todas as vendas confirmadas do merchant
       const sales = await prisma.purchase.findMany({
@@ -73,7 +73,7 @@ class BalanceService {
    * Calcula saldo de cashback de um usuário
    * Baseado em todas as transações de cashback recebidas
    */
-  async getCashbackBalance(userId) {
+  async getCashbackBalance(prisma, userId) {
     try {
       const cashbackTransactions = await prisma.cashbackTransaction.findMany({
         where: {
@@ -103,7 +103,7 @@ class BalanceService {
    * Calcula saldo de depósito de um usuário
    * Baseado em todas as transações de depósito confirmadas
    */
-  async getDepositBalance(userId) {
+  async getDepositBalance(prisma, userId) {
     try {
       const deposits = await prisma.transaction.findMany({
         where: {
@@ -133,7 +133,7 @@ class BalanceService {
   /**
    * Retorna todos os saldos de um usuário
    */
-  async getAllBalances(userId, userType) {
+  async getAllBalances(prisma, userId, userType) {
     try {
       const balances = {
         sales: { totalSales: 0, totalWithdrawals: 0, availableBalance: 0 },
@@ -144,12 +144,12 @@ class BalanceService {
 
       // Se for merchant, calcular saldo de vendas
       if (userType === 'merchant') {
-        balances.sales = await this.getMerchantSalesBalance(userId);
+        balances.sales = await this.getMerchantSalesBalance(prisma, userId);
       }
 
       // Todos os usuários podem ter cashback e depósito
-      balances.cashback = await this.getCashbackBalance(userId);
-      balances.deposit = await this.getDepositBalance(userId);
+      balances.cashback = await this.getCashbackBalance(prisma, userId);
+      balances.deposit = await this.getDepositBalance(prisma, userId);
 
       // Total = vendas + cashback + depósito
       balances.total =
@@ -167,7 +167,7 @@ class BalanceService {
   /**
    * Verifica se merchant pode sacar determinado valor
    */
-  async canWithdraw(userId, amount, userType) {
+  async canWithdraw(prisma, userId, amount, userType) {
     try {
       // Apenas merchants podem sacar
       if (userType !== 'merchant') {
@@ -178,7 +178,7 @@ class BalanceService {
       }
 
       // Verificar saldo disponível
-      const salesBalance = await this.getMerchantSalesBalance(userId);
+      const salesBalance = await this.getMerchantSalesBalance(prisma, userId);
 
       if (amount > salesBalance.availableBalance) {
         return {

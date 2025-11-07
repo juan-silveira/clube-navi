@@ -1,7 +1,7 @@
 /**
- * Product Controller - Multi-Tenant
+ * Product Controller - Multi-Clube
  * Gerencia produtos dos comerciantes (merchants)
- * Usa req.tenantPrisma para isolamento de dados por tenant
+ * Usa req.clubPrisma para isolamento de dados por clube
  */
 
 const { v4: uuidv4 } = require('uuid');
@@ -13,7 +13,7 @@ const productService = require('../services/product.service');
  */
 const createProduct = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const productData = req.body;
 
@@ -63,7 +63,7 @@ const createProduct = async (req, res) => {
  */
 const listProducts = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user?.id;
     const {
       merchantId,
@@ -110,7 +110,7 @@ const listProducts = async (req, res) => {
  */
 const getProductById = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { id } = req.params;
     const userId = req.user?.id;
 
@@ -146,7 +146,7 @@ const getProductById = async (req, res) => {
  */
 const updateProduct = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { id } = req.params;
     const updateData = req.body;
@@ -201,7 +201,7 @@ const updateProduct = async (req, res) => {
  */
 const deleteProduct = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { id } = req.params;
 
@@ -245,7 +245,7 @@ const deleteProduct = async (req, res) => {
  */
 const updateStock = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { id } = req.params;
     const { stock, operation } = req.body; // operation: 'set', 'add', 'subtract'
@@ -318,7 +318,7 @@ const updateStock = async (req, res) => {
  */
 const uploadProductImage = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { id: productId } = req.params;
 
@@ -352,7 +352,7 @@ const uploadProductImage = async (req, res) => {
     }
 
     // Upload da imagem para S3
-    const fileName = `products/${req.tenant?.slug || 'default'}/${productId}/${uuidv4()}-${req.file.originalname}`;
+    const fileName = `products/${req.club?.slug || 'default'}/${productId}/${uuidv4()}-${req.file.originalname}`;
     const imageUrl = await s3Service.uploadBuffer(
       req.file.buffer,
       fileName,
@@ -405,7 +405,7 @@ const uploadProductImage = async (req, res) => {
  */
 const getCategories = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     const categories = await productService.getCategories(prisma);
 
@@ -428,7 +428,7 @@ const getCategories = async (req, res) => {
  */
 const getFeaturedProducts = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { limit = 10, sortBy = 'cashback' } = req.query;
 
     const products = await productService.getFeaturedProducts(
@@ -456,7 +456,7 @@ const getFeaturedProducts = async (req, res) => {
  */
 const getMerchantStats = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { merchantId } = req.params;
     const userId = req.user.id;
 
@@ -494,7 +494,7 @@ const getMerchantStats = async (req, res) => {
  */
 const getProductStats = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Contar total de produtos
     const total = await prisma.product.count();

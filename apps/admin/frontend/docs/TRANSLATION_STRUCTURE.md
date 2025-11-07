@@ -1,8 +1,8 @@
-# Estrutura de Traduções - Coinage Platform
+# Estrutura de Traduções - Clube Digital Platform
 
 ## 📋 Visão Geral
 
-Este documento define a estrutura de namespaces de tradução para toda a plataforma Coinage.
+Este documento define a estrutura de namespaces de tradução para toda a plataforma Clube Digital.
 
 ## 🎯 Princípios
 
@@ -338,4 +338,4 @@ Ao traduzir uma página, verificar:
 ---
 
 **Última Atualização**: 2025-01-16
-**Mantido por**: Equipe Coinage
+**Mantido por**: Equipe Clube Digital

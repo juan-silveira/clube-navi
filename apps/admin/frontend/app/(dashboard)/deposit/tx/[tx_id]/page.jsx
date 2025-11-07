@@ -14,7 +14,7 @@ const DepositConfirmationPage = () => {
   const router = useRouter();
   const txId = params.tx_id;
   
-  useDocumentTitle('Confirmação de Depósito', 'Coinage', true);
+  useDocumentTitle('Confirmação de Depósito', 'Clube Digital', true);
 
   const { user, accessToken } = useAuthStore();
   const { showSuccess, showError } = useAlertContext();

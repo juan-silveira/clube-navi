@@ -166,7 +166,7 @@ class AlertingService {
       severity: critical ? 'CRITICAL' : 'WARNING',
       timestamp: new Date().toISOString(),
       data,
-      system: 'Coinage Backend',
+      system: 'Clube Digital Backend',
       environment: process.env.NODE_ENV || 'development'
     };
 
@@ -191,7 +191,7 @@ class AlertingService {
   async sendAlertEmail(alertData) {
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@coinage.com';
     
-    const subject = `[${alertData.severity}] ${alertData.type} - Coinage Alert`;
+    const subject = `[${alertData.severity}] ${alertData.type} - Clube Digital Alert`;
     
     const template = 'system_alert';
     const templateData = {

@@ -299,7 +299,7 @@ model TenantBranding {
 
   tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_brandings")
+  @@map("club_brandings")
 }
 
 model TenantModule {
@@ -323,12 +323,12 @@ model TenantModule {
   @@unique([tenantId, moduleKey])
   @@index([tenantId])
   @@index([isEnabled])
-  @@map("tenant_modules")
+  @@map("club_modules")
 }
 
 model TenantStats {
   id                    String    @id @default(uuid()) @db.Uuid
-  tenantId              String    @unique @map("tenant_id") @db.Uuid
+  tenantId              String    @unique @map("club_id") @db.Uuid
 
   // Usuários
   totalUsers            Int       @default(0) @map("total_users")
@@ -357,7 +357,7 @@ model TenantStats {
   tenant                Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([tenantId])
-  @@map("tenant_stats")
+  @@map("club_stats")
 }
 
 model GlobalStats {
@@ -385,7 +385,7 @@ model GlobalStats {
 
 model TenantCashbackConfig {
   id                        String   @id @default(uuid()) @db.Uuid
-  tenantId                  String   @unique @map("tenant_id") @db.Uuid
+  tenantId                  String   @unique @map("club_id") @db.Uuid
 
   // Percentuais padrão (soma deve ser 100%)
   consumerPercent           Decimal  @default(50.0) @map("consumer_percent") @db.Decimal(5, 2)
@@ -398,12 +398,12 @@ model TenantCashbackConfig {
 
   tenant                    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_cashback_configs")
+  @@map("club_cashback_configs")
 }
 
 model TenantWithdrawalConfig {
   id                   String   @id @default(uuid()) @db.Uuid
-  tenantId             String   @unique @map("tenant_id") @db.Uuid
+  tenantId             String   @unique @map("club_id") @db.Uuid
 
   // Taxa sobre saques
   withdrawalFeePercent Decimal  @default(2.5) @map("withdrawal_fee_percent") @db.Decimal(5, 2)
@@ -415,7 +415,7 @@ model TenantWithdrawalConfig {
 
   tenant               Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_withdrawal_configs")
+  @@map("club_withdrawal_configs")
 }
 
 model TenantAdmin {
@@ -437,7 +437,7 @@ model TenantAdmin {
 
   @@unique([tenantId, email])
   @@index([tenantId])
-  @@map("tenant_admins")
+  @@map("club_admins")
 }
 
 model SuperAdmin {
@@ -468,7 +468,7 @@ model TenantConfig {
   tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@unique([tenantId, key])
-  @@map("tenant_configs")
+  @@map("club_configs")
 }
 
 model TenantApiKey {
@@ -486,7 +486,7 @@ model TenantApiKey {
   tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([key])
-  @@map("tenant_api_keys")
+  @@map("club_api_keys")
 }
 
 model TenantUsageStats {
@@ -505,7 +505,7 @@ model TenantUsageStats {
   tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@unique([tenantId, date])
-  @@map("tenant_usage_stats")
+  @@map("club_usage_stats")
 }
 
 // ENUMS

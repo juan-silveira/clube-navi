@@ -103,17 +103,17 @@ router.post('/send-email', async (req, res) => {
         email: to,
         name: 'Test User'
       },
-      subject: 'Teste MailerSend Direto - Coinage System',
+      subject: 'Teste MailerSend Direto - Clube Digital System',
       htmlContent: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: linear-gradient(135deg, #374151 0%, #1f2937 50%, #00229e 100%); color: white;">
           <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
-            <div style="font-size: 20px; font-weight: 700;">🏦 Coinage</div>
+            <div style="font-size: 20px; font-weight: 700;">🏦 Clube Digital</div>
           </div>
           
           <div style="background: white; color: #333; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
             <h1 style="color: #059669; text-align: center; margin-bottom: 20px;">✅ MailerSend Funcionando!</h1>
             
-            <p>Este é um teste direto do MailerSend via Coinage System.</p>
+            <p>Este é um teste direto do MailerSend via Clube Digital System.</p>
             
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #374151; margin-top: 0;">Configuração Atual:</h3>
@@ -133,15 +133,15 @@ router.post('/send-email', async (req, res) => {
           </div>
           
           <div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.7); font-size: 13px;">
-            Sistema Coinage - Teste realizado em ${new Date().toLocaleString('pt-BR')}
+            Sistema Clube Digital - Teste realizado em ${new Date().toLocaleString('pt-BR')}
           </div>
         </div>
       `,
-      textContent: `Coinage - Teste MailerSend Direto
+      textContent: `Clube Digital - Teste MailerSend Direto
 
 ✅ MailerSend está funcionando!
 
-Este é um teste direto do MailerSend via Coinage System.
+Este é um teste direto do MailerSend via Clube Digital System.
 
 Configuração:
 - Provider: MailerSend
@@ -151,7 +151,7 @@ Configuração:
 
 🎉 Sucesso! O sistema de email está configurado e funcionando corretamente.
 
-Sistema Coinage - Teste realizado em ${new Date().toLocaleString('pt-BR')}`
+Sistema Clube Digital - Teste realizado em ${new Date().toLocaleString('pt-BR')}`
     });
 
     console.log('📧 Resultado do envio direto:', result);

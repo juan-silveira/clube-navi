@@ -78,11 +78,11 @@
     "Lembrete de Saque Pendente": "Recordatorio de Retiro Pendiente"
   },
   "templateMessages": {
-    "welcome": "👋 *¡Bienvenido a Coinage!*\n\n¡Hola, {{nome}}!\n\nEstamos felices de tenerte con nosotros. Nuestra plataforma ofrece las mejores soluciones en criptomonedas.\n\n¡Si necesitas ayuda, estamos a tu disposición!",
+    "welcome": "👋 *¡Bienvenido a Clube Digital!*\n\n¡Hola, {{nome}}!\n\nEstamos felices de tenerte con nosotros. Nuestra plataforma ofrece las mejores soluciones en criptomonedas.\n\n¡Si necesitas ayuda, estamos a tu disposición!",
     "document_reminder": "📄 *Recordatorio de Documentación*\n\n¡Hola, {{nome}}!\n\nNotamos que aún no has enviado todos los documentos necesarios para la validación de tu cuenta.\n\nPor favor, accede al sistema y completa tu registro para tener acceso total a la plataforma.",
-    "document_approved": "✅ *Aprobación de Documentación de Coinage*\n\n¡Hola, {{nome}}!\n\nTodos los documentos necesarios para la validación de tu cuenta han sido aprobados.\n\nAhora tienes acceso total a la plataforma.",
+    "document_approved": "✅ *Aprobación de Documentación de Clube Digital*\n\n¡Hola, {{nome}}!\n\nTodos los documentos necesarios para la validación de tu cuenta han sido aprobados.\n\nAhora tienes acceso total a la plataforma.",
     "withdrawal_reminder": "💰 *Retiro Pendiente*\n\n¡Hola, {{nome}}!\n\nTienes un retiro pendiente de aprobación. Estamos analizando tu solicitud y pronto responderemos.\n\n¡Verifica el estado en el sistema!",
-    "general_announcement": "📢 *Comunicado Importante*\n\n¡Hola, {{nome}}!\n\n[Escribe aquí el contenido del comunicado]\n\nAtentamente,\nEquipo Coinage",
+    "general_announcement": "📢 *Comunicado Importante*\n\n¡Hola, {{nome}}!\n\n[Escribe aquí el contenido del comunicado]\n\nAtentamente,\nEquipo Clube Digital",
     "maintenance": "🔧 *Mantenimiento Programado*\n\n¡Hola!\n\nInformamos que realizaremos un mantenimiento programado el {{data}} a las {{hora}}.\n\nDurante este período, algunos servicios pueden estar temporalmente no disponibles.\n\n¡Contamos con tu comprensión!",
     "custom": ""
   }

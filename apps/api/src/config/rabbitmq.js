@@ -358,7 +358,7 @@ class RabbitMQConfig {
         messageId: this.generateMessageId(),
         timestamp: Date.now(),
         headers: {
-          'x-source': 'coinage-api',
+          'x-source': 'club-api',
           'x-correlation-id': options.correlationId || this.generateMessageId(),
           ...options.headers
         },

@@ -1,4 +1,4 @@
-// Nota: Prisma agora vem de req.tenantPrisma (multi-tenant)
+// Nota: Prisma agora vem de req.clubPrisma (multi-clube)
 // Removido: const prismaConfig = require('../config/prisma');
 // Removido: const getPrisma = () => prismaConfig.getPrisma();
 
@@ -50,7 +50,7 @@ const authenticateUser = async (email, password, prisma) => {
  * Login do usuário com controle de tentativas
  */
 const login = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
 
   try {
     const { email, password, company_alias } = req.body;
@@ -381,7 +381,7 @@ const login = async (req, res) => {
     // Simular req.company para o logging
     const reqWithCompany = { ...req, company: currentCompany };
 
-    // COMENTADO: userActions usa singleton Prisma, não suporta multi-tenant ainda
+    // COMENTADO: userActions usa singleton Prisma, não suporta multi-clube ainda
     // // Registrar login bem-sucedido
     // await userActionsService.logAuth(user.id, 'login', reqWithCompany, {
     //   details: {
@@ -395,7 +395,7 @@ const login = async (req, res) => {
     const accessToken = jwtService.generateAccessToken(user);
     const refreshToken = jwtService.generateRefreshToken(user);
 
-    // Buscar dados completos do usuário usando tenant Prisma
+    // Buscar dados completos do usuário usando clube Prisma
     const userData = await prisma.user.findUnique({
       where: { id: user.id },
       select: {
@@ -430,12 +430,12 @@ const login = async (req, res) => {
     }
 
     // FUNCIONALIDADE DE EMPRESAS REMOVIDA - Comentado para evitar erros
-    // Atualizar último acesso na empresa principal (Coinage) por padrão
+    // Atualizar último acesso na empresa principal (Clube Digital) por padrão
     // try {
     //   const userCompanyService = require('../services/userCompany.service');
     //   const companyService = require('../services/company.service');
     //
-    //   // Buscar empresa Coinage
+    //   // Buscar empresa Clube Digital
     //   const coinageCompany = await companyService.getCompanyByAlias('coinage');
     //   if (coinageCompany) {
     //     await userCompanyService.updateLastActivity(user.id, coinageCompany.id);
@@ -1079,7 +1079,7 @@ const register = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Verificar se email já existe
     const existingUser = await prisma.user.findUnique({
@@ -1191,9 +1191,9 @@ const register = async (req, res) => {
       data: userData
     });
 
-    // TENANT SCHEMA: userTaxes não existe no schema tenant, pulando criação de taxas
-    // TENANT SCHEMA: Company não existe no schema tenant, pulando vinculação de empresa
-    // TENANT SCHEMA: userActions não existe no schema tenant, pulando log de ação
+    // TENANT SCHEMA: userTaxes não existe no schema clube, pulando criação de taxas
+    // TENANT SCHEMA: Company não existe no schema clube, pulando vinculação de empresa
+    // TENANT SCHEMA: userActions não existe no schema clube, pulando log de ação
 
     // Gerar token de confirmação ANTES do try-catch
     let confirmationToken = null;
@@ -1299,7 +1299,7 @@ const testBlacklist = async (req, res) => {
  * Desbloquear usuário (função para administradores)
  */
 const unblockUser = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   
   try {
     const { email } = req.body;
@@ -1357,7 +1357,7 @@ const unblockUser = async (req, res) => {
  * Bloquear usuário (função para administradores)
  */
 const blockUser = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   
   try {
     const { email } = req.body;
@@ -1414,7 +1414,7 @@ const blockUser = async (req, res) => {
  * Listar usuários bloqueados (função para administradores)
  */
 const listBlockedUsers = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   
   try {
     const blockedUsers = await prisma.user.findMany({
@@ -1453,7 +1453,7 @@ const listBlockedUsers = async (req, res) => {
  * Listar empresas disponíveis (público - para tela de login)
  */
 const getAvailableCompanies = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   
   try {
     const companies = await prisma.company.findMany({
@@ -1504,7 +1504,7 @@ const getUserByUsername = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const user = await prisma.user.findUnique({
       where: { username: username.toLowerCase() },
       select: {
@@ -1578,7 +1578,7 @@ const updateReferralDescription = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { referralDescription: referralDescription.trim() },
@@ -1621,7 +1621,7 @@ const getReferralStats = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Buscar usuário atual
     const currentUser = await prisma.user.findUnique({
@@ -1698,7 +1698,7 @@ const validateReferralCode = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Buscar usuário pelo username (código de indicação)
     const referrer = await prisma.user.findFirst({
@@ -1749,7 +1749,7 @@ const validateReferralCode = async (req, res) => {
 const confirmEmail = async (req, res) => {
   try {
     const { token } = req.params;
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     if (!token) {
       return res.status(400).json({
@@ -1836,7 +1836,7 @@ const confirmEmail = async (req, res) => {
 const resendConfirmationEmail = async (req, res) => {
   try {
     const { email } = req.body;
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     if (!email) {
       return res.status(400).json({
@@ -1902,7 +1902,7 @@ const resendConfirmationEmail = async (req, res) => {
 const checkEmailConfirmation = async (req, res) => {
   try {
     const userId = req.user?.id;
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     if (!userId) {
       return res.status(401).json({

@@ -51,7 +51,7 @@ const sendGroupedDocumentNotifications = async (prisma, userId, userName, userEm
       if (user.phone) {
         console.log(`📱 [UPLOAD] Enviando para ${user.name} (${user.phone})...`);
         await axios.post('https://webhook.n8n.net.br/webhook/envios-coinage', {
-          user: 'Coinage',
+          user: 'Clube Digital',
           dest: user.phone,
           text: message
         });
@@ -194,7 +194,7 @@ const uploadUserDocument = async (req, res) => {
 
     // Agrupar notificações de documentos
     const bufferKey = userId;
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Cancelar timer anterior se existir
     if (documentNotificationBuffer.has(bufferKey)) {
@@ -411,11 +411,11 @@ const rejectDocument = async (req, res) => {
 const getDocumentStats = async (req, res) => {
   try {
     const { companyId } = req.query;
-    
+
     // Se não for super admin, usar empresa do usuário
     const finalCompanyId = req.user.isApiAdmin ? companyId : req.user.companyId;
 
-    const stats = await userDocumentService.getDocumentStats(finalCompanyId);
+    const stats = await userDocumentService.getDocumentStats(finalCompanyId, req.clubePrisma);
 
     res.json({
       success: true,

@@ -144,10 +144,10 @@ router.post('/send-email', async (req, res) => {
         email: to,
         name: 'Test User'
       },
-      subject: 'Teste MailerSend - Coinage System',
+      subject: 'Teste MailerSend - Clube Digital System',
       htmlContent: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #2563eb;">🏦 Coinage - Teste de Email</h1>
+          <h1 style="color: #2563eb;">🏦 Clube Digital - Teste de Email</h1>
           <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <p>✅ <strong>MailerSend está funcionando!</strong></p>
             <p>Este email foi enviado via MailerSend API em ambiente de desenvolvimento/testnet.</p>
@@ -161,7 +161,7 @@ router.post('/send-email', async (req, res) => {
           <p style="color: #6b7280; font-size: 14px;">Data: ${new Date().toLocaleString('pt-BR')}</p>
         </div>
       `,
-      textContent: `Coinage - Teste de Email\n\n✅ MailerSend está funcionando!\n\nEste email foi enviado via MailerSend API em ambiente de desenvolvimento/testnet.\n\nProvider: ${emailService.activeProvider}\nNetwork: ${process.env.DEFAULT_NETWORK}\nEnvironment: ${process.env.NODE_ENV}\n\nData: ${new Date().toLocaleString('pt-BR')}`
+      textContent: `Clube Digital - Teste de Email\n\n✅ MailerSend está funcionando!\n\nEste email foi enviado via MailerSend API em ambiente de desenvolvimento/testnet.\n\nProvider: ${emailService.activeProvider}\nNetwork: ${process.env.DEFAULT_NETWORK}\nEnvironment: ${process.env.NODE_ENV}\n\nData: ${new Date().toLocaleString('pt-BR')}`
     });
 
     console.log('📧 Resultado do envio:', result);

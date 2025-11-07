@@ -12,7 +12,7 @@ import QRCode from 'qrcode';
 import api from "@/services/api";
 
 const PixPaymentPage = () => {
-  useDocumentTitle('Pagamento PIX', 'Coinage', true);
+  useDocumentTitle('Pagamento PIX', 'Clube Digital', true);
 
   const router = useRouter();
   const params = useParams();

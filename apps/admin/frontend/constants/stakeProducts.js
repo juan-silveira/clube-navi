@@ -233,7 +233,7 @@ export const STAKE_PRODUCTS = {
   // === OUTROS PRODUTOS DE STAKE ===
   'cnt-coinage-stake': {
     id: 'cnt-coinage',
-    name: 'CNT - Coinage',
+    name: 'CNT - Clube Digital',
     subtitle: '(Renda Digital)',
     description: 'Stake do token CNT com recompensas em IMB.',
     
@@ -245,7 +245,7 @@ export const STAKE_PRODUCTS = {
       stakeToken: {
         address: null,
         symbol: 'CNT',
-        name: 'Coinage Trade',
+        name: 'Clube Digital Trade',
         decimals: 18
       },
       rewardToken: {

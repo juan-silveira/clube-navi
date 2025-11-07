@@ -12,7 +12,7 @@ class MailerSendProvider {
     
     this.defaultSender = {
       email: process.env.MAILERSEND_FROM_EMAIL || 'noreply@coinage.app',
-      name: process.env.MAILERSEND_FROM_NAME || 'Coinage System',
+      name: process.env.MAILERSEND_FROM_NAME || 'Clube Digital System',
     };
 
     this.isConfigured = !!(process.env.MAILERSEND_API_TOKEN && this.defaultSender.email);

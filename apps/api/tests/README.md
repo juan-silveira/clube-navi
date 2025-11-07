@@ -68,7 +68,7 @@ API_URL=http://localhost:8033 TENANT_SLUG=clube-navi bash ./apps/api/tests/e2e-a
 🧪 TESTE E2E: GESTÃO DE CONTA
 =========================================
 API: http://localhost:8033
-Tenant: clube-navi
+Clube: clube-navi
 
 ▶ 0. Verificando disponibilidade da API...
 ✓ API está respondendo
@@ -140,7 +140,7 @@ Teste completo do sistema de produtos, compras e cashback (requer aprovação ma
 
 1. API rodando: `npm run dev:api`
 2. Banco de dados configurado e migrado
-3. Tenant criado (padrão: `clube_navi`)
+3. Clube criado (padrão: `clube_navi`)
 
 ### Execução Básica
 
@@ -152,9 +152,9 @@ Teste completo do sistema de produtos, compras e cashback (requer aprovação ma
 ### Execução com Variáveis Customizadas
 
 ```bash
-# Customizar API URL e Tenant
+# Customizar API URL e Clube
 API_URL=http://localhost:4000 \
-TENANT_SLUG=meu_tenant \
+TENANT_SLUG=meu_clube \
 ./apps/api/tests/e2e-cashback-system.sh
 ```
 
@@ -163,7 +163,7 @@ TENANT_SLUG=meu_tenant \
 | Variável | Descrição | Padrão |
 |----------|-----------|--------|
 | `API_URL` | URL da API | `http://localhost:4000` |
-| `TENANT_SLUG` | Slug do tenant | `clube_navi` |
+| `TENANT_SLUG` | Slug do clube | `clube_navi` |
 
 ## 📊 Saída Esperada
 
@@ -245,7 +245,7 @@ Script para aprovar merchants manualmente no banco de dados.
 
 **Uso:**
 ```bash
-node apps/api/scripts/approve-merchant.js <email_ou_id> [tenant_slug]
+node apps/api/scripts/approve-merchant.js <email_ou_id> [clube_slug]
 
 # Exemplos
 node apps/api/scripts/approve-merchant.js merchant@test.com
@@ -262,4 +262,4 @@ node apps/api/scripts/approve-merchant.js abc-123-def-456
 
 - [PROJECT-STATUS.md](../../../docs/PROJECT-STATUS.md) - Status do projeto
 - [CORE-BUSINESS.md](../../../docs/CORE-BUSINESS.md) - Regras de negócio
-- [MULTI-TENANT-ARCHITECTURE.md](../../../docs/MULTI-TENANT-ARCHITECTURE.md) - Arquitetura multi-tenant
+- [MULTI-TENANT-ARCHITECTURE.md](../../../docs/MULTI-TENANT-ARCHITECTURE.md) - Arquitetura multi-clube

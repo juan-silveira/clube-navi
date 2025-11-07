@@ -412,7 +412,7 @@ class UserTaxesService {
           address: (process.env.DEFAULT_NETWORK || 'mainnet') === 'testnet' 
             ? '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804'  // Testnet
             : '0x18e946548b2C24Ad371343086e424ABaC3393678', // Mainnet
-          name: 'Coinage Real Brasil'
+          name: 'Clube Digital Real Brasil'
         },
         'CNT': {
           id: 'cnt-fallback',

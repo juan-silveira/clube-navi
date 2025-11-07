@@ -7,13 +7,13 @@
 const express = require('express');
 const router = express.Router();
 const balanceService = require('../services/balance.service');
-const { authenticateToken } = require('../middleware/auth');
+const { authenticateJWT } = require('../middleware/jwt.middleware');
 
 /**
  * GET /api/balance/merchant-sales
  * Retorna saldo de vendas do merchant autenticado
  */
-router.get('/merchant-sales', authenticateToken, async (req, res) => {
+router.get('/merchant-sales', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
     const userType = req.user.userType;
@@ -25,7 +25,7 @@ router.get('/merchant-sales', authenticateToken, async (req, res) => {
       });
     }
 
-    const balance = await balanceService.getMerchantSalesBalance(userId);
+    const balance = await balanceService.getMerchantSalesBalance(req.clubPrisma, userId);
 
     return res.json({
       success: true,
@@ -44,11 +44,11 @@ router.get('/merchant-sales', authenticateToken, async (req, res) => {
  * GET /api/balance/cashback
  * Retorna saldo de cashback do usuário autenticado
  */
-router.get('/cashback', authenticateToken, async (req, res) => {
+router.get('/cashback', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const balance = await balanceService.getCashbackBalance(userId);
+    const balance = await balanceService.getCashbackBalance(req.clubPrisma, userId);
 
     return res.json({
       success: true,
@@ -67,11 +67,11 @@ router.get('/cashback', authenticateToken, async (req, res) => {
  * GET /api/balance/deposit
  * Retorna saldo de depósito do usuário autenticado
  */
-router.get('/deposit', authenticateToken, async (req, res) => {
+router.get('/deposit', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const balance = await balanceService.getDepositBalance(userId);
+    const balance = await balanceService.getDepositBalance(req.clubPrisma, userId);
 
     return res.json({
       success: true,
@@ -90,12 +90,12 @@ router.get('/deposit', authenticateToken, async (req, res) => {
  * GET /api/balance/all
  * Retorna todos os saldos do usuário autenticado
  */
-router.get('/all', authenticateToken, async (req, res) => {
+router.get('/all', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
     const userType = req.user.userType;
 
-    const balances = await balanceService.getAllBalances(userId, userType);
+    const balances = await balanceService.getAllBalances(req.clubPrisma, userId, userType);
 
     return res.json({
       success: true,
@@ -116,7 +116,7 @@ router.get('/all', authenticateToken, async (req, res) => {
  *
  * Body: { amount: number }
  */
-router.post('/can-withdraw', authenticateToken, async (req, res) => {
+router.post('/can-withdraw', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
     const userType = req.user.userType;
@@ -129,7 +129,7 @@ router.post('/can-withdraw', authenticateToken, async (req, res) => {
       });
     }
 
-    const result = await balanceService.canWithdraw(userId, amount, userType);
+    const result = await balanceService.canWithdraw(req.clubPrisma, userId, amount, userType);
 
     if (!result.canWithdraw) {
       return res.status(400).json({

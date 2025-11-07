@@ -15,7 +15,7 @@
   "roles": {
     "USER": "Usuário",
     "ADMIN": "Admin do Company",
-    "APP_ADMIN": "Admin Coinage",
+    "APP_ADMIN": "Admin Clube Digital",
     "SUPER_ADMIN": "Super Admin"
   },
   "defaultUser": "Usuário",

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Coinage platform uses a custom i18n implementation based on i18next and react-i18next for multi-language support.
+The Clube Digital platform uses a custom i18n implementation based on i18next and react-i18next for multi-language support.
 
 ## Supported Languages
 

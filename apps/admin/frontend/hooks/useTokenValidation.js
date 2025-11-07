@@ -3,7 +3,7 @@ import useAuthStore from '@/store/authStore';
 import { authService } from '@/services/api';
 
 const useTokenValidation = () => {
-  const { isAuthenticated, accessToken, refreshToken, logout, setTokens } = useAuthStore();
+  const { isAuthenticated, accessToken, refreshToken, logout, setTokens, user } = useAuthStore();
   const hasValidated = useRef(false);
 
   useEffect(() => {
@@ -14,6 +14,12 @@ const useTokenValidation = () => {
     const validateToken = async () => {
       // Se não está autenticado ou não tem token, não validar
       if (!isAuthenticated || !accessToken) return;
+
+      // Super admins não precisam validar token
+      if (user?.email?.includes('@clubedigital.com')) {
+        console.log('🔐 Super admin - pulando validação de token');
+        return;
+      }
 
       try {
         // Tentar fazer uma requisição com o token atual

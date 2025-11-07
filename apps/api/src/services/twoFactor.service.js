@@ -25,8 +25,8 @@ class TwoFactorService {
 
       // Gerar secret
       const secret = speakeasy.generateSecret({
-        name: `Coinage (${userEmail})`,
-        issuer: 'Coinage',
+        name: `Clube Digital (${userEmail})`,
+        issuer: 'Clube Digital',
         length: 32
       });
 

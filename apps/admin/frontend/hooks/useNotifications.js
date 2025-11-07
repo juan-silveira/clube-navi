@@ -3,18 +3,24 @@ import useAuthStore from '@/store/authStore';
 import api from '@/services/api';
 
 export const useNotifications = () => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
   // Buscar contagem de não lidas
   const fetchUnreadCount = useCallback(async () => {
     if (!isAuthenticated) return;
-    
+
+    // Super admins não têm notificações
+    if (user?.email?.includes('@clubedigital.com')) {
+      setUnreadCount(0);
+      return 0;
+    }
+
     try {
       setLoading(true);
       const response = await api.get('/api/notifications/unread-count');
-      
+
       if (response.data.success) {
         const count = response.data.data.count;
         setUnreadCount(count);
@@ -28,7 +34,7 @@ export const useNotifications = () => {
     } finally {
       setLoading(false);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user]);
 
   // Carregar dados iniciais
   useEffect(() => {

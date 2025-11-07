@@ -15,13 +15,11 @@ import BasicArea from "@/components/partials/chart/appex-chart/BasicArea";
 import VisitorRadar from "@/components/partials/widget/chart/visitor-radar";
 import MostSales2 from "@/components/partials/widget/most-sales2";
 import Products from "@/components/partials/widget/products";
-import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 
 const Ecommerce = () => {
   const [filterMap, setFilterMap] = useState("usa");
   return (
     <div>
-      <HomeBredCurbs title="Ecommerce" />
       <div className="grid grid-cols-12 gap-5 mb-5">
         <div className="2xl:col-span-3 lg:col-span-4 col-span-12">
           <ImageBlock2 />

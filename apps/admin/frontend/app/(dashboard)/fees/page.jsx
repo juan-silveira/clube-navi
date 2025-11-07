@@ -11,7 +11,7 @@ import api from "@/services/api";
 const FeesPage = () => {
   const { t } = useTranslation('fees');
   // Hook para gerenciar título da aba com contagem de notificações
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [userTaxes, setUserTaxes] = useState(null);
   const [loading, setLoading] = useState(true);

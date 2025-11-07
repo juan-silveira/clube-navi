@@ -8,7 +8,7 @@ const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    'X-Tenant-Slug': TENANT_SLUG,
+    'X-Club-Slug': TENANT_SLUG,
   },
 });
 

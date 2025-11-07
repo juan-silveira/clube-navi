@@ -29,7 +29,7 @@ const getEmergencyBalances = (network = 'mainnet') => {
 
 class BalanceBackupService {
   constructor() {
-    this.dbName = 'CoinageBalanceBackup';
+    this.dbName = 'Clube DigitalBalanceBackup';
     this.dbVersion = 1;
     this.storeName = 'balances';
     this.db = null;

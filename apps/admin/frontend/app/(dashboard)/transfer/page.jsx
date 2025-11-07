@@ -22,7 +22,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 
 const TransferPage = () => {
   const { t } = useTranslation('transfer');
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
 
   const router = useRouter();
   const { user } = useAuthStore();
@@ -163,8 +163,8 @@ const TransferPage = () => {
   const staticTokenMetadata = {
     'AZE': { name: 'Azore Token', icon: '/assets/images/currencies/AZE.png' },
     'AZE-t': { name: 'Azore Token (Testnet)', icon: '/assets/images/currencies/AZE.png' },
-    'cBRL': { name: 'Coinage Real Brasil', icon: '/assets/images/currencies/cBRL.png' },
-    'CNT': { name: 'Coinage Trade', icon: '/assets/images/currencies/CNT.png' },
+    'cBRL': { name: 'Clube Digital Real Brasil', icon: '/assets/images/currencies/cBRL.png' },
+    'CNT': { name: 'Clube Digital Trade', icon: '/assets/images/currencies/CNT.png' },
     'PCN': { name: 'Pratique Coin', icon: '/assets/images/currencies/PCN.png' },
     'MJD': { name: 'Meu Jurídico Digital', icon: '/assets/images/currencies/MJD.png' },
     'IMB': { name: 'Imobiliária', icon: '/assets/images/currencies/IMB.png' }

@@ -110,7 +110,7 @@ class PixValidationService {
       // 5. Registrar transação da taxa
       await this.prisma.transaction.create({
         data: {
-          companyId: user.userCompanies?.[0]?.companyId || '40fce51c-b169-4bac-9608-a9549b360c90', // Fallback para Coinage
+          companyId: user.userCompanies?.[0]?.companyId || '40fce51c-b169-4bac-9608-a9549b360c90', // Fallback para Clube Digital
           userId: userId,
           transactionType: 'fee',
           status: 'confirmed',

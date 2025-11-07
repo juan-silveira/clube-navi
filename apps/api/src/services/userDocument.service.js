@@ -371,9 +371,16 @@ class UserDocumentService {
    * @param {string} companyId - ID da empresa (opcional)
    * @returns {Promise<Object>} Estatísticas dos documentos
    */
-  async getDocumentStats(companyId = null) {
+  async getDocumentStats(companyId = null, clubePrisma = null) {
     try {
-      if (!this.prisma) await this.init();
+      // Use clubePrisma if provided, otherwise fall back to this.prisma
+      const prisma = clubePrisma || this.prisma;
+
+      if (!prisma) {
+        await this.init();
+      }
+
+      const finalPrisma = clubePrisma || this.prisma;
 
       const where = {};
 
@@ -394,10 +401,10 @@ class UserDocumentService {
         rejectedCount,
         totalCount
       ] = await Promise.all([
-        this.prisma.userDocument.count({ where: { ...where, status: 'pending' } }),
-        this.prisma.userDocument.count({ where: { ...where, status: 'approved' } }),
-        this.prisma.userDocument.count({ where: { ...where, status: 'rejected' } }),
-        this.prisma.userDocument.count({ where })
+        finalPrisma.userDocument.count({ where: { ...where, status: 'pending' } }),
+        finalPrisma.userDocument.count({ where: { ...where, status: 'approved' } }),
+        finalPrisma.userDocument.count({ where: { ...where, status: 'rejected' } }),
+        finalPrisma.userDocument.count({ where })
       ]);
 
       return {

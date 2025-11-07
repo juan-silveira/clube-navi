@@ -78,11 +78,11 @@
     "Lembrete de Saque Pendente": "Lembrete de Saque Pendente"
   },
   "templateMessages": {
-    "welcome": "👋 *Bem-vindo à Coinage!*\n\nOlá, {{nome}}!\n\nFicamos felizes em tê-lo conosco. Nossa plataforma oferece as melhores soluções em criptomoedas.\n\nSe precisar de ajuda, estamos à disposição!",
+    "welcome": "👋 *Bem-vindo à Clube Digital!*\n\nOlá, {{nome}}!\n\nFicamos felizes em tê-lo conosco. Nossa plataforma oferece as melhores soluções em criptomoedas.\n\nSe precisar de ajuda, estamos à disposição!",
     "document_reminder": "📄 *Lembrete de Documentação*\n\nOlá, {{nome}}!\n\nNotamos que você ainda não enviou todos os documentos necessários para validação da sua conta.\n\nPor favor, acesse o sistema e complete seu cadastro para ter acesso total à plataforma.",
-    "document_approved": "✅ *Aprovação de Documentação da Coinage*\n\nOlá, {{nome}}!\n\nTodos os documentos necessários para validação da sua conta foram aprovados.\n\nAgora você tem acesso total à plataforma.",
+    "document_approved": "✅ *Aprovação de Documentação da Clube Digital*\n\nOlá, {{nome}}!\n\nTodos os documentos necessários para validação da sua conta foram aprovados.\n\nAgora você tem acesso total à plataforma.",
     "withdrawal_reminder": "💰 *Saque Pendente*\n\nOlá, {{nome}}!\n\nVocê possui um saque pendente de aprovação. Estamos analisando sua solicitação e em breve retornaremos.\n\nAcompanhe o status pelo sistema!",
-    "general_announcement": "📢 *Comunicado Importante*\n\nOlá, {{nome}}!\n\n[Digite aqui o conteúdo do comunicado]\n\nAtenciosamente,\nEquipe Coinage",
+    "general_announcement": "📢 *Comunicado Importante*\n\nOlá, {{nome}}!\n\n[Digite aqui o conteúdo do comunicado]\n\nAtenciosamente,\nEquipe Clube Digital",
     "maintenance": "🔧 *Manutenção Programada*\n\nOlá!\n\nInformamos que realizaremos uma manutenção programada em {{data}} às {{hora}}.\n\nDurante este período, alguns serviços podem ficar temporariamente indisponíveis.\n\nContamos com sua compreensão!",
     "custom": ""
   }

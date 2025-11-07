@@ -85,10 +85,10 @@ if (typeof window !== 'undefined') {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Cache Cleaner - Coinage</title>
+    <title>Cache Cleaner - Clube Digital</title>
 </head>
 <body>
-    <h1>🧹 Limpeza de Cache - Coinage</h1>
+    <h1>🧹 Limpeza de Cache - Clube Digital</h1>
     <p>Abra o console do navegador (F12) para ver o resultado.</p>
     
     <button onclick="clearAllCaches()">🗑️ Limpar Todos os Caches</button>

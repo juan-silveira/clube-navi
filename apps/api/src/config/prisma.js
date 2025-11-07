@@ -1,4 +1,4 @@
-const { PrismaClient } = require('../generated/prisma');
+const { PrismaClient } = require('../../prisma/src/generated/prisma-master');
 
 class PrismaConfig {
   constructor() {

@@ -24,7 +24,7 @@ const notifyLabel = (unreadCount) => {
 
 const Notification = () => {
   const { t } = useTranslation('header');
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const { ensureValidToken } = useProactiveTokenRefresh();
   const { notifyMarkAsRead, notifyAllMarkedAsRead } = useNotificationEvents();
   const [notifications, setNotifications] = useState([]);
@@ -35,15 +35,21 @@ const Notification = () => {
   // Buscar contagem de não lidas
   const fetchUnreadCount = useCallback(async () => {
     if (!isAuthenticated) return;
-    
+
+    // Super admins não têm notificações
+    if (user?.email?.includes('@clubedigital.com')) {
+      setUnreadCount(0);
+      return 0;
+    }
+
     try {
       // Garantir que o token seja válido antes da requisição
       await ensureValidToken();
-      
+
       const response = await api.get('/api/notifications/unread-count');
-      
+
       if (response.data.success) {
-        const count = response.data.data.count;
+        const count = response.data.data?.count || 0;
         setUnreadCount(count);
         setLastError(null); // Limpar erro anterior
         return count;
@@ -55,20 +61,27 @@ const Notification = () => {
       setUnreadCount(0);
       return 0;
     }
-  }, [isAuthenticated, ensureValidToken]);
+  }, [isAuthenticated, user, ensureValidToken]);
 
   // Buscar notificações não lidas
   const fetchUnreadNotifications = useCallback(async () => {
     if (!isAuthenticated) return;
-    
+
+    // Super admins não têm notificações
+    if (user?.email?.includes('@clubedigital.com')) {
+      setNotifications([]);
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
-      
+
       // Garantir que o token seja válido antes da requisição
       await ensureValidToken();
-      
+
       const response = await api.get('/api/notifications/unread');
-      
+
       if (response.data.success) {
         const notificationsData = response.data.data || [];
         setNotifications(notificationsData);

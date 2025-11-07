@@ -19,7 +19,7 @@ const NotificationPage = () => {
   const { t } = useTranslation('notifications');
 
   // Hook para gerenciar título da aba com contagem de notificações
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
   const { isAuthenticated } = useAuthStore();
   const { showSuccess, showError } = useAlertContext();
   const { 

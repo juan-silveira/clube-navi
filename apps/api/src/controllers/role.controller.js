@@ -14,7 +14,7 @@ exports.listRoles = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -59,7 +59,7 @@ exports.getRoleDetails = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -128,7 +128,7 @@ exports.createRole = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -201,7 +201,7 @@ exports.updateRole = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -302,7 +302,7 @@ exports.deleteRole = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -366,7 +366,7 @@ exports.listPermissions = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -423,7 +423,7 @@ exports.assignRoleToUser = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -517,7 +517,7 @@ exports.removeRoleFromUser = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -570,7 +570,7 @@ exports.getUserRoles = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });

@@ -7,7 +7,7 @@ CREATE TYPE "PushNotificationStatus" AS ENUM ('pending', 'sent', 'failed', 'read
 -- CreateTable
 CREATE TABLE "push_notification_campaigns" (
     "id" UUID NOT NULL,
-    "tenant_id" UUID NOT NULL,
+    "club_id" UUID NOT NULL,
     "title" VARCHAR(100) NOT NULL,
     "description" TEXT NOT NULL,
     "page_title" VARCHAR(100),

@@ -29,17 +29,37 @@ const LoginForm = () => {
     mode: "all",
   });
   const router = useRouter();
-  const onSubmit = (data) => {
-    const user = users.find(
-      (user) => user.email === data.email && user.password === data.password
-    );
-    if (user) {
-      dispatch(handleLogin(true));
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
-    } else {
-      showError("Invalid credentials");
+  const onSubmit = async (data) => {
+    try {
+      // Call real backend API for super admin login
+      const response = await fetch('http://localhost:8033/api/super-admin-auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Save token to localStorage
+        localStorage.setItem('authToken', result.data.token);
+        localStorage.setItem('adminData', JSON.stringify(result.data.admin));
+
+        dispatch(handleLogin(true));
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1500);
+      } else {
+        showError(result.message || "Invalid credentials");
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      showError("Failed to connect to server");
     }
   };
 
@@ -50,7 +70,7 @@ const LoginForm = () => {
       <Textinput
         name="email"
         label="email"
-        defaultValue="dashcode@gmail.com"
+        defaultValue="admin@clubedigital.com"
         type="email"
         register={register}
         error={errors?.email}
@@ -59,7 +79,7 @@ const LoginForm = () => {
         name="password"
         label="passwrod"
         type="password"
-        defaultValue="dashcode"
+        defaultValue=""
         register={register}
         error={errors.password}
       />

@@ -7,7 +7,7 @@
 const express = require('express');
 const router = express.Router();
 const pixService = require('../services/pix.service');
-const { authenticateToken } = require('../middleware/auth');
+const { authenticateJWT } = require('../middleware/jwt.middleware');
 
 /**
  * POST /api/pix/validate-key
@@ -18,7 +18,7 @@ const { authenticateToken } = require('../middleware/auth');
  *   pixKeyType: 'cpf' | 'cnpj' | 'email' | 'phone' | 'random'
  * }
  */
-router.post('/validate-key', authenticateToken, async (req, res) => {
+router.post('/validate-key', authenticateJWT, async (req, res) => {
   try {
     const { pixKey, pixKeyType } = req.body;
 
@@ -78,7 +78,7 @@ router.post('/validate-key', authenticateToken, async (req, res) => {
  *   pixKeyType: 'cpf' | 'cnpj' | 'email' | 'phone' | 'random'
  * }
  */
-router.post('/validate-format', authenticateToken, async (req, res) => {
+router.post('/validate-format', authenticateJWT, async (req, res) => {
   try {
     const { pixKey, pixKeyType } = req.body;
 

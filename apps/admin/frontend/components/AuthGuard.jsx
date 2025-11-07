@@ -11,8 +11,14 @@ const AuthGuard = ({ children }) => {
 
   // Função para verificar status atual do usuário no servidor
   const checkUserStatus = async () => {
+    // Super admins não precisam verificar status de email
+    const isSuperAdmin = user?.type === 'super-admin' || user?.isSuperAdmin || user?.isApiAdmin;
+    if (isSuperAdmin) {
+      return { emailConfirmed: true, isActive: true };
+    }
+
     if (!accessToken || !user?.id) return { emailConfirmed: false, isActive: false };
-    
+
     try {
       // Criar um timeout para a requisição
       const controller = new AbortController();
@@ -66,11 +72,21 @@ const AuthGuard = ({ children }) => {
         return;
       }
 
+      // Verificar se é Super Admin (usando type, isSuperAdmin ou isApiAdmin)
+      const isSuperAdmin = user?.type === 'super-admin' || user?.isSuperAdmin || user?.isApiAdmin;
+
+      // Super admins não precisam de verificação de email e vão para dashboard admin
+      if (isSuperAdmin) {
+        console.log('🔐 AuthGuard: Super Admin detectado, permitindo acesso direto');
+        setIsLoading(false);
+        return;
+      }
+
       // Verificar status atual do usuário se ainda não verificou
       if (!hasCheckedUserStatus && user) {
         const userStatus = await checkUserStatus();
         setHasCheckedUserStatus(true);
-        
+
         // Verificar se o email foi confirmado com dados atualizados
         if (!userStatus.emailConfirmed || !userStatus.isActive) {
           router.push('/email-confirmation-required');

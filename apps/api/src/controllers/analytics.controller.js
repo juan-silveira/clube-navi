@@ -10,7 +10,7 @@ const analyticsService = require('../services/analytics.service');
  * Rastrear evento genérico
  */
 exports.trackEvent = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const userId = req.user?.id || null;
 
   try {
@@ -65,7 +65,7 @@ exports.trackEvent = async (req, res) => {
  * Rastrear page view
  */
 exports.trackPageView = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const userId = req.user?.id || null;
 
   try {
@@ -111,7 +111,7 @@ exports.trackPageView = async (req, res) => {
  * Rastrear clique
  */
 exports.trackClick = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const userId = req.user?.id || null;
 
   try {
@@ -154,7 +154,7 @@ exports.trackClick = async (req, res) => {
  * Criar ou atualizar sessão
  */
 exports.createSession = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const userId = req.user?.id || null;
 
   try {
@@ -193,7 +193,7 @@ exports.createSession = async (req, res) => {
  * Rastrear abertura de notificação
  */
 exports.trackNotificationOpen = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const userId = req.user?.id || null;
 
   try {
@@ -232,7 +232,7 @@ exports.trackNotificationOpen = async (req, res) => {
  * Rastrear clique em notificação
  */
 exports.trackNotificationClick = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const userId = req.user?.id || null;
 
   try {
@@ -278,7 +278,7 @@ exports.trackNotificationClick = async (req, res) => {
  * Obter estatísticas gerais de analytics
  */
 exports.getStats = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
 
   try {
     const {
@@ -313,7 +313,7 @@ exports.getStats = async (req, res) => {
  * Obter eventos detalhados
  */
 exports.getEvents = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
 
   try {
     const {
@@ -401,7 +401,7 @@ exports.getEvents = async (req, res) => {
  * Obter sessões de usuários
  */
 exports.getSessions = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
 
   try {
     const {
@@ -474,7 +474,7 @@ exports.getSessions = async (req, res) => {
  * Obter analytics de campanhas push
  */
 exports.getCampaignAnalytics = async (req, res) => {
-  const prisma = req.tenantPrisma;
+  const prisma = req.clubPrisma;
   const { campaignId } = req.params;
 
   try {

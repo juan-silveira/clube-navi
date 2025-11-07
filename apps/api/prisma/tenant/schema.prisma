@@ -1,8 +1,8 @@
 // ==========================================
 // TENANT DATABASE SCHEMA
 // ==========================================
-// Cada tenant tem seu próprio database com este schema
-// Dados de usuários, produtos, transações isolados por tenant
+// Cada club tem seu próprio database com este schema
+// Dados de usuários, produtos, transações isolados por club
 
 generator client {
   provider      = "prisma-client-js"
@@ -359,7 +359,7 @@ enum NotificationType {
 
 model PushNotificationCampaign {
   id                String                    @id @default(uuid()) @db.Uuid
-  tenantId          String                    @map("tenant_id") @db.Uuid
+  clubId          String                    @map("club_id") @db.Uuid
   title             String                    @db.VarChar(100)
   description       String                    @db.Text
   pageTitle         String?                   @map("page_title") @db.VarChar(100)

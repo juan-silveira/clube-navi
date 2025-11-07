@@ -90,7 +90,7 @@ class DepositService {
         transactionId: transaction.id,
         amount: parseFloat(amount),
         status: 'pending',
-        qrCode: `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Coinage Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
+        qrCode: `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Clube Digital Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
         pixKey: 'contato@coinage.com.br',
         expiresAt: new Date(Date.now() + 30 * 60 * 1000), // 30 minutos
         createdAt: new Date()

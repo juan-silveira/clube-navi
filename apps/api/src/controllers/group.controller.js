@@ -13,7 +13,7 @@ exports.listGroups = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -57,7 +57,7 @@ exports.getGroupDetails = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -122,7 +122,7 @@ exports.createGroup = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -200,7 +200,7 @@ exports.updateGroup = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -259,7 +259,7 @@ exports.deleteGroup = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -315,7 +315,7 @@ exports.addUsersToGroup = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -400,7 +400,7 @@ exports.removeUsersFromGroup = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });
@@ -477,7 +477,7 @@ exports.getUserGroups = async (req, res) => {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: req.tenantDatabaseUrl
+        url: req.clubeDatabaseUrl
       }
     }
   });

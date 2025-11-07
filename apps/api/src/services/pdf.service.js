@@ -4,11 +4,11 @@ const path = require('path');
 
 class PDFService {
   /**
-   * Dados fixos da Coinage para o informe
+   * Dados fixos da Clube Digital para o informe
    */
-  getCoinageCompanyData() {
+  getClubeDigitalCompanyData() {
     return {
-      name: 'Coinage',
+      name: 'Clube Digital',
       cnpj: '02.332.886/0001-04',
       alias: 'coinage'
     };
@@ -78,7 +78,7 @@ class PDFService {
           .fillColor('#ffffff')
           .fontSize(18)
           .font('Helvetica-Bold')
-          .text('COINAGE', marginLeft, 30, {
+          .text('CLUBE DIGITAL', marginLeft, 30, {
             width: 200,
             align: 'left',
           });
@@ -90,7 +90,7 @@ class PDFService {
         .fillColor('#ffffff')
         .fontSize(18)
         .font('Helvetica-Bold')
-        .text('COINAGE', marginLeft, 30, {
+        .text('CLUBE DIGITAL', marginLeft, 30, {
           width: 200,
           align: 'left',
         });
@@ -130,8 +130,8 @@ class PDFService {
     const marginLeft = 50;
     let y = 170; // Ajustado para dar mais espaço após o novo header
 
-    // Obter dados fixos da Coinage
-    const coinageData = this.getCoinageCompanyData();
+    // Obter dados fixos da Clube Digital
+    const coinageData = this.getClubeDigitalCompanyData();
 
     // Título da seção
     doc
@@ -805,7 +805,7 @@ class PDFService {
           },
           info: {
             Title: `Informe de Rendimentos ${reportData.period?.informeYear || reportData.period?.year || new Date().getFullYear()}`,
-            Author: reportData.company.name || 'Coinage Platform',
+            Author: reportData.company.name || 'Clube Digital Platform',
             Subject: 'Informe de Rendimentos Financeiros',
             Keywords: 'informe, rendimentos, imposto de renda, IRPF',
           },

@@ -6,10 +6,10 @@ import { useNotifications } from './useNotifications';
  * Funciona similar ao Gmail, mostrando "(X)" quando há mensagens não lidas
  * 
  * @param {string} baseTitle - Título base da página (ex: "Dashboard", "Perfil")
- * @param {string} appName - Nome da aplicação (padrão: "Coinage")
+ * @param {string} appName - Nome da aplicação (padrão: "Clube Digital")
  * @param {boolean} showNotifications - Se deve mostrar contagem de notificações (padrão: true)
  */
-export const useDocumentTitle = (baseTitle = '', appName = 'Coinage', showNotifications = true) => {
+export const useDocumentTitle = (baseTitle = '', appName = 'Clube Digital', showNotifications = true) => {
   const { unreadCount, fetchUnreadCount } = useNotifications();
   const lastUnreadCount = useRef(unreadCount);
   

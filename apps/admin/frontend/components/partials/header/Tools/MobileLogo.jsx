@@ -38,9 +38,6 @@ const MobileLogo = () => {
           alt="Logo" 
           style={{ maxHeight: '35px', width: 'auto' }}
         />
-        <span className="text-[9px] text-slate-500 dark:text-slate-400 mt-1 mr-1">
-          by Coinage
-        </span>
       </div>
     </Link>
   );

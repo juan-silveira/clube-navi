@@ -5,7 +5,7 @@ const MESSAGE_TEMPLATES = {
   'welcome': {
     id: 'welcome',
     name: 'Boas-vindas',
-    message: '👋 *Bem-vindo à Coinage!*\n\nOlá, {{nome}}!\n\nFicamos felizes em tê-lo conosco. Nossa plataforma oferece as melhores soluções em criptomoedas.\n\nSe precisar de ajuda, estamos à disposição!'
+    message: '👋 *Bem-vindo à Clube Digital!*\n\nOlá, {{nome}}!\n\nFicamos felizes em tê-lo conosco. Nossa plataforma oferece as melhores soluções em criptomoedas.\n\nSe precisar de ajuda, estamos à disposição!'
   },
   'document_reminder': {
     id: 'document_reminder',
@@ -15,7 +15,7 @@ const MESSAGE_TEMPLATES = {
   'document_approved': {
     id: 'document_approved',
     name: 'Aprovação de Documentação',
-    message: '✅ *Aprovação de Documentação da Coinage*\n\nOlá, {{nome}}!\n\nTodos os documentos necessários para validação da sua conta foram aprovados.\n\nAgora você tem acesso total à plataforma.'
+    message: '✅ *Aprovação de Documentação da Clube Digital*\n\nOlá, {{nome}}!\n\nTodos os documentos necessários para validação da sua conta foram aprovados.\n\nAgora você tem acesso total à plataforma.'
   },
   'withdrawal_reminder': {
     id: 'withdrawal_reminder',
@@ -25,7 +25,7 @@ const MESSAGE_TEMPLATES = {
   'general_announcement': {
     id: 'general_announcement',
     name: 'Comunicado Geral',
-    message: '📢 *Comunicado Importante*\n\nOlá, {{nome}}!\n\n[Digite aqui o conteúdo do comunicado]\n\nAtenciosamente,\nEquipe Coinage'
+    message: '📢 *Comunicado Importante*\n\nOlá, {{nome}}!\n\n[Digite aqui o conteúdo do comunicado]\n\nAtenciosamente,\nEquipe Clube Digital'
   },
   'maintenance': {
     id: 'maintenance',
@@ -44,7 +44,7 @@ const MESSAGE_TEMPLATES = {
  */
 const sendMessages = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { recipientUserIds, message, templateId } = req.body;
     const senderUserId = req.user.id;
 
@@ -107,7 +107,7 @@ const sendMessages = async (req, res) => {
             .replace(/{{nome}}/g, user.name);
 
           await axios.post('https://webhook.n8n.net.br/webhook/envios-coinage', {
-            user: 'Coinage',
+            user: 'Clube Digital',
             dest: cleanPhone,
             text: personalizedMessage
           });
@@ -193,7 +193,7 @@ const getTemplates = async (req, res) => {
  */
 const getMessageHistory = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { page = 1, limit = 20 } = req.query;
     const skip = (parseInt(page) - 1) * parseInt(limit);
 

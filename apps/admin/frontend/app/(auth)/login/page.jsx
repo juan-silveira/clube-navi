@@ -25,15 +25,8 @@ const LoginPage = () => {
 
   // Alterar title da página
   useEffect(() => {
-    document.title = 'Clube Navi - Login';
+    document.title = 'Clube Digital - Login';
   }, []);
-
-  // Verificar se já está autenticado
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/');
-    }
-  }, [isAuthenticated, router]);
 
   // Verificar toasts do sessionStorage
   useEffect(() => {
@@ -136,11 +129,12 @@ const LoginPage = () => {
       // Fazer login no store
       login(user, accessToken, refreshToken, isFirstAccess);
 
-      // Redirecionar baseado na necessidade de trocar senha
+      // Redirecionar após login bem-sucedido
       if (isFirstAccess) {
-        router.push('/change-password');
+        window.location.href = '/change-password';
       } else {
-        router.push('/');
+        // Redirecionar para a raiz que mostrará o dashboard
+        window.location.href = '/';
       }
 
     } catch (error) {
@@ -160,18 +154,6 @@ const LoginPage = () => {
       showError(errorMessage);
     }
   };
-
-  // Se já está autenticado, mostrar loading
-  if (isAuthenticated) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-slate-600 dark:text-slate-400">Redirecionando...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -223,7 +205,7 @@ const LoginPage = () => {
                   </Link>
                 </div>
                 <div className="text-center 2xl:mb-10 mb-4">
-                  <h4 className="font-medium">Bem-vindo ao Clube Navi</h4>
+                  <h4 className="font-medium">Bem-vindo ao Clube Digital</h4>
                   <div className="text-slate-500 text-base">
                     Faça login para acessar sua conta
                   </div>
@@ -344,7 +326,7 @@ const LoginPage = () => {
                 
               </div>
               <div className="auth-footer text-center">
-                Copyright 2025, Clube Navi All Rights Reserved.
+                Copyright 2025, Clube Digital All Rights Reserved.
               </div>
             </div>
           </div>

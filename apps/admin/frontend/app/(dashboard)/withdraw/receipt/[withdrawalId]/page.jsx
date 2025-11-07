@@ -10,7 +10,7 @@ import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import api from '@/services/api';
 
 const WithdrawReceiptPage = () => {
-  useDocumentTitle('Comprovante de Saque', 'Coinage', true);
+  useDocumentTitle('Comprovante de Saque', 'Clube Digital', true);
   
   const params = useParams();
   const router = useRouter();
@@ -135,7 +135,7 @@ const WithdrawReceiptPage = () => {
     if (navigator.share && withdrawal) {
       try {
         await navigator.share({
-          title: 'Comprovante de Saque - Coinage',
+          title: 'Comprovante de Saque - Clube Digital',
           text: `Saque realizado: ${formatDisplayValue(withdrawal.amount)} - PIX: ${withdrawal.pixTransactionId}`,
           url: window.location.href
         });

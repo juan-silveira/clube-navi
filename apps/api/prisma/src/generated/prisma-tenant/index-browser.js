@@ -252,7 +252,7 @@ exports.Prisma.NotificationScalarFieldEnum = {
 
 exports.Prisma.PushNotificationCampaignScalarFieldEnum = {
   id: 'id',
-  tenantId: 'tenantId',
+  clubId: 'clubId',
   title: 'title',
   description: 'description',
   pageTitle: 'pageTitle',

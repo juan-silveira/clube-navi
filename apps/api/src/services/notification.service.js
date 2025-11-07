@@ -88,7 +88,7 @@ class NotificationService {
       const notification = await this.prisma.notification.create({
         data: {
           userId: data.userId,
-          sender: data.sender || 'Coinage',
+          sender: data.sender || 'Clube Digital',
           title: titleWithEmoji,
           message: enhancedMessage,
           isRead: false,
@@ -483,7 +483,7 @@ class NotificationService {
 
       const notification = await this.createNotification({
         userId: userId,
-        sender: 'Coinage',
+        sender: 'Clube Digital',
         title,
         message
       });
@@ -538,7 +538,7 @@ class NotificationService {
 
       const notification = await this.createNotification({
         userId: userId,
-        sender: 'Coinage',
+        sender: 'Clube Digital',
         title,
         message
       });
@@ -577,7 +577,7 @@ class NotificationService {
         type: 'success',
         priority: 'high',
         category: 'financial',
-        sender: 'Coinage - PIX',
+        sender: 'Clube Digital - PIX',
         title,
         message,
         metadata: {

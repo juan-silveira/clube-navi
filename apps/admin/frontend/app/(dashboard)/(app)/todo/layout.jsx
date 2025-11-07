@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Coinage',
+  title: 'Clube Digital',
   description: 'Dashcode is a popular dashboard template.',
 }
 

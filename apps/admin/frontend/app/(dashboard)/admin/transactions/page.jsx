@@ -18,7 +18,7 @@ const CompanyTransactionsPage = () => {
   const { t } = useTranslation('admin');
 
   // Hook para gerenciar título da aba com contagem de notificações
-  useDocumentTitle(t('transactions.pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('transactions.pageTitle'), 'Clube Digital', true);
   
   const { showSuccess, showError, showInfo, showWarning } = useAlertContext();
   const router = useRouter();
@@ -151,7 +151,7 @@ const CompanyTransactionsPage = () => {
             
             // Fallback para currency
             const currencyMap = {
-              'cBRL': { symbol: 'cBRL', name: 'Coinage Real Brasil' },
+              'cBRL': { symbol: 'cBRL', name: 'Clube Digital Real Brasil' },
               'AZE': { symbol: 'AZE', name: 'Azore' },
               'AZE-t': { symbol: 'AZE-t', name: 'Azore Testnet' },
               'STT': { symbol: 'STT', name: 'Stake Token' },

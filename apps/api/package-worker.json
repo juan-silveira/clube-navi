@@ -1,7 +1,7 @@
 {
   "name": "coinage-workers",
   "version": "1.0.0",
-  "description": "Workers para processar filas RabbitMQ do sistema Coinage",
+  "description": "Workers para processar filas RabbitMQ do sistema Clube Digital",
   "main": "src/workers/index.js",
   "scripts": {
     "start": "node src/workers/index.js",
@@ -35,7 +35,7 @@
     "webhooks",
     "coinage"
   ],
-  "author": "Coinage Team",
+  "author": "Clube Digital Team",
   "license": "MIT"
 }
 

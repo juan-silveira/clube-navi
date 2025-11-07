@@ -19,6 +19,14 @@ export const ActiveCompanyProvider = ({ children }) => {
         return;
       }
 
+      // Super admins não têm empresa - pular busca
+      if (user?.email?.includes('@clubedigital.com')) {
+        console.log('🔐 Super admin detectado - pulando busca de empresa');
+        setCurrentCompany(null);
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         const response = await whitelabelService.getCurrentCompany();
@@ -50,6 +58,20 @@ export const ActiveCompanyProvider = ({ children }) => {
 
   // Calcular permissões baseadas APENAS na company ativa
   const permissions = useMemo(() => {
+    // Super admins do sistema têm TODAS as permissões
+    if (user?.email?.includes('@clubedigital.com')) {
+      return {
+        isAdmin: true,
+        isAppAdmin: true,
+        isSuperAdmin: true,
+        canViewCompanySettings: true,
+        canViewSystemSettings: true,
+        canViewSensitiveData: true,
+        canManageRoles: true,
+        role: 'SUPER_ADMIN'
+      };
+    }
+
     if (!activeCompany) {
       return {
         isAdmin: false,
@@ -78,7 +100,7 @@ export const ActiveCompanyProvider = ({ children }) => {
       canManageRoles: isSuperAdmin,
       role: role
     };
-  }, [activeCompany]);
+  }, [activeCompany, user]);
 
   const value = {
     currentCompany,

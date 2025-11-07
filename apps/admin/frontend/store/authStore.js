@@ -92,7 +92,7 @@ const useAuthStore = create(
           
           // Limpar IndexedDB se existir
           if (typeof window !== 'undefined' && window.indexedDB) {
-            indexedDB.deleteDatabase('CoinageBalanceBackup');
+            indexedDB.deleteDatabase('Clube DigitalBalanceBackup');
           }
           
           // console.log('[AUTH] Cache completamente limpo no login para usuário:', user?.id);
@@ -118,7 +118,13 @@ const useAuthStore = create(
         
         // Se o usuário tem uma foto de perfil salva no banco, usar ela
         const photoUrl = user?.profilePicture || null;
-        
+
+        // Garantir que user tenha a propriedade type para Super Admins
+        // O backend pode retornar isSuperAdmin mas não type
+        if (user && !user.type && (user.isSuperAdmin || user.isApiAdmin)) {
+          user.type = 'super-admin';
+        }
+
         set({
           user,
           accessToken,

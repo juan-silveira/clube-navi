@@ -13,10 +13,19 @@ const Navmenu = ({ menus }) => {
   const router = useRouter();
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const permissions = usePermissions();
+  const { user } = useAuthStore();
+
+  // Verificar se é super admin do sistema
+  const isSystemAdmin = user?.email?.includes('@clubedigital.com');
 
   // Filter menus based on user permissions (da company ativa)
   const filteredMenus = useMemo(() => {
     return menus.filter(item => {
+      // Ocultar itens marcados para super admins do sistema
+      if (isSystemAdmin && item.hideForSystemAdmin) {
+        return false;
+      }
+
       // Se é menu exclusivo para admin, verificar se usuário tem permissão na company ATIVA
       if (item.adminOnly && !permissions.isSuperAdmin && !permissions.isAppAdmin) {
         return false;
@@ -32,7 +41,7 @@ const Navmenu = ({ menus }) => {
         permissions.hasPermission(permission)
       );
     });
-  }, [menus, permissions]);
+  }, [menus, permissions, isSystemAdmin]);
 
   const toggleSubmenu = (i) => {
     if (activeSubmenu === i) {

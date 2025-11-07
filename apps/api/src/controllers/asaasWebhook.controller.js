@@ -1,8 +1,7 @@
 const crypto = require('crypto');
 const depositService = require('../services/deposit.service');
 // const withdrawService = require('../services/withdraw.service'); // REMOVIDO - serviço não utilizado
-const PixService = require('../services/pix.service');
-const pixService = new PixService();
+const pixService = require('../services/pix.service');
 const { PrismaClient } = require('../generated/prisma');
 
 const prisma = new PrismaClient();

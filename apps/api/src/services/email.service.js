@@ -12,7 +12,7 @@ class EmailService {
     this.prisma = null;
     this.provider = process.env.EMAIL_PROVIDER || 'mock';
     this.fromEmail = process.env.EMAIL_FROM_ADDRESS || 'noreply@coinage.trade';
-    this.fromName = process.env.EMAIL_FROM_NAME || 'Coinage';
+    this.fromName = process.env.EMAIL_FROM_NAME || 'Clube Digital';
     
     // Inicializar provedores
     this.providerInstances = {
@@ -566,9 +566,9 @@ class EmailService {
           <p>Sua conta foi vinculada com sucesso ao <strong>{{companyName}}</strong> em {{linkedAt}}.</p>
           <p>Agora você pode acessar os serviços usando suas credenciais habituais.</p>
           <br>
-          <p>Atenciosamente,<br>Equipe Coinage</p>
+          <p>Atenciosamente,<br>Equipe Clube Digital</p>
           <hr>
-          <small>© {{year}} Coinage. Todos os direitos reservados.</small>
+          <small>© {{year}} Clube Digital. Todos os direitos reservados.</small>
         `,
         textContent: 'Olá {{userName}}! Sua conta foi vinculada com sucesso ao {{companyName}} em {{linkedAt}}.'
       },
@@ -582,9 +582,9 @@ class EmailService {
           <p>Este código expira em {{expiresIn}}.</p>
           <p>Se você não solicitou este código, ignore este email.</p>
           <br>
-          <p>Atenciosamente,<br>Equipe Coinage</p>
+          <p>Atenciosamente,<br>Equipe Clube Digital</p>
           <hr>
-          <small>© {{year}} Coinage. Todos os direitos reservados.</small>
+          <small>© {{year}} Clube Digital. Todos os direitos reservados.</small>
         `,
         textContent: 'Olá {{userName}}, seu código de verificação é: {{code}}. Expira em {{expiresIn}}.'
       },
@@ -636,9 +636,9 @@ class EmailService {
           <p>Este link expira em {{expiresIn}}.</p>
           <p>Se você não solicitou esta redefinição, ignore este email.</p>
           <br>
-          <p>Atenciosamente,<br>Equipe Coinage</p>
+          <p>Atenciosamente,<br>Equipe Clube Digital</p>
           <hr>
-          <small>© {{year}} Coinage. Todos os direitos reservados.</small>
+          <small>© {{year}} Clube Digital. Todos os direitos reservados.</small>
         `,
         textContent: 'Olá {{userName}}, clique neste link para redefinir sua senha: {{resetLink}} (expira em {{expiresIn}})'
       }

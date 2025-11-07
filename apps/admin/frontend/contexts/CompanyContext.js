@@ -25,6 +25,14 @@ export const CompanyProvider = ({ children }) => {
   // Carregar branding automaticamente quando autenticar
   useEffect(() => {
     if (isAuthenticated && user && !brandingLoaded) {
+      // Super admins não têm "empresa atual", pular carregamento
+      if (user.email && user.email.includes('@clubedigital.com')) {
+        console.log('🔐 Super admin detectado, pulando carregamento de empresa');
+        setBrandingLoaded(true);
+        setCurrentCompany({ name: 'Super Admin', id: 'super-admin' });
+        return;
+      }
+
       // console.log('🎨 Carregando branding após login...');
       loadCurrentCompany().then(() => {
         setBrandingLoaded(true);
@@ -148,7 +156,7 @@ export const CompanyProvider = ({ children }) => {
       // Só definir branding padrão se ainda não temos nenhum branding
       if (!companyBranding) {
         const defaultBranding = {
-          brand_name: companyAlias === 'navi' ? 'Navi' : 'Coinage',
+          brand_name: companyAlias === 'navi' ? 'Navi' : 'Clube Digital',
           primary_color: "#3B82F6",
           secondary_color: "#1E293B", 
           logo_url: "/assets/images/logo/logo.svg",
@@ -229,7 +237,7 @@ export const CompanyProvider = ({ children }) => {
     
     // Branding padrão
     return {
-      brand_name: "Coinage",
+      brand_name: "Clube Digital",
       primary_color: "#3B82F6",
       secondary_color: "#1E293B", 
       logo_url: "/assets/images/logo/logo.svg",

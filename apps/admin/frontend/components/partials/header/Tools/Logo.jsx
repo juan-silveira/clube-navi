@@ -89,10 +89,6 @@ const Logo = () => {
           />
         </React.Fragment>
       </Link>
-      {/* Texto "by Coinage" alinhado à direita */}
-      <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 mr-1">
-        by Coinage
-      </span>
     </div>
   );
 };

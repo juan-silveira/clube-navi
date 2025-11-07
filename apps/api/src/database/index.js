@@ -1,17 +1,17 @@
 /**
  * Database Clients Module
  *
- * Exporta clientes para Master DB e Tenant DBs
+ * Exporta clientes para Master DB e Clube DBs
  */
 
 const { getMasterClient, disconnectMaster, masterPrisma } = require('./master-client');
 const {
-  getTenantClient,
-  disconnectTenant,
-  disconnectAllTenants,
+  getClubClient,
+  disconnectClub,
+  disconnectAllClubs,
   cleanupIdleConnections,
   getConnectionStats
-} = require('./tenant-client');
+} = require('./club-client');
 
 module.exports = {
   // Master Database
@@ -19,10 +19,10 @@ module.exports = {
   disconnectMaster,
   masterPrisma,
 
-  // Tenant Databases
-  getTenantClient,
-  disconnectTenant,
-  disconnectAllTenants,
+  // Clube Databases
+  getClubClient,
+  disconnectClub,
+  disconnectAllClubs,
   cleanupIdleConnections,
   getConnectionStats
 };

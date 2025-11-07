@@ -88,7 +88,7 @@ const defaultTokens = [
   
   // cBRL - Token ERC20 da Testnet
   {
-    name: 'Coinage Real Brasil',
+    name: 'Clube Digital Real Brasil',
     symbol: 'cBRL',
     address: process.env.CBRL_TESTNET || '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804',
     network: 'testnet',
@@ -110,7 +110,7 @@ const defaultTokens = [
   
   // cBRL - Token ERC20 da Mainnet (placeholder)
   {
-    name: 'Coinage Real Brasil',
+    name: 'Clube Digital Real Brasil',
     symbol: 'cBRL',
     address: process.env.CBRL_MAINNET || '0x18e946548b2C24Ad371343086e424ABaC3393678',
     network: 'mainnet',
@@ -154,7 +154,7 @@ const defaultTokens = [
   
   // cBRL - Token ERC20 da Mainnet
   {
-    name: 'Coinage Real Brasil',
+    name: 'Clube Digital Real Brasil',
     symbol: 'cBRL',
     address: process.env.CBRL_MAINNET || '0x18e946548b2C24Ad371343086e424ABaC3393678',
     network: 'mainnet',

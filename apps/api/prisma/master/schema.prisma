@@ -1,8 +1,8 @@
 // ==========================================
 // MASTER DATABASE SCHEMA
 // ==========================================
-// Banco de dados central que gerencia todos os tenants
-// Cada tenant tem seu próprio database isolado
+// Banco de dados central que gerencia todos os clubs
+// Cada club tem seu próprio database isolado
 
 generator client {
   provider      = "prisma-client-js"
@@ -16,15 +16,15 @@ datasource db {
 }
 
 // ==========================================
-// TENANT MANAGEMENT
+// CLUB MANAGEMENT
 // ==========================================
 
-model Tenant {
+model Club {
   id                String    @id @default(uuid()) @db.Uuid
   slug              String    @unique @db.VarChar(50)
   companyName       String    @map("company_name") @db.VarChar(255)
   companyDocument   String    @unique @map("company_document") @db.VarChar(18)
-  status            TenantStatus @default(trial)
+  status            ClubStatus @default(trial)
 
   // Database connection
   databaseHost      String    @map("database_host") @db.VarChar(255)
@@ -67,29 +67,29 @@ model Tenant {
   updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   // Relations
-  branding          TenantBranding?
-  modules           TenantModule[]
-  admins            TenantAdmin[]
-  apiKeys           TenantApiKey[]
-  usageStats        TenantUsageStats[]
-  stats             TenantStats?
-  cashbackConfig    TenantCashbackConfig?
-  withdrawalConfig  TenantWithdrawalConfig?
+  branding          ClubBranding?
+  modules           ClubModule[]
+  admins            ClubAdmin[]
+  apiKeys           ClubApiKey[]
+  usageStats        ClubUsageStats[]
+  stats             ClubStats?
+  cashbackConfig    ClubCashbackConfig?
+  withdrawalConfig  ClubWithdrawalConfig?
 
   @@index([slug])
   @@index([subdomain])
   @@index([status])
-  @@index([subscriptionStatus], map: "idx_tenants_subscription_status")
-  @@map("tenants")
+  @@index([subscriptionStatus], map: "idx_clubs_subscription_status")
+  @@map("clubs")
 }
 
 // ==========================================
-// TENANT BRANDING
+// CLUB BRANDING
 // ==========================================
 
-model TenantBranding {
+model ClubBranding {
   id                String   @id @default(uuid()) @db.Uuid
-  tenantId          String   @unique @map("tenant_id") @db.Uuid
+  clubId          String   @unique @map("club_id") @db.Uuid
 
   // Logos
   logoUrl           String?  @map("logo_url") @db.VarChar(500)
@@ -112,18 +112,18 @@ model TenantBranding {
   createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club            Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_brandings")
+  @@map("club_brandings")
 }
 
 // ==========================================
 // MODULES SYSTEM
 // ==========================================
 
-model TenantModule {
+model ClubModule {
   id                String    @id @default(uuid()) @db.Uuid
-  tenantId          String    @map("tenant_id") @db.Uuid
+  clubId          String    @map("club_id") @db.Uuid
   moduleKey         ModuleKey @map("module_key")
   isEnabled         Boolean   @default(true) @map("is_enabled")
   isEnabledByDefault Boolean  @default(true) @map("is_enabled_by_default")
@@ -136,21 +136,21 @@ model TenantModule {
   createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  tenant            Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club            Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@unique([tenantId, moduleKey])
-  @@index([tenantId])
+  @@unique([clubId, moduleKey])
+  @@index([clubId])
   @@index([isEnabled])
-  @@map("tenant_modules")
+  @@map("club_modules")
 }
 
 // ==========================================
 // ANALYTICS & STATISTICS
 // ==========================================
 
-model TenantStats {
+model ClubStats {
   id                    String    @id @default(uuid()) @db.Uuid
-  tenantId              String    @unique @map("tenant_id") @db.Uuid
+  clubId              String    @unique @map("club_id") @db.Uuid
 
   // Usuários
   totalUsers            Int       @default(0) @map("total_users")
@@ -175,10 +175,10 @@ model TenantStats {
   createdAt             DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt             DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  tenant                Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club                Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@index([tenantId])
-  @@map("tenant_stats")
+  @@index([clubId])
+  @@map("club_stats")
 }
 
 model GlobalStats {
@@ -186,7 +186,7 @@ model GlobalStats {
   date                  DateTime  @unique @db.Date
 
   // Totais globais
-  totalTenants          Int       @default(0) @map("total_tenants")
+  totalClubs          Int       @default(0) @map("total_clubs")
   totalUsers            Int       @default(0) @map("total_users")
   totalConsumers        Int       @default(0) @map("total_consumers")
   totalMerchants        Int       @default(0) @map("total_merchants")
@@ -203,9 +203,9 @@ model GlobalStats {
   cashback30d           Decimal   @default(0) @map("cashback_30d") @db.Decimal(15, 2)
 
   // Crescimento
-  newTenants            Int       @default(0) @map("new_tenants")
+  newClubs            Int       @default(0) @map("new_clubs")
   newUsers              Int       @default(0) @map("new_users")
-  churnedTenants        Int       @default(0) @map("churned_tenants")
+  churnedClubs        Int       @default(0) @map("churned_clubs")
 
   createdAt             DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
@@ -217,9 +217,9 @@ model GlobalStats {
 // CASHBACK CONFIGURATION
 // ==========================================
 
-model TenantCashbackConfig {
+model ClubCashbackConfig {
   id                        String   @id @default(uuid()) @db.Uuid
-  tenantId                  String   @unique @map("tenant_id") @db.Uuid
+  clubId                  String   @unique @map("club_id") @db.Uuid
 
   // Percentuais padrão (soma deve ser 100%)
   consumerPercent           Decimal  @default(50.0) @map("consumer_percent") @db.Decimal(5, 2)
@@ -230,14 +230,14 @@ model TenantCashbackConfig {
   createdAt                 DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt                 DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  tenant                    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club                    Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_cashback_configs")
+  @@map("club_cashback_configs")
 }
 
-model TenantWithdrawalConfig {
+model ClubWithdrawalConfig {
   id                   String   @id @default(uuid()) @db.Uuid
-  tenantId             String   @unique @map("tenant_id") @db.Uuid
+  clubId             String   @unique @map("club_id") @db.Uuid
 
   // Taxa sobre saques
   withdrawalFeePercent Decimal  @default(2.5) @map("withdrawal_fee_percent") @db.Decimal(5, 2)
@@ -247,18 +247,18 @@ model TenantWithdrawalConfig {
   createdAt            DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt            DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  tenant               Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club               Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_withdrawal_configs")
+  @@map("club_withdrawal_configs")
 }
 
 // ==========================================
 // ADMINS
 // ==========================================
 
-model TenantAdmin {
+model ClubAdmin {
   id                String    @id @default(uuid()) @db.Uuid
-  tenantId          String    @map("tenant_id") @db.Uuid
+  clubId          String    @map("club_id") @db.Uuid
 
   name              String    @db.VarChar(255)
   email             String    @db.VarChar(255)
@@ -271,12 +271,12 @@ model TenantAdmin {
   createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  tenant            Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club            Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@unique([tenantId, email])
-  @@index([tenantId])
+  @@unique([clubId, email])
+  @@index([clubId])
   @@index([email])
-  @@map("tenant_admins")
+  @@map("club_admins")
 }
 
 model SuperAdmin {
@@ -299,9 +299,9 @@ model SuperAdmin {
 // API KEYS & USAGE
 // ==========================================
 
-model TenantApiKey {
+model ClubApiKey {
   id                String    @id @default(uuid()) @db.Uuid
-  tenantId          String    @map("tenant_id") @db.Uuid
+  clubId          String    @map("club_id") @db.Uuid
 
   keyName           String    @map("key_name") @db.VarChar(100)
   apiKey            String    @unique @map("api_key") @db.VarChar(64)
@@ -311,16 +311,16 @@ model TenantApiKey {
   createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   expiresAt         DateTime? @map("expires_at") @db.Timestamptz(6)
 
-  tenant            Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club            Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@index([tenantId])
+  @@index([clubId])
   @@index([apiKey])
-  @@map("tenant_api_keys")
+  @@map("club_api_keys")
 }
 
-model TenantUsageStats {
+model ClubUsageStats {
   id                String   @id @default(uuid()) @db.Uuid
-  tenantId          String   @map("tenant_id") @db.Uuid
+  clubId          String   @map("club_id") @db.Uuid
   date              DateTime @db.Date
 
   apiCalls          Int      @default(0) @map("api_calls")
@@ -329,19 +329,19 @@ model TenantUsageStats {
 
   createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
-  tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  club            Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
-  @@unique([tenantId, date])
-  @@index([tenantId])
+  @@unique([clubId, date])
+  @@index([clubId])
   @@index([date])
-  @@map("tenant_usage_stats")
+  @@map("club_usage_stats")
 }
 
 // ==========================================
 // ENUMS
 // ==========================================
 
-enum TenantStatus {
+enum ClubStatus {
   trial
   active
   suspended
@@ -360,7 +360,7 @@ enum SubscriptionStatus {
   ACTIVE      // Pagando normalmente
   PAST_DUE    // Atraso no pagamento
   SUSPENDED   // Suspenso por falta de pagamento
-  CANCELED    // Cancelado pelo tenant
+  CANCELED    // Cancelado pelo club
 }
 
 enum ModuleKey {

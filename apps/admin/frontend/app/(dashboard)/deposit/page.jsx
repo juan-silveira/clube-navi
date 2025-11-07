@@ -16,7 +16,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const DepositPage = () => {
   const { t } = useTranslation('deposit');
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
 
   const router = useRouter();
   const { user, accessToken } = useAuthStore();

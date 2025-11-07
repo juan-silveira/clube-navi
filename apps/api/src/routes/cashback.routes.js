@@ -9,9 +9,9 @@ const { authenticateToken } = require('../middleware/jwt.middleware');
 
 /**
  * GET /api/cashback/config
- * Obter configuração de cashback do tenant
+ * Obter configuração de cashback do clube
  */
-router.get('/config', authenticateToken, cashbackController.getTenantConfig);
+router.get('/config', authenticateToken, cashbackController.getClubeConfig);
 
 /**
  * GET /api/cashback/stats

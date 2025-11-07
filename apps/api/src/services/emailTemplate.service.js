@@ -226,7 +226,7 @@ class EmailTemplateService {
       ...data,
       currentYear: new Date().getFullYear(),
       timestamp: new Date().toISOString(),
-      companyName: data.companyName || 'Coinage',
+      companyName: data.companyName || 'Clube Digital',
       supportEmail: data.supportEmail || process.env.SUPPORT_EMAIL || 'suporte@coinage.com'
     };
     

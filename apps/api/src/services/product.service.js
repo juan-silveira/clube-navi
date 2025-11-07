@@ -7,7 +7,7 @@
 class ProductService {
   /**
    * Criar produto
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} userId - ID do usuário (merchant)
    * @param {Object} data - Dados do produto
    * @returns {Object} Produto criado
@@ -70,7 +70,7 @@ class ProductService {
 
   /**
    * Listar produtos com filtros e paginação
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} userId - ID do usuário
    * @param {Object} filters - Filtros e paginação
    * @returns {Object} Lista de produtos e metadados
@@ -162,7 +162,7 @@ class ProductService {
 
   /**
    * Buscar produto por ID
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} productId - ID do produto
    * @param {String} userId - ID do usuário (para validação)
    * @returns {Object} Produto
@@ -208,7 +208,7 @@ class ProductService {
 
   /**
    * Atualizar produto
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} productId - ID do produto
    * @param {String} userId - ID do usuário (merchant)
    * @param {Object} data - Dados para atualizar
@@ -260,7 +260,7 @@ class ProductService {
 
   /**
    * Desativar produto
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} productId - ID do produto
    * @param {String} userId - ID do usuário (merchant)
    * @returns {Object} Produto desativado
@@ -291,7 +291,7 @@ class ProductService {
 
   /**
    * Atualizar estoque
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} productId - ID do produto
    * @param {String} userId - ID do usuário (merchant)
    * @param {Number} quantity - Quantidade a adicionar/remover
@@ -344,7 +344,7 @@ class ProductService {
 
   /**
    * Obter categorias disponíveis
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @returns {Array} Lista de categorias
    */
   async getCategories(prisma) {
@@ -362,7 +362,7 @@ class ProductService {
 
   /**
    * Obter estatísticas de produtos do merchant
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} merchantId - ID do merchant
    * @returns {Object} Estatísticas
    */
@@ -401,7 +401,7 @@ class ProductService {
 
   /**
    * Buscar produtos em destaque (mais vendidos ou maior cashback)
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {Number} limit - Limite de resultados
    * @param {String} sortBy - 'sales' ou 'cashback'
    * @returns {Array} Produtos em destaque

@@ -59,7 +59,7 @@ const ForgotPassPage = () => {
               <div className="text-center 2xl:mb-10 mb-5">
                 <h4 className="font-medium mb-4">Esqueceu sua senha?</h4>
                 <div className="text-slate-500 dark:text-slate-400 text-base">
-                  Recupere sua senha do Clube Navi.
+                  Recupere sua senha do Clube Digital.
                 </div>
               </div>
               <div className="font-normal text-base text-slate-500 dark:text-slate-400 text-center px-2 bg-slate-100 dark:bg-slate-600 rounded py-3 mb-4 mt-10">
@@ -78,7 +78,7 @@ const ForgotPassPage = () => {
               </div>
             </div>
             <div className="auth-footer text-center">
-              Copyright 2025, Clube Navi All Rights Reserved.
+              Copyright 2025, Clube Digital All Rights Reserved.
             </div>
           </div>
         </div>

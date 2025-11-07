@@ -1,12 +1,12 @@
 // ==========================================
 // TENANT DATABASE SCHEMA
 // ==========================================
-// Cada tenant tem seu próprio database com este schema
-// Dados de usuários, produtos, transações isolados por tenant
+// Cada club tem seu próprio database com este schema
+// Dados de usuários, produtos, transações isolados por club
 
 generator client {
   provider      = "prisma-client-js"
-  output        = "../src/generated/prisma-tenant"
+  output        = "../src/generated/prisma-club"
   binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
 }
 

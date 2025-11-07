@@ -253,7 +253,7 @@ class MultiExchangeManager {
             if (cacheKeys.length > 0) {
                 const pipeline = redisManager.createConnection('blockchain_cache').pipeline();
                 cacheKeys.forEach(key => {
-                    pipeline.del(key.replace('coinage:blockchain_cache:', ''));
+                    pipeline.del(key.replace('club:blockchain_cache:', ''));
                 });
                 await pipeline.exec();
             }

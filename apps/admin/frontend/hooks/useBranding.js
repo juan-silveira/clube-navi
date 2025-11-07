@@ -57,7 +57,7 @@ export const useBranding = () => {
 
   // Obter nome da marca
   const getBrandName = () => {
-    return branding?.brand_name || 'Coinage';
+    return branding?.brand_name || 'Clube Digital';
   };
 
   // Obter tagline

@@ -6,7 +6,6 @@ import SelectMonth from "@/components/partials/SelectMonth";
 import StackBarChart from "@/components/partials/widget/chart/stack-bar";
 import Calculation from "@/components/partials/widget/chart/Calculation";
 import ExampleTwo from "@/components/partials/table/ExampleTwo";
-import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 const campaigns = [
   {
     name: "Channel",
@@ -32,7 +31,6 @@ const campaigns = [
 const CrmPage = () => {
   return (
     <div>
-      <HomeBredCurbs title="Crm" />
       <div className="space-y-5">
         <div className="grid grid-cols-12 gap-5">
           <div className="lg:col-span-8 col-span-12 space-y-5">

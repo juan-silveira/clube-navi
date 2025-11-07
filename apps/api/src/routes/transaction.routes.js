@@ -13,7 +13,7 @@ router.get('/test-no-auth', async (req, res) => {
       transactions: [
         {
           id: '1',
-          company: { name: 'Coinage App' },
+          company: { name: 'Clube Digital App' },
           tokenSymbol: 'STT',
           tokenName: 'Stake Token',
           txHash: '0x1234567890abcdef1234567890abcdef12345678901234567890abcdef123456',

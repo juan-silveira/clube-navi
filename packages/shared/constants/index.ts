@@ -6,7 +6,7 @@
 // APP CONSTANTS
 // ============================================
 
-export const APP_NAME = 'Clube Navi';
+export const APP_NAME = 'Clube Digital';
 export const APP_VERSION = '1.0.0';
 
 // ============================================

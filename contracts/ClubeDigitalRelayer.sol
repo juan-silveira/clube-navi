@@ -6,10 +6,10 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 
 /**
- * @title ICoinageTrade
- * @dev Interface para o token cBRL (CoinageTrade) com transferFromGasless
+ * @title IClube DigitalTrade
+ * @dev Interface para o token cBRL (Clube DigitalTrade) com transferFromGasless
  */
-interface ICoinageTrade is IERC20 {
+interface IClube DigitalTrade is IERC20 {
     function transferFromGasless(address from, address to, uint256 value) external;
 }
 
@@ -24,7 +24,7 @@ interface ICoinageTrade is IERC20 {
 contract ClubeDigitalRelayer is ReentrancyGuard, Pausable {
 
     // Token cBRL (Clube Real) com transferFromGasless
-    ICoinageTrade public immutable cBRLToken;
+    IClube DigitalTrade public immutable cBRLToken;
 
     // Endereço da plataforma para receber taxas
     address public platformAddress;
@@ -89,7 +89,7 @@ contract ClubeDigitalRelayer is ReentrancyGuard, Pausable {
 
     /**
      * @dev Constructor do contrato
-     * @param _cBRLToken Endereço do token cBRL (CoinageTrade)
+     * @param _cBRLToken Endereço do token cBRL (Clube DigitalTrade)
      * @param _platformAddress Endereço da carteira da plataforma
      * @param _initialAdmin Endereço do primeiro administrador
      *
@@ -105,7 +105,7 @@ contract ClubeDigitalRelayer is ReentrancyGuard, Pausable {
         require(_platformAddress != address(0), "Invalid platform address");
         require(_initialAdmin != address(0), "Invalid admin address");
 
-        cBRLToken = ICoinageTrade(_cBRLToken);
+        cBRLToken = IClube DigitalTrade(_cBRLToken);
         platformAddress = _platformAddress;
         isAdmin[_initialAdmin] = true;
 

@@ -1,7 +1,7 @@
 /**
- * Purchase Controller - Multi-Tenant
+ * Purchase Controller - Multi-Clube
  * Gerencia compras e distribui cashback
- * Usa req.tenantPrisma para isolamento de dados por tenant
+ * Usa req.clubPrisma para isolamento de dados por clube
  */
 
 const purchaseService = require('../services/purchase.service');
@@ -11,16 +11,16 @@ const purchaseService = require('../services/purchase.service');
  */
 const createPurchase = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const consumerId = req.user.id;
     const { productId, quantity = 1 } = req.body;
-    const tenantConfig = req.tenant || {};
+    const clubeConfig = req.club || {};
 
     const data = {
       consumerId,
       productId,
       quantity,
-      tenantConfig
+      clubeConfig
     };
 
     const result = await purchaseService.createPurchase(prisma, data);
@@ -87,7 +87,7 @@ const createPurchase = async (req, res) => {
  */
 const listPurchases = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const userType = req.user.userType;
     const { status, page = 1, limit = 20 } = req.query;
@@ -119,7 +119,7 @@ const listPurchases = async (req, res) => {
  */
 const getPurchaseById = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { id } = req.params;
 
@@ -162,7 +162,7 @@ const getPurchaseById = async (req, res) => {
  */
 const confirmPurchase = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { id } = req.params;
     const { txHash } = req.body;
 
@@ -213,7 +213,7 @@ const confirmPurchase = async (req, res) => {
  */
 const cancelPurchase = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const { id } = req.params;
     const { reason } = req.body;
@@ -268,7 +268,7 @@ const cancelPurchase = async (req, res) => {
  */
 const getPurchaseStats = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const userId = req.user.id;
     const userType = req.user.userType;
 

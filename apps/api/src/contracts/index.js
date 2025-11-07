@@ -25,7 +25,7 @@ const CONTRACT_CATEGORIES = {
  * Tipos de contrato padrão disponíveis
  */
 const DEFAULT_CONTRACT_TYPES = {
-  // Contratos principais do sistema Coinage
+  // Contratos principais do sistema Clube Digital
   DEFAULT_TOKEN: 'default_token',      // Token ERC20 com mint/burn (cBRL, cUSD, etc)
   DEFAULT_STAKE: 'default_stake',      // Contrato de staking
   DEFAULT_EXCHANGE: 'default_exchange', // Contrato de exchange/swap

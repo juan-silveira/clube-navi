@@ -16,8 +16,8 @@ const TOKEN_PRICES = {
 const TOKEN_NAMES = {
   'AZE': 'Azore',
   'AZE-t': 'Azore (testnet)',
-  'cBRL': 'Coinage Real Brasil',
-  'CNT': 'Coinage Trade',
+  'cBRL': 'Clube Digital Real Brasil',
+  'CNT': 'Clube Digital Trade',
   'MJD': 'Meu Jurídico Digital',
   'PCN': 'Pratique Coin',
   'STT': 'Simple Test Token'

@@ -6,7 +6,7 @@
 
 class ImageStorageService {
   constructor() {
-    this.dbName = 'CoinageImages';
+    this.dbName = 'Clube DigitalImages';
     this.dbVersion = 1;
     this.storeName = 'profilePhotos';
     this.db = null;

@@ -25,7 +25,6 @@ const CardSlider = dynamic(
 );
 import LastTransactions from "@/components/partials/table/LastTransactions";
 import SelectMonth from "@/components/partials/SelectMonth";
-import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 import DigitalAssetsCard from "@/components/partials/widget/DigitalAssetsCard";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -60,7 +59,7 @@ const BankingPage = () => {
   const { t } = useTranslation('dashboard');
 
   // Hook para gerenciar título da aba com contagem de notificações
-  useDocumentTitle(t('title'), 'Coinage', true);
+  useDocumentTitle(t('title'), 'Clube Digital', true);
 
   // Hook compartilhado para earnings
   const earningsData = useEarnings({
@@ -70,7 +69,6 @@ const BankingPage = () => {
 
   return (
     <div className="space-y-5">
-      <HomeBredCurbs title={t('title')} />
       <Card
         title={t('portfolio.title')}
         subtitle={t('portfolio.subtitle')}

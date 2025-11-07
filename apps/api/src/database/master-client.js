@@ -2,10 +2,10 @@
  * Master Database Client
  *
  * Cliente Prisma para o banco de dados Master
- * Gerencia informações de tenants, módulos, analytics, etc.
+ * Gerencia informações de clubes, módulos, analytics, etc.
  */
 
-const { PrismaClient } = require('../generated/prisma-master');
+const { PrismaClient } = require('../../prisma/src/generated/prisma-master');
 
 // Singleton instance
 let masterPrisma = null;

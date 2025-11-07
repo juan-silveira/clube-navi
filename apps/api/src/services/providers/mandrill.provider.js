@@ -11,7 +11,7 @@ class MandrillProvider {
     
     this.defaultSender = {
       email: process.env.MANDRILL_FROM_EMAIL || 'noreply@coinage.com',
-      name: process.env.MANDRILL_FROM_NAME || 'Coinage',
+      name: process.env.MANDRILL_FROM_NAME || 'Clube Digital',
     };
 
     this.isConfigured = !!(

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-// Removido: import useWebSocket from '@/hooks/useWebSocket';
 import useCachedBalances from '@/hooks/useCachedBalances';
 import useSharedPolling from '@/hooks/useSharedPolling';
 import { BalanceDisplay } from '@/utils/balanceUtils';
@@ -78,7 +77,7 @@ const OrderBookPage = () => {
   // Tabs para mobile
   const [mobileTab, setMobileTab] = useState('chart'); // 'chart', 'orderbook', 'trades'
 
-  // Use cached balances hook like HomeBredCurbs
+  // Use cached balances hook
   const {
     getBalance,
     loading: isBalanceLoading,

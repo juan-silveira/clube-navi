@@ -20,13 +20,10 @@
     "financialReports": "Financial Reports",
     "feesAndDeadlines": "Fees and Deadlines",
     "stakesManagement": "Stakes Management",
-    "whatsappMessages": "WhatsApp Messages",
-    "companyManagement": "Company Management",
-    "documentValidation": "Document Validation",
-    "companyTransactions": "Company Transactions",
-    "contractInteraction": "Contract Interaction",
-    "withdrawalManagement": "Withdrawal Management",
-    "documentValidationSystem": "Document Validation"
+    "clubs": "Club Management",
+    "clubAdmins": "Club Admins",
+    "superAdmins": "Super Admins",
+    "modules": "System Modules"
   },
   "sections": {
     "menu": "menu",

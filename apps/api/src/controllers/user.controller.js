@@ -1,4 +1,4 @@
-// Nota: Prisma agora vem de req.tenantPrisma (multi-tenant)
+// Nota: Prisma agora vem de req.clubPrisma (multi-clube)
 // Removido: const prismaConfig = require('../config/prisma');
 // Removido: const getPrisma = () => prismaConfig.getPrisma();
 
@@ -377,7 +377,7 @@ const getUserBalancesByAddress = async (req, res) => {
       const knownTokens = {
         testnet: [
           {
-            name: 'Coinage Real Brasil',
+            name: 'Clube Digital Real Brasil',
             symbol: 'cBRL',
             address: '0x0A8c73967e4Eee8ffA06484C3fBf65E6Ae3b9804',
             decimals: 18
@@ -391,7 +391,7 @@ const getUserBalancesByAddress = async (req, res) => {
         ],
         mainnet: [
           {
-            name: 'Coinage Real Brasil',
+            name: 'Clube Digital Real Brasil',
             symbol: 'cBRL',
             address: '0x18e946548b2C24Ad371343086e424ABaC3393678', // Contrato correto da mainnet
             decimals: 18
@@ -562,7 +562,7 @@ const listUserTransactions = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const where = {};
 
@@ -774,7 +774,7 @@ const updateUserRole = async (req, res) => {
       });
     }
     
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     
     // Buscar a relação user_company
     const userCompany = await prisma.userCompany.findUnique({
@@ -869,7 +869,7 @@ const updateUserLanguage = async (req, res) => {
 
     console.log(`🌐 Atualizando idioma para usuário ${userId}: ${language}`);
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const user = await prisma.user.update({
       where: { id: userId },
       data: { preferredLanguage: language },
@@ -906,7 +906,7 @@ const getUserBalance = async (req, res) => {
     const userId = req.user.id;
 
     // Buscar usuário com chave pública (endereço blockchain)
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -1011,7 +1011,7 @@ const uploadProfilePicture = async (req, res) => {
     const imageUrl = await s3Service.uploadFile(req.file.buffer, filename, req.file.mimetype);
 
     // Atualizar profilePicture do usuário no banco
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { profilePicture: imageUrl },
@@ -1052,7 +1052,7 @@ const uploadProfilePicture = async (req, res) => {
  */
 const getMerchantStats = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Contar total de merchants
     const total = await prisma.user.count({
@@ -1113,7 +1113,7 @@ const deleteAccount = async (req, res) => {
     console.log(`🗑️ Solicitação de exclusão de conta do usuário: ${userId}`);
     console.log(`Motivo: ${reason}`);
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     // Buscar usuário
     const user = await prisma.users.findUnique({
@@ -1219,7 +1219,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const bcrypt = require('bcryptjs');
 
     // Buscar usuário com senha
@@ -1280,7 +1280,7 @@ const changePassword = async (req, res) => {
 const downloadUserData = async (req, res) => {
   try {
     const userId = req.user.id;
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
 
     console.log(`📥 Solicitação de download de dados do usuário: ${userId}`);
 

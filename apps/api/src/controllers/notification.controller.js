@@ -377,7 +377,7 @@ class NotificationController {
 
       const notification = await this.notificationService.createNotification({
         userId,
-        sender: sender || 'Coinage',
+        sender: sender || 'Clube Digital',
         title,
         message
       });

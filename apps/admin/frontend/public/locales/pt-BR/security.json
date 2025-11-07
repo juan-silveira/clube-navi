@@ -90,7 +90,7 @@
       "downloadCodesButton": "Baixar Códigos",
       "codesCopied": "Códigos copiados para a área de transferência",
       "codesDownloadedSuccess": "Códigos baixados com sucesso",
-      "downloadFileContent": "Códigos de Backup - Coinage 2FA\nData: {{date}}\n\n{{codes}}\n\nGuarde estes códigos em local seguro. Cada código pode ser usado apenas uma vez."
+      "downloadFileContent": "Códigos de Backup - Clube Digital 2FA\nData: {{date}}\n\n{{codes}}\n\nGuarde estes códigos em local seguro. Cada código pode ser usado apenas uma vez."
     },
     "errors": {
       "enterSixDigitCode": "Digite o código de 6 dígitos",

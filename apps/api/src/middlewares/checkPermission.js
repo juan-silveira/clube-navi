@@ -26,11 +26,11 @@ function clearUserPermissionCache(userId) {
 /**
  * Busca todas as permissões de um usuário no banco
  */
-async function getUserPermissions(userId, tenantDatabaseUrl) {
+async function getUserPermissions(userId, clubeDatabaseUrl) {
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: tenantDatabaseUrl
+        url: clubeDatabaseUrl
       }
     }
   });
@@ -92,9 +92,9 @@ async function getUserPermissions(userId, tenantDatabaseUrl) {
 /**
  * Verifica se o usuário tem uma permissão específica
  */
-async function userHasPermission(userId, requiredPermission, tenantDatabaseUrl) {
+async function userHasPermission(userId, requiredPermission, clubeDatabaseUrl) {
   // Verificar cache
-  const cacheKey = `${userId}-${tenantDatabaseUrl}`;
+  const cacheKey = `${userId}-${clubeDatabaseUrl}`;
   const cached = permissionCache.get(cacheKey);
 
   let userPermissions;
@@ -104,7 +104,7 @@ async function userHasPermission(userId, requiredPermission, tenantDatabaseUrl) 
     userPermissions = cached.data;
   } else {
     // Buscar permissões do banco
-    userPermissions = await getUserPermissions(userId, tenantDatabaseUrl);
+    userPermissions = await getUserPermissions(userId, clubeDatabaseUrl);
 
     // Armazenar no cache
     permissionCache.set(cacheKey, {
@@ -151,19 +151,19 @@ function checkPermission(requiredPermission) {
         });
       }
 
-      // Verificar se temos o tenantDatabaseUrl
-      if (!req.tenantDatabaseUrl) {
+      // Verificar se temos o clubeDatabaseUrl
+      if (!req.clubeDatabaseUrl) {
         return res.status(500).json({
           success: false,
-          error: 'Tenant não identificado'
+          error: 'Clube não identificado'
         });
       }
 
       const userId = req.user.id;
-      const tenantDatabaseUrl = req.tenantDatabaseUrl;
+      const clubeDatabaseUrl = req.clubeDatabaseUrl;
 
       // Verificar permissão
-      const hasPermission = await userHasPermission(userId, requiredPermission, tenantDatabaseUrl);
+      const hasPermission = await userHasPermission(userId, requiredPermission, clubeDatabaseUrl);
 
       if (!hasPermission) {
         return res.status(403).json({
@@ -202,19 +202,19 @@ function checkAnyPermission(permissions) {
         });
       }
 
-      if (!req.tenantDatabaseUrl) {
+      if (!req.clubeDatabaseUrl) {
         return res.status(500).json({
           success: false,
-          error: 'Tenant não identificado'
+          error: 'Clube não identificado'
         });
       }
 
       const userId = req.user.id;
-      const tenantDatabaseUrl = req.tenantDatabaseUrl;
+      const clubeDatabaseUrl = req.clubeDatabaseUrl;
 
       // Verificar se tem qualquer uma das permissões
       for (const permission of permissions) {
-        const hasPermission = await userHasPermission(userId, permission, tenantDatabaseUrl);
+        const hasPermission = await userHasPermission(userId, permission, clubeDatabaseUrl);
         if (hasPermission) {
           next();
           return;
@@ -254,19 +254,19 @@ function checkAllPermissions(permissions) {
         });
       }
 
-      if (!req.tenantDatabaseUrl) {
+      if (!req.clubeDatabaseUrl) {
         return res.status(500).json({
           success: false,
-          error: 'Tenant não identificado'
+          error: 'Clube não identificado'
         });
       }
 
       const userId = req.user.id;
-      const tenantDatabaseUrl = req.tenantDatabaseUrl;
+      const clubeDatabaseUrl = req.clubeDatabaseUrl;
 
       // Verificar todas as permissões
       for (const permission of permissions) {
-        const hasPermission = await userHasPermission(userId, permission, tenantDatabaseUrl);
+        const hasPermission = await userHasPermission(userId, permission, clubeDatabaseUrl);
         if (!hasPermission) {
           return res.status(403).json({
             success: false,
@@ -293,15 +293,15 @@ function checkAllPermissions(permissions) {
  * Função auxiliar para buscar as permissões de um usuário
  * Útil para retornar as permissões no login ou em endpoints específicos
  */
-async function getUserPermissionsForResponse(userId, tenantDatabaseUrl) {
-  const cacheKey = `${userId}-${tenantDatabaseUrl}`;
+async function getUserPermissionsForResponse(userId, clubeDatabaseUrl) {
+  const cacheKey = `${userId}-${clubeDatabaseUrl}`;
   const cached = permissionCache.get(cacheKey);
 
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     return cached.data;
   }
 
-  const userPermissions = await getUserPermissions(userId, tenantDatabaseUrl);
+  const userPermissions = await getUserPermissions(userId, clubeDatabaseUrl);
 
   permissionCache.set(cacheKey, {
     data: userPermissions,

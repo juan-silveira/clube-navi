@@ -1,4 +1,4 @@
-# Sistema PIX + cBRL - Coinage
+# Sistema PIX + cBRL - Clube Digital
 
 ## Visão Geral
 

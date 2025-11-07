@@ -125,7 +125,7 @@ const useTransactions = (initialParams = {}) => {
     // Mapeamento de currency para nome correto
     const getCurrencyName = (currency) => {
       const currencyMap = {
-        'cBRL': 'Coinage Real Brasil',
+        'cBRL': 'Clube Digital Real Brasil',
         'PCN': 'Pratique Coin',
         'STAKE': 'Stake Token',
         'AZE': 'Azore',
@@ -133,7 +133,7 @@ const useTransactions = (initialParams = {}) => {
         'USDT': 'Tether',
         'USDC': 'USD Coin',
         'BTC': 'Bitcoin',
-        'CNT': 'Coinage Trade'
+        'CNT': 'Clube Digital Trade'
       };
       return currencyMap[currency] || currency; // Se não encontrar, usa o próprio símbolo
     };

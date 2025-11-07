@@ -116,7 +116,7 @@ class PasswordResetService {
           userName: user.name || user.email.split('@')[0],
           userEmail: user.email,
           resetUrl,
-          companyName: companyData?.name || 'Coinage',
+          companyName: companyData?.name || 'Clube Digital',
           requestDate: new Date().toLocaleString('pt-BR'),
           requestIp: ipAddress || 'N/A',
           userAgent: userAgent || 'N/A',

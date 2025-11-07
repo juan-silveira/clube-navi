@@ -236,7 +236,7 @@ class DepositService {
         // Em caso de erro na criação do PIX, criar dados mock como fallback
         const pixPaymentId = `pix_${transaction.id}_${Date.now()}`;
         const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
-        const qrCodeMock = `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Coinage Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+        const qrCodeMock = `00020126580014br.gov.bcb.pix2536pix-qr.mercadopago.com/instore/o/v2/${pixPaymentId}5204000053039865802BR5925Clube Digital Tecnologia6009Sao Paulo62070503***6304${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
         // IMPORTANTE: Atualizar transaction com dados do PIX no metadata (não há campo pix_transaction_id no schema)
         await this.prisma.transaction.update({

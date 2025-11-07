@@ -274,7 +274,7 @@ const PixKeyPage = () => {
               Importante
             </h3>
             <p className="text-sm text-yellow-700 dark:text-yellow-300">
-              A chave PIX deve pertencer ao mesmo CPF cadastrado em sua conta Coinage. 
+              A chave PIX deve pertencer ao mesmo CPF cadastrado em sua conta Clube Digital. 
               Isso é necessário para garantir a segurança das suas transações.
             </p>
           </div>

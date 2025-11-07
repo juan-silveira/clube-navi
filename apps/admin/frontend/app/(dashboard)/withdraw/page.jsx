@@ -20,7 +20,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 
 const WithdrawPage = () => {
   const { t } = useTranslation('withdraw');
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
 
   const router = useRouter();
   const { user } = useAuthStore();

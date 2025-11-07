@@ -73,7 +73,7 @@
               "pm.test('API is running', function () {",
               "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData.status).to.eql('running');",
-              "    pm.expect(jsonData.message).to.contain('Coinage API');",
+              "    pm.expect(jsonData.message).to.contain('Clube Digital API');",
               "});",
               "",
               "pm.test('Has endpoints information', function () {",

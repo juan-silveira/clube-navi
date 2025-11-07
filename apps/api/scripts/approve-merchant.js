@@ -5,14 +5,14 @@
  * Uso: node scripts/approve-merchant.js <email_ou_id>
  */
 
-const { getTenantClient } = require('../src/database/tenant-client');
+const { getTenantClient } = require('../src/database/club-client');
 
-async function approveMerchant(emailOrId, tenantSlug = 'clube-navi') {
-  console.log(`\n🔍 Buscando merchant: ${emailOrId} no tenant: ${tenantSlug}\n`);
+async function approveMerchant(emailOrId, clubSlug = 'clube-navi') {
+  console.log(`\n🔍 Buscando merchant: ${emailOrId} no club: ${clubSlug}\n`);
 
   const prisma = await getTenantClient({
-    slug: tenantSlug,
-    databaseName: `clube_digital_${tenantSlug.replace(/-/g, '_')}`
+    slug: clubSlug,
+    databaseName: `clube_digital_${clubSlug.replace(/-/g, '_')}`
   });
 
   try {
@@ -77,11 +77,11 @@ async function approveMerchant(emailOrId, tenantSlug = 'clube-navi') {
 // Parse argumentos
 const args = process.argv.slice(2);
 if (args.length === 0) {
-  console.error('❌ Uso: node scripts/approve-merchant.js <email_ou_id> [tenant_slug]');
+  console.error('❌ Uso: node scripts/approve-merchant.js <email_ou_id> [club_slug]');
   process.exit(1);
 }
 
 const emailOrId = args[0];
-const tenantSlug = args[1] || 'clube-navi';
+const clubSlug = args[1] || 'clube-navi';
 
-approveMerchant(emailOrId, tenantSlug);
+approveMerchant(emailOrId, clubSlug);

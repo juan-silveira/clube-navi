@@ -13,7 +13,7 @@ class GmailSMTPProvider {
   constructor() {
     this.user = process.env.GMAIL_USER;
     this.pass = process.env.GMAIL_PASS;
-    this.fromName = process.env.GMAIL_FROM_NAME || 'Coinage';
+    this.fromName = process.env.GMAIL_FROM_NAME || 'Clube Digital';
     
     this.isConfigured = !!(
       process.env.GMAIL_USER && 

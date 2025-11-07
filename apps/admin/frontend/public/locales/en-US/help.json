@@ -38,9 +38,9 @@
             "answer": "To create an account, click 'Sign Up' at the top of the page, fill in your personal information (name, email, phone, and CPF), create a strong password, and follow the email verification instructions. After confirming your email, you can start using the platform.",
             "question": "How to create an account?"
           },
-          "whatIsCoinage": {
-            "answer": "Coinage is a digital asset platform that allows you to buy, sell, and manage your token investments securely and intuitively. Our platform offers features like instant PIX deposits, token exchange, and secure digital wallet.",
-            "question": "What is Coinage?",
+          "whatIsClube Digital": {
+            "answer": "Clube Digital is a digital asset platform that allows you to buy, sell, and manage your token investments securely and intuitively. Our platform offers features like instant PIX deposits, token exchange, and secure digital wallet.",
+            "question": "What is Clube Digital?",
             "links": {
               "tutorials": "View tutorials"
             }
@@ -149,14 +149,14 @@
         "questions": {
           "howToTransfer": {
             "answer": "Access 'Transfer' in the menu, enter the recipient's email or CPF, enter the amount and token you want to transfer, review the details, and confirm the operation. Internal transfers are instant and fee-free.",
-            "question": "How to transfer to another Coinage user?",
+            "question": "How to transfer to another Clube Digital user?",
             "links": {
               "tutorial": "View tutorial",
               "makeTransfer": "Make transfer"
             }
           },
           "transferLimit": {
-            "answer": "There is no limit for transfers between Coinage users. You can transfer any amount available in your wallet, as long as you have sufficient balance.",
+            "answer": "There is no limit for transfers between Clube Digital users. You can transfer any amount available in your wallet, as long as you have sufficient balance.",
             "question": "Is there a limit for transfers?"
           },
           "cancelTransfer": {

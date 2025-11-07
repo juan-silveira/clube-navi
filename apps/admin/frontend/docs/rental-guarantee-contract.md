@@ -4,7 +4,7 @@
 
 Contrato inteligente para gerenciar múltiplos contratos de garantia de locação de imóveis (caução). Este contrato permite:
 - Criação centralizada de múltiplos contratos de garantia
-- **Tenant (inquilino) é definido na criação do contrato**
+- **Clube (inquilino) é definido na criação do contrato**
 - Sistema de stake com valor EXATO (não aceita valores diferentes)
 - Aprovação dupla (proprietário + inquilino) para liberação de fundos
 - Multa por unstake antecipado
@@ -26,7 +26,7 @@ Contrato inteligente para gerenciar múltiplos contratos de garantia de locaçã
 struct RentalContract {
     uint256 id;                  // ID único do contrato
     address landlord;            // Proprietário do imóvel
-    address tenant;              // Inquilino (quem fez o stake)
+    address clube;              // Inquilino (quem fez o stake)
     uint256 exactStakeAmount;    // Valor EXATO requerido para stake
     uint256 endDate;             // Data de encerramento (Unix timestamp)
     uint256 penaltyAmount;       // Valor de multa para unstake antecipado
@@ -44,7 +44,7 @@ struct RentalContract {
 **Explicação dos campos:**
 - `id`: Gerado automaticamente, incrementa a cada novo contrato
 - `landlord`: Endereço que criou o contrato (proprietário do imóvel)
-- **`tenant`: Endereço do inquilino definido NA CRIAÇÃO do contrato. Apenas este endereço pode fazer stake**
+- **`clube`: Endereço do inquilino definido NA CRIAÇÃO do contrato. Apenas este endereço pode fazer stake**
 - `exactStakeAmount`: Valor exato que deve ser depositado. Se tentar depositar valor diferente, a transação falha
 - `endDate`: Timestamp Unix. Se unstake ocorrer antes desta data, aplica multa
 - `penaltyAmount`: Valor deduzido do stake se unstake ocorrer antes do `endDate`
@@ -64,19 +64,19 @@ struct RentalContract {
 event RentalContractCreated(
     uint256 indexed contractId,
     address indexed landlord,
-    address indexed tenant,
+    address indexed clube,
     uint256 exactStakeAmount,
     uint256 endDate,
     uint256 penaltyAmount
 )
 ```
-Emitido quando um novo contrato de garantia é criado. Inclui landlord e tenant definidos.
+Emitido quando um novo contrato de garantia é criado. Inclui landlord e clube definidos.
 
 ### StakeDeposited
 ```solidity
 event StakeDeposited(
     uint256 indexed contractId,
-    address indexed tenant,
+    address indexed clube,
     uint256 amount
 )
 ```
@@ -166,7 +166,7 @@ event RewardClaimed(
     uint256 amount
 )
 ```
-Emitido quando um tenant resgata suas recompensas (sem fazer unstake).
+Emitido quando um clube resgata suas recompensas (sem fazer unstake).
 
 ### RewardTokensWithdrawn
 ```solidity
@@ -203,18 +203,18 @@ Emitido quando o timestamp de início do ciclo é atualizado.
 ```solidity
 function createRentalContract(
     address _landlord,
-    address _tenant,
+    address _clube,
     uint256 _exactStakeAmount,
     uint256 _endDate,
     uint256 _penaltyAmount
 ) external onlyRole(DEFAULT_ADMIN_ROLE) returns (uint256)
 ```
 
-**Propósito:** Cria um novo contrato de garantia de locação com landlord e tenant pré-definidos.
+**Propósito:** Cria um novo contrato de garantia de locação com landlord e clube pré-definidos.
 
 **Parâmetros:**
 - `_landlord`: Endereço do proprietário do imóvel
-- **`_tenant`: Endereço do inquilino que fará o stake (definido na criação)**
+- **`_clube`: Endereço do inquilino que fará o stake (definido na criação)**
 - `_exactStakeAmount`: Valor exato que o inquilino deverá depositar (em wei)
 - `_endDate`: Data de término do contrato (Unix timestamp)
 - `_penaltyAmount`: Valor de multa se unstake ocorrer antes do `_endDate`
@@ -223,8 +223,8 @@ function createRentalContract(
 
 **Validações:**
 - `_landlord` não pode ser `address(0)`
-- `_tenant` não pode ser `address(0)`
-- **`_tenant` não pode ser igual a `_landlord`**
+- `_clube` não pode ser `address(0)`
+- **`_clube` não pode ser igual a `_landlord`**
 - `_exactStakeAmount` deve ser > 0
 - `_endDate` deve ser futura
 - `_penaltyAmount` não pode exceder `_exactStakeAmount`
@@ -234,7 +234,7 @@ function createRentalContract(
 // Exemplo: Criar contrato de R$ 5.000 de caução, vencimento em 1 ano, multa de R$ 1.000
 const contractId = await contract.createRentalContract(
     landlordAddress,
-    tenantAddress,  // Tenant definido na criação
+    tenantAddress,  // Clube definido na criação
     ethers.parseUnits("5000", 18),  // 5000 tokens
     Math.floor(Date.now() / 1000) + (365 * 24 * 60 * 60),  // +1 ano
     ethers.parseUnits("1000", 18)   // 1000 tokens de multa
@@ -279,26 +279,26 @@ function stake(
 **Propósito:** Deposita a garantia no contrato. Aceita APENAS o valor exato especificado.
 
 **Parâmetros:**
-- `_caller`: Endereço que está chamando (deve ser o tenant definido no contrato)
+- `_caller`: Endereço que está chamando (deve ser o clube definido no contrato)
 - `_contractId`: ID do contrato
 
 **Validações:**
 - Contrato deve estar ativo
 - Contrato não pode já ter stake
 - Contrato não pode estar expirado
-- **CRÍTICO: `_caller` deve ser EXATAMENTE o tenant definido na criação do contrato**
+- **CRÍTICO: `_caller` deve ser EXATAMENTE o clube definido na criação do contrato**
 - **CRÍTICO:** O valor transferido será EXATAMENTE `exactStakeAmount`. Qualquer valor diferente fará a transação falhar
 
 **Fluxo:**
 1. Valida todas as condições
-2. Transfere `exactStakeAmount` do tenant para o contrato (via `transferFromGasless`)
-3. Registra tenant no contrato
+2. Transfere `exactStakeAmount` do clube para o contrato (via `transferFromGasless`)
+3. Registra clube no contrato
 4. Marca `hasStake = true`
 5. Emite evento `StakeDeposited`
 
 **Uso esperado:**
 ```javascript
-// Tenant precisa ter aprovado o contrato para transferir tokens antes
+// Clube precisa ter aprovado o contrato para transferir tokens antes
 await token.approve(contractAddress, exactStakeAmount);
 await contract.stake(tenantAddress, contractId);
 ```
@@ -340,12 +340,12 @@ function approveTenantUnstake(
 
 **Parâmetros:**
 - `_contractId`: ID do contrato
-- `_caller`: Endereço que está aprovando (deve ser o tenant)
+- `_caller`: Endereço que está aprovando (deve ser o clube)
 
 **Validações:**
 - Contrato deve estar ativo
 - Contrato deve ter stake
-- Caller deve ser o tenant
+- Caller deve ser o clube
 
 ---
 
@@ -355,7 +355,7 @@ function revokeLandlordApproval(uint256 _contractId, address _caller) external
 function revokeTenantApproval(uint256 _contractId, address _caller) external
 ```
 
-**Propósito:** Permite que landlord ou tenant revoguem suas aprovações antes do unstake ser executado.
+**Propósito:** Permite que landlord ou clube revoguem suas aprovações antes do unstake ser executado.
 
 **Caso de uso:** Se houver mudança de acordo, qualquer parte pode revogar sua aprovação.
 
@@ -375,7 +375,7 @@ function unstake(
 
 **Parâmetros:**
 - `_contractId`: ID do contrato
-- `_recipient`: Endereço que receberá os tokens (normalmente o tenant, mas pode ser outro)
+- `_recipient`: Endereço que receberá os tokens (normalmente o clube, mas pode ser outro)
 
 **Validações:**
 - Contrato deve estar ativo
@@ -413,7 +413,7 @@ SENÃO:
 // 1. Landlord aprova
 await contract.approveLandlordUnstake(contractId, landlordAddress);
 
-// 2. Tenant aprova
+// 2. Clube aprova
 await contract.approveTenantUnstake(contractId, tenantAddress);
 
 // 3. Admin verifica se pode executar
@@ -435,7 +435,7 @@ function unstakeAdmin(
 ) external onlyRole(DEFAULT_ADMIN_ROLE) nonReentrant
 ```
 
-**Propósito:** Executa unstake FORÇADO pelo admin SEM necessidade de aprovações de landlord ou tenant. **Resolve deadlocks e disputas.**
+**Propósito:** Executa unstake FORÇADO pelo admin SEM necessidade de aprovações de landlord ou clube. **Resolve deadlocks e disputas.**
 
 **Parâmetros:**
 - `_contractId`: ID do contrato
@@ -445,12 +445,12 @@ function unstakeAdmin(
 - Contrato deve estar ativo
 - Contrato deve ter stake
 - Recipient não pode ser `address(0)`
-- **NÃO requer aprovações de landlord ou tenant**
+- **NÃO requer aprovações de landlord ou clube**
 
 **Diferenças vs unstake:**
 | Aspecto | unstake | unstakeAdmin |
 |---------|---------|--------------|
-| Aprovações | Requer ambas (landlord + tenant) | Não requer |
+| Aprovações | Requer ambas (landlord + clube) | Não requer |
 | Uso | Fluxo normal | Deadlocks, disputas |
 | Multa | Aplica se antes do prazo | Aplica se antes do prazo |
 | Recompensas | Incluídas | Incluídas |
@@ -464,7 +464,7 @@ function unstakeAdmin(
 
 **Fluxo:**
 1. Admin decide que precisa forçar o unstake
-2. Admin escolhe recipient (pode ser tenant, landlord, ou outro endereço)
+2. Admin escolhe recipient (pode ser clube, landlord, ou outro endereço)
 3. Sistema aplica lógica normal de multa se antes do prazo
 4. Sistema inclui recompensas pendentes
 5. Transfere para recipient escolhido
@@ -473,9 +473,9 @@ function unstakeAdmin(
 
 **Uso esperado:**
 ```javascript
-// Cenário: Tenant quer resgatar mas landlord não aprova há 60 dias
+// Cenário: Clube quer resgatar mas landlord não aprova há 60 dias
 
-// Admin força unstake enviando para o tenant
+// Admin força unstake enviando para o clube
 await contract.unstakeAdmin(contractId, tenantAddress);
 
 // OU Admin pode enviar para outro endereço se houver decisão judicial
@@ -577,7 +577,7 @@ function claimReward(uint256 _contractId)
     external onlyRole(DEFAULT_ADMIN_ROLE) nonReentrant
 ```
 
-**Propósito:** Permite que tenant resgate APENAS as recompensas acumuladas, SEM fazer unstake.
+**Propósito:** Permite que clube resgate APENAS as recompensas acumuladas, SEM fazer unstake.
 
 **Parâmetros:**
 - `_contractId`: ID do contrato
@@ -589,7 +589,7 @@ function claimReward(uint256 _contractId)
 
 **Uso:**
 ```javascript
-// Tenant quer sacar apenas as recompensas, mantendo o stake ativo
+// Clube quer sacar apenas as recompensas, mantendo o stake ativo
 await contract.claimReward(contractId);
 ```
 
@@ -692,7 +692,7 @@ function canExecuteUnstake(uint256 _contractId) external view returns (bool)
 - Contrato está ativo
 - Contrato tem stake
 - Landlord aprovou
-- Tenant aprovou
+- Clube aprovou
 
 **Uso:** Admin deve chamar esta função ANTES de tentar `unstake()`.
 
@@ -706,7 +706,7 @@ function getApprovalStatus(uint256 _contractId)
 
 **Propósito:** Retorna o status das aprovações de um contrato.
 
-**Exemplo de retorno:** `(true, false)` - landlord aprovou, tenant ainda não
+**Exemplo de retorno:** `(true, false)` - landlord aprovou, clube ainda não
 
 ---
 
@@ -722,13 +722,13 @@ function getContractsByLandlord(address _landlord)
 
 ---
 
-#### getContractsByTenant
+#### getContractsByClube
 ```solidity
-function getContractsByTenant(address _tenant)
+function getContractsByClube(address _clube)
     external view returns (uint256[] memory)
 ```
 
-**Propósito:** Retorna IDs de todos os contratos ativos onde um endereço é tenant.
+**Propósito:** Retorna IDs de todos os contratos ativos onde um endereço é clube.
 
 **Uso:** UI pode usar para mostrar "Meus Contratos como Inquilino".
 
@@ -869,7 +869,7 @@ function getRewardsSummary() external view returns (
 2. Landlord → Chama backend que chama approveLandlordUnstake(1, landlord)
    → landlordApproval = true
 
-3. Tenant → Chama backend que chama approveTenantUnstake(1, tenant1)
+3. Clube → Chama backend que chama approveTenantUnstake(1, tenant1)
    → tenantApproval = true
 
 4. Admin → Verifica canExecuteUnstake(1)
@@ -886,7 +886,7 @@ function getRewardsSummary() external view returns (
 1. block.timestamp < endDate
 
 2. Landlord → approveLandlordUnstake(1, landlord)
-3. Tenant → approveTenantUnstake(1, tenant1)
+3. Clube → approveTenantUnstake(1, tenant1)
 
 4. Admin → calculateCurrentPenalty(1)
    → Retorna (1000, true)
@@ -903,7 +903,7 @@ function getRewardsSummary() external view returns (
 1. Landlord → approveLandlordUnstake(1, landlord)
    → landlordApproval = true
 
-2. Tenant → approveTenantUnstake(1, tenant1)
+2. Clube → approveTenantUnstake(1, tenant1)
    → tenantApproval = true
 
 3. Landlord muda de ideia → revokeLandlordApproval(1, landlord)
@@ -916,10 +916,10 @@ function getRewardsSummary() external view returns (
 ### Fluxo 5: Resolução de Deadlock com unstakeAdmin
 ```
 1. Situação: Contrato 1
-   - Tenant aprovou: ✓
+   - Clube aprovou: ✓
    - Landlord aprovou: ✗ (há 90 dias sem responder)
    - Prazo de término já passou
-   - Tenant precisa dos fundos urgentemente
+   - Clube precisa dos fundos urgentemente
 
 2. Admin → canExecuteUnstake(1)
    → Retorna false (falta aprovação do landlord)
@@ -960,7 +960,7 @@ function getRewardsSummary() external view returns (
    → Cada contrato tem pendingReward atualizado
    → cycleStartTime atualizado para agora
 
-4. Tenant do Contrato 1 → claimReward(1)
+4. Clube do Contrato 1 → claimReward(1)
    → Recebe X tokens
    → pendingReward zerado
    → Stake continua ativo e rendendo
@@ -980,7 +980,7 @@ function getRewardsSummary() external view returns (
    - Data de término já passou
 
 2. Landlord → approveLandlordUnstake(1, landlord)
-3. Tenant → approveTenantUnstake(1, tenant1)
+3. Clube → approveTenantUnstake(1, tenant1)
 
 4. Admin → unstake(1, tenant1)
    → Transfere 5000 tokens (stake) + 150 tokens (recompensas) = 5150 tokens para tenant1
@@ -1058,7 +1058,7 @@ function getRewardsSummary() external view returns (
 
 3. **~~Recipient no unstake~~**: ✅ Flexibilidade total! Admin sempre escolhe o recipient.
 
-4. **~~Whitelist~~**: ✅ Removida! Tenant agora é definido na criação do contrato.
+4. **~~Whitelist~~**: ✅ Removida! Clube agora é definido na criação do contrato.
 
 5. **~~Histórico~~**: ✅ Não mantido on-chain. Sistema backend registra. Contratos inativos retornam estado inativo.
 
@@ -1066,7 +1066,7 @@ function getRewardsSummary() external view returns (
 
 7. **~~Depósitos parciais~~**: ✅ Não permitido. Apenas valor exato total.
 
-8. **~~Multi-tenant~~**: ✅ Não permitido. Um contrato = um tenant.
+8. **~~Multi-clube~~**: ✅ Não permitido. Um contrato = um clube.
 
 ---
 
@@ -1079,20 +1079,20 @@ function getRewardsSummary() external view returns (
 - [ ] Tentar stake duas vezes no mesmo contrato (deve falhar)
 - [ ] Tentar stake em contrato expirado (deve falhar)
 - [ ] Aprovar como landlord
-- [ ] Aprovar como tenant
+- [ ] Aprovar como clube
 - [ ] Tentar aprovar como terceiro (deve falhar)
 - [ ] Revogar aprovação
 - [ ] Executar unstake sem ambas aprovações (deve falhar)
 - [ ] Executar unstake com ambas aprovações (antes do prazo - com multa)
 - [ ] Executar unstake com ambas aprovações (após prazo - sem multa)
 - [ ] Executar unstakeAdmin SEM aprovações (deadlock scenario)
-- [ ] Executar unstakeAdmin com recipient diferente do tenant
+- [ ] Executar unstakeAdmin com recipient diferente do clube
 - [ ] Verificar que unstakeAdmin aplica multa corretamente
 - [ ] Verificar que unstakeAdmin inclui recompensas
 - [ ] Cancelar contrato sem stake
 - [ ] Tentar cancelar contrato com stake (deve falhar)
 - [ ] Estender contrato
-- [ ] Tentar stake com endereço diferente do tenant definido (deve falhar)
+- [ ] Tentar stake com endereço diferente do clube definido (deve falhar)
 - [ ] Depositar recompensas no cofre
 - [ ] Distribuir recompensas globalmente
 - [ ] Verificar recompensas acumuladas corretamente por contrato
@@ -1118,7 +1118,7 @@ function getRewardsSummary() external view returns (
 POST /api/rental/create
 Body: {
     landlordAddress,
-    tenantAddress,  // Tenant definido na criação
+    tenantAddress,  // Clube definido na criação
     exactStakeAmount,
     endDate,
     penaltyAmount
@@ -1132,8 +1132,8 @@ Body: { tenantAddress }
 POST /api/rental/:id/approve/landlord
 Body: { callerAddress }
 
-// Aprovar unstake (tenant)
-POST /api/rental/:id/approve/tenant
+// Aprovar unstake (clube)
+POST /api/rental/:id/approve/clube
 Body: { callerAddress }
 
 // Executar unstake (requer aprovações)
@@ -1168,7 +1168,7 @@ GET /api/rental/:id - Detalhes do contrato
 GET /api/rental/:id/can-unstake - Verifica se pode executar
 GET /api/rental/:id/penalty - Calcula penalidade atual
 GET /api/rental/landlord/:address - Contratos do proprietário
-GET /api/rental/tenant/:address - Contratos do inquilino
+GET /api/rental/clube/:address - Contratos do inquilino
 
 // Consultas de recompensas
 GET /api/rental/:id/pending-reward - Recompensa pendente do contrato
@@ -1183,7 +1183,7 @@ GET /api/rental/rewards/reserve-balance - Saldo do cofre (admin only)
 
 **Tela 1: Criar Contrato (Admin)**
 - Input: Endereço do proprietário (landlord)
-- Input: Endereço do inquilino (tenant)
+- Input: Endereço do inquilino (clube)
 - Input: Valor da caução
 - Input: Data de término (date picker)
 - Input: Valor da multa
@@ -1193,12 +1193,12 @@ GET /api/rental/rewards/reserve-balance - Saldo do cofre (admin only)
 - Tabela com colunas:
   - ID
   - Landlord
-  - Tenant
+  - Clube
   - Valor Stake
   - Recompensas Pendentes
   - Data Término
   - Status (Com stake / Sem stake)
-  - Aprovações (Landlord: ✓/✗, Tenant: ✓/✗)
+  - Aprovações (Landlord: ✓/✗, Clube: ✓/✗)
   - Ações
 
 **Tela 3: Detalhes do Contrato**
@@ -1206,9 +1206,9 @@ GET /api/rental/rewards/reserve-balance - Saldo do cofre (admin only)
 - Card de Recompensas:
   - Recompensas pendentes: X tokens
   - Simulação: "Se distribuir 5.40% agora, você receberia Y tokens"
-  - Botão "Resgatar Recompensas" (se tenant e há recompensa pendente)
-- Botão "Depositar Caução" (se tenant e sem stake)
-- Botão "Aprovar Liberação" (se landlord ou tenant)
+  - Botão "Resgatar Recompensas" (se clube e há recompensa pendente)
+- Botão "Depositar Caução" (se clube e sem stake)
+- Botão "Aprovar Liberação" (se landlord ou clube)
 - Botão "Revogar Aprovação" (se já aprovou)
 - Botão "Executar Liberação" (se admin e ambos aprovaram)
 - **Botão "Forçar Liberação (Admin)" (se admin, em vermelho, com confirmação dupla)**
@@ -1237,7 +1237,7 @@ GET /api/rental/rewards/reserve-balance - Saldo do cofre (admin only)
 - Botão "Retirar do Cofre"
 - Histórico de Distribuições
 
-**Tela 5: Minha Carteira (Tenant)**
+**Tela 5: Minha Carteira (Clube)**
 - Meus Contratos como Inquilino:
   - Lista de contratos ativos
   - Para cada contrato:
@@ -1272,5 +1272,5 @@ GET /api/rental/rewards/reserve-balance - Saldo do cofre (admin only)
 - ✅ Recompensas proporcionais ao tempo de stake
 - ✅ Cofre centralizado de recompensas
 - ✅ Funções de consulta e simulação
-- ✅ Tenant definido na criação do contrato (removido sistema de whitelist)
+- ✅ Clube definido na criação do contrato (removido sistema de whitelist)
 - ✅ Código mais simples e gas-efficient

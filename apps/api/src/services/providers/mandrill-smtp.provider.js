@@ -8,7 +8,7 @@ class MandrillSMTPProvider {
   constructor() {
     this.apiKey = process.env.MANDRILL_API_KEY;
     this.fromEmail = process.env.MANDRILL_FROM_EMAIL || 'noreply@coinage.trade';
-    this.fromName = process.env.MANDRILL_FROM_NAME || 'Coinage';
+    this.fromName = process.env.MANDRILL_FROM_NAME || 'Clube Digital';
     
     this.isConfigured = !!(
       process.env.MANDRILL_API_KEY && 

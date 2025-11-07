@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Tarifas e Prazos - Coinage",
+  title: "Tarifas e Prazos - Clube Digital",
   description: "Consulte as tarifas e prazos dos nossos serviços bancários",
 };
 

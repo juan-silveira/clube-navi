@@ -15,7 +15,7 @@ class ExchangeSystemStarter {
     }
 
     async start() {
-        console.log('🚀 Starting Coinage Exchange System...');
+        console.log('🚀 Starting Clube Digital Exchange System...');
         console.log('=======================================');
 
         try {
@@ -33,14 +33,14 @@ class ExchangeSystemStarter {
             // 4. Configurar handlers de sistema
             this.setupSystemHandlers();
 
-            console.log('✅ Coinage Exchange System started successfully');
+            console.log('✅ Clube Digital Exchange System started successfully');
             console.log('=======================================');
 
             // Manter processo vivo
             this.keepAlive();
 
         } catch (error) {
-            console.error('❌ Failed to start Coinage Exchange System:', error);
+            console.error('❌ Failed to start Clube Digital Exchange System:', error);
             process.exit(1);
         }
     }

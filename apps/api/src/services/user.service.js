@@ -19,7 +19,7 @@ class UserService {
   /**
    * Cria um novo usuário
    * @param {Object} userData - Dados do usuário
-   * @param {string} defaultCompanyId - ID da empresa padrão (opcional, usa Coinage se não fornecido)
+   * @param {string} defaultCompanyId - ID da empresa padrão (opcional, usa Clube Digital se não fornecido)
    * @returns {Promise<Object>} Usuário criado
    */
   async createUser(userData, defaultCompanyId = null) {

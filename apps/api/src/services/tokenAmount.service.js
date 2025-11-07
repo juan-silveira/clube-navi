@@ -182,7 +182,7 @@ class TokenAmountService {
       const networkLabel = network === 'mainnet' ? 'Mainnet' : 'Testnet';
       const notification = await this.notificationService.createNotification({
         userId: userId,
-        sender: 'Coinage',
+        sender: 'Clube Digital',
         title: `🪙 Novo token detectado: ${newToken.token} (${networkLabel})`,
         message: `Um novo token **${newToken.token}** foi detectado em sua carteira na ${networkLabel} com saldo de **${newToken.amount}**. Bem-vindo ao ecossistema!`
       });

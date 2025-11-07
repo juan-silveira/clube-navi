@@ -15,12 +15,19 @@ const useCurrentCompany = () => {
       return;
     }
 
+    // Super admins não têm empresa
+    if (user?.email?.includes('@clubedigital.com')) {
+      setCurrentCompany(null);
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await whitelabelService.getCurrentCompany();
-      
+
       if (response.success) {
         setCurrentCompany(response.data.currentCompany);
       } else {

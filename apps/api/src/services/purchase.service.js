@@ -7,18 +7,18 @@
 class PurchaseService {
   /**
    * Calcula distribuição de cashback
-   * @param {Object} prisma - Prisma client do tenant
-   * @param {Object} tenantConfig - Configuração do tenant
+   * @param {Object} prisma - Prisma client do clube
+   * @param {Object} clubeConfig - Configuração do clube
    * @param {Number} totalAmount - Valor total da compra
    * @param {Number} cashbackPercentage - Percentual de cashback do produto
    * @returns {Object} Distribuição de cashback
    */
-  async calculateCashbackDistribution(prisma, tenantConfig, totalAmount, cashbackPercentage) {
+  async calculateCashbackDistribution(prisma, clubeConfig, totalAmount, cashbackPercentage) {
     // Calcular cashback total
     const totalCashback = totalAmount * (cashbackPercentage / 100);
 
-    // Obter configuração de cashback (tenant-specific ou default)
-    const config = tenantConfig?.cashbackConfig || {
+    // Obter configuração de cashback (clube-specific ou default)
+    const config = clubeConfig?.cashbackConfig || {
       consumerPercent: 50,           // 50% do cashback vai para o consumidor
       clubPercent: 25,                // 25% fica com o clube/plataforma
       consumerReferrerPercent: 15,   // 15% para quem indicou o consumidor
@@ -36,12 +36,12 @@ class PurchaseService {
 
   /**
    * Criar compra
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {Object} data - Dados da compra
    * @returns {Object} Compra criada
    */
   async createPurchase(prisma, data) {
-    const { consumerId, productId, quantity = 1, tenantConfig } = data;
+    const { consumerId, productId, quantity = 1, clubeConfig } = data;
 
     // Buscar produto e validar
     const product = await prisma.product.findUnique({
@@ -68,7 +68,7 @@ class PurchaseService {
     // Calcular distribuição de cashback
     const distribution = await this.calculateCashbackDistribution(
       prisma,
-      tenantConfig,
+      clubeConfig,
       totalAmount,
       parseFloat(product.cashbackPercentage)
     );
@@ -119,7 +119,7 @@ class PurchaseService {
 
   /**
    * Confirmar compra (atualizar status para completed)
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} purchaseId - ID da compra
    * @param {String} userId - ID do usuário
    * @returns {Object} Compra atualizada
@@ -168,7 +168,7 @@ class PurchaseService {
 
   /**
    * Cancelar compra
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} purchaseId - ID da compra
    * @param {String} userId - ID do usuário
    * @returns {Object} Compra cancelada
@@ -233,7 +233,7 @@ class PurchaseService {
 
   /**
    * Buscar compra por ID
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} purchaseId - ID da compra
    * @param {String} userId - ID do usuário
    * @returns {Object} Compra
@@ -278,7 +278,7 @@ class PurchaseService {
 
   /**
    * Listar compras do usuário
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} userId - ID do usuário
    * @param {Object} filters - Filtros (status, page, limit)
    * @returns {Object} Lista de compras
@@ -349,7 +349,7 @@ class PurchaseService {
 
   /**
    * Obter estatísticas de compras
-   * @param {Object} prisma - Prisma client do tenant
+   * @param {Object} prisma - Prisma client do clube
    * @param {String} userId - ID do usuário
    * @returns {Object} Estatísticas
    */

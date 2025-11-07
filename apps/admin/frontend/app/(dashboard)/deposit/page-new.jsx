@@ -14,7 +14,7 @@ import useCurrencyMask from "@/hooks/useCurrencyMask";
 import api from "@/services/api";
 
 const DepositPage = () => {
-  useDocumentTitle('Depósito', 'Coinage', true);
+  useDocumentTitle('Depósito', 'Clube Digital', true);
 
   const { user } = useAuthStore();
   const { showSuccess, showError } = useAlertContext();
@@ -313,7 +313,7 @@ const DepositPage = () => {
           Depósito
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Adicione fundos à sua conta Coinage em Reais
+          Adicione fundos à sua conta Clube Digital em Reais
         </p>
       </div>
 

@@ -18,8 +18,18 @@ const requireApiAdmin = async (req, res, next) => {
     console.log('🔍 [ADMIN] Verificando permissões:', {
       userId: req.user.id,
       isApiAdmin: req.user.isApiAdmin,
-      roles: req.user.userCompanies?.map(uc => uc.role)
+      isSuperAdmin: req.user.isSuperAdmin,
+      type: req.user.type,
+      roles: req.user.roles,
+      userCompanies: req.user.userCompanies?.map(uc => uc.role)
     });
+
+    // Super Admins sempre têm acesso
+    if (req.user.isSuperAdmin || req.user.type === 'super-admin') {
+      console.log('🔍 [ADMIN] Super Admin detectado - acesso permitido');
+      next();
+      return;
+    }
 
     if (!req.user.isApiAdmin) {
       console.log('🔍 [ADMIN] Acesso negado - não é API Admin');
@@ -85,6 +95,12 @@ const requireAnyAdmin = async (req, res, next) => {
         message: 'Usuário não autenticado',
         error: 'NOT_AUTHENTICATED'
       });
+    }
+
+    // Super Admins sempre têm acesso
+    if (req.user.isSuperAdmin || req.user.type === 'super-admin') {
+      next();
+      return;
     }
 
     if (!req.user.isApiAdmin) {
@@ -251,14 +267,18 @@ const requireSameCompany = async (req, res, next) => {
 const addUserInfo = (req, res, next) => {
   if (req.user) {
     // Adicionar headers com informações do usuário
+    const isCompanyAdmin = typeof req.user.isCompanyAdminUser === 'function'
+      ? req.user.isCompanyAdminUser()
+      : false;
+
     res.set({
       'X-User-ID': req.user.id,
       'X-User-Name': req.user.name,
       'X-User-Email': req.user.email,
-      'X-Company-ID': req.user.companyId,
-      'X-User-Roles': req.user.roles.join(','),
+      'X-Company-ID': req.user.companyId || '',
+      'X-User-Roles': (req.user.roles || []).join(','),
       'X-User-Is-Api-Admin': req.user.isApiAdmin,
-      'X-User-Is-Company-Admin': req.user.isCompanyAdminUser()
+      'X-User-Is-Company-Admin': isCompanyAdmin
     });
   }
   next();

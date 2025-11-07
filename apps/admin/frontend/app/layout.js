@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import "./scss/app.scss";
 
 export const metadata = {
-  title: 'Coinage - Sistema de Gestão',
+  title: 'Clube Digital - Sistema de Gestão',
   description: 'Sistema de gestão de tokens e transações blockchain.',
   icons: {
     icon: '/favicon.png',

@@ -8,6 +8,7 @@ import useSkin from "@/hooks/useSkin";
 import { useCompanyContext } from "@/contexts/CompanyContext";
 import useImageFallback from "@/hooks/useImageFallback";
 import { generateLogoPlaceholder, generateCompanyPlaceholder } from "@/utils/placeholderUtils";
+import useAuthStore from "@/store/authStore";
 
 const SidebarLogo = ({ menuHover }) => {
   const [isDark] = useDarkMode();
@@ -17,6 +18,10 @@ const SidebarLogo = ({ menuHover }) => {
   // skin
   const [skin] = useSkin();
   const { companyBranding, currentCompany } = useCompanyContext();
+  const { user } = useAuthStore();
+
+  // Verificar se é super admin do sistema
+  const isSystemAdmin = user?.email?.includes('@clubedigital.com');
 
   // Função para obter logo de fallback
   const getFallbackLogo = (isCompact = false) => {
@@ -37,65 +42,81 @@ const SidebarLogo = ({ menuHover }) => {
 
   // Verificar se tem mini + text disponíveis
   const hasMiniAndText = () => {
+    // Super admins sempre têm mini + text
+    if (isSystemAdmin) return true;
+
     if (!companyBranding) return false;
-    
+
     const hasMini = !!(companyBranding.miniUrl || companyBranding.miniUrlDark);
     const hasText = !!(companyBranding.textUrl || companyBranding.textUrlDark);
-    
-    
+
     return hasMini && hasText;
   };
 
   // Obter mini logo (logo-c)
   const getMiniLogo = () => {
+    // Super admins do sistema - usar logo Clube Digital
+    if (isSystemAdmin) {
+      return isDark || isSemiDark
+        ? "/assets/images/logo/white-mini.svg"
+        : "/assets/images/logo/mini.svg";
+    }
+
     if (companyBranding) {
       // Se tem mini + text, usar mini
       if (hasMiniAndText()) {
-        const miniUrl = isDark 
+        const miniUrl = isDark
           ? (companyBranding.miniUrlDark || companyBranding.miniUrl)
           : (companyBranding.miniUrl || companyBranding.miniUrlDark);
-        
+
         if (miniUrl) {
           return getMiniImageSrc(miniUrl);
         }
       }
-      
+
       // Se não tem mini+text, usar logo principal como mini
-      const logoUrl = isDark 
+      const logoUrl = isDark
         ? (companyBranding.logoUrlDark || companyBranding.logoUrl)
         : (companyBranding.logoUrl || companyBranding.logoUrlDark);
-      
+
       if (logoUrl) {
         return getMiniImageSrc(logoUrl);
       }
     }
-    
+
     // Fallback para assets estáticos
-    return !isDark && !isSemiDark 
+    return !isDark && !isSemiDark
       ? "/assets/images/logo/logo-c.svg"
       : "/assets/images/logo/logo-c-white.svg";
   };
 
   // Obter text logo
   const getTextLogo = () => {
+    // Super admins do sistema - usar logo completo
+    if (isSystemAdmin) {
+      return isDark || isSemiDark
+        ? "/assets/images/logo/white-logo.svg"
+        : "/assets/images/logo/logo.svg";
+    }
+
     if (companyBranding) {
       // Se tem mini + text, usar text
       if (hasMiniAndText()) {
-        const textUrl = isDark 
+        const textUrl = isDark
           ? (companyBranding.textUrlDark || companyBranding.textUrl)
           : (companyBranding.textUrl || companyBranding.textUrlDark);
-        
+
         if (textUrl) {
           return getTextImageSrc(textUrl);
         }
       }
-      
+
       // Se não tem mini+text, não mostrar nada (será escondido)
       return null;
     }
-    
+
     // Fallback para assets estáticos
-    return !isDark && !isSemiDark 
+    return !isDark && !isSemiDark
       ? "/assets/images/logo/text.svg"
       : "/assets/images/logo/text-white.svg";
   };
@@ -167,14 +188,6 @@ const SidebarLogo = ({ menuHover }) => {
           ></div>
         )}
       </div>
-      {/* Texto "by Coinage" alinhado à direita quando expandido */}
-      {(!collapsed || menuHover) && (
-        <div className="text-end pe-11">
-          <span className="text-[10px] text-slate-500 dark:text-slate-400 mr-1">
-            by Coinage
-          </span>
-        </div>
-      )}
     </>
   );
 };

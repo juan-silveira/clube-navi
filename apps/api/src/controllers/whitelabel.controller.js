@@ -71,7 +71,7 @@ const confirmLinking = async (req, res) => {
  */
 const authenticateUser = async (req, res) => {
   try {
-    const prisma = req.tenantPrisma;
+    const prisma = req.clubPrisma;
     const { email, password, companyId } = req.body;
 
     if (!email || !password || !companyId) {

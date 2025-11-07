@@ -6,19 +6,18 @@
 
 const express = require('express');
 const router = express.Router();
-const prisma = require('../config/database');
 const balanceService = require('../services/balance.service');
-const { authenticateToken } = require('../middleware/auth');
+const { authenticateJWT } = require('../middleware/jwt.middleware');
 
 /**
  * GET /api/withdrawals
  * Lista todas as solicitações de saque do usuário autenticado
  */
-router.get('/', authenticateToken, async (req, res) => {
+router.get('/', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const withdrawals = await prisma.withdrawal.findMany({
+    const withdrawals = await req.clubPrisma.withdrawal.findMany({
       where: {
         userId,
       },
@@ -44,12 +43,12 @@ router.get('/', authenticateToken, async (req, res) => {
  * GET /api/withdrawals/:id
  * Busca uma solicitação de saque específica
  */
-router.get('/:id', authenticateToken, async (req, res) => {
+router.get('/:id', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
     const { id } = req.params;
 
-    const withdrawal = await prisma.withdrawal.findFirst({
+    const withdrawal = await req.clubPrisma.withdrawal.findFirst({
       where: {
         id,
         userId,
@@ -88,7 +87,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
  *   pixKeyOwnerCpf: string
  * }
  */
-router.post('/', authenticateToken, async (req, res) => {
+router.post('/', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
     const userType = req.user.userType;
@@ -119,7 +118,7 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 
     // Verificar se pode sacar
-    const canWithdrawCheck = await balanceService.canWithdraw(userId, amount, userType);
+    const canWithdrawCheck = await balanceService.canWithdraw(req.clubPrisma, userId, amount, userType);
     if (!canWithdrawCheck.canWithdraw) {
       return res.status(400).json({
         success: false,
@@ -128,7 +127,7 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 
     // Verificar se há saque pendente
-    const pendingWithdrawal = await prisma.withdrawal.findFirst({
+    const pendingWithdrawal = await req.clubPrisma.withdrawal.findFirst({
       where: {
         userId,
         status: {
@@ -149,7 +148,7 @@ router.post('/', authenticateToken, async (req, res) => {
     const netAmount = amount - fee;
 
     // Criar solicitação de saque
-    const withdrawal = await prisma.withdrawal.create({
+    const withdrawal = await req.clubPrisma.withdrawal.create({
       data: {
         userId,
         amount,
@@ -183,13 +182,13 @@ router.post('/', authenticateToken, async (req, res) => {
  * POST /api/withdrawals/:id/cancel
  * Cancela uma solicitação de saque pendente
  */
-router.post('/:id/cancel', authenticateToken, async (req, res) => {
+router.post('/:id/cancel', authenticateJWT, async (req, res) => {
   try {
     const userId = req.user.id;
     const { id } = req.params;
 
     // Buscar saque
-    const withdrawal = await prisma.withdrawal.findFirst({
+    const withdrawal = await req.clubPrisma.withdrawal.findFirst({
       where: {
         id,
         userId,
@@ -212,7 +211,7 @@ router.post('/:id/cancel', authenticateToken, async (req, res) => {
     }
 
     // Cancelar saque
-    const updatedWithdrawal = await prisma.withdrawal.update({
+    const updatedWithdrawal = await req.clubPrisma.withdrawal.update({
       where: {
         id,
       },

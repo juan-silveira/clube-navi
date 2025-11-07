@@ -177,7 +177,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"template\": \"welcome\",\n  \"to\": \"{{test_email}}\",\n  \"data\": {\n    \"name\": \"João Silva\",\n    \"companyName\": \"Coinage\"\n  }\n}"
+          "raw": "{\n  \"template\": \"welcome\",\n  \"to\": \"{{test_email}}\",\n  \"data\": {\n    \"name\": \"João Silva\",\n    \"companyName\": \"Clube Digital\"\n  }\n}"
         },
         "url": {
           "raw": "{{base_url}}/api/email/send-template",

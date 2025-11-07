@@ -667,41 +667,72 @@ router.get('/users/cpf/:cpf', authenticateApiKey, requireApiAdmin, userControlle
  *       403:
  *         description: Acesso negado
  */
-router.get('/dashboard/stats', authenticateApiKey, requireApiAdmin, requirePasswordChange, async (req, res) => {
+router.get('/dashboard/stats', requirePasswordChange, async (req, res) => {
   try {
-    // Obter modelos do banco
-    const { Company, User, SmartContract, Transaction } = global.models;
-    
-    // Buscar estatísticas reais do banco
+    const { getMasterClient } = require('../database');
+    const masterPrisma = getMasterClient();
+
+    console.log('🔍 [DASHBOARD] masterPrisma:', !!masterPrisma);
+    console.log('🔍 [DASHBOARD] masterPrisma.club:', !!masterPrisma?.club);
+    console.log('🔍 [DASHBOARD] masterPrisma.globalStats:', !!masterPrisma?.globalStats);
+
+    if (!masterPrisma) {
+      throw new Error('Master Prisma client not initialized');
+    }
+
+    // Buscar estatísticas globais mais recentes
+    const latestGlobalStats = await masterPrisma.globalStats.findFirst({
+      orderBy: {
+        date: 'desc'
+      }
+    });
+
+    // Buscar contagens básicas do Master DB
     const [
-      totalCompanies,
-      activeCompanies,
-      totalUsers,
-      activeUsers,
-      totalContracts,
-      totalTransactions,
-      totalApiAdminUsers,
-      totalCompanyAdminUsers
+      totalClubs,
+      activeClubs,
+      totalClubAdmins,
+      activeClubAdmins,
+      totalSuperAdmins,
+      activeSuperAdmins
     ] = await Promise.all([
-      Company.count(),
-      Company.count({ where: { isActive: true } }),
-      User.count(),
-      User.count({ where: { isActive: true } }),
-      SmartContract.count(),
-      Transaction.count(),
-      User.count({ where: { isApiAdmin: true, isActive: true } }),
-      User.count({ where: { isCompanyAdmin: true, isActive: true } })
+      masterPrisma.club.count(),
+      masterPrisma.club.count({ where: { status: 'active' } }),
+      masterPrisma.clubAdmin.count(),
+      masterPrisma.clubAdmin.count({ where: { isActive: true } }),
+      masterPrisma.superAdmin.count(),
+      masterPrisma.superAdmin.count({ where: { isActive: true } })
     ]);
 
     const stats = {
-      totalCompanies,
-      activeCompanies,
-      totalUsers,
-      activeUsers,
-      totalContracts,
-      totalTransactions,
-      totalApiAdminUsers,
-      totalCompanyAdminUsers,
+      // Estatísticas de clubs e admins
+      totalClubs,
+      activeClubs,
+      totalClubAdmins,
+      activeClubAdmins,
+      totalSuperAdmins,
+      activeSuperAdmins,
+
+      // Estatísticas globais (da tabela global_stats)
+      globalStats: latestGlobalStats ? {
+        date: latestGlobalStats.date,
+        totalUsers: latestGlobalStats.totalUsers,
+        totalConsumers: latestGlobalStats.totalConsumers,
+        totalMerchants: latestGlobalStats.totalMerchants,
+        totalPurchases: latestGlobalStats.totalPurchases,
+        totalRevenue: latestGlobalStats.totalRevenue,
+        totalCashbackPaid: latestGlobalStats.totalCashbackPaid,
+        totalPlatformFees: latestGlobalStats.totalPlatformFees,
+        totalProducts: latestGlobalStats.totalProducts,
+        activeUsers30d: latestGlobalStats.activeUsers30d,
+        revenue30d: latestGlobalStats.revenue30d,
+        purchases30d: latestGlobalStats.purchases30d,
+        cashback30d: latestGlobalStats.cashback30d,
+        newClubs: latestGlobalStats.newClubs,
+        newUsers: latestGlobalStats.newUsers,
+        churnedClubs: latestGlobalStats.churnedClubs
+      } : null,
+
       systemUptime: process.uptime(),
       timestamp: new Date().toISOString()
     };

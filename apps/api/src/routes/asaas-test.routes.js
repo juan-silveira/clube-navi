@@ -157,7 +157,7 @@ router.post('/create-customer', async (req, res) => {
  */
 router.post('/create-pix-test', async (req, res) => {
   try {
-    const { value = 10.00, description = 'Teste PIX Coinage', customerEmail } = req.body;
+    const { value = 10.00, description = 'Teste PIX Clube Digital', customerEmail } = req.body;
     
     const apiKey = process.env.ASAAS_API_KEY;
     const apiUrl = process.env.ASAAS_API_URL || 'https://api.asaas.com/v3';

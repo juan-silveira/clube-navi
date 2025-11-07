@@ -45,13 +45,13 @@ O Clube Digital foi transformado de uma aplicação **single-tenant** para **mul
 │            clube_digital_master                         │
 ├─────────────────────────────────────────────────────────┤
 │ • tenants                (metadata de todos tenants)    │
-│ • tenant_branding        (logos, cores, etc)            │
-│ • tenant_modules         (módulos habilitados)          │
-│ • tenant_stats           (métricas por tenant)          │
+│ • club_branding        (logos, cores, etc)            │
+│ • club_modules         (módulos habilitados)          │
+│ • club_stats           (métricas por tenant)          │
 │ • global_stats           (snapshots diários)            │
-│ • tenant_cashback_configs (percentuais de cashback)     │
-│ • tenant_withdrawal_configs (config de saques)          │
-│ • tenant_admins          (admins de cada tenant)        │
+│ • club_cashback_configs (percentuais de cashback)     │
+│ • club_withdrawal_configs (config de saques)          │
+│ • club_admins          (admins de cada tenant)        │
 │ • super_admins           (super admins cross-tenant)    │
 └─────────────────────────────────────────────────────────┘
                             │
@@ -383,7 +383,7 @@ async function resolveTenant(type, value) {
 ```bash
 node scripts/create-tenant.js \
   --slug=clube-navi \
-  --name="Clube Navi" \
+  --name="Clube Digital" \
   --email=admin@clubenavi.com.br \
   --document="12.345.678/0001-90" \
   --phone="11999999999" \
@@ -396,7 +396,7 @@ node scripts/create-tenant.js \
 
 📋 Tenant Information:
   Slug:          clube-navi
-  Company:       Clube Navi
+  Company:       Clube Digital
   Subdomain:     clube-navi.api.clubedigital.com.br
   Status:        trial
   Plan:          PRO
@@ -645,7 +645,7 @@ $ curl -H "X-Tenant-Slug: clube-navi" http://localhost:8033/api/tenant-info
   "tenant": {
     "id": "20c9d8a4-e923-4702-bf0d-4d8ace9d91ce",
     "slug": "clube-navi",
-    "companyName": "Clube Navi",
+    "companyName": "Clube Digital",
     "status": "trial",
     "plan": "PRO",
     "subdomain": "clube-navi"

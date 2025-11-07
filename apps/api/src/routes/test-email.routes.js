@@ -36,7 +36,7 @@ const emailService = require('../services/email.service');
  */
 router.post('/send', async (req, res) => {
   try {
-    const { to, subject = 'Teste Email - Coinage', message = 'Esta é uma mensagem de teste do sistema Coinage.' } = req.body;
+    const { to, subject = 'Teste Email - Clube Digital', message = 'Esta é uma mensagem de teste do sistema Clube Digital.' } = req.body;
     
     if (!to) {
       return res.status(400).json({
@@ -55,7 +55,7 @@ router.post('/send', async (req, res) => {
       htmlContent: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #2563eb; margin: 0;">🏦 Coinage</h1>
+            <h1 style="color: #2563eb; margin: 0;">🏦 Clube Digital</h1>
             <p style="color: #6b7280; margin: 5px 0;">Sistema Financeiro</p>
           </div>
           
@@ -72,12 +72,12 @@ router.post('/send', async (req, res) => {
           </div>
           
           <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 14px;">
-            <p>Este é um email de teste do sistema Coinage</p>
+            <p>Este é um email de teste do sistema Clube Digital</p>
             <p>Data: ${new Date().toLocaleString('pt-BR')}</p>
           </div>
         </div>
       `,
-      textContent: `${message}\n\n✅ Sistema de Email ativo!\nEmail enviado via ${emailService.activeProvider || 'mock'} em ambiente de desenvolvimento/testnet.\n\nEste é um email de teste do sistema Coinage\nData: ${new Date().toLocaleString('pt-BR')}`
+      textContent: `${message}\n\n✅ Sistema de Email ativo!\nEmail enviado via ${emailService.activeProvider || 'mock'} em ambiente de desenvolvimento/testnet.\n\nEste é um email de teste do sistema Clube Digital\nData: ${new Date().toLocaleString('pt-BR')}`
     });
 
     res.json({

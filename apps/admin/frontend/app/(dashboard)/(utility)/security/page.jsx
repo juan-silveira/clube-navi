@@ -14,7 +14,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 const SecurityPage = () => {
   const { t } = useTranslation('security');
   // Hook para gerenciar título da aba com contagem de notificações
-  useDocumentTitle(t('pageTitle'), 'Coinage', true);
+  useDocumentTitle(t('pageTitle'), 'Clube Digital', true);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   return (

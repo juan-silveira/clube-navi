@@ -104,58 +104,89 @@ const authenticateToken = async (req, res, next) => {
     // Verificar e decodificar o token
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    // MULTI-TENANT: Usar req.tenantPrisma se disponível (rotas tenant), senão usar master
-    let prisma;
-    if (req.tenantPrisma) {
-      console.log('🔍 JWT Middleware - Usando Tenant Prisma Client');
-      prisma = req.tenantPrisma;
-    } else {
-      console.log('🔍 JWT Middleware - Usando Master Prisma Client');
-      try {
-        prisma = getPrisma();
-      } catch (error) {
-        // Se Prisma não foi inicializado, inicializar primeiro
-        await prismaConfig.initialize();
-        prisma = getPrisma();
-      }
-    }
+    let user;
 
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id }
-      // FUNCIONALIDADE REMOVIDA: userCompanies
-    });
+    // Check if this is a Super Admin token
+    if (decoded.type === 'super-admin') {
+      console.log('🔍 JWT Middleware - Autenticando Super Admin');
 
-    if (!user || !user.isActive) {
-      return res.status(401).json({
-        success: false,
-        message: 'Usuário não encontrado ou inativo'
+      // Get Master Prisma Client
+      const masterClient = require('../database/master-client');
+      const masterPrisma = masterClient.getMasterClient();
+
+      const admin = await masterPrisma.superAdmin.findUnique({
+        where: { id: decoded.adminId }
       });
+
+      if (!admin || !admin.isActive) {
+        return res.status(401).json({
+          success: false,
+          message: 'Super Admin não encontrado ou inativo'
+        });
+      }
+
+      // Create a user-like object for compatibility
+      user = {
+        id: admin.id,
+        name: admin.name,
+        email: admin.email,
+        isActive: admin.isActive,
+        isSuperAdmin: true,
+        isAdmin: true,
+        isApiAdmin: true,
+        permissions: admin.permissions || {},
+        type: 'super-admin',
+        roles: ['super-admin']
+      };
+
+      req.superAdmin = decoded; // Keep decoded token data
+    } else {
+      // Regular user authentication - use tenant database
+      console.log('🔍 JWT Middleware - Autenticando usuário do clube');
+
+      // MULTI-TENANT: Usar req.clubPrisma se disponível (rotas clube), senão usar master
+      let prisma;
+      if (req.clubPrisma) {
+        console.log('🔍 JWT Middleware - Usando Clube Prisma Client');
+        prisma = req.clubPrisma;
+      } else {
+        console.log('⚠️ JWT Middleware - clubPrisma não disponível, usuário requer contexto de clube');
+        return res.status(401).json({
+          success: false,
+          message: 'Contexto de clube não disponível'
+        });
+      }
+
+      user = await prisma.user.findUnique({
+        where: { id: decoded.id }
+      });
+
+      if (!user || !user.isActive) {
+        return res.status(401).json({
+          success: false,
+          message: 'Usuário não encontrado ou inativo'
+        });
+      }
+
+      // Verificar roles do usuário
+      const userRoles = []; // TODO: Implementar sistema de roles sem companies
+
+      // Helpers de verificação de permissão
+      user.isAdmin = false; // TODO: Implementar sistema de roles
+      user.isApiAdmin = false;
+      user.isSuperAdmin = false;
+      user.roles = userRoles;
     }
-
-    // FUNCIONALIDADE REMOVIDA: Seleção de empresa (userCompanies removido do schema)
-    // if (user.userCompanies && user.userCompanies.length > 0) {
-    //   const activeCompanies = user.userCompanies.filter(uc => uc.status === 'active' && uc.company.isActive);
-    //   ...
-    // }
-    
-    // Verificar roles do usuário (sem userCompanies - removido do schema)
-    const userRoles = []; // TODO: Implementar sistema de roles sem companies
-
-    // Helpers de verificação de permissão
-    user.isAdmin = false; // TODO: Implementar sistema de roles
-    user.isApiAdmin = false;
-    user.isSuperAdmin = false;
-    user.roles = userRoles;
 
     req.user = user;
-    
+
     // 💾 SALVAR NO CACHE TODOS OS DADOS (user + company) - EVITA PRÓXIMAS VALIDAÇÕES
     tokenCache.set(token, {
       user: user,
       company: req.company || null, // Incluir dados da empresa no cache
       timestamp: Date.now()
     });
-    
+
     // console.log(`✅ [JWT-Cache] Usuário ${user.name} autenticado e salvo no cache (empresa: ${req.company?.name || 'N/A'})`);
     next();
     
@@ -209,32 +240,56 @@ const optionalJWT = async (req, res, next) => {
     // Verificar e decodificar o token
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    // Buscar usuário no banco usando Prisma
-    let prisma;
-    try {
-      prisma = getPrisma();
-    } catch (error) {
-      // Se Prisma não foi inicializado, inicializar primeiro
-      await prismaConfig.initialize();
-      prisma = getPrisma();
-    }
-    
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id }
-      // FUNCIONALIDADE REMOVIDA: userCompanies
-    });
+    let user;
 
-    if (user && user.isActive) {
-      // FUNCIONALIDADE REMOVIDA: Dados da empresa (userCompanies removido do schema)
-      // if (user.userCompanies && user.userCompanies.length > 0) {
-      //   ...
-      // }
+    // Check if this is a Super Admin token
+    if (decoded.type === 'super-admin') {
+      // Get Master Prisma Client
+      const masterClient = require('../database/master-client');
+      const masterPrisma = masterClient.getMasterClient();
 
-      // FUNCIONALIDADE REMOVIDA: Verificação de roles (userCompanies removido do schema)
-      const hasAdminRole = false; // TODO: Implementar sistema de roles
-      user.isApiAdmin = hasAdminRole;
-      
-      req.user = user;
+      const admin = await masterPrisma.superAdmin.findUnique({
+        where: { id: decoded.adminId }
+      });
+
+      if (admin && admin.isActive) {
+        // Create a user-like object for compatibility
+        user = {
+          id: admin.id,
+          name: admin.name,
+          email: admin.email,
+          isActive: admin.isActive,
+          isSuperAdmin: true,
+          isAdmin: true,
+          isApiAdmin: true,
+          permissions: admin.permissions || {},
+          type: 'super-admin',
+          roles: ['super-admin']
+        };
+
+        req.superAdmin = decoded;
+        req.user = user;
+      }
+    } else {
+      // Regular user authentication - try to use tenant database
+      if (req.clubPrisma) {
+        const prisma = req.clubPrisma;
+
+        user = await prisma.user.findUnique({
+          where: { id: decoded.id }
+        });
+
+        if (user && user.isActive) {
+          // Verificar roles do usuário
+          const userRoles = []; // TODO: Implementar sistema de roles
+          const hasAdminRole = false; // TODO: Implementar sistema de roles
+          user.isApiAdmin = hasAdminRole;
+          user.isSuperAdmin = false;
+          user.roles = userRoles;
+
+          req.user = user;
+        }
+      }
     }
 
     next();

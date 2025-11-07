@@ -10,7 +10,7 @@
  * - Cliente Inadimplente: Cliente com pagamento atrasado (prioridade 10)
  */
 
-const { PrismaClient } = require('../src/generated/prisma-tenant');
+const { PrismaClient } = require('../src/generated/prisma-club');
 
 // Módulos e suas permissões
 const MODULES = {
@@ -159,14 +159,14 @@ const ROLES = {
   }
 };
 
-async function seedPermissions(tenantDatabaseUrl) {
+async function seedPermissions(clubDatabaseUrl) {
   console.log('\n🌱 Seeding Roles & Permissions...');
   console.log('='.repeat(50));
 
   const prisma = new PrismaClient({
     datasources: {
       db: {
-        url: tenantDatabaseUrl
+        url: clubDatabaseUrl
       }
     }
   });
@@ -280,14 +280,14 @@ async function seedPermissions(tenantDatabaseUrl) {
 
 // Executar se chamado diretamente
 if (require.main === module) {
-  const tenantDatabaseUrl = process.env.TENANT_DATABASE_URL;
+  const clubDatabaseUrl = process.env.CLUB_DATABASE_URL;
 
-  if (!tenantDatabaseUrl) {
-    console.error('❌ TENANT_DATABASE_URL não definido');
+  if (!clubDatabaseUrl) {
+    console.error('❌ CLUB_DATABASE_URL não definido');
     process.exit(1);
   }
 
-  seedPermissions(tenantDatabaseUrl)
+  seedPermissions(clubDatabaseUrl)
     .catch((error) => {
       console.error(error);
       process.exit(1);

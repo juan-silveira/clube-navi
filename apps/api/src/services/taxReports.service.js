@@ -1007,7 +1007,7 @@ class TaxReportsService {
       const report = {
         // Identificação
         company: {
-          name: company?.name || 'Coinage Platform',
+          name: company?.name || 'Clube Digital Platform',
           cnpj: '02.332.886/0001-04', // TODO: buscar do banco de dados
           alias: company?.alias,
         },

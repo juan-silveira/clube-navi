@@ -1,7 +1,7 @@
 {
-  "name": "azore-blockchain-api-service",
+  "name": "clube-digital-api-service",
   "version": "1.0.0",
-  "description": "Microserviço Node.js para abstrair a complexidade da blockchain Azore",
+  "description": "Microserviço Node.js para o sistema Clube Digital",
   "main": "src/server.prisma.js",
   "scripts": {
     "start": "node src/server.prisma.js",
@@ -16,14 +16,14 @@
     "worker:dev": "nodemon src/workers/deposit.worker.js"
   },
   "keywords": [
-    "blockchain",
-    "azore",
+    "clube-digital",
+    "multi-tenant",
     "api",
     "microservice",
-    "ethers",
-    "smart-contracts"
+    "cashback",
+    "loyalty"
   ],
-  "author": "Azore Team",
+  "author": "Clube Digital Team",
   "license": "MIT",
   "dependencies": {
     "@mailchimp/mailchimp_transactional": "^1.0.59",
@@ -70,6 +70,7 @@
     "speakeasy": "^2.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
+    "ua-parser-js": "^2.0.6",
     "uuid": "^9.0.1",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"

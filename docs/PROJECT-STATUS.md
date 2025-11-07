@@ -802,13 +802,13 @@ apps/mobile/
 
 ### ⚠️ Novos Requisitos Identificados
 
-#### Moeda cBRL (Coinage.trade)
+#### Moeda cBRL (Clube Digital.trade)
 **Status**: Parcialmente implementado
 - ✅ Token cBRL existe na blockchain Azore
 - ✅ Integração com blockchain funciona
 - ❌ Documentação sobre cBRL no app mobile
 - ❌ Interface mostrando paridade 1:1 com BRL
-- ❌ Referência à Coinage.trade
+- ❌ Referência à Clube Digital.trade
 
 #### Sistema de Lojistas
 **Status**: Não implementado

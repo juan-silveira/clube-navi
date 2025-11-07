@@ -84,7 +84,7 @@ async function deployToken(params, wallet) {
     let tokenSource = fs.readFileSync(tokenSolPath, 'utf8');
 
     // Replace the contract name
-    tokenSource = tokenSource.replace(/contract\s+CoinageTrade/g, `contract ${contractName}`);
+    tokenSource = tokenSource.replace(/contract\s+Clube DigitalTrade/g, `contract ${contractName}`);
 
     console.log(`📝 Token contract source prepared`);
 
@@ -227,7 +227,7 @@ async function deployExchange(params, wallet) {
     const input = {
         language: 'Solidity',
         sources: {
-            'CoinageExchange.sol': {
+            'Clube DigitalExchange.sol': {
                 content: exchangeSource
             }
         },
@@ -270,7 +270,7 @@ async function deployExchange(params, wallet) {
     console.log(`📋 Extracting contract from compilation output...`);
     console.log(`   Available contracts:`, Object.keys(output.contracts));
 
-    const contract = output.contracts['CoinageExchange.sol']['HybridExchange'];
+    const contract = output.contracts['Clube DigitalExchange.sol']['HybridExchange'];
     if (!contract) {
         console.error(`❌ Contract not found. Available:`, output.contracts);
         throw new Error('HybridExchange contract not found in compilation output');

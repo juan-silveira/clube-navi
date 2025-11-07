@@ -24,7 +24,7 @@ const ResetPasswordPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = 'Clube Navi - Redefinir Senha';
+    document.title = 'Clube Digital - Redefinir Senha';
   }, []);
 
   useEffect(() => {
@@ -156,7 +156,7 @@ const ResetPasswordPage = () => {
               <Link href="/login">
                 <img
                   src={isDark ? "/assets/images/logo/logo-white.svg" : "/assets/images/logo/logo.svg"}
-                  alt="Clube Navi"
+                  alt="Clube Digital"
                   className="mb-10"
                 />
               </Link>
@@ -201,7 +201,7 @@ const ResetPasswordPage = () => {
                 </div>
               </div>
               <div className="auth-footer text-center">
-                Copyright 2025, Clube Navi All Rights Reserved.
+                Copyright 2025, Clube Digital All Rights Reserved.
               </div>
             </div>
           </div>
@@ -218,7 +218,7 @@ const ResetPasswordPage = () => {
             <Link href="/login">
               <img
                 src={isDark ? "/assets/images/logo/logo-white.svg" : "/assets/images/logo/logo.svg"}
-                alt="Clube Navi"
+                alt="Clube Digital"
                 className="mb-10"
               />
             </Link>
@@ -245,7 +245,7 @@ const ResetPasswordPage = () => {
                 <Link href="/login">
                   <img
                     src={isDark ? "/assets/images/logo/logo-white.svg" : "/assets/images/logo/logo.svg"}
-                    alt="Clube Navi"
+                    alt="Clube Digital"
                     className="mx-auto"
                   />
                 </Link>
@@ -318,7 +318,7 @@ const ResetPasswordPage = () => {
               </div>
             </div>
             <div className="auth-footer text-center">
-              Copyright 2025, Clube Navi All Rights Reserved.
+              Copyright 2025, Clube Digital All Rights Reserved.
             </div>
           </div>
         </div>

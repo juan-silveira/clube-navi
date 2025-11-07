@@ -7,7 +7,6 @@ import Textinput from "@/components/ui/Textinput";
 import Modal from "@/components/ui/Modal";
 import Badge from "@/components/ui/Badge";
 import Tooltip from "@/components/ui/Tooltip";
-import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
 import merchantService from "@/services/merchantService";
 
 const MerchantsManagement = () => {
@@ -140,8 +139,6 @@ const MerchantsManagement = () => {
 
   return (
     <div>
-      <HomeBredCurbs title="Gestão de Merchants" />
-
       {/* Header com Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-5">
         <Card>
