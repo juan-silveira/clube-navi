@@ -4,9 +4,38 @@ Este diretório contém testes end-to-end para validar o funcionamento completo 
 
 ## 📋 Testes Disponíveis
 
-### 1. `e2e-cashback-system.sh`
+### 1. `e2e-full-auto.sh` ⭐ RECOMENDADO
 
-Teste completo do sistema de produtos, compras e cashback.
+Teste **TOTALMENTE AUTOMATIZADO** com aprovação automática de merchant via SQL.
+
+**O que é testado:**
+
+1. ✅ Criação de Merchant com credenciais únicas
+2. ✅ Aprovação automática via SQL (merchant_status = 'approved')
+3. ✅ Criação de produto
+4. ✅ Criação de Consumer com credenciais únicas
+5. ✅ Criação de compra
+6. ✅ Confirmação de compra
+7. ✅ Verificação de estatísticas
+
+**Características:**
+- ✅ Gera CPF e email únicos para cada execução
+- ✅ Aprova merchant automaticamente via SQL
+- ✅ Não requer intervenção manual
+- ✅ Testa fluxo completo E2E em < 5 segundos
+
+**Como executar:**
+```bash
+API_URL=http://localhost:8033 TENANT_SLUG=clube-navi bash ./apps/api/tests/e2e-full-auto.sh
+```
+
+---
+
+### 2. `e2e-cashback-system.sh`
+
+Teste completo do sistema de produtos, compras e cashback (requer aprovação manual de merchant).
+
+**NOTA:** Este teste requer aprovação manual do merchant. Use o script `approve-merchant.js` ou prefira o `e2e-full-auto.sh`.
 
 **O que é testado:**
 
@@ -130,6 +159,27 @@ Se algum teste falhar, o script mostrará:
 - [ ] Teste de permissões (403)
 - [ ] Teste de validações (400)
 - [ ] Teste de recursos não encontrados (404)
+
+## 🛠️ Scripts Helper
+
+### `approve-merchant.js`
+
+Script para aprovar merchants manualmente no banco de dados.
+
+**Uso:**
+```bash
+node apps/api/scripts/approve-merchant.js <email_ou_id> [tenant_slug]
+
+# Exemplos
+node apps/api/scripts/approve-merchant.js merchant@test.com
+node apps/api/scripts/approve-merchant.js merchant@test.com clube-navi
+node apps/api/scripts/approve-merchant.js abc-123-def-456
+```
+
+**O que faz:**
+- Busca merchant por email ou ID
+- Atualiza `merchantStatus` para `approved`
+- Ativa `isActive` e `emailConfirmed`
 
 ## 📚 Documentação Relacionada
 

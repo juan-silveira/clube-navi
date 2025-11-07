@@ -109,7 +109,12 @@ class PurchaseService {
       return newPurchase;
     });
 
-    return purchase;
+    // Retornar purchase com estrutura esperada pelo controller
+    return {
+      purchase,
+      distribution,
+      totalAmount
+    };
   }
 
   /**
