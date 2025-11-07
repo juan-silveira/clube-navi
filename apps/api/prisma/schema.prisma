@@ -50,6 +50,7 @@ model User {
   userTaxes              UserTaxes?
   userTwoFactors         UserTwoFactor[]
   userBalances           UserBalance[]
+  withdrawals            Withdrawal[]
 
   @@index([email], map: "idx_users_email")
   @@index([cpf], map: "idx_users_cpf")
@@ -304,6 +305,32 @@ model UserBalance {
   @@map("user_balances")
 }
 
+model Withdrawal {
+  id              String            @id @default(uuid()) @db.Uuid
+  userId          String            @map("user_id") @db.Uuid
+  amount          Decimal           @db.Decimal(15, 2)
+  pixKey          String            @map("pix_key") @db.VarChar(255)
+  pixKeyType      String            @map("pix_key_type") @db.VarChar(20)
+  pixKeyOwnerName String?           @map("pix_key_owner_name") @db.VarChar(255)
+  pixKeyOwnerCpf  String?           @map("pix_key_owner_cpf") @db.VarChar(14)
+  status          WithdrawalStatus  @default(pending)
+  rejectionReason String?           @map("rejection_reason") @db.Text
+  processedBy     String?           @map("processed_by") @db.Uuid
+  processedAt     DateTime?         @map("processed_at") @db.Timestamptz(6)
+  txHash          String?           @map("tx_hash") @db.VarChar(255)
+  fee             Decimal           @default(0) @map("fee") @db.Decimal(15, 2)
+  netAmount       Decimal           @map("net_amount") @db.Decimal(15, 2)
+  createdAt       DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime          @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user            User              @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "idx_withdrawals_user_id")
+  @@index([status], map: "idx_withdrawals_status")
+  @@index([createdAt], map: "idx_withdrawals_created_at")
+  @@index([userId, status], map: "idx_withdrawals_user_status")
+  @@map("withdrawals")
+}
+
 model NotificationConfig {
   id        String   @id @default(uuid()) @db.Uuid
   type      String   @unique @db.VarChar(50)
@@ -479,5 +506,13 @@ enum UserActionStatus {
   success
   failed
   pending
+  cancelled
+}
+
+enum WithdrawalStatus {
+  pending
+  processing
+  completed
+  rejected
   cancelled
 }
