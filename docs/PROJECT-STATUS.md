@@ -56,6 +56,14 @@ Multi-Tenant:         ███░░░░░░░ 30% implementado (Fase 1 co
 
 ### Últimas Atualizações
 
+- ✅ **Testes E2E Automatizados IMPLEMENTADOS** (2025-11-06)
+  - ✅ Script bash completo e2e-cashback-system.sh
+  - ✅ Testa 15 endpoints do sistema (produtos, compras, cashback)
+  - ✅ Fluxo completo: merchant → produto → consumer → compra → cashback
+  - ✅ Validação de estatísticas e histórico
+  - ✅ Documentação completa em tests/README.md
+  - ✅ Saída colorida com status de cada passo
+  - ✅ Fácil execução e debugging
 - ✅ **Arquitetura Service Layer e Endpoints de Cashback IMPLEMENTADOS** (2025-11-06)
   - ✅ Refatoração completa: product.controller.js → product.service.js
   - ✅ Refatoração completa: purchase.controller.js → purchase.service.js
@@ -2024,11 +2032,12 @@ docs/
 ### Esta Semana
 
 1. [ ] Executar setup da Fase 1 (criar master DB, migrations, primeiro tenant)
-2. [ ] Implementar validação de código de indicação no registro
-3. [ ] Adicionar AccountStatus ao User
-4. [ ] Criar service de purchase
-5. [ ] Criar worker de cashback
-6. [ ] Começar telas do marketplace (mobile)
+2. [x] Implementar validação de código de indicação no registro ✅
+3. [x] Adicionar AccountStatus ao User ✅
+4. [x] Criar service de purchase ✅
+5. [x] Criar worker de cashback ✅
+6. [x] Criar testes E2E automatizados ✅ **NOVO** (2025-11-06)
+7. [ ] Começar telas do marketplace (mobile)
 
 ### Este Mês
 
