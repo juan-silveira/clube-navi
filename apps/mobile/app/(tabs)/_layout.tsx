@@ -184,6 +184,24 @@ export default function TabLayout() {
           href: null, // Esconde do menu de tabs
         }}
       />
+      <Tabs.Screen
+        name="marketplace"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="product-detail"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
+      <Tabs.Screen
+        name="purchase-detail"
+        options={{
+          href: null, // Esconde do menu de tabs
+        }}
+      />
     </Tabs>
   );
 }

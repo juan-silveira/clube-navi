@@ -55,6 +55,23 @@ export const API_ENDPOINTS = {
   ENABLE_2FA: '/api/auth/2fa/enable',
   DISABLE_2FA: '/api/auth/2fa/disable',
   VERIFY_2FA: '/api/auth/2fa/verify',
+
+  // Products
+  PRODUCTS: '/api/products',
+  PRODUCT_BY_ID: (id: string) => `/api/products/${id}`,
+  PRODUCTS_CATEGORIES: '/api/products/categories/list',
+  PRODUCTS_FEATURED: '/api/products/featured/list',
+
+  // Purchases
+  PURCHASES: '/api/purchases',
+  PURCHASE_BY_ID: (id: string) => `/api/purchases/${id}`,
+  PURCHASE_CONFIRM: (id: string) => `/api/purchases/${id}/confirm`,
+  PURCHASE_STATS: '/api/purchases/stats',
+
+  // Cashback
+  CASHBACK_STATS: '/api/cashback/stats',
+  CASHBACK_HISTORY: '/api/cashback/history',
+  CASHBACK_CALCULATE: '/api/cashback/calculate',
 } as const;
 
 export const API_TIMEOUT = 30000; // 30 segundos

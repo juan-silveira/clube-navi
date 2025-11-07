@@ -13,10 +13,11 @@ export default function Explore() {
   const currentBreadcrumb = deserializeBreadcrumb(params.breadcrumb as string);
 
   const productsAndServices = [
-    { id: 1, icon: 'film-outline', label: 'Cinema', route: '/(tabs)/cinema', color: whitelabelConfig.colors.primary },
-    { id: 2, icon: 'cash-outline', label: 'Cashback', route: '/(tabs)/cashback', color: whitelabelConfig.colors.primary },
-    { id: 3, icon: 'gift-outline', label: 'GiftCard', route: '/(tabs)/gift-cards', color: whitelabelConfig.colors.primary },
-    { id: 4, icon: 'wifi-outline', label: 'Internet', route: '/(tabs)/internet-management', color: whitelabelConfig.colors.primary },
+    { id: 1, icon: 'cart-outline', label: 'Marketplace', route: '/(tabs)/marketplace', color: whitelabelConfig.colors.success },
+    { id: 2, icon: 'film-outline', label: 'Cinema', route: '/(tabs)/cinema', color: whitelabelConfig.colors.primary },
+    { id: 3, icon: 'cash-outline', label: 'Cashback', route: '/(tabs)/cashback', color: whitelabelConfig.colors.primary },
+    { id: 4, icon: 'gift-outline', label: 'GiftCard', route: '/(tabs)/gift-cards', color: whitelabelConfig.colors.primary },
+    { id: 5, icon: 'wifi-outline', label: 'Internet', route: '/(tabs)/internet-management', color: whitelabelConfig.colors.primary },
   ];
 
   const cinemaCategories = [
