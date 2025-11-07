@@ -1027,6 +1027,32 @@ class S3Service {
   }
 
   /**
+   * Upload de buffer (dados em memória) - Método genérico
+   */
+  async uploadBuffer(buffer, key, contentType = 'application/octet-stream') {
+    try {
+      const params = {
+        Bucket: this.bucketName,
+        Key: key,
+        Body: buffer,
+        ContentType: contentType,
+        ACL: process.env.S3_ACL || 'public-read'
+      };
+
+      console.log(`⬆️ [S3Service] Uploading buffer to S3: ${key}`);
+
+      const result = await this.s3.upload(params).promise();
+
+      console.log(`✅ [S3Service] Upload successful: ${result.Location}`);
+
+      return result.Location;
+    } catch (error) {
+      console.error('❌ [S3Service] Erro ao fazer upload do buffer:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Deletar todos os arquivos de um prefixo (helper method)
    */
   async deleteFilesByPrefix(prefix) {
