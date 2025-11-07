@@ -50,6 +50,8 @@ const backupRoutes = require('./routes/backup.routes');
 const productRoutes = require('./routes/product.routes');
 const purchaseRoutes = require('./routes/purchase.routes');
 const cashbackRoutes = require('./routes/cashback.routes');
+const balanceRoutes = require('./routes/balance.routes');
+const withdrawalRoutes = require('./routes/withdrawal.routes');
 
 // Importar serviços
 const logService = require('./services/log.service');
@@ -778,6 +780,10 @@ app.use('/api/users', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, 
 app.use('/api/products', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, productRoutes);
 app.use('/api/purchases', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, purchaseRoutes);
 app.use('/api/cashback', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, cashbackRoutes);
+
+// Rotas de saldo e saques
+app.use('/api/balance', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, balanceRoutes);
+app.use('/api/withdrawals', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, withdrawalRoutes);
 
 // Rotas de contratos (com autenticação e sistema de fila) - COMENTADO PARA DEBUG
 // app.use('/api/contracts', authenticateApiKey, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, contractRoutes);

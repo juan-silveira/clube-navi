@@ -16,10 +16,11 @@ export default function Explore() {
     { id: 1, icon: 'cart-outline', label: 'Marketplace', route: '/(tabs)/marketplace', color: whitelabelConfig.colors.success },
     { id: 2, icon: 'cube-outline', label: 'Meus Produtos', route: '/(tabs)/my-products', color: whitelabelConfig.colors.warning },
     { id: 3, icon: 'shield-checkmark-outline', label: 'Verificar Identidade', route: '/(tabs)/kyc-upload', color: '#3b82f6' },
-    { id: 4, icon: 'film-outline', label: 'Cinema', route: '/(tabs)/cinema', color: whitelabelConfig.colors.primary },
-    { id: 5, icon: 'cash-outline', label: 'Cashback', route: '/(tabs)/cashback', color: whitelabelConfig.colors.primary },
-    { id: 6, icon: 'gift-outline', label: 'GiftCard', route: '/(tabs)/gift-cards', color: whitelabelConfig.colors.primary },
-    { id: 7, icon: 'wifi-outline', label: 'Internet', route: '/(tabs)/internet-management', color: whitelabelConfig.colors.primary },
+    { id: 4, icon: 'wallet-outline', label: 'Solicitar Saque', route: '/(tabs)/request-withdrawal', color: '#10b981' },
+    { id: 5, icon: 'film-outline', label: 'Cinema', route: '/(tabs)/cinema', color: whitelabelConfig.colors.primary },
+    { id: 6, icon: 'cash-outline', label: 'Cashback', route: '/(tabs)/cashback', color: whitelabelConfig.colors.primary },
+    { id: 7, icon: 'gift-outline', label: 'GiftCard', route: '/(tabs)/gift-cards', color: whitelabelConfig.colors.primary },
+    { id: 8, icon: 'wifi-outline', label: 'Internet', route: '/(tabs)/internet-management', color: whitelabelConfig.colors.primary },
   ];
 
   const cinemaCategories = [
