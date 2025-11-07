@@ -66,14 +66,15 @@ export default function More() {
 
   const menuItems: Array<{ icon: string; title: string; route?: string; badge?: number; useBreadcrumb?: boolean }> = [
     { icon: 'grid-outline', title: 'Dashboard', route: '/(tabs)/dashboard' },
+    { icon: 'wallet-outline', title: 'Carteira de Cashback', route: '/(tabs)/cashback-wallet' },
     { icon: 'gift-outline', title: 'Minhas indicações', route: '/referrals', useBreadcrumb: true },
     { icon: 'people-outline', title: 'Lojas que sigo' },
     { icon: 'headset-outline', title: 'Ajuda' },
-    { icon: 'bag-outline', title: 'Minhas compras' },
+    { icon: 'bag-outline', title: 'Minhas compras', route: '/(tabs)/purchase-history' },
     { icon: 'star-outline', title: 'Minhas opiniões' },
     { icon: 'heart-outline', title: 'Favoritos' },
     { icon: 'pricetag-outline', title: 'Ofertas do dia' },
-    { icon: 'settings-outline', title: 'Configurações' },
+    { icon: 'settings-outline', title: 'Configurações da Conta', route: '/(tabs)/account-settings' },
   ];
 
   return (

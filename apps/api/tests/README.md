@@ -31,7 +31,84 @@ API_URL=http://localhost:8033 TENANT_SLUG=clube-navi bash ./apps/api/tests/e2e-f
 
 ---
 
-### 2. `e2e-cashback-system.sh`
+### 2. `e2e-account-management.sh` ⭐ NOVO
+
+Teste completo de gerenciamento de conta do usuário com LGPD compliance.
+
+**O que é testado:**
+
+1. ✅ Health check da API
+2. ✅ Registro de usuário com dados únicos
+3. ✅ Login e obtenção de token JWT
+4. ✅ Download de dados do usuário (LGPD compliance)
+5. ✅ Verificação de remoção de campos sensíveis (password)
+6. ✅ Alteração de senha com senha atual incorreta (deve falhar)
+7. ✅ Alteração de senha com senha atual correta (deve passar)
+8. ✅ Login com senha antiga após alteração (deve falhar)
+9. ✅ Login com senha nova após alteração (deve passar)
+10. ✅ Exclusão de conta com validação de saldo
+11. ✅ Bloqueio de login após exclusão
+
+**Características:**
+- ✅ Validação de health check antes de executar
+- ✅ Gera CPF, email e username únicos usando timestamp
+- ✅ Testa casos de sucesso e falha (validações negativas)
+- ✅ Cleanup automático de arquivos temporários
+- ✅ Output colorido e estruturado
+- ✅ 287 linhas de código com cobertura completa
+
+**Como executar:**
+```bash
+API_URL=http://localhost:8033 TENANT_SLUG=clube-navi bash ./apps/api/tests/e2e-account-management.sh
+```
+
+**Saída esperada:**
+```
+=========================================
+🧪 TESTE E2E: GESTÃO DE CONTA
+=========================================
+API: http://localhost:8033
+Tenant: clube-navi
+
+▶ 0. Verificando disponibilidade da API...
+✓ API está respondendo
+
+▶ 1. Registrando usuário de teste...
+✓ Usuário registrado: <user-id>
+
+▶ 2. Fazendo login...
+✓ Login realizado com sucesso
+
+▶ 3. Testando download de dados do usuário (LGPD)...
+✓ Download de dados realizado com sucesso
+✓ Dados retornados corretamente (sem campos sensíveis)
+
+▶ 4. Testando alteração de senha...
+ℹ 4.1. Testando com senha atual incorreta (deve falhar)...
+✓ Validação de senha atual funcionando corretamente
+ℹ 4.2. Alterando senha com senha atual correta...
+✓ Senha alterada com sucesso
+ℹ 4.3. Tentando login com senha antiga (deve falhar)...
+✓ Login com senha antiga rejeitado corretamente
+ℹ 4.4. Fazendo login com nova senha...
+✓ Login com nova senha realizado com sucesso
+
+▶ 5. Testando exclusão de conta com saldo (deve falhar se houver)...
+ℹ 5.1. Verificando saldo do usuário...
+✓ Conta excluída (usuário sem saldo)
+ℹ 5.2. Verificando que conta foi deletada (login deve falhar)...
+✓ Conta deletada e login bloqueado corretamente
+
+=========================================
+✓ TODOS OS TESTES PASSARAM!
+=========================================
+
+✓ Suite de testes de gestão de conta concluída!
+```
+
+---
+
+### 3. `e2e-cashback-system.sh`
 
 Teste completo do sistema de produtos, compras e cashback (requer aprovação manual de merchant).
 

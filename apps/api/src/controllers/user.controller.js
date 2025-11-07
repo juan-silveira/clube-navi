@@ -1102,6 +1102,235 @@ const getMerchantStats = async (req, res) => {
   }
 };
 
+/**
+ * Excluir conta do usuário (auto-serviço)
+ */
+const deleteAccount = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { reason } = req.body;
+
+    console.log(`🗑️ Solicitação de exclusão de conta do usuário: ${userId}`);
+    console.log(`Motivo: ${reason}`);
+
+    const prisma = req.tenantPrisma;
+
+    // Buscar usuário
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+      include: {
+        products: true,
+        purchases: true,
+        _count: {
+          select: {
+            products: true,
+            purchases: true,
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado',
+      });
+    }
+
+    // Verificar se tem saldo pendente de saque
+    // Buscar saldo atual via balance service ou diretamente
+    const balanceResponse = await userService.getUserBalance(userId);
+
+    if (balanceResponse && balanceResponse.availableBalance > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Você ainda tem R$ ${balanceResponse.availableBalance.toFixed(2)} disponível. Faça o saque antes de excluir a conta.`,
+      });
+    }
+
+    // Registrar motivo da exclusão em uma tabela de auditoria (opcional)
+    await userActionsService.logUser(userId, 'account_deletion_requested', null, req, {
+      details: {
+        reason,
+        productsCount: user._count.products,
+        purchasesCount: user._count.purchases,
+      },
+    });
+
+    // Soft delete: marcar conta como inativa ao invés de excluir
+    // Isso permite recuperação e mantém integridade referencial
+    await prisma.users.update({
+      where: { id: userId },
+      data: {
+        isActive: false,
+        accountStatus: 'deleted',
+        email: `deleted_${userId}@deleted.com`, // Liberar email para reuso
+        cpf: `deleted_${userId}`, // Liberar CPF
+        updatedAt: new Date(),
+      },
+    });
+
+    // Desativar produtos do merchant
+    if (user._count.products > 0) {
+      await prisma.products.updateMany({
+        where: { merchantId: userId },
+        data: { isActive: false },
+      });
+    }
+
+    console.log(`✅ Conta do usuário ${userId} marcada como excluída`);
+
+    res.json({
+      success: true,
+      message: 'Conta excluída com sucesso',
+    });
+  } catch (error) {
+    console.error('❌ Erro ao excluir conta:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao excluir conta',
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * Alterar senha do usuário
+ */
+const changePassword = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: 'Senha atual e nova senha são obrigatórias',
+      });
+    }
+
+    // Validação de senha forte
+    const passwordValidation = validatePassword(newPassword);
+    if (!passwordValidation.isValid) {
+      return res.status(400).json({
+        success: false,
+        message: 'Nova senha não atende aos critérios de segurança',
+        errors: passwordValidation.errors,
+      });
+    }
+
+    const prisma = req.tenantPrisma;
+    const bcrypt = require('bcryptjs');
+
+    // Buscar usuário com senha
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado',
+      });
+    }
+
+    // Verificar senha atual
+    const isValidPassword = await bcrypt.compare(currentPassword, user.password);
+    if (!isValidPassword) {
+      return res.status(401).json({
+        success: false,
+        message: 'Senha atual incorreta',
+      });
+    }
+
+    // Hash da nova senha
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+    // Atualizar senha
+    await prisma.users.update({
+      where: { id: userId },
+      data: {
+        password: hashedPassword,
+        passwordChangedAt: new Date(),
+      },
+    });
+
+    // Registrar ação
+    await userActionsService.logUser(userId, 'password_changed', null, req);
+
+    console.log(`🔐 Senha alterada para usuário: ${userId}`);
+
+    res.json({
+      success: true,
+      message: 'Senha alterada com sucesso',
+    });
+  } catch (error) {
+    console.error('❌ Erro ao alterar senha:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao alterar senha',
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * Baixar dados do usuário (LGPD)
+ */
+const downloadUserData = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const prisma = req.tenantPrisma;
+
+    console.log(`📥 Solicitação de download de dados do usuário: ${userId}`);
+
+    // Buscar todos os dados do usuário
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+      include: {
+        products: true,
+        purchases: {
+          include: {
+            product: true,
+          },
+        },
+        userDocuments: true,
+        withdrawals: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuário não encontrado',
+      });
+    }
+
+    // Remover dados sensíveis
+    const userData = {
+      ...user,
+      password: undefined,
+      privateKey: undefined,
+    };
+
+    // Registrar ação
+    await userActionsService.logUser(userId, 'data_download_requested', null, req);
+
+    res.json({
+      success: true,
+      message: 'Dados do usuário recuperados com sucesso',
+      data: userData,
+    });
+  } catch (error) {
+    console.error('❌ Erro ao baixar dados do usuário:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao baixar dados',
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getUserById,
@@ -1124,5 +1353,8 @@ module.exports = {
   updateUserLanguage,
   getUserBalance,
   uploadProfilePicture,
-  getMerchantStats
+  getMerchantStats,
+  deleteAccount,
+  changePassword,
+  downloadUserData,
 };

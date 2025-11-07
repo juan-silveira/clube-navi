@@ -7,6 +7,7 @@ import Textinput from "@/components/ui/Textinput";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import Select from "react-select";
+import Modal from "@/components/ui/Modal";
 import useDarkMode from "@/hooks/useDarkMode";
 import Dropdown from "@/components/ui/Dropdown";
 import usePermissions from "@/hooks/usePermissions";
@@ -70,12 +71,25 @@ const CompanyUsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(20);
 
+  // Seleção múltipla
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [showBulkActions, setShowBulkActions] = useState(false);
+
+  // Modal de Roles
+  const [showRolesModal, setShowRolesModal] = useState(false);
+  const [selectedUserForRoles, setSelectedUserForRoles] = useState(null);
+  const [availableRoles, setAvailableRoles] = useState([]);
+  const [userRoles, setUserRoles] = useState([]);
+  const [loadingRoles, setLoadingRoles] = useState(false);
+
   // Filtros (sem empresa pois é apenas da empresa do usuário)
   const [filters, setFilters] = useState({
     search: '',
     role: '',
     status: '',
-    lastLoginDays: ''
+    lastLoginDays: '',
+    createdFrom: '',
+    createdTo: ''
   });
 
   // Estatísticas
@@ -244,11 +258,28 @@ const CompanyUsersPage = () => {
     if (filters.lastLoginDays) {
       const daysAgo = new Date();
       daysAgo.setDate(daysAgo.getDate() - parseInt(filters.lastLoginDays));
-      filtered = filtered.filter(user => 
+      filtered = filtered.filter(user =>
         user.lastLogin && new Date(user.lastLogin) >= daysAgo
       );
     }
 
+    // Filtro de data de criação (from)
+    if (filters.createdFrom) {
+      const fromDate = new Date(filters.createdFrom);
+      fromDate.setHours(0, 0, 0, 0);
+      filtered = filtered.filter(user =>
+        new Date(user.createdAt) >= fromDate
+      );
+    }
+
+    // Filtro de data de criação (to)
+    if (filters.createdTo) {
+      const toDate = new Date(filters.createdTo);
+      toDate.setHours(23, 59, 59, 999);
+      filtered = filtered.filter(user =>
+        new Date(user.createdAt) <= toDate
+      );
+    }
 
     setFilteredUsers(filtered);
     // Reset para primeira página quando aplicar filtros
@@ -268,8 +299,177 @@ const CompanyUsersPage = () => {
       search: '',
       role: '',
       status: '',
-      lastLoginDays: ''
+      lastLoginDays: '',
+      createdFrom: '',
+      createdTo: ''
     });
+  };
+
+  // Funções de seleção múltipla
+  const toggleSelectAll = () => {
+    if (selectedUsers.length === currentUsers.length) {
+      setSelectedUsers([]);
+    } else {
+      setSelectedUsers(currentUsers.map(u => u.id));
+    }
+  };
+
+  const toggleSelectUser = (userId) => {
+    setSelectedUsers(prev => {
+      if (prev.includes(userId)) {
+        return prev.filter(id => id !== userId);
+      } else {
+        return [...prev, userId];
+      }
+    });
+  };
+
+  const clearSelection = () => {
+    setSelectedUsers([]);
+  };
+
+  // Ações em massa
+  const handleBulkAction = async (action) => {
+    if (selectedUsers.length === 0) {
+      showWarning(t('users.messages.selectUsers'));
+      return;
+    }
+
+    if (!permissions.canViewCompanySettings) {
+      showError(t('users.messages.noPermission'));
+      return;
+    }
+
+    const selectedUsersList = users.filter(u => selectedUsers.includes(u.id));
+    const count = selectedUsers.length;
+
+    try {
+      setLoading(true);
+
+      switch (action) {
+        case 'approve':
+          await Promise.all(
+            selectedUsersList.map(user =>
+              userService.updateUser(user.id, { isActive: true, isBlockedLoginAttempts: false })
+            )
+          );
+          setUsers(users.map(u => {
+            if (selectedUsers.includes(u.id)) {
+              const updated = { ...u, isActive: true, isBlockedLoginAttempts: false };
+              updated.status = 'active';
+              return updated;
+            }
+            return u;
+          }));
+          showSuccess(`${count} ${t('users.messages.usersApproved')}`);
+          break;
+
+        case 'activate':
+          await Promise.all(
+            selectedUsersList.map(user =>
+              userService.updateUser(user.id, { isActive: true })
+            )
+          );
+          setUsers(users.map(u => {
+            if (selectedUsers.includes(u.id)) {
+              const updated = { ...u, isActive: true };
+              updated.status = updated.isBlockedLoginAttempts ? 'blocked' : 'active';
+              return updated;
+            }
+            return u;
+          }));
+          showSuccess(`${count} ${t('users.messages.usersActivated')}`);
+          break;
+
+        case 'deactivate':
+          await Promise.all(
+            selectedUsersList.map(user =>
+              userService.updateUser(user.id, { isActive: false })
+            )
+          );
+          setUsers(users.map(u => {
+            if (selectedUsers.includes(u.id)) {
+              const updated = { ...u, isActive: false };
+              updated.status = 'inactive';
+              return updated;
+            }
+            return u;
+          }));
+          showSuccess(`${count} ${t('users.messages.usersDeactivated')}`);
+          break;
+
+        case 'block':
+          await Promise.all(
+            selectedUsersList.map(user =>
+              userService.updateUser(user.id, { isBlockedLoginAttempts: true })
+            )
+          );
+          setUsers(users.map(u => {
+            if (selectedUsers.includes(u.id)) {
+              const updated = { ...u, isBlockedLoginAttempts: true };
+              updated.status = 'blocked';
+              return updated;
+            }
+            return u;
+          }));
+          showSuccess(`${count} ${t('users.messages.usersBlocked')}`);
+          break;
+
+        case 'unblock':
+          await Promise.all(
+            selectedUsersList.map(user =>
+              userService.updateUser(user.id, { isBlockedLoginAttempts: false })
+            )
+          );
+          setUsers(users.map(u => {
+            if (selectedUsers.includes(u.id)) {
+              const updated = { ...u, isBlockedLoginAttempts: false };
+              updated.status = updated.isActive ? 'active' : 'inactive';
+              return updated;
+            }
+            return u;
+          }));
+          showSuccess(`${count} ${t('users.messages.usersUnblocked')}`);
+          break;
+
+        case 'exportSelected':
+          const csvData = selectedUsersList.map(user => ({
+            Nome: user.name,
+            Email: user.email,
+            CPF: user.cpf,
+            Telefone: user.phone,
+            Role: user.role,
+            Status: user.status,
+            'Data Criação': new Date(user.createdAt).toLocaleDateString('pt-BR'),
+            'Último Login': user.lastLogin ? new Date(user.lastLogin).toLocaleDateString('pt-BR') : 'Nunca',
+            'Login Count': user.loginCount,
+            'Transações': user.transactions
+          }));
+
+          const csvContent = [
+            Object.keys(csvData[0]).join(','),
+            ...csvData.map(row => Object.values(row).map(val => `"${val}"`).join(','))
+          ].join('\n');
+
+          const blob = new Blob([csvContent], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `usuarios-selecionados-${currentCompany.alias}-${new Date().toISOString().split('T')[0]}.csv`;
+          a.click();
+          URL.revokeObjectURL(url);
+          showSuccess(`${count} ${t('users.messages.usersExported')}`);
+          break;
+      }
+
+      clearSelection();
+      setShowBulkActions(false);
+    } catch (error) {
+      console.error('Error in bulk action:', error);
+      showError(t('users.messages.errorBulkAction'));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const exportUsers = () => {
@@ -526,6 +726,83 @@ const CompanyUsersPage = () => {
     }
   };
 
+  // Funções para gerenciar Roles RBAC
+  const handleOpenRolesModal = async (user) => {
+    setSelectedUserForRoles(user);
+    setShowRolesModal(true);
+    setLoadingRoles(true);
+
+    try {
+      // Buscar roles disponíveis
+      const rolesResponse = await api.get('/api/roles/roles');
+      if (rolesResponse.data.success) {
+        setAvailableRoles(rolesResponse.data.data || []);
+      }
+
+      // Buscar roles do usuário
+      const userRolesResponse = await api.get(`/api/roles/users/${user.id}/roles`);
+      if (userRolesResponse.data.success) {
+        setUserRoles(userRolesResponse.data.data || []);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar roles:', error);
+      showError('Erro ao carregar roles');
+    } finally {
+      setLoadingRoles(false);
+    }
+  };
+
+  const handleCloseRolesModal = () => {
+    setShowRolesModal(false);
+    setSelectedUserForRoles(null);
+    setAvailableRoles([]);
+    setUserRoles([]);
+  };
+
+  const handleAssignRole = async (roleId) => {
+    if (!selectedUserForRoles) return;
+
+    try {
+      const response = await api.post('/api/roles/user-roles', {
+        userId: selectedUserForRoles.id,
+        roleId
+      });
+
+      if (response.data.success) {
+        showSuccess('Role atribuída com sucesso');
+        // Recarregar roles do usuário
+        const userRolesResponse = await api.get(`/api/roles/users/${selectedUserForRoles.id}/roles`);
+        if (userRolesResponse.data.success) {
+          setUserRoles(userRolesResponse.data.data || []);
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao atribuir role:', error);
+      showError(error.response?.data?.error || 'Erro ao atribuir role');
+    }
+  };
+
+  const handleRemoveRole = async (roleId) => {
+    if (!selectedUserForRoles) return;
+
+    try {
+      const response = await api.delete('/api/roles/user-roles', {
+        data: {
+          userId: selectedUserForRoles.id,
+          roleId
+        }
+      });
+
+      if (response.data.success) {
+        showSuccess('Role removida com sucesso');
+        setUserRoles(userRoles.filter(ur => ur.role.id !== roleId));
+      }
+    } catch (error) {
+      console.error('Erro ao remover role:', error);
+      showError(error.response?.data?.error || 'Erro ao remover role');
+    }
+  };
+
   const getDaysSinceLastLogin = (lastLogin) => {
     if (!lastLogin) return null;
     const days = Math.floor((new Date() - new Date(lastLogin)) / (1000 * 60 * 60 * 24));
@@ -620,7 +897,7 @@ const CompanyUsersPage = () => {
             onClick={exportUsers}
             text={t('users.exportCSV')}
           />
-            
+
           {/* {permissions.canManageRoles && (
             <Button
               onClick={() => {
@@ -641,6 +918,85 @@ const CompanyUsersPage = () => {
           />
         </div>
       </div>
+
+      {/* Barra de Ações em Massa */}
+      {selectedUsers.length > 0 && (
+        <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0 p-4">
+            <div className="flex items-center space-x-3">
+              <input
+                type="checkbox"
+                checked={selectedUsers.length === currentUsers.length}
+                onChange={toggleSelectAll}
+                className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+              />
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {selectedUsers.length} {t('users.bulkActions.selected', { count: selectedUsers.length })}
+              </span>
+              <button
+                onClick={clearSelection}
+                className="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400"
+              >
+                {t('users.bulkActions.clearSelection')}
+              </button>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {permissions.canViewCompanySettings && (
+                <>
+                  <Button
+                    onClick={() => handleBulkAction('approve')}
+                    className="btn-sm bg-green-500 hover:bg-green-600 text-white"
+                    disabled={loading}
+                  >
+                    <UserCheck size={14} className="mr-1" />
+                    {t('users.bulkActions.approve')}
+                  </Button>
+                  <Button
+                    onClick={() => handleBulkAction('activate')}
+                    className="btn-sm bg-blue-500 hover:bg-blue-600 text-white"
+                    disabled={loading}
+                  >
+                    <UserCheck size={14} className="mr-1" />
+                    {t('users.bulkActions.activate')}
+                  </Button>
+                  <Button
+                    onClick={() => handleBulkAction('deactivate')}
+                    className="btn-sm bg-orange-500 hover:bg-orange-600 text-white"
+                    disabled={loading}
+                  >
+                    <UserX size={14} className="mr-1" />
+                    {t('users.bulkActions.deactivate')}
+                  </Button>
+                  <Button
+                    onClick={() => handleBulkAction('block')}
+                    className="btn-sm bg-red-500 hover:bg-red-600 text-white"
+                    disabled={loading}
+                  >
+                    <Lock size={14} className="mr-1" />
+                    {t('users.bulkActions.block')}
+                  </Button>
+                  <Button
+                    onClick={() => handleBulkAction('unblock')}
+                    className="btn-sm bg-teal-500 hover:bg-teal-600 text-white"
+                    disabled={loading}
+                  >
+                    <Unlock size={14} className="mr-1" />
+                    {t('users.bulkActions.unblock')}
+                  </Button>
+                </>
+              )}
+              <Button
+                onClick={() => handleBulkAction('exportSelected')}
+                className="btn-sm bg-gray-500 hover:bg-gray-600 text-white"
+                disabled={loading}
+              >
+                <Download size={14} className="mr-1" />
+                {t('users.bulkActions.export')}
+              </Button>
+            </div>
+          </div>
+        </Card>
+      )}
 
       {/* Estatísticas */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -717,83 +1073,110 @@ const CompanyUsersPage = () => {
 
       {/* Filtros */}
       <Card>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 items-end">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {t('users.filters.search')}
-            </label>
-            <div className="relative">
-              <Textinput
-                placeholder={t('users.filters.searchPlaceholder')}
-                value={filters.search}
-                onChange={(e) => handleFilterChange('search', e.target.value)}
+        <div className="space-y-4">
+          {/* Primeira linha */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {t('users.filters.search')}
+              </label>
+              <div className="relative">
+                <Textinput
+                  placeholder={t('users.filters.searchPlaceholder')}
+                  value={filters.search}
+                  onChange={(e) => handleFilterChange('search', e.target.value)}
+                />
+                <Search size={16} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {t('users.filters.role')}
+              </label>
+              <Select
+                className="react-select"
+                classNamePrefix="select"
+                options={roleOptions}
+                value={roleOptions.find(option => option.value === filters.role)}
+                onChange={(option) => handleFilterChange('role', option?.value || '')}
+                placeholder="Role"
+                styles={selectStyles}
+                isClearable
               />
-              <Search size={16} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {t('users.filters.status')}
+              </label>
+              <Select
+                className="react-select"
+                classNamePrefix="select"
+                options={statusOptions}
+                value={statusOptions.find(option => option.value === filters.status)}
+                onChange={(option) => handleFilterChange('status', option?.value || '')}
+                placeholder={t('users.filters.status')}
+                styles={selectStyles}
+                isClearable
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {t('users.filters.lastLogin')}
+              </label>
+              <Select
+                className="react-select"
+                classNamePrefix="select"
+                options={lastLoginOptions}
+                value={lastLoginOptions.find(option => option.value === filters.lastLoginDays)}
+                onChange={(option) => handleFilterChange('lastLoginDays', option?.value || '')}
+                placeholder={t('users.filters.period')}
+                styles={selectStyles}
+                isClearable
+              />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {t('users.filters.role')}
-            </label>
-            <Select
-              className="react-select"
-              classNamePrefix="select"
-              options={roleOptions}
-              value={roleOptions.find(option => option.value === filters.role)}
-              onChange={(option) => handleFilterChange('role', option?.value || '')}
-              placeholder="Role"
-              styles={selectStyles}
-              isClearable
-            />
-          </div>
+          {/* Segunda linha - Filtros de data */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {t('users.filters.createdFrom', 'Data de criação (de)')}
+              </label>
+              <Textinput
+                type="date"
+                value={filters.createdFrom}
+                onChange={(e) => handleFilterChange('createdFrom', e.target.value)}
+              />
+            </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {t('users.filters.status')}
-            </label>
-            <Select
-              className="react-select"
-              classNamePrefix="select"
-              options={statusOptions}
-              value={statusOptions.find(option => option.value === filters.status)}
-              onChange={(option) => handleFilterChange('status', option?.value || '')}
-              placeholder={t('users.filters.status')}
-              styles={selectStyles}
-              isClearable
-            />
-          </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {t('users.filters.createdTo', 'Data de criação (até)')}
+              </label>
+              <Textinput
+                type="date"
+                value={filters.createdTo}
+                onChange={(e) => handleFilterChange('createdTo', e.target.value)}
+              />
+            </div>
 
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {t('users.filters.lastLogin')}
-            </label>
-            <Select
-              className="react-select"
-              classNamePrefix="select"
-              options={lastLoginOptions}
-              value={lastLoginOptions.find(option => option.value === filters.lastLoginDays)}
-              onChange={(option) => handleFilterChange('lastLoginDays', option?.value || '')}
-              placeholder={t('users.filters.period')}
-              styles={selectStyles}
-              isClearable
-            />
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Button
-              onClick={clearFilters}
-              variant="outline"
-              className="btn-outline-secondary flex-1"
-            >
-              {t('users.filters.clear')}
-            </Button>
+            <div className="flex items-end space-x-2">
+              <Button
+                onClick={clearFilters}
+                variant="outline"
+                className="btn-outline-secondary flex-1"
+              >
+                {t('users.filters.clear')}
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Resumo dos filtros */}
-        {(filters.search || filters.role || filters.status || filters.lastLoginDays) && (
+        {(filters.search || filters.role || filters.status || filters.lastLoginDays || filters.createdFrom || filters.createdTo) && (
           <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm text-slate-600 dark:text-slate-400">{t('users.filters.activeFilters')}</span>
@@ -815,6 +1198,16 @@ const CompanyUsersPage = () => {
               {filters.lastLoginDays && (
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-500/20 dark:text-primary-300">
                   {t('users.filters.loginLabel')} {lastLoginOptions.find(o => o.value === filters.lastLoginDays)?.label}
+                </span>
+              )}
+              {filters.createdFrom && (
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-500/20 dark:text-primary-300">
+                  De: {new Date(filters.createdFrom).toLocaleDateString('pt-BR')}
+                </span>
+              )}
+              {filters.createdTo && (
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-500/20 dark:text-primary-300">
+                  Até: {new Date(filters.createdTo).toLocaleDateString('pt-BR')}
                 </span>
               )}
             </div>
@@ -856,6 +1249,14 @@ const CompanyUsersPage = () => {
               <table className="min-w-full relative">
                 <thead className="bg-slate-50 dark:bg-slate-800">
                   <tr>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400">
+                      <input
+                        type="checkbox"
+                        checked={selectedUsers.length > 0 && selectedUsers.length === currentUsers.length}
+                        onChange={toggleSelectAll}
+                        className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                      />
+                    </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                       {t('users.table.user')}
                     </th>
@@ -883,6 +1284,16 @@ const CompanyUsersPage = () => {
                           key={user.id}
                           className="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-150"
                         >
+                          {/* Checkbox */}
+                          <td className="px-4 py-3">
+                            <input
+                              type="checkbox"
+                              checked={selectedUsers.includes(user.id)}
+                              onChange={() => toggleSelectUser(user.id)}
+                              className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                            />
+                          </td>
+
                           {/* Usuário */}
                           <td className="px-4 py-3">
                             <div className="flex items-center space-x-3">
@@ -1061,6 +1472,16 @@ const CompanyUsersPage = () => {
                                       )}
                                     </>
                                   )}
+
+                                  <div className="border-t border-gray-100 dark:border-gray-600"></div>
+
+                                  <button
+                                    onClick={() => handleOpenRolesModal(user)}
+                                    className="flex items-center px-4 py-2 text-sm text-purple-600 dark:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
+                                  >
+                                    <Shield size={14} className="mr-2" />
+                                    Gerenciar Permissões
+                                  </button>
                                 </>
                               )}
                             </Dropdown>
@@ -1070,7 +1491,7 @@ const CompanyUsersPage = () => {
                     })
                   ) : (
                     <tr>
-                      <td colSpan={5} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
+                      <td colSpan={6} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
                         <div className="flex flex-col items-center">
                           <User className="w-12 h-12 mb-2 opacity-50" />
                           <span className="font-medium">{t('users.noUsers')}</span>
@@ -1141,6 +1562,139 @@ const CompanyUsersPage = () => {
           )}
         </div>
       </Card>
+
+      {/* Modal de Roles */}
+      <Modal
+        activeModal={showRolesModal}
+        onClose={handleCloseRolesModal}
+        title={`Gerenciar Permissões - ${selectedUserForRoles?.name}`}
+        className="max-w-3xl"
+        footer={
+          <div className="flex justify-end">
+            <Button
+              text="Fechar"
+              className="btn-outline-secondary"
+              onClick={handleCloseRolesModal}
+            />
+          </div>
+        }
+      >
+        {loadingRoles ? (
+          <div className="flex justify-center items-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
+            <span className="ml-2 text-slate-600 dark:text-slate-400">Carregando roles...</span>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {/* Roles Atuais do Usuário */}
+            <div>
+              <h6 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">
+                Roles Atribuídas ({userRoles.length})
+              </h6>
+              {userRoles.length === 0 ? (
+                <div className="text-center py-6 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                  <Shield className="w-12 h-12 mx-auto text-slate-300 mb-2" />
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    Nenhuma role atribuída
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {userRoles.map((userRole) => (
+                    <div
+                      key={userRole.id}
+                      className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <Shield className="w-5 h-5 text-purple-600" />
+                        <div>
+                          <h6 className="text-sm font-medium text-slate-900 dark:text-white">
+                            {userRole.role.displayName}
+                          </h6>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
+                            {userRole.role.description}
+                          </p>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <span className="text-xs px-2 py-0.5 rounded bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300">
+                              Prioridade: {userRole.role.priority}
+                            </span>
+                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                              {userRole.role._count?.permissions || 0} permissões
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleRemoveRole(userRole.role.id)}
+                        className="text-red-500 hover:text-red-700"
+                        title="Remover role"
+                      >
+                        <XCircle className="w-5 h-5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Roles Disponíveis */}
+            <div>
+              <h6 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">
+                Roles Disponíveis
+              </h6>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {availableRoles
+                  .filter(role => !userRoles.some(ur => ur.role.id === role.id))
+                  .map((role) => (
+                    <div
+                      key={role.id}
+                      className="flex items-center justify-between p-3 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                    >
+                      <div className="flex items-center space-x-3 flex-1">
+                        <Shield className="w-5 h-5 text-slate-400" />
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2">
+                            <h6 className="text-sm font-medium text-slate-900 dark:text-white">
+                              {role.displayName}
+                            </h6>
+                            {role.isSystem && (
+                              <Lock className="w-3 h-3 text-slate-400" title="Role do sistema" />
+                            )}
+                          </div>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
+                            {role.description}
+                          </p>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <span className="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300">
+                              Prioridade: {role.priority}
+                            </span>
+                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                              {role._count?.permissions || 0} permissões
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleAssignRole(role.id)}
+                        className="ml-3 px-3 py-1.5 bg-purple-500 hover:bg-purple-600 text-white text-sm rounded-md transition-colors"
+                      >
+                        Atribuir
+                      </button>
+                    </div>
+                  ))}
+                {availableRoles.filter(role => !userRoles.some(ur => ur.role.id === role.id)).length === 0 && (
+                  <div className="text-center py-6 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <CheckCircle2 className="w-12 h-12 mx-auto text-green-500 mb-2" />
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                      Todas as roles disponíveis já foram atribuídas
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </Modal>
 
     </div>
   );

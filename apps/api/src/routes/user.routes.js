@@ -971,4 +971,66 @@ router.put('/language', jwtMiddleware.authenticateToken, userController.updateUs
  */
 router.get('/merchants/stats', jwtMiddleware.authenticateToken, userController.getMerchantStats);
 
+/**
+ * DELETE /api/users/account
+ * Excluir conta do usuário (soft delete)
+ * @route DELETE /api/users/account
+ * @group User - Operações de usuário
+ * @security JWT
+ * @param {string} reason.body.required - Motivo da exclusão
+ * @returns {object} 200 - Conta excluída com sucesso
+ *     example:
+ *       {
+ *         "success": true,
+ *         "message": "Conta excluída com sucesso"
+ *       }
+ * @returns {object} 400 - Saldo pendente
+ * @returns {object} 500 - Erro interno
+ */
+router.delete('/account', jwtMiddleware.authenticateToken, userController.deleteAccount);
+
+/**
+ * PUT /api/users/password
+ * Alterar senha do usuário
+ * @route PUT /api/users/password
+ * @group User - Operações de usuário
+ * @security JWT
+ * @param {string} currentPassword.body.required - Senha atual
+ * @param {string} newPassword.body.required - Nova senha
+ * @returns {object} 200 - Senha alterada com sucesso
+ *     example:
+ *       {
+ *         "success": true,
+ *         "message": "Senha alterada com sucesso"
+ *       }
+ * @returns {object} 401 - Senha atual incorreta
+ * @returns {object} 400 - Nova senha não atende aos critérios
+ * @returns {object} 500 - Erro interno
+ */
+router.put('/password', jwtMiddleware.authenticateToken, userController.changePassword);
+
+/**
+ * GET /api/users/data
+ * Baixar dados do usuário (LGPD compliance)
+ * @route GET /api/users/data
+ * @group User - Operações de usuário
+ * @security JWT
+ * @returns {object} 200 - Dados do usuário
+ *     example:
+ *       {
+ *         "success": true,
+ *         "data": {
+ *           "id": "uuid",
+ *           "name": "João Silva",
+ *           "email": "joao@example.com",
+ *           "products": [],
+ *           "purchases": [],
+ *           "userDocuments": [],
+ *           "withdrawals": []
+ *         }
+ *       }
+ * @returns {object} 500 - Erro interno
+ */
+router.get('/data', jwtMiddleware.authenticateToken, userController.downloadUserData);
+
 module.exports = router; 

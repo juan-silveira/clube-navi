@@ -233,6 +233,40 @@ class ApiService {
     }
   }
 
+  async changePassword(currentPassword: string, newPassword: string): Promise<ApiResponse> {
+    try {
+      const response = await this.api.put<ApiResponse>(
+        '/api/users/password',
+        { currentPassword, newPassword }
+      );
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse>(error);
+    }
+  }
+
+  async downloadUserData(): Promise<ApiResponse<any>> {
+    try {
+      const response = await this.api.get<ApiResponse<any>>('/api/users/data');
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse<any>>(error);
+    }
+  }
+
+  async deleteAccount(reason: string): Promise<ApiResponse> {
+    try {
+      const response = await this.api.delete<ApiResponse>(
+        '/api/users/account',
+        { reason }
+      );
+      await this.clearStorage();
+      return response.data;
+    } catch (error) {
+      return this.handleError<ApiResponse>(error);
+    }
+  }
+
   // Métodos auxiliares
   async getStoredUser(): Promise<User | null> {
     try {
@@ -284,9 +318,9 @@ class ApiService {
     }
   }
 
-  async delete<T = any>(url: string): Promise<ApiResponse<T>> {
+  async delete<T = any>(url: string, data?: any): Promise<ApiResponse<T>> {
     try {
-      const response = await this.api.delete(url);
+      const response = await this.api.delete(url, { data });
       return response.data;
     } catch (error) {
       return this.handleError<ApiResponse<T>>(error);

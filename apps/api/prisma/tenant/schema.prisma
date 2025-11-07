@@ -68,9 +68,14 @@ model User {
   purchases              Purchase[]          @relation("ConsumerPurchases")
   sales                  Purchase[]          @relation("MerchantSales")
   pushTokens             UserPushToken[]
+  pushNotificationLogs   PushNotificationLog[]
   notifications          Notification[]
   userModules            UserModule[]
   cashbackConfig         UserCashbackConfig?
+  userRoles              UserRole[]
+  groups                 GroupUser[]
+  analyticsEvents        AnalyticsEvent[]
+  sessions               UserSession[]
 
   @@index([email])
   @@index([username])
@@ -346,4 +351,255 @@ enum NotificationType {
   referral
   system
   promotion
+}
+
+// ==========================================
+// PUSH NOTIFICATIONS
+// ==========================================
+
+model PushNotificationCampaign {
+  id                String                    @id @default(uuid()) @db.Uuid
+  tenantId          String                    @map("tenant_id") @db.Uuid
+  title             String                    @db.VarChar(100)
+  description       String                    @db.Text
+  pageTitle         String?                   @map("page_title") @db.VarChar(100)
+  pageDescription   String?                   @map("page_description") @db.Text
+  code              String?                   @db.VarChar(50)
+  rules             String?                   @db.Text
+  logoUrl           String?                   @map("logo_url") @db.VarChar(255)
+  bannerUrl         String?                   @map("banner_url") @db.VarChar(255)
+  enableButton      Boolean                   @default(false) @map("enable_button")
+  buttonType        String?                   @map("button_type") @db.VarChar(20) // 'module' ou 'external'
+  targetModule      String?                   @map("target_module") @db.VarChar(50)
+  externalLink      String?                   @map("external_link") @db.VarChar(500)
+  buttonText        String?                   @map("button_text") @db.VarChar(50)
+  geolocation       Json?                     // { cep, radius }
+  targetUserCount   Int                       @default(0) @map("target_user_count")
+  sentCount         Int                       @default(0) @map("sent_count")
+  failedCount       Int                       @default(0) @map("failed_count")
+  status            PushCampaignStatus        @default(draft)
+  scheduledAt       DateTime?                 @map("scheduled_at") @db.Timestamptz(6)
+  createdAt         DateTime                  @default(now()) @map("created_at") @db.Timestamptz(6)
+  completedAt       DateTime?                 @map("completed_at") @db.Timestamptz(6)
+  logs              PushNotificationLog[]
+
+  @@map("push_notification_campaigns")
+}
+
+model PushNotificationLog {
+  id          String                   @id @default(uuid()) @db.Uuid
+  campaignId  String                   @map("campaign_id") @db.Uuid
+  userId      String                   @map("user_id") @db.Uuid
+  pushToken   String                   @map("push_token") @db.VarChar(500)
+  status      PushNotificationStatus   @default(pending)
+  error       String?                  @db.Text
+  sentAt      DateTime                 @map("sent_at") @db.Timestamptz(6)
+  openedAt    DateTime?                @map("opened_at") @db.Timestamptz(6)
+  clickedAt   DateTime?                @map("clicked_at") @db.Timestamptz(6)
+  campaign    PushNotificationCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user        User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("push_notification_logs")
+}
+
+enum PushCampaignStatus {
+  draft
+  scheduled
+  processing
+  completed
+  failed
+}
+
+enum PushNotificationStatus {
+  pending
+  sent
+  failed
+  read
+}
+
+// ==========================================
+// ANALYTICS & TRACKING
+// ==========================================
+
+model AnalyticsEvent {
+  id          String               @id @default(uuid()) @db.Uuid
+  userId      String?              @map("user_id") @db.Uuid
+  sessionId   String?              @map("session_id") @db.Uuid // Para rastrear sessões anônimas
+  eventType   AnalyticsEventType   @map("event_type")
+  eventName   String               @map("event_name") @db.VarChar(100) // Ex: "button_click", "page_view", "product_view"
+  category    String?              @db.VarChar(50) // Ex: "navigation", "purchase", "engagement"
+
+  // Dados contextuais
+  pagePath    String?              @map("page_path") @db.VarChar(500)
+  pageTitle   String?              @map("page_title") @db.VarChar(200)
+  referrer    String?              @db.VarChar(500)
+
+  // Metadados do evento (flexível)
+  metadata    Json?                // { productId, campaignId, buttonText, etc }
+
+  // Informações do dispositivo/browser
+  platform    String?              @db.VarChar(50) // "web", "ios", "android"
+  deviceType  String?              @map("device_type") @db.VarChar(50) // "mobile", "tablet", "desktop"
+  browser     String?              @db.VarChar(50)
+  os          String?              @db.VarChar(50)
+
+  // Geolocalização (opcional)
+  ipAddress   String?              @map("ip_address") @db.VarChar(45)
+  country     String?              @db.VarChar(2) // Código ISO do país
+  city        String?              @db.VarChar(100)
+
+  // Timestamps
+  createdAt   DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user        User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([eventType])
+  @@index([eventName])
+  @@index([createdAt])
+  @@index([sessionId])
+  @@map("analytics_events")
+}
+
+model UserSession {
+  id            String    @id @default(uuid()) @db.Uuid
+  userId        String?   @map("user_id") @db.Uuid
+  sessionToken  String    @unique @map("session_token") @db.VarChar(255)
+
+  // Dados da sessão
+  startedAt     DateTime  @default(now()) @map("started_at") @db.Timestamptz(6)
+  lastActivityAt DateTime @default(now()) @map("last_activity_at") @db.Timestamptz(6)
+  endedAt       DateTime? @map("ended_at") @db.Timestamptz(6)
+  duration      Int?      @default(0) // Em segundos
+
+  // Device info
+  platform      String?   @db.VarChar(50)
+  deviceType    String?   @map("device_type") @db.VarChar(50)
+  browser       String?   @db.VarChar(50)
+  os            String?   @db.VarChar(50)
+  ipAddress     String?   @map("ip_address") @db.VarChar(45)
+
+  // Métricas da sessão
+  pageViews     Int       @default(0) @map("page_views")
+  interactions  Int       @default(0) // Número total de interações
+
+  user          User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionToken])
+  @@index([startedAt])
+  @@map("user_sessions")
+}
+
+enum AnalyticsEventType {
+  page_view
+  click
+  form_submit
+  purchase
+  search
+  notification_open
+  notification_click
+  video_play
+  video_complete
+  download
+  share
+  error
+  custom
+}
+
+// ==========================================
+// ROLES & PERMISSIONS
+// ==========================================
+
+model Role {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String           @unique @db.VarChar(50) // super_admin, admin, operator, client_active, client_inactive
+  displayName String           @map("display_name") @db.VarChar(100)
+  description String?          @db.Text
+  isSystem    Boolean          @default(false) @map("is_system") // Roles do sistema não podem ser deletadas
+  priority    Int              @default(0) // Ordem de hierarquia (maior = mais poder)
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  permissions RolePermission[]
+  userRoles   UserRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String           @id @default(uuid()) @db.Uuid
+  module      String           @db.VarChar(50) // users, products, purchases, cashback, notifications, etc
+  action      PermissionAction // create, read, update, delete
+  resource    String           @db.VarChar(100) // Nome completo: "users.create", "products.read"
+  description String?          @db.Text
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  roles       RolePermission[]
+
+  @@unique([module, action])
+  @@map("permissions")
+}
+
+model RolePermission {
+  id           String     @id @default(uuid()) @db.Uuid
+  roleId       String     @map("role_id") @db.Uuid
+  permissionId String     @map("permission_id") @db.Uuid
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  roleId    String   @map("role_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  createdBy String?  @map("created_by") @db.Uuid // Quem atribuiu a role
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}
+
+model Group {
+  id          String      @id @default(uuid()) @db.Uuid
+  name        String      @db.VarChar(100)
+  description String?     @db.Text
+  color       String?     @db.VarChar(7) // Cor em hex: #FF5733
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+  createdBy   String      @map("created_by") @db.Uuid
+
+  users       GroupUser[]
+
+  @@map("groups")
+}
+
+model GroupUser {
+  id        String   @id @default(uuid()) @db.Uuid
+  groupId   String   @map("group_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  addedAt   DateTime @default(now()) @map("added_at") @db.Timestamptz(6)
+  addedBy   String   @map("added_by") @db.Uuid
+
+  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@map("group_users")
+}
+
+enum PermissionAction {
+  create
+  read
+  update
+  delete
+  execute // Para ações especiais como "send_notification", "approve_document"
 }

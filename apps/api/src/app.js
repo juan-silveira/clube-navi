@@ -57,6 +57,9 @@ const pixValidationRoutes = require('./routes/pix-validation.routes');
 // Importar serviços
 const logService = require('./services/log.service');
 
+// Iniciar processador de campanhas agendadas
+require('./services/scheduledCampaignProcessor.service');
+
 // Importar middlewares
 const { 
   authenticateApiKey, 
@@ -1291,6 +1294,26 @@ app.use('/api/notification-config', authenticateJWT, notificationConfigRoutes);
 // Rotas de mensagens WhatsApp
 const { router: whatsappMessageRoutes } = require('./routes/whatsappMessage.routes');
 app.use('/api/whatsapp-messages', authenticateJWT, whatsappMessageRoutes);
+
+// Rotas de notificações Push
+const pushNotificationRoutes = require('./routes/pushNotification.routes');
+app.use('/api/push-notifications', authenticateJWT, pushNotificationRoutes);
+
+// Rotas de tokens Push
+const pushTokenRoutes = require('./routes/pushToken.routes');
+app.use('/api/push-tokens', pushTokenRoutes);
+
+// Rotas de Analytics
+const analyticsRoutes = require('./routes/analytics.routes');
+app.use('/api/analytics', resolveTenantMiddleware, analyticsRoutes);
+
+// Rotas de Roles e Permissões
+const roleRoutes = require('./routes/role.routes');
+app.use('/api/roles', resolveTenantMiddleware, authenticateJWT, roleRoutes);
+
+// Rotas de Grupos
+const groupRoutes = require('./routes/group.routes');
+app.use('/api/groups', resolveTenantMiddleware, authenticateJWT, groupRoutes);
 
 // Rotas de taxas de usuários (com autenticação JWT)
 const userTaxesRoutes = require('./routes/userTaxes.routes');

@@ -250,6 +250,135 @@ exports.Prisma.NotificationScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PushNotificationCampaignScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  description: 'description',
+  pageTitle: 'pageTitle',
+  pageDescription: 'pageDescription',
+  code: 'code',
+  rules: 'rules',
+  logoUrl: 'logoUrl',
+  bannerUrl: 'bannerUrl',
+  enableButton: 'enableButton',
+  buttonType: 'buttonType',
+  targetModule: 'targetModule',
+  externalLink: 'externalLink',
+  buttonText: 'buttonText',
+  geolocation: 'geolocation',
+  targetUserCount: 'targetUserCount',
+  sentCount: 'sentCount',
+  failedCount: 'failedCount',
+  status: 'status',
+  scheduledAt: 'scheduledAt',
+  createdAt: 'createdAt',
+  completedAt: 'completedAt'
+};
+
+exports.Prisma.PushNotificationLogScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  userId: 'userId',
+  pushToken: 'pushToken',
+  status: 'status',
+  error: 'error',
+  sentAt: 'sentAt',
+  openedAt: 'openedAt',
+  clickedAt: 'clickedAt'
+};
+
+exports.Prisma.AnalyticsEventScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sessionId: 'sessionId',
+  eventType: 'eventType',
+  eventName: 'eventName',
+  category: 'category',
+  pagePath: 'pagePath',
+  pageTitle: 'pageTitle',
+  referrer: 'referrer',
+  metadata: 'metadata',
+  platform: 'platform',
+  deviceType: 'deviceType',
+  browser: 'browser',
+  os: 'os',
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sessionToken: 'sessionToken',
+  startedAt: 'startedAt',
+  lastActivityAt: 'lastActivityAt',
+  endedAt: 'endedAt',
+  duration: 'duration',
+  platform: 'platform',
+  deviceType: 'deviceType',
+  browser: 'browser',
+  os: 'os',
+  ipAddress: 'ipAddress',
+  pageViews: 'pageViews',
+  interactions: 'interactions'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  displayName: 'displayName',
+  description: 'description',
+  isSystem: 'isSystem',
+  priority: 'priority',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  module: 'module',
+  action: 'action',
+  resource: 'resource',
+  description: 'description',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RolePermissionScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  permissionId: 'permissionId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserRoleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roleId: 'roleId',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy'
+};
+
+exports.Prisma.GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdBy: 'createdBy'
+};
+
+exports.Prisma.GroupUserScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  userId: 'userId',
+  addedAt: 'addedAt',
+  addedBy: 'addedBy'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -332,6 +461,45 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   promotion: 'promotion'
 };
 
+exports.PushCampaignStatus = exports.$Enums.PushCampaignStatus = {
+  draft: 'draft',
+  scheduled: 'scheduled',
+  processing: 'processing',
+  completed: 'completed',
+  failed: 'failed'
+};
+
+exports.PushNotificationStatus = exports.$Enums.PushNotificationStatus = {
+  pending: 'pending',
+  sent: 'sent',
+  failed: 'failed',
+  read: 'read'
+};
+
+exports.AnalyticsEventType = exports.$Enums.AnalyticsEventType = {
+  page_view: 'page_view',
+  click: 'click',
+  form_submit: 'form_submit',
+  purchase: 'purchase',
+  search: 'search',
+  notification_open: 'notification_open',
+  notification_click: 'notification_click',
+  video_play: 'video_play',
+  video_complete: 'video_complete',
+  download: 'download',
+  share: 'share',
+  error: 'error',
+  custom: 'custom'
+};
+
+exports.PermissionAction = exports.$Enums.PermissionAction = {
+  create: 'create',
+  read: 'read',
+  update: 'update',
+  delete: 'delete',
+  execute: 'execute'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   UserModule: 'UserModule',
@@ -340,7 +508,17 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   Purchase: 'Purchase',
   Campaign: 'Campaign',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  PushNotificationCampaign: 'PushNotificationCampaign',
+  PushNotificationLog: 'PushNotificationLog',
+  AnalyticsEvent: 'AnalyticsEvent',
+  UserSession: 'UserSession',
+  Role: 'Role',
+  Permission: 'Permission',
+  RolePermission: 'RolePermission',
+  UserRole: 'UserRole',
+  Group: 'Group',
+  GroupUser: 'GroupUser'
 };
 
 /**
