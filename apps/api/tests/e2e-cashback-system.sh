@@ -85,8 +85,10 @@ MERCHANT_RESPONSE=$(curl -s -X POST "$API_URL/api/auth/register" \
     \"password\": \"Test@123\",
     \"firstName\": \"Test\",
     \"lastName\": \"Merchant\",
+    \"name\": \"Test Merchant Silva\",
     \"cpf\": \"12345678901\",
     \"phone\": \"11999999999\",
+    \"personType\": \"PF\",
     \"userType\": \"merchant\"
   }")
 
@@ -185,8 +187,10 @@ CONSUMER_RESPONSE=$(curl -s -X POST "$API_URL/api/auth/register" \
     \"password\": \"Test@123\",
     \"firstName\": \"Test\",
     \"lastName\": \"Consumer\",
+    \"name\": \"Test Consumer Santos\",
     \"cpf\": \"98765432109\",
     \"phone\": \"11888888888\",
+    \"personType\": \"PF\",
     \"userType\": \"consumer\"
   }")
 
