@@ -174,8 +174,8 @@ export default function RequestWithdrawalScreen() {
       };
     }
 
-    // Validar chave PIX
-    const pixValidation = withdrawalService.validatePixKey(pixKey, pixKeyType);
+    // Validar chave PIX (formato básico)
+    const pixValidation = withdrawalService.validatePixKeyFormat(pixKey, pixKeyType);
     if (!pixValidation.valid) {
       return { valid: false, error: pixValidation.error };
     }

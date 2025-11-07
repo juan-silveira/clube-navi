@@ -52,6 +52,7 @@ const purchaseRoutes = require('./routes/purchase.routes');
 const cashbackRoutes = require('./routes/cashback.routes');
 const balanceRoutes = require('./routes/balance.routes');
 const withdrawalRoutes = require('./routes/withdrawal.routes');
+const pixValidationRoutes = require('./routes/pix-validation.routes');
 
 // Importar serviços
 const logService = require('./services/log.service');
@@ -784,6 +785,9 @@ app.use('/api/cashback', resolveTenantMiddleware, authenticateJWT, apiRateLimite
 // Rotas de saldo e saques
 app.use('/api/balance', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, balanceRoutes);
 app.use('/api/withdrawals', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, withdrawalRoutes);
+
+// Rotas de validação PIX
+app.use('/api/pix/validation', resolveTenantMiddleware, authenticateJWT, apiRateLimiter, pixValidationRoutes);
 
 // Rotas de contratos (com autenticação e sistema de fila) - COMENTADO PARA DEBUG
 // app.use('/api/contracts', authenticateApiKey, transactionRateLimiter, addUserInfo, logAuthenticatedRequest, QueueMiddleware.enqueueExternalOperations, CacheRefreshMiddleware.refreshAfterQueueOperation, contractRoutes);

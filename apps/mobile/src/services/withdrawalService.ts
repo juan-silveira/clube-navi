@@ -177,9 +177,9 @@ class WithdrawalService {
   }
 
   /**
-   * Valida formato de chave PIX
+   * Valida formato de chave PIX localmente
    */
-  validatePixKey(key: string, type: PixKeyType): { valid: boolean; error?: string } {
+  validatePixKeyFormat(key: string, type: PixKeyType): { valid: boolean; error?: string } {
     const cleanKey = key.replace(/\D/g, '');
 
     switch (type) {
@@ -216,6 +216,60 @@ class WithdrawalService {
 
       default:
         return { valid: false, error: 'Tipo de chave inválido' };
+    }
+  }
+
+  /**
+   * Valida chave PIX com o servidor (consulta DICT via EFI)
+   */
+  async validatePixKey(
+    pixKey: string,
+    pixKeyType: PixKeyType
+  ): Promise<{
+    success: boolean;
+    valid: boolean;
+    holder?: {
+      name: string;
+      cpfCnpj: string;
+      personType: string;
+    };
+    error?: string;
+  }> {
+    try {
+      const response = await apiService.post<{
+        valid: boolean;
+        pixKey: string;
+        pixKeyType: PixKeyType;
+        holder?: {
+          name: string;
+          cpfCnpj: string;
+          personType: string;
+        };
+      }>('/api/pix/validation/validate-key', {
+        pixKey,
+        pixKeyType,
+      });
+
+      if (response.success && response.data) {
+        return {
+          success: true,
+          valid: response.data.valid,
+          holder: response.data.holder,
+        };
+      }
+
+      return {
+        success: false,
+        valid: false,
+        error: response.message || 'Erro ao validar chave PIX',
+      };
+    } catch (error: any) {
+      console.error('Error validating PIX key:', error);
+      return {
+        success: false,
+        valid: false,
+        error: error?.response?.data?.message || 'Erro ao validar chave PIX',
+      };
     }
   }
 
