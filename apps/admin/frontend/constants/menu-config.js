@@ -127,6 +127,32 @@ export const getMenuItems = (t) => [
   },
   {
     isHeadr: true,
+    title: "Marketplace",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    title: "Analytics",
+    isHide: true,
+    icon: "heroicons:chart-bar",
+    link: "/marketplace-analytics",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    title: "Produtos",
+    isHide: true,
+    icon: "heroicons:shopping-bag",
+    link: "/products",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    title: "Merchants",
+    isHide: true,
+    icon: "heroicons:building-storefront",
+    link: "/merchants",
+    requiredPermissions: ["canViewCompanySettings"],
+  },
+  {
+    isHeadr: true,
     title: t('menu:sections.systemSettings'),
     requiredPermissions: ["canViewSystemSettings"],
   },

@@ -9,6 +9,7 @@ import Modal from "@/components/ui/Modal";
 import Badge from "@/components/ui/Badge";
 import Tooltip from "@/components/ui/Tooltip";
 import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
+import productService from "@/services/productService";
 
 const ProductsManagement = () => {
   const [products, setProducts] = useState([]);
@@ -17,6 +18,12 @@ const ProductsManagement = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [stats, setStats] = useState({
+    total: 0,
+    active: 0,
+    lowStock: 0,
+    outOfStock: 0,
+  });
 
   const [formData, setFormData] = useState({
     name: "",
@@ -27,58 +34,38 @@ const ProductsManagement = () => {
     stock: "",
   });
 
-  // Mock data - Substituir por chamada real à API
   useEffect(() => {
     loadProducts();
+    loadStats();
   }, []);
 
   const loadProducts = async () => {
     setLoading(true);
-    // Simular chamada API
-    setTimeout(() => {
-      setProducts([
-        {
-          id: "1",
-          name: "Smartphone XYZ Pro",
-          description: "Último modelo com câmera avançada",
-          price: 2999.90,
-          cashbackPercentage: 15,
-          category: "Eletrônicos",
-          stock: 45,
-          isActive: true,
-          merchantId: "merchant-1",
-          merchant: { firstName: "João", lastName: "Silva" },
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: "2",
-          name: "Notebook Gaming Ultra",
-          description: "Perfeito para jogos e trabalho pesado",
-          price: 4599.00,
-          cashbackPercentage: 20,
-          category: "Eletrônicos",
-          stock: 12,
-          isActive: true,
-          merchantId: "merchant-2",
-          merchant: { firstName: "Maria", lastName: "Santos" },
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: "3",
-          name: "Tênis Esportivo Premium",
-          description: "Conforto e performance",
-          price: 399.90,
-          cashbackPercentage: 10,
-          category: "Esportes",
-          stock: 0,
-          isActive: false,
-          merchantId: "merchant-3",
-          merchant: { firstName: "Carlos", lastName: "Oliveira" },
-          createdAt: new Date().toISOString(),
-        },
-      ]);
+    try {
+      const response = await productService.listProducts();
+      if (response.success && response.data) {
+        const productList = Array.isArray(response.data)
+          ? response.data
+          : response.data.products || [];
+        setProducts(productList);
+      }
+    } catch (error) {
+      console.error("Error loading products:", error);
+      alert("Erro ao carregar produtos");
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
+  };
+
+  const loadStats = async () => {
+    try {
+      const response = await productService.getProductStats();
+      if (response.success && response.data) {
+        setStats(response.data);
+      }
+    } catch (error) {
+      console.error("Error loading stats:", error);
+    }
   };
 
   const handleEdit = (product) => {
@@ -96,34 +83,70 @@ const ProductsManagement = () => {
 
   const handleDelete = async (productId) => {
     if (confirm("Tem certeza que deseja excluir este produto?")) {
-      // Implementar chamada API para deletar
-      setProducts(products.filter((p) => p.id !== productId));
+      try {
+        await productService.deleteProduct(productId);
+        setProducts(products.filter((p) => p.id !== productId));
+        loadStats();
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        alert("Erro ao excluir produto");
+      }
     }
   };
 
   const handleToggleActive = async (product) => {
-    // Implementar chamada API para ativar/desativar
-    setProducts(
-      products.map((p) =>
-        p.id === product.id ? { ...p, isActive: !p.isActive } : p
-      )
-    );
+    try {
+      await productService.toggleProductStatus(product.id, !product.isActive);
+      setProducts(
+        products.map((p) =>
+          p.id === product.id ? { ...p, isActive: !p.isActive } : p
+        )
+      );
+      loadStats();
+    } catch (error) {
+      console.error("Error toggling product status:", error);
+      alert("Erro ao alterar status do produto");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implementar chamada API para criar/editar
-    setShowModal(false);
-    setEditingProduct(null);
-    setFormData({
-      name: "",
-      description: "",
-      price: "",
-      cashbackPercentage: "",
-      category: "",
-      stock: "",
-    });
-    loadProducts();
+    try {
+      if (editingProduct) {
+        await productService.updateProduct(editingProduct.id, {
+          name: formData.name,
+          description: formData.description,
+          price: parseFloat(formData.price),
+          cashbackPercentage: parseFloat(formData.cashbackPercentage),
+          category: formData.category,
+          stock: parseInt(formData.stock),
+        });
+      } else {
+        await productService.createProduct({
+          name: formData.name,
+          description: formData.description,
+          price: parseFloat(formData.price),
+          cashbackPercentage: parseFloat(formData.cashbackPercentage),
+          category: formData.category,
+          stock: parseInt(formData.stock),
+        });
+      }
+      setShowModal(false);
+      setEditingProduct(null);
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        cashbackPercentage: "",
+        category: "",
+        stock: "",
+      });
+      loadProducts();
+      loadStats();
+    } catch (error) {
+      console.error("Error saving product:", error);
+      alert("Erro ao salvar produto");
+    }
   };
 
   const filteredProducts = products.filter((product) => {
@@ -159,7 +182,7 @@ const ProductsManagement = () => {
                 Total Produtos
               </div>
               <div className="text-2xl font-medium text-slate-900 dark:text-white">
-                {products.length}
+                {stats.total}
               </div>
             </div>
           </div>
@@ -181,7 +204,7 @@ const ProductsManagement = () => {
                 Ativos
               </div>
               <div className="text-2xl font-medium text-slate-900 dark:text-white">
-                {products.filter((p) => p.isActive).length}
+                {stats.active}
               </div>
             </div>
           </div>
@@ -203,7 +226,7 @@ const ProductsManagement = () => {
                 Estoque Baixo
               </div>
               <div className="text-2xl font-medium text-slate-900 dark:text-white">
-                {products.filter((p) => p.stock < 10 && p.stock > 0).length}
+                {stats.lowStock}
               </div>
             </div>
           </div>
@@ -225,7 +248,7 @@ const ProductsManagement = () => {
                 Sem Estoque
               </div>
               <div className="text-2xl font-medium text-slate-900 dark:text-white">
-                {products.filter((p) => p.stock === 0).length}
+                {stats.outOfStock}
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import Modal from "@/components/ui/Modal";
 import Badge from "@/components/ui/Badge";
 import Tooltip from "@/components/ui/Tooltip";
 import HomeBredCurbs from "@/components/partials/HomeBredCurbs";
+import merchantService from "@/services/merchantService";
 
 const MerchantsManagement = () => {
   const [merchants, setMerchants] = useState([]);
@@ -16,143 +17,102 @@ const MerchantsManagement = () => {
   const [selectedMerchant, setSelectedMerchant] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [stats, setStats] = useState({
+    total: 0,
+    pending: 0,
+    approved: 0,
+    rejected: 0,
+  });
 
-  // Mock data - Substituir por chamada real à API
   useEffect(() => {
     loadMerchants();
-  }, []);
+    loadStats();
+  }, [statusFilter]);
 
   const loadMerchants = async () => {
     setLoading(true);
-    // Simular chamada API
-    setTimeout(() => {
-      setMerchants([
-        {
-          id: "merchant-1",
-          firstName: "João",
-          lastName: "Silva",
-          email: "joao.silva@merchant.com",
-          cpf: "123.456.789-00",
-          phone: "11 98765-4321",
-          userType: "merchant",
-          merchantStatus: "pending",
-          isActive: false,
-          emailConfirmed: true,
-          createdAt: "2025-01-05T10:30:00.000Z",
-          address: {
-            personType: "PF",
-            city: "São Paulo",
-            state: "SP",
-          },
-          _count: {
-            products: 0,
-          },
-        },
-        {
-          id: "merchant-2",
-          firstName: "Maria",
-          lastName: "Santos",
-          email: "maria.santos@merchant.com",
-          cpf: "987.654.321-00",
-          phone: "11 91234-5678",
-          userType: "merchant",
-          merchantStatus: "approved",
-          isActive: true,
-          emailConfirmed: true,
-          createdAt: "2025-01-03T14:20:00.000Z",
-          address: {
-            personType: "PF",
-            city: "Rio de Janeiro",
-            state: "RJ",
-          },
-          _count: {
-            products: 12,
-          },
-        },
-        {
-          id: "merchant-3",
-          firstName: "Tech Store",
-          lastName: "Ltda",
-          email: "contato@techstore.com",
-          cpf: "12.345.678/0001-90",
-          phone: "11 3456-7890",
-          userType: "merchant",
-          merchantStatus: "rejected",
-          isActive: false,
-          emailConfirmed: true,
-          createdAt: "2025-01-02T09:15:00.000Z",
-          address: {
-            personType: "PJ",
-            city: "Belo Horizonte",
-            state: "MG",
-          },
-          _count: {
-            products: 0,
-          },
-        },
-        {
-          id: "merchant-4",
-          firstName: "Carlos",
-          lastName: "Oliveira",
-          email: "carlos@shop.com",
-          cpf: "456.789.123-00",
-          phone: "11 97777-8888",
-          userType: "merchant",
-          merchantStatus: "pending",
-          isActive: false,
-          emailConfirmed: false,
-          createdAt: "2025-01-07T16:45:00.000Z",
-          address: {
-            personType: "PF",
-            city: "Curitiba",
-            state: "PR",
-          },
-          _count: {
-            products: 0,
-          },
-        },
-      ]);
+    try {
+      const response = await merchantService.listMerchants({
+        status: statusFilter === "all" ? undefined : statusFilter,
+        search: searchTerm,
+      });
+      if (response.success && response.data) {
+        const merchantList = response.data.merchants || response.data.users || [];
+        setMerchants(merchantList);
+      }
+    } catch (error) {
+      console.error("Error loading merchants:", error);
+      alert("Erro ao carregar merchants");
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
+  };
+
+  const loadStats = async () => {
+    try {
+      const response = await merchantService.getMerchantStats();
+      if (response.success && response.data) {
+        setStats(response.data);
+      }
+    } catch (error) {
+      console.error("Error loading stats:", error);
+    }
   };
 
   const handleApprove = async (merchantId) => {
     if (confirm("Aprovar este merchant?")) {
-      // Implementar chamada API para aprovar
-      setMerchants(
-        merchants.map((m) =>
-          m.id === merchantId
-            ? { ...m, merchantStatus: "approved", isActive: true }
-            : m
-        )
-      );
+      try {
+        await merchantService.approveMerchant(merchantId);
+        setMerchants(
+          merchants.map((m) =>
+            m.id === merchantId
+              ? { ...m, merchantStatus: "approved", isActive: true }
+              : m
+          )
+        );
+        loadStats();
+      } catch (error) {
+        console.error("Error approving merchant:", error);
+        alert("Erro ao aprovar merchant");
+      }
     }
   };
 
   const handleReject = async (merchantId) => {
     const reason = prompt("Motivo da rejeição (opcional):");
-    // Implementar chamada API para rejeitar
-    setMerchants(
-      merchants.map((m) =>
-        m.id === merchantId
-          ? { ...m, merchantStatus: "rejected", isActive: false }
-          : m
-      )
-    );
+    try {
+      await merchantService.rejectMerchant(merchantId, reason || "");
+      setMerchants(
+        merchants.map((m) =>
+          m.id === merchantId
+            ? { ...m, merchantStatus: "rejected", isActive: false }
+            : m
+        )
+      );
+      loadStats();
+    } catch (error) {
+      console.error("Error rejecting merchant:", error);
+      alert("Erro ao rejeitar merchant");
+    }
+  };
+
+  const handleToggleActive = async (merchantId, isActive) => {
+    try {
+      await merchantService.toggleMerchantStatus(merchantId, !isActive);
+      setMerchants(
+        merchants.map((m) =>
+          m.id === merchantId ? { ...m, isActive: !isActive } : m
+        )
+      );
+    } catch (error) {
+      console.error("Error toggling merchant status:", error);
+      alert("Erro ao alterar status do merchant");
+    }
   };
 
   const handleViewDetails = (merchant) => {
     setSelectedMerchant(merchant);
     setShowDetailModal(true);
-  };
-
-  const handleToggleActive = async (merchant) => {
-    // Implementar chamada API para ativar/desativar
-    setMerchants(
-      merchants.map((m) =>
-        m.id === merchant.id ? { ...m, isActive: !m.isActive } : m
-      )
-    );
   };
 
   const filteredMerchants = merchants.filter((merchant) => {
@@ -176,13 +136,6 @@ const MerchantsManagement = () => {
       default:
         return { label: status, className: "bg-slate-100 text-slate-800" };
     }
-  };
-
-  const stats = {
-    total: merchants.length,
-    pending: merchants.filter((m) => m.merchantStatus === "pending").length,
-    approved: merchants.filter((m) => m.merchantStatus === "approved").length,
-    rejected: merchants.filter((m) => m.merchantStatus === "rejected").length,
   };
 
   return (
