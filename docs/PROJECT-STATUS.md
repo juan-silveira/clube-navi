@@ -43,17 +43,60 @@
 
 ### Status Geral do Projeto
 
+**Core Features (Produção):**
 ```
-Backend (API):        █████████░ 90% completo (marketplace + stats completos)
-Admin Web:            ██████░░░░ 60% completo (analytics integrado)
-Mobile App:           ████████░░ 80% completo (CRUD produtos merchant)
-Blockchain:           ███████░░░ 70% completo
-Infraestrutura:       ████████░░ 80% completo
-Documentação:         █████████░ 90% completo (multi-tenant + marketplace)
+Backend (API):        ████████░░ 85% completo
+  ├─ Auth & Users:    ██████████ 100% (registro, login, JWT, 2FA parcial)
+  ├─ KYC/Docs:        ████████░░ 80% (upload OK, falta aprovação admin)
+  ├─ Financeiro:      ███████░░░ 70% (PIX depósito OK, falta saque)
+  ├─ Marketplace:     ██████████ 100% (produtos, compras, cashback E2E)
+  ├─ Blockchain:      ████████░░ 80% (mint/transfer OK, burn preparado)
+  └─ Admin APIs:      ██████░░░░ 60% (stats OK, falta gestão completa)
 
-Multi-Tenant:         ███░░░░░░░ 30% implementado (Fase 1 completa)
-Marketplace:          ██████████ 100% backend completo + teste E2E validado
+Admin Web:            ███████░░░ 70% completo
+  ├─ Estrutura:       ██████████ 100% (Next.js 13, auth, layout)
+  ├─ Analytics:       ████████░░ 80% (dashboard marketplace OK)
+  ├─ Gestão Users:    ██░░░░░░░░ 20% (lista básica, falta CRUD completo)
+  ├─ Gestão KYC:      ██████████ 100% (validação docs completa!)
+  ├─ Gestão Saques:   ██████████ 100% (aprovação manual completa!)
+  ├─ Gestão Produtos: █████████░ 90% (lista e stats OK)
+  └─ CMS:             ░░░░░░░░░░ 0% (não implementado)
+
+Mobile App:           ██████░░░░ 65% completo
+  ├─ Auth:            ██████████ 100% (login, registro 2 etapas)
+  ├─ Perfil:          █████████░ 90% (edição, foto, dados)
+  ├─ KYC:             ░░░░░░░░░░ 0% (falta tela de upload de documentos)
+  ├─ Financeiro:      ███████░░░ 70% (depósito OK, extrato OK, falta saque)
+  ├─ Merchant:        █████████░ 90% (CRUD produtos completo)
+  ├─ Consumer:        ███░░░░░░░ 30% (falta marketplace, carrinho, checkout)
+  ├─ Cashback:        ████░░░░░░ 40% (backend OK, falta UI visualização)
+  └─ Indicações:      █████░░░░░ 50% (tela OK, falta listar indicados)
+
+Infraestrutura:       ████████░░ 85% completo
+  ├─ Database:        ██████████ 100% (PostgreSQL + Prisma)
+  ├─ Cache:           ██████████ 100% (Redis funcionando)
+  ├─ Filas:           ██████████ 100% (RabbitMQ + workers)
+  ├─ Storage:         ██████████ 100% (S3 configurado)
+  ├─ Blockchain:      █████████░ 90% (Azore integrado)
+  └─ Testes E2E:      ████████░░ 80% (marketplace validado)
+
+Documentação:         █████████░ 90% completo
+Multi-Tenant:         ███░░░░░░░ 30% (Fase 1 schemas + middleware)
 ```
+
+**Resumo Executivo:**
+- ✅ **Backend sólido** - Core business funcionando (85%)
+- ✅ **Admin bem avançado** - KYC, Saques, Analytics funcionando (70%)
+- ⚠️ **Mobile precisa de features** - Merchant OK, falta consumer + saques (65%)
+- ✅ **Infraestrutura robusta** - Tudo funcionando (85%)
+
+**Gaps Principais a Endereçar:**
+1. 🔴 **Mobile** - Falta tela de upload KYC (documentos)
+2. 🔴 **Mobile** - Falta tela de solicitação de saque (merchants only)
+3. 🔴 **Mobile** - Falta marketplace consumer (catálogo, carrinho, checkout)
+4. 🟡 **Mobile** - Falta fluxo de cancelamento de conta
+5. 🟡 **Backend** - Falta validação de chave PIX
+6. 🟢 **Admin** - Melhorar CRUD completo de usuários
 
 ### Últimas Atualizações
 
@@ -2054,90 +2097,211 @@ docs/
 
 ## 📝 Próximos Passos Imediatos
 
-### 🚀 FASE 1 IMPLEMENTADA - Próximos Passos para Execução
+### 🎯 **PRIORIDADE CRÍTICA - Features para Produção**
 
-**Arquivos criados (Fase 1):**
-- ✅ `/apps/api/prisma/schema-master.prisma` (501 linhas)
-- ✅ `/apps/api/prisma/schema-tenant.prisma` (382 linhas)
-- ✅ `/apps/api/src/database/master-client.js`
-- ✅ `/apps/api/src/database/tenant-client.js`
-- ✅ `/apps/api/src/database/index.js`
-- ✅ `/apps/api/src/middleware/tenant-resolution.middleware.js` (300+ linhas)
-- ✅ `/scripts/create-tenant.js` (400+ linhas)
-- ✅ `/scripts/migrate-all-tenants.js` (170+ linhas)
-- ✅ `/docs/MULTI-TENANT-QUICKSTART.md` (450+ linhas)
-- ✅ `/.env.example` (atualizado com MASTER_DATABASE_URL)
-- ✅ `/package.json` (scripts multi-tenant adicionados)
+Estas são as features mínimas necessárias para o app funcionar em produção:
 
-**Próximos passos para ativar multi-tenant:**
+#### **Sprint 1 - Mobile KYC + Saques (1 semana)** 🔴 URGENTE
 
-1. **Atualizar .env local** ⚠️ **IMPORTANTE**
-   ```bash
-   # Adicionar ao .env:
-   MASTER_DATABASE_URL=postgresql://postgres:postgres_password@localhost:5432/clube_digital_master?schema=public
-   ```
+**Objetivo**: Permitir que usuários completem KYC e merchants saquem dinheiro
 
-2. **Criar Master Database**
-   ```bash
-   psql -U postgres -c "CREATE DATABASE clube_digital_master;"
-   ```
+**Mobile:**
+1. **Tela de Upload KYC** (`/kyc-upload.tsx`)
+   - Upload de 3 fotos: documento frente, verso, selfie
+   - Usar expo-image-picker (câmera ou galeria)
+   - Validação de tamanho/tipo de arquivo
+   - Upload para S3 via API
+   - Feedback visual de progresso
+   - Estado: pending/approved/rejected
 
-3. **Gerar Prisma Clients**
-   ```bash
-   npm run prisma:generate:all
-   ```
+2. **Tela de Solicitação de Saque** (`/request-withdrawal.tsx`) - **MERCHANT ONLY**
+   - Validar se é merchant aprovado
+   - Mostrar saldo disponível (vendas)
+   - Input de valor do saque (min/max)
+   - Input de chave PIX (CPF, email, phone, random key)
+   - Confirmação de dados
+   - Enviar para fila de aprovação admin
+   - Status: pending/processing/approved/rejected
 
-4. **Executar Migrations do Master DB**
-   ```bash
-   npm run prisma:migrate:master
-   ```
+**Backend:**
+3. **API de Validação de Chave PIX**
+   - Endpoint: `POST /api/pix/validate-key`
+   - Validar formato da chave (CPF, email, etc)
+   - Integração com provider PIX (EFI Pay ou Asaas)
+   - Retornar dados do titular
 
-5. **Criar primeiro tenant de teste**
-   ```bash
-   npm run tenant:create -- \
-     --slug=test-tenant \
-     --name="Test Company" \
-     --email=admin@test.com
-   ```
+4. **Regra de Negócio: Saldo de Vendas**
+   - Separar saldo de vendas vs saldo de depósito/cashback
+   - Apenas merchants podem sacar
+   - Apenas saldo de vendas pode ser sacado
+   - Implementar lógica no backend
 
-6. **Testar tenant resolution**
-   - Executar API: `npm run dev:api`
-   - Fazer request com header: `curl -H "X-Tenant-Slug: test-tenant" http://localhost:4000/api/health`
+**Entregáveis:**
+```
+apps/mobile/app/(tabs)/
+├── kyc-upload.tsx           ✅ NOVO
+└── request-withdrawal.tsx   ✅ NOVO (merchant only)
 
-7. **Próxima Fase: Fase 2 - Mobile Apps + OTA** 🎯
+apps/api/src/
+├── controllers/pix.controller.js     ✅ NOVO
+├── services/pix-validation.service.js ✅ NOVO
+└── services/balance.service.js       ✅ ATUALIZADO (separar saldos)
+```
 
-### Hoje (Prioridade Máxima - Single-Tenant Features)
+---
 
-1. ✅ Criar documentação CORE-BUSINESS.md
-2. ✅ Criar documentação PROJECT-STATUS.md
-3. ✅ Implementar Fase 1 Multi-Tenant (COMPLETO)
-4. ✅ Adicionar models de Product, Purchase ao schema-tenant.prisma
-5. ✅ Criar API de produtos (CRUD) - product.controller.js
-6. ✅ Criar API de compras - purchase.controller.js
-7. ✅ Sistema de cashback completo (distribuição automática)
-8. ✅ Teste E2E validado (merchant → produto → consumer → compra → cashback)
-9. ✅ JWT middleware multi-tenant
-10. ✅ Auth controller limpo de dependências legacy
+#### **Sprint 2 - Marketplace Consumer (1-2 semanas)** 🔴 IMPORTANTE
 
-### Esta Semana
+**Objetivo**: Consumidores podem comprar produtos e ganhar cashback
 
-1. [ ] Executar setup da Fase 1 (criar master DB, migrations, primeiro tenant)
-2. [x] Implementar validação de código de indicação no registro ✅
-3. [x] Adicionar AccountStatus ao User ✅
-4. [x] Criar service de purchase ✅
-5. [x] Criar worker de cashback ✅
-6. [x] Criar testes E2E automatizados ✅ **NOVO** (2025-11-06)
-7. [ ] Começar telas do marketplace (mobile)
+**Mobile:**
+1. **Catálogo de Produtos** (`/marketplace.tsx`)
+   - Listar todos produtos ativos
+   - Grid responsivo com imagens
+   - Filtros por categoria
+   - Busca por nome
+   - Pull-to-refresh
+   - Paginação infinita
 
-### Este Mês
+2. **Detalhes do Produto** (`/product/[id].tsx`)
+   - Galeria de imagens (swiper)
+   - Nome, descrição, preço
+   - Cashback que vai ganhar
+   - Estoque disponível
+   - Botão "Adicionar ao Carrinho"
+   - Botão "Comprar Agora"
 
-1. [ ] Completar setup multi-tenant em ambiente de desenvolvimento
-2. [ ] Completar sistema de cashback
-3. [ ] Implementar marketplace completo (mobile)
-4. [ ] Implementar gestão de produtos (admin)
-5. [ ] Sistema de compras funcionando E2E
-6. [ ] Testes automatizados básicos
-7. [ ] Iniciar Fase 2: Mobile Apps separados + EAS Update
+3. **Carrinho de Compras** (`/cart.tsx`)
+   - Listar itens no carrinho
+   - Ajustar quantidade
+   - Remover itens
+   - Calcular total
+   - Calcular cashback total
+   - Botão "Finalizar Compra"
+
+4. **Checkout** (`/checkout.tsx`)
+   - Resumo da compra
+   - Confirmação de cashback
+   - Verificar saldo cBRL
+   - Processar pagamento
+   - Feedback de sucesso/erro
+
+**Backend:**
+5. **Endpoint de Carrinho**
+   - POST /api/cart/add - Adicionar item
+   - GET /api/cart - Listar itens
+   - PUT /api/cart/:id - Atualizar quantidade
+   - DELETE /api/cart/:id - Remover item
+   - DELETE /api/cart - Limpar carrinho
+
+**Entregáveis:**
+```
+apps/mobile/app/(tabs)/
+├── marketplace.tsx           ✅ NOVO
+├── product/[id].tsx         ✅ NOVO
+├── cart.tsx                 ✅ NOVO
+└── checkout.tsx             ✅ NOVO
+
+apps/mobile/src/services/
+└── cartService.ts           ✅ NOVO
+
+apps/api/src/
+├── controllers/cart.controller.js  ✅ NOVO
+└── services/cart.service.js        ✅ NOVO
+```
+
+---
+
+#### **Sprint 3 - Cancelamento de Conta (3 dias)** 🟡 IMPORTANTE
+
+**Objetivo**: Usuários podem cancelar conta com saque de saldo
+
+**Mobile:**
+1. **Tela de Cancelamento de Conta** (`/account/cancel.tsx`)
+   - Avisos sobre consequências
+   - Verificar se tem saldo
+   - Se tem saldo → Redirecionar para saque total obrigatório
+   - Se não tem saldo → Confirmar cancelamento imediato
+   - Input de motivo do cancelamento (opcional)
+   - Confirmação com senha
+   - Feedback de sucesso
+
+**Backend:**
+2. **Lógica de Cancelamento**
+   - Verificar saldo total do usuário
+   - Se saldo > 0 → Criar saque obrigatório
+   - Se saldo = 0 → Desativar conta imediatamente
+   - Atualizar status para `INACTIVE_USER_REQUEST`
+   - Registrar motivo e data
+   - Enviar email de confirmação
+
+3. **Regra de Reativação**
+   - Bloquear novo registro com mesmo CPF/email
+   - Apenas suporte pode reativar
+   - Admin tem interface para reativar
+
+**Admin:**
+4. **Interface de Reativação** (`/system/reactivate-accounts/`)
+   - Listar contas com status `INACTIVE_USER_REQUEST`
+   - Ver motivo do cancelamento
+   - Ver histórico do usuário
+   - Botão "Reativar Conta"
+   - Adicionar notas internas
+
+**Entregáveis:**
+```
+apps/mobile/app/account/
+└── cancel.tsx                          ✅ NOVO
+
+apps/api/src/
+├── controllers/account.controller.js   ✅ NOVO
+└── services/account.service.js         ✅ NOVO
+
+apps/admin/frontend/app/(dashboard)/system/
+└── reactivate-accounts/page.jsx       ✅ NOVO
+```
+
+---
+
+### 🚀 **Roadmap de Longo Prazo**
+
+#### **Fase Multi-Tenant (Já Iniciada - 30%)**
+- ✅ Fase 1 completa (schemas, middleware, scripts)
+- ⏳ Fase 2 - Mobile Apps separados + EAS Update (0%)
+- ⏳ Fase 3 - Sistema de Módulos (0%)
+- ⏳ Fase 4 - Comunicação em Massa (0%)
+- ⏳ Fase 5 - Admin Multi-Tenant (0%)
+- ⏳ Fase 6 - Super Admin Dashboard (0%)
+
+#### **Features Futuras (Backlog)**
+1. **Push Notifications** - Notificar usuários sobre compras, cashback, etc
+2. **WhatsApp Notifications** - Campanhas e alertas via WhatsApp
+3. **Sistema de Indicações Completo** - Dashboard, relatórios, validação
+4. **CMS para Banners** - Gerenciar banners e promoções no app
+5. **Relatórios Avançados** - Analytics completo, exportação, dashboards
+6. **Gamificação** - Badges, níveis, recompensas
+7. **Sistema de Cupons** - Descontos e promoções
+
+---
+
+### 📊 **Métricas de Sucesso**
+
+**Para ir para produção, precisamos:**
+- ✅ Backend funcionando (85% OK)
+- ✅ Admin funcionando (70% OK)
+- ⚠️ Mobile com features essenciais:
+  - ✅ Auth (100%)
+  - ✅ Merchant CRUD produtos (90%)
+  - 🔴 KYC Upload (0%) ← **BLOQUEADOR**
+  - 🔴 Saque Merchants (0%) ← **BLOQUEADOR**
+  - 🔴 Marketplace Consumer (30%) ← **BLOQUEADOR**
+  - 🟡 Cancelamento de conta (0%)
+
+**Tempo estimado para MVP:**
+- Sprint 1 (KYC + Saques): 1 semana
+- Sprint 2 (Marketplace): 1-2 semanas
+- Sprint 3 (Cancelamento): 3 dias
+- **Total: 2.5 - 3.5 semanas para produção**
 
 ---
 
