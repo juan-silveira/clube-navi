@@ -807,6 +807,26 @@ app.use('/api/super-admin/billing', billingRoutes);
 const clubTransactionsRoutes = require('./routes/clubTransactions.routes');
 app.use('/api/super-admin/club-transactions', clubTransactionsRoutes);
 
+// ============================================================================
+// CLUB ADMIN ROUTES (com resolução de clube e autenticação de club admin)
+// ============================================================================
+
+// Rotas de autenticação de club admin
+const clubAdminAuthRoutes = require('./routes/clubAdminAuth.routes');
+app.use('/api/club-admin/auth', clubAdminAuthRoutes);
+
+// Rotas de informações do clube (com clube resolution)
+const clubAdminInfoRoutes = require('./routes/clubAdminInfo.routes');
+app.use('/api/club-admin', clubAdminInfoRoutes);
+
+// Rotas de usuários do clube
+const clubAdminUsersRoutes = require('./routes/clubAdminUsers.routes');
+app.use('/api/club-admin/users', resolveClubMiddleware, clubAdminUsersRoutes);
+
+// Rotas de transações do clube
+const clubAdminTransactionsRoutes = require('./routes/clubAdminTransactions.routes');
+app.use('/api/club-admin/transactions', resolveClubMiddleware, clubAdminTransactionsRoutes);
+
 // Rotas de recuperação de senha (públicas)
 app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
 
