@@ -172,6 +172,82 @@ router.get('/club-stats', authenticateClubAdmin, async (req, res) => {
       ? Math.round(chartData.reduce((sum, d) => sum + d.count, 0) / chartData.length)
       : 0;
 
+    // TOP MERCHANTS - Top 3 comerciantes por volume de vendas
+    const topMerchantsData = await clubPrisma.purchase.groupBy({
+      by: ['merchantId'],
+      where: { status: 'completed' },
+      _sum: {
+        totalAmount: true
+      },
+      _count: {
+        id: true
+      },
+      orderBy: {
+        _sum: {
+          totalAmount: 'desc'
+        }
+      },
+      take: 3
+    });
+
+    const topMerchants = await Promise.all(
+      topMerchantsData.map(async (item) => {
+        const merchant = await clubPrisma.user.findUnique({
+          where: { id: item.merchantId },
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true
+          }
+        });
+        return {
+          ...merchant,
+          totalSales: item._sum.totalAmount || 0,
+          transactionCount: item._count.id
+        };
+      })
+    );
+
+    // TOP MEMBERS - Top 3 consumidores por volume de compras
+    const topMembersData = await clubPrisma.purchase.groupBy({
+      by: ['consumerId'],
+      where: { status: 'completed' },
+      _sum: {
+        totalAmount: true,
+        consumerCashback: true
+      },
+      _count: {
+        id: true
+      },
+      orderBy: {
+        _sum: {
+          totalAmount: 'desc'
+        }
+      },
+      take: 3
+    });
+
+    const topMembers = await Promise.all(
+      topMembersData.map(async (item) => {
+        const member = await clubPrisma.user.findUnique({
+          where: { id: item.consumerId },
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true
+          }
+        });
+        return {
+          ...member,
+          totalSpent: item._sum.totalAmount || 0,
+          totalCashback: item._sum.consumerCashback || 0,
+          transactionCount: item._count.id
+        };
+      })
+    );
+
     res.json({
       success: true,
       data: {
@@ -217,6 +293,10 @@ router.get('/club-stats', authenticateClubAdmin, async (req, res) => {
           successRate,
           engagementRate,
           avgTransactionsPerDay
+        },
+        rankings: {
+          topMerchants,
+          topMembers
         },
         timestamp: new Date().toISOString()
       }
