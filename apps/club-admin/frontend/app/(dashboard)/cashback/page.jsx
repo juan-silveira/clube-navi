@@ -16,16 +16,23 @@ const CashbackPage = () => {
     consumerReferrerPercentage: 12.5,
     merchantReferrerPercentage: 12.5,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [transactionsPerPage] = useState(5);
   const { showSuccess, showError } = useAlertContext();
 
   useEffect(() => {
-    loadCashbackData();
-  }, []);
+    loadCashbackData(currentPage);
+  }, [currentPage]);
 
-  const loadCashbackData = async () => {
+  const loadCashbackData = async (page = 1) => {
     try {
       setLoading(true);
-      const response = await clubAdminApi.get("/cashback/stats");
+      const response = await clubAdminApi.get("/cashback/stats", {
+        params: {
+          page,
+          limit: transactionsPerPage
+        }
+      });
       setStats(response.data);
 
       // Se houver configuração salva, carregar
@@ -260,37 +267,67 @@ const CashbackPage = () => {
       <Card title="Distribuição Recente de Cashback" subtitle="Últimas transações com cashback">
         <div className="p-4">
           {stats?.recentTransactions && stats.recentTransactions.length > 0 ? (
-            <div className="space-y-3">
-              {stats.recentTransactions.map((transaction) => (
-                <div
-                  key={transaction.id}
-                  className="flex items-center justify-between p-4 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-success-100 dark:bg-success-900 flex items-center justify-center">
-                      <Icon icon="heroicons:gift" className="w-5 h-5 text-success-600 dark:text-success-300" />
+            <>
+              <div className="space-y-3 mb-4">
+                {stats.recentTransactions.map((transaction) => (
+                  <div
+                    key={transaction.id}
+                    className="flex items-center justify-between p-4 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-success-100 dark:bg-success-900 flex items-center justify-center">
+                        <Icon icon="heroicons:gift" className="w-5 h-5 text-success-600 dark:text-success-300" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">
+                          {transaction.consumerName}
+                        </p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                          {new Date(transaction.createdAt).toLocaleDateString('pt-BR')} às{' '}
+                          {new Date(transaction.createdAt).toLocaleTimeString('pt-BR')}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        {transaction.consumerName}
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-success-600 dark:text-success-400">
+                        R$ {Number(transaction.consumerCashback).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                       <p className="text-xs text-slate-500 dark:text-slate-400">
-                        {new Date(transaction.createdAt).toLocaleDateString('pt-BR')} às{' '}
-                        {new Date(transaction.createdAt).toLocaleTimeString('pt-BR')}
+                        de R$ {Number(transaction.totalAmount).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-bold text-success-600 dark:text-success-400">
-                      R$ {Number(transaction.consumerCashback).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      de R$ {Number(transaction.totalAmount).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </p>
+                ))}
+              </div>
+
+              {/* Paginação */}
+              {stats.pagination && stats.pagination.totalPages > 1 && (
+                <div className="flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-4">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">
+                    Mostrando {((currentPage - 1) * transactionsPerPage) + 1} a{' '}
+                    {Math.min(currentPage * transactionsPerPage, stats.pagination.total)} de{' '}
+                    {stats.pagination.total} transações
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      text="Anterior"
+                      className="btn-outline-secondary btn-sm"
+                      icon="heroicons:chevron-left"
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                    />
+                    <Button
+                      text="Próxima"
+                      className="btn-outline-secondary btn-sm"
+                      icon="heroicons:chevron-right"
+                      iconPosition="right"
+                      onClick={() => setCurrentPage(p => Math.min(stats.pagination.totalPages, p + 1))}
+                      disabled={currentPage === stats.pagination.totalPages}
+                    />
                   </div>
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-12">
               <Icon icon="heroicons:gift" className="w-16 h-16 text-slate-300 dark:text-slate-600 mx-auto mb-3" />

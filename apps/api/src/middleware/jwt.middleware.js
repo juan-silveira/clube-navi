@@ -152,18 +152,23 @@ const authenticateToken = async (req, res, next) => {
         });
       }
 
-      user = await req.clubPrisma.user.findUnique({
-        where: { id: decoded.userId }
-      });
+      // Usar raw query para evitar validação de enum UserType
+      const users = await req.clubPrisma.$queryRaw`
+        SELECT * FROM users
+        WHERE id = ${decoded.userId}::uuid
+        LIMIT 1
+      `;
+      user = users[0];
 
-      if (!user || !user.isActive) {
+      if (!user || !user.is_active) {
         return res.status(401).json({
           success: false,
           message: 'Club Admin não encontrado ou inativo'
         });
       }
 
-      if (user.userType !== 'admin') {
+      // Note: Raw query retorna campos em snake_case
+      if (user.user_type !== 'admin') {
         return res.status(403).json({
           success: false,
           message: 'User is not a club admin'

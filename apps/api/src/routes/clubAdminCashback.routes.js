@@ -12,6 +12,11 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
     const clubPrisma = req.clubPrisma;
     const clubId = req.clubAdmin?.clubId;
 
+    // Paginação
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
     // Total distribuído
     const totalStats = await clubPrisma.purchase.aggregate({
       where: {
@@ -44,7 +49,17 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
       }
     });
 
-    // Transações recentes com cashback
+    // Contar total de transações com cashback para paginação
+    const totalTransactions = await clubPrisma.purchase.count({
+      where: {
+        status: 'completed',
+        consumerCashback: {
+          gt: 0
+        }
+      }
+    });
+
+    // Transações recentes com cashback (paginadas)
     const recentTransactions = await clubPrisma.purchase.findMany({
       where: {
         status: 'completed',
@@ -63,7 +78,8 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
       orderBy: {
         createdAt: 'desc'
       },
-      take: 10
+      take: limit,
+      skip: skip
     });
 
     // Formatar transações
@@ -110,7 +126,13 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
       transactionCount: totalStats._count.id,
       avgCashback,
       recentTransactions: formattedTransactions,
-      config: frontendConfig
+      config: frontendConfig,
+      pagination: {
+        page,
+        limit,
+        total: totalTransactions,
+        totalPages: Math.ceil(totalTransactions / limit)
+      }
     });
   } catch (error) {
     console.error('Erro ao buscar estatísticas de cashback:', error);
