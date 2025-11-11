@@ -20,7 +20,6 @@ const WhatsAppMessagingPage = () => {
 
   // Estado para templates
   const [templates, setTemplates] = useState([]);
-  const [loadingTemplates, setLoadingTemplates] = useState(false);
 
   // Estado para histórico
   const [history, setHistory] = useState([]);
@@ -77,7 +76,6 @@ const WhatsAppMessagingPage = () => {
   };
 
   const fetchTemplates = async () => {
-    setLoadingTemplates(true);
     try {
       const response = await clubAdminApi.get('/whatsapp/templates');
       if (response.data && response.data.success) {
@@ -90,8 +88,6 @@ const WhatsAppMessagingPage = () => {
         { id: 'reminder', name: 'Lembrete', message: 'Lembrete importante sobre sua conta.' },
         { id: 'announcement', name: 'Comunicado', message: 'Temos uma novidade para você!' }
       ]);
-    } finally {
-      setLoadingTemplates(false);
     }
   };
 
@@ -286,7 +282,7 @@ const WhatsAppMessagingPage = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Digite sua mensagem aqui..."
                   row={10}
-                  className="min-h-[400px]"
+                  className="min-h-[200px]"
                 />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   {message.length} caracteres
