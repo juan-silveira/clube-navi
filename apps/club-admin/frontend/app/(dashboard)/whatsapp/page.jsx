@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import MultiSelect from '@/components/ui/MultiSelect';
+import Textarea from '@/components/ui/Textarea';
 import { Icon } from "@iconify/react";
 import { useAlertContext } from '@/contexts/AlertContext';
 import { clubAdminApi } from '@/services/api';
@@ -231,29 +233,17 @@ const WhatsAppMessagingPage = () => {
                   </div>
                 </div>
 
-                <select
-                  multiple
+                <MultiSelect
+                  label=""
+                  options={users.map(user => ({
+                    value: user.id,
+                    label: `${user.firstName} ${user.lastName}${user.phone ? ` (${normalizePhoneDisplay(user.phone)})` : ' (Sem telefone)'}`,
+                    disabled: !user.phone
+                  }))}
                   value={selectedUsers}
-                  onChange={(e) => {
-                    const selected = Array.from(e.target.selectedOptions, option => option.value);
-                    setSelectedUsers(selected);
-                  }}
-                  className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg
-                           bg-white dark:bg-slate-800 text-slate-900 dark:text-white
-                           focus:ring-2 focus:ring-primary-500 focus:border-transparent h-32"
-                >
-                  {users.map(user => (
-                    <option
-                      key={user.id}
-                      value={user.id}
-                      disabled={!user.phone}
-                      className={!user.phone ? 'text-slate-400' : ''}
-                    >
-                      {user.firstName} {user.lastName}
-                      {user.phone ? ` (${normalizePhoneDisplay(user.phone)})` : ' (Sem telefone)'}
-                    </option>
-                  ))}
-                </select>
+                  onChange={setSelectedUsers}
+                  placeholder="Selecione os destinatários..."
+                />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   {selectedUsers.length} usuário(s) selecionado(s)
                 </p>
@@ -290,17 +280,12 @@ const WhatsAppMessagingPage = () => {
 
               {/* Mensagem */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Mensagem
-                </label>
-                <textarea
+                <Textarea
+                  label="Mensagem"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Digite sua mensagem aqui..."
                   rows={10}
-                  className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg
-                           bg-white dark:bg-slate-800 text-slate-900 dark:text-white
-                           focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   {message.length} caracteres
