@@ -827,6 +827,10 @@ app.use('/api/club-admin/users', resolveClubMiddleware, clubAdminUsersRoutes);
 const clubAdminTransactionsRoutes = require('./routes/clubAdminTransactions.routes');
 app.use('/api/club-admin/transactions', resolveClubMiddleware, clubAdminTransactionsRoutes);
 
+// Rotas de cashback do clube
+const clubAdminCashbackRoutes = require('./routes/clubAdminCashback.routes');
+app.use('/api/club-admin/cashback', resolveClubMiddleware, clubAdminCashbackRoutes);
+
 // Rotas de recuperação de senha (públicas)
 app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
 
