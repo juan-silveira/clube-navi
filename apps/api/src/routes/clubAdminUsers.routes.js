@@ -14,7 +14,7 @@ const { authenticateClubAdmin } = require('../middleware/clubAdmin.middleware');
 router.get('/', authenticateClubAdmin, async (req, res) => {
   try {
     const clubPrisma = req.clubPrisma;
-    const { page = 1, limit = 20, search, status } = req.query;
+    const { page = 1, limit = 20, search, status, userType } = req.query;
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const take = parseInt(limit);
@@ -36,7 +36,70 @@ router.get('/', authenticateClubAdmin, async (req, res) => {
       where.isActive = false;
     }
 
-    // Buscar usuários
+    // Filtrar por userType se fornecido
+    if (userType) {
+      // Usar raw query para contornar problema de enum do Prisma
+      let whereClauses = [`user_type::text = '${userType}'`];
+
+      if (status === 'active') {
+        whereClauses.push('is_active = true');
+      } else if (status === 'inactive') {
+        whereClauses.push('is_active = false');
+      }
+
+      if (search) {
+        const searchPattern = `%${search}%`;
+        whereClauses.push(`(
+          first_name ILIKE '${searchPattern}' OR
+          last_name ILIKE '${searchPattern}' OR
+          email ILIKE '${searchPattern}' OR
+          phone LIKE '${searchPattern}'
+        )`);
+      }
+
+      const whereClause = whereClauses.join(' AND ');
+
+      console.log(`[DEBUG] WHERE clause: ${whereClause}`);
+      console.log(`[DEBUG] userType value: ${userType}`);
+
+      const usersRaw = await clubPrisma.$queryRawUnsafe(`
+        SELECT
+          id,
+          first_name as "firstName",
+          last_name as "lastName",
+          email,
+          cpf,
+          phone,
+          is_active as "isActive",
+          email_confirmed as "emailConfirmed",
+          created_at as "createdAt",
+          updated_at as "updatedAt"
+        FROM users
+        WHERE ${whereClause}
+        ORDER BY created_at DESC
+        LIMIT ${take}
+        OFFSET ${skip}
+      `);
+
+      const totalRaw = await clubPrisma.$queryRawUnsafe(`
+        SELECT COUNT(*)::int as count
+        FROM users
+        WHERE ${whereClause}
+      `);
+
+      return res.json({
+        success: true,
+        data: usersRaw,
+        pagination: {
+          page: parseInt(page),
+          limit: parseInt(limit),
+          total: totalRaw[0].count,
+          totalPages: Math.ceil(totalRaw[0].count / parseInt(limit))
+        }
+      });
+    }
+
+    // Buscar usuários (sem filtro de userType)
     const [users, total] = await Promise.all([
       clubPrisma.user.findMany({
         where,
@@ -45,8 +108,10 @@ router.get('/', authenticateClubAdmin, async (req, res) => {
         orderBy: { createdAt: 'desc' },
         select: {
           id: true,
-          name: true,
+          firstName: true,
+          lastName: true,
           email: true,
+          cpf: true,
           phone: true,
           isActive: true,
           emailConfirmed: true,

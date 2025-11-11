@@ -203,7 +203,6 @@ model Notification {
 
 model PushNotificationCampaign {
   id              String                @id @default(uuid()) @db.Uuid
-  tenant_id       String                @db.Uuid
   title           String                @db.VarChar(100)
   description     String
   pageTitle       String?               @map("page_title") @db.VarChar(100)
@@ -218,15 +217,20 @@ model PushNotificationCampaign {
   externalLink    String?               @map("external_link") @db.VarChar(500)
   buttonText      String?               @map("button_text") @db.VarChar(50)
   geolocation     Json?
+  targetUserIds   Json?                 @map("target_user_ids") @db.Json
   targetUserCount Int                   @default(0) @map("target_user_count")
   sentCount       Int                   @default(0) @map("sent_count")
   failedCount     Int                   @default(0) @map("failed_count")
   status          PushCampaignStatus    @default(draft)
+  createdBy       String                @map("created_by") @db.Uuid
   createdAt       DateTime              @default(now()) @map("created_at") @db.Timestamptz(6)
   completedAt     DateTime?             @map("completed_at") @db.Timestamptz(6)
   scheduledAt     DateTime?             @map("scheduled_at") @db.Timestamptz(6)
   logs            PushNotificationLog[]
 
+  @@index([status])
+  @@index([createdBy])
+  @@index([scheduledAt])
   @@map("push_notification_campaigns")
 }
 
@@ -377,6 +381,25 @@ model GroupUser {
   @@map("group_users")
 }
 
+model WhatsappMessage {
+  id              String                @id @default(uuid()) @db.Uuid
+  senderUserId    String                @map("sender_user_id") @db.Uuid
+  templateId      String?               @map("template_id") @db.VarChar(50)
+  message         String
+  recipientUserIds Json                 @map("recipient_user_ids") @db.Json
+  recipientPhones Json                 @map("recipient_phones") @db.Json
+  status          WhatsappMessageStatus @default(sending)
+  successCount    Int                   @default(0) @map("success_count")
+  failureCount    Int                   @default(0) @map("failure_count")
+  results         Json?                 @db.Json
+  sentAt          DateTime              @default(now()) @map("sent_at") @db.Timestamptz(6)
+
+  @@index([senderUserId])
+  @@index([sentAt])
+  @@index([status])
+  @@map("whatsapp_messages")
+}
+
 enum UserType {
   consumer
   merchant
@@ -472,4 +495,11 @@ enum PermissionAction {
   update
   delete
   execute
+}
+
+enum WhatsappMessageStatus {
+  sending
+  sent
+  failed
+  partial
 }

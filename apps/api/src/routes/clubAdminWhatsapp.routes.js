@@ -187,7 +187,32 @@ router.post('/send', authenticateClubAdmin, async (req, res) => {
 
     console.log(`📊 [WHATSAPP] Resultado: ${successCount} enviadas, ${failureCount} falharam`);
 
-    // TODO: Salvar histórico no banco (criar tabela whatsapp_messages no schema tenant)
+    // Salvar histórico no banco
+    let messageStatus = 'sent';
+    if (successCount === 0 && failureCount > 0) {
+      messageStatus = 'failed';
+    } else if (successCount > 0 && failureCount > 0) {
+      messageStatus = 'partial';
+    }
+
+    try {
+      await clubPrisma.whatsappMessage.create({
+        data: {
+          senderUserId: clubAdmin.id,
+          message: message.trim(),
+          recipientUserIds: userIds,
+          recipientPhones: recipientPhones,
+          status: messageStatus,
+          successCount: successCount,
+          failureCount: failureCount,
+          results: results,
+          sentAt: new Date()
+        }
+      });
+      console.log(`💾 [WHATSAPP] Histórico salvo no banco`);
+    } catch (dbError) {
+      console.error(`⚠️ [WHATSAPP] Erro ao salvar histórico no banco:`, dbError.message);
+    }
 
     res.json({
       success: true,
@@ -215,19 +240,55 @@ router.post('/send', authenticateClubAdmin, async (req, res) => {
  */
 router.get('/history', authenticateClubAdmin, async (req, res) => {
   try {
+    const clubPrisma = req.clubPrisma;
     const { page = 1, limit = 10 } = req.query;
 
-    // TODO: Implementar armazenamento real de histórico no banco
-    // Por enquanto, retornar array vazio
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
+
+    // Buscar total de mensagens
+    const total = await clubPrisma.whatsappMessage.count();
+
+    // Buscar mensagens com paginação
+    const messages = await clubPrisma.whatsappMessage.findMany({
+      skip: skip,
+      take: limitNum,
+      orderBy: {
+        sentAt: 'desc'
+      },
+      select: {
+        id: true,
+        message: true,
+        recipientUserIds: true,
+        recipientPhones: true,
+        status: true,
+        successCount: true,
+        failureCount: true,
+        sentAt: true
+      }
+    });
+
+    // Formatar resposta para o frontend
+    const formattedMessages = messages.map(msg => ({
+      id: msg.id,
+      message: msg.message,
+      recipients: Array.isArray(msg.recipientUserIds) ? msg.recipientUserIds : [],
+      status: msg.status,
+      successCount: msg.successCount,
+      failureCount: msg.failureCount,
+      sentAt: msg.sentAt
+    }));
+
     res.json({
       success: true,
       data: {
-        messages: [],
+        messages: formattedMessages,
         pagination: {
-          page: parseInt(page),
-          limit: parseInt(limit),
-          total: 0,
-          totalPages: 0
+          page: pageNum,
+          limit: limitNum,
+          total: total,
+          totalPages: Math.ceil(total / limitNum)
         }
       }
     });

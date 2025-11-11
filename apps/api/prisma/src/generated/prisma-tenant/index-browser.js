@@ -252,7 +252,6 @@ exports.Prisma.NotificationScalarFieldEnum = {
 
 exports.Prisma.PushNotificationCampaignScalarFieldEnum = {
   id: 'id',
-  clubId: 'clubId',
   title: 'title',
   description: 'description',
   pageTitle: 'pageTitle',
@@ -267,13 +266,15 @@ exports.Prisma.PushNotificationCampaignScalarFieldEnum = {
   externalLink: 'externalLink',
   buttonText: 'buttonText',
   geolocation: 'geolocation',
+  targetUserIds: 'targetUserIds',
   targetUserCount: 'targetUserCount',
   sentCount: 'sentCount',
   failedCount: 'failedCount',
   status: 'status',
-  scheduledAt: 'scheduledAt',
+  createdBy: 'createdBy',
   createdAt: 'createdAt',
-  completedAt: 'completedAt'
+  completedAt: 'completedAt',
+  scheduledAt: 'scheduledAt'
 };
 
 exports.Prisma.PushNotificationLogScalarFieldEnum = {
@@ -284,8 +285,8 @@ exports.Prisma.PushNotificationLogScalarFieldEnum = {
   status: 'status',
   error: 'error',
   sentAt: 'sentAt',
-  openedAt: 'openedAt',
-  clickedAt: 'clickedAt'
+  clickedAt: 'clickedAt',
+  openedAt: 'openedAt'
 };
 
 exports.Prisma.AnalyticsEventScalarFieldEnum = {
@@ -379,6 +380,20 @@ exports.Prisma.GroupUserScalarFieldEnum = {
   addedBy: 'addedBy'
 };
 
+exports.Prisma.WhatsappMessageScalarFieldEnum = {
+  id: 'id',
+  senderUserId: 'senderUserId',
+  templateId: 'templateId',
+  message: 'message',
+  recipientUserIds: 'recipientUserIds',
+  recipientPhones: 'recipientPhones',
+  status: 'status',
+  successCount: 'successCount',
+  failureCount: 'failureCount',
+  results: 'results',
+  sentAt: 'sentAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -386,6 +401,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -464,10 +483,10 @@ exports.NotificationType = exports.$Enums.NotificationType = {
 
 exports.PushCampaignStatus = exports.$Enums.PushCampaignStatus = {
   draft: 'draft',
-  scheduled: 'scheduled',
   processing: 'processing',
   completed: 'completed',
-  failed: 'failed'
+  failed: 'failed',
+  scheduled: 'scheduled'
 };
 
 exports.PushNotificationStatus = exports.$Enums.PushNotificationStatus = {
@@ -501,6 +520,13 @@ exports.PermissionAction = exports.$Enums.PermissionAction = {
   execute: 'execute'
 };
 
+exports.WhatsappMessageStatus = exports.$Enums.WhatsappMessageStatus = {
+  sending: 'sending',
+  sent: 'sent',
+  failed: 'failed',
+  partial: 'partial'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   UserModule: 'UserModule',
@@ -519,7 +545,8 @@ exports.Prisma.ModelName = {
   RolePermission: 'RolePermission',
   UserRole: 'UserRole',
   Group: 'Group',
-  GroupUser: 'GroupUser'
+  GroupUser: 'GroupUser',
+  WhatsappMessage: 'WhatsappMessage'
 };
 
 /**

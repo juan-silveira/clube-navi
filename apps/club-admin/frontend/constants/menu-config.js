@@ -72,7 +72,7 @@ export const getMenuItems = (t) => [
   {
     title: "Notificações Push",
     icon: "heroicons:bell",
-    link: "/notifications",
+    link: "/push-notifications",
   },
   {
     title: "WhatsApp",

@@ -103,6 +103,11 @@ export type Group = $Result.DefaultSelection<Prisma.$GroupPayload>
  * 
  */
 export type GroupUser = $Result.DefaultSelection<Prisma.$GroupUserPayload>
+/**
+ * Model WhatsappMessage
+ * 
+ */
+export type WhatsappMessage = $Result.DefaultSelection<Prisma.$WhatsappMessagePayload>
 
 /**
  * Enums
@@ -192,10 +197,10 @@ export type NotificationType = (typeof NotificationType)[keyof typeof Notificati
 
 export const PushCampaignStatus: {
   draft: 'draft',
-  scheduled: 'scheduled',
   processing: 'processing',
   completed: 'completed',
-  failed: 'failed'
+  failed: 'failed',
+  scheduled: 'scheduled'
 };
 
 export type PushCampaignStatus = (typeof PushCampaignStatus)[keyof typeof PushCampaignStatus]
@@ -239,6 +244,16 @@ export const PermissionAction: {
 };
 
 export type PermissionAction = (typeof PermissionAction)[keyof typeof PermissionAction]
+
+
+export const WhatsappMessageStatus: {
+  sending: 'sending',
+  sent: 'sent',
+  failed: 'failed',
+  partial: 'partial'
+};
+
+export type WhatsappMessageStatus = (typeof WhatsappMessageStatus)[keyof typeof WhatsappMessageStatus]
 
 }
 
@@ -289,6 +304,10 @@ export const AnalyticsEventType: typeof $Enums.AnalyticsEventType
 export type PermissionAction = $Enums.PermissionAction
 
 export const PermissionAction: typeof $Enums.PermissionAction
+
+export type WhatsappMessageStatus = $Enums.WhatsappMessageStatus
+
+export const WhatsappMessageStatus: typeof $Enums.WhatsappMessageStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -587,6 +606,16 @@ export class PrismaClient<
     * ```
     */
   get groupUser(): Prisma.GroupUserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.whatsappMessage`: Exposes CRUD operations for the **WhatsappMessage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WhatsappMessages
+    * const whatsappMessages = await prisma.whatsappMessage.findMany()
+    * ```
+    */
+  get whatsappMessage(): Prisma.WhatsappMessageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1045,7 +1074,8 @@ export namespace Prisma {
     RolePermission: 'RolePermission',
     UserRole: 'UserRole',
     Group: 'Group',
-    GroupUser: 'GroupUser'
+    GroupUser: 'GroupUser',
+    WhatsappMessage: 'WhatsappMessage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1064,7 +1094,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userModule" | "userCashbackConfig" | "userPushToken" | "product" | "purchase" | "campaign" | "notification" | "pushNotificationCampaign" | "pushNotificationLog" | "analyticsEvent" | "userSession" | "role" | "permission" | "rolePermission" | "userRole" | "group" | "groupUser"
+      modelProps: "user" | "userModule" | "userCashbackConfig" | "userPushToken" | "product" | "purchase" | "campaign" | "notification" | "pushNotificationCampaign" | "pushNotificationLog" | "analyticsEvent" | "userSession" | "role" | "permission" | "rolePermission" | "userRole" | "group" | "groupUser" | "whatsappMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2400,6 +2430,80 @@ export namespace Prisma {
           }
         }
       }
+      WhatsappMessage: {
+        payload: Prisma.$WhatsappMessagePayload<ExtArgs>
+        fields: Prisma.WhatsappMessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WhatsappMessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WhatsappMessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>
+          }
+          findFirst: {
+            args: Prisma.WhatsappMessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WhatsappMessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>
+          }
+          findMany: {
+            args: Prisma.WhatsappMessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>[]
+          }
+          create: {
+            args: Prisma.WhatsappMessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>
+          }
+          createMany: {
+            args: Prisma.WhatsappMessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WhatsappMessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>[]
+          }
+          delete: {
+            args: Prisma.WhatsappMessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>
+          }
+          update: {
+            args: Prisma.WhatsappMessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.WhatsappMessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WhatsappMessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WhatsappMessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.WhatsappMessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessagePayload>
+          }
+          aggregate: {
+            args: Prisma.WhatsappMessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWhatsappMessage>
+          }
+          groupBy: {
+            args: Prisma.WhatsappMessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappMessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WhatsappMessageCountArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappMessageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2514,6 +2618,7 @@ export namespace Prisma {
     userRole?: UserRoleOmit
     group?: GroupOmit
     groupUser?: GroupUserOmit
+    whatsappMessage?: WhatsappMessageOmit
   }
 
   /* Types for Logging */
@@ -2594,30 +2699,30 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    analyticsEvents: number
+    groups: number
+    notifications: number
     products: number
     purchases: number
     sales: number
-    pushTokens: number
     pushNotificationLogs: number
-    notifications: number
     userModules: number
+    pushTokens: number
     userRoles: number
-    groups: number
-    analyticsEvents: number
     sessions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    analyticsEvents?: boolean | UserCountOutputTypeCountAnalyticsEventsArgs
+    groups?: boolean | UserCountOutputTypeCountGroupsArgs
+    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     products?: boolean | UserCountOutputTypeCountProductsArgs
     purchases?: boolean | UserCountOutputTypeCountPurchasesArgs
     sales?: boolean | UserCountOutputTypeCountSalesArgs
-    pushTokens?: boolean | UserCountOutputTypeCountPushTokensArgs
     pushNotificationLogs?: boolean | UserCountOutputTypeCountPushNotificationLogsArgs
-    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     userModules?: boolean | UserCountOutputTypeCountUserModulesArgs
+    pushTokens?: boolean | UserCountOutputTypeCountPushTokensArgs
     userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
-    groups?: boolean | UserCountOutputTypeCountGroupsArgs
-    analyticsEvents?: boolean | UserCountOutputTypeCountAnalyticsEventsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   }
 
@@ -2630,6 +2735,27 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAnalyticsEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnalyticsEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GroupUserWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
   }
 
   /**
@@ -2656,22 +2782,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPushTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserPushTokenWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountPushNotificationLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PushNotificationLogWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NotificationWhereInput
   }
 
   /**
@@ -2684,22 +2796,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountPushTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPushTokenWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountUserRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRoleWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GroupUserWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAnalyticsEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AnalyticsEventWhereInput
   }
 
   /**
@@ -3248,17 +3353,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    analyticsEvents?: boolean | User$analyticsEventsArgs<ExtArgs>
+    groups?: boolean | User$groupsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
     products?: boolean | User$productsArgs<ExtArgs>
     purchases?: boolean | User$purchasesArgs<ExtArgs>
     sales?: boolean | User$salesArgs<ExtArgs>
-    pushTokens?: boolean | User$pushTokensArgs<ExtArgs>
     pushNotificationLogs?: boolean | User$pushNotificationLogsArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
-    userModules?: boolean | User$userModulesArgs<ExtArgs>
     cashbackConfig?: boolean | User$cashbackConfigArgs<ExtArgs>
+    userModules?: boolean | User$userModulesArgs<ExtArgs>
+    pushTokens?: boolean | User$pushTokensArgs<ExtArgs>
     userRoles?: boolean | User$userRolesArgs<ExtArgs>
-    groups?: boolean | User$groupsArgs<ExtArgs>
-    analyticsEvents?: boolean | User$analyticsEventsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -3355,17 +3460,17 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "username" | "cpf" | "phone" | "birthDate" | "password" | "passwordChangedAt" | "profilePicture" | "userType" | "merchantStatus" | "publicKey" | "privateKey" | "referralId" | "referredBy" | "address" | "isActive" | "accountStatus" | "lastLoginAt" | "emailConfirmed" | "failedLoginAttempts" | "lastFailedLoginAt" | "isBlockedLoginAttempts" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    analyticsEvents?: boolean | User$analyticsEventsArgs<ExtArgs>
+    groups?: boolean | User$groupsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
     products?: boolean | User$productsArgs<ExtArgs>
     purchases?: boolean | User$purchasesArgs<ExtArgs>
     sales?: boolean | User$salesArgs<ExtArgs>
-    pushTokens?: boolean | User$pushTokensArgs<ExtArgs>
     pushNotificationLogs?: boolean | User$pushNotificationLogsArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
-    userModules?: boolean | User$userModulesArgs<ExtArgs>
     cashbackConfig?: boolean | User$cashbackConfigArgs<ExtArgs>
+    userModules?: boolean | User$userModulesArgs<ExtArgs>
+    pushTokens?: boolean | User$pushTokensArgs<ExtArgs>
     userRoles?: boolean | User$userRolesArgs<ExtArgs>
-    groups?: boolean | User$groupsArgs<ExtArgs>
-    analyticsEvents?: boolean | User$analyticsEventsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3375,17 +3480,17 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      analyticsEvents: Prisma.$AnalyticsEventPayload<ExtArgs>[]
+      groups: Prisma.$GroupUserPayload<ExtArgs>[]
+      notifications: Prisma.$NotificationPayload<ExtArgs>[]
       products: Prisma.$ProductPayload<ExtArgs>[]
       purchases: Prisma.$PurchasePayload<ExtArgs>[]
       sales: Prisma.$PurchasePayload<ExtArgs>[]
-      pushTokens: Prisma.$UserPushTokenPayload<ExtArgs>[]
       pushNotificationLogs: Prisma.$PushNotificationLogPayload<ExtArgs>[]
-      notifications: Prisma.$NotificationPayload<ExtArgs>[]
-      userModules: Prisma.$UserModulePayload<ExtArgs>[]
       cashbackConfig: Prisma.$UserCashbackConfigPayload<ExtArgs> | null
+      userModules: Prisma.$UserModulePayload<ExtArgs>[]
+      pushTokens: Prisma.$UserPushTokenPayload<ExtArgs>[]
       userRoles: Prisma.$UserRolePayload<ExtArgs>[]
-      groups: Prisma.$GroupUserPayload<ExtArgs>[]
-      analyticsEvents: Prisma.$AnalyticsEventPayload<ExtArgs>[]
       sessions: Prisma.$UserSessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3810,17 +3915,17 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    analyticsEvents<T extends User$analyticsEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$analyticsEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnalyticsEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    groups<T extends User$groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GroupUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends User$productsArgs<ExtArgs> = {}>(args?: Subset<T, User$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     purchases<T extends User$purchasesArgs<ExtArgs> = {}>(args?: Subset<T, User$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sales<T extends User$salesArgs<ExtArgs> = {}>(args?: Subset<T, User$salesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    pushTokens<T extends User$pushTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$pushTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPushTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pushNotificationLogs<T extends User$pushNotificationLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$pushNotificationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PushNotificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    userModules<T extends User$userModulesArgs<ExtArgs> = {}>(args?: Subset<T, User$userModulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cashbackConfig<T extends User$cashbackConfigArgs<ExtArgs> = {}>(args?: Subset<T, User$cashbackConfigArgs<ExtArgs>>): Prisma__UserCashbackConfigClient<$Result.GetResult<Prisma.$UserCashbackConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    userModules<T extends User$userModulesArgs<ExtArgs> = {}>(args?: Subset<T, User$userModulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pushTokens<T extends User$pushTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$pushTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPushTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userRoles<T extends User$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    groups<T extends User$groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GroupUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    analyticsEvents<T extends User$analyticsEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$analyticsEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnalyticsEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4266,6 +4371,78 @@ export namespace Prisma {
   }
 
   /**
+   * User.analyticsEvents
+   */
+  export type User$analyticsEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnalyticsEvent
+     */
+    select?: AnalyticsEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnalyticsEvent
+     */
+    omit?: AnalyticsEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnalyticsEventInclude<ExtArgs> | null
+    where?: AnalyticsEventWhereInput
+    orderBy?: AnalyticsEventOrderByWithRelationInput | AnalyticsEventOrderByWithRelationInput[]
+    cursor?: AnalyticsEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnalyticsEventScalarFieldEnum | AnalyticsEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.groups
+   */
+  export type User$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GroupUser
+     */
+    select?: GroupUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GroupUser
+     */
+    omit?: GroupUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GroupUserInclude<ExtArgs> | null
+    where?: GroupUserWhereInput
+    orderBy?: GroupUserOrderByWithRelationInput | GroupUserOrderByWithRelationInput[]
+    cursor?: GroupUserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GroupUserScalarFieldEnum | GroupUserScalarFieldEnum[]
+  }
+
+  /**
+   * User.notifications
+   */
+  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
    * User.products
    */
   export type User$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4338,30 +4515,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.pushTokens
-   */
-  export type User$pushTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPushToken
-     */
-    select?: UserPushTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserPushToken
-     */
-    omit?: UserPushTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserPushTokenInclude<ExtArgs> | null
-    where?: UserPushTokenWhereInput
-    orderBy?: UserPushTokenOrderByWithRelationInput | UserPushTokenOrderByWithRelationInput[]
-    cursor?: UserPushTokenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserPushTokenScalarFieldEnum | UserPushTokenScalarFieldEnum[]
-  }
-
-  /**
    * User.pushNotificationLogs
    */
   export type User$pushNotificationLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4386,27 +4539,22 @@ export namespace Prisma {
   }
 
   /**
-   * User.notifications
+   * User.cashbackConfig
    */
-  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$cashbackConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Notification
+     * Select specific fields to fetch from the UserCashbackConfig
      */
-    select?: NotificationSelect<ExtArgs> | null
+    select?: UserCashbackConfigSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Notification
+     * Omit specific fields from the UserCashbackConfig
      */
-    omit?: NotificationOmit<ExtArgs> | null
+    omit?: UserCashbackConfigOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NotificationInclude<ExtArgs> | null
-    where?: NotificationWhereInput
-    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
-    cursor?: NotificationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+    include?: UserCashbackConfigInclude<ExtArgs> | null
+    where?: UserCashbackConfigWhereInput
   }
 
   /**
@@ -4434,22 +4582,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.cashbackConfig
+   * User.pushTokens
    */
-  export type User$cashbackConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$pushTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserCashbackConfig
+     * Select specific fields to fetch from the UserPushToken
      */
-    select?: UserCashbackConfigSelect<ExtArgs> | null
+    select?: UserPushTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserCashbackConfig
+     * Omit specific fields from the UserPushToken
      */
-    omit?: UserCashbackConfigOmit<ExtArgs> | null
+    omit?: UserPushTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserCashbackConfigInclude<ExtArgs> | null
-    where?: UserCashbackConfigWhereInput
+    include?: UserPushTokenInclude<ExtArgs> | null
+    where?: UserPushTokenWhereInput
+    orderBy?: UserPushTokenOrderByWithRelationInput | UserPushTokenOrderByWithRelationInput[]
+    cursor?: UserPushTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserPushTokenScalarFieldEnum | UserPushTokenScalarFieldEnum[]
   }
 
   /**
@@ -4474,54 +4627,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
-  }
-
-  /**
-   * User.groups
-   */
-  export type User$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GroupUser
-     */
-    select?: GroupUserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GroupUser
-     */
-    omit?: GroupUserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GroupUserInclude<ExtArgs> | null
-    where?: GroupUserWhereInput
-    orderBy?: GroupUserOrderByWithRelationInput | GroupUserOrderByWithRelationInput[]
-    cursor?: GroupUserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: GroupUserScalarFieldEnum | GroupUserScalarFieldEnum[]
-  }
-
-  /**
-   * User.analyticsEvents
-   */
-  export type User$analyticsEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AnalyticsEvent
-     */
-    select?: AnalyticsEventSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AnalyticsEvent
-     */
-    omit?: AnalyticsEventOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AnalyticsEventInclude<ExtArgs> | null
-    where?: AnalyticsEventWhereInput
-    orderBy?: AnalyticsEventOrderByWithRelationInput | AnalyticsEventOrderByWithRelationInput[]
-    cursor?: AnalyticsEventWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AnalyticsEventScalarFieldEnum | AnalyticsEventScalarFieldEnum[]
   }
 
   /**
@@ -12730,7 +12835,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMinAggregateOutputType = {
     id: string | null
-    clubId: string | null
     title: string | null
     description: string | null
     pageTitle: string | null
@@ -12748,14 +12852,14 @@ export namespace Prisma {
     sentCount: number | null
     failedCount: number | null
     status: $Enums.PushCampaignStatus | null
-    scheduledAt: Date | null
+    createdBy: string | null
     createdAt: Date | null
     completedAt: Date | null
+    scheduledAt: Date | null
   }
 
   export type PushNotificationCampaignMaxAggregateOutputType = {
     id: string | null
-    clubId: string | null
     title: string | null
     description: string | null
     pageTitle: string | null
@@ -12773,14 +12877,14 @@ export namespace Prisma {
     sentCount: number | null
     failedCount: number | null
     status: $Enums.PushCampaignStatus | null
-    scheduledAt: Date | null
+    createdBy: string | null
     createdAt: Date | null
     completedAt: Date | null
+    scheduledAt: Date | null
   }
 
   export type PushNotificationCampaignCountAggregateOutputType = {
     id: number
-    clubId: number
     title: number
     description: number
     pageTitle: number
@@ -12795,13 +12899,15 @@ export namespace Prisma {
     externalLink: number
     buttonText: number
     geolocation: number
+    targetUserIds: number
     targetUserCount: number
     sentCount: number
     failedCount: number
     status: number
-    scheduledAt: number
+    createdBy: number
     createdAt: number
     completedAt: number
+    scheduledAt: number
     _all: number
   }
 
@@ -12820,7 +12926,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMinAggregateInputType = {
     id?: true
-    clubId?: true
     title?: true
     description?: true
     pageTitle?: true
@@ -12838,14 +12943,14 @@ export namespace Prisma {
     sentCount?: true
     failedCount?: true
     status?: true
-    scheduledAt?: true
+    createdBy?: true
     createdAt?: true
     completedAt?: true
+    scheduledAt?: true
   }
 
   export type PushNotificationCampaignMaxAggregateInputType = {
     id?: true
-    clubId?: true
     title?: true
     description?: true
     pageTitle?: true
@@ -12863,14 +12968,14 @@ export namespace Prisma {
     sentCount?: true
     failedCount?: true
     status?: true
-    scheduledAt?: true
+    createdBy?: true
     createdAt?: true
     completedAt?: true
+    scheduledAt?: true
   }
 
   export type PushNotificationCampaignCountAggregateInputType = {
     id?: true
-    clubId?: true
     title?: true
     description?: true
     pageTitle?: true
@@ -12885,13 +12990,15 @@ export namespace Prisma {
     externalLink?: true
     buttonText?: true
     geolocation?: true
+    targetUserIds?: true
     targetUserCount?: true
     sentCount?: true
     failedCount?: true
     status?: true
-    scheduledAt?: true
+    createdBy?: true
     createdAt?: true
     completedAt?: true
+    scheduledAt?: true
     _all?: true
   }
 
@@ -12983,7 +13090,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignGroupByOutputType = {
     id: string
-    clubId: string
     title: string
     description: string
     pageTitle: string | null
@@ -12998,13 +13104,15 @@ export namespace Prisma {
     externalLink: string | null
     buttonText: string | null
     geolocation: JsonValue | null
+    targetUserIds: JsonValue | null
     targetUserCount: number
     sentCount: number
     failedCount: number
     status: $Enums.PushCampaignStatus
-    scheduledAt: Date | null
+    createdBy: string
     createdAt: Date
     completedAt: Date | null
+    scheduledAt: Date | null
     _count: PushNotificationCampaignCountAggregateOutputType | null
     _avg: PushNotificationCampaignAvgAggregateOutputType | null
     _sum: PushNotificationCampaignSumAggregateOutputType | null
@@ -13028,7 +13136,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13043,20 +13150,21 @@ export namespace Prisma {
     externalLink?: boolean
     buttonText?: boolean
     geolocation?: boolean
+    targetUserIds?: boolean
     targetUserCount?: boolean
     sentCount?: boolean
     failedCount?: boolean
     status?: boolean
-    scheduledAt?: boolean
+    createdBy?: boolean
     createdAt?: boolean
     completedAt?: boolean
+    scheduledAt?: boolean
     logs?: boolean | PushNotificationCampaign$logsArgs<ExtArgs>
     _count?: boolean | PushNotificationCampaignCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pushNotificationCampaign"]>
 
   export type PushNotificationCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13071,18 +13179,19 @@ export namespace Prisma {
     externalLink?: boolean
     buttonText?: boolean
     geolocation?: boolean
+    targetUserIds?: boolean
     targetUserCount?: boolean
     sentCount?: boolean
     failedCount?: boolean
     status?: boolean
-    scheduledAt?: boolean
+    createdBy?: boolean
     createdAt?: boolean
     completedAt?: boolean
+    scheduledAt?: boolean
   }, ExtArgs["result"]["pushNotificationCampaign"]>
 
   export type PushNotificationCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13097,18 +13206,19 @@ export namespace Prisma {
     externalLink?: boolean
     buttonText?: boolean
     geolocation?: boolean
+    targetUserIds?: boolean
     targetUserCount?: boolean
     sentCount?: boolean
     failedCount?: boolean
     status?: boolean
-    scheduledAt?: boolean
+    createdBy?: boolean
     createdAt?: boolean
     completedAt?: boolean
+    scheduledAt?: boolean
   }, ExtArgs["result"]["pushNotificationCampaign"]>
 
   export type PushNotificationCampaignSelectScalar = {
     id?: boolean
-    clubId?: boolean
     title?: boolean
     description?: boolean
     pageTitle?: boolean
@@ -13123,16 +13233,18 @@ export namespace Prisma {
     externalLink?: boolean
     buttonText?: boolean
     geolocation?: boolean
+    targetUserIds?: boolean
     targetUserCount?: boolean
     sentCount?: boolean
     failedCount?: boolean
     status?: boolean
-    scheduledAt?: boolean
+    createdBy?: boolean
     createdAt?: boolean
     completedAt?: boolean
+    scheduledAt?: boolean
   }
 
-  export type PushNotificationCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "title" | "description" | "pageTitle" | "pageDescription" | "code" | "rules" | "logoUrl" | "bannerUrl" | "enableButton" | "buttonType" | "targetModule" | "externalLink" | "buttonText" | "geolocation" | "targetUserCount" | "sentCount" | "failedCount" | "status" | "scheduledAt" | "createdAt" | "completedAt", ExtArgs["result"]["pushNotificationCampaign"]>
+  export type PushNotificationCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "pageTitle" | "pageDescription" | "code" | "rules" | "logoUrl" | "bannerUrl" | "enableButton" | "buttonType" | "targetModule" | "externalLink" | "buttonText" | "geolocation" | "targetUserIds" | "targetUserCount" | "sentCount" | "failedCount" | "status" | "createdBy" | "createdAt" | "completedAt" | "scheduledAt", ExtArgs["result"]["pushNotificationCampaign"]>
   export type PushNotificationCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     logs?: boolean | PushNotificationCampaign$logsArgs<ExtArgs>
     _count?: boolean | PushNotificationCampaignCountOutputTypeDefaultArgs<ExtArgs>
@@ -13147,7 +13259,6 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      clubId: string
       title: string
       description: string
       pageTitle: string | null
@@ -13162,13 +13273,15 @@ export namespace Prisma {
       externalLink: string | null
       buttonText: string | null
       geolocation: Prisma.JsonValue | null
+      targetUserIds: Prisma.JsonValue | null
       targetUserCount: number
       sentCount: number
       failedCount: number
       status: $Enums.PushCampaignStatus
-      scheduledAt: Date | null
+      createdBy: string
       createdAt: Date
       completedAt: Date | null
+      scheduledAt: Date | null
     }, ExtArgs["result"]["pushNotificationCampaign"]>
     composites: {}
   }
@@ -13594,7 +13707,6 @@ export namespace Prisma {
    */
   interface PushNotificationCampaignFieldRefs {
     readonly id: FieldRef<"PushNotificationCampaign", 'String'>
-    readonly clubId: FieldRef<"PushNotificationCampaign", 'String'>
     readonly title: FieldRef<"PushNotificationCampaign", 'String'>
     readonly description: FieldRef<"PushNotificationCampaign", 'String'>
     readonly pageTitle: FieldRef<"PushNotificationCampaign", 'String'>
@@ -13609,13 +13721,15 @@ export namespace Prisma {
     readonly externalLink: FieldRef<"PushNotificationCampaign", 'String'>
     readonly buttonText: FieldRef<"PushNotificationCampaign", 'String'>
     readonly geolocation: FieldRef<"PushNotificationCampaign", 'Json'>
+    readonly targetUserIds: FieldRef<"PushNotificationCampaign", 'Json'>
     readonly targetUserCount: FieldRef<"PushNotificationCampaign", 'Int'>
     readonly sentCount: FieldRef<"PushNotificationCampaign", 'Int'>
     readonly failedCount: FieldRef<"PushNotificationCampaign", 'Int'>
     readonly status: FieldRef<"PushNotificationCampaign", 'PushCampaignStatus'>
-    readonly scheduledAt: FieldRef<"PushNotificationCampaign", 'DateTime'>
+    readonly createdBy: FieldRef<"PushNotificationCampaign", 'String'>
     readonly createdAt: FieldRef<"PushNotificationCampaign", 'DateTime'>
     readonly completedAt: FieldRef<"PushNotificationCampaign", 'DateTime'>
+    readonly scheduledAt: FieldRef<"PushNotificationCampaign", 'DateTime'>
   }
     
 
@@ -14064,8 +14178,8 @@ export namespace Prisma {
     status: $Enums.PushNotificationStatus | null
     error: string | null
     sentAt: Date | null
-    openedAt: Date | null
     clickedAt: Date | null
+    openedAt: Date | null
   }
 
   export type PushNotificationLogMaxAggregateOutputType = {
@@ -14076,8 +14190,8 @@ export namespace Prisma {
     status: $Enums.PushNotificationStatus | null
     error: string | null
     sentAt: Date | null
-    openedAt: Date | null
     clickedAt: Date | null
+    openedAt: Date | null
   }
 
   export type PushNotificationLogCountAggregateOutputType = {
@@ -14088,8 +14202,8 @@ export namespace Prisma {
     status: number
     error: number
     sentAt: number
-    openedAt: number
     clickedAt: number
+    openedAt: number
     _all: number
   }
 
@@ -14102,8 +14216,8 @@ export namespace Prisma {
     status?: true
     error?: true
     sentAt?: true
-    openedAt?: true
     clickedAt?: true
+    openedAt?: true
   }
 
   export type PushNotificationLogMaxAggregateInputType = {
@@ -14114,8 +14228,8 @@ export namespace Prisma {
     status?: true
     error?: true
     sentAt?: true
-    openedAt?: true
     clickedAt?: true
+    openedAt?: true
   }
 
   export type PushNotificationLogCountAggregateInputType = {
@@ -14126,8 +14240,8 @@ export namespace Prisma {
     status?: true
     error?: true
     sentAt?: true
-    openedAt?: true
     clickedAt?: true
+    openedAt?: true
     _all?: true
   }
 
@@ -14211,8 +14325,8 @@ export namespace Prisma {
     status: $Enums.PushNotificationStatus
     error: string | null
     sentAt: Date
-    openedAt: Date | null
     clickedAt: Date | null
+    openedAt: Date | null
     _count: PushNotificationLogCountAggregateOutputType | null
     _min: PushNotificationLogMinAggregateOutputType | null
     _max: PushNotificationLogMaxAggregateOutputType | null
@@ -14240,8 +14354,8 @@ export namespace Prisma {
     status?: boolean
     error?: boolean
     sentAt?: boolean
-    openedAt?: boolean
     clickedAt?: boolean
+    openedAt?: boolean
     campaign?: boolean | PushNotificationCampaignDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pushNotificationLog"]>
@@ -14254,8 +14368,8 @@ export namespace Prisma {
     status?: boolean
     error?: boolean
     sentAt?: boolean
-    openedAt?: boolean
     clickedAt?: boolean
+    openedAt?: boolean
     campaign?: boolean | PushNotificationCampaignDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pushNotificationLog"]>
@@ -14268,8 +14382,8 @@ export namespace Prisma {
     status?: boolean
     error?: boolean
     sentAt?: boolean
-    openedAt?: boolean
     clickedAt?: boolean
+    openedAt?: boolean
     campaign?: boolean | PushNotificationCampaignDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pushNotificationLog"]>
@@ -14282,11 +14396,11 @@ export namespace Prisma {
     status?: boolean
     error?: boolean
     sentAt?: boolean
-    openedAt?: boolean
     clickedAt?: boolean
+    openedAt?: boolean
   }
 
-  export type PushNotificationLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "campaignId" | "userId" | "pushToken" | "status" | "error" | "sentAt" | "openedAt" | "clickedAt", ExtArgs["result"]["pushNotificationLog"]>
+  export type PushNotificationLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "campaignId" | "userId" | "pushToken" | "status" | "error" | "sentAt" | "clickedAt" | "openedAt", ExtArgs["result"]["pushNotificationLog"]>
   export type PushNotificationLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | PushNotificationCampaignDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -14314,8 +14428,8 @@ export namespace Prisma {
       status: $Enums.PushNotificationStatus
       error: string | null
       sentAt: Date
-      openedAt: Date | null
       clickedAt: Date | null
+      openedAt: Date | null
     }, ExtArgs["result"]["pushNotificationLog"]>
     composites: {}
   }
@@ -14748,8 +14862,8 @@ export namespace Prisma {
     readonly status: FieldRef<"PushNotificationLog", 'PushNotificationStatus'>
     readonly error: FieldRef<"PushNotificationLog", 'String'>
     readonly sentAt: FieldRef<"PushNotificationLog", 'DateTime'>
-    readonly openedAt: FieldRef<"PushNotificationLog", 'DateTime'>
     readonly clickedAt: FieldRef<"PushNotificationLog", 'DateTime'>
+    readonly openedAt: FieldRef<"PushNotificationLog", 'DateTime'>
   }
     
 
@@ -20052,8 +20166,8 @@ export namespace Prisma {
     roleId?: boolean
     permissionId?: boolean
     createdAt?: boolean
-    role?: boolean | RoleDefaultArgs<ExtArgs>
     permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rolePermission"]>
 
   export type RolePermissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20061,8 +20175,8 @@ export namespace Prisma {
     roleId?: boolean
     permissionId?: boolean
     createdAt?: boolean
-    role?: boolean | RoleDefaultArgs<ExtArgs>
     permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rolePermission"]>
 
   export type RolePermissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20070,8 +20184,8 @@ export namespace Prisma {
     roleId?: boolean
     permissionId?: boolean
     createdAt?: boolean
-    role?: boolean | RoleDefaultArgs<ExtArgs>
     permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rolePermission"]>
 
   export type RolePermissionSelectScalar = {
@@ -20083,23 +20197,23 @@ export namespace Prisma {
 
   export type RolePermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roleId" | "permissionId" | "createdAt", ExtArgs["result"]["rolePermission"]>
   export type RolePermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    role?: boolean | RoleDefaultArgs<ExtArgs>
     permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }
   export type RolePermissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    role?: boolean | RoleDefaultArgs<ExtArgs>
     permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }
   export type RolePermissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    role?: boolean | RoleDefaultArgs<ExtArgs>
     permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }
 
   export type $RolePermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RolePermission"
     objects: {
-      role: Prisma.$RolePayload<ExtArgs>
       permission: Prisma.$PermissionPayload<ExtArgs>
+      role: Prisma.$RolePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20500,8 +20614,8 @@ export namespace Prisma {
    */
   export interface Prisma__RolePermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     permission<T extends PermissionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PermissionDefaultArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21113,8 +21227,8 @@ export namespace Prisma {
     roleId?: boolean
     createdAt?: boolean
     createdBy?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userRole"]>
 
   export type UserRoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -21123,8 +21237,8 @@ export namespace Prisma {
     roleId?: boolean
     createdAt?: boolean
     createdBy?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userRole"]>
 
   export type UserRoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -21133,8 +21247,8 @@ export namespace Prisma {
     roleId?: boolean
     createdAt?: boolean
     createdBy?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userRole"]>
 
   export type UserRoleSelectScalar = {
@@ -21147,23 +21261,23 @@ export namespace Prisma {
 
   export type UserRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "roleId" | "createdAt" | "createdBy", ExtArgs["result"]["userRole"]>
   export type UserRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserRoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $UserRolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserRole"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       role: Prisma.$RolePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21565,8 +21679,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserRoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24178,6 +24292,1105 @@ export namespace Prisma {
 
 
   /**
+   * Model WhatsappMessage
+   */
+
+  export type AggregateWhatsappMessage = {
+    _count: WhatsappMessageCountAggregateOutputType | null
+    _avg: WhatsappMessageAvgAggregateOutputType | null
+    _sum: WhatsappMessageSumAggregateOutputType | null
+    _min: WhatsappMessageMinAggregateOutputType | null
+    _max: WhatsappMessageMaxAggregateOutputType | null
+  }
+
+  export type WhatsappMessageAvgAggregateOutputType = {
+    successCount: number | null
+    failureCount: number | null
+  }
+
+  export type WhatsappMessageSumAggregateOutputType = {
+    successCount: number | null
+    failureCount: number | null
+  }
+
+  export type WhatsappMessageMinAggregateOutputType = {
+    id: string | null
+    senderUserId: string | null
+    templateId: string | null
+    message: string | null
+    status: $Enums.WhatsappMessageStatus | null
+    successCount: number | null
+    failureCount: number | null
+    sentAt: Date | null
+  }
+
+  export type WhatsappMessageMaxAggregateOutputType = {
+    id: string | null
+    senderUserId: string | null
+    templateId: string | null
+    message: string | null
+    status: $Enums.WhatsappMessageStatus | null
+    successCount: number | null
+    failureCount: number | null
+    sentAt: Date | null
+  }
+
+  export type WhatsappMessageCountAggregateOutputType = {
+    id: number
+    senderUserId: number
+    templateId: number
+    message: number
+    recipientUserIds: number
+    recipientPhones: number
+    status: number
+    successCount: number
+    failureCount: number
+    results: number
+    sentAt: number
+    _all: number
+  }
+
+
+  export type WhatsappMessageAvgAggregateInputType = {
+    successCount?: true
+    failureCount?: true
+  }
+
+  export type WhatsappMessageSumAggregateInputType = {
+    successCount?: true
+    failureCount?: true
+  }
+
+  export type WhatsappMessageMinAggregateInputType = {
+    id?: true
+    senderUserId?: true
+    templateId?: true
+    message?: true
+    status?: true
+    successCount?: true
+    failureCount?: true
+    sentAt?: true
+  }
+
+  export type WhatsappMessageMaxAggregateInputType = {
+    id?: true
+    senderUserId?: true
+    templateId?: true
+    message?: true
+    status?: true
+    successCount?: true
+    failureCount?: true
+    sentAt?: true
+  }
+
+  export type WhatsappMessageCountAggregateInputType = {
+    id?: true
+    senderUserId?: true
+    templateId?: true
+    message?: true
+    recipientUserIds?: true
+    recipientPhones?: true
+    status?: true
+    successCount?: true
+    failureCount?: true
+    results?: true
+    sentAt?: true
+    _all?: true
+  }
+
+  export type WhatsappMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappMessage to aggregate.
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessages to fetch.
+     */
+    orderBy?: WhatsappMessageOrderByWithRelationInput | WhatsappMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WhatsappMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WhatsappMessages
+    **/
+    _count?: true | WhatsappMessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WhatsappMessageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WhatsappMessageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WhatsappMessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WhatsappMessageMaxAggregateInputType
+  }
+
+  export type GetWhatsappMessageAggregateType<T extends WhatsappMessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateWhatsappMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWhatsappMessage[P]>
+      : GetScalarType<T[P], AggregateWhatsappMessage[P]>
+  }
+
+
+
+
+  export type WhatsappMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappMessageWhereInput
+    orderBy?: WhatsappMessageOrderByWithAggregationInput | WhatsappMessageOrderByWithAggregationInput[]
+    by: WhatsappMessageScalarFieldEnum[] | WhatsappMessageScalarFieldEnum
+    having?: WhatsappMessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WhatsappMessageCountAggregateInputType | true
+    _avg?: WhatsappMessageAvgAggregateInputType
+    _sum?: WhatsappMessageSumAggregateInputType
+    _min?: WhatsappMessageMinAggregateInputType
+    _max?: WhatsappMessageMaxAggregateInputType
+  }
+
+  export type WhatsappMessageGroupByOutputType = {
+    id: string
+    senderUserId: string
+    templateId: string | null
+    message: string
+    recipientUserIds: JsonValue
+    recipientPhones: JsonValue
+    status: $Enums.WhatsappMessageStatus
+    successCount: number
+    failureCount: number
+    results: JsonValue | null
+    sentAt: Date
+    _count: WhatsappMessageCountAggregateOutputType | null
+    _avg: WhatsappMessageAvgAggregateOutputType | null
+    _sum: WhatsappMessageSumAggregateOutputType | null
+    _min: WhatsappMessageMinAggregateOutputType | null
+    _max: WhatsappMessageMaxAggregateOutputType | null
+  }
+
+  type GetWhatsappMessageGroupByPayload<T extends WhatsappMessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WhatsappMessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WhatsappMessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WhatsappMessageGroupByOutputType[P]>
+            : GetScalarType<T[P], WhatsappMessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WhatsappMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderUserId?: boolean
+    templateId?: boolean
+    message?: boolean
+    recipientUserIds?: boolean
+    recipientPhones?: boolean
+    status?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    results?: boolean
+    sentAt?: boolean
+  }, ExtArgs["result"]["whatsappMessage"]>
+
+  export type WhatsappMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderUserId?: boolean
+    templateId?: boolean
+    message?: boolean
+    recipientUserIds?: boolean
+    recipientPhones?: boolean
+    status?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    results?: boolean
+    sentAt?: boolean
+  }, ExtArgs["result"]["whatsappMessage"]>
+
+  export type WhatsappMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderUserId?: boolean
+    templateId?: boolean
+    message?: boolean
+    recipientUserIds?: boolean
+    recipientPhones?: boolean
+    status?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    results?: boolean
+    sentAt?: boolean
+  }, ExtArgs["result"]["whatsappMessage"]>
+
+  export type WhatsappMessageSelectScalar = {
+    id?: boolean
+    senderUserId?: boolean
+    templateId?: boolean
+    message?: boolean
+    recipientUserIds?: boolean
+    recipientPhones?: boolean
+    status?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    results?: boolean
+    sentAt?: boolean
+  }
+
+  export type WhatsappMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "senderUserId" | "templateId" | "message" | "recipientUserIds" | "recipientPhones" | "status" | "successCount" | "failureCount" | "results" | "sentAt", ExtArgs["result"]["whatsappMessage"]>
+
+  export type $WhatsappMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WhatsappMessage"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      senderUserId: string
+      templateId: string | null
+      message: string
+      recipientUserIds: Prisma.JsonValue
+      recipientPhones: Prisma.JsonValue
+      status: $Enums.WhatsappMessageStatus
+      successCount: number
+      failureCount: number
+      results: Prisma.JsonValue | null
+      sentAt: Date
+    }, ExtArgs["result"]["whatsappMessage"]>
+    composites: {}
+  }
+
+  type WhatsappMessageGetPayload<S extends boolean | null | undefined | WhatsappMessageDefaultArgs> = $Result.GetResult<Prisma.$WhatsappMessagePayload, S>
+
+  type WhatsappMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WhatsappMessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WhatsappMessageCountAggregateInputType | true
+    }
+
+  export interface WhatsappMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WhatsappMessage'], meta: { name: 'WhatsappMessage' } }
+    /**
+     * Find zero or one WhatsappMessage that matches the filter.
+     * @param {WhatsappMessageFindUniqueArgs} args - Arguments to find a WhatsappMessage
+     * @example
+     * // Get one WhatsappMessage
+     * const whatsappMessage = await prisma.whatsappMessage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WhatsappMessageFindUniqueArgs>(args: SelectSubset<T, WhatsappMessageFindUniqueArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WhatsappMessage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WhatsappMessageFindUniqueOrThrowArgs} args - Arguments to find a WhatsappMessage
+     * @example
+     * // Get one WhatsappMessage
+     * const whatsappMessage = await prisma.whatsappMessage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WhatsappMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, WhatsappMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappMessage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageFindFirstArgs} args - Arguments to find a WhatsappMessage
+     * @example
+     * // Get one WhatsappMessage
+     * const whatsappMessage = await prisma.whatsappMessage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WhatsappMessageFindFirstArgs>(args?: SelectSubset<T, WhatsappMessageFindFirstArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappMessage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageFindFirstOrThrowArgs} args - Arguments to find a WhatsappMessage
+     * @example
+     * // Get one WhatsappMessage
+     * const whatsappMessage = await prisma.whatsappMessage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WhatsappMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, WhatsappMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WhatsappMessages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WhatsappMessages
+     * const whatsappMessages = await prisma.whatsappMessage.findMany()
+     * 
+     * // Get first 10 WhatsappMessages
+     * const whatsappMessages = await prisma.whatsappMessage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const whatsappMessageWithIdOnly = await prisma.whatsappMessage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WhatsappMessageFindManyArgs>(args?: SelectSubset<T, WhatsappMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WhatsappMessage.
+     * @param {WhatsappMessageCreateArgs} args - Arguments to create a WhatsappMessage.
+     * @example
+     * // Create one WhatsappMessage
+     * const WhatsappMessage = await prisma.whatsappMessage.create({
+     *   data: {
+     *     // ... data to create a WhatsappMessage
+     *   }
+     * })
+     * 
+     */
+    create<T extends WhatsappMessageCreateArgs>(args: SelectSubset<T, WhatsappMessageCreateArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WhatsappMessages.
+     * @param {WhatsappMessageCreateManyArgs} args - Arguments to create many WhatsappMessages.
+     * @example
+     * // Create many WhatsappMessages
+     * const whatsappMessage = await prisma.whatsappMessage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WhatsappMessageCreateManyArgs>(args?: SelectSubset<T, WhatsappMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WhatsappMessages and returns the data saved in the database.
+     * @param {WhatsappMessageCreateManyAndReturnArgs} args - Arguments to create many WhatsappMessages.
+     * @example
+     * // Create many WhatsappMessages
+     * const whatsappMessage = await prisma.whatsappMessage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WhatsappMessages and only return the `id`
+     * const whatsappMessageWithIdOnly = await prisma.whatsappMessage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WhatsappMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, WhatsappMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WhatsappMessage.
+     * @param {WhatsappMessageDeleteArgs} args - Arguments to delete one WhatsappMessage.
+     * @example
+     * // Delete one WhatsappMessage
+     * const WhatsappMessage = await prisma.whatsappMessage.delete({
+     *   where: {
+     *     // ... filter to delete one WhatsappMessage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WhatsappMessageDeleteArgs>(args: SelectSubset<T, WhatsappMessageDeleteArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WhatsappMessage.
+     * @param {WhatsappMessageUpdateArgs} args - Arguments to update one WhatsappMessage.
+     * @example
+     * // Update one WhatsappMessage
+     * const whatsappMessage = await prisma.whatsappMessage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WhatsappMessageUpdateArgs>(args: SelectSubset<T, WhatsappMessageUpdateArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WhatsappMessages.
+     * @param {WhatsappMessageDeleteManyArgs} args - Arguments to filter WhatsappMessages to delete.
+     * @example
+     * // Delete a few WhatsappMessages
+     * const { count } = await prisma.whatsappMessage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WhatsappMessageDeleteManyArgs>(args?: SelectSubset<T, WhatsappMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WhatsappMessages
+     * const whatsappMessage = await prisma.whatsappMessage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WhatsappMessageUpdateManyArgs>(args: SelectSubset<T, WhatsappMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappMessages and returns the data updated in the database.
+     * @param {WhatsappMessageUpdateManyAndReturnArgs} args - Arguments to update many WhatsappMessages.
+     * @example
+     * // Update many WhatsappMessages
+     * const whatsappMessage = await prisma.whatsappMessage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WhatsappMessages and only return the `id`
+     * const whatsappMessageWithIdOnly = await prisma.whatsappMessage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WhatsappMessageUpdateManyAndReturnArgs>(args: SelectSubset<T, WhatsappMessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WhatsappMessage.
+     * @param {WhatsappMessageUpsertArgs} args - Arguments to update or create a WhatsappMessage.
+     * @example
+     * // Update or create a WhatsappMessage
+     * const whatsappMessage = await prisma.whatsappMessage.upsert({
+     *   create: {
+     *     // ... data to create a WhatsappMessage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WhatsappMessage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WhatsappMessageUpsertArgs>(args: SelectSubset<T, WhatsappMessageUpsertArgs<ExtArgs>>): Prisma__WhatsappMessageClient<$Result.GetResult<Prisma.$WhatsappMessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WhatsappMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageCountArgs} args - Arguments to filter WhatsappMessages to count.
+     * @example
+     * // Count the number of WhatsappMessages
+     * const count = await prisma.whatsappMessage.count({
+     *   where: {
+     *     // ... the filter for the WhatsappMessages we want to count
+     *   }
+     * })
+    **/
+    count<T extends WhatsappMessageCountArgs>(
+      args?: Subset<T, WhatsappMessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WhatsappMessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WhatsappMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WhatsappMessageAggregateArgs>(args: Subset<T, WhatsappMessageAggregateArgs>): Prisma.PrismaPromise<GetWhatsappMessageAggregateType<T>>
+
+    /**
+     * Group by WhatsappMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WhatsappMessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WhatsappMessageGroupByArgs['orderBy'] }
+        : { orderBy?: WhatsappMessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WhatsappMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWhatsappMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WhatsappMessage model
+   */
+  readonly fields: WhatsappMessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WhatsappMessage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WhatsappMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WhatsappMessage model
+   */
+  interface WhatsappMessageFieldRefs {
+    readonly id: FieldRef<"WhatsappMessage", 'String'>
+    readonly senderUserId: FieldRef<"WhatsappMessage", 'String'>
+    readonly templateId: FieldRef<"WhatsappMessage", 'String'>
+    readonly message: FieldRef<"WhatsappMessage", 'String'>
+    readonly recipientUserIds: FieldRef<"WhatsappMessage", 'Json'>
+    readonly recipientPhones: FieldRef<"WhatsappMessage", 'Json'>
+    readonly status: FieldRef<"WhatsappMessage", 'WhatsappMessageStatus'>
+    readonly successCount: FieldRef<"WhatsappMessage", 'Int'>
+    readonly failureCount: FieldRef<"WhatsappMessage", 'Int'>
+    readonly results: FieldRef<"WhatsappMessage", 'Json'>
+    readonly sentAt: FieldRef<"WhatsappMessage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WhatsappMessage findUnique
+   */
+  export type WhatsappMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessage to fetch.
+     */
+    where: WhatsappMessageWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessage findUniqueOrThrow
+   */
+  export type WhatsappMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessage to fetch.
+     */
+    where: WhatsappMessageWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessage findFirst
+   */
+  export type WhatsappMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessage to fetch.
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessages to fetch.
+     */
+    orderBy?: WhatsappMessageOrderByWithRelationInput | WhatsappMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappMessages.
+     */
+    cursor?: WhatsappMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappMessages.
+     */
+    distinct?: WhatsappMessageScalarFieldEnum | WhatsappMessageScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessage findFirstOrThrow
+   */
+  export type WhatsappMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessage to fetch.
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessages to fetch.
+     */
+    orderBy?: WhatsappMessageOrderByWithRelationInput | WhatsappMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappMessages.
+     */
+    cursor?: WhatsappMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappMessages.
+     */
+    distinct?: WhatsappMessageScalarFieldEnum | WhatsappMessageScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessage findMany
+   */
+  export type WhatsappMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessages to fetch.
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessages to fetch.
+     */
+    orderBy?: WhatsappMessageOrderByWithRelationInput | WhatsappMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WhatsappMessages.
+     */
+    cursor?: WhatsappMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessages.
+     */
+    skip?: number
+    distinct?: WhatsappMessageScalarFieldEnum | WhatsappMessageScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessage create
+   */
+  export type WhatsappMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * The data needed to create a WhatsappMessage.
+     */
+    data: XOR<WhatsappMessageCreateInput, WhatsappMessageUncheckedCreateInput>
+  }
+
+  /**
+   * WhatsappMessage createMany
+   */
+  export type WhatsappMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WhatsappMessages.
+     */
+    data: WhatsappMessageCreateManyInput | WhatsappMessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsappMessage createManyAndReturn
+   */
+  export type WhatsappMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many WhatsappMessages.
+     */
+    data: WhatsappMessageCreateManyInput | WhatsappMessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsappMessage update
+   */
+  export type WhatsappMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * The data needed to update a WhatsappMessage.
+     */
+    data: XOR<WhatsappMessageUpdateInput, WhatsappMessageUncheckedUpdateInput>
+    /**
+     * Choose, which WhatsappMessage to update.
+     */
+    where: WhatsappMessageWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessage updateMany
+   */
+  export type WhatsappMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WhatsappMessages.
+     */
+    data: XOR<WhatsappMessageUpdateManyMutationInput, WhatsappMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappMessages to update
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * Limit how many WhatsappMessages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappMessage updateManyAndReturn
+   */
+  export type WhatsappMessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * The data used to update WhatsappMessages.
+     */
+    data: XOR<WhatsappMessageUpdateManyMutationInput, WhatsappMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappMessages to update
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * Limit how many WhatsappMessages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappMessage upsert
+   */
+  export type WhatsappMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * The filter to search for the WhatsappMessage to update in case it exists.
+     */
+    where: WhatsappMessageWhereUniqueInput
+    /**
+     * In case the WhatsappMessage found by the `where` argument doesn't exist, create a new WhatsappMessage with this data.
+     */
+    create: XOR<WhatsappMessageCreateInput, WhatsappMessageUncheckedCreateInput>
+    /**
+     * In case the WhatsappMessage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WhatsappMessageUpdateInput, WhatsappMessageUncheckedUpdateInput>
+  }
+
+  /**
+   * WhatsappMessage delete
+   */
+  export type WhatsappMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+    /**
+     * Filter which WhatsappMessage to delete.
+     */
+    where: WhatsappMessageWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessage deleteMany
+   */
+  export type WhatsappMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappMessages to delete
+     */
+    where?: WhatsappMessageWhereInput
+    /**
+     * Limit how many WhatsappMessages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappMessage without action
+   */
+  export type WhatsappMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessage
+     */
+    select?: WhatsappMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessage
+     */
+    omit?: WhatsappMessageOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -24347,7 +25560,6 @@ export namespace Prisma {
 
   export const PushNotificationCampaignScalarFieldEnum: {
     id: 'id',
-    clubId: 'clubId',
     title: 'title',
     description: 'description',
     pageTitle: 'pageTitle',
@@ -24362,13 +25574,15 @@ export namespace Prisma {
     externalLink: 'externalLink',
     buttonText: 'buttonText',
     geolocation: 'geolocation',
+    targetUserIds: 'targetUserIds',
     targetUserCount: 'targetUserCount',
     sentCount: 'sentCount',
     failedCount: 'failedCount',
     status: 'status',
-    scheduledAt: 'scheduledAt',
+    createdBy: 'createdBy',
     createdAt: 'createdAt',
-    completedAt: 'completedAt'
+    completedAt: 'completedAt',
+    scheduledAt: 'scheduledAt'
   };
 
   export type PushNotificationCampaignScalarFieldEnum = (typeof PushNotificationCampaignScalarFieldEnum)[keyof typeof PushNotificationCampaignScalarFieldEnum]
@@ -24382,8 +25596,8 @@ export namespace Prisma {
     status: 'status',
     error: 'error',
     sentAt: 'sentAt',
-    openedAt: 'openedAt',
-    clickedAt: 'clickedAt'
+    clickedAt: 'clickedAt',
+    openedAt: 'openedAt'
   };
 
   export type PushNotificationLogScalarFieldEnum = (typeof PushNotificationLogScalarFieldEnum)[keyof typeof PushNotificationLogScalarFieldEnum]
@@ -24504,6 +25718,23 @@ export namespace Prisma {
   export type GroupUserScalarFieldEnum = (typeof GroupUserScalarFieldEnum)[keyof typeof GroupUserScalarFieldEnum]
 
 
+  export const WhatsappMessageScalarFieldEnum: {
+    id: 'id',
+    senderUserId: 'senderUserId',
+    templateId: 'templateId',
+    message: 'message',
+    recipientUserIds: 'recipientUserIds',
+    recipientPhones: 'recipientPhones',
+    status: 'status',
+    successCount: 'successCount',
+    failureCount: 'failureCount',
+    results: 'results',
+    sentAt: 'sentAt'
+  };
+
+  export type WhatsappMessageScalarFieldEnum = (typeof WhatsappMessageScalarFieldEnum)[keyof typeof WhatsappMessageScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -24518,6 +25749,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -24796,6 +26034,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'WhatsappMessageStatus'
+   */
+  export type EnumWhatsappMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappMessageStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappMessageStatus[]'
+   */
+  export type ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappMessageStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -24843,17 +26095,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    analyticsEvents?: AnalyticsEventListRelationFilter
+    groups?: GroupUserListRelationFilter
+    notifications?: NotificationListRelationFilter
     products?: ProductListRelationFilter
     purchases?: PurchaseListRelationFilter
     sales?: PurchaseListRelationFilter
-    pushTokens?: UserPushTokenListRelationFilter
     pushNotificationLogs?: PushNotificationLogListRelationFilter
-    notifications?: NotificationListRelationFilter
-    userModules?: UserModuleListRelationFilter
     cashbackConfig?: XOR<UserCashbackConfigNullableScalarRelationFilter, UserCashbackConfigWhereInput> | null
+    userModules?: UserModuleListRelationFilter
+    pushTokens?: UserPushTokenListRelationFilter
     userRoles?: UserRoleListRelationFilter
-    groups?: GroupUserListRelationFilter
-    analyticsEvents?: AnalyticsEventListRelationFilter
     sessions?: UserSessionListRelationFilter
   }
 
@@ -24885,17 +26137,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    analyticsEvents?: AnalyticsEventOrderByRelationAggregateInput
+    groups?: GroupUserOrderByRelationAggregateInput
+    notifications?: NotificationOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
     purchases?: PurchaseOrderByRelationAggregateInput
     sales?: PurchaseOrderByRelationAggregateInput
-    pushTokens?: UserPushTokenOrderByRelationAggregateInput
     pushNotificationLogs?: PushNotificationLogOrderByRelationAggregateInput
-    notifications?: NotificationOrderByRelationAggregateInput
-    userModules?: UserModuleOrderByRelationAggregateInput
     cashbackConfig?: UserCashbackConfigOrderByWithRelationInput
+    userModules?: UserModuleOrderByRelationAggregateInput
+    pushTokens?: UserPushTokenOrderByRelationAggregateInput
     userRoles?: UserRoleOrderByRelationAggregateInput
-    groups?: GroupUserOrderByRelationAggregateInput
-    analyticsEvents?: AnalyticsEventOrderByRelationAggregateInput
     sessions?: UserSessionOrderByRelationAggregateInput
   }
 
@@ -24930,17 +26182,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    analyticsEvents?: AnalyticsEventListRelationFilter
+    groups?: GroupUserListRelationFilter
+    notifications?: NotificationListRelationFilter
     products?: ProductListRelationFilter
     purchases?: PurchaseListRelationFilter
     sales?: PurchaseListRelationFilter
-    pushTokens?: UserPushTokenListRelationFilter
     pushNotificationLogs?: PushNotificationLogListRelationFilter
-    notifications?: NotificationListRelationFilter
-    userModules?: UserModuleListRelationFilter
     cashbackConfig?: XOR<UserCashbackConfigNullableScalarRelationFilter, UserCashbackConfigWhereInput> | null
+    userModules?: UserModuleListRelationFilter
+    pushTokens?: UserPushTokenListRelationFilter
     userRoles?: UserRoleListRelationFilter
-    groups?: GroupUserListRelationFilter
-    analyticsEvents?: AnalyticsEventListRelationFilter
     sessions?: UserSessionListRelationFilter
   }, "id" | "email" | "username" | "cpf" | "publicKey" | "referralId">
 
@@ -25637,7 +26889,6 @@ export namespace Prisma {
     OR?: PushNotificationCampaignWhereInput[]
     NOT?: PushNotificationCampaignWhereInput | PushNotificationCampaignWhereInput[]
     id?: UuidFilter<"PushNotificationCampaign"> | string
-    clubId?: UuidFilter<"PushNotificationCampaign"> | string
     title?: StringFilter<"PushNotificationCampaign"> | string
     description?: StringFilter<"PushNotificationCampaign"> | string
     pageTitle?: StringNullableFilter<"PushNotificationCampaign"> | string | null
@@ -25652,19 +26903,20 @@ export namespace Prisma {
     externalLink?: StringNullableFilter<"PushNotificationCampaign"> | string | null
     buttonText?: StringNullableFilter<"PushNotificationCampaign"> | string | null
     geolocation?: JsonNullableFilter<"PushNotificationCampaign">
+    targetUserIds?: JsonNullableFilter<"PushNotificationCampaign">
     targetUserCount?: IntFilter<"PushNotificationCampaign"> | number
     sentCount?: IntFilter<"PushNotificationCampaign"> | number
     failedCount?: IntFilter<"PushNotificationCampaign"> | number
     status?: EnumPushCampaignStatusFilter<"PushNotificationCampaign"> | $Enums.PushCampaignStatus
-    scheduledAt?: DateTimeNullableFilter<"PushNotificationCampaign"> | Date | string | null
+    createdBy?: UuidFilter<"PushNotificationCampaign"> | string
     createdAt?: DateTimeFilter<"PushNotificationCampaign"> | Date | string
     completedAt?: DateTimeNullableFilter<"PushNotificationCampaign"> | Date | string | null
+    scheduledAt?: DateTimeNullableFilter<"PushNotificationCampaign"> | Date | string | null
     logs?: PushNotificationLogListRelationFilter
   }
 
   export type PushNotificationCampaignOrderByWithRelationInput = {
     id?: SortOrder
-    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrderInput | SortOrder
@@ -25679,13 +26931,15 @@ export namespace Prisma {
     externalLink?: SortOrderInput | SortOrder
     buttonText?: SortOrderInput | SortOrder
     geolocation?: SortOrderInput | SortOrder
+    targetUserIds?: SortOrderInput | SortOrder
     targetUserCount?: SortOrder
     sentCount?: SortOrder
     failedCount?: SortOrder
     status?: SortOrder
-    scheduledAt?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
+    scheduledAt?: SortOrderInput | SortOrder
     logs?: PushNotificationLogOrderByRelationAggregateInput
   }
 
@@ -25694,7 +26948,6 @@ export namespace Prisma {
     AND?: PushNotificationCampaignWhereInput | PushNotificationCampaignWhereInput[]
     OR?: PushNotificationCampaignWhereInput[]
     NOT?: PushNotificationCampaignWhereInput | PushNotificationCampaignWhereInput[]
-    clubId?: UuidFilter<"PushNotificationCampaign"> | string
     title?: StringFilter<"PushNotificationCampaign"> | string
     description?: StringFilter<"PushNotificationCampaign"> | string
     pageTitle?: StringNullableFilter<"PushNotificationCampaign"> | string | null
@@ -25709,19 +26962,20 @@ export namespace Prisma {
     externalLink?: StringNullableFilter<"PushNotificationCampaign"> | string | null
     buttonText?: StringNullableFilter<"PushNotificationCampaign"> | string | null
     geolocation?: JsonNullableFilter<"PushNotificationCampaign">
+    targetUserIds?: JsonNullableFilter<"PushNotificationCampaign">
     targetUserCount?: IntFilter<"PushNotificationCampaign"> | number
     sentCount?: IntFilter<"PushNotificationCampaign"> | number
     failedCount?: IntFilter<"PushNotificationCampaign"> | number
     status?: EnumPushCampaignStatusFilter<"PushNotificationCampaign"> | $Enums.PushCampaignStatus
-    scheduledAt?: DateTimeNullableFilter<"PushNotificationCampaign"> | Date | string | null
+    createdBy?: UuidFilter<"PushNotificationCampaign"> | string
     createdAt?: DateTimeFilter<"PushNotificationCampaign"> | Date | string
     completedAt?: DateTimeNullableFilter<"PushNotificationCampaign"> | Date | string | null
+    scheduledAt?: DateTimeNullableFilter<"PushNotificationCampaign"> | Date | string | null
     logs?: PushNotificationLogListRelationFilter
   }, "id">
 
   export type PushNotificationCampaignOrderByWithAggregationInput = {
     id?: SortOrder
-    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrderInput | SortOrder
@@ -25736,13 +26990,15 @@ export namespace Prisma {
     externalLink?: SortOrderInput | SortOrder
     buttonText?: SortOrderInput | SortOrder
     geolocation?: SortOrderInput | SortOrder
+    targetUserIds?: SortOrderInput | SortOrder
     targetUserCount?: SortOrder
     sentCount?: SortOrder
     failedCount?: SortOrder
     status?: SortOrder
-    scheduledAt?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
+    scheduledAt?: SortOrderInput | SortOrder
     _count?: PushNotificationCampaignCountOrderByAggregateInput
     _avg?: PushNotificationCampaignAvgOrderByAggregateInput
     _max?: PushNotificationCampaignMaxOrderByAggregateInput
@@ -25755,7 +27011,6 @@ export namespace Prisma {
     OR?: PushNotificationCampaignScalarWhereWithAggregatesInput[]
     NOT?: PushNotificationCampaignScalarWhereWithAggregatesInput | PushNotificationCampaignScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"PushNotificationCampaign"> | string
-    clubId?: UuidWithAggregatesFilter<"PushNotificationCampaign"> | string
     title?: StringWithAggregatesFilter<"PushNotificationCampaign"> | string
     description?: StringWithAggregatesFilter<"PushNotificationCampaign"> | string
     pageTitle?: StringNullableWithAggregatesFilter<"PushNotificationCampaign"> | string | null
@@ -25770,13 +27025,15 @@ export namespace Prisma {
     externalLink?: StringNullableWithAggregatesFilter<"PushNotificationCampaign"> | string | null
     buttonText?: StringNullableWithAggregatesFilter<"PushNotificationCampaign"> | string | null
     geolocation?: JsonNullableWithAggregatesFilter<"PushNotificationCampaign">
+    targetUserIds?: JsonNullableWithAggregatesFilter<"PushNotificationCampaign">
     targetUserCount?: IntWithAggregatesFilter<"PushNotificationCampaign"> | number
     sentCount?: IntWithAggregatesFilter<"PushNotificationCampaign"> | number
     failedCount?: IntWithAggregatesFilter<"PushNotificationCampaign"> | number
     status?: EnumPushCampaignStatusWithAggregatesFilter<"PushNotificationCampaign"> | $Enums.PushCampaignStatus
-    scheduledAt?: DateTimeNullableWithAggregatesFilter<"PushNotificationCampaign"> | Date | string | null
+    createdBy?: UuidWithAggregatesFilter<"PushNotificationCampaign"> | string
     createdAt?: DateTimeWithAggregatesFilter<"PushNotificationCampaign"> | Date | string
     completedAt?: DateTimeNullableWithAggregatesFilter<"PushNotificationCampaign"> | Date | string | null
+    scheduledAt?: DateTimeNullableWithAggregatesFilter<"PushNotificationCampaign"> | Date | string | null
   }
 
   export type PushNotificationLogWhereInput = {
@@ -25790,8 +27047,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFilter<"PushNotificationLog"> | $Enums.PushNotificationStatus
     error?: StringNullableFilter<"PushNotificationLog"> | string | null
     sentAt?: DateTimeFilter<"PushNotificationLog"> | Date | string
-    openedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
     clickedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
+    openedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
     campaign?: XOR<PushNotificationCampaignScalarRelationFilter, PushNotificationCampaignWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -25804,8 +27061,8 @@ export namespace Prisma {
     status?: SortOrder
     error?: SortOrderInput | SortOrder
     sentAt?: SortOrder
-    openedAt?: SortOrderInput | SortOrder
     clickedAt?: SortOrderInput | SortOrder
+    openedAt?: SortOrderInput | SortOrder
     campaign?: PushNotificationCampaignOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -25821,8 +27078,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFilter<"PushNotificationLog"> | $Enums.PushNotificationStatus
     error?: StringNullableFilter<"PushNotificationLog"> | string | null
     sentAt?: DateTimeFilter<"PushNotificationLog"> | Date | string
-    openedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
     clickedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
+    openedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
     campaign?: XOR<PushNotificationCampaignScalarRelationFilter, PushNotificationCampaignWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -25835,8 +27092,8 @@ export namespace Prisma {
     status?: SortOrder
     error?: SortOrderInput | SortOrder
     sentAt?: SortOrder
-    openedAt?: SortOrderInput | SortOrder
     clickedAt?: SortOrderInput | SortOrder
+    openedAt?: SortOrderInput | SortOrder
     _count?: PushNotificationLogCountOrderByAggregateInput
     _max?: PushNotificationLogMaxOrderByAggregateInput
     _min?: PushNotificationLogMinOrderByAggregateInput
@@ -25853,8 +27110,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusWithAggregatesFilter<"PushNotificationLog"> | $Enums.PushNotificationStatus
     error?: StringNullableWithAggregatesFilter<"PushNotificationLog"> | string | null
     sentAt?: DateTimeWithAggregatesFilter<"PushNotificationLog"> | Date | string
-    openedAt?: DateTimeNullableWithAggregatesFilter<"PushNotificationLog"> | Date | string | null
     clickedAt?: DateTimeNullableWithAggregatesFilter<"PushNotificationLog"> | Date | string | null
+    openedAt?: DateTimeNullableWithAggregatesFilter<"PushNotificationLog"> | Date | string | null
   }
 
   export type AnalyticsEventWhereInput = {
@@ -26223,8 +27480,8 @@ export namespace Prisma {
     roleId?: UuidFilter<"RolePermission"> | string
     permissionId?: UuidFilter<"RolePermission"> | string
     createdAt?: DateTimeFilter<"RolePermission"> | Date | string
-    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     permission?: XOR<PermissionScalarRelationFilter, PermissionWhereInput>
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }
 
   export type RolePermissionOrderByWithRelationInput = {
@@ -26232,8 +27489,8 @@ export namespace Prisma {
     roleId?: SortOrder
     permissionId?: SortOrder
     createdAt?: SortOrder
-    role?: RoleOrderByWithRelationInput
     permission?: PermissionOrderByWithRelationInput
+    role?: RoleOrderByWithRelationInput
   }
 
   export type RolePermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -26245,8 +27502,8 @@ export namespace Prisma {
     roleId?: UuidFilter<"RolePermission"> | string
     permissionId?: UuidFilter<"RolePermission"> | string
     createdAt?: DateTimeFilter<"RolePermission"> | Date | string
-    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     permission?: XOR<PermissionScalarRelationFilter, PermissionWhereInput>
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }, "id" | "roleId_permissionId">
 
   export type RolePermissionOrderByWithAggregationInput = {
@@ -26278,8 +27535,8 @@ export namespace Prisma {
     roleId?: UuidFilter<"UserRole"> | string
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     createdBy?: UuidNullableFilter<"UserRole"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type UserRoleOrderByWithRelationInput = {
@@ -26288,8 +27545,8 @@ export namespace Prisma {
     roleId?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
     role?: RoleOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type UserRoleWhereUniqueInput = Prisma.AtLeast<{
@@ -26302,8 +27559,8 @@ export namespace Prisma {
     roleId?: UuidFilter<"UserRole"> | string
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     createdBy?: UuidNullableFilter<"UserRole"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId_roleId">
 
   export type UserRoleOrderByWithAggregationInput = {
@@ -26452,6 +27709,90 @@ export namespace Prisma {
     addedBy?: UuidWithAggregatesFilter<"GroupUser"> | string
   }
 
+  export type WhatsappMessageWhereInput = {
+    AND?: WhatsappMessageWhereInput | WhatsappMessageWhereInput[]
+    OR?: WhatsappMessageWhereInput[]
+    NOT?: WhatsappMessageWhereInput | WhatsappMessageWhereInput[]
+    id?: UuidFilter<"WhatsappMessage"> | string
+    senderUserId?: UuidFilter<"WhatsappMessage"> | string
+    templateId?: StringNullableFilter<"WhatsappMessage"> | string | null
+    message?: StringFilter<"WhatsappMessage"> | string
+    recipientUserIds?: JsonFilter<"WhatsappMessage">
+    recipientPhones?: JsonFilter<"WhatsappMessage">
+    status?: EnumWhatsappMessageStatusFilter<"WhatsappMessage"> | $Enums.WhatsappMessageStatus
+    successCount?: IntFilter<"WhatsappMessage"> | number
+    failureCount?: IntFilter<"WhatsappMessage"> | number
+    results?: JsonNullableFilter<"WhatsappMessage">
+    sentAt?: DateTimeFilter<"WhatsappMessage"> | Date | string
+  }
+
+  export type WhatsappMessageOrderByWithRelationInput = {
+    id?: SortOrder
+    senderUserId?: SortOrder
+    templateId?: SortOrderInput | SortOrder
+    message?: SortOrder
+    recipientUserIds?: SortOrder
+    recipientPhones?: SortOrder
+    status?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    results?: SortOrderInput | SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type WhatsappMessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WhatsappMessageWhereInput | WhatsappMessageWhereInput[]
+    OR?: WhatsappMessageWhereInput[]
+    NOT?: WhatsappMessageWhereInput | WhatsappMessageWhereInput[]
+    senderUserId?: UuidFilter<"WhatsappMessage"> | string
+    templateId?: StringNullableFilter<"WhatsappMessage"> | string | null
+    message?: StringFilter<"WhatsappMessage"> | string
+    recipientUserIds?: JsonFilter<"WhatsappMessage">
+    recipientPhones?: JsonFilter<"WhatsappMessage">
+    status?: EnumWhatsappMessageStatusFilter<"WhatsappMessage"> | $Enums.WhatsappMessageStatus
+    successCount?: IntFilter<"WhatsappMessage"> | number
+    failureCount?: IntFilter<"WhatsappMessage"> | number
+    results?: JsonNullableFilter<"WhatsappMessage">
+    sentAt?: DateTimeFilter<"WhatsappMessage"> | Date | string
+  }, "id">
+
+  export type WhatsappMessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    senderUserId?: SortOrder
+    templateId?: SortOrderInput | SortOrder
+    message?: SortOrder
+    recipientUserIds?: SortOrder
+    recipientPhones?: SortOrder
+    status?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    results?: SortOrderInput | SortOrder
+    sentAt?: SortOrder
+    _count?: WhatsappMessageCountOrderByAggregateInput
+    _avg?: WhatsappMessageAvgOrderByAggregateInput
+    _max?: WhatsappMessageMaxOrderByAggregateInput
+    _min?: WhatsappMessageMinOrderByAggregateInput
+    _sum?: WhatsappMessageSumOrderByAggregateInput
+  }
+
+  export type WhatsappMessageScalarWhereWithAggregatesInput = {
+    AND?: WhatsappMessageScalarWhereWithAggregatesInput | WhatsappMessageScalarWhereWithAggregatesInput[]
+    OR?: WhatsappMessageScalarWhereWithAggregatesInput[]
+    NOT?: WhatsappMessageScalarWhereWithAggregatesInput | WhatsappMessageScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"WhatsappMessage"> | string
+    senderUserId?: UuidWithAggregatesFilter<"WhatsappMessage"> | string
+    templateId?: StringNullableWithAggregatesFilter<"WhatsappMessage"> | string | null
+    message?: StringWithAggregatesFilter<"WhatsappMessage"> | string
+    recipientUserIds?: JsonWithAggregatesFilter<"WhatsappMessage">
+    recipientPhones?: JsonWithAggregatesFilter<"WhatsappMessage">
+    status?: EnumWhatsappMessageStatusWithAggregatesFilter<"WhatsappMessage"> | $Enums.WhatsappMessageStatus
+    successCount?: IntWithAggregatesFilter<"WhatsappMessage"> | number
+    failureCount?: IntWithAggregatesFilter<"WhatsappMessage"> | number
+    results?: JsonNullableWithAggregatesFilter<"WhatsappMessage">
+    sentAt?: DateTimeWithAggregatesFilter<"WhatsappMessage"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -26480,17 +27821,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -26522,17 +27863,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -26564,17 +27905,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -26606,17 +27947,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -27408,7 +28749,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCreateInput = {
     id?: string
-    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -27423,19 +28763,20 @@ export namespace Prisma {
     externalLink?: string | null
     buttonText?: string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: number
     sentCount?: number
     failedCount?: number
     status?: $Enums.PushCampaignStatus
-    scheduledAt?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
     completedAt?: Date | string | null
+    scheduledAt?: Date | string | null
     logs?: PushNotificationLogCreateNestedManyWithoutCampaignInput
   }
 
   export type PushNotificationCampaignUncheckedCreateInput = {
     id?: string
-    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -27450,19 +28791,20 @@ export namespace Prisma {
     externalLink?: string | null
     buttonText?: string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: number
     sentCount?: number
     failedCount?: number
     status?: $Enums.PushCampaignStatus
-    scheduledAt?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
     completedAt?: Date | string | null
+    scheduledAt?: Date | string | null
     logs?: PushNotificationLogUncheckedCreateNestedManyWithoutCampaignInput
   }
 
   export type PushNotificationCampaignUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27477,19 +28819,20 @@ export namespace Prisma {
     externalLink?: NullableStringFieldUpdateOperationsInput | string | null
     buttonText?: NullableStringFieldUpdateOperationsInput | string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: IntFieldUpdateOperationsInput | number
     sentCount?: IntFieldUpdateOperationsInput | number
     failedCount?: IntFieldUpdateOperationsInput | number
     status?: EnumPushCampaignStatusFieldUpdateOperationsInput | $Enums.PushCampaignStatus
-    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logs?: PushNotificationLogUpdateManyWithoutCampaignNestedInput
   }
 
   export type PushNotificationCampaignUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27504,19 +28847,20 @@ export namespace Prisma {
     externalLink?: NullableStringFieldUpdateOperationsInput | string | null
     buttonText?: NullableStringFieldUpdateOperationsInput | string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: IntFieldUpdateOperationsInput | number
     sentCount?: IntFieldUpdateOperationsInput | number
     failedCount?: IntFieldUpdateOperationsInput | number
     status?: EnumPushCampaignStatusFieldUpdateOperationsInput | $Enums.PushCampaignStatus
-    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logs?: PushNotificationLogUncheckedUpdateManyWithoutCampaignNestedInput
   }
 
   export type PushNotificationCampaignCreateManyInput = {
     id?: string
-    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -27531,18 +28875,19 @@ export namespace Prisma {
     externalLink?: string | null
     buttonText?: string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: number
     sentCount?: number
     failedCount?: number
     status?: $Enums.PushCampaignStatus
-    scheduledAt?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
     completedAt?: Date | string | null
+    scheduledAt?: Date | string | null
   }
 
   export type PushNotificationCampaignUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27557,18 +28902,19 @@ export namespace Prisma {
     externalLink?: NullableStringFieldUpdateOperationsInput | string | null
     buttonText?: NullableStringFieldUpdateOperationsInput | string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: IntFieldUpdateOperationsInput | number
     sentCount?: IntFieldUpdateOperationsInput | number
     failedCount?: IntFieldUpdateOperationsInput | number
     status?: EnumPushCampaignStatusFieldUpdateOperationsInput | $Enums.PushCampaignStatus
-    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationCampaignUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27583,13 +28929,15 @@ export namespace Prisma {
     externalLink?: NullableStringFieldUpdateOperationsInput | string | null
     buttonText?: NullableStringFieldUpdateOperationsInput | string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: IntFieldUpdateOperationsInput | number
     sentCount?: IntFieldUpdateOperationsInput | number
     failedCount?: IntFieldUpdateOperationsInput | number
     status?: EnumPushCampaignStatusFieldUpdateOperationsInput | $Enums.PushCampaignStatus
-    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationLogCreateInput = {
@@ -27598,8 +28946,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
     campaign: PushNotificationCampaignCreateNestedOneWithoutLogsInput
     user: UserCreateNestedOneWithoutPushNotificationLogsInput
   }
@@ -27612,8 +28960,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
   }
 
   export type PushNotificationLogUpdateInput = {
@@ -27622,8 +28970,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     campaign?: PushNotificationCampaignUpdateOneRequiredWithoutLogsNestedInput
     user?: UserUpdateOneRequiredWithoutPushNotificationLogsNestedInput
   }
@@ -27636,8 +28984,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationLogCreateManyInput = {
@@ -27648,8 +28996,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
   }
 
   export type PushNotificationLogUpdateManyMutationInput = {
@@ -27658,8 +29006,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationLogUncheckedUpdateManyInput = {
@@ -27670,8 +29018,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AnalyticsEventCreateInput = {
@@ -28093,8 +29441,8 @@ export namespace Prisma {
   export type RolePermissionCreateInput = {
     id?: string
     createdAt?: Date | string
-    role: RoleCreateNestedOneWithoutPermissionsInput
     permission: PermissionCreateNestedOneWithoutRolesInput
+    role: RoleCreateNestedOneWithoutPermissionsInput
   }
 
   export type RolePermissionUncheckedCreateInput = {
@@ -28107,8 +29455,8 @@ export namespace Prisma {
   export type RolePermissionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: RoleUpdateOneRequiredWithoutPermissionsNestedInput
     permission?: PermissionUpdateOneRequiredWithoutRolesNestedInput
+    role?: RoleUpdateOneRequiredWithoutPermissionsNestedInput
   }
 
   export type RolePermissionUncheckedUpdateInput = {
@@ -28141,8 +29489,8 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     createdBy?: string | null
-    user: UserCreateNestedOneWithoutUserRolesInput
     role: RoleCreateNestedOneWithoutUserRolesInput
+    user: UserCreateNestedOneWithoutUserRolesInput
   }
 
   export type UserRoleUncheckedCreateInput = {
@@ -28157,8 +29505,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutUserRolesNestedInput
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
+    user?: UserUpdateOneRequiredWithoutUserRolesNestedInput
   }
 
   export type UserRoleUncheckedUpdateInput = {
@@ -28319,6 +29667,104 @@ export namespace Prisma {
     addedBy?: StringFieldUpdateOperationsInput | string
   }
 
+  export type WhatsappMessageCreateInput = {
+    id?: string
+    senderUserId: string
+    templateId?: string | null
+    message: string
+    recipientUserIds: JsonNullValueInput | InputJsonValue
+    recipientPhones: JsonNullValueInput | InputJsonValue
+    status?: $Enums.WhatsappMessageStatus
+    successCount?: number
+    failureCount?: number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: Date | string
+  }
+
+  export type WhatsappMessageUncheckedCreateInput = {
+    id?: string
+    senderUserId: string
+    templateId?: string | null
+    message: string
+    recipientUserIds: JsonNullValueInput | InputJsonValue
+    recipientPhones: JsonNullValueInput | InputJsonValue
+    status?: $Enums.WhatsappMessageStatus
+    successCount?: number
+    failureCount?: number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: Date | string
+  }
+
+  export type WhatsappMessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderUserId?: StringFieldUpdateOperationsInput | string
+    templateId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: StringFieldUpdateOperationsInput | string
+    recipientUserIds?: JsonNullValueInput | InputJsonValue
+    recipientPhones?: JsonNullValueInput | InputJsonValue
+    status?: EnumWhatsappMessageStatusFieldUpdateOperationsInput | $Enums.WhatsappMessageStatus
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappMessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderUserId?: StringFieldUpdateOperationsInput | string
+    templateId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: StringFieldUpdateOperationsInput | string
+    recipientUserIds?: JsonNullValueInput | InputJsonValue
+    recipientPhones?: JsonNullValueInput | InputJsonValue
+    status?: EnumWhatsappMessageStatusFieldUpdateOperationsInput | $Enums.WhatsappMessageStatus
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappMessageCreateManyInput = {
+    id?: string
+    senderUserId: string
+    templateId?: string | null
+    message: string
+    recipientUserIds: JsonNullValueInput | InputJsonValue
+    recipientPhones: JsonNullValueInput | InputJsonValue
+    status?: $Enums.WhatsappMessageStatus
+    successCount?: number
+    failureCount?: number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: Date | string
+  }
+
+  export type WhatsappMessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderUserId?: StringFieldUpdateOperationsInput | string
+    templateId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: StringFieldUpdateOperationsInput | string
+    recipientUserIds?: JsonNullValueInput | InputJsonValue
+    recipientPhones?: JsonNullValueInput | InputJsonValue
+    status?: EnumWhatsappMessageStatusFieldUpdateOperationsInput | $Enums.WhatsappMessageStatus
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappMessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderUserId?: StringFieldUpdateOperationsInput | string
+    templateId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: StringFieldUpdateOperationsInput | string
+    recipientUserIds?: JsonNullValueInput | InputJsonValue
+    recipientPhones?: JsonNullValueInput | InputJsonValue
+    status?: EnumWhatsappMessageStatusFieldUpdateOperationsInput | $Enums.WhatsappMessageStatus
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    results?: NullableJsonNullValueInput | InputJsonValue
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -28443,6 +29889,24 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type AnalyticsEventListRelationFilter = {
+    every?: AnalyticsEventWhereInput
+    some?: AnalyticsEventWhereInput
+    none?: AnalyticsEventWhereInput
+  }
+
+  export type GroupUserListRelationFilter = {
+    every?: GroupUserWhereInput
+    some?: GroupUserWhereInput
+    none?: GroupUserWhereInput
+  }
+
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
   export type ProductListRelationFilter = {
     every?: ProductWhereInput
     some?: ProductWhereInput
@@ -28455,22 +29919,15 @@ export namespace Prisma {
     none?: PurchaseWhereInput
   }
 
-  export type UserPushTokenListRelationFilter = {
-    every?: UserPushTokenWhereInput
-    some?: UserPushTokenWhereInput
-    none?: UserPushTokenWhereInput
-  }
-
   export type PushNotificationLogListRelationFilter = {
     every?: PushNotificationLogWhereInput
     some?: PushNotificationLogWhereInput
     none?: PushNotificationLogWhereInput
   }
 
-  export type NotificationListRelationFilter = {
-    every?: NotificationWhereInput
-    some?: NotificationWhereInput
-    none?: NotificationWhereInput
+  export type UserCashbackConfigNullableScalarRelationFilter = {
+    is?: UserCashbackConfigWhereInput | null
+    isNot?: UserCashbackConfigWhereInput | null
   }
 
   export type UserModuleListRelationFilter = {
@@ -28479,27 +29936,16 @@ export namespace Prisma {
     none?: UserModuleWhereInput
   }
 
-  export type UserCashbackConfigNullableScalarRelationFilter = {
-    is?: UserCashbackConfigWhereInput | null
-    isNot?: UserCashbackConfigWhereInput | null
+  export type UserPushTokenListRelationFilter = {
+    every?: UserPushTokenWhereInput
+    some?: UserPushTokenWhereInput
+    none?: UserPushTokenWhereInput
   }
 
   export type UserRoleListRelationFilter = {
     every?: UserRoleWhereInput
     some?: UserRoleWhereInput
     none?: UserRoleWhereInput
-  }
-
-  export type GroupUserListRelationFilter = {
-    every?: GroupUserWhereInput
-    some?: GroupUserWhereInput
-    none?: GroupUserWhereInput
-  }
-
-  export type AnalyticsEventListRelationFilter = {
-    every?: AnalyticsEventWhereInput
-    some?: AnalyticsEventWhereInput
-    none?: AnalyticsEventWhereInput
   }
 
   export type UserSessionListRelationFilter = {
@@ -28513,6 +29959,18 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
+  export type AnalyticsEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GroupUserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ProductOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -28521,15 +29979,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type UserPushTokenOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type PushNotificationLogOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NotificationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -28537,15 +29987,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserPushTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserRoleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type GroupUserOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AnalyticsEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -29323,7 +30769,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCountOrderByAggregateInput = {
     id?: SortOrder
-    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrder
@@ -29338,13 +30783,15 @@ export namespace Prisma {
     externalLink?: SortOrder
     buttonText?: SortOrder
     geolocation?: SortOrder
+    targetUserIds?: SortOrder
     targetUserCount?: SortOrder
     sentCount?: SortOrder
     failedCount?: SortOrder
     status?: SortOrder
-    scheduledAt?: SortOrder
+    createdBy?: SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrder
+    scheduledAt?: SortOrder
   }
 
   export type PushNotificationCampaignAvgOrderByAggregateInput = {
@@ -29355,7 +30802,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignMaxOrderByAggregateInput = {
     id?: SortOrder
-    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrder
@@ -29373,14 +30819,14 @@ export namespace Prisma {
     sentCount?: SortOrder
     failedCount?: SortOrder
     status?: SortOrder
-    scheduledAt?: SortOrder
+    createdBy?: SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrder
+    scheduledAt?: SortOrder
   }
 
   export type PushNotificationCampaignMinOrderByAggregateInput = {
     id?: SortOrder
-    clubId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     pageTitle?: SortOrder
@@ -29398,9 +30844,10 @@ export namespace Prisma {
     sentCount?: SortOrder
     failedCount?: SortOrder
     status?: SortOrder
-    scheduledAt?: SortOrder
+    createdBy?: SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrder
+    scheduledAt?: SortOrder
   }
 
   export type PushNotificationCampaignSumOrderByAggregateInput = {
@@ -29439,8 +30886,8 @@ export namespace Prisma {
     status?: SortOrder
     error?: SortOrder
     sentAt?: SortOrder
-    openedAt?: SortOrder
     clickedAt?: SortOrder
+    openedAt?: SortOrder
   }
 
   export type PushNotificationLogMaxOrderByAggregateInput = {
@@ -29451,8 +30898,8 @@ export namespace Prisma {
     status?: SortOrder
     error?: SortOrder
     sentAt?: SortOrder
-    openedAt?: SortOrder
     clickedAt?: SortOrder
+    openedAt?: SortOrder
   }
 
   export type PushNotificationLogMinOrderByAggregateInput = {
@@ -29463,8 +30910,8 @@ export namespace Prisma {
     status?: SortOrder
     error?: SortOrder
     sentAt?: SortOrder
-    openedAt?: SortOrder
     clickedAt?: SortOrder
+    openedAt?: SortOrder
   }
 
   export type EnumPushNotificationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -29750,14 +31197,14 @@ export namespace Prisma {
     _max?: NestedEnumPermissionActionFilter<$PrismaModel>
   }
 
-  export type RoleScalarRelationFilter = {
-    is?: RoleWhereInput
-    isNot?: RoleWhereInput
-  }
-
   export type PermissionScalarRelationFilter = {
     is?: PermissionWhereInput
     isNot?: PermissionWhereInput
+  }
+
+  export type RoleScalarRelationFilter = {
+    is?: RoleWhereInput
+    isNot?: RoleWhereInput
   }
 
   export type RolePermissionRoleIdPermissionIdCompoundUniqueInput = {
@@ -29878,6 +31325,139 @@ export namespace Prisma {
     addedAt?: SortOrder
     addedBy?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EnumWhatsappMessageStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappMessageStatus | EnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel> | $Enums.WhatsappMessageStatus
+  }
+
+  export type WhatsappMessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    senderUserId?: SortOrder
+    templateId?: SortOrder
+    message?: SortOrder
+    recipientUserIds?: SortOrder
+    recipientPhones?: SortOrder
+    status?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    results?: SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type WhatsappMessageAvgOrderByAggregateInput = {
+    successCount?: SortOrder
+    failureCount?: SortOrder
+  }
+
+  export type WhatsappMessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    senderUserId?: SortOrder
+    templateId?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type WhatsappMessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    senderUserId?: SortOrder
+    templateId?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type WhatsappMessageSumOrderByAggregateInput = {
+    successCount?: SortOrder
+    failureCount?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type EnumWhatsappMessageStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappMessageStatus | EnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappMessageStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappMessageStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel>
+  }
+
+  export type AnalyticsEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput> | AnalyticsEventCreateWithoutUserInput[] | AnalyticsEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AnalyticsEventCreateOrConnectWithoutUserInput | AnalyticsEventCreateOrConnectWithoutUserInput[]
+    createMany?: AnalyticsEventCreateManyUserInputEnvelope
+    connect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
+  }
+
+  export type GroupUserCreateNestedManyWithoutUserInput = {
+    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
+    createMany?: GroupUserCreateManyUserInputEnvelope
+    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+  }
+
+  export type NotificationCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
 
   export type ProductCreateNestedManyWithoutMerchantInput = {
     create?: XOR<ProductCreateWithoutMerchantInput, ProductUncheckedCreateWithoutMerchantInput> | ProductCreateWithoutMerchantInput[] | ProductUncheckedCreateWithoutMerchantInput[]
@@ -29900,13 +31480,6 @@ export namespace Prisma {
     connect?: PurchaseWhereUniqueInput | PurchaseWhereUniqueInput[]
   }
 
-  export type UserPushTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
-    createMany?: UserPushTokenCreateManyUserInputEnvelope
-    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-  }
-
   export type PushNotificationLogCreateNestedManyWithoutUserInput = {
     create?: XOR<PushNotificationLogCreateWithoutUserInput, PushNotificationLogUncheckedCreateWithoutUserInput> | PushNotificationLogCreateWithoutUserInput[] | PushNotificationLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PushNotificationLogCreateOrConnectWithoutUserInput | PushNotificationLogCreateOrConnectWithoutUserInput[]
@@ -29914,11 +31487,10 @@ export namespace Prisma {
     connect?: PushNotificationLogWhereUniqueInput | PushNotificationLogWhereUniqueInput[]
   }
 
-  export type NotificationCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  export type UserCashbackConfigCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
+    connect?: UserCashbackConfigWhereUniqueInput
   }
 
   export type UserModuleCreateNestedManyWithoutUserInput = {
@@ -29928,10 +31500,11 @@ export namespace Prisma {
     connect?: UserModuleWhereUniqueInput | UserModuleWhereUniqueInput[]
   }
 
-  export type UserCashbackConfigCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
-    connect?: UserCashbackConfigWhereUniqueInput
+  export type UserPushTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
+    createMany?: UserPushTokenCreateManyUserInputEnvelope
+    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
   }
 
   export type UserRoleCreateNestedManyWithoutUserInput = {
@@ -29941,25 +31514,32 @@ export namespace Prisma {
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
   }
 
-  export type GroupUserCreateNestedManyWithoutUserInput = {
-    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
-    createMany?: GroupUserCreateManyUserInputEnvelope
-    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+  export type UserSessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserSessionCreateWithoutUserInput, UserSessionUncheckedCreateWithoutUserInput> | UserSessionCreateWithoutUserInput[] | UserSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserSessionCreateOrConnectWithoutUserInput | UserSessionCreateOrConnectWithoutUserInput[]
+    createMany?: UserSessionCreateManyUserInputEnvelope
+    connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
   }
 
-  export type AnalyticsEventCreateNestedManyWithoutUserInput = {
+  export type AnalyticsEventUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput> | AnalyticsEventCreateWithoutUserInput[] | AnalyticsEventUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AnalyticsEventCreateOrConnectWithoutUserInput | AnalyticsEventCreateOrConnectWithoutUserInput[]
     createMany?: AnalyticsEventCreateManyUserInputEnvelope
     connect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
   }
 
-  export type UserSessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserSessionCreateWithoutUserInput, UserSessionUncheckedCreateWithoutUserInput> | UserSessionCreateWithoutUserInput[] | UserSessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserSessionCreateOrConnectWithoutUserInput | UserSessionCreateOrConnectWithoutUserInput[]
-    createMany?: UserSessionCreateManyUserInputEnvelope
-    connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+  export type GroupUserUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
+    createMany?: GroupUserCreateManyUserInputEnvelope
+    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
   export type ProductUncheckedCreateNestedManyWithoutMerchantInput = {
@@ -29983,13 +31563,6 @@ export namespace Prisma {
     connect?: PurchaseWhereUniqueInput | PurchaseWhereUniqueInput[]
   }
 
-  export type UserPushTokenUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
-    createMany?: UserPushTokenCreateManyUserInputEnvelope
-    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-  }
-
   export type PushNotificationLogUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PushNotificationLogCreateWithoutUserInput, PushNotificationLogUncheckedCreateWithoutUserInput> | PushNotificationLogCreateWithoutUserInput[] | PushNotificationLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PushNotificationLogCreateOrConnectWithoutUserInput | PushNotificationLogCreateOrConnectWithoutUserInput[]
@@ -29997,11 +31570,10 @@ export namespace Prisma {
     connect?: PushNotificationLogWhereUniqueInput | PushNotificationLogWhereUniqueInput[]
   }
 
-  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  export type UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
+    connect?: UserCashbackConfigWhereUniqueInput
   }
 
   export type UserModuleUncheckedCreateNestedManyWithoutUserInput = {
@@ -30011,10 +31583,11 @@ export namespace Prisma {
     connect?: UserModuleWhereUniqueInput | UserModuleWhereUniqueInput[]
   }
 
-  export type UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
-    connect?: UserCashbackConfigWhereUniqueInput
+  export type UserPushTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
+    createMany?: UserPushTokenCreateManyUserInputEnvelope
+    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
   }
 
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
@@ -30022,20 +31595,6 @@ export namespace Prisma {
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
     createMany?: UserRoleCreateManyUserInputEnvelope
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-  }
-
-  export type GroupUserUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
-    createMany?: GroupUserCreateManyUserInputEnvelope
-    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-  }
-
-  export type AnalyticsEventUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput> | AnalyticsEventCreateWithoutUserInput[] | AnalyticsEventUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AnalyticsEventCreateOrConnectWithoutUserInput | AnalyticsEventCreateOrConnectWithoutUserInput[]
-    createMany?: AnalyticsEventCreateManyUserInputEnvelope
-    connect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
   }
 
   export type UserSessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -30085,6 +31644,48 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type AnalyticsEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput> | AnalyticsEventCreateWithoutUserInput[] | AnalyticsEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AnalyticsEventCreateOrConnectWithoutUserInput | AnalyticsEventCreateOrConnectWithoutUserInput[]
+    upsert?: AnalyticsEventUpsertWithWhereUniqueWithoutUserInput | AnalyticsEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AnalyticsEventCreateManyUserInputEnvelope
+    set?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
+    disconnect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
+    delete?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
+    connect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
+    update?: AnalyticsEventUpdateWithWhereUniqueWithoutUserInput | AnalyticsEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AnalyticsEventUpdateManyWithWhereWithoutUserInput | AnalyticsEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
+  }
+
+  export type GroupUserUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
+    upsert?: GroupUserUpsertWithWhereUniqueWithoutUserInput | GroupUserUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GroupUserCreateManyUserInputEnvelope
+    set?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    disconnect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    delete?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    update?: GroupUserUpdateWithWhereUniqueWithoutUserInput | GroupUserUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GroupUserUpdateManyWithWhereWithoutUserInput | GroupUserUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
+  }
+
+  export type NotificationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type ProductUpdateManyWithoutMerchantNestedInput = {
     create?: XOR<ProductCreateWithoutMerchantInput, ProductUncheckedCreateWithoutMerchantInput> | ProductCreateWithoutMerchantInput[] | ProductUncheckedCreateWithoutMerchantInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutMerchantInput | ProductCreateOrConnectWithoutMerchantInput[]
@@ -30127,20 +31728,6 @@ export namespace Prisma {
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
   }
 
-  export type UserPushTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
-    upsert?: UserPushTokenUpsertWithWhereUniqueWithoutUserInput | UserPushTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserPushTokenCreateManyUserInputEnvelope
-    set?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    disconnect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    delete?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    update?: UserPushTokenUpdateWithWhereUniqueWithoutUserInput | UserPushTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserPushTokenUpdateManyWithWhereWithoutUserInput | UserPushTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
-  }
-
   export type PushNotificationLogUpdateManyWithoutUserNestedInput = {
     create?: XOR<PushNotificationLogCreateWithoutUserInput, PushNotificationLogUncheckedCreateWithoutUserInput> | PushNotificationLogCreateWithoutUserInput[] | PushNotificationLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PushNotificationLogCreateOrConnectWithoutUserInput | PushNotificationLogCreateOrConnectWithoutUserInput[]
@@ -30155,18 +31742,14 @@ export namespace Prisma {
     deleteMany?: PushNotificationLogScalarWhereInput | PushNotificationLogScalarWhereInput[]
   }
 
-  export type NotificationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  export type UserCashbackConfigUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
+    upsert?: UserCashbackConfigUpsertWithoutUserInput
+    disconnect?: UserCashbackConfigWhereInput | boolean
+    delete?: UserCashbackConfigWhereInput | boolean
+    connect?: UserCashbackConfigWhereUniqueInput
+    update?: XOR<XOR<UserCashbackConfigUpdateToOneWithWhereWithoutUserInput, UserCashbackConfigUpdateWithoutUserInput>, UserCashbackConfigUncheckedUpdateWithoutUserInput>
   }
 
   export type UserModuleUpdateManyWithoutUserNestedInput = {
@@ -30183,14 +31766,18 @@ export namespace Prisma {
     deleteMany?: UserModuleScalarWhereInput | UserModuleScalarWhereInput[]
   }
 
-  export type UserCashbackConfigUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
-    upsert?: UserCashbackConfigUpsertWithoutUserInput
-    disconnect?: UserCashbackConfigWhereInput | boolean
-    delete?: UserCashbackConfigWhereInput | boolean
-    connect?: UserCashbackConfigWhereUniqueInput
-    update?: XOR<XOR<UserCashbackConfigUpdateToOneWithWhereWithoutUserInput, UserCashbackConfigUpdateWithoutUserInput>, UserCashbackConfigUncheckedUpdateWithoutUserInput>
+  export type UserPushTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
+    upsert?: UserPushTokenUpsertWithWhereUniqueWithoutUserInput | UserPushTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserPushTokenCreateManyUserInputEnvelope
+    set?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    disconnect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    delete?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    update?: UserPushTokenUpdateWithWhereUniqueWithoutUserInput | UserPushTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserPushTokenUpdateManyWithWhereWithoutUserInput | UserPushTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
   }
 
   export type UserRoleUpdateManyWithoutUserNestedInput = {
@@ -30207,21 +31794,21 @@ export namespace Prisma {
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
   }
 
-  export type GroupUserUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
-    upsert?: GroupUserUpsertWithWhereUniqueWithoutUserInput | GroupUserUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GroupUserCreateManyUserInputEnvelope
-    set?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    disconnect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    delete?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    update?: GroupUserUpdateWithWhereUniqueWithoutUserInput | GroupUserUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GroupUserUpdateManyWithWhereWithoutUserInput | GroupUserUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
+  export type UserSessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserSessionCreateWithoutUserInput, UserSessionUncheckedCreateWithoutUserInput> | UserSessionCreateWithoutUserInput[] | UserSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserSessionCreateOrConnectWithoutUserInput | UserSessionCreateOrConnectWithoutUserInput[]
+    upsert?: UserSessionUpsertWithWhereUniqueWithoutUserInput | UserSessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserSessionCreateManyUserInputEnvelope
+    set?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+    disconnect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+    delete?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+    connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+    update?: UserSessionUpdateWithWhereUniqueWithoutUserInput | UserSessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserSessionUpdateManyWithWhereWithoutUserInput | UserSessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserSessionScalarWhereInput | UserSessionScalarWhereInput[]
   }
 
-  export type AnalyticsEventUpdateManyWithoutUserNestedInput = {
+  export type AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput> | AnalyticsEventCreateWithoutUserInput[] | AnalyticsEventUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AnalyticsEventCreateOrConnectWithoutUserInput | AnalyticsEventCreateOrConnectWithoutUserInput[]
     upsert?: AnalyticsEventUpsertWithWhereUniqueWithoutUserInput | AnalyticsEventUpsertWithWhereUniqueWithoutUserInput[]
@@ -30235,18 +31822,32 @@ export namespace Prisma {
     deleteMany?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
   }
 
-  export type UserSessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserSessionCreateWithoutUserInput, UserSessionUncheckedCreateWithoutUserInput> | UserSessionCreateWithoutUserInput[] | UserSessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserSessionCreateOrConnectWithoutUserInput | UserSessionCreateOrConnectWithoutUserInput[]
-    upsert?: UserSessionUpsertWithWhereUniqueWithoutUserInput | UserSessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserSessionCreateManyUserInputEnvelope
-    set?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
-    disconnect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
-    delete?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
-    connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
-    update?: UserSessionUpdateWithWhereUniqueWithoutUserInput | UserSessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserSessionUpdateManyWithWhereWithoutUserInput | UserSessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserSessionScalarWhereInput | UserSessionScalarWhereInput[]
+  export type GroupUserUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
+    upsert?: GroupUserUpsertWithWhereUniqueWithoutUserInput | GroupUserUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GroupUserCreateManyUserInputEnvelope
+    set?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    disconnect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    delete?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
+    update?: GroupUserUpdateWithWhereUniqueWithoutUserInput | GroupUserUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GroupUserUpdateManyWithWhereWithoutUserInput | GroupUserUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
   export type ProductUncheckedUpdateManyWithoutMerchantNestedInput = {
@@ -30291,20 +31892,6 @@ export namespace Prisma {
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
   }
 
-  export type UserPushTokenUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
-    upsert?: UserPushTokenUpsertWithWhereUniqueWithoutUserInput | UserPushTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserPushTokenCreateManyUserInputEnvelope
-    set?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    disconnect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    delete?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
-    update?: UserPushTokenUpdateWithWhereUniqueWithoutUserInput | UserPushTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserPushTokenUpdateManyWithWhereWithoutUserInput | UserPushTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
-  }
-
   export type PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PushNotificationLogCreateWithoutUserInput, PushNotificationLogUncheckedCreateWithoutUserInput> | PushNotificationLogCreateWithoutUserInput[] | PushNotificationLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PushNotificationLogCreateOrConnectWithoutUserInput | PushNotificationLogCreateOrConnectWithoutUserInput[]
@@ -30319,18 +31906,14 @@ export namespace Prisma {
     deleteMany?: PushNotificationLogScalarWhereInput | PushNotificationLogScalarWhereInput[]
   }
 
-  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  export type UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
+    upsert?: UserCashbackConfigUpsertWithoutUserInput
+    disconnect?: UserCashbackConfigWhereInput | boolean
+    delete?: UserCashbackConfigWhereInput | boolean
+    connect?: UserCashbackConfigWhereUniqueInput
+    update?: XOR<XOR<UserCashbackConfigUpdateToOneWithWhereWithoutUserInput, UserCashbackConfigUpdateWithoutUserInput>, UserCashbackConfigUncheckedUpdateWithoutUserInput>
   }
 
   export type UserModuleUncheckedUpdateManyWithoutUserNestedInput = {
@@ -30347,14 +31930,18 @@ export namespace Prisma {
     deleteMany?: UserModuleScalarWhereInput | UserModuleScalarWhereInput[]
   }
 
-  export type UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserCashbackConfigCreateOrConnectWithoutUserInput
-    upsert?: UserCashbackConfigUpsertWithoutUserInput
-    disconnect?: UserCashbackConfigWhereInput | boolean
-    delete?: UserCashbackConfigWhereInput | boolean
-    connect?: UserCashbackConfigWhereUniqueInput
-    update?: XOR<XOR<UserCashbackConfigUpdateToOneWithWhereWithoutUserInput, UserCashbackConfigUpdateWithoutUserInput>, UserCashbackConfigUncheckedUpdateWithoutUserInput>
+  export type UserPushTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput> | UserPushTokenCreateWithoutUserInput[] | UserPushTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPushTokenCreateOrConnectWithoutUserInput | UserPushTokenCreateOrConnectWithoutUserInput[]
+    upsert?: UserPushTokenUpsertWithWhereUniqueWithoutUserInput | UserPushTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserPushTokenCreateManyUserInputEnvelope
+    set?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    disconnect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    delete?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    connect?: UserPushTokenWhereUniqueInput | UserPushTokenWhereUniqueInput[]
+    update?: UserPushTokenUpdateWithWhereUniqueWithoutUserInput | UserPushTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserPushTokenUpdateManyWithWhereWithoutUserInput | UserPushTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
   }
 
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
@@ -30369,34 +31956,6 @@ export namespace Prisma {
     update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
-  }
-
-  export type GroupUserUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput> | GroupUserCreateWithoutUserInput[] | GroupUserUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GroupUserCreateOrConnectWithoutUserInput | GroupUserCreateOrConnectWithoutUserInput[]
-    upsert?: GroupUserUpsertWithWhereUniqueWithoutUserInput | GroupUserUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GroupUserCreateManyUserInputEnvelope
-    set?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    disconnect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    delete?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    connect?: GroupUserWhereUniqueInput | GroupUserWhereUniqueInput[]
-    update?: GroupUserUpdateWithWhereUniqueWithoutUserInput | GroupUserUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GroupUserUpdateManyWithWhereWithoutUserInput | GroupUserUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
-  }
-
-  export type AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput> | AnalyticsEventCreateWithoutUserInput[] | AnalyticsEventUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AnalyticsEventCreateOrConnectWithoutUserInput | AnalyticsEventCreateOrConnectWithoutUserInput[]
-    upsert?: AnalyticsEventUpsertWithWhereUniqueWithoutUserInput | AnalyticsEventUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AnalyticsEventCreateManyUserInputEnvelope
-    set?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
-    disconnect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
-    delete?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
-    connect?: AnalyticsEventWhereUniqueInput | AnalyticsEventWhereUniqueInput[]
-    update?: AnalyticsEventUpdateWithWhereUniqueWithoutUserInput | AnalyticsEventUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AnalyticsEventUpdateManyWithWhereWithoutUserInput | AnalyticsEventUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
   }
 
   export type UserSessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -30847,24 +32406,16 @@ export namespace Prisma {
     deleteMany?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
   }
 
-  export type RoleCreateNestedOneWithoutPermissionsInput = {
-    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
-    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput
-    connect?: RoleWhereUniqueInput
-  }
-
   export type PermissionCreateNestedOneWithoutRolesInput = {
     create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
     connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput
     connect?: PermissionWhereUniqueInput
   }
 
-  export type RoleUpdateOneRequiredWithoutPermissionsNestedInput = {
+  export type RoleCreateNestedOneWithoutPermissionsInput = {
     create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
     connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput
-    upsert?: RoleUpsertWithoutPermissionsInput
     connect?: RoleWhereUniqueInput
-    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutPermissionsInput, RoleUpdateWithoutPermissionsInput>, RoleUncheckedUpdateWithoutPermissionsInput>
   }
 
   export type PermissionUpdateOneRequiredWithoutRolesNestedInput = {
@@ -30875,10 +32426,12 @@ export namespace Prisma {
     update?: XOR<XOR<PermissionUpdateToOneWithWhereWithoutRolesInput, PermissionUpdateWithoutRolesInput>, PermissionUncheckedUpdateWithoutRolesInput>
   }
 
-  export type UserCreateNestedOneWithoutUserRolesInput = {
-    create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput
-    connect?: UserWhereUniqueInput
+  export type RoleUpdateOneRequiredWithoutPermissionsNestedInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput
+    upsert?: RoleUpsertWithoutPermissionsInput
+    connect?: RoleWhereUniqueInput
+    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutPermissionsInput, RoleUpdateWithoutPermissionsInput>, RoleUncheckedUpdateWithoutPermissionsInput>
   }
 
   export type RoleCreateNestedOneWithoutUserRolesInput = {
@@ -30887,12 +32440,10 @@ export namespace Prisma {
     connect?: RoleWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutUserRolesNestedInput = {
+  export type UserCreateNestedOneWithoutUserRolesInput = {
     create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
     connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput
-    upsert?: UserUpsertWithoutUserRolesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserRolesInput, UserUpdateWithoutUserRolesInput>, UserUncheckedUpdateWithoutUserRolesInput>
   }
 
   export type RoleUpdateOneRequiredWithoutUserRolesNestedInput = {
@@ -30901,6 +32452,14 @@ export namespace Prisma {
     upsert?: RoleUpsertWithoutUserRolesInput
     connect?: RoleWhereUniqueInput
     update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutUserRolesInput, RoleUpdateWithoutUserRolesInput>, RoleUncheckedUpdateWithoutUserRolesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutUserRolesNestedInput = {
+    create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput
+    upsert?: UserUpsertWithoutUserRolesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserRolesInput, UserUpdateWithoutUserRolesInput>, UserUncheckedUpdateWithoutUserRolesInput>
   }
 
   export type GroupUserCreateNestedManyWithoutGroupInput = {
@@ -30971,6 +32530,10 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutGroupsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGroupsInput, UserUpdateWithoutGroupsInput>, UserUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type EnumWhatsappMessageStatusFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappMessageStatus
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -31478,6 +33041,154 @@ export namespace Prisma {
     _max?: NestedEnumPermissionActionFilter<$PrismaModel>
   }
 
+  export type NestedEnumWhatsappMessageStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappMessageStatus | EnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel> | $Enums.WhatsappMessageStatus
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumWhatsappMessageStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappMessageStatus | EnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappMessageStatus[] | ListEnumWhatsappMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappMessageStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappMessageStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel>
+  }
+
+  export type AnalyticsEventCreateWithoutUserInput = {
+    id?: string
+    sessionId?: string | null
+    eventType: $Enums.AnalyticsEventType
+    eventName: string
+    category?: string | null
+    pagePath?: string | null
+    pageTitle?: string | null
+    referrer?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    platform?: string | null
+    deviceType?: string | null
+    browser?: string | null
+    os?: string | null
+    ipAddress?: string | null
+    country?: string | null
+    city?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AnalyticsEventUncheckedCreateWithoutUserInput = {
+    id?: string
+    sessionId?: string | null
+    eventType: $Enums.AnalyticsEventType
+    eventName: string
+    category?: string | null
+    pagePath?: string | null
+    pageTitle?: string | null
+    referrer?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    platform?: string | null
+    deviceType?: string | null
+    browser?: string | null
+    os?: string | null
+    ipAddress?: string | null
+    country?: string | null
+    city?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AnalyticsEventCreateOrConnectWithoutUserInput = {
+    where: AnalyticsEventWhereUniqueInput
+    create: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type AnalyticsEventCreateManyUserInputEnvelope = {
+    data: AnalyticsEventCreateManyUserInput | AnalyticsEventCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GroupUserCreateWithoutUserInput = {
+    id?: string
+    addedAt?: Date | string
+    addedBy: string
+    group: GroupCreateNestedOneWithoutUsersInput
+  }
+
+  export type GroupUserUncheckedCreateWithoutUserInput = {
+    id?: string
+    groupId: string
+    addedAt?: Date | string
+    addedBy: string
+  }
+
+  export type GroupUserCreateOrConnectWithoutUserInput = {
+    where: GroupUserWhereUniqueInput
+    create: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput>
+  }
+
+  export type GroupUserCreateManyUserInputEnvelope = {
+    data: GroupUserCreateManyUserInput | GroupUserCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    isRead?: boolean
+    readAt?: Date | string | null
+    actionUrl?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type NotificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    isRead?: boolean
+    readAt?: Date | string | null
+    actionUrl?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationCreateManyUserInputEnvelope = {
+    data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProductCreateWithoutMerchantInput = {
     id?: string
     name: string
@@ -31602,42 +33313,14 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserPushTokenCreateWithoutUserInput = {
-    id?: string
-    token: string
-    platform: $Enums.Platform
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserPushTokenUncheckedCreateWithoutUserInput = {
-    id?: string
-    token: string
-    platform: $Enums.Platform
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserPushTokenCreateOrConnectWithoutUserInput = {
-    where: UserPushTokenWhereUniqueInput
-    create: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserPushTokenCreateManyUserInputEnvelope = {
-    data: UserPushTokenCreateManyUserInput | UserPushTokenCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type PushNotificationLogCreateWithoutUserInput = {
     id?: string
     pushToken: string
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
     campaign: PushNotificationCampaignCreateNestedOneWithoutLogsInput
   }
 
@@ -31648,8 +33331,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
   }
 
   export type PushNotificationLogCreateOrConnectWithoutUserInput = {
@@ -31659,72 +33342,6 @@ export namespace Prisma {
 
   export type PushNotificationLogCreateManyUserInputEnvelope = {
     data: PushNotificationLogCreateManyUserInput | PushNotificationLogCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NotificationCreateWithoutUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    message: string
-    isRead?: boolean
-    readAt?: Date | string | null
-    actionUrl?: string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-  }
-
-  export type NotificationUncheckedCreateWithoutUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    message: string
-    isRead?: boolean
-    readAt?: Date | string | null
-    actionUrl?: string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-  }
-
-  export type NotificationCreateOrConnectWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type NotificationCreateManyUserInputEnvelope = {
-    data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserModuleCreateWithoutUserInput = {
-    id?: string
-    moduleKey: string
-    isEnabled: boolean
-    reason?: string | null
-    enabledBy?: string | null
-    disabledBy?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserModuleUncheckedCreateWithoutUserInput = {
-    id?: string
-    moduleKey: string
-    isEnabled: boolean
-    reason?: string | null
-    enabledBy?: string | null
-    disabledBy?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserModuleCreateOrConnectWithoutUserInput = {
-    where: UserModuleWhereUniqueInput
-    create: XOR<UserModuleCreateWithoutUserInput, UserModuleUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserModuleCreateManyUserInputEnvelope = {
-    data: UserModuleCreateManyUserInput | UserModuleCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -31759,6 +33376,66 @@ export namespace Prisma {
     create: XOR<UserCashbackConfigCreateWithoutUserInput, UserCashbackConfigUncheckedCreateWithoutUserInput>
   }
 
+  export type UserModuleCreateWithoutUserInput = {
+    id?: string
+    moduleKey: string
+    isEnabled: boolean
+    reason?: string | null
+    enabledBy?: string | null
+    disabledBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserModuleUncheckedCreateWithoutUserInput = {
+    id?: string
+    moduleKey: string
+    isEnabled: boolean
+    reason?: string | null
+    enabledBy?: string | null
+    disabledBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserModuleCreateOrConnectWithoutUserInput = {
+    where: UserModuleWhereUniqueInput
+    create: XOR<UserModuleCreateWithoutUserInput, UserModuleUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserModuleCreateManyUserInputEnvelope = {
+    data: UserModuleCreateManyUserInput | UserModuleCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserPushTokenCreateWithoutUserInput = {
+    id?: string
+    token: string
+    platform: $Enums.Platform
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserPushTokenUncheckedCreateWithoutUserInput = {
+    id?: string
+    token: string
+    platform: $Enums.Platform
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserPushTokenCreateOrConnectWithoutUserInput = {
+    where: UserPushTokenWhereUniqueInput
+    create: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserPushTokenCreateManyUserInputEnvelope = {
+    data: UserPushTokenCreateManyUserInput | UserPushTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     id?: string
     createdAt?: Date | string
@@ -31780,80 +33457,6 @@ export namespace Prisma {
 
   export type UserRoleCreateManyUserInputEnvelope = {
     data: UserRoleCreateManyUserInput | UserRoleCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type GroupUserCreateWithoutUserInput = {
-    id?: string
-    addedAt?: Date | string
-    addedBy: string
-    group: GroupCreateNestedOneWithoutUsersInput
-  }
-
-  export type GroupUserUncheckedCreateWithoutUserInput = {
-    id?: string
-    groupId: string
-    addedAt?: Date | string
-    addedBy: string
-  }
-
-  export type GroupUserCreateOrConnectWithoutUserInput = {
-    where: GroupUserWhereUniqueInput
-    create: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput>
-  }
-
-  export type GroupUserCreateManyUserInputEnvelope = {
-    data: GroupUserCreateManyUserInput | GroupUserCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type AnalyticsEventCreateWithoutUserInput = {
-    id?: string
-    sessionId?: string | null
-    eventType: $Enums.AnalyticsEventType
-    eventName: string
-    category?: string | null
-    pagePath?: string | null
-    pageTitle?: string | null
-    referrer?: string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    platform?: string | null
-    deviceType?: string | null
-    browser?: string | null
-    os?: string | null
-    ipAddress?: string | null
-    country?: string | null
-    city?: string | null
-    createdAt?: Date | string
-  }
-
-  export type AnalyticsEventUncheckedCreateWithoutUserInput = {
-    id?: string
-    sessionId?: string | null
-    eventType: $Enums.AnalyticsEventType
-    eventName: string
-    category?: string | null
-    pagePath?: string | null
-    pageTitle?: string | null
-    referrer?: string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    platform?: string | null
-    deviceType?: string | null
-    browser?: string | null
-    os?: string | null
-    ipAddress?: string | null
-    country?: string | null
-    city?: string | null
-    createdAt?: Date | string
-  }
-
-  export type AnalyticsEventCreateOrConnectWithoutUserInput = {
-    where: AnalyticsEventWhereUniqueInput
-    create: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput>
-  }
-
-  export type AnalyticsEventCreateManyUserInputEnvelope = {
-    data: AnalyticsEventCreateManyUserInput | AnalyticsEventCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -31897,6 +33500,105 @@ export namespace Prisma {
   export type UserSessionCreateManyUserInputEnvelope = {
     data: UserSessionCreateManyUserInput | UserSessionCreateManyUserInput[]
     skipDuplicates?: boolean
+  }
+
+  export type AnalyticsEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: AnalyticsEventWhereUniqueInput
+    update: XOR<AnalyticsEventUpdateWithoutUserInput, AnalyticsEventUncheckedUpdateWithoutUserInput>
+    create: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type AnalyticsEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: AnalyticsEventWhereUniqueInput
+    data: XOR<AnalyticsEventUpdateWithoutUserInput, AnalyticsEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AnalyticsEventUpdateManyWithWhereWithoutUserInput = {
+    where: AnalyticsEventScalarWhereInput
+    data: XOR<AnalyticsEventUpdateManyMutationInput, AnalyticsEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AnalyticsEventScalarWhereInput = {
+    AND?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
+    OR?: AnalyticsEventScalarWhereInput[]
+    NOT?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
+    id?: UuidFilter<"AnalyticsEvent"> | string
+    userId?: UuidNullableFilter<"AnalyticsEvent"> | string | null
+    sessionId?: UuidNullableFilter<"AnalyticsEvent"> | string | null
+    eventType?: EnumAnalyticsEventTypeFilter<"AnalyticsEvent"> | $Enums.AnalyticsEventType
+    eventName?: StringFilter<"AnalyticsEvent"> | string
+    category?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    pagePath?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    pageTitle?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    referrer?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    metadata?: JsonNullableFilter<"AnalyticsEvent">
+    platform?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    deviceType?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    browser?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    os?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    ipAddress?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    country?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    city?: StringNullableFilter<"AnalyticsEvent"> | string | null
+    createdAt?: DateTimeFilter<"AnalyticsEvent"> | Date | string
+  }
+
+  export type GroupUserUpsertWithWhereUniqueWithoutUserInput = {
+    where: GroupUserWhereUniqueInput
+    update: XOR<GroupUserUpdateWithoutUserInput, GroupUserUncheckedUpdateWithoutUserInput>
+    create: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput>
+  }
+
+  export type GroupUserUpdateWithWhereUniqueWithoutUserInput = {
+    where: GroupUserWhereUniqueInput
+    data: XOR<GroupUserUpdateWithoutUserInput, GroupUserUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GroupUserUpdateManyWithWhereWithoutUserInput = {
+    where: GroupUserScalarWhereInput
+    data: XOR<GroupUserUpdateManyMutationInput, GroupUserUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type GroupUserScalarWhereInput = {
+    AND?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
+    OR?: GroupUserScalarWhereInput[]
+    NOT?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
+    id?: UuidFilter<"GroupUser"> | string
+    groupId?: UuidFilter<"GroupUser"> | string
+    userId?: UuidFilter<"GroupUser"> | string
+    addedAt?: DateTimeFilter<"GroupUser"> | Date | string
+    addedBy?: UuidFilter<"GroupUser"> | string
+  }
+
+  export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    id?: UuidFilter<"Notification"> | string
+    userId?: UuidFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    isRead?: BoolFilter<"Notification"> | boolean
+    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    actionUrl?: StringNullableFilter<"Notification"> | string | null
+    metadata?: JsonNullableFilter<"Notification">
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
   export type ProductUpsertWithWhereUniqueWithoutMerchantInput = {
@@ -31985,35 +33687,6 @@ export namespace Prisma {
     data: XOR<PurchaseUpdateManyMutationInput, PurchaseUncheckedUpdateManyWithoutMerchantInput>
   }
 
-  export type UserPushTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserPushTokenWhereUniqueInput
-    update: XOR<UserPushTokenUpdateWithoutUserInput, UserPushTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserPushTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserPushTokenWhereUniqueInput
-    data: XOR<UserPushTokenUpdateWithoutUserInput, UserPushTokenUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserPushTokenUpdateManyWithWhereWithoutUserInput = {
-    where: UserPushTokenScalarWhereInput
-    data: XOR<UserPushTokenUpdateManyMutationInput, UserPushTokenUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UserPushTokenScalarWhereInput = {
-    AND?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
-    OR?: UserPushTokenScalarWhereInput[]
-    NOT?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
-    id?: UuidFilter<"UserPushToken"> | string
-    userId?: UuidFilter<"UserPushToken"> | string
-    token?: StringFilter<"UserPushToken"> | string
-    platform?: EnumPlatformFilter<"UserPushToken"> | $Enums.Platform
-    isActive?: BoolFilter<"UserPushToken"> | boolean
-    createdAt?: DateTimeFilter<"UserPushToken"> | Date | string
-    updatedAt?: DateTimeFilter<"UserPushToken"> | Date | string
-  }
-
   export type PushNotificationLogUpsertWithWhereUniqueWithoutUserInput = {
     where: PushNotificationLogWhereUniqueInput
     update: XOR<PushNotificationLogUpdateWithoutUserInput, PushNotificationLogUncheckedUpdateWithoutUserInput>
@@ -32041,71 +33714,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFilter<"PushNotificationLog"> | $Enums.PushNotificationStatus
     error?: StringNullableFilter<"PushNotificationLog"> | string | null
     sentAt?: DateTimeFilter<"PushNotificationLog"> | Date | string
-    openedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
     clickedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
-  }
-
-  export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
-    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    data: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type NotificationUpdateManyWithWhereWithoutUserInput = {
-    where: NotificationScalarWhereInput
-    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type NotificationScalarWhereInput = {
-    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-    OR?: NotificationScalarWhereInput[]
-    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-    id?: UuidFilter<"Notification"> | string
-    userId?: UuidFilter<"Notification"> | string
-    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
-    title?: StringFilter<"Notification"> | string
-    message?: StringFilter<"Notification"> | string
-    isRead?: BoolFilter<"Notification"> | boolean
-    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
-    actionUrl?: StringNullableFilter<"Notification"> | string | null
-    metadata?: JsonNullableFilter<"Notification">
-    createdAt?: DateTimeFilter<"Notification"> | Date | string
-  }
-
-  export type UserModuleUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserModuleWhereUniqueInput
-    update: XOR<UserModuleUpdateWithoutUserInput, UserModuleUncheckedUpdateWithoutUserInput>
-    create: XOR<UserModuleCreateWithoutUserInput, UserModuleUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserModuleUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserModuleWhereUniqueInput
-    data: XOR<UserModuleUpdateWithoutUserInput, UserModuleUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserModuleUpdateManyWithWhereWithoutUserInput = {
-    where: UserModuleScalarWhereInput
-    data: XOR<UserModuleUpdateManyMutationInput, UserModuleUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UserModuleScalarWhereInput = {
-    AND?: UserModuleScalarWhereInput | UserModuleScalarWhereInput[]
-    OR?: UserModuleScalarWhereInput[]
-    NOT?: UserModuleScalarWhereInput | UserModuleScalarWhereInput[]
-    id?: UuidFilter<"UserModule"> | string
-    userId?: UuidFilter<"UserModule"> | string
-    moduleKey?: StringFilter<"UserModule"> | string
-    isEnabled?: BoolFilter<"UserModule"> | boolean
-    reason?: StringNullableFilter<"UserModule"> | string | null
-    enabledBy?: UuidNullableFilter<"UserModule"> | string | null
-    disabledBy?: UuidNullableFilter<"UserModule"> | string | null
-    createdAt?: DateTimeFilter<"UserModule"> | Date | string
-    updatedAt?: DateTimeFilter<"UserModule"> | Date | string
+    openedAt?: DateTimeNullableFilter<"PushNotificationLog"> | Date | string | null
   }
 
   export type UserCashbackConfigUpsertWithoutUserInput = {
@@ -32145,6 +33755,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserModuleUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserModuleWhereUniqueInput
+    update: XOR<UserModuleUpdateWithoutUserInput, UserModuleUncheckedUpdateWithoutUserInput>
+    create: XOR<UserModuleCreateWithoutUserInput, UserModuleUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserModuleUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserModuleWhereUniqueInput
+    data: XOR<UserModuleUpdateWithoutUserInput, UserModuleUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserModuleUpdateManyWithWhereWithoutUserInput = {
+    where: UserModuleScalarWhereInput
+    data: XOR<UserModuleUpdateManyMutationInput, UserModuleUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserModuleScalarWhereInput = {
+    AND?: UserModuleScalarWhereInput | UserModuleScalarWhereInput[]
+    OR?: UserModuleScalarWhereInput[]
+    NOT?: UserModuleScalarWhereInput | UserModuleScalarWhereInput[]
+    id?: UuidFilter<"UserModule"> | string
+    userId?: UuidFilter<"UserModule"> | string
+    moduleKey?: StringFilter<"UserModule"> | string
+    isEnabled?: BoolFilter<"UserModule"> | boolean
+    reason?: StringNullableFilter<"UserModule"> | string | null
+    enabledBy?: UuidNullableFilter<"UserModule"> | string | null
+    disabledBy?: UuidNullableFilter<"UserModule"> | string | null
+    createdAt?: DateTimeFilter<"UserModule"> | Date | string
+    updatedAt?: DateTimeFilter<"UserModule"> | Date | string
+  }
+
+  export type UserPushTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserPushTokenWhereUniqueInput
+    update: XOR<UserPushTokenUpdateWithoutUserInput, UserPushTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<UserPushTokenCreateWithoutUserInput, UserPushTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserPushTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserPushTokenWhereUniqueInput
+    data: XOR<UserPushTokenUpdateWithoutUserInput, UserPushTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserPushTokenUpdateManyWithWhereWithoutUserInput = {
+    where: UserPushTokenScalarWhereInput
+    data: XOR<UserPushTokenUpdateManyMutationInput, UserPushTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserPushTokenScalarWhereInput = {
+    AND?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
+    OR?: UserPushTokenScalarWhereInput[]
+    NOT?: UserPushTokenScalarWhereInput | UserPushTokenScalarWhereInput[]
+    id?: UuidFilter<"UserPushToken"> | string
+    userId?: UuidFilter<"UserPushToken"> | string
+    token?: StringFilter<"UserPushToken"> | string
+    platform?: EnumPlatformFilter<"UserPushToken"> | $Enums.Platform
+    isActive?: BoolFilter<"UserPushToken"> | boolean
+    createdAt?: DateTimeFilter<"UserPushToken"> | Date | string
+    updatedAt?: DateTimeFilter<"UserPushToken"> | Date | string
+  }
+
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
     where: UserRoleWhereUniqueInput
     update: XOR<UserRoleUpdateWithoutUserInput, UserRoleUncheckedUpdateWithoutUserInput>
@@ -32170,73 +33840,6 @@ export namespace Prisma {
     roleId?: UuidFilter<"UserRole"> | string
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     createdBy?: UuidNullableFilter<"UserRole"> | string | null
-  }
-
-  export type GroupUserUpsertWithWhereUniqueWithoutUserInput = {
-    where: GroupUserWhereUniqueInput
-    update: XOR<GroupUserUpdateWithoutUserInput, GroupUserUncheckedUpdateWithoutUserInput>
-    create: XOR<GroupUserCreateWithoutUserInput, GroupUserUncheckedCreateWithoutUserInput>
-  }
-
-  export type GroupUserUpdateWithWhereUniqueWithoutUserInput = {
-    where: GroupUserWhereUniqueInput
-    data: XOR<GroupUserUpdateWithoutUserInput, GroupUserUncheckedUpdateWithoutUserInput>
-  }
-
-  export type GroupUserUpdateManyWithWhereWithoutUserInput = {
-    where: GroupUserScalarWhereInput
-    data: XOR<GroupUserUpdateManyMutationInput, GroupUserUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type GroupUserScalarWhereInput = {
-    AND?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
-    OR?: GroupUserScalarWhereInput[]
-    NOT?: GroupUserScalarWhereInput | GroupUserScalarWhereInput[]
-    id?: UuidFilter<"GroupUser"> | string
-    groupId?: UuidFilter<"GroupUser"> | string
-    userId?: UuidFilter<"GroupUser"> | string
-    addedAt?: DateTimeFilter<"GroupUser"> | Date | string
-    addedBy?: UuidFilter<"GroupUser"> | string
-  }
-
-  export type AnalyticsEventUpsertWithWhereUniqueWithoutUserInput = {
-    where: AnalyticsEventWhereUniqueInput
-    update: XOR<AnalyticsEventUpdateWithoutUserInput, AnalyticsEventUncheckedUpdateWithoutUserInput>
-    create: XOR<AnalyticsEventCreateWithoutUserInput, AnalyticsEventUncheckedCreateWithoutUserInput>
-  }
-
-  export type AnalyticsEventUpdateWithWhereUniqueWithoutUserInput = {
-    where: AnalyticsEventWhereUniqueInput
-    data: XOR<AnalyticsEventUpdateWithoutUserInput, AnalyticsEventUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AnalyticsEventUpdateManyWithWhereWithoutUserInput = {
-    where: AnalyticsEventScalarWhereInput
-    data: XOR<AnalyticsEventUpdateManyMutationInput, AnalyticsEventUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AnalyticsEventScalarWhereInput = {
-    AND?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
-    OR?: AnalyticsEventScalarWhereInput[]
-    NOT?: AnalyticsEventScalarWhereInput | AnalyticsEventScalarWhereInput[]
-    id?: UuidFilter<"AnalyticsEvent"> | string
-    userId?: UuidNullableFilter<"AnalyticsEvent"> | string | null
-    sessionId?: UuidNullableFilter<"AnalyticsEvent"> | string | null
-    eventType?: EnumAnalyticsEventTypeFilter<"AnalyticsEvent"> | $Enums.AnalyticsEventType
-    eventName?: StringFilter<"AnalyticsEvent"> | string
-    category?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    pagePath?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    pageTitle?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    referrer?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    metadata?: JsonNullableFilter<"AnalyticsEvent">
-    platform?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    deviceType?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    browser?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    os?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    ipAddress?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    country?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    city?: StringNullableFilter<"AnalyticsEvent"> | string | null
-    createdAt?: DateTimeFilter<"AnalyticsEvent"> | Date | string
   }
 
   export type UserSessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -32303,16 +33906,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -32344,16 +33947,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -32401,16 +34004,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -32442,16 +34045,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -32483,16 +34086,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -32524,16 +34127,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -32581,16 +34184,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -32622,16 +34225,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -32663,16 +34266,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -32704,16 +34307,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -32761,16 +34364,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -32802,16 +34405,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -32843,16 +34446,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -32884,16 +34487,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -32983,16 +34586,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -33024,16 +34627,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -33081,16 +34684,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -33122,16 +34725,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -33168,16 +34771,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -33209,16 +34812,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -33301,16 +34904,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -33342,16 +34945,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -33394,16 +34997,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -33435,16 +35038,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -33517,16 +35120,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -33558,16 +35161,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -33615,16 +35218,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -33656,16 +35259,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -33675,8 +35278,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPushNotificationLogsInput
   }
 
@@ -33687,8 +35290,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
   }
 
   export type PushNotificationLogCreateOrConnectWithoutCampaignInput = {
@@ -33719,7 +35322,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignCreateWithoutLogsInput = {
     id?: string
-    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -33734,18 +35336,19 @@ export namespace Prisma {
     externalLink?: string | null
     buttonText?: string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: number
     sentCount?: number
     failedCount?: number
     status?: $Enums.PushCampaignStatus
-    scheduledAt?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
     completedAt?: Date | string | null
+    scheduledAt?: Date | string | null
   }
 
   export type PushNotificationCampaignUncheckedCreateWithoutLogsInput = {
     id?: string
-    clubId: string
     title: string
     description: string
     pageTitle?: string | null
@@ -33760,13 +35363,15 @@ export namespace Prisma {
     externalLink?: string | null
     buttonText?: string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: number
     sentCount?: number
     failedCount?: number
     status?: $Enums.PushCampaignStatus
-    scheduledAt?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
     completedAt?: Date | string | null
+    scheduledAt?: Date | string | null
   }
 
   export type PushNotificationCampaignCreateOrConnectWithoutLogsInput = {
@@ -33802,16 +35407,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -33843,16 +35448,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -33874,7 +35479,6 @@ export namespace Prisma {
 
   export type PushNotificationCampaignUpdateWithoutLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33889,18 +35493,19 @@ export namespace Prisma {
     externalLink?: NullableStringFieldUpdateOperationsInput | string | null
     buttonText?: NullableStringFieldUpdateOperationsInput | string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: IntFieldUpdateOperationsInput | number
     sentCount?: IntFieldUpdateOperationsInput | number
     failedCount?: IntFieldUpdateOperationsInput | number
     status?: EnumPushCampaignStatusFieldUpdateOperationsInput | $Enums.PushCampaignStatus
-    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationCampaignUncheckedUpdateWithoutLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clubId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33915,13 +35520,15 @@ export namespace Prisma {
     externalLink?: NullableStringFieldUpdateOperationsInput | string | null
     buttonText?: NullableStringFieldUpdateOperationsInput | string | null
     geolocation?: NullableJsonNullValueInput | InputJsonValue
+    targetUserIds?: NullableJsonNullValueInput | InputJsonValue
     targetUserCount?: IntFieldUpdateOperationsInput | number
     sentCount?: IntFieldUpdateOperationsInput | number
     failedCount?: IntFieldUpdateOperationsInput | number
     status?: EnumPushCampaignStatusFieldUpdateOperationsInput | $Enums.PushCampaignStatus
-    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUpsertWithoutPushNotificationLogsInput = {
@@ -33963,16 +35570,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -34004,16 +35611,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -34045,16 +35652,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -34086,16 +35693,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -34143,16 +35750,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -34184,16 +35791,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -34225,17 +35832,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -34266,17 +35873,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -34323,17 +35930,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -34364,17 +35971,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RolePermissionCreateWithoutRoleInput = {
@@ -34503,6 +36110,29 @@ export namespace Prisma {
     data: XOR<RolePermissionUpdateManyMutationInput, RolePermissionUncheckedUpdateManyWithoutPermissionInput>
   }
 
+  export type PermissionCreateWithoutRolesInput = {
+    id?: string
+    module: string
+    action: $Enums.PermissionAction
+    resource: string
+    description?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PermissionUncheckedCreateWithoutRolesInput = {
+    id?: string
+    module: string
+    action: $Enums.PermissionAction
+    resource: string
+    description?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PermissionCreateOrConnectWithoutRolesInput = {
+    where: PermissionWhereUniqueInput
+    create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+  }
+
   export type RoleCreateWithoutPermissionsInput = {
     id?: string
     name: string
@@ -34532,27 +36162,33 @@ export namespace Prisma {
     create: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
   }
 
-  export type PermissionCreateWithoutRolesInput = {
-    id?: string
-    module: string
-    action: $Enums.PermissionAction
-    resource: string
-    description?: string | null
-    createdAt?: Date | string
-  }
-
-  export type PermissionUncheckedCreateWithoutRolesInput = {
-    id?: string
-    module: string
-    action: $Enums.PermissionAction
-    resource: string
-    description?: string | null
-    createdAt?: Date | string
-  }
-
-  export type PermissionCreateOrConnectWithoutRolesInput = {
-    where: PermissionWhereUniqueInput
+  export type PermissionUpsertWithoutRolesInput = {
+    update: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
     create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+    where?: PermissionWhereInput
+  }
+
+  export type PermissionUpdateToOneWithWhereWithoutRolesInput = {
+    where?: PermissionWhereInput
+    data: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type PermissionUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    action?: EnumPermissionActionFieldUpdateOperationsInput | $Enums.PermissionAction
+    resource?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PermissionUncheckedUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    action?: EnumPermissionActionFieldUpdateOperationsInput | $Enums.PermissionAction
+    resource?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RoleUpsertWithoutPermissionsInput = {
@@ -34590,33 +36226,33 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedUpdateManyWithoutRoleNestedInput
   }
 
-  export type PermissionUpsertWithoutRolesInput = {
-    update: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
-    create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
-    where?: PermissionWhereInput
+  export type RoleCreateWithoutUserRolesInput = {
+    id?: string
+    name: string
+    displayName: string
+    description?: string | null
+    isSystem?: boolean
+    priority?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: RolePermissionCreateNestedManyWithoutRoleInput
   }
 
-  export type PermissionUpdateToOneWithWhereWithoutRolesInput = {
-    where?: PermissionWhereInput
-    data: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
+  export type RoleUncheckedCreateWithoutUserRolesInput = {
+    id?: string
+    name: string
+    displayName: string
+    description?: string | null
+    isSystem?: boolean
+    priority?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   }
 
-  export type PermissionUpdateWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    module?: StringFieldUpdateOperationsInput | string
-    action?: EnumPermissionActionFieldUpdateOperationsInput | $Enums.PermissionAction
-    resource?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PermissionUncheckedUpdateWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    module?: StringFieldUpdateOperationsInput | string
-    action?: EnumPermissionActionFieldUpdateOperationsInput | $Enums.PermissionAction
-    resource?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type RoleCreateOrConnectWithoutUserRolesInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>
   }
 
   export type UserCreateWithoutUserRolesInput = {
@@ -34647,16 +36283,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    groups?: GroupUserCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
-    groups?: GroupUserCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -34688,16 +36324,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
-    groups?: GroupUserUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -34706,33 +36342,39 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
   }
 
-  export type RoleCreateWithoutUserRolesInput = {
-    id?: string
-    name: string
-    displayName: string
-    description?: string | null
-    isSystem?: boolean
-    priority?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    permissions?: RolePermissionCreateNestedManyWithoutRoleInput
-  }
-
-  export type RoleUncheckedCreateWithoutUserRolesInput = {
-    id?: string
-    name: string
-    displayName: string
-    description?: string | null
-    isSystem?: boolean
-    priority?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    permissions?: RolePermissionUncheckedCreateNestedManyWithoutRoleInput
-  }
-
-  export type RoleCreateOrConnectWithoutUserRolesInput = {
-    where: RoleWhereUniqueInput
+  export type RoleUpsertWithoutUserRolesInput = {
+    update: XOR<RoleUpdateWithoutUserRolesInput, RoleUncheckedUpdateWithoutUserRolesInput>
     create: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>
+    where?: RoleWhereInput
+  }
+
+  export type RoleUpdateToOneWithWhereWithoutUserRolesInput = {
+    where?: RoleWhereInput
+    data: XOR<RoleUpdateWithoutUserRolesInput, RoleUncheckedUpdateWithoutUserRolesInput>
+  }
+
+  export type RoleUpdateWithoutUserRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isSystem?: BoolFieldUpdateOperationsInput | boolean
+    priority?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: RolePermissionUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutUserRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isSystem?: BoolFieldUpdateOperationsInput | boolean
+    priority?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type UserUpsertWithoutUserRolesInput = {
@@ -34774,16 +36416,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
-    groups?: GroupUserUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -34815,52 +36457,17 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
-    groups?: GroupUserUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type RoleUpsertWithoutUserRolesInput = {
-    update: XOR<RoleUpdateWithoutUserRolesInput, RoleUncheckedUpdateWithoutUserRolesInput>
-    create: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>
-    where?: RoleWhereInput
-  }
-
-  export type RoleUpdateToOneWithWhereWithoutUserRolesInput = {
-    where?: RoleWhereInput
-    data: XOR<RoleUpdateWithoutUserRolesInput, RoleUncheckedUpdateWithoutUserRolesInput>
-  }
-
-  export type RoleUpdateWithoutUserRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isSystem?: BoolFieldUpdateOperationsInput | boolean
-    priority?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    permissions?: RolePermissionUpdateManyWithoutRoleNestedInput
-  }
-
-  export type RoleUncheckedUpdateWithoutUserRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isSystem?: BoolFieldUpdateOperationsInput | boolean
-    priority?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    permissions?: RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type GroupUserCreateWithoutGroupInput = {
@@ -34956,16 +36563,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseCreateNestedManyWithoutConsumerInput
     sales?: PurchaseCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    userModules?: UserModuleCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigCreateNestedOneWithoutUserInput
+    userModules?: UserModuleCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenCreateNestedManyWithoutUserInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
   }
 
@@ -34997,16 +36604,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutMerchantInput
     purchases?: PurchaseUncheckedCreateNestedManyWithoutConsumerInput
     sales?: PurchaseUncheckedCreateNestedManyWithoutMerchantInput
-    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     pushNotificationLogs?: PushNotificationLogUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
     cashbackConfig?: UserCashbackConfigUncheckedCreateNestedOneWithoutUserInput
+    userModules?: UserModuleUncheckedCreateNestedManyWithoutUserInput
+    pushTokens?: UserPushTokenUncheckedCreateNestedManyWithoutUserInput
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-    analyticsEvents?: AnalyticsEventUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -35085,16 +36692,16 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -35126,17 +36733,56 @@ export namespace Prisma {
     isBlockedLoginAttempts?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutMerchantNestedInput
     purchases?: PurchaseUncheckedUpdateManyWithoutConsumerNestedInput
     sales?: PurchaseUncheckedUpdateManyWithoutMerchantNestedInput
-    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     pushNotificationLogs?: PushNotificationLogUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
     cashbackConfig?: UserCashbackConfigUncheckedUpdateOneWithoutUserNestedInput
+    userModules?: UserModuleUncheckedUpdateManyWithoutUserNestedInput
+    pushTokens?: UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
-    analyticsEvents?: AnalyticsEventUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AnalyticsEventCreateManyUserInput = {
+    id?: string
+    sessionId?: string | null
+    eventType: $Enums.AnalyticsEventType
+    eventName: string
+    category?: string | null
+    pagePath?: string | null
+    pageTitle?: string | null
+    referrer?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    platform?: string | null
+    deviceType?: string | null
+    browser?: string | null
+    os?: string | null
+    ipAddress?: string | null
+    country?: string | null
+    city?: string | null
+    createdAt?: Date | string
+  }
+
+  export type GroupUserCreateManyUserInput = {
+    id?: string
+    groupId: string
+    addedAt?: Date | string
+    addedBy: string
+  }
+
+  export type NotificationCreateManyUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    isRead?: boolean
+    readAt?: Date | string | null
+    actionUrl?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type ProductCreateManyMerchantInput = {
@@ -35185,15 +36831,6 @@ export namespace Prisma {
     completedAt?: Date | string | null
   }
 
-  export type UserPushTokenCreateManyUserInput = {
-    id?: string
-    token: string
-    platform: $Enums.Platform
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type PushNotificationLogCreateManyUserInput = {
     id?: string
     campaignId: string
@@ -35201,20 +36838,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
-  }
-
-  export type NotificationCreateManyUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    message: string
-    isRead?: boolean
-    readAt?: Date | string | null
-    actionUrl?: string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
+    openedAt?: Date | string | null
   }
 
   export type UserModuleCreateManyUserInput = {
@@ -35228,38 +36853,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UserPushTokenCreateManyUserInput = {
+    id?: string
+    token: string
+    platform: $Enums.Platform
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserRoleCreateManyUserInput = {
     id?: string
     roleId: string
     createdAt?: Date | string
     createdBy?: string | null
-  }
-
-  export type GroupUserCreateManyUserInput = {
-    id?: string
-    groupId: string
-    addedAt?: Date | string
-    addedBy: string
-  }
-
-  export type AnalyticsEventCreateManyUserInput = {
-    id?: string
-    sessionId?: string | null
-    eventType: $Enums.AnalyticsEventType
-    eventName: string
-    category?: string | null
-    pagePath?: string | null
-    pageTitle?: string | null
-    referrer?: string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    platform?: string | null
-    deviceType?: string | null
-    browser?: string | null
-    os?: string | null
-    ipAddress?: string | null
-    country?: string | null
-    city?: string | null
-    createdAt?: Date | string
   }
 
   export type UserSessionCreateManyUserInput = {
@@ -35276,6 +36883,123 @@ export namespace Prisma {
     ipAddress?: string | null
     pageViews?: number
     interactions?: number
+  }
+
+  export type AnalyticsEventUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: EnumAnalyticsEventTypeFieldUpdateOperationsInput | $Enums.AnalyticsEventType
+    eventName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    pagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    referrer?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceType?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnalyticsEventUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: EnumAnalyticsEventTypeFieldUpdateOperationsInput | $Enums.AnalyticsEventType
+    eventName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    pagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    referrer?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceType?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnalyticsEventUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventType?: EnumAnalyticsEventTypeFieldUpdateOperationsInput | $Enums.AnalyticsEventType
+    eventName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    pagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    referrer?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceType?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GroupUserUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: StringFieldUpdateOperationsInput | string
+    group?: GroupUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type GroupUserUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GroupUserUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NotificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductUpdateWithoutMerchantInput = {
@@ -35418,41 +37142,14 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type UserPushTokenUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserPushTokenUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserPushTokenUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type PushNotificationLogUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     pushToken?: StringFieldUpdateOperationsInput | string
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     campaign?: PushNotificationCampaignUpdateOneRequiredWithoutLogsNestedInput
   }
 
@@ -35463,8 +37160,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationLogUncheckedUpdateManyWithoutUserInput = {
@@ -35474,44 +37171,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type NotificationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NotificationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NotificationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserModuleUpdateWithoutUserInput = {
@@ -35547,6 +37208,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserPushTokenUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPushTokenUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPushTokenUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35566,87 +37254,6 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type GroupUserUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addedBy?: StringFieldUpdateOperationsInput | string
-    group?: GroupUpdateOneRequiredWithoutUsersNestedInput
-  }
-
-  export type GroupUserUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    groupId?: StringFieldUpdateOperationsInput | string
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addedBy?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GroupUserUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    groupId?: StringFieldUpdateOperationsInput | string
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addedBy?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type AnalyticsEventUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
-    eventType?: EnumAnalyticsEventTypeFieldUpdateOperationsInput | $Enums.AnalyticsEventType
-    eventName?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    pagePath?: NullableStringFieldUpdateOperationsInput | string | null
-    pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    referrer?: NullableStringFieldUpdateOperationsInput | string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    platform?: NullableStringFieldUpdateOperationsInput | string | null
-    deviceType?: NullableStringFieldUpdateOperationsInput | string | null
-    browser?: NullableStringFieldUpdateOperationsInput | string | null
-    os?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AnalyticsEventUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
-    eventType?: EnumAnalyticsEventTypeFieldUpdateOperationsInput | $Enums.AnalyticsEventType
-    eventName?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    pagePath?: NullableStringFieldUpdateOperationsInput | string | null
-    pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    referrer?: NullableStringFieldUpdateOperationsInput | string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    platform?: NullableStringFieldUpdateOperationsInput | string | null
-    deviceType?: NullableStringFieldUpdateOperationsInput | string | null
-    browser?: NullableStringFieldUpdateOperationsInput | string | null
-    os?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AnalyticsEventUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
-    eventType?: EnumAnalyticsEventTypeFieldUpdateOperationsInput | $Enums.AnalyticsEventType
-    eventName?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    pagePath?: NullableStringFieldUpdateOperationsInput | string | null
-    pageTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    referrer?: NullableStringFieldUpdateOperationsInput | string | null
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    platform?: NullableStringFieldUpdateOperationsInput | string | null
-    deviceType?: NullableStringFieldUpdateOperationsInput | string | null
-    browser?: NullableStringFieldUpdateOperationsInput | string | null
-    os?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserSessionUpdateWithoutUserInput = {
@@ -35768,8 +37375,8 @@ export namespace Prisma {
     status?: $Enums.PushNotificationStatus
     error?: string | null
     sentAt: Date | string
-    openedAt?: Date | string | null
     clickedAt?: Date | string | null
+    openedAt?: Date | string | null
   }
 
   export type PushNotificationLogUpdateWithoutCampaignInput = {
@@ -35778,8 +37385,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPushNotificationLogsNestedInput
   }
 
@@ -35790,8 +37397,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PushNotificationLogUncheckedUpdateManyWithoutCampaignInput = {
@@ -35801,8 +37408,8 @@ export namespace Prisma {
     status?: EnumPushNotificationStatusFieldUpdateOperationsInput | $Enums.PushNotificationStatus
     error?: NullableStringFieldUpdateOperationsInput | string | null
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clickedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    openedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RolePermissionCreateManyRoleInput = {

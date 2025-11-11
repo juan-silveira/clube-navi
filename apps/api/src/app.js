@@ -835,6 +835,22 @@ app.use('/api/club-admin/cashback', resolveClubMiddleware, clubAdminCashbackRout
 const clubAdminWhatsappRoutes = require('./routes/clubAdminWhatsapp.routes');
 app.use('/api/club-admin/whatsapp', resolveClubMiddleware, clubAdminWhatsappRoutes);
 
+// Rotas de notificações push do clube
+const clubAdminPushNotificationsRoutes = require('./routes/clubAdminPushNotifications.routes');
+app.use('/api/club-admin/push-notifications', resolveClubMiddleware, clubAdminPushNotificationsRoutes);
+
+// Rotas de branding do clube
+const clubAdminBrandingRoutes = require('./routes/clubAdminBranding.routes');
+app.use('/api/club-admin/branding', resolveClubMiddleware, clubAdminBrandingRoutes);
+
+// Rotas de módulos do clube
+const clubAdminModulesRoutes = require('./routes/clubAdminModules.routes');
+app.use('/api/club-admin/modules', resolveClubMiddleware, clubAdminModulesRoutes);
+
+// Rotas de grupos do clube
+const clubAdminGroupsRoutes = require('./routes/clubAdminGroups.routes');
+app.use('/api/club-admin/groups', resolveClubMiddleware, clubAdminGroupsRoutes);
+
 // Rotas de recuperação de senha (públicas)
 app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
 

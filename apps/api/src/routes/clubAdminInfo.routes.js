@@ -354,7 +354,7 @@ router.get('/users', authenticateClubAdmin, async (req, res) => {
 
     const params = [];
     if (userType) {
-      query += ` WHERE user_type = $1`;
+      query += ` WHERE user_type::text = $1`;
       params.push(userType);
     }
 
