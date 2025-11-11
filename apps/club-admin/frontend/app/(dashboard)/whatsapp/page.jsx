@@ -286,6 +286,7 @@ const WhatsAppMessagingPage = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Digite sua mensagem aqui..."
                   row={10}
+                  className="min-h-[400px]"
                 />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   {message.length} caracteres
