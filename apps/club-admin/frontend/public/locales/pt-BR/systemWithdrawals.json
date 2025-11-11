@@ -1,0 +1,96 @@
+{
+  "title": "Gerenciamento de Saques",
+  "subtitle": "Gerencie saques pendentes de aprovação manual",
+  "modal": {
+    "title": "Confirmar Pagamento PIX",
+    "details": {
+      "type": "Tipo:",
+      "title": "Detalhes do Saque",
+      "pixKey": "Chave PIX:",
+      "valueToSend": "Valor a enviar:",
+      "transactionId": "ID da Transação:"
+    },
+    "warning": {
+      "title": "Confirmação de Pagamento Manual",
+      "message": "Você está confirmando o pagamento manual do saque. Certifique-se de que o PIX foi enviado corretamente."
+    },
+    "receiptCode": {
+      "label": "Código do Recibo/Comprovante *",
+      "helper": "Insira o código de confirmação ou ID da transação PIX",
+      "placeholder": "Insira o código do comprovante do pagamento PIX"
+    }
+  },
+  "stats": {
+    "total": "Total",
+    "failed": "Falharam",
+    "pending": "Pendentes",
+    "confirmed": "Confirmados"
+  },
+  "table": {
+    "title": "Saques",
+    "loading": "Carregando saques...",
+    "values": {
+      "fee": "Taxa:",
+      "net": "Líquido:",
+      "requested": "Solicitado:"
+    },
+    "empty": {
+      "title": "Nenhum saque encontrado",
+      "subtitle": "Tente ajustar os filtros para ver mais resultados"
+    },
+    "columns": {
+      "user": "Usuário",
+      "pixKey": "Chave PIX",
+      "status": "Status",
+      "values": "Valores",
+      "actions": "Ações",
+      "burnHash": "Hash Burn",
+      "dateTime": "Data/Hora",
+      "receiptCode": "Código Recibo"
+    },
+    "pagination": {
+      "showing": "Exibindo {{from}} ao {{to}} de {{total}} registros",
+      "perPage10": "10 por página",
+      "perPage20": "20 por página",
+      "perPage50": "50 por página"
+    }
+  },
+  "buttons": {
+    "clear": "Limpar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "refresh": "Atualizar",
+    "confirmPayment": "Confirmar Pagamento"
+  },
+  "status": {
+    "FAILED": "Falhou",
+    "PENDING": "Pendente",
+    "CONFIRMED": "Confirmado"
+  },
+  "messages": {
+    "copied": "Copiado para área de transferência",
+    "authError": "Erro de autenticação ao carregar saques",
+    "loadError": "Erro ao carregar saques",
+    "confirmError": "Erro ao confirmar pagamento",
+    "rateLimitError": "Muitas requisições simultâneas. Aguarde um momento.",
+    "enterReceiptCode": "Por favor, insira o código do recibo",
+    "genericLoadError": "Erro ao carregar saques. Tente novamente.",
+    "paymentConfirmed": "Pagamento confirmado com sucesso!",
+    "noWithdrawalsFound": "Nenhum saque encontrado ou resposta inválida"
+  },
+  "tooltips": {
+    "copyCode": "Copiar código",
+    "viewTransaction": "Ver transação no explorer: {{hash}}"
+  },
+  "filters": {
+    "status": {
+      "all": "Todos os Status",
+      "label": "Status",
+      "placeholder": "Status"
+    },
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Usuário, email, chave PIX..."
+    }
+  }
+}

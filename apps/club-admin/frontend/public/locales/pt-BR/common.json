@@ -1,0 +1,42 @@
+{
+  "alerts": {
+    "info": "Informação",
+    "error": "Erro",
+    "success": "Sucesso",
+    "warning": "Aviso"
+  },
+  "labels": {
+    "date": "Data",
+    "name": "Nome",
+    "email": "E-mail",
+    "amount": "Valor",
+    "status": "Status",
+    "actions": "Ações",
+    "balance": "Saldo",
+    "password": "Senha",
+    "description": "Descrição"
+  },
+  "buttons": {
+    "back": "Voltar",
+    "edit": "Editar",
+    "next": "Próximo",
+    "save": "Salvar",
+    "close": "Fechar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "search": "Buscar",
+    "submit": "Enviar",
+    "confirm": "Confirmar"
+  },
+  "login": {
+    "success": "Login realizado",
+    "welcome": "Bem-vindo, {{name}}!"
+  },
+  "messages": {
+    "error": "Ocorreu um erro",
+    "noData": "Nenhum dado encontrado",
+    "loading": "Carregando...",
+    "success": "Operação realizada com sucesso",
+    "confirmDelete": "Tem certeza que deseja excluir?"
+  }
+}

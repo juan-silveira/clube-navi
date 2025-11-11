@@ -1,0 +1,130 @@
+{
+  "title": "Seguridad",
+  "subtitle": "Gestione su configuración de seguridad y privacidad",
+  "pageTitle": "Seguridad",
+  "common": {
+    "active": "Activo",
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "back": "Volver",
+    "finish": "Finalizar",
+    "important": "Importante",
+    "attention": "Atención"
+  },
+  "errors": {
+    "default2FAConfigError": "Error al configurar 2FA"
+  },
+  "tips": {
+    "title": "Consejos de Seguridad",
+    "enable2FA": {
+      "title": "Activar 2FA",
+      "description": "La autenticación de dos factores añade una capa adicional de seguridad a su cuenta"
+    },
+    "backupCodes": {
+      "title": "Códigos de Respaldo",
+      "description": "Guarde sus códigos de respaldo en un lugar seguro para la recuperación de la cuenta"
+    },
+    "strongPassword": {
+      "title": "Contraseña Segura",
+      "description": "Use contraseñas con al menos 8 caracteres, incluyendo letras, números y símbolos"
+    },
+    "monitorActivity": {
+      "title": "Monitorear Actividad",
+      "description": "Verifique regularmente el historial de inicio de sesión y las actividades de la cuenta"
+    },
+    "authenticatorApp": {
+      "title": "Aplicación de Autenticación",
+      "description": "Use Google Authenticator, Authy o similar para generar códigos temporales seguros"
+    },
+    "operationProtection": {
+      "title": "Protección de Operación",
+      "description": "Con 2FA activado, los retiros y transferencias requerirán un código de verificación"
+    }
+  },
+  "twoFactorAuthentication": {
+    "title": "Autenticación de Dos Factores (2FA)",
+    "enable": "Activar 2FA",
+    "disable": {
+      "button": "Deshabilitar 2FA",
+      "modalTitle": "Deshabilitar Autenticación de Dos Factores",
+      "tooltip": "Deshabilitar 2FA reducirá la seguridad de su cuenta. Deberá ingresar el código de su aplicación de autenticación para confirmar.",
+      "warningBase": "Deshabilitar 2FA reducirá la seguridad de su cuenta.",
+      "warningBackupCode": " Ingrese un código de respaldo para confirmar.",
+      "warningAuthenticatorCode": " Ingrese el código de su aplicación de autenticación para confirmar.",
+      "backupCodeLabel": "Código de Respaldo",
+      "confirmationCodeLabel": "Código de Confirmación",
+      "backToAuthenticatorCode": "← Volver al código del autenticador",
+      "useBackupCode": "Usar código de respaldo 2FA →",
+      "characters": "caracteres",
+      "digits": "dígitos",
+      "enterCodeToConfirm": "Ingrese el código de {{length}} {{type}} para confirmar"
+    },
+    "tooltip": "La autenticación de dos factores agrega una capa adicional de seguridad, requiriendo un código temporal de su aplicación de autenticación (Google Authenticator, Authy, etc.) además de su contraseña.",
+    "description": "Agregue una capa adicional de seguridad",
+    "messages": {
+      "accountProtected": "Su cuenta está protegida con 2FA",
+      "enabledSuccess": "¡2FA activado con éxito!",
+      "disabledSuccess": "2FA deshabilitado con éxito"
+    },
+    "activeMethods": {
+      "title": "Métodos Activos:",
+      "authenticatorApp": "Aplicación de Autenticación",
+      "lastUsed": "Último uso"
+    },
+    "setup": {
+      "modalTitle": "Configurar Autenticación de Dos Factores",
+      "step1Title": "Paso 1: Escanee el Código QR",
+      "step1Description": "Use su aplicación de autenticación (Google Authenticator, Authy, etc.) para escanear el código",
+      "manualKeyLabel": "O ingrese la clave manualmente:",
+      "step2Title": "Paso 2: Verificar Código",
+      "step2Description": "Ingrese el código de 6 dígitos que se muestra en su aplicación de autenticación",
+      "verificationCodeLabel": "Código de Verificación",
+      "verifyAndActivate": "Verificar y Activar",
+      "step3SuccessTitle": "¡2FA Activado con Éxito!",
+      "step3Description": "Guarde sus códigos de respaldo en un lugar seguro",
+      "secretCopied": "Clave copiada al portapapeles"
+    },
+    "backup": {
+      "importantWarning": "Guarde estos códigos de respaldo. Puede usarlos para acceder a su cuenta si pierde el acceso a su aplicación de autenticación. Cada código solo se puede usar una vez.",
+      "copyCodesButton": "Copiar Códigos",
+      "downloadCodesButton": "Descargar Códigos",
+      "codesCopied": "Códigos copiados al portapapeles",
+      "codesDownloadedSuccess": "Códigos descargados con éxito",
+      "downloadFileContent": "Códigos de Respaldo - Clube Digital 2FA\nFecha: {{date}}\n\n{{codes}}\n\nGuarde estos códigos en un lugar seguro. Cada código solo se puede usar una vez."
+    },
+    "errors": {
+      "enterSixDigitCode": "Ingrese el código de 6 dígitos",
+      "invalidCode": "Código inválido",
+      "defaultDisableError": "Error al deshabilitar 2FA"
+    }
+  },
+  "changePassword": {
+    "title": "Cambiar Contraseña",
+    "button": "Actualizar Contraseña",
+    "modalTitle": "Cambiar Contraseña",
+    "loading": "Actualizando...",
+    "tooltip": "Mantenga su cuenta segura cambiando su contraseña regularmente. Use una contraseña segura con al menos 8 caracteres, incluyendo letras, números y símbolos.",
+    "description": "Actualice su contraseña regularmente",
+    "labels": {
+      "currentPassword": "Confirmar Contraseña Actual",
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña"
+    },
+    "placeholders": {
+      "currentPassword": "Ingrese la Contraseña Actual",
+      "newPassword": "Ingrese la Nueva Contraseña",
+      "confirmPassword": "Confirme la Nueva Contraseña"
+    },
+    "messages": {
+      "success": "¡Contraseña cambiada con éxito!"
+    },
+    "errors": {
+      "allFieldsRequired": "Todos los campos son obligatorios",
+      "passwordCriteriaFailed": "La contraseña no cumple con los criterios de seguridad:\n{{errors}}",
+      "passwordsDoNotMatch": "La nueva contraseña y la confirmación no coinciden",
+      "newPasswordMustBeDifferent": "La nueva contraseña debe ser diferente de la contraseña actual",
+      "defaultChangeError": "Error al cambiar la contraseña",
+      "connectionError": "Error de conexión. Intente de nuevo."
+    }
+  }
+}

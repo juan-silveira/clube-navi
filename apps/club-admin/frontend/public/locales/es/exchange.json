@@ -1,0 +1,212 @@
+{
+  "title": "Exchange",
+  "pageTitle": "Exchange",
+  "chart": {
+    "title": "Gráfico",
+    "low24h": "Baja 24h",
+    "noData": "Sin datos de precio disponibles",
+    "high24h": "Alta 24h",
+    "loading": "Cargando gráfico...",
+    "interval": "Intervalo",
+    "timeAxis": "Tiempo",
+    "tryAgain": "Intentar nuevamente",
+    "change24h": "Cambio 24h",
+    "lastPrice": "Último Precio",
+    "priceAxis": "Precio",
+    "volume24h": "Volumen 24h",
+    "noDataHint": "Los gráficos aparecerán cuando haya negociaciones para {{symbol}}",
+    "errorLoadingData": "Error al cargar datos del gráfico",
+    "errorInitializing": "Error al inicializar gráfico",
+    "errorCreatingChart": "Error al crear gráfico: {{message}}",
+    "errorLoadingLibrary": "Error al cargar biblioteca del gráfico"
+  },
+  "swapForm": {
+    "buy": "Comprar",
+    "max": "Máx",
+    "sell": "Vender",
+    "title": "Swap",
+    "orders": "órdenes",
+    "calculating": "Calculando...",
+    "averagePrice": "Precio Promedio",
+    "maxVariation": "Variación máxima",
+    "minToReceive": "Mínimo a recibir",
+    "noTokenFound": "No se encontraron tokens",
+    "selectTokens": "Seleccione los tokens",
+    "autoRefreshIn": "Actualización automática en",
+    "connectWallet": "Conectar Wallet",
+    "exchangeFound": "Exchange encontrado para {{pair}}",
+    "errorExecuting": "Error al ejecutar orden",
+    "priceVariation": "Variación de precio",
+    "errorConnecting": "Error al conectar con el servidor",
+    "ordersToExecute": "Órdenes a ejecutar",
+    "errorCalculating": "Error al calcular valor a recibir",
+    "exchangeNotFound": "No se encontró exchange para {{pair}}",
+    "errorGettingQuote": "Error al obtener cotización",
+    "noOrdersAvailable": "No hay órdenes disponibles en el mercado",
+    "insufficientLiquidity": "Liquidez insuficiente. Máximo disponible: {{amount}} tokens",
+    "priceVariationTooltip": "Protección contra variación de precio durante la ejecución de la transacción"
+  },
+  "bookPage": {
+    "pair": "Par",
+    "title": "Libro de Órdenes",
+    "balance": "Saldo",
+    "subtitle": "Trading con control total de precios",
+    "success": {
+      "limitBuy": "¡Orden limitada de compra creada con éxito! Los datos se actualizarán en ~10s después de la confirmación en blockchain.",
+      "limitSell": "¡Orden limitada de venta creada con éxito! Los datos se actualizarán en ~10s después de la confirmación en blockchain.",
+      "orderCancelled": "¡Orden cancelada con éxito! Espere la confirmación en blockchain."
+    },
+    "errors": {
+      "cancelOrder": "Error al cancelar orden",
+      "createOrder": "Error al crear orden",
+      "userNotFound": "Demo: Usuario no encontrado en la base de datos. En producción, este error no ocurriría para usuarios autenticados.",
+      "loadExchanges": "Error al cargar exchanges"
+    },
+    "pollingStatus": {
+      "active": "Actualizaciones automáticas (Polling 5s)",
+      "paused": "Sistema pausado",
+      "description": "(actualizaciones automáticas cada 5s)",
+      "descriptionPaused": "(datos estáticos)"
+    },
+    "selectExchange": {
+      "title": "Seleccione un Exchange",
+      "description": "Elija un par de trading en el selector arriba para comenzar"
+    }
+  },
+  "orderForm": {
+    "buy": "Comprar",
+    "sell": "Vender"
+  },
+  "tooltips": {
+    "back": "Volver"
+  },
+  "myOrders": {
+    "title": "Mis Órdenes",
+    "table": {
+      "pair": "Par",
+      "type": "Tipo",
+      "price": "Precio",
+      "total": "Total",
+      "status": "Estado",
+      "actions": "Acciones",
+      "initialAmount": "Cant. Inicial",
+      "remainingAmount": "Cant. Restante"
+    },
+    "filters": {
+      "all": "Todas",
+      "buy": "Compra",
+      "pair": "Par",
+      "sell": "Venta",
+      "type": "Tipo",
+      "active": "Activas",
+      "allPairs": "Todos",
+      "allTypes": "Todos",
+      "executed": "Ejecutadas",
+      "cancelled": "Canceladas",
+      "clearFilters": "Limpiar Filtros"
+    },
+    "status": {
+      "active": "ACTIVA",
+      "executed": "EJECUTADA",
+      "cancelled": "CANCELADA",
+      "processing": "Procesando..."
+    },
+    "actions": {
+      "cancel": "Cancelar",
+      "cancelling": "Cancelando..."
+    },
+    "cancelModal": {
+      "no": "No",
+      "yes": "Sí, Cancelar",
+      "title": "Confirmar Cancelación",
+      "warning": "Esta acción no se puede deshacer.",
+      "descriptionBuy": "¿Realmente desea cancelar esta orden de compra?",
+      "descriptionSell": "¿Realmente desea cancelar esta orden de venta?"
+    },
+    "empty": {
+      "noOrders": "No se encontraron órdenes",
+      "noOrdersPage": "No hay órdenes en esta página"
+    },
+    "pagination": {
+      "next": "Próximo",
+      "showing": "Mostrando {{from}} a {{to}} de {{total}} órdenes",
+      "previous": "Anterior",
+      "itemsPerPage": "Ítems por página:"
+    }
+  },
+  "orderBook": {
+    "buys": "Compras ↑",
+    "price": "Precio",
+    "sells": "Ventas ↓",
+    "total": "Total",
+    "spread": "Spread",
+    "loading": "Cargando order book...",
+    "quantity": "Cantidad",
+    "tryAgain": "Intentar nuevamente",
+    "lastPrice": "Último Precio:",
+    "noAggregation": "Sin agregación",
+    "noActiveOrders": "No hay órdenes activas",
+    "createOrderPrompt": "Crea una orden e inicia el book"
+  },
+  "marketPage": {
+    "title": "Mercado",
+    "balance": "Saldo",
+    "subtitle": "Ejecución inmediata al mejor precio disponible",
+    "errors": {
+      "noOrders": "No hay órdenes disponibles en el mercado para ejecutar su orden.",
+      "sameToken": "No es posible seleccionar {{symbol}} en ambos campos",
+      "userNotFound": "Demo: Usuario no encontrado en la base de datos. En producción, este error no ocurriría para usuarios autenticados.",
+      "loadContracts": "Error al cargar contratos",
+      "insufficientLiquidity": "Liquidez insuficiente"
+    },
+    "success": {
+      "limitBuy": "¡Orden de compra ejecutada con éxito! Transacción gasless procesada.",
+      "limitSell": "¡Orden de venta ejecutada con éxito! Transacción gasless procesada.",
+      "marketBuy": "¡Orden de mercado de compra ejecutada con éxito!",
+      "marketSell": "¡Orden de mercado de venta ejecutada con éxito!"
+    },
+    "exchangeNotFound": {
+      "title": "Exchange No Encontrado",
+      "contact": "Contacte al administrador para registrar este par de trading",
+      "description": "No existe un contrato de exchange registrado para el par {{pair}}"
+    }
+  },
+  "recentTrades": {
+    "time": "Hora",
+    "user": "Usuario",
+    "price": "Precio",
+    "title": "Operaciones Recientes",
+    "total": "Total",
+    "status": "Estado",
+    "invoice": "Factura",
+    "loading": "Cargando operaciones...",
+    "noTrades": "Sin operaciones recientes",
+    "quantity": "Cant",
+    "tryAgain": "Intentar nuevamente",
+    "waitingForTrades": "Esperando primeras operaciones para {{symbol}}"
+  },
+  "limitForm": {
+    "available": "Disponible:",
+    "orderTitle": "Orden de {{type}}",
+    "priceLabel": "Precio por {{base}} (en {{quote}})",
+    "totalToPay": "Total a pagar:",
+    "creatingOrder": "Creando orden...",
+    "quantityLabel": "Cantidad de {{base}}",
+    "totalToReceive": "Total a recibir:",
+    "createOrderButton": "Crear Orden de {{type}}",
+    "errorCreatingOrder": "Error al crear orden"
+  },
+  "selectionPage": {
+    "title": "Tipo de Operación",
+    "helpText": "Elija <strong>Mercado</strong> para ejecución inmediata al mejor precio disponible o <strong>Limitada</strong> para definir su propio precio",
+    "subtitle": "Elija cómo desea operar",
+    "limit": {
+      "title": "Limitada",
+      "subtitle": "Control de precio"
+    },
+    "market": {
+      "title": "Mercado",
+      "subtitle": "Ejecución inmediata"
+    }
+  }
+}

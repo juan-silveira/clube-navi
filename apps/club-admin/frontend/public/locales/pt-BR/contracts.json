@@ -1,0 +1,103 @@
+{
+  "interact": {
+    "title": "Interação com Contratos",
+    "loading": "Carregando...",
+    "subtitle": "Execute funções em smart contracts registrados",
+    "errors": {
+      "gas": "Erro de Gas",
+      "admin": "Erro de Permissão",
+      "noAbi": "Este contrato não possui ABI registrado. Por favor, re-registre o contrato.",
+      "revert": "Transação Revertida",
+      "general": "Erro",
+      "network": "Erro de Rede",
+      "timeout": "Timeout",
+      "updateError": "Erro ao atualizar ABI do contrato",
+      "accessDenied": "Acesso Negado",
+      "loadingError": "Erro ao carregar contratos",
+      "networkError": "Erro de rede ao executar função '{{functionName}}' - Tente novamente",
+      "adminNotFound": "Endereço do administrador não configurado para este contrato - Contate o administrador",
+      "callException": "Erro de Execução",
+      "updateSuccess": "ABI atualizado com sucesso!",
+      "executeSuccess": "Função {{functionName}} executada com sucesso",
+      "functionFailed": "Função '{{functionName}}' falhou - Verifique se os parâmetros estão corretos ou se a função existe no contrato",
+      "functionTimeout": "Função '{{functionName}}' expirou - Esta função pode não existir no contrato implantado ou a rede pode estar congestionada",
+      "insufficientGas": "Gas insuficiente para executar '{{functionName}}' - Tente aumentar o limite de gas",
+      "missingFunction": "Função Não Encontrada",
+      "processingError": "Erro ao processar ABI do contrato",
+      "functionNotFound": "Função '{{functionName}}' não foi encontrada no contrato implantado",
+      "transactionSuccess": "Transação enviada com sucesso! Hash: {{txHash}}",
+      "transactionReverted": "Transação '{{functionName}}' foi revertida pelo contrato - Verifique as condições da função",
+      "functionNotAvailable": "Função '{{functionName}}' não está disponível no contrato implantado"
+    },
+    "tips": {
+      "title": "Dica",
+      "suggestion": "Sugestão",
+      "networkIssue": "Rede",
+      "adminRequired": "Esta função requer permissões de administrador no smart contract. Para executar funções com controle de acesso é necessário conectar uma carteira admin diretamente ao contrato.",
+      "exchangePrice": "Exchange: Digite o preço por token em cBRL. Por exemplo, \"1.50\" significa 1.50 cBRL por token.",
+      "matchingOrders": "Correspondência: Digite os IDs das ordens separados por vírgulas (ex: \"1,2,3\"). Essas ordens serão correspondidas juntas.",
+      "checkParameters": "Verifique se todos os parâmetros estão no formato correto e se você tem as permissões necessárias para executar esta função.",
+      "amountConversion": "Dica: Digite números inteiros (ex: \"1\" para 1 token). O sistema converte automaticamente para o formato wei.",
+      "percentageFormat": "Percentual: Digite o valor multiplicado por 100 (5,40% = 540, 10,48% = 1048). O valor será enviado exatamente como digitado.",
+      "restrictedAccess": "Acesso Restrito",
+      "slippageProtection": "Proteção de Slippage: Digite a quantidade mínima que você está disposto a receber. Deixe vazio para sem proteção de slippage.",
+      "connectivityProblem": "Problema de conectividade. Aguarde alguns segundos e tente novamente.",
+      "functionNotImplemented": "Esta função pode estar definida no ABI mas não implementada no contrato implantado. Verifique se o contrato foi implantado com a versão mais recente."
+    },
+    "results": {
+      "txHash": "TX Hash",
+      "gasUsed": "Gas Usado",
+      "success": "Sucesso"
+    },
+    "functions": {
+      "param": "parâmetro",
+      "params": "parâmetros",
+      "executing": "Executando...",
+      "read": {
+        "none": "Nenhuma função de leitura disponível",
+        "title": "Funções de Leitura",
+        "subtitle": "Sem custo de gas",
+        "queryButton": "Consultar"
+      },
+      "parameters": "Parâmetros",
+      "write": {
+        "none": "Nenhuma função de escrita disponível",
+        "title": "Funções de Escrita",
+        "subtitle": "Requer gas",
+        "sendButton": "Enviar Transação"
+      }
+    },
+    "abiMissing": {
+      "title": "ABI não encontrado",
+      "updating": "Atualizando ABI...",
+      "description": "Este contrato foi registrado sem ABI. Clique no botão abaixo para adicionar o ABI padrão de stake.",
+      "updateButton": "Atualizar ABI"
+    },
+    "placeholders": {
+      "orderId": "Digite o ID da ordem para cancelar",
+      "enterType": "Digite {{type}}",
+      "orderPrice": "Digite o preço em cBRL (ex: 1.25 para 1.25 cBRL por token)",
+      "amountInWei": "Digite a quantidade (1 = 1 token, auto-converte para wei)",
+      "buyOrderIds": "Digite os IDs das ordens de compra (separados por vírgula)",
+      "orderAmount": "Digite a quantidade de tokens (ex: 100 para 100 tokens)",
+      "minAmountOut": "Quantidade mínima para receber (proteção de slippage)",
+      "sellOrderIds": "Digite os IDs das ordens de venda (separados por vírgula)",
+      "marketBuyAmount": "Digite a quantidade para gastar (cBRL)",
+      "marketSellAmount": "Digite a quantidade para vender (tokens)",
+      "distributionPercentage": "Digite o percentual (ex: 540 para 5,40%, 1048 para 10,48%)"
+    },
+    "timestampHelper": {
+      "title": "Auxiliar de Timestamp",
+      "useNow": "Usar Agora ({{timestamp}})",
+      "current": "Atual: {{date}}"
+    },
+    "contractSelector": {
+      "admin": "Admin",
+      "title": "Selecionar Contrato",
+      "network": "Rede",
+      "noContracts": "Nenhum contrato registrado ainda",
+      "totalInOtherNetworks": "Total de contratos em outras redes: {{count}}",
+      "noContractsForNetwork": "Nenhum contrato encontrado para a rede {{network}}"
+    }
+  }
+}

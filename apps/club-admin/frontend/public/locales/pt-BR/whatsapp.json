@@ -1,0 +1,89 @@
+{
+  "title": "Mensagens WhatsApp",
+  "subtitle": "Envie mensagens WhatsApp para usuários selecionados",
+  "tips": {
+    "tip1": "Use templates para agilizar o envio de mensagens comuns",
+    "tip2": "A variável {{nome}} será substituída automaticamente pelo nome de cada destinatário",
+    "tip3": "Apenas usuários com telefone cadastrado podem receber mensagens",
+    "tip4": "Você pode editar os templates antes de enviar para personalizar a mensagem"
+  },
+  "cards": {
+    "tips": "Dicas",
+    "history": "Histórico de Mensagens",
+    "sendMessage": "Enviar Mensagem"
+  },
+  "status": {
+    "sent": "Enviado",
+    "failed": "Falhou",
+    "partial": "Parcial"
+  },
+  "buttons": {
+    "next": "Próxima",
+    "sending": "Enviando...",
+    "previous": "Anterior",
+    "selectAll": "Selecionar Todos",
+    "deselectAll": "Remover Todos",
+    "hideHistory": "Ocultar Histórico",
+    "sendMessage": "Enviar Mensagem",
+    "showHistory": "Ver Histórico"
+  },
+  "history": {
+    "sent": "{{count}} enviada(s)",
+    "empty": "Nenhuma mensagem enviada ainda",
+    "failed": "{{count}} falharam",
+    "loading": "Carregando histórico...",
+    "pagination": "Página {{current}} de {{total}}",
+    "recipients": "{{count}} destinatário(s)"
+  },
+  "success": {
+    "allSent": "Mensagem enviada com sucesso para {{count}} usuário(s)!",
+    "allFailed": "Falha ao enviar mensagem para todos os {{count}} destinatário(s)",
+    "partialSent": "Mensagem enviada para {{success}} usuário(s). {{failed}} falharam."
+  },
+  "errors": {
+    "loadUsers": "Erro ao carregar usuários",
+    "noMessage": "Digite uma mensagem",
+    "sendError": "Erro ao enviar mensagem",
+    "loadHistory": "Erro ao carregar histórico",
+    "noRecipients": "Selecione pelo menos um destinatário",
+    "loadTemplates": "Erro ao carregar templates"
+  },
+  "form": {
+    "message": {
+      "label": "Mensagem",
+      "characters": "{{count}} caracteres",
+      "placeholder": "Digite sua mensagem aqui...\n\nVocê pode usar a seguinte variável:\n{{nome}} - Nome do usuário\n\nExemplo:\nOlá, {{nome}}! Bem-vindo à plataforma."
+    },
+    "templates": {
+      "label": "Templates (opcional)"
+    },
+    "recipients": {
+      "label": "Destinatários",
+      "selected": "{{count}} usuário(s) selecionado(s)",
+      "placeholder": "Buscar e selecionar usuários..."
+    }
+  },
+  "stats": {
+    "usersWithPhone": "Usuários com telefone",
+    "usersWithoutPhone": "{{count}} sem telefone",
+    "templatesAvailable": "Templates disponíveis"
+  },
+  "templateNames": {
+    "Boas-vindas": "Boas-vindas",
+    "Comunicado Geral": "Comunicado Geral",
+    "Manutenção Programada": "Manutenção Programada",
+    "Lembrete de Documentos": "Lembrete de Documentos",
+    "Aprovação de Documentação": "Aprovação de Documentação",
+    "Mensagem Personalizada": "Mensagem Personalizada",
+    "Lembrete de Saque Pendente": "Lembrete de Saque Pendente"
+  },
+  "templateMessages": {
+    "welcome": "👋 *Bem-vindo à Clube Digital!*\n\nOlá, {{nome}}!\n\nFicamos felizes em tê-lo conosco. Nossa plataforma oferece as melhores soluções em criptomoedas.\n\nSe precisar de ajuda, estamos à disposição!",
+    "document_reminder": "📄 *Lembrete de Documentação*\n\nOlá, {{nome}}!\n\nNotamos que você ainda não enviou todos os documentos necessários para validação da sua conta.\n\nPor favor, acesse o sistema e complete seu cadastro para ter acesso total à plataforma.",
+    "document_approved": "✅ *Aprovação de Documentação da Clube Digital*\n\nOlá, {{nome}}!\n\nTodos os documentos necessários para validação da sua conta foram aprovados.\n\nAgora você tem acesso total à plataforma.",
+    "withdrawal_reminder": "💰 *Saque Pendente*\n\nOlá, {{nome}}!\n\nVocê possui um saque pendente de aprovação. Estamos analisando sua solicitação e em breve retornaremos.\n\nAcompanhe o status pelo sistema!",
+    "general_announcement": "📢 *Comunicado Importante*\n\nOlá, {{nome}}!\n\n[Digite aqui o conteúdo do comunicado]\n\nAtenciosamente,\nEquipe Clube Digital",
+    "maintenance": "🔧 *Manutenção Programada*\n\nOlá!\n\nInformamos que realizaremos uma manutenção programada em {{data}} às {{hora}}.\n\nDurante este período, alguns serviços podem ficar temporariamente indisponíveis.\n\nContamos com sua compreensão!",
+    "custom": ""
+  }
+}

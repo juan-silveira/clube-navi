@@ -1,9 +1,3 @@
-// ==========================================
-// TENANT DATABASE SCHEMA
-// ==========================================
-// Cada club tem seu próprio database com este schema
-// Dados de usuários, produtos, transações isolados por club
-
 generator client {
   provider      = "prisma-client-js"
   output        = "../src/generated/prisma-tenant"
@@ -15,66 +9,45 @@ datasource db {
   url      = env("TENANT_DATABASE_URL")
 }
 
-// ==========================================
-// USERS
-// ==========================================
-
 model User {
-  id                     String              @id @default(uuid()) @db.Uuid
-  firstName              String              @map("first_name") @db.VarChar(100)
-  lastName               String              @map("last_name") @db.VarChar(100)
-  email                  String              @unique @db.VarChar(255)
-  username               String              @unique @db.VarChar(50)
-  cpf                    String              @unique @db.VarChar(14)
-  phone                  String?             @db.VarChar(20)
-  birthDate              DateTime?           @map("birth_date") @db.Date
-
-  // Authentication
-  password               String              @db.VarChar(255)
-  passwordChangedAt      DateTime?           @map("password_changed_at") @db.Timestamptz(6)
-
-  // Profile
-  profilePicture         String?             @map("profile_picture") @db.VarChar(500)
-  userType               UserType            @map("user_type")
-  merchantStatus         MerchantStatus?     @map("merchant_status")
-
-  // Blockchain (nullable até a confirmação de email)
-  publicKey              String?             @unique @map("public_key") @db.VarChar(42)
-  privateKey             String?             @map("private_key") @db.VarChar(255)
-
-  // Referral (nullable se usuário não tem código)
-  referralId             String?             @unique @map("referral_id") @db.VarChar(20)
-  referredBy             String?             @map("referred_by") @db.VarChar(20)
-
-  // Geolocation (para push por CEP)
+  id                     String                @id @default(uuid()) @db.Uuid
+  firstName              String                @map("first_name") @db.VarChar(100)
+  lastName               String                @map("last_name") @db.VarChar(100)
+  email                  String                @unique @db.VarChar(255)
+  username               String                @unique @db.VarChar(50)
+  cpf                    String                @unique @db.VarChar(14)
+  phone                  String?               @db.VarChar(20)
+  birthDate              DateTime?             @map("birth_date") @db.Date
+  password               String                @db.VarChar(255)
+  passwordChangedAt      DateTime?             @map("password_changed_at") @db.Timestamptz(6)
+  profilePicture         String?               @map("profile_picture") @db.VarChar(500)
+  userType               UserType              @map("user_type")
+  merchantStatus         MerchantStatus?       @map("merchant_status")
+  publicKey              String?               @unique @map("public_key") @db.VarChar(42)
+  privateKey             String?               @map("private_key") @db.VarChar(255)
+  referralId             String?               @unique @map("referral_id") @db.VarChar(20)
+  referredBy             String?               @map("referred_by") @db.VarChar(20)
   address                Json?
-
-  // Status
-  isActive               Boolean             @default(true) @map("is_active")
-  accountStatus          AccountStatus       @default(active) @map("account_status")
-  lastLoginAt            DateTime?           @map("last_login_at") @db.Timestamptz(6)
-
-  // Security
-  emailConfirmed         Boolean             @default(false) @map("email_confirmed")
-  failedLoginAttempts    Int                 @default(0) @map("failed_login_attempts")
-  lastFailedLoginAt      DateTime?           @map("last_failed_login_at") @db.Timestamptz(6)
-  isBlockedLoginAttempts Boolean             @default(false) @map("is_blocked_login_attempts")
-
-  createdAt              DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt              DateTime            @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  // Relations
-  products               Product[]
-  purchases              Purchase[]          @relation("ConsumerPurchases")
-  sales                  Purchase[]          @relation("MerchantSales")
-  pushTokens             UserPushToken[]
-  pushNotificationLogs   PushNotificationLog[]
-  notifications          Notification[]
-  userModules            UserModule[]
-  cashbackConfig         UserCashbackConfig?
-  userRoles              UserRole[]
-  groups                 GroupUser[]
+  isActive               Boolean               @default(true) @map("is_active")
+  accountStatus          AccountStatus         @default(active) @map("account_status")
+  lastLoginAt            DateTime?             @map("last_login_at") @db.Timestamptz(6)
+  emailConfirmed         Boolean               @default(false) @map("email_confirmed")
+  failedLoginAttempts    Int                   @default(0) @map("failed_login_attempts")
+  lastFailedLoginAt      DateTime?             @map("last_failed_login_at") @db.Timestamptz(6)
+  isBlockedLoginAttempts Boolean               @default(false) @map("is_blocked_login_attempts")
+  createdAt              DateTime              @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt              DateTime              @updatedAt @map("updated_at") @db.Timestamptz(6)
   analyticsEvents        AnalyticsEvent[]
+  groups                 GroupUser[]
+  notifications          Notification[]
+  products               Product[]
+  purchases              Purchase[]            @relation("ConsumerPurchases")
+  sales                  Purchase[]            @relation("MerchantSales")
+  pushNotificationLogs   PushNotificationLog[]
+  cashbackConfig         UserCashbackConfig?
+  userModules            UserModule[]
+  pushTokens             UserPushToken[]
+  userRoles              UserRole[]
   sessions               UserSession[]
 
   @@index([email])
@@ -86,24 +59,17 @@ model User {
   @@map("users")
 }
 
-// ==========================================
-// USER MODULES (Controle Individual)
-// ==========================================
-
 model UserModule {
-  id                  String   @id @default(uuid()) @db.Uuid
-  userId              String   @map("user_id") @db.Uuid
-  moduleKey           String   @map("module_key") @db.VarChar(50)
-  isEnabled           Boolean  @map("is_enabled")
-
-  reason              String?  @db.Text
-  enabledBy           String?  @map("enabled_by") @db.Uuid
-  disabledBy          String?  @map("disabled_by") @db.Uuid
-
-  createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt           DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  moduleKey  String   @map("module_key") @db.VarChar(50)
+  isEnabled  Boolean  @map("is_enabled")
+  reason     String?
+  enabledBy  String?  @map("enabled_by") @db.Uuid
+  disabledBy String?  @map("disabled_by") @db.Uuid
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, moduleKey])
   @@index([userId])
@@ -111,80 +77,54 @@ model UserModule {
   @@map("user_modules")
 }
 
-// ==========================================
-// CASHBACK CONFIG (Individual por Usuário)
-// ==========================================
-
 model UserCashbackConfig {
-  id                        String   @id @default(uuid()) @db.Uuid
-  userId                    String   @unique @map("user_id") @db.Uuid
-
-  // Percentuais customizados (soma deve ser 100%)
-  consumerPercent           Decimal  @map("consumer_percent") @db.Decimal(5, 2)
-  clubPercent               Decimal  @map("club_percent") @db.Decimal(5, 2)
-  consumerReferrerPercent   Decimal  @map("consumer_referrer_percent") @db.Decimal(5, 2)
-  merchantReferrerPercent   Decimal  @map("merchant_referrer_percent") @db.Decimal(5, 2)
-
-  // Audit
-  reason                    String?  @db.Text
-  configuredBy              String?  @map("configured_by") @db.Uuid
-  configuredAt              DateTime @default(now()) @map("configured_at") @db.Timestamptz(6)
-
-  createdAt                 DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt                 DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  user                      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                      String   @id @default(uuid()) @db.Uuid
+  userId                  String   @unique @map("user_id") @db.Uuid
+  consumerPercent         Decimal  @map("consumer_percent") @db.Decimal(5, 2)
+  clubPercent             Decimal  @map("club_percent") @db.Decimal(5, 2)
+  consumerReferrerPercent Decimal  @map("consumer_referrer_percent") @db.Decimal(5, 2)
+  merchantReferrerPercent Decimal  @map("merchant_referrer_percent") @db.Decimal(5, 2)
+  reason                  String?
+  configuredBy            String?  @map("configured_by") @db.Uuid
+  configuredAt            DateTime @default(now()) @map("configured_at") @db.Timestamptz(6)
+  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt               DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user                    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("user_cashback_configs")
 }
 
-// ==========================================
-// PUSH TOKENS
-// ==========================================
-
 model UserPushToken {
-  id                  String    @id @default(uuid()) @db.Uuid
-  userId              String    @map("user_id") @db.Uuid
-
-  token               String    @unique @db.VarChar(255)
-  platform            Platform
-  isActive            Boolean   @default(true) @map("is_active")
-
-  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  token     String   @unique @db.VarChar(255)
+  platform  Platform
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([platform])
   @@map("user_push_tokens")
 }
 
-// ==========================================
-// PRODUCTS
-// ==========================================
-
 model Product {
-  id                  String         @id @default(uuid()) @db.Uuid
-  merchantId          String         @map("merchant_id") @db.Uuid
-
-  name                String         @db.VarChar(255)
-  description         String         @db.Text
-  price               Decimal        @db.Decimal(10, 2)
-  cashbackPercentage  Decimal        @map("cashback_percentage") @db.Decimal(5, 2)
-
-  imageUrl            String?        @map("image_url") @db.VarChar(500)
-  category            String?        @db.VarChar(100)
-
-  stock               Int            @default(0)
-  isActive            Boolean        @default(true) @map("is_active")
-
-  createdAt           DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt           DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  merchant            User           @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  purchases           Purchase[]
+  id                 String     @id @default(uuid()) @db.Uuid
+  merchantId         String     @map("merchant_id") @db.Uuid
+  name               String     @db.VarChar(255)
+  description        String
+  price              Decimal    @db.Decimal(10, 2)
+  cashbackPercentage Decimal    @map("cashback_percentage") @db.Decimal(5, 2)
+  imageUrl           String?    @map("image_url") @db.VarChar(500)
+  category           String?    @db.VarChar(100)
+  stock              Int        @default(0)
+  isActive           Boolean    @default(true) @map("is_active")
+  createdAt          DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+  merchant           User       @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  purchases          Purchase[]
 
   @@index([merchantId])
   @@index([isActive])
@@ -192,32 +132,24 @@ model Product {
   @@map("products")
 }
 
-// ==========================================
-// PURCHASES
-// ==========================================
-
 model Purchase {
-  id                      String          @id @default(uuid()) @db.Uuid
-  consumerId              String          @map("consumer_id") @db.Uuid
-  merchantId              String          @map("merchant_id") @db.Uuid
-  productId               String          @map("product_id") @db.Uuid
-
-  totalAmount             Decimal         @map("total_amount") @db.Decimal(10, 2)
-  merchantAmount          Decimal         @map("merchant_amount") @db.Decimal(10, 2)
-  consumerCashback        Decimal         @map("consumer_cashback") @db.Decimal(10, 2)
-  platformFee             Decimal         @map("platform_fee") @db.Decimal(10, 2)
-  consumerReferrerFee     Decimal         @map("consumer_referrer_fee") @db.Decimal(10, 2)
-  merchantReferrerFee     Decimal         @map("merchant_referrer_fee") @db.Decimal(10, 2)
-
-  status                  PurchaseStatus  @default(pending)
-  txHash                  String?         @map("tx_hash") @db.VarChar(66)
-
-  createdAt               DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
-  completedAt             DateTime?       @map("completed_at") @db.Timestamptz(6)
-
-  consumer                User            @relation("ConsumerPurchases", fields: [consumerId], references: [id])
-  merchant                User            @relation("MerchantSales", fields: [merchantId], references: [id])
-  product                 Product         @relation(fields: [productId], references: [id])
+  id                  String         @id @default(uuid()) @db.Uuid
+  consumerId          String         @map("consumer_id") @db.Uuid
+  merchantId          String         @map("merchant_id") @db.Uuid
+  productId           String         @map("product_id") @db.Uuid
+  totalAmount         Decimal        @map("total_amount") @db.Decimal(10, 2)
+  merchantAmount      Decimal        @map("merchant_amount") @db.Decimal(10, 2)
+  consumerCashback    Decimal        @map("consumer_cashback") @db.Decimal(10, 2)
+  platformFee         Decimal        @map("platform_fee") @db.Decimal(10, 2)
+  consumerReferrerFee Decimal        @map("consumer_referrer_fee") @db.Decimal(10, 2)
+  merchantReferrerFee Decimal        @map("merchant_referrer_fee") @db.Decimal(10, 2)
+  status              PurchaseStatus @default(pending)
+  txHash              String?        @map("tx_hash") @db.VarChar(66)
+  createdAt           DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  completedAt         DateTime?      @map("completed_at") @db.Timestamptz(6)
+  consumer            User           @relation("ConsumerPurchases", fields: [consumerId], references: [id])
+  merchant            User           @relation("MerchantSales", fields: [merchantId], references: [id])
+  product             Product        @relation(fields: [productId], references: [id])
 
   @@index([consumerId])
   @@index([merchantId])
@@ -227,64 +159,41 @@ model Purchase {
   @@map("purchases")
 }
 
-// ==========================================
-// CAMPAIGNS (Push Notifications)
-// ==========================================
-
 model Campaign {
-  id                  String          @id @default(uuid()) @db.Uuid
-
-  title               String          @db.VarChar(255)
-  body                String          @db.Text
-  type                CampaignType
-  status              CampaignStatus  @default(draft)
-
-  // Targeting
-  targetAll           Boolean         @default(false) @map("target_all")
-  targetUserIds       Json?           @map("target_user_ids") @db.Json
-  targetCep           String?         @map("target_cep") @db.VarChar(10)
-
-  // Action
-  actionUrl           String?         @map("action_url") @db.VarChar(500)
-
-  // Stats
-  totalSent           Int             @default(0) @map("total_sent")
-  totalOpened         Int             @default(0) @map("total_opened")
-  totalClicked        Int             @default(0) @map("total_clicked")
-
-  // Scheduling
-  scheduledFor        DateTime?       @map("scheduled_for") @db.Timestamptz(6)
-  sentAt              DateTime?       @map("sent_at") @db.Timestamptz(6)
-
-  createdAt           DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt           DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  id            String         @id @default(uuid()) @db.Uuid
+  title         String         @db.VarChar(255)
+  body          String
+  type          CampaignType
+  status        CampaignStatus @default(draft)
+  targetAll     Boolean        @default(false) @map("target_all")
+  targetUserIds Json?          @map("target_user_ids") @db.Json
+  targetCep     String?        @map("target_cep") @db.VarChar(10)
+  actionUrl     String?        @map("action_url") @db.VarChar(500)
+  totalSent     Int            @default(0) @map("total_sent")
+  totalOpened   Int            @default(0) @map("total_opened")
+  totalClicked  Int            @default(0) @map("total_clicked")
+  scheduledFor  DateTime?      @map("scheduled_for") @db.Timestamptz(6)
+  sentAt        DateTime?      @map("sent_at") @db.Timestamptz(6)
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@index([status])
   @@index([scheduledFor])
   @@map("campaigns")
 }
 
-// ==========================================
-// NOTIFICATIONS
-// ==========================================
-
 model Notification {
-  id                  String            @id @default(uuid()) @db.Uuid
-  userId              String            @map("user_id") @db.Uuid
-
-  type                NotificationType
-  title               String            @db.VarChar(255)
-  message             String            @db.Text
-
-  isRead              Boolean           @default(false) @map("is_read")
-  readAt              DateTime?         @map("read_at") @db.Timestamptz(6)
-
-  actionUrl           String?           @map("action_url") @db.VarChar(500)
-  metadata            Json?
-
-  createdAt           DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
-
-  user                User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String           @id @default(uuid()) @db.Uuid
+  userId    String           @map("user_id") @db.Uuid
+  type      NotificationType
+  title     String           @db.VarChar(255)
+  message   String
+  isRead    Boolean          @default(false) @map("is_read")
+  readAt    DateTime?        @map("read_at") @db.Timestamptz(6)
+  actionUrl String?          @map("action_url") @db.VarChar(500)
+  metadata  Json?
+  createdAt DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([isRead])
@@ -292,13 +201,186 @@ model Notification {
   @@map("notifications")
 }
 
-// ==========================================
-// ENUMS
-// ==========================================
+model PushNotificationCampaign {
+  id              String                @id @default(uuid()) @db.Uuid
+  tenant_id       String                @db.Uuid
+  title           String                @db.VarChar(100)
+  description     String
+  pageTitle       String?               @map("page_title") @db.VarChar(100)
+  pageDescription String?               @map("page_description")
+  code            String?               @db.VarChar(50)
+  rules           String?
+  logoUrl         String?               @map("logo_url") @db.VarChar(255)
+  bannerUrl       String?               @map("banner_url") @db.VarChar(255)
+  enableButton    Boolean               @default(false) @map("enable_button")
+  buttonType      String?               @map("button_type") @db.VarChar(20)
+  targetModule    String?               @map("target_module") @db.VarChar(50)
+  externalLink    String?               @map("external_link") @db.VarChar(500)
+  buttonText      String?               @map("button_text") @db.VarChar(50)
+  geolocation     Json?
+  targetUserCount Int                   @default(0) @map("target_user_count")
+  sentCount       Int                   @default(0) @map("sent_count")
+  failedCount     Int                   @default(0) @map("failed_count")
+  status          PushCampaignStatus    @default(draft)
+  createdAt       DateTime              @default(now()) @map("created_at") @db.Timestamptz(6)
+  completedAt     DateTime?             @map("completed_at") @db.Timestamptz(6)
+  scheduledAt     DateTime?             @map("scheduled_at") @db.Timestamptz(6)
+  logs            PushNotificationLog[]
+
+  @@map("push_notification_campaigns")
+}
+
+model PushNotificationLog {
+  id         String                   @id @default(uuid()) @db.Uuid
+  campaignId String                   @map("campaign_id") @db.Uuid
+  userId     String                   @map("user_id") @db.Uuid
+  pushToken  String                   @map("push_token") @db.VarChar(500)
+  status     PushNotificationStatus   @default(pending)
+  error      String?
+  sentAt     DateTime                 @map("sent_at") @db.Timestamptz(6)
+  clickedAt  DateTime?                @map("clicked_at") @db.Timestamptz(6)
+  openedAt   DateTime?                @map("opened_at") @db.Timestamptz(6)
+  campaign   PushNotificationCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user       User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("push_notification_logs")
+}
+
+model AnalyticsEvent {
+  id         String             @id @default(uuid()) @db.Uuid
+  userId     String?            @map("user_id") @db.Uuid
+  sessionId  String?            @map("session_id") @db.Uuid
+  eventType  AnalyticsEventType @map("event_type")
+  eventName  String             @map("event_name") @db.VarChar(100)
+  category   String?            @db.VarChar(50)
+  pagePath   String?            @map("page_path") @db.VarChar(500)
+  pageTitle  String?            @map("page_title") @db.VarChar(200)
+  referrer   String?            @db.VarChar(500)
+  metadata   Json?
+  platform   String?            @db.VarChar(50)
+  deviceType String?            @map("device_type") @db.VarChar(50)
+  browser    String?            @db.VarChar(50)
+  os         String?            @db.VarChar(50)
+  ipAddress  String?            @map("ip_address") @db.VarChar(45)
+  country    String?            @db.VarChar(2)
+  city       String?            @db.VarChar(100)
+  createdAt  DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  user       User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([eventType])
+  @@index([eventName])
+  @@index([createdAt])
+  @@index([sessionId])
+  @@map("analytics_events")
+}
+
+model UserSession {
+  id             String    @id @default(uuid()) @db.Uuid
+  userId         String?   @map("user_id") @db.Uuid
+  sessionToken   String    @unique @map("session_token") @db.VarChar(255)
+  startedAt      DateTime  @default(now()) @map("started_at") @db.Timestamptz(6)
+  lastActivityAt DateTime  @default(now()) @map("last_activity_at") @db.Timestamptz(6)
+  endedAt        DateTime? @map("ended_at") @db.Timestamptz(6)
+  duration       Int?      @default(0)
+  platform       String?   @db.VarChar(50)
+  deviceType     String?   @map("device_type") @db.VarChar(50)
+  browser        String?   @db.VarChar(50)
+  os             String?   @db.VarChar(50)
+  ipAddress      String?   @map("ip_address") @db.VarChar(45)
+  pageViews      Int       @default(0) @map("page_views")
+  interactions   Int       @default(0)
+  user           User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionToken])
+  @@index([startedAt])
+  @@map("user_sessions")
+}
+
+model Role {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String           @unique @db.VarChar(50)
+  displayName String           @map("display_name") @db.VarChar(100)
+  description String?
+  isSystem    Boolean          @default(false) @map("is_system")
+  priority    Int              @default(0)
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+  permissions RolePermission[]
+  userRoles   UserRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String           @id @default(uuid()) @db.Uuid
+  module      String           @db.VarChar(50)
+  action      PermissionAction
+  resource    String           @db.VarChar(100)
+  description String?
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  roles       RolePermission[]
+
+  @@unique([module, action])
+  @@map("permissions")
+}
+
+model RolePermission {
+  id           String     @id @default(uuid()) @db.Uuid
+  roleId       String     @map("role_id") @db.Uuid
+  permissionId String     @map("permission_id") @db.Uuid
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  roleId    String   @map("role_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  createdBy String?  @map("created_by") @db.Uuid
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}
+
+model Group {
+  id          String      @id @default(uuid()) @db.Uuid
+  name        String      @db.VarChar(100)
+  description String?
+  color       String?     @db.VarChar(7)
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+  createdBy   String      @map("created_by") @db.Uuid
+  users       GroupUser[]
+
+  @@map("groups")
+}
+
+model GroupUser {
+  id      String   @id @default(uuid()) @db.Uuid
+  groupId String   @map("group_id") @db.Uuid
+  userId  String   @map("user_id") @db.Uuid
+  addedAt DateTime @default(now()) @map("added_at") @db.Timestamptz(6)
+  addedBy String   @map("added_by") @db.Uuid
+  group   Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@map("group_users")
+}
 
 enum UserType {
   consumer
   merchant
+  admin
 }
 
 enum MerchantStatus {
@@ -353,61 +435,12 @@ enum NotificationType {
   promotion
 }
 
-// ==========================================
-// PUSH NOTIFICATIONS
-// ==========================================
-
-model PushNotificationCampaign {
-  id                String                    @id @default(uuid()) @db.Uuid
-  clubId          String                    @map("club_id") @db.Uuid
-  title             String                    @db.VarChar(100)
-  description       String                    @db.Text
-  pageTitle         String?                   @map("page_title") @db.VarChar(100)
-  pageDescription   String?                   @map("page_description") @db.Text
-  code              String?                   @db.VarChar(50)
-  rules             String?                   @db.Text
-  logoUrl           String?                   @map("logo_url") @db.VarChar(255)
-  bannerUrl         String?                   @map("banner_url") @db.VarChar(255)
-  enableButton      Boolean                   @default(false) @map("enable_button")
-  buttonType        String?                   @map("button_type") @db.VarChar(20) // 'module' ou 'external'
-  targetModule      String?                   @map("target_module") @db.VarChar(50)
-  externalLink      String?                   @map("external_link") @db.VarChar(500)
-  buttonText        String?                   @map("button_text") @db.VarChar(50)
-  geolocation       Json?                     // { cep, radius }
-  targetUserCount   Int                       @default(0) @map("target_user_count")
-  sentCount         Int                       @default(0) @map("sent_count")
-  failedCount       Int                       @default(0) @map("failed_count")
-  status            PushCampaignStatus        @default(draft)
-  scheduledAt       DateTime?                 @map("scheduled_at") @db.Timestamptz(6)
-  createdAt         DateTime                  @default(now()) @map("created_at") @db.Timestamptz(6)
-  completedAt       DateTime?                 @map("completed_at") @db.Timestamptz(6)
-  logs              PushNotificationLog[]
-
-  @@map("push_notification_campaigns")
-}
-
-model PushNotificationLog {
-  id          String                   @id @default(uuid()) @db.Uuid
-  campaignId  String                   @map("campaign_id") @db.Uuid
-  userId      String                   @map("user_id") @db.Uuid
-  pushToken   String                   @map("push_token") @db.VarChar(500)
-  status      PushNotificationStatus   @default(pending)
-  error       String?                  @db.Text
-  sentAt      DateTime                 @map("sent_at") @db.Timestamptz(6)
-  openedAt    DateTime?                @map("opened_at") @db.Timestamptz(6)
-  clickedAt   DateTime?                @map("clicked_at") @db.Timestamptz(6)
-  campaign    PushNotificationCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  user        User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("push_notification_logs")
-}
-
 enum PushCampaignStatus {
   draft
-  scheduled
   processing
   completed
   failed
+  scheduled
 }
 
 enum PushNotificationStatus {
@@ -415,80 +448,6 @@ enum PushNotificationStatus {
   sent
   failed
   read
-}
-
-// ==========================================
-// ANALYTICS & TRACKING
-// ==========================================
-
-model AnalyticsEvent {
-  id          String               @id @default(uuid()) @db.Uuid
-  userId      String?              @map("user_id") @db.Uuid
-  sessionId   String?              @map("session_id") @db.Uuid // Para rastrear sessões anônimas
-  eventType   AnalyticsEventType   @map("event_type")
-  eventName   String               @map("event_name") @db.VarChar(100) // Ex: "button_click", "page_view", "product_view"
-  category    String?              @db.VarChar(50) // Ex: "navigation", "purchase", "engagement"
-
-  // Dados contextuais
-  pagePath    String?              @map("page_path") @db.VarChar(500)
-  pageTitle   String?              @map("page_title") @db.VarChar(200)
-  referrer    String?              @db.VarChar(500)
-
-  // Metadados do evento (flexível)
-  metadata    Json?                // { productId, campaignId, buttonText, etc }
-
-  // Informações do dispositivo/browser
-  platform    String?              @db.VarChar(50) // "web", "ios", "android"
-  deviceType  String?              @map("device_type") @db.VarChar(50) // "mobile", "tablet", "desktop"
-  browser     String?              @db.VarChar(50)
-  os          String?              @db.VarChar(50)
-
-  // Geolocalização (opcional)
-  ipAddress   String?              @map("ip_address") @db.VarChar(45)
-  country     String?              @db.VarChar(2) // Código ISO do país
-  city        String?              @db.VarChar(100)
-
-  // Timestamps
-  createdAt   DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
-
-  user        User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([eventType])
-  @@index([eventName])
-  @@index([createdAt])
-  @@index([sessionId])
-  @@map("analytics_events")
-}
-
-model UserSession {
-  id            String    @id @default(uuid()) @db.Uuid
-  userId        String?   @map("user_id") @db.Uuid
-  sessionToken  String    @unique @map("session_token") @db.VarChar(255)
-
-  // Dados da sessão
-  startedAt     DateTime  @default(now()) @map("started_at") @db.Timestamptz(6)
-  lastActivityAt DateTime @default(now()) @map("last_activity_at") @db.Timestamptz(6)
-  endedAt       DateTime? @map("ended_at") @db.Timestamptz(6)
-  duration      Int?      @default(0) // Em segundos
-
-  // Device info
-  platform      String?   @db.VarChar(50)
-  deviceType    String?   @map("device_type") @db.VarChar(50)
-  browser       String?   @db.VarChar(50)
-  os            String?   @db.VarChar(50)
-  ipAddress     String?   @map("ip_address") @db.VarChar(45)
-
-  // Métricas da sessão
-  pageViews     Int       @default(0) @map("page_views")
-  interactions  Int       @default(0) // Número total de interações
-
-  user          User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([sessionToken])
-  @@index([startedAt])
-  @@map("user_sessions")
 }
 
 enum AnalyticsEventType {
@@ -507,99 +466,10 @@ enum AnalyticsEventType {
   custom
 }
 
-// ==========================================
-// ROLES & PERMISSIONS
-// ==========================================
-
-model Role {
-  id          String           @id @default(uuid()) @db.Uuid
-  name        String           @unique @db.VarChar(50) // super_admin, admin, operator, client_active, client_inactive
-  displayName String           @map("display_name") @db.VarChar(100)
-  description String?          @db.Text
-  isSystem    Boolean          @default(false) @map("is_system") // Roles do sistema não podem ser deletadas
-  priority    Int              @default(0) // Ordem de hierarquia (maior = mais poder)
-  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt   DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  permissions RolePermission[]
-  userRoles   UserRole[]
-
-  @@map("roles")
-}
-
-model Permission {
-  id          String           @id @default(uuid()) @db.Uuid
-  module      String           @db.VarChar(50) // users, products, purchases, cashback, notifications, etc
-  action      PermissionAction // create, read, update, delete
-  resource    String           @db.VarChar(100) // Nome completo: "users.create", "products.read"
-  description String?          @db.Text
-  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
-
-  roles       RolePermission[]
-
-  @@unique([module, action])
-  @@map("permissions")
-}
-
-model RolePermission {
-  id           String     @id @default(uuid()) @db.Uuid
-  roleId       String     @map("role_id") @db.Uuid
-  permissionId String     @map("permission_id") @db.Uuid
-  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
-
-  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
-  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
-
-  @@unique([roleId, permissionId])
-  @@map("role_permissions")
-}
-
-model UserRole {
-  id        String   @id @default(uuid()) @db.Uuid
-  userId    String   @map("user_id") @db.Uuid
-  roleId    String   @map("role_id") @db.Uuid
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  createdBy String?  @map("created_by") @db.Uuid // Quem atribuiu a role
-
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, roleId])
-  @@map("user_roles")
-}
-
-model Group {
-  id          String      @id @default(uuid()) @db.Uuid
-  name        String      @db.VarChar(100)
-  description String?     @db.Text
-  color       String?     @db.VarChar(7) // Cor em hex: #FF5733
-  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
-  createdBy   String      @map("created_by") @db.Uuid
-
-  users       GroupUser[]
-
-  @@map("groups")
-}
-
-model GroupUser {
-  id        String   @id @default(uuid()) @db.Uuid
-  groupId   String   @map("group_id") @db.Uuid
-  userId    String   @map("user_id") @db.Uuid
-  addedAt   DateTime @default(now()) @map("added_at") @db.Timestamptz(6)
-  addedBy   String   @map("added_by") @db.Uuid
-
-  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([groupId, userId])
-  @@map("group_users")
-}
-
 enum PermissionAction {
   create
   read
   update
   delete
-  execute // Para ações especiais como "send_notification", "approve_document"
+  execute
 }

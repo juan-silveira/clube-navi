@@ -1,0 +1,37 @@
+{
+  "search": {
+    "button": "Buscar...",
+    "noResults": "Nenhum resultado encontrado",
+    "placeholder": "Buscar..."
+  },
+  "balanceSwitch": {
+    "hide": "Ocultar valores",
+    "show": "Mostrar valores"
+  },
+  "notification": {
+    "empty": "Nenhuma notificação",
+    "title": "Notificações",
+    "loading": "Carregando...",
+    "viewAll": "Ver todas",
+    "markAsRead": "Marcar como lida",
+    "markAllRead": "Marcar todas lidas"
+  },
+  "profile": {
+    "defaultUser": "Usuário",
+    "menu": {
+      "logout": "Sair",
+      "profile": "Perfil",
+      "soundEnabled": "Som de notificações ativado",
+      "soundDisabled": "Som de notificações desativado",
+      "soundActivated": "Som ativado",
+      "soundDeactivated": "Som desativado",
+      "notificationSound": "Som das notificações"
+    },
+    "defaultEmail": "email@example.com"
+  },
+  "mobileFooter": {
+    "messages": "Mensagens",
+    "settings": "Configurações",
+    "notifications": "Notificações"
+  }
+}

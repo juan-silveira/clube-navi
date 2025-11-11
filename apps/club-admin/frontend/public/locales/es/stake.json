@@ -1,0 +1,111 @@
+{
+  "title": "Stake",
+  "pageTitle": "Stake",
+  "invest": {
+    "title": "Invertir en Stake",
+    "subtitle": "Invierta sus PCN para generar ingresos pasivos",
+    "summary": {
+      "title": "Resumen de la Operación",
+      "status": "Estado:",
+      "benefit1": "Ingresos pasivos automáticos",
+      "benefit2": "Participación en recompensas del protocolo",
+      "benefit3": "Sin tarifas de transacción (pagadas por el admin)",
+      "benefits": "Beneficios del Stake:",
+      "lockPeriod": "Período de bloqueo:",
+      "processing": "Procesando...",
+      "statusValue": "Listo para invertir",
+      "cancelButton": "Cancelar",
+      "confirmButton": "Confirmar Inversión",
+      "operationType": "Tipo de operación:",
+      "amountToInvest": "Monto a invertir",
+      "estimatedReturn": "Rendimiento estimado:",
+      "lockPeriodValue": "Según contrato",
+      "estimatedReturnValue": "Variable"
+    },
+    "investmentInfo": {
+      "title": "Información de la Inversión",
+      "gasFee": "Tarifa de gas:",
+      "gasFree": "Gratis (pagado por el admin)",
+      "network": "Red:",
+      "contract": "Contrato:",
+      "stakeTitle": "Stake de PCN",
+      "stakeDescription": "Sus tokens serán bloqueados en el contrato inteligente y comenzarán a generar rendimientos inmediatamente."
+    },
+    "investmentAmount": {
+      "title": "Monto de la Inversión",
+      "maxButton": "Máximo",
+      "amountLabel": "Monto a invertir (PCN)",
+      "validAmount": "Monto válido para inversión",
+      "warningMessage": "Después de invertir, sus tokens estarán bloqueados en el contrato. Podrá seguir sus rendimientos y solicitar retiros según las reglas del contrato.",
+      "availableBalance": "Saldo disponible:",
+      "amountPlaceholder": "0.000000",
+      "enterPositiveValue": "Ingrese un valor mayor que cero",
+      "insufficientBalance": "Saldo insuficiente"
+    }
+  },
+  "withdraw": {
+    "title": "Retirar del Stake",
+    "subtitle": "Retire sus tokens del stake a su cartera",
+    "summary": {
+      "title": "Resumen de la Operación",
+      "status": "Estado:",
+      "warning1": "Esta acción no se puede deshacer",
+      "warning2": "Dejará de recibir recompensas sobre el monto retirado",
+      "warning3": "Verifique las reglas de penalización del contrato",
+      "processing": "Procesando...",
+      "destination": "Destino de los tokens:",
+      "statusReady": "Listo para retirar",
+      "cancelButton": "Cancelar",
+      "confirmButton": "Confirmar Retiro",
+      "operationType": "Tipo de operación:",
+      "processingTime": "Tiempo de procesamiento:",
+      "remainingStake": "Quedará en stake:",
+      "statusNoBalance": "Sin saldo en stake",
+      "amountToWithdraw": "Monto a retirar",
+      "destinationValue": "Su cartera",
+      "importantWarning": "Aviso importante:",
+      "noBalanceMessage": "No tiene tokens en stake en este contrato.",
+      "noBalanceWarning": "Atención:",
+      "operationTypeValue": "Unstake",
+      "processingTimeValue": "Inmediato"
+    },
+    "withdrawalInfo": {
+      "title": "Información del Retiro",
+      "gasFee": "Tarifa de gas:",
+      "gasFree": "Gratis (pagado por el admin)",
+      "network": "Red:",
+      "contract": "Contrato:",
+      "partialAllowed": "Permitido",
+      "withdrawalTitle": "Retiro de Stake",
+      "partialNotAllowed": "No permitido (retiro total obligatorio)",
+      "partialWithdrawal": "Retiro parcial:",
+      "withdrawalDescription": "Sus tokens serán desbloqueados y enviados a su cartera."
+    },
+    "withdrawalAmount": {
+      "title": "Monto del Retiro",
+      "maxButton": "Máximo",
+      "amountLabel": "Monto a retirar (PCN)",
+      "validAmount": "Monto válido para retiro",
+      "stakedBalance": "Saldo en stake:",
+      "exceedsBalance": "El monto excede el saldo en stake",
+      "amountLabelTotal": "Monto a retirar (PCN) - Total obligatorio",
+      "noPartialWarning": "Este contrato no permite retiro parcial. Debe retirar todo el valor en stake de una sola vez.",
+      "amountPlaceholder": "0.000000",
+      "withdrawalMessage": "Después del retiro, los tokens serán enviados directamente a su cartera. Pueden aplicarse tarifas de penalización según las reglas del contrato.",
+      "enterPositiveValue": "Ingrese un valor mayor que cero",
+      "totalStakedMessage": "Este es el valor total que tiene invertido en este contrato"
+    }
+  },
+  "messages": {
+    "errorInvesting": "Error al realizar inversión",
+    "enterValidValue": "Por favor, ingrese un valor válido",
+    "errorWithdrawing": "Error al realizar retiro",
+    "errorLoadingStake": "Error al cargar información de stake",
+    "investmentSuccess": "¡Inversión realizada con éxito!",
+    "withdrawalSuccess": "¡Retiro realizado con éxito!",
+    "amountExceedsStake": "Monto mayor que el saldo en stake",
+    "insufficientBalance": "Saldo insuficiente",
+    "contractNotSpecified": "Contrato no especificado",
+    "errorLoadingContract": "Error al cargar información del contrato"
+  }
+}

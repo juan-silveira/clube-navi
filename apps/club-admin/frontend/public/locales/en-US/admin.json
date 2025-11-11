@@ -1,0 +1,678 @@
+{
+  "users": {
+    "title": "User Management",
+    "loading": "Loading users...",
+    "newUser": "New User",
+    "noUsers": "No users found",
+    "refresh": "Refresh",
+    "subtitle": "Manage all users in your company",
+    "exportCSV": "Export CSV",
+    "roles": {
+      "all": "All Roles",
+      "user": "User",
+      "admin": "Administrator",
+      "appAdmin": "Company Admin",
+      "superAdmin": "Super Administrator"
+    },
+    "status": {
+      "all": "All Status",
+      "active": "Active",
+      "blocked": "Blocked",
+      "pending": "Pending",
+      "inactive": "Inactive"
+    },
+    "table": {
+      "role": "Role",
+      "user": "User",
+      "today": "Today",
+      "logins": "logins",
+      "status": "Status",
+      "actions": "Actions",
+      "daysAgo": "days ago",
+      "activity": "Activity",
+      "transactions": "transactions",
+      "neverLoggedIn": "Never logged in"
+    },
+    "usersCount": "Users",
+    "noUsersDesc": "Try adjusting the filters to see more results",
+    "stats": {
+      "total": "Total",
+      "active": "Active",
+      "admins": "Admins",
+      "blocked": "Blocked",
+      "inactive": "Inactive"
+    },
+    "companyTitle": "User Management",
+    "filters": {
+      "role": "Role",
+      "clear": "Clear",
+      "period": "Period",
+      "search": "Search",
+      "status": "Status",
+      "lastLogin": "Last Login",
+      "roleLabel": "Role:",
+      "loginLabel": "Login:",
+      "searchLabel": "Search:",
+      "statusLabel": "Status:",
+      "activeFilters": "Active filters:",
+      "searchPlaceholder": "Name, email, CPF..."
+    },
+    "profile": {
+      "edit": "Edit",
+      "save": "Save Changes",
+      "title": "User Profile",
+      "cancel": "Cancel",
+      "noName": "User without name",
+      "status": "Status:",
+      "noEmail": "Email not provided",
+      "fields": {
+        "cpf": "CPF",
+        "email": "Email",
+        "phone": "Phone",
+        "fullName": "Full Name",
+        "birthDate": "Birth Date",
+        "cannotEdit": "This field cannot be edited!",
+        "privateKey": "Private Key",
+        "notProvided": "Not provided",
+        "notAvailable": "Not available",
+        "cpfPlaceholder": "CPF",
+        "emailPlaceholder": "Email",
+        "phonePlaceholder": "(00) 00000-0000",
+        "blockchainAddress": "Blockchain Address",
+        "walletNotGenerated": "Wallet not generated",
+        "fullNamePlaceholder": "Full name",
+        "birthDatePlaceholder": "Birth date",
+        "blockchainPlaceholder": "Blockchain Address"
+      },
+      "backToUsers": "Back",
+      "tabs": {
+        "profile": "Profile",
+        "activity": "Activity",
+        "balances": "Balances",
+        "documents": "Documents",
+        "notifications": "Notifications"
+      },
+      "twoFA": {
+        "active": "2FA Active",
+        "disable": "Disable 2FA",
+        "warning": "Warning",
+        "disabled": "2FA disabled successfully",
+        "activeDesc": "This user has two-factor authentication enabled:",
+        "warningDesc": "You are about to disable two-factor authentication for this user. This action will reduce account security and will be logged in the system.",
+        "disableTitle": "Disable User 2FA",
+        "selectMethod": "Select the 2FA method to disable",
+        "confirmDisable": "Confirm Disable",
+        "errorDisabling": "Error disabling 2FA",
+        "authenticatorApp": "Authenticator App",
+        "selectMethodLabel": "Select the 2FA method to disable:"
+      },
+      "activity": {
+        "title": "Activity History",
+        "status": "Status",
+        "update": "Update",
+        "category": "Category",
+        "subtitle": "Last 20 actions performed by the user",
+        "updating": "Updating...",
+        "noActivity": "No activity found",
+        "actions": {
+          "login": "Login done",
+          "logout": "Logout done",
+          "token_swap": "Token swap done",
+          "login_failed": "Login failed",
+          "stake_created": "Stake created",
+          "transfer_sent": "Transfer sent",
+          "deposit_failed": "Deposit failed",
+          "password_reset": "Password reset",
+          "profile_viewed": "Profile viewed",
+          "reward_claimed": "Reward claimed",
+          "profile_updated": "Profile updated",
+          "stake_withdrawn": "Stake withdrawn",
+          "transfer_failed": "Transfer failed",
+          "password_changed": "Password changed",
+          "transaction_sent": "Transaction sent",
+          "deposit_confirmed": "Deposit confirmed",
+          "deposit_initiated": "Deposit initiated",
+          "document_uploaded": "Document sent",
+          "document_verified": "Document verified",
+          "transfer_received": "Transfer received",
+          "withdrawal_failed": "Withdraw failed",
+          "transaction_failed": "Transaction failed",
+          "withdrawal_approved": "Withdraw approved",
+          "contract_interaction": "Contract interaction",
+          "withdrawal_completed": "Withdraw completed",
+          "withdrawal_initiated": "Withdraw initiated",
+          "transaction_confirmed": "Transaction confirmed"
+        },
+        "noActivityDesc": "This user has no recorded activities yet",
+        "statuses": {
+          "error": "Error",
+          "failed": "Failed",
+          "pending": "Pending",
+          "success": "Success"
+        },
+        "categories": {
+          "system": "System",
+          "profile": "Profile",
+          "security": "Security",
+          "financial": "Financial",
+          "authentication": "Authentication"
+        }
+      },
+      "balances": {
+        "title": "User Balances",
+        "update": "Update",
+        "loading": "Loading...",
+        "subtitle": "Balances saved in database or fetched from blockchain",
+        "noBalances": "User has no token balances",
+        "walletAddress": "Wallet Address",
+        "noBalancesDesc": "Balances will appear when there are tokens in the user's wallet"
+      },
+      "documents": {
+        "close": "Close",
+        "title": "User Documents",
+        "reason": "Reason",
+        "zoomIn": "Zoom in",
+        "notSent": "Document not sent",
+        "zoomOut": "Zoom out",
+        "approved": "Approved",
+        "subtitle": "Validation status of the 3 required documents",
+        "resetZoom": "Reset zoom (100%)",
+        "types": {
+          "back": "Document Back",
+          "front": "Document Front",
+          "selfie": "Selfie with Document",
+          "backDesc": "Back of the same document",
+          "frontDesc": "ID, Driver's License or Passport (front)",
+          "selfieDesc": "Holding the document next to your face"
+        },
+        "uploadedOn": "Uploaded on",
+        "clickToView": "Click to view with zoom",
+        "pdfControls": "Use PDF viewer controls to navigate • Press ESC or click X to close",
+        "notSentCount": "{{count}} documents not sent",
+        "pendingCount": "{{count}} documents under review",
+        "zoomControls": "Use + and - buttons to zoom (50% - 300%) • Press ESC or click X to close",
+        "approvedCount": "{{count}} of 3 documents approved",
+        "rejectedCount": "{{count}} documents rejected",
+        "clickToViewPdf": "Click to view PDF",
+        "status": {
+          "notSent": "Not sent",
+          "pending": "Under review",
+          "approved": "Approved",
+          "rejected": "Rejected"
+        },
+        "validationStatus": "Validation Status"
+      },
+      "messages": {
+        "updated": "User updated successfully",
+        "errorSave": "Error saving changes",
+        "errorUpdate": "Error updating user",
+        "userNotFound": "User not found",
+        "errorLoadingUser": "Error loading user data"
+      },
+      "notifications": {
+        "send": "Send Notification",
+        "type": "Type",
+        "title": "Title",
+        "sendTo": "Send Notification to {{name}}",
+        "message": "Message",
+        "types": {
+          "info": "Information",
+          "error": "Error",
+          "success": "Success",
+          "warning": "Warning"
+        },
+        "successSent": "Notification sent successfully",
+        "errorSending": "Error sending notification",
+        "errorValidation": "Fill in notification title and message",
+        "titlePlaceholder": "Notification title",
+        "messagePlaceholder": "Enter notification message..."
+      }
+    },
+    "actions": {
+      "block": "Block",
+      "approve": "Approve User",
+      "unblock": "Unblock",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "viewProfile": "View Profile",
+      "demoteToUser": "Demote to User",
+      "promoteToAdmin": "Promote to Admin"
+    },
+    "pagination": {
+      "of": "of",
+      "to": "to",
+      "records": "records",
+      "showing": "Showing"
+    },
+    "loadingProfile": "Loading user profile...",
+    "itemsPerPage": {
+      "10": "10 per page",
+      "20": "20 per page",
+      "50": "50 per page",
+      "100": "100 per page"
+    },
+    "messages": {
+      "blocked": "was blocked",
+      "approved": "was approved and activated",
+      "activated": "was activated",
+      "unblocked": "was unblocked",
+      "deactivated": "was deactivated",
+      "errorAction": "Error executing action",
+      "errorLoading": "Error loading users",
+      "noPermission": "You don't have permission for this action",
+      "demotedToUser": "was demoted to User",
+      "promotedToAdmin": "was promoted to Administrator",
+      "tooManyRequests": "Too many simultaneous requests. Please wait a moment."
+    },
+    "lastLoginOptions": {
+      "any": "Any period",
+      "lastDay": "Last day",
+      "last7Days": "Last 7 days",
+      "last30Days": "Last 30 days",
+      "last90Days": "Last 90 days"
+    }
+  },
+  "dashboard": {
+    "loading": "Loading statistics...",
+    "pageTitle": "Administrative Dashboard",
+    "lastUpdate": "Last update:",
+    "error": {
+      "retry": "Try again",
+      "title": "Error loading statistics"
+    },
+    "updateButton": "Update",
+    "stats": {
+      "users": {
+        "title": "Total Users",
+        "total": "Total",
+        "active": "active",
+        "inactive": "Inactive",
+        "new7days": "New (7 days)",
+        "activeLabel": "Active",
+        "newLast7Days": "last 7 days",
+        "summaryTitle": "User Summary"
+      },
+      "companies": {
+        "title": "Registered Companies",
+        "total": "Total",
+        "active": "active",
+        "inactive": "Inactive",
+        "new7days": "New (7 days)",
+        "activeLabel": "Active",
+        "newLast7Days": "last 7 days",
+        "summaryTitle": "Company Summary"
+      },
+      "performance": {
+        "title": "Performance",
+        "avgTransactionsPerDay": "Avg TX/day",
+        "withdrawalSuccessRate": "WD Success Rate",
+        "transactionSuccessRate": "TX Success Rate"
+      },
+      "withdrawals": {
+        "title": "Pending Withdrawals",
+        "total": "Total",
+        "pending": "Pending",
+        "completed": "completed",
+        "last7Days": "Last 7 days",
+        "summaryTitle": "Withdrawal Summary"
+      },
+      "transactions": {
+        "title": "Total Transactions",
+        "failed": "Failed",
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "chartTitle": "Transactions (Last 7 days)",
+        "seriesName": "Transactions",
+        "statusTitle": "Transaction Status",
+        "successRate": "success",
+        "chartSubtitle": "Track daily transaction volume"
+      },
+      "documents": {
+        "total": "total",
+        "pending": "Pending Documents",
+        "approved": "Approved Documents",
+        "rejected": "Rejected Documents",
+        "viewAll": "View All Documents",
+        "approvedSubtitle": "Validated documents",
+        "rejectedSubtitle": "Rejected documents"
+      }
+    }
+  },
+  "transactions": {
+    "title": "Company Transactions",
+    "subtitle": "Complete history of all company user transactions",
+    "pageTitle": "Company Transactions",
+    "table": {
+      "date": "Date",
+      "type": "Type",
+      "user": "User",
+      "title": "Transactions",
+      "token": "Token",
+      "amount": "Amount",
+      "status": "Status",
+      "txHash": "TxHash"
+    },
+    "types": {
+      "stake": "Stake",
+      "deposit": "Deposit",
+      "unstake": "Unstake",
+      "exchange": "Exchange",
+      "transfer": "Transfer",
+      "withdraw": "Withdraw",
+      "stake_reward": "Reward",
+      "contract_call": "Contract Call",
+      "contract_read": "Contract Read",
+      "contract_deploy": "Contract Deploy"
+    },
+    "filters": {
+      "type": "Transaction Type",
+      "user": "User",
+      "clear": "Clear",
+      "token": "Token",
+      "status": "Status",
+      "itemsPerPage": "Items per page",
+      "activeFilters": "Active filters:",
+      "typePlaceholder": "Filter by type",
+      "userPlaceholder": "Search by user name or email...",
+      "tokenPlaceholder": "Search by token name or symbol...",
+      "statusPlaceholder": "Filter by status"
+    },
+    "pagination": {
+      "of": "of",
+      "to": "to",
+      "perPage": "{{count}} per page",
+      "records": "records",
+      "showing": "Showing"
+    },
+    "actions": {
+      "export": "Export CSV",
+      "refresh": "Refresh"
+    },
+    "statuses": {
+      "failed": "Failed",
+      "pending": "Pending",
+      "cancelled": "Cancelled",
+      "confirmed": "Confirmed"
+    },
+    "messages": {
+      "loading": "Loading transactions...",
+      "errorLoading": "Error loading transactions",
+      "adjustFilters": "Try adjusting the filters to see more results",
+      "noTransactions": "No transactions found",
+      "notAuthenticated": "User not authenticated",
+      "errorLoadingTokens": "Error loading available tokens"
+    }
+  },
+  "companyStakes": {
+    "title": "Stakes Management",
+    "loading": "Loading...",
+    "subtitle": "{{companyName}} - Stake contracts administration",
+    "error": {
+      "error": "Error",
+      "function": "Function",
+      "tryAgain": "Try Again",
+      "abiOutdated": "Contract ABI is outdated",
+      "checkSettings": "Check Settings",
+      "unableToConnect": "Could not connect to the contract on the blockchain. Possible causes:",
+      "functionsNotRead": "{{count}} function(s) could not be read",
+      "adminNoPermission": "Admin address does not have permission to read data",
+      "networkUnavailable": "Blockchain network is unavailable",
+      "problemLoadingData": "Problem loading contract data",
+      "contractNotDeployed": "Contract is not deployed at the specified address",
+      "someFunctionsReturned": "Some contract functions returned errors. Functions that failed:"
+    },
+    "actions": {
+      "title": "Actions Performed",
+      "reload": "Reload",
+      "update": "Update",
+      "params": {
+        "no": "No",
+        "yes": "Yes",
+        "days": "days",
+        "allowed": "Allowed",
+        "blocked": "Blocked",
+        "activated": "Activated",
+        "available": "Available",
+        "deactivated": "Deactivated"
+      },
+      "table": {
+        "user": "User",
+        "action": "Action",
+        "dateTime": "Date/Time",
+        "parameters": "Parameters",
+        "transaction": "Transaction"
+      },
+      "noActionsYet": "No actions registered yet",
+      "loadingActions": "Loading actions...",
+      "names": {
+        "addToWhitelist": "Add to Whitelist",
+        "depositRewards": "Deposit Rewards",
+        "setAllowRestake": "Configure Restake",
+        "distributeReward": "Distribute Rewards",
+        "setCycleDuration": "Set Cycle Duration",
+        "setStakingBlocked": "Block/Unblock Stake",
+        "removeFromWhitelist": "Remove from Whitelist",
+        "setWhitelistEnabled": "Configure Whitelist",
+        "updateMinValueStake": "Update Minimum Value",
+        "withdrawRewardTokens": "Withdraw Reward Tokens"
+      }
+    },
+    "rewards": {
+      "title": "Rewards Management",
+      "depositRewards": "Deposit Rewards",
+      "distributeRewards": "Distribute Rewards",
+      "withdrawFromVault": "Withdraw from Vault"
+    },
+    "contract": {
+      "stake": "Stake",
+      "reward": "Reward",
+      "selectContract": "Select Contract"
+    },
+    "dashboard": {
+      "days": "{{count}} days",
+      "last": "Last",
+      "stake": "Stake",
+      "title": "Dashboard",
+      "users": "Users",
+      "vault": "Vault",
+      "active": "Active",
+      "errors": "{{count}} error(s)",
+      "allowed": "Allowed",
+      "blocked": "Blocked",
+      "restake": "Restake",
+      "rewards": "Rewards",
+      "invested": "Invested",
+      "minValue": "Minimum Value",
+      "settings": "Settings",
+      "available": "Available",
+      "whitelist": "Whitelist",
+      "cycleStart": "Cycle Start",
+      "deactivated": "Deactivated",
+      "totalInStake": "Total in Stake",
+      "cycleDuration": "Cycle Duration",
+      "availableBalance": "Available Balance",
+      "totalDistributed": "Total Distributed"
+    },
+    "settings": {
+      "title": "Contract Settings",
+      "minValue": "Minimum Value",
+      "blockStakes": "Block Stakes",
+      "allowRestake": "Allow Restake",
+      "blockRestake": "Block Restake",
+      "cycleDuration": "Cycle Duration",
+      "unblockStakes": "Unblock Stakes",
+      "updateMinValue": "Update Minimum Value",
+      "allowBlockRestake": "Allow/Block Restake",
+      "blockUnblockStakes": "Block/Unblock Stakes",
+      "changeCycleDuration": "Change Cycle Duration"
+    },
+    "whitelist": {
+      "check": "Check",
+      "title": "Whitelist Management",
+      "active": "Active",
+      "noUsers": "No users in whitelist",
+      "activate": "Activate",
+      "whitelist": "Whitelist",
+      "addAddress": "Add Address",
+      "deactivate": "Deactivate",
+      "table": {
+        "name": "Name",
+        "email": "Email",
+        "actions": "Actions",
+        "address": "Address",
+        "inStake": "In Stake",
+        "toReceive": "To Receive"
+      },
+      "loadingUsers": "Loading users...",
+      "isInWhitelist": "is in the whitelist",
+      "removeAddress": "Remove Address",
+      "addToWhitelist": "Add to Whitelist",
+      "notInWhitelist": "is NOT in the whitelist",
+      "usersInWhitelist": "Users in Whitelist ({{count}})",
+      "activateWhitelist": "Activate Whitelist",
+      "whitelistDisabled": "Whitelist is disabled",
+      "deactivateWhitelist": "Deactivate Whitelist",
+      "removeFromWhitelist": "Remove from Whitelist",
+      "checkAddressPlaceholder": "Check address (0x...)",
+      "whitelistEnabledNoAddresses": "Whitelist is active but there are no addresses registered",
+      "manageAddressesAnyway": "You can manage addresses anyway"
+    },
+    "statements": {
+      "title": "Statements",
+      "loading": "Loading statements...",
+      "noStatements": "No statements registered",
+      "noStatementsDesc": "Click \"Add Statement\" to register the first one",
+      "addButton": "Add Statement",
+      "table": {
+        "date": "Date",
+        "name": "Name",
+        "type": "Type",
+        "file": "File",
+        "link": "Link",
+        "actions": "Actions"
+      },
+      "buttons": {
+        "open": "Open",
+        "download": "Download",
+        "openLink": "Open Link",
+        "edit": "Edit"
+      },
+      "addModal": {
+        "title": "Add Statement",
+        "date": "Statement Date",
+        "datePlaceholder": "Select date",
+        "name": "File Name",
+        "namePlaceholder": "Ex: Statement Q1 2024",
+        "linkUrl": "Link URL",
+        "linkUrlPlaceholder": "Ex: https://example.com/document.pdf",
+        "file": "PDF File",
+        "fileInfo": "Accepted formats: PDF, JPEG, PNG, WEBP (max. 10MB)",
+        "fileOrLink": "A file or link is required",
+        "selectFile": "Select file",
+        "fileSelected": "File selected:",
+        "uploading": "Uploading...",
+        "cancel": "Cancel",
+        "add": "Add"
+      },
+      "editModal": {
+        "title": "Edit Statement",
+        "currentFile": "Current File",
+        "removeFile": "Remove File",
+        "newFile": "New File",
+        "update": "Update",
+        "updating": "Updating...",
+        "success": "Statement updated successfully",
+        "error": "Error updating statement"
+      }
+    },
+    "modals": {
+      "confirmAction": "Confirm Action",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "attention": "Attention",
+      "blockchainWarning": "This action will be executed on the blockchain and cannot be undone.",
+      "depositRewards": {
+        "yourBalance": "Your Balance:",
+        "vaultBalance": "Vault Balance:",
+        "tokenQuantity": "Token Quantity",
+        "placeholder": "Ex: 1000"
+      },
+      "distributeReward": {
+        "percentageLabel": "Percentage (in basis points, ex: 540 = 5.40%)",
+        "placeholder": "Ex: 540"
+      },
+      "addToWhitelist": {
+        "loadingUsers": "Loading users...",
+        "allUsersInWhitelist": "All users are already in the whitelist",
+        "selectUser": "Select User",
+        "selectPlaceholder": "Select a user...",
+        "addressLabel": "Address to Add",
+        "addressPlaceholder": "0x... or select a user above"
+      },
+      "removeFromWhitelist": {
+        "loadingUsers": "Loading users...",
+        "noUsersInWhitelist": "No company users in the whitelist",
+        "selectUser": "Select Whitelist User",
+        "selectPlaceholder": "Select a user...",
+        "addressLabel": "Address to Remove",
+        "addressPlaceholder": "0x... or select a user above"
+      },
+      "updateMinValue": {
+        "currentValue": "Current Value:",
+        "newMinValue": "New Minimum Value",
+        "placeholder": "Ex: 10"
+      },
+      "withdrawRewardTokens": {
+        "availableBalance": "Available Balance (Vault):",
+        "withdrawQuantity": "Quantity to Withdraw",
+        "placeholder": "Ex: 500",
+        "maxButton": "MAX"
+      },
+      "setCycleDuration": {
+        "currentDuration": "Current Duration:",
+        "days": "days",
+        "newDuration": "New Duration (in days)",
+        "placeholder": "Ex: 90"
+      },
+      "setWhitelistEnabled": {
+        "activate": "Activate",
+        "deactivate": "Deactivate",
+        "question": "the whitelist system?"
+      },
+      "setAllowRestake": {
+        "currentStatus": "Current Status:",
+        "restakeAllowed": "Restake Allowed",
+        "restakeBlocked": "Restake Blocked",
+        "willChangeTitle": "Upon confirmation, it will change to:"
+      },
+      "setStakingBlocked": {
+        "currentStatus": "Current Status:",
+        "stakesBlocked": "Stakes Blocked",
+        "stakesAvailable": "Stakes Available",
+        "willChangeTitle": "Upon confirmation, it will change to:"
+      }
+    },
+    "messages": {
+      "invalidAddress": "Invalid address",
+      "errorLoadingData": "Could not load contract data. Check if the contract is deployed and if the admin address is correct.",
+      "functionsNotRead": "{{count}} contract function(s) could not be read. Click the alert for details.",
+      "actionNotRecognized": "Action not recognized",
+      "addressIsWhitelisted": "Address is in the whitelist",
+      "adminAddressNotFound": "Admin address not found for this contract",
+      "errorCheckingAddress": "Error checking address",
+      "actionExecutedSuccess": "{{action}} executed successfully!",
+      "addressNotWhitelisted": "Address is NOT in the whitelist",
+      "errorLoadingContracts": "Error loading stake contracts",
+      "errorExecutingFunction": "Error executing function",
+      "errorLoadingContractData": "Error loading contract data",
+      "whitelistFunctionNotFound": "The getWhitelistedAddresses function was not found in the contract. Check if the contract implements this function."
+    },
+    "emptyState": {
+      "goToCompanies": "Go to Company Management",
+      "noContractsDesc": "There are no stake contracts registered for the {{network}} network.",
+      "noContractsTitle": "No stake contracts found",
+      "companyNotIdentified": "Company not identified",
+      "companyNotIdentifiedDesc": "Could not identify the current company. Please access through the company management page."
+    }
+  }
+}

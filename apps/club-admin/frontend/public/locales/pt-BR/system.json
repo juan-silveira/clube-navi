@@ -1,0 +1,66 @@
+{
+  "translations": {
+    "title": "Sistema de Traduções",
+    "table": {
+      "key": "Chave",
+      "save": "Salvar",
+      "title": "Traduções",
+      "saving": "Salvando...",
+      "english": "English",
+      "spanish": "Español",
+      "modified": "modificada",
+      "portuguese": "Português",
+      "modifiedPlural": "modificadas"
+    },
+    "controls": {
+      "search": "Buscar",
+      "language": "Idioma",
+      "namespace": "Namespace",
+      "syncToFiles": "Sincronizar para Arquivos",
+      "syncFromFiles": "Sincronizar de Arquivos",
+      "searchPlaceholder": "Buscar chave ou valor...",
+      "syncToFilesTooltip": "Exporta as traduções do banco de dados para os arquivos JSON do projeto",
+      "syncFromFilesTooltip": "Importa as traduções dos arquivos JSON do projeto para o banco de dados"
+    },
+    "namespaces": {
+      "auth": "Telas de autenticação (login, registro, recuperação de senha)",
+      "menu": "Menus de navegação",
+      "admin": "Administração de empresas",
+      "stake": "Staking e investimentos",
+      "common": "Textos comuns (botões, labels, mensagens genéricas)",
+      "emails": "Templates de email",
+      "errors": "Mensagens de erro",
+      "header": "Cabeçalho e navegação superior",
+      "system": "Administração do sistema",
+      "deposit": "Telas de depósito",
+      "profile": "Perfil do usuário",
+      "exchange": "Exchange (mercado, book, orders)",
+      "transfer": "Telas de transferência",
+      "withdraw": "Telas de saque",
+      "dashboard": "Dashboards (usuário e admin)",
+      "financial": "Operações financeiras (depósito, saque, transferência)",
+      "statement": "Extrato de transações",
+      "validations": "Mensagens de validação de formulários",
+      "notifications": "Notificações e alertas"
+    },
+    "messages": {
+      "loading": "Carregando traduções...",
+      "syncing": "Sincronizando...",
+      "errorSaving": "Erro ao salvar tradução",
+      "partialSave": "Apenas {count}/3 idiomas salvos com sucesso",
+      "errorSyncing": "Erro ao sincronizar",
+      "syncComplete": "Sincronização concluída!",
+      "noTranslations": "Nenhuma tradução encontrada",
+      "sessionExpired": "Sessão expirada. Por favor, faça login novamente.",
+      "savedAllLanguages": "Tradução salva em todos os idiomas!",
+      "errorLoadingNamespaces": "Erro ao carregar namespaces",
+      "errorLoadingTranslations": "Erro ao carregar traduções"
+    },
+    "statistics": {
+      "namespaces": "Namespaces",
+      "totalLanguages": "Total de Idiomas",
+      "activeLanguages": "Idiomas Ativos",
+      "totalTranslations": "Total de Traduções"
+    }
+  }
+}

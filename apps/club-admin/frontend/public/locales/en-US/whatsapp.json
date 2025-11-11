@@ -1,0 +1,89 @@
+{
+  "title": "WhatsApp Messages",
+  "subtitle": "Send WhatsApp messages to selected users",
+  "tips": {
+    "tip1": "Use templates to speed up sending common messages",
+    "tip2": "The variable {{nome}} will be automatically replaced by each recipient's name",
+    "tip3": "Only users with a registered phone number can receive messages",
+    "tip4": "You can edit templates before sending to customize the message"
+  },
+  "cards": {
+    "tips": "Tips",
+    "history": "Message History",
+    "sendMessage": "Send Message"
+  },
+  "status": {
+    "sent": "Sent",
+    "failed": "Failed",
+    "partial": "Partial"
+  },
+  "buttons": {
+    "next": "Next",
+    "sending": "Sending...",
+    "previous": "Previous",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "hideHistory": "Hide History",
+    "sendMessage": "Send Message",
+    "showHistory": "Show History"
+  },
+  "history": {
+    "sent": "{{count}} sent",
+    "empty": "No messages sent yet",
+    "failed": "{{count}} failed",
+    "loading": "Loading history...",
+    "pagination": "Page {{current}} of {{total}}",
+    "recipients": "{{count}} recipient(s)"
+  },
+  "success": {
+    "allSent": "Message successfully sent to {{count}} user(s)!",
+    "allFailed": "Failed to send message to all {{count}} recipient(s)",
+    "partialSent": "Message sent to {{success}} user(s). {{failed}} failed."
+  },
+  "errors": {
+    "loadUsers": "Error loading users",
+    "noMessage": "Type a message",
+    "sendError": "Error sending message",
+    "loadHistory": "Error loading history",
+    "noRecipients": "Select at least one recipient",
+    "loadTemplates": "Error loading templates"
+  },
+  "form": {
+    "message": {
+      "label": "Message",
+      "characters": "{{count}} characters",
+      "placeholder": "Type your message here...\n\nYou can use the following variable:\n{{nome}} - User name\n\nExample:\nHello, {{nome}}! Welcome to the platform."
+    },
+    "templates": {
+      "label": "Templates (optional)"
+    },
+    "recipients": {
+      "label": "Recipients",
+      "selected": "{{count}} user(s) selected",
+      "placeholder": "Search and select users..."
+    }
+  },
+  "stats": {
+    "usersWithPhone": "Users with phone",
+    "usersWithoutPhone": "{{count}} without phone",
+    "templatesAvailable": "Available templates"
+  },
+  "templateNames": {
+    "Boas-vindas": "Welcome",
+    "Comunicado Geral": "General Notice",
+    "Manutenção Programada": "Scheduled Maintenance",
+    "Lembrete de Documentos": "Document Reminder",
+    "Aprovação de Documentação": "Document Approval",
+    "Mensagem Personalizada": "Custom Message",
+    "Lembrete de Saque Pendente": "Pending Withdrawal Reminder"
+  },
+  "templateMessages": {
+    "welcome": "👋 *Welcome to Clube Digital!*\n\nHello, {{nome}}!\n\nWe are happy to have you with us. Our platform offers the best cryptocurrency solutions.\n\nIf you need help, we are at your disposal!",
+    "document_reminder": "📄 *Documentation Reminder*\n\nHello, {{nome}}!\n\nWe noticed that you have not yet submitted all the necessary documents for account validation.\n\nPlease access the system and complete your registration to have full access to the platform.",
+    "document_approved": "✅ *Clube Digital Documentation Approval*\n\nHello, {{nome}}!\n\nAll necessary documents for your account validation have been approved.\n\nYou now have full access to the platform.",
+    "withdrawal_reminder": "💰 *Pending Withdrawal*\n\nHello, {{nome}}!\n\nYou have a withdrawal pending approval. We are reviewing your request and will respond shortly.\n\nCheck the status in the system!",
+    "general_announcement": "📢 *Important Notice*\n\nHello, {{nome}}!\n\n[Type the content of the notice here]\n\nBest regards,\nClube Digital Team",
+    "maintenance": "🔧 *Scheduled Maintenance*\n\nHello!\n\nWe inform you that we will perform scheduled maintenance on {{data}} at {{hora}}.\n\nDuring this period, some services may be temporarily unavailable.\n\nWe count on your understanding!",
+    "custom": ""
+  }
+}

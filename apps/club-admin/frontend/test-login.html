@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login</title>
+</head>
+<body>
+    <h1>Test Login Debug</h1>
+    <button onclick="checkStorage()">Check LocalStorage</button>
+    <button onclick="testLogin()">Test Login</button>
+    <pre id="output"></pre>
+
+    <script>
+        function checkStorage() {
+            const output = document.getElementById('output');
+            const authStorage = localStorage.getItem('auth-storage');
+            output.textContent = 'Auth Storage:\n' + (authStorage || 'VAZIO!');
+        }
+
+        async function testLogin() {
+            const output = document.getElementById('output');
+            try {
+                const response = await fetch('http://localhost:8033/api/club-admin/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Club-Slug': 'clube-navi'
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@clube-navi.com',
+                        password: 'Admin123!'
+                    })
+                });
+                const data = await response.json();
+                output.textContent = 'Login Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                output.textContent = 'Error:\n' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

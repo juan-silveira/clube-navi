@@ -1,0 +1,335 @@
+{
+  "title": "Ajuda",
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Encontre respostas para suas dúvidas",
+    "searchFor": "para",
+    "clearSearch": "Limpar busca",
+    "searchFound": "encontrado",
+    "relatedLinks": "Links úteis:",
+    "searchResults": "resultado",
+    "noResults": {
+      "title": "Nenhum resultado encontrado",
+      "button": "Falar com Suporte",
+      "description": "Não encontramos perguntas relacionadas à sua busca."
+    },
+    "searchFoundPlural": "encontrados",
+    "searchPlaceholder": "Buscar dúvidas...",
+    "searchResultsPlural": "resultados",
+    "categories": {
+      "general": {
+        "label": "Geral",
+        "questions": {
+          "kyc": {
+            "answer": "Acesse 'Validação de Documentos' no menu, envie uma foto nítida do seu documento (RG ou CNH) frente e verso, tire uma selfie para reconhecimento facial e aguarde a aprovação (geralmente em até 24 horas úteis).",
+            "question": "Como validar meus documentos (KYC)?",
+            "links": {
+              "validateDocuments": "Validar documentos"
+            }
+          },
+          "security": {
+            "answer": "Sim! Utilizamos as melhores práticas de segurança do mercado, incluindo: autenticação em duas etapas (2FA), criptografia de ponta a ponta para seus dados, armazenamento seguro de chaves privadas, e monitoramento 24/7 de atividades suspeitas.",
+            "question": "A plataforma é segura?",
+            "links": {
+              "configureSecurity": "Configurar segurança"
+            }
+          },
+          "createAccount": {
+            "answer": "Para criar uma conta, clique em 'Cadastrar' no topo da página, preencha seus dados pessoais (nome, e-mail, telefone e CPF), crie uma senha forte e siga as instruções de verificação de e-mail. Após confirmar seu e-mail, você já pode começar a usar a plataforma.",
+            "question": "Como criar uma conta?"
+          },
+          "whatIsClube Digital": {
+            "answer": "A Clube Digital é uma plataforma de ativos digitais que permite comprar, vender e gerenciar seus investimentos em tokens de forma segura e intuitiva. Nossa plataforma oferece recursos como depósitos instantâneos via PIX, exchange de tokens e carteira digital segura.",
+            "question": "O que é a Clube Digital?",
+            "links": {
+              "tutorials": "Ver tutoriais"
+            }
+          }
+        }
+      },
+      "deposits": {
+        "label": "Depósitos",
+        "questions": {
+          "minDeposit": {
+            "answer": "Sim, o valor mínimo para depósito é de R$ 10,00 para todos os métodos de pagamento. Não há limite máximo, mas valores acima de R$ 50.000,00 podem requerer validação adicional.",
+            "question": "Há valor mínimo para depósito?",
+            "links": {
+              "viewFees": "Ver tarifas"
+            }
+          },
+          "depositTime": {
+            "answer": "O tempo varia conforme o método escolhido: PIX é instantâneo (creditado em até 2 minutos), TED pode levar até 1 dia útil, e DOC leva até 2 dias úteis. Você receberá uma notificação assim que o valor for creditado.",
+            "question": "Quanto tempo leva para o depósito ser creditado?"
+          },
+          "howToDeposit": {
+            "answer": "Acesse a seção 'Depositar' no menu lateral, escolha o método de pagamento (PIX, TED ou DOC), informe o valor desejado e siga as instruções na tela. Para PIX, você receberá um QR Code ou chave PIX para realizar o pagamento.",
+            "question": "Como fazer um depósito?",
+            "links": {
+              "tutorial": "Ver tutorial",
+              "makeDeposit": "Fazer depósito"
+            }
+          },
+          "cancelDeposit": {
+            "answer": "Depósitos via PIX não podem ser cancelados após a confirmação do pagamento. Para TED e DOC, você pode cancelar através do seu banco antes do processamento. Entre em contato com o suporte se precisar de ajuda.",
+            "question": "Posso cancelar um depósito?"
+          }
+        }
+      },
+      "exchange": {
+        "label": "Exchange",
+        "questions": {
+          "orderBook": {
+            "answer": "O livro de ofertas mostra todas as ordens de compra e venda disponíveis com seus respectivos preços e quantidades. Você pode criar sua própria ordem limitada definindo preço e quantidade, ou aceitar uma ordem existente clicando nela.",
+            "question": "Como funciona o livro de ofertas?",
+            "links": {
+              "tutorial": "Ver tutorial",
+              "orderBook": "Acessar livro"
+            }
+          },
+          "orderTypes": {
+            "answer": "Ordem de mercado executa imediatamente ao melhor preço disponível no momento. É ideal para quem quer rapidez. Ordem limitada permite definir o preço desejado, sendo executada apenas quando o mercado atingir esse valor. É ideal para quem quer controle sobre o preço.",
+            "question": "Qual a diferença entre ordem de mercado e ordem limitada?",
+            "links": {
+              "exchange": "Acessar exchange",
+              "tutorial": "Ver tutoriais de compra"
+            }
+          },
+          "cancelOrder": {
+            "answer": "Sim, ordens limitadas podem ser canceladas a qualquer momento antes da execução através do livro de ofertas. Ordens de mercado são executadas imediatamente e não podem ser canceladas. Não há taxa para cancelamento.",
+            "question": "Posso cancelar uma ordem?",
+            "links": {
+              "orderBook": "Ver livro de ofertas"
+            }
+          },
+          "tradingFees": {
+            "answer": "As taxas variam conforme seu volume mensal: até R$ 10.000 = 0,5%, de R$ 10.000 a R$ 50.000 = 0,3%, de R$ 50.000 a R$ 100.000 = 0,2%, acima de R$ 100.000 = 0,1%. Consulte 'Tarifas e Prazos' para detalhes completos.",
+            "question": "Quais são as taxas de negociação?",
+            "links": {
+              "viewFees": "Ver tarifas"
+            }
+          }
+        }
+      },
+      "security": {
+        "label": "Segurança",
+        "questions": {
+          "lost2FA": {
+            "answer": "Use um dos códigos de backup que foram gerados quando você ativou o 2FA. Se não tiver os códigos, entre em contato com nosso suporte através da opção 'Falar com Suporte' fornecendo seus dados de cadastro, um documento com foto e um vídeo selfie para validação de identidade.",
+            "question": "O que fazer se perder acesso ao 2FA?"
+          },
+          "what2FA": {
+            "answer": "2FA é uma camada extra de segurança que requer um código temporário (gerado por app autenticador) além da sua senha para acessar a conta. Mesmo que alguém descubra sua senha, não conseguirá acessar sem o código do seu celular. Recomendamos fortemente ativar este recurso.",
+            "question": "O que é autenticação em duas etapas (2FA)?",
+            "links": {
+              "enable2FA": "Ativar 2FA"
+            }
+          },
+          "enable2FA": {
+            "answer": "Acesse 'Segurança' no menu, clique em 'Ativar 2FA', baixe um aplicativo autenticador (Google Authenticator ou Authy), escaneie o QR code que aparecerá na tela, digite o código de 6 dígitos gerado pelo app e confirme. Guarde os códigos de backup em local seguro.",
+            "question": "Como ativar o 2FA?",
+            "links": {
+              "configureNow": "Configurar agora"
+            }
+          },
+          "changePassword": {
+            "answer": "Acesse 'Segurança' no menu, clique em 'Alterar Senha', digite sua senha atual, crie uma nova senha forte (mínimo 8 caracteres com letras, números e símbolos) e confirme. Você receberá um e-mail confirmando a alteração.",
+            "question": "Como alterar minha senha?",
+            "links": {
+              "changePassword": "Alterar senha"
+            }
+          },
+          "protectAccount": {
+            "answer": "Siga estas práticas: ative o 2FA, use uma senha forte e única, não compartilhe suas credenciais, verifique sempre a URL antes de fazer login, desconfie de e-mails suspeitos, e mantenha seu dispositivo seguro com antivírus atualizado.",
+            "question": "Como proteger minha conta?"
+          }
+        }
+      },
+      "transfers": {
+        "label": "Transferências",
+        "questions": {
+          "howToTransfer": {
+            "answer": "Acesse 'Transferir' no menu, digite o e-mail ou CPF do destinatário, informe o valor e o token que deseja transferir, revise os dados e confirme a operação. Transferências internas são instantâneas e sem taxa.",
+            "question": "Como transferir para outro usuário da Clube Digital?",
+            "links": {
+              "tutorial": "Ver tutorial",
+              "makeTransfer": "Fazer transferência"
+            }
+          },
+          "transferLimit": {
+            "answer": "Não há limite para transferências entre usuários da Clube Digital. Você pode transferir qualquer valor disponível na sua carteira, desde que tenha saldo suficiente.",
+            "question": "Há limite para transferências?"
+          },
+          "cancelTransfer": {
+            "answer": "Não. Transferências são processadas instantaneamente e não podem ser canceladas. Certifique-se sempre de conferir os dados do destinatário antes de confirmar.",
+            "question": "Posso cancelar uma transferência?"
+          },
+          "checkTransfers": {
+            "answer": "Acesse 'Extrato' no menu para ver todas as suas transações, incluindo transferências enviadas e recebidas. Você pode filtrar por data, tipo de transação e token.",
+            "question": "Como verificar minhas transferências?",
+            "links": {
+              "viewStatement": "Ver extrato"
+            }
+          }
+        }
+      },
+      "withdrawals": {
+        "label": "Saques",
+        "questions": {
+          "withdrawFees": {
+            "answer": "A taxa varia conforme o método: PIX tem taxa de R$ 2,90, TED tem taxa de R$ 9,90, e DOC tem taxa de R$ 4,90. Consulte 'Tarifas e Prazos' para informações completas.",
+            "question": "Quais são as taxas de saque?",
+            "links": {
+              "viewFees": "Ver tarifas completas"
+            }
+          },
+          "withdrawTime": {
+            "answer": "Saques via PIX são processados em até 30 minutos durante o horário comercial (9h às 18h). TED pode levar até 1 dia útil. Saques solicitados fora do horário comercial são processados no próximo dia útil.",
+            "question": "Quanto tempo leva para processar um saque?"
+          },
+          "howToWithdraw": {
+            "answer": "Acesse 'Sacar' no menu, escolha a conta bancária cadastrada (ou cadastre uma nova), informe o valor que deseja sacar, confirme os dados e autorize a operação. Para saques via PIX, informe a chave PIX de destino.",
+            "question": "Como fazer um saque?",
+            "links": {
+              "tutorial": "Ver tutorial",
+              "makeWithdraw": "Realizar saque"
+            }
+          },
+          "withdrawLimit": {
+            "answer": "Sim, o limite inicial é de R$ 10.000,00 por dia. Este limite pode ser aumentado mediante solicitação e validação de documentos adicionais. Clientes com conta verificada (KYC completo) podem solicitar limites maiores.",
+            "question": "Há limite de saque diário?",
+            "links": {
+              "validateDocuments": "Validar documentos"
+            }
+          }
+        }
+      }
+    },
+    "quickActions": {
+      "support": {
+        "title": "Ainda com Dúvidas?",
+        "button": "Falar com Suporte",
+        "description": "Nossa equipe de suporte está pronta para ajudar você"
+      },
+      "tutorials": {
+        "title": "Ver Tutoriais em Vídeo",
+        "button": "Assistir Tutoriais",
+        "description": "Aprenda visualmente com nossos tutoriais passo a passo"
+      }
+    }
+  },
+  "pageTitle": "Central de Ajuda",
+  "home": {
+    "title": "Central de Ajuda",
+    "footer": "Escolha a opção que melhor se adequa à sua necessidade. Estamos aqui para ajudar!",
+    "subtitle": "Como podemos ajudá-lo hoje?",
+    "faq": {
+      "title": "FAQ",
+      "description": "Respostas para dúvidas comuns"
+    },
+    "support": {
+      "title": "Suporte",
+      "description": "Fale diretamente com nossa equipe"
+    },
+    "tutorials": {
+      "title": "Tutoriais",
+      "description": "Guias passo a passo para usar a plataforma"
+    }
+  },
+  "support": {
+    "title": "Falar com Suporte",
+    "subtitle": "Envie sua mensagem e retornaremos em breve",
+    "form": {
+      "title": "Envie sua mensagem",
+      "submit": "Enviar Mensagem",
+      "submitting": "Enviando...",
+      "message": {
+        "label": "Mensagem",
+        "placeholder": "Descreva detalhadamente sua dúvida ou problema..."
+      },
+      "subject": {
+        "label": "Assunto",
+        "placeholder": "Digite o assunto da sua mensagem"
+      },
+      "success": {
+        "title": "Mensagem enviada com sucesso!",
+        "description": "Nossa equipe entrará em contato em breve."
+      },
+      "category": {
+        "label": "Categoria",
+        "options": {
+          "kyc": "Validação de documentos",
+          "other": "Outros assuntos",
+          "select": "Selecione uma categoria",
+          "account": "Problemas com a conta",
+          "deposit": "Problemas com depósito",
+          "exchange": "Problemas com negociação",
+          "security": "Segurança",
+          "withdrawal": "Problemas com saque"
+        }
+      }
+    },
+    "info": {
+      "hours": {
+        "title": "Horário de Atendimento",
+        "sunday": "Domingo:",
+        "saturday": "Sábado:",
+        "weekdays": "Segunda a Sexta:",
+        "sundayTime": "Fechado",
+        "saturdayTime": "9h às 13h",
+        "weekdaysTime": "9h às 18h"
+      },
+      "otherOptions": {
+        "faq": "Consultar FAQ",
+        "title": "Outras Opções",
+        "tutorials": "Ver Tutoriais"
+      },
+      "responseTime": {
+        "title": "Tempo de Resposta",
+        "description": "Normalmente respondemos em até <strong>24 horas úteis</strong>. Para casos urgentes, você receberá uma resposta ainda mais rápida."
+      }
+    }
+  },
+  "tutorials": {
+    "title": "Tutoriais",
+    "subtitle": "Guias passo a passo para usar a plataforma",
+    "videoTutorial": "Vídeo tutorial",
+    "categories": {
+      "advanced": "Avançado",
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário"
+    },
+    "list": {
+      "limitBuy": {
+        "title": "Compra com Ordem Limitada",
+        "description": "Aprenda a definir seu preço de compra no livro de ofertas"
+      },
+      "transfer": {
+        "title": "Como realizar uma transferência",
+        "description": "Passo a passo para transferir valores entre contas de forma rápida"
+      },
+      "withdraw": {
+        "title": "Como realizar um saque",
+        "description": "Guia completo para sacar seus fundos com segurança via PIX"
+      },
+      "limitSell": {
+        "title": "Venda com Ordem Limitada",
+        "description": "Como criar ordens de venda com controle total de preço"
+      },
+      "marketBuy": {
+        "title": "Compra no Mercado",
+        "description": "Como comprar tokens com execução imediata ao melhor preço"
+      },
+      "marketSell": {
+        "title": "Venda no Mercado",
+        "description": "Como vender tokens rapidamente pelo preço de mercado"
+      },
+      "firstDeposit": {
+        "title": "Como fazer seu primeiro depósito",
+        "description": "Aprenda a adicionar fundos à sua conta de forma segura via PIX"
+      }
+    },
+    "modal": {
+      "browserNotSupported": "Seu navegador não suporta o elemento de vídeo."
+    }
+  }
+}

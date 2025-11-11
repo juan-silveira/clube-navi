@@ -1,0 +1,87 @@
+{
+  "title": "Notificações",
+  "loading": "Carregando notificações...",
+  "subtitle": "Gerencie suas notificações do sistema",
+  "pageTitle": "Notificações",
+  "filter": {
+    "all": "Todas",
+    "read": "Lidas",
+    "label": "Filtrar:",
+    "unread": "Não lidas",
+    "deleted": "Excluídas",
+    "favorite": "Favoritas"
+  },
+  "details": {
+    "back": "Voltar",
+    "title": "Detalhes da Notificação",
+    "tooltips": {
+      "delete": "Excluir",
+      "markAsRead": "Marcar como lida",
+      "markAsUnread": "Marcar como não lida",
+      "addToFavorites": "Adicionar aos favoritos",
+      "removeFromFavorites": "Remover dos favoritos"
+    }
+  },
+  "emptyState": {
+    "all": "Você não tem notificações no momento.",
+    "read": "Nenhuma notificação lida encontrada.",
+    "title": "Nenhuma notificação",
+    "unread": "Nenhuma notificação não lida encontrada.",
+    "default": "Nenhuma notificação encontrada.",
+    "deleted": "Nenhuma notificação excluída encontrada.",
+    "favorite": "Nenhuma notificação favorita encontrada."
+  },
+  "counter": {
+    "selected": "{{count}} selecionada(s)",
+    "notifications_one": "{{count}} notificação",
+    "notifications_other": "{{count}} notificações"
+  },
+  "actions": {
+    "selectAll": "Selecionar todas",
+    "markAsRead": "Marcar como lidas",
+    "markAllAsRead": "Marcar todas como lidas",
+    "deleteSelected": "Excluir selecionadas",
+    "markAllAsUnread": "Marcar todas como não lidas"
+  },
+  "alerts": {
+    "movedToTrash": "Notificação movida para a Lixeira",
+    "deletionCompleted": "Exclusão concluída",
+    "notificationRestored": "Notificação restaurada com sucesso!",
+    "restorationCompleted": "Restauração concluída",
+    "notificationsRestored": "Notificações restauradas com sucesso!",
+    "allNotificationsRestored": "Todas as notificações restauradas com sucesso!",
+    "notificationsMovedToTrash": "Notificações movidas para a Lixeira",
+    "errorDeletingNotifications": "Erro ao excluir notificações",
+    "errorRestoringNotification": "Erro ao restaurar notificação",
+    "errorRestoringNotifications": "Erro ao restaurar notificações",
+    "allNotificationsMovedToTrash": "Todas as notificações movidas para a Lixeira"
+  },
+  "pagination": {
+    "lastPage": "Última página",
+    "nextPage": "Próxima página",
+    "firstPage": "Primeira página",
+    "previousPage": "Página anterior"
+  },
+  "item": {
+    "tooltips": {
+      "delete": "Excluir",
+      "restore": "Restaurar",
+      "markAsRead": "Marcar como lida",
+      "markAsUnread": "Marcar como não lida"
+    }
+  },
+  "modals": {
+    "deleteAll": {
+      "title": "Excluir todas as notificações",
+      "cancel": "Cancelar",
+      "confirm": "Sim, excluir todas!",
+      "message": "Tem certeza que deseja excluir todas as {{count}} notificações?"
+    },
+    "deleteMultiple": {
+      "title": "Excluir notificações",
+      "cancel": "Cancelar",
+      "confirm": "Sim, excluir!",
+      "message": "Tem certeza que deseja excluir {{count}} notificação(ões)?"
+    }
+  }
+}

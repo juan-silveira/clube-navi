@@ -1,0 +1,109 @@
+{
+  "title": "Dashboard",
+  "earnings": {
+    "error": "Erro ao carregar",
+    "title": "Proventos",
+    "loading": "Carregando...",
+    "subtitle": "Acompanhe as distribuições dos proventos gerados pelos seus investimentos",
+    "tryAgain": "Tentar novamente",
+    "noResults": "Sem resultados",
+    "table": {
+      "date": "Data",
+      "token": "Token",
+      "amount": "Quantidade",
+      "valueInBRL": "Valor em BRL"
+    },
+    "loadingSubtitle": "Buscando proventos",
+    "noResultsSubtitle": "Nenhum provento encontrado",
+    "accumulatedEarnings": "Ganhos Acumulados"
+  },
+  "portfolio": {
+    "title": "Portfólio",
+    "subtitle": "Confira abaixo o seu patrimônio digital",
+    "totalInOrder": "Total em Ordem",
+    "totalInvested": "Total investido",
+    "yourPatrimony": "{{name}}, este é o seu patrimônio",
+    "availableBalance": "Saldo disponível",
+    "assetsBalance": "Saldo em Ativos",
+    "tooltips": {
+      "noStakes": "Nenhum stake ativo",
+      "noOrders": "Nenhuma ordem ativa",
+      "stakeTitle": "Total Investido (Stake)",
+      "stakeSubtitle": "{{count}} token em stake",
+      "stakeSubtitle_plural": "{{count}} tokens em stake",
+      "ordersTitle": "Total em Ordem",
+      "ordersSubtitle": "{{count}} token com ordens ativas",
+      "ordersSubtitle_plural": "{{count}} tokens com ordens ativas",
+      "totalValue": "Valor Total:"
+    }
+  },
+  "apiWarning": {
+    "title": "API da Azore instável",
+    "cacheMessage": "Exibindo última versão salva - Saldos podem estar desatualizados",
+    "connectingMessage": "Conectando... Aguarde alguns instantes"
+  },
+  "greeting": {
+    "evening": "Boa noite",
+    "morning": "Bom dia",
+    "welcome": "Bem-vindo à Clube Digital",
+    "afternoon": "Boa tarde"
+  },
+  "transactions": {
+    "error": "Erro ao carregar transações",
+    "title": "Últimas Transações",
+    "loading": "Carregando transações...",
+    "subtitle": "Confira abaixo as 5 últimas transações",
+    "noResults": "Sem resultados",
+    "types": {
+      "buy": "Compra",
+      "sell": "Venda",
+      "stake": "Investimento",
+      "cancel": "Cancelamento",
+      "deposit": "Depósito",
+      "unstake": "Resgate",
+      "exchange": "Troca",
+      "transfer": "Transferência",
+      "withdraw": "Saque",
+      "stake_reward": "Dividendo",
+      "contract_call": "Chamada de Contrato",
+      "contract_read": "Leitura de Contrato",
+      "contract_deploy": "Deploy de Contrato"
+    },
+    "table": {
+      "date": "Data",
+      "type": "Tipo",
+      "token": "Token",
+      "value": "Valor",
+      "status": "Status",
+      "txHash": "TxHash",
+      "company": "Empresa"
+    },
+    "status": {
+      "failed": "Falhou",
+      "pending": "Pendente",
+      "cancelled": "Cancelado",
+      "confirmed": "Confirmado"
+    },
+    "noResultsMessage": "Nenhuma transação encontrada",
+    "pagination": {
+      "showing": "Exibindo {{from}} ao {{to}} de {{total}} registros"
+    }
+  },
+  "digitalAssets": {
+    "title": "Ativos Digitais",
+    "balance": "Saldo",
+    "subtitle": "Veja o detalhamento dos seus ativos por categoria",
+    "table": {
+      "name": "Nome",
+      "symbol": "Sigla",
+      "valueBRL": "Valor em BRL",
+      "available": "Disponível"
+    },
+    "categories": {
+      "digital": "Renda Digital",
+      "utility": "Utility Tokens",
+      "startups": "Startups",
+      "cryptocurrencies": "Criptomoedas"
+    }
+  }
+}

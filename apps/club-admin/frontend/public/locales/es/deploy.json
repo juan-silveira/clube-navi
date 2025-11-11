@@ -1,0 +1,85 @@
+{
+  "title": "Deploy de Contratos",
+  "subtitle": "Despliegue nuevos contratos Token, Exchange o Stake",
+  "result": {
+    "title": "✅ ¡Desplegado con Éxito!",
+    "txHash": "TX Hash:",
+    "address": "Dirección:",
+    "gasUsed": "Gas Utilizado:",
+    "blockNumber": "Bloque:"
+  },
+  "buttons": {
+    "deploy": "🚀 Desplegar",
+    "deploying": "Desplegando..."
+  },
+  "parameters": {
+    "title": "Parámetros del Contrato",
+    "required": "*",
+    "token": {
+      "name": "Nombre del Token",
+      "symbol": "Símbolo",
+      "contractName": "Nombre del contrato",
+      "initialSupply": "Suministro Inicial",
+      "namePlaceholder": "Ej: Mi Token de Prueba",
+      "symbolPlaceholder": "Ej: MTT",
+      "initialSupplyPlaceholder": "Ej: 100000"
+    },
+    "exchange": {
+      "tokenA": "Token A (Dirección)",
+      "tokenB": "Token B (Dirección)",
+      "feeRecipient": "Billetera para Tarifas",
+      "feeCalculated": "Tarifa: {{fee}}%",
+      "feeBasisPoints": "Tarifa (en puntos base)",
+      "feePlaceholder": "Ej: 35 (para 0,35%)",
+      "addressPlaceholder": "0x..."
+    },
+    "stake": {
+      "whitelist": "Lista Blanca (opcional)",
+      "stakeToken": "Token para Stake",
+      "rewardToken": "Token para Recompensa (opcional)",
+      "cycleStartDate": "Fecha de Inicio del Ciclo (opcional)",
+      "minStakeAmount": "Cantidad Mínima para Stake (Wei)",
+      "whitelistCount": "{{count}} direcciones",
+      "addressPlaceholder": "0x...",
+      "cycleStartTimestamp": "Timestamp: {{timestamp}} (12:00 PM horario de Brasília)",
+      "whitelistPlaceholder": "Una dirección por línea\n0x...\n0x...",
+      "rewardTokenPlaceholder": "0x... (deje vacío para usar el mismo del stake)",
+      "minStakeAmountPlaceholder": "Ej: 1000000000000000000 (1 token con 18 decimales)"
+    }
+  },
+  "success": {
+    "deployed": "¡Contrato desplegado con éxito!"
+  },
+  "contractType": {
+    "label": "Tipo de Contrato",
+    "stake": {
+      "title": "Stake",
+      "description": "Staking Contract"
+    },
+    "token": {
+      "title": "Token",
+      "description": "ERC20 Token"
+    },
+    "exchange": {
+      "title": "Exchange",
+      "description": "Trading Exchange"
+    }
+  },
+  "errors": {
+    "deployError": "Error al desplegar el contrato",
+    "genericError": "Error al desplegar",
+    "requiredFields": "Complete todos los campos requeridos"
+  },
+  "contractPreview": {
+    "title": "📄 Vista Previa del Contrato",
+    "tip": {
+      "title": "Lo que se desplegará:",
+      "token": {
+        "item1": "Token ERC20 con roles de acceso",
+        "item2": "Función mint para crear nuevos tokens",
+        "item3": "Función burn para quemar tokens",
+        "item4": "Función gasless para transferencias sin gas del usuario"
+      }
+    }
+  }
+}

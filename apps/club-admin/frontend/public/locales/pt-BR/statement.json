@@ -1,0 +1,100 @@
+{
+  "error": "Erro ao carregar transações",
+  "title": "Extrato",
+  "loading": "Carregando transações...",
+  "pageTitle": "Extrato",
+  "table": {
+    "date": "Data",
+    "type": "Tipo",
+    "title": "Transações",
+    "token": "Token",
+    "amount": "Valor",
+    "status": "Status",
+    "txHash": "TxHash",
+    "company": "Company",
+    "adjustFilters": "Tente ajustar os filtros para ver mais resultados",
+    "noTransactions": "Nenhuma transação encontrada"
+  },
+  "header": {
+    "title": "Extrato de Transações",
+    "subtitle": "Histórico completo de todas as suas transações",
+    "exportButton": "Exportar"
+  },
+  "filters": {
+    "token": "Token",
+    "status": "Status",
+    "typeLabel": "Tipo:",
+    "tokenLabel": "Token:",
+    "clearButton": "Limpar",
+    "statusLabel": "Status:",
+    "itemsPerPage": "Itens por página",
+    "activeFilters": "Filtros ativos:",
+    "transactionType": "Tipo de Transação",
+    "typePlaceholder": "Filtrar por tipo",
+    "tokenPlaceholder": "Filtrar por token",
+    "statusPlaceholder": "Filtrar por status"
+  },
+  "pagination": {
+    "of": "de",
+    "to": "ao",
+    "records": "registros",
+    "showing": "Exibindo"
+  },
+  "itemsPerPage": {
+    "10": "10 por página",
+    "20": "20 por página",
+    "50": "50 por página",
+    "100": "100 por página"
+  },
+  "orderDetails": {
+    "id": "ID:",
+    "pair": "Par:",
+    "type": "Tipo:",
+    "price": "Preço:",
+    "title": "Detalhes da Ordem",
+    "total": "total",
+    "amount": "Quantidade:",
+    "filled": "Executado:",
+    "txHash": "TxHash:",
+    "executed": "executado",
+    "progress": "Progresso",
+    "operation": "Operação:",
+    "remaining": "Restante:",
+    "orderStatus": "Status Ordem:"
+  },
+  "typeOptions": {
+    "all": "Todos os tipos",
+    "deposit": "Depósito",
+    "dividend": "Dividendo",
+    "exchange": "Troca",
+    "transfer": "Transferência",
+    "withdraw": "Saque",
+    "investment": "Investimento",
+    "redemption": "Resgate"
+  },
+  "tokenOptions": {
+    "all": "Todos os tokens"
+  },
+  "statusOptions": {
+    "all": "Todos os status",
+    "failed": "Falhou",
+    "pending": "Pendente",
+    "cancelled": "Cancelado",
+    "confirmed": "Confirmado"
+  },
+  "transactionTypes": {
+    "buy": "Compra",
+    "sell": "Venda",
+    "stake": "Investimento",
+    "cancel": "Cancelamento",
+    "deposit": "Depósito",
+    "unstake": "Resgate",
+    "exchange": "Troca",
+    "transfer": "Transferência",
+    "withdraw": "Saque",
+    "stake_reward": "Dividendo",
+    "contract_call": "Chamada de Contrato",
+    "contract_read": "Leitura de Contrato",
+    "contract_deploy": "Deploy de Contrato"
+  }
+}

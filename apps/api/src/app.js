@@ -172,8 +172,8 @@ app.use(helmet());
 // Middleware de CORS
 app.use(cors({
   origin: process.env.CORS_ORIGIN || '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Session-Token']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Session-Token', 'X-Clube-Slug']
 }));
 
 // Middleware de Rate Limiting Global
@@ -811,13 +811,13 @@ app.use('/api/super-admin/club-transactions', clubTransactionsRoutes);
 // CLUB ADMIN ROUTES (com resolução de clube e autenticação de club admin)
 // ============================================================================
 
-// Rotas de autenticação de club admin
+// Rotas de autenticação de club admin (PRECISA do middleware de resolução!)
 const clubAdminAuthRoutes = require('./routes/clubAdminAuth.routes');
-app.use('/api/club-admin/auth', clubAdminAuthRoutes);
+app.use('/api/club-admin/auth', resolveClubMiddleware, clubAdminAuthRoutes);
 
 // Rotas de informações do clube (com clube resolution)
 const clubAdminInfoRoutes = require('./routes/clubAdminInfo.routes');
-app.use('/api/club-admin', clubAdminInfoRoutes);
+app.use('/api/club-admin', resolveClubMiddleware, clubAdminInfoRoutes);
 
 // Rotas de usuários do clube
 const clubAdminUsersRoutes = require('./routes/clubAdminUsers.routes');

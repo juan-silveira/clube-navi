@@ -1,0 +1,675 @@
+{
+  "users": {
+    "title": "Gestión de Usuarios",
+    "loading": "Cargando usuarios...",
+    "newUser": "Nuevo Usuario",
+    "noUsers": "No se encontraron usuarios",
+    "refresh": "Actualizar",
+    "subtitle": "Gestiona todos los usuarios de tu empresa",
+    "exportCSV": "Exportar CSV",
+    "roles": {
+      "all": "Todos los Roles",
+      "user": "Usuario",
+      "admin": "Administrador",
+      "appAdmin": "Admin de Empresa",
+      "superAdmin": "Super Administrador"
+    },
+    "status": {
+      "all": "Todos los Estados",
+      "active": "Activo",
+      "blocked": "Bloqueado",
+      "pending": "Pendiente",
+      "inactive": "Inactivo"
+    },
+    "table": {
+      "role": "Rol",
+      "user": "Usuario",
+      "today": "Hoy",
+      "logins": "accesos",
+      "status": "Estado",
+      "actions": "Acciones",
+      "daysAgo": "días atrás",
+      "activity": "Actividad",
+      "transactions": "transacciones",
+      "neverLoggedIn": "Nunca ha accedido"
+    },
+    "usersCount": "Usuarios",
+    "noUsersDesc": "Intenta ajustar los filtros para ver más resultados",
+    "stats": {
+      "total": "Total",
+      "active": "Activos",
+      "admins": "Administradores",
+      "blocked": "Bloqueados",
+      "inactive": "Inactivos"
+    },
+    "companyTitle": "Gestión de Usuarios",
+    "filters": {
+      "role": "Rol",
+      "clear": "Limpiar",
+      "period": "Período",
+      "search": "Buscar",
+      "status": "Estado",
+      "lastLogin": "Último Acceso",
+      "roleLabel": "Rol:",
+      "loginLabel": "Acceso:",
+      "searchLabel": "Búsqueda:",
+      "statusLabel": "Estado:",
+      "activeFilters": "Filtros activos:",
+      "searchPlaceholder": "Nombre, email, CPF..."
+    },
+    "profile": {
+      "edit": "Editar",
+      "save": "Guardar Cambios",
+      "title": "Perfil del Usuario",
+      "cancel": "Cancelar",
+      "noName": "Usuario sin nombre",
+      "status": "Estado:",
+      "noEmail": "Email no informado",
+      "fields": {
+        "cpf": "CPF",
+        "email": "Email",
+        "phone": "Teléfono",
+        "fullName": "Nombre Completo",
+        "birthDate": "Fecha de Nacimiento",
+        "cannotEdit": "¡Este campo no se puede editar!",
+        "privateKey": "Clave Privada",
+        "notProvided": "No informado",
+        "notAvailable": "No disponible",
+        "cpfPlaceholder": "CPF",
+        "emailPlaceholder": "Email",
+        "phonePlaceholder": "(00) 00000-0000",
+        "blockchainAddress": "Dirección Blockchain",
+        "walletNotGenerated": "Cartera no generada",
+        "fullNamePlaceholder": "Nombre completo",
+        "birthDatePlaceholder": "Fecha de nacimiento",
+        "blockchainPlaceholder": "Dirección Blockchain"
+      },
+      "backToUsers": "Volver",
+      "tabs": {
+        "profile": "Perfil",
+        "activity": "Actividad",
+        "balances": "Saldos",
+        "documents": "Documentos",
+        "notifications": "Notificaciones"
+      },
+      "twoFA": {
+        "active": "2FA Activo",
+        "disable": "Deshabilitar 2FA",
+        "warning": "Advertencia",
+        "disabled": "2FA deshabilitado con éxito",
+        "activeDesc": "Este usuario tiene autenticación de dos factores habilitada:",
+        "warningDesc": "Estás a punto de deshabilitar la autenticación de dos factores de este usuario. Esta acción reducirá la seguridad de la cuenta y será registrada en los logs del sistema.",
+        "disableTitle": "Deshabilitar 2FA del Usuario",
+        "selectMethod": "Selecciona el método 2FA para deshabilitar",
+        "confirmDisable": "Confirmar Deshabilitación",
+        "errorDisabling": "Error al deshabilitar 2FA",
+        "authenticatorApp": "App Autenticador",
+        "selectMethodLabel": "Selecciona el método 2FA para deshabilitar:"
+      },
+      "activity": {
+        "title": "Historial de Actividades",
+        "status": "Estado",
+        "update": "Actualizar",
+        "category": "Categoría",
+        "subtitle": "Últimas 20 acciones realizadas por el usuario",
+        "updating": "Actualizando...",
+        "noActivity": "No se encontró actividad",
+        "actions": {
+          "login": "Login realizado",
+          "logout": "Logout realizado",
+          "token_swap": "Token swap realizado",
+          "login_failed": "Fallo en el login",
+          "stake_created": "Stake creado",
+          "transfer_sent": "Transferencia enviada",
+          "deposit_failed": "Fallo en el depósito",
+          "password_reset": "Contraseña restablecida",
+          "profile_viewed": "Perfil visualizado",
+          "reward_claimed": "Recompensa reclamada",
+          "profile_updated": "Perfil actualizado",
+          "stake_withdrawn": "Stake retirado",
+          "transfer_failed": "Fallo en la transferencia",
+          "password_changed": "Contraseña cambiada",
+          "transaction_sent": "Transacción enviada",
+          "deposit_confirmed": "Depósito confirmado",
+          "deposit_initiated": "Depósito iniciado",
+          "document_uploaded": "Documento enviado",
+          "document_verified": "Documento verificado",
+          "transfer_received": "Transferencia recibida",
+          "withdrawal_failed": "Fallo en el retiro",
+          "transaction_failed": "Fallo en la transacción",
+          "withdrawal_approved": "Retiro aprobado",
+          "contract_interaction": "Interacción con contrato",
+          "withdrawal_completed": "Retiro completado",
+          "withdrawal_initiated": "Retiro iniciado",
+          "transaction_confirmed": "Transacción confirmada"
+        },
+        "noActivityDesc": "Este usuario aún no tiene actividades registradas",
+        "statuses": {
+          "error": "Error",
+          "failed": "Fallido",
+          "pending": "Pendiente",
+          "success": "Éxito"
+        },
+        "categories": {
+          "system": "Sistema",
+          "profile": "Perfil",
+          "security": "Seguridad",
+          "financial": "Financiero",
+          "authentication": "Autenticación"
+        }
+      },
+      "balances": {
+        "title": "Saldos del Usuario",
+        "update": "Actualizar",
+        "loading": "Cargando...",
+        "subtitle": "Saldos guardados en la base de datos o recuperados de blockchain",
+        "noBalances": "Usuario sin saldos en tokens",
+        "walletAddress": "Dirección de la Cartera",
+        "noBalancesDesc": "Los saldos aparecerán cuando haya algún token en la cartera del usuario"
+      },
+      "documents": {
+        "close": "Cerrar",
+        "title": "Documentos del Usuario",
+        "reason": "Motivo",
+        "zoomIn": "Aumentar zoom",
+        "notSent": "Documento no enviado",
+        "zoomOut": "Disminuir zoom",
+        "approved": "Aprobados",
+        "subtitle": "Estado de validación de los 3 documentos obligatorios",
+        "resetZoom": "Restablecer zoom (100%)",
+        "types": {
+          "back": "Reverso del Documento",
+          "front": "Frente del Documento",
+          "selfie": "Selfie con Documento",
+          "backDesc": "Reverso del mismo documento",
+          "frontDesc": "ID, Licencia de Conducir o Pasaporte (frente)",
+          "selfieDesc": "Sosteniendo el documento al lado de tu cara"
+        },
+        "uploadedOn": "Enviado el",
+        "clickToView": "Haz clic para ver con zoom",
+        "pdfControls": "Usa los controles del visor de PDF para navegar • Presiona ESC o haz clic en X para cerrar",
+        "notSentCount": "{{count}} documentos no enviados",
+        "pendingCount": "{{count}} documentos en revisión",
+        "zoomControls": "Usa los botones + y - para hacer zoom (50% - 300%) • Presiona ESC o haz clic en X para cerrar",
+        "approvedCount": "{{count}} de 3 documentos aprobados",
+        "rejectedCount": "{{count}} documentos rechazados",
+        "clickToViewPdf": "Haz clic para ver PDF",
+        "status": {
+          "notSent": "No enviado",
+          "pending": "En revisión",
+          "approved": "Aprobado",
+          "rejected": "Rechazado"
+        },
+        "validationStatus": "Estado de Validación"
+      },
+      "messages": {
+        "updated": "Usuario actualizado con éxito",
+        "errorSave": "Error al guardar cambios",
+        "errorUpdate": "Error al actualizar usuario",
+        "userNotFound": "Usuario no encontrado",
+        "errorLoadingUser": "Error al cargar datos del usuario"
+      },
+      "notifications": {
+        "send": "Enviar Notificación",
+        "type": "Tipo",
+        "title": "Título",
+        "sendTo": "Enviar Notificación a {{name}}",
+        "message": "Mensaje",
+        "types": {
+          "info": "Información",
+          "error": "Error",
+          "success": "Éxito",
+          "warning": "Advertencia"
+        },
+        "successSent": "Notificación enviada con éxito",
+        "errorSending": "Error al enviar notificación",
+        "errorValidation": "Completa el título y mensaje de la notificación",
+        "titlePlaceholder": "Título de la notificación",
+        "messagePlaceholder": "Ingresa el mensaje de la notificación..."
+      }
+    },
+    "actions": {
+      "block": "Bloquear",
+      "approve": "Aprobar Usuario",
+      "unblock": "Desbloquear",
+      "activate": "Activar",
+      "deactivate": "Desactivar",
+      "viewProfile": "Ver Perfil",
+      "demoteToUser": "Degradar a Usuario",
+      "promoteToAdmin": "Promover a Admin"
+    },
+    "pagination": {
+      "of": "de",
+      "to": "al",
+      "records": "registros",
+      "showing": "Mostrando"
+    },
+    "loadingProfile": "Cargando perfil del usuario...",
+    "itemsPerPage": {
+      "10": "10 por página",
+      "20": "20 por página",
+      "50": "50 por página",
+      "100": "100 por página"
+    },
+    "messages": {
+      "blocked": "fue bloqueado",
+      "approved": "fue aprobado y activado",
+      "activated": "fue activado",
+      "unblocked": "fue desbloqueado",
+      "deactivated": "fue desactivado",
+      "errorAction": "Error al ejecutar acción",
+      "errorLoading": "Error al cargar usuarios",
+      "noPermission": "No tienes permiso para esta acción",
+      "demotedToUser": "fue degradado a Usuario",
+      "promotedToAdmin": "fue promovido a Administrador",
+      "tooManyRequests": "Demasiadas solicitudes simultáneas. Espera un momento."
+    },
+    "lastLoginOptions": {
+      "any": "Cualquier período",
+      "lastDay": "Último día",
+      "last7Days": "Últimos 7 días",
+      "last30Days": "Últimos 30 días",
+      "last90Days": "Últimos 90 días"
+    }
+  },
+  "dashboard": {
+    "loading": "Cargando estadísticas...",
+    "pageTitle": "Panel Administrativo",
+    "lastUpdate": "Última actualización:",
+    "error": {
+      "retry": "Intentar de nuevo",
+      "title": "Error al cargar estadísticas"
+    },
+    "updateButton": "Actualizar",
+    "stats": {
+      "users": {
+        "title": "Total de Usuarios",
+        "total": "Total",
+        "active": "activos",
+        "inactive": "Inactivos",
+        "new7days": "Nuevos (7 días)",
+        "activeLabel": "Activos",
+        "newLast7Days": "últimos 7 días",
+        "summaryTitle": "Resumen de Usuarios"
+      },
+      "companies": {
+        "title": "Empresas Registradas",
+        "total": "Total",
+        "active": "activas",
+        "inactive": "Inactivas",
+        "new7days": "Nuevas (7 días)",
+        "activeLabel": "Activas",
+        "newLast7Days": "últimos 7 días",
+        "summaryTitle": "Resumen de Empresas"
+      },
+      "performance": {
+        "title": "Rendimiento",
+        "avgTransactionsPerDay": "Promedio TX/día",
+        "withdrawalSuccessRate": "Tasa de Éxito RT",
+        "transactionSuccessRate": "Tasa de Éxito TX"
+      },
+      "withdrawals": {
+        "title": "Retiros Pendientes",
+        "total": "Total",
+        "pending": "Pendientes",
+        "completed": "completados",
+        "last7Days": "Últimos 7 días",
+        "summaryTitle": "Resumen de Retiros"
+      },
+      "transactions": {
+        "title": "Total de Transacciones",
+        "failed": "Fallidas",
+        "pending": "Pendientes",
+        "confirmed": "Confirmadas",
+        "chartTitle": "Transacciones (Últimos 7 días)",
+        "seriesName": "Transacciones",
+        "statusTitle": "Estado de Transacciones",
+        "successRate": "éxito",
+        "chartSubtitle": "Seguimiento del volumen diario de transacciones"
+      },
+      "documents": {
+        "total": "total",
+        "pending": "Documentos Pendientes",
+        "approved": "Documentos Aprobados",
+        "rejected": "Documentos Rechazados",
+        "viewAll": "Ver Todos los Documentos",
+        "approvedSubtitle": "Documentos validados",
+        "rejectedSubtitle": "Documentos rechazados"
+      }
+    }
+  },
+  "transactions": {
+    "title": "Transacciones de la Empresa",
+    "subtitle": "Historial completo de todas las transacciones de los usuarios de la empresa",
+    "pageTitle": "Transacciones de la Empresa",
+    "table": {
+      "date": "Fecha",
+      "type": "Tipo",
+      "user": "Usuario",
+      "title": "Transacciones",
+      "token": "Token",
+      "amount": "Valor",
+      "status": "Estado",
+      "txHash": "TxHash"
+    },
+    "types": {
+      "stake": "Inversión",
+      "deposit": "Depósito",
+      "unstake": "Rescate",
+      "exchange": "Intercambio",
+      "transfer": "Transferencia",
+      "withdraw": "Retiro",
+      "stake_reward": "Recompensa",
+      "contract_call": "Llamada de Contrato",
+      "contract_read": "Lectura de Contrato",
+      "contract_deploy": "Deploy de Contrato"
+    },
+    "filters": {
+      "type": "Tipo de Transacción",
+      "user": "Usuario",
+      "clear": "Limpiar",
+      "token": "Token",
+      "status": "Estado",
+      "itemsPerPage": "Elementos por página",
+      "activeFilters": "Filtros activos:",
+      "typePlaceholder": "Filtrar por tipo",
+      "userPlaceholder": "Buscar por nombre o email del usuario...",
+      "tokenPlaceholder": "Buscar por nombre o símbolo del token...",
+      "statusPlaceholder": "Filtrar por estado"
+    },
+    "pagination": {
+      "of": "de",
+      "to": "al",
+      "perPage": "{{count}} por página",
+      "records": "registros",
+      "showing": "Mostrando"
+    },
+    "actions": {
+      "export": "Exportar CSV",
+      "refresh": "Actualizar"
+    },
+    "statuses": {
+      "failed": "Fallido",
+      "pending": "Pendiente",
+      "cancelled": "Cancelado",
+      "confirmed": "Confirmado"
+    },
+    "messages": {
+      "loading": "Cargando transacciones...",
+      "errorLoading": "Error al cargar transacciones",
+      "adjustFilters": "Intenta ajustar los filtros para ver más resultados",
+      "noTransactions": "No se encontraron transacciones",
+      "notAuthenticated": "Usuario no autenticado",
+      "errorLoadingTokens": "Error al cargar tokens disponibles"
+    }
+  },
+  "companyStakes": {
+    "title": "Gestión de Stakes",
+    "loading": "Cargando...",
+    "subtitle": "{{companyName}} - Administración de contratos de stake",
+    "error": {
+      "error": "Error",
+      "function": "Función",
+      "tryAgain": "Intentar Nuevamente",
+      "abiOutdated": "El ABI del contrato está desactualizado",
+      "checkSettings": "Verificar Configuraciones",
+      "unableToConnect": "No fue posible conectar al contrato en la blockchain. Posibles causas:",
+      "functionsNotRead": "{{count}} función(es) no pudieron ser leídas",
+      "adminNoPermission": "La dirección admin no tiene permiso para leer datos",
+      "networkUnavailable": "La red blockchain no está disponible",
+      "problemLoadingData": "Problema al cargar datos del contrato",
+      "contractNotDeployed": "El contrato no está deployado en la dirección especificada",
+      "someFunctionsReturned": "Algunas funciones del contrato retornaron error. Funciones que fallaron:"
+    },
+    "actions": {
+      "title": "Acciones Realizadas",
+      "reload": "Recargar",
+      "update": "Actualizar",
+      "params": {
+        "no": "No",
+        "yes": "Sí",
+        "days": "días",
+        "allowed": "Permitido",
+        "blocked": "Bloqueado",
+        "activated": "Activado",
+        "available": "Disponible",
+        "deactivated": "Desactivado"
+      },
+      "table": {
+        "user": "Usuario",
+        "action": "Acción",
+        "dateTime": "Fecha/Hora",
+        "parameters": "Parámetros",
+        "transaction": "Transacción"
+      },
+      "noActionsYet": "Ninguna acción registrada todavía",
+      "loadingActions": "Cargando acciones...",
+      "names": {
+        "addToWhitelist": "Agregar a Whitelist",
+        "depositRewards": "Depositar Recompensas",
+        "setAllowRestake": "Configurar Restake",
+        "distributeReward": "Distribuir Recompensas",
+        "setCycleDuration": "Definir Duración del Ciclo",
+        "setStakingBlocked": "Bloquear/Desbloquear Stake",
+        "removeFromWhitelist": "Remover de Whitelist",
+        "setWhitelistEnabled": "Configurar Whitelist",
+        "updateMinValueStake": "Actualizar Valor Mínimo",
+        "withdrawRewardTokens": "Retirar Tokens de Recompensa"
+      }
+    },
+    "rewards": {
+      "title": "Gestión de Recompensas",
+      "depositRewards": "Depositar Recompensas",
+      "distributeRewards": "Distribuir Recompensas",
+      "withdrawFromVault": "Retirar de la Bóveda"
+    },
+    "contract": {
+      "stake": "Stake",
+      "reward": "Recompensa",
+      "selectContract": "Seleccionar Contrato"
+    },
+    "dashboard": {
+      "days": "{{count}} días",
+      "last": "Última",
+      "stake": "Stake",
+      "title": "Dashboard",
+      "users": "Usuarios",
+      "vault": "Bóveda",
+      "active": "Activos",
+      "errors": "{{count}} error(es)",
+      "allowed": "Permitido",
+      "blocked": "Bloqueado",
+      "restake": "Restake",
+      "rewards": "Recompensas",
+      "invested": "Invertido",
+      "minValue": "Valor Mínimo",
+      "settings": "Configuraciones",
+      "available": "Disponible",
+      "whitelist": "Whitelist",
+      "cycleStart": "Inicio del Ciclo",
+      "deactivated": "Desactivada",
+      "totalInStake": "Total en Stake",
+      "cycleDuration": "Duración del Ciclo",
+      "availableBalance": "Saldo Disponible",
+      "totalDistributed": "Total Distribuido"
+    },
+    "settings": {
+      "title": "Configuraciones del Contrato",
+      "minValue": "Valor Mínimo",
+      "allowRestake": "Permitir Restake",
+      "blockRestake": "Bloquear Restake",
+      "cycleDuration": "Duración del Ciclo",
+      "updateMinValue": "Actualizar Valor Mínimo",
+      "allowBlockRestake": "Permitir/Bloquear Restake",
+      "changeCycleDuration": "Cambiar Duración del Ciclo"
+    },
+    "whitelist": {
+      "check": "Verificar",
+      "title": "Gestión de Whitelist",
+      "active": "Activa",
+      "noUsers": "Ningún usuario en whitelist",
+      "activate": "Activar",
+      "whitelist": "Whitelist",
+      "addAddress": "Agregar Dirección",
+      "deactivate": "Desactivar",
+      "table": {
+        "name": "Nombre",
+        "email": "Email",
+        "actions": "Acciones",
+        "address": "Dirección",
+        "inStake": "En Stake",
+        "toReceive": "A Recibir"
+      },
+      "loadingUsers": "Cargando usuarios...",
+      "isInWhitelist": "está en la whitelist",
+      "removeAddress": "Remover Dirección",
+      "addToWhitelist": "Agregar a Whitelist",
+      "notInWhitelist": "NO está en la whitelist",
+      "usersInWhitelist": "Usuarios en Whitelist ({{count}})",
+      "activateWhitelist": "Activar Whitelist",
+      "whitelistDisabled": "La whitelist está desactivada",
+      "deactivateWhitelist": "Desactivar Whitelist",
+      "removeFromWhitelist": "Remover de Whitelist",
+      "checkAddressPlaceholder": "Verificar dirección (0x...)",
+      "whitelistEnabledNoAddresses": "La whitelist está activa pero no hay direcciones registradas",
+      "manageAddressesAnyway": "Puedes gestionar las direcciones de todas formas"
+    },
+    "statements": {
+      "title": "Estados Financieros",
+      "loading": "Cargando estados financieros...",
+      "noStatements": "No hay estados financieros registrados",
+      "noStatementsDesc": "Haga clic en \"Agregar Estado Financiero\" para registrar el primero",
+      "addButton": "Agregar Estado Financiero",
+      "table": {
+        "date": "Fecha",
+        "name": "Nombre",
+        "type": "Tipo",
+        "file": "Archivo",
+        "link": "Enlace",
+        "actions": "Acciones"
+      },
+      "buttons": {
+        "open": "Abrir",
+        "download": "Descargar",
+        "openLink": "Abrir Enlace",
+        "edit": "Editar"
+      },
+      "addModal": {
+        "title": "Agregar Estado Financiero",
+        "date": "Fecha del Estado Financiero",
+        "datePlaceholder": "Seleccione la fecha",
+        "name": "Nombre del Archivo",
+        "namePlaceholder": "Ej: Estado Financiero Q1 2024",
+        "linkUrl": "URL del Enlace",
+        "linkUrlPlaceholder": "Ej: https://ejemplo.com/documento.pdf",
+        "file": "Archivo PDF",
+        "fileInfo": "Formatos aceptados: PDF, JPEG, PNG, WEBP (máx. 10MB)",
+        "fileOrLink": "Se requiere al menos un archivo o enlace",
+        "selectFile": "Seleccionar archivo",
+        "fileSelected": "Archivo seleccionado:",
+        "uploading": "Subiendo...",
+        "cancel": "Cancelar",
+        "add": "Agregar"
+      },
+      "editModal": {
+        "title": "Editar Estado Financiero",
+        "currentFile": "Archivo Actual",
+        "removeFile": "Eliminar Archivo",
+        "newFile": "Nuevo Archivo",
+        "update": "Actualizar",
+        "updating": "Actualizando...",
+        "success": "Estado financiero actualizado con éxito",
+        "error": "Error al actualizar estado financiero"
+      }
+    },
+    "modals": {
+      "confirmAction": "Confirmar Acción",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "attention": "Atención",
+      "blockchainWarning": "Esta acción será ejecutada en la blockchain y no podrá deshacerse.",
+      "depositRewards": {
+        "yourBalance": "Tu Saldo:",
+        "vaultBalance": "Saldo del Cofre:",
+        "tokenQuantity": "Cantidad de Tokens",
+        "placeholder": "Ej: 1000"
+      },
+      "distributeReward": {
+        "percentageLabel": "Porcentaje (en puntos base, ej: 540 = 5.40%)",
+        "placeholder": "Ej: 540"
+      },
+      "addToWhitelist": {
+        "loadingUsers": "Cargando usuarios...",
+        "allUsersInWhitelist": "Todos los usuarios ya están en la whitelist",
+        "selectUser": "Seleccionar Usuario",
+        "selectPlaceholder": "Seleccione un usuario...",
+        "addressLabel": "Dirección para Agregar",
+        "addressPlaceholder": "0x... o seleccione un usuario arriba"
+      },
+      "removeFromWhitelist": {
+        "loadingUsers": "Cargando usuarios...",
+        "noUsersInWhitelist": "Ningún usuario de la empresa está en la whitelist",
+        "selectUser": "Seleccionar Usuario de Whitelist",
+        "selectPlaceholder": "Seleccione un usuario...",
+        "addressLabel": "Dirección para Remover",
+        "addressPlaceholder": "0x... o seleccione un usuario arriba"
+      },
+      "updateMinValue": {
+        "currentValue": "Valor Actual:",
+        "newMinValue": "Nuevo Valor Mínimo",
+        "placeholder": "Ej: 10"
+      },
+      "withdrawRewardTokens": {
+        "availableBalance": "Saldo Disponible (Cofre):",
+        "withdrawQuantity": "Cantidad a Retirar",
+        "placeholder": "Ej: 500",
+        "maxButton": "MAX"
+      },
+      "setCycleDuration": {
+        "currentDuration": "Duración Actual:",
+        "days": "días",
+        "newDuration": "Nueva Duración (en días)",
+        "placeholder": "Ej: 90"
+      },
+      "setWhitelistEnabled": {
+        "activate": "Activar",
+        "deactivate": "Desactivar",
+        "question": "el sistema de whitelist?"
+      },
+      "setAllowRestake": {
+        "currentStatus": "Estado Actual:",
+        "restakeAllowed": "Restake Permitido",
+        "restakeBlocked": "Restake Bloqueado",
+        "willChangeTitle": "Al confirmar, se cambiará a:"
+      },
+      "setStakingBlocked": {
+        "currentStatus": "Estado Actual:",
+        "stakesBlocked": "Stakes Bloqueados",
+        "stakesAvailable": "Stakes Disponibles",
+        "willChangeTitle": "Al confirmar, se cambiará a:"
+      }
+    },
+    "messages": {
+      "invalidAddress": "Dirección inválida",
+      "errorLoadingData": "No fue posible cargar datos del contrato. Verifica si el contrato está deployado y si la dirección admin es correcta.",
+      "functionsNotRead": "{{count}} función(es) del contrato no pudieron ser leídas. Haz clic en la alerta para ver detalles.",
+      "actionNotRecognized": "Acción no reconocida",
+      "addressIsWhitelisted": "La dirección está en la whitelist",
+      "adminAddressNotFound": "Dirección del admin no encontrada para este contrato",
+      "errorCheckingAddress": "Error al verificar dirección",
+      "actionExecutedSuccess": "¡{{action}} ejecutado con éxito!",
+      "addressNotWhitelisted": "La dirección NO está en la whitelist",
+      "errorLoadingContracts": "Error al cargar contratos de stake",
+      "errorExecutingFunction": "Error al ejecutar función",
+      "errorLoadingContractData": "Error al cargar datos del contrato",
+      "whitelistFunctionNotFound": "La función getWhitelistedAddresses no fue encontrada en el contrato. Verifica si el contrato implementa esta función."
+    },
+    "emptyState": {
+      "goToCompanies": "Ir a Gestión de Empresas",
+      "noContractsDesc": "No hay contratos de stake registrados para la red {{network}}.",
+      "noContractsTitle": "Ningún contrato de stake encontrado",
+      "companyNotIdentified": "Empresa no identificada",
+      "companyNotIdentifiedDesc": "No fue posible identificar la empresa actual. Por favor, accede a través de la página de gestión de empresas."
+    }
+  }
+}

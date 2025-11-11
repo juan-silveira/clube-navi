@@ -110,7 +110,8 @@ export type GroupUser = $Result.DefaultSelection<Prisma.$GroupUserPayload>
 export namespace $Enums {
   export const UserType: {
   consumer: 'consumer',
-  merchant: 'merchant'
+  merchant: 'merchant',
+  admin: 'admin'
 };
 
 export type UserType = (typeof UserType)[keyof typeof UserType]

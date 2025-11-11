@@ -1,0 +1,191 @@
+{
+  "title": "Gestión de Empresas",
+  "subtitle": "Gestione todas las empresas y sus configuraciones de whitelabel",
+  "stats": {
+    "total": "Total",
+    "active": "Activas",
+    "inactive": "Inactivas",
+    "customBranding": "Personalizadas",
+    "defaultBranding": "Predeterminado"
+  },
+  "table": {
+    "title": "Empresas",
+    "loading": "Cargando empresas...",
+    "empty": {
+      "title": "No se encontraron empresas",
+      "subtitle": "Intente ajustar los filtros para ver más resultados"
+    },
+    "stats": {
+      "users": "usuarios",
+      "transactions": "transacciones"
+    },
+    "columns": {
+      "stats": "Estadísticas",
+      "status": "Estado",
+      "actions": "Acciones",
+      "company": "Empresa",
+      "activity": "Actividad",
+      "branding": "Personalización"
+    },
+    "activity": {
+      "today": "Hoy",
+      "active": "Activo:",
+      "created": "Creado:",
+      "daysAgo": "hace {{days}} días",
+      "noRecentActivity": "Sin actividad reciente"
+    },
+    "pagination": {
+      "showing": "Mostrando {{from}} a {{to}} de {{total}} registros",
+      "perPage10": "10 por página",
+      "perPage20": "20 por página",
+      "perPage50": "50 por página",
+      "perPage100": "100 por página"
+    },
+    "brandingStatus": {
+      "custom": "Personalizada",
+      "default": "Predeterminado"
+    }
+  },
+  "buttons": {
+    "save": "Guardar Configuraciones",
+    "clear": "Limpiar",
+    "cancel": "Cancelar",
+    "upload": "Haga clic para subir",
+    "refresh": "Actualizar",
+    "exportCSV": "Exportar CSV"
+  },
+  "status": {
+    "active": "Activo",
+    "pending": "Pendiente",
+    "inactive": "Inactivo"
+  },
+  "actions": {
+    "activate": "Activar",
+    "deactivate": "Desactivar",
+    "editBranding": "Editar Branding",
+    "manageStakes": "Gestionar Stakes"
+  },
+  "filters": {
+    "status": {
+      "all": "Todos los Estados",
+      "label": "Estado",
+      "placeholder": "Estado"
+    },
+    "branding": {
+      "all": "Todas",
+      "label": "Personalización",
+      "custom": "Personalizada",
+      "default": "Predeterminado",
+      "placeholder": "Branding"
+    },
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Nombre o alias de la empresa"
+    },
+    "activeFilters": "Filtros activos",
+    "lastActivity": {
+      "label": "Última Actividad",
+      "lastDay": "Último día",
+      "anyPeriod": "Cualquier período",
+      "last7Days": "Últimos 7 días",
+      "last30Days": "Últimos 30 días",
+      "last90Days": "Últimos 90 días",
+      "placeholder": "Período"
+    },
+    "activeLabels": {
+      "search": "Búsqueda",
+      "status": "Estado",
+      "activity": "Actividad",
+      "branding": "Branding"
+    }
+  },
+  "messages": {
+    "loadError": "Error al cargar empresas",
+    "saveError": "Error al guardar configuraciones",
+    "actionError": "Error al ejecutar acción",
+    "saveSuccess": "¡Configuraciones de branding guardadas exitosamente!",
+    "uploadError": "Error al subir archivo",
+    "noPermission": "No tiene permiso para esta acción",
+    "activateError": "Error al activar empresa",
+    "uploadSuccess": "¡{{assetType}} subido exitosamente!",
+    "uploadingAsset": "Subiendo {{assetType}}...",
+    "activateSuccess": "{{name}} ha sido activada",
+    "deactivateError": "Error al desactivar empresa",
+    "deactivateSuccess": "{{name}} ha sido desactivada"
+  },
+  "branding": {
+    "modalTitle": "Configuración de Branding",
+    "colors": {
+      "text": "Color del Texto",
+      "accent": "Color de Acento",
+      "primary": "Color Primario",
+      "secondary": "Color Secundario",
+      "background": "Color de Fondo"
+    },
+    "images": {
+      "width": "Ancho",
+      "height": "Alto",
+      "favicon": "Favicon",
+      "darkLogo": "Logo Oscuro",
+      "mainLogo": "Logo Principal",
+      "dimensionsTip": "Use \"100%\" para llenar todo el espacio disponible, o valores en píxeles para tamaños fijos. \"auto\" mantiene la proporción original.",
+      "dimensionsHint": "Use %, px o auto",
+      "urlPlaceholder": "URL de la imagen",
+      "backgroundImage": "Imagen de Fondo",
+      "widthPlaceholder": "Ej: 100%, 500px, auto",
+      "heightPlaceholder": "Ej: 100%, 400px, auto",
+      "backgroundDimensions": "Dimensiones de la Imagen de Fondo"
+    },
+    "layout": {
+      "style": "Estilo de Diseño",
+      "fontSize": "Tamaño de Fuente",
+      "borderRadius": "Bordes Redondeados (px)",
+      "styles": {
+        "default": "Predeterminado",
+        "sidebar": "Barra Lateral",
+        "centered": "Centrado",
+        "fullscreen": "Pantalla Completa"
+      },
+      "fontSizes": {
+        "large": "Grande",
+        "small": "Pequeño",
+        "medium": "Mediano"
+      },
+      "borderRadiusPlaceholder": "8"
+    },
+    "urls": {
+      "support": "URL de Soporte",
+      "privacyPolicy": "Política de Privacidad",
+      "termsOfService": "Términos de Servicio",
+      "supportPlaceholder": "https://soporte.empresa.com",
+      "privacyPolicyPlaceholder": "https://empresa.com/privacidad",
+      "termsOfServicePlaceholder": "https://empresa.com/terminos"
+    },
+    "sections": {
+      "urls": "URLs",
+      "texts": "Textos",
+      "colors": "Colores",
+      "images": "Imágenes",
+      "layout": "Diseño y Estilo",
+      "preview": "Vista Previa"
+    },
+    "preview": {
+      "mobile": "Móvil",
+      "desktop": "Escritorio"
+    },
+    "texts": {
+      "brandName": "Nombre de la Marca",
+      "footerText": "Texto del Pie de Página",
+      "loginTitle": "Título de la Pantalla de Login",
+      "contactEmail": "Email de Contacto",
+      "loginSubtitle": "Subtítulo de la Pantalla de Login",
+      "welcomeMessage": "Mensaje de Bienvenida",
+      "brandNamePlaceholder": "Nombre de la marca",
+      "footerTextPlaceholder": "© 2025 Empresa. Todos los derechos reservados.",
+      "loginTitlePlaceholder": "Bienvenido a Clube Digital",
+      "contactEmailPlaceholder": "soporte@empresa.com",
+      "loginSubtitlePlaceholder": "Plataforma líder en blockchain",
+      "welcomeMessagePlaceholder": "¡Bienvenido! Su plataforma confiable..."
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "title": "Validação de Documentos",
+  "approved": "Aprovados",
+  "subtitle": "Analise e valide documentos enviados pelos usuários",
+  "table": {
+    "file": "Arquivo:",
+    "type": "Tipo:",
+    "empty": "Nenhum documento encontrado",
+    "title": "Documentos",
+    "users": "usuário",
+    "loading": "Carregando documentos...",
+    "document": "documento",
+    "uploaded": "Enviado:",
+    "usersPlural": "usuários",
+    "documentsPlural": "documentos",
+    "rejectionReason": "Motivo da Rejeição:"
+  },
+  "selectFiles": "Selecione arquivos para enviar",
+  "stats": {
+    "total": "Total",
+    "pending": "Pendentes",
+    "approved": "Aprovados",
+    "rejected": "Rejeitados"
+  },
+  "uploadSingle": "Enviar Documento",
+  "buttons": {
+    "clear": "Limpar",
+    "cancel": "Cancelar",
+    "reject": "Rejeitar",
+    "approve": "Aprovar",
+    "refresh": "Atualizar",
+    "rejectDocument": "Rejeitar Documento",
+    "approveDocument": "Aprovar Documento"
+  },
+  "selectedCount": "{{count}} documento(s) selecionado(s)",
+  "status": {
+    "notSent": "Não enviado",
+    "pending": "Pendente",
+    "unknown": "Desconhecido",
+    "approved": "Aprovado",
+    "rejected": "Rejeitado"
+  },
+  "uploadMultiple": "Enviar {{count}} Documentos",
+  "warnings": {
+    "item1": "RG, CNH, Passaporte ou Carteira Profissional",
+    "item2": "Fotos nítidas, sem reflexos ou sombras",
+    "item3": "Use o mesmo documento nas 3 fotos",
+    "item4": "Análise em até 2 dias úteis",
+    "title": "Documentos Aceitos"
+  },
+  "uploadDocuments": "Enviar Documentos",
+  "uploader": {
+    "remove": "Remover",
+    "preview": "Preview do arquivo",
+    "dropHere": "Solte aqui",
+    "fileTypes": "JPEG, PNG, PDF (máx. 10MB)",
+    "uploading": "Enviando",
+    "previewNew": "Preview do novo arquivo",
+    "uploadedOn": "Enviado em",
+    "clickOrDrag": "Clique ou arraste",
+    "rejectionReason": "Motivo da Rejeição"
+  },
+  "imageModal": {
+    "close": "Fechar",
+    "zoomIn": "Aumentar zoom",
+    "zoomOut": "Diminuir zoom",
+    "resetZoom": "Reset zoom (100%)",
+    "pdfInstructions": "Use os controles do visualizador de PDF para navegar • Pressione ESC ou clique no X para fechar",
+    "imageInstructions": "Use os botões + e - para zoom (50% - 300%) • Pressione ESC ou clique no X para fechar"
+  },
+  "messages": {
+    "success": "Documento enviado com sucesso!",
+    "loadError": "Erro ao carregar documentos para validação",
+    "rejectSuccess": "Documento rejeitado",
+    "approveSuccess": "Documento aprovado com sucesso",
+    "successMultiple": "{{count}} documento(s) enviado(s) com sucesso!",
+    "validationError": "Erro ao validar documento",
+    "noDocumentsSelected": "Nenhum documento selecionado para envio",
+    "rejectionReasonRequired": "Informe o motivo da rejeição"
+  },
+  "modal": {
+    "clickToView": "Clique para visualizar",
+    "pdfDocument": "Documento PDF",
+    "rejectTitle": "Rejeitar Documento",
+    "approveTitle": "Aprovar Documento",
+    "rejectionReasonLabel": "Motivo da Rejeição *",
+    "clickToViewFullscreen": "Clique para visualizar em tela cheia",
+    "rejectionReasonPlaceholder": "Descreva o motivo da rejeição..."
+  },
+  "documentTypes": {
+    "front": {
+      "label": "Frente do Documento",
+      "description": "Foto da frente do seu documento de identidade"
+    },
+    "back": {
+      "label": "Verso do Documento",
+      "description": "Foto do verso do seu documento de identidade"
+    },
+    "selfie": {
+      "label": "Selfie com Documento",
+      "description": "Foto sua segurando o documento próximo ao rosto"
+    }
+  },
+  "filters": {
+    "status": {
+      "all": "Todos os Status",
+      "label": "Status"
+    },
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Nome, email..."
+    },
+    "documentType": {
+      "all": "Todos os Tipos",
+      "label": "Tipo de Documento"
+    }
+  },
+  "errors": {
+    "fileTooLarge": "Arquivo muito grande. Máximo: 10MB.",
+    "uploadFailed": "Erro ao enviar documento",
+    "invalidFileType": "Tipo de arquivo não permitido. Use JPEG, PNG, HEIC, WEBP ou PDF."
+  }
+}

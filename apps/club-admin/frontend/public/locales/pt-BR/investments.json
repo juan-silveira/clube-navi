@@ -1,0 +1,440 @@
+{
+  "title": "Meus Investimentos",
+  "tabs": {
+    "fixed": "Renda Fixa",
+    "stake": "Stake",
+    "crypto": "Criptoativos",
+    "private": "Ofertas Privadas",
+    "analysis": "Análises",
+    "variable": "Renda Variável",
+    "portfolio": "Meu Portfólio",
+    "opportunities": "Oportunidades"
+  },
+  "stake": {
+    "title": "Stake de Ativos Digitais",
+    "loading": "Carregando opções de stake...",
+    "risk": {
+      "low": "Baixo",
+      "high": "Alto",
+      "medium": "Médio",
+      "variable": "Variável"
+    },
+    "subtitle": "Bloqueie seus ativos e receba recompensas periódicas",
+    "card": {
+      "risk": "Risco:",
+      "inStake": "Em Stake:",
+      "maturity": "Vencimento:",
+      "available": "Disponível:",
+      "toReceive": "À Receber",
+      "stakeButton": "Fazer Stake",
+      "withdrawButton": "Retirar",
+      "quarterlyReturn": "Retorno Trimestral:"
+    },
+    "noDeadline": "Sem prazo",
+    "empty": {
+      "title": "Nenhum contrato de stake disponível",
+      "description": "Não há contratos de stake público disponíveis no momento"
+    },
+    "infoCard": {
+      "title": "Como funciona o Stake?",
+      "benefit1": "Rendimentos pagos periodicamente conforme o plano escolhido",
+      "benefit2": "Possibilidade de reinvestir automaticamente os rendimentos",
+      "benefit3": "Diferentes níveis de risco e retorno disponíveis",
+      "benefit4": "Retirada antecipada sujeita a penalidades",
+      "description": "O Stake permite que você bloqueie seus ativos digitais por um período determinado em troca de recompensas periódicas. Quanto maior o período de bloqueio, maiores as recompensas."
+    },
+    "errors": {
+      "loadContracts": "Erro ao carregar contratos de stake. Tente novamente mais tarde."
+    }
+  },
+  "analysis": {
+    "title": "Análises e Insights",
+    "description": "Esta seção estará disponível em breve com gráficos detalhados e análises de mercado.",
+    "inDevelopment": "Análises em Desenvolvimento"
+  },
+  "crypto": {
+    "buyButton": "Comprar",
+    "table": {
+      "asset": "Ativo",
+      "price": "Preço",
+      "market": "Mercado",
+      "actions": "Ações",
+      "payment": "Pagamento",
+      "daysRemaining": "Dias Restantes",
+      "profitability": "Rentabilidade"
+    },
+    "infoCard": {
+      "title": "Sobre Criptoativos",
+      "description": "Invista em ativos digitais com potencial de alta valorização. Os criptoativos oferecem exposição ao mercado de moedas digitais com diferentes níveis de risco e retorno."
+    },
+    "products": {
+      "monthly": "Mensal",
+      "bitcoinFuture": "Bitcoin Futuro",
+      "daysRemaining": "{{days}} dias",
+      "primaryMarket": "Primário",
+      "bitcoinProfitability": "+200% em 2024"
+    }
+  },
+  "newInvestmentButton": "Novo Investimento",
+  "opportunities": {
+    "price": "Preço",
+    "title": "Oportunidades de Investimento",
+    "marketCap": "Market Cap",
+    "investButton": "Investir",
+    "solana": {
+      "description": "Blockchain de alta performance para DApps"
+    },
+    "polygon": {
+      "description": "Solução de escalabilidade Ethereum"
+    },
+    "chainlink": {
+      "description": "Rede de oráculos descentralizada"
+    }
+  },
+  "fixedIncome": {
+    "buyButton": "Comprar",
+    "table": {
+      "asset": "Ativo",
+      "price": "Preço",
+      "market": "Mercado",
+      "actions": "Ações",
+      "payment": "Pagamento",
+      "daysRemaining": "Dias Restantes",
+      "profitability": "Rentabilidade"
+    },
+    "empty": {
+      "title": "Nenhum investimento de renda fixa disponível",
+      "description": "Não há produtos de renda fixa disponíveis no momento"
+    },
+    "infoCard": {
+      "title": "Sobre Renda Fixa Digital",
+      "description": "Investimentos com retorno previsível e menor volatilidade. Ideal para investidores que buscam segurança e rentabilidade consistente com pagamentos regulares."
+    },
+    "products": {
+      "daily": "Diário",
+      "daysRemaining": "{{days}} dias",
+      "primaryMarket": "Primário",
+      "coinageProfitability": "Retorno de 1.5% ao mês"
+    }
+  },
+  "pedacinhoPratique": {
+    "title": "Meu Pedacinho Pratique",
+    "risk": {
+      "low": "Baixo",
+      "high": "Alto",
+      "label": "Risco: {{level}}",
+      "medium": "Médio",
+      "veryLow": "Muito Baixo",
+      "veryHigh": "Muito Alto"
+    },
+    "card": {
+      "more": "Mais",
+      "risk": "Risco:",
+      "myStake": "Meu Stake:",
+      "nextDue": "Próximo Vencimento:",
+      "buyButton": "Comprar",
+      "toReceive": "{{symbol}} à receber",
+      "sellButton": "Vender",
+      "claimButton": "Receber",
+      "stakeButton": "Investir",
+      "tooltipInfo": "Contrato de stake inteligente para investimento em participação empresarial.",
+      "totalStaked": "Total em Stake:",
+      "errorLoading": "(Erro ao carregar alguns dados)",
+      "lastQuarterly": "Último Trimestral:",
+      "unstakeButton": "Retirar",
+      "compoundButton": "Reinvestir",
+      "stakingBlocked": "Stake Bloqueado",
+      "statementsButton": "Últimos Demonstrativos"
+    },
+    "pcnBalance": "Saldo PCN",
+    "empty": {
+      "title": "Nenhum contrato Pedacinho Pratique encontrado",
+      "description": "Não há contratos de stake com \"Pedacinho Pratique\" disponíveis no momento"
+    },
+    "errors": {
+      "loadContracts": "Erro ao carregar contratos Pedacinho Pratique"
+    },
+    "statements": {
+      "modalTitle": "Demonstrativos - {{contractName}}",
+      "loading": "Carregando demonstrativos...",
+      "noStatements": "Nenhum demonstrativo disponível",
+      "table": {
+        "date": "Data",
+        "name": "Nome",
+        "type": "Tipo",
+        "file": "Arquivo",
+        "link": "Link",
+        "actions": "Ações"
+      },
+      "buttons": {
+        "open": "Abrir",
+        "download": "Baixar",
+        "openLink": "Abrir Link",
+        "close": "Fechar"
+      }
+    }
+  },
+  "variableIncome": {
+    "buyButton": "Comprar",
+    "table": {
+      "asset": "Ativo",
+      "price": "Preço",
+      "market": "Mercado",
+      "actions": "Ações",
+      "payment": "Pagamento",
+      "daysRemaining": "Dias Restantes",
+      "profitability": "Rentabilidade"
+    },
+    "empty": {
+      "title": "Nenhum investimento de renda variável disponível",
+      "description": "Não há produtos de renda variável disponíveis no momento"
+    },
+    "closedButton": "Encerrado",
+    "infoCard": {
+      "title": "Sobre Renda Variável Digital",
+      "description": "Produtos com retornos variáveis baseados em royalties e participações. Oferece potencial de maior rentabilidade com pagamentos periódicos vinculados ao desempenho dos ativos."
+    },
+    "products": {
+      "closed": "Encerrado",
+      "biannual": "Semestral",
+      "finished": "Finalizado",
+      "quarterly": "Trimestral",
+      "daysRemaining": "{{days}} dias",
+      "primaryMarket": "Primário",
+      "imbProfitability": "Aprox. 20% ao ano + Reajuste IGPM",
+      "mjdProfitability": "Royalties de até 17% ao ano"
+    }
+  },
+  "privateOffers": {
+    "empty": {
+      "title": "Nenhuma oferta privada disponível",
+      "description": "Você não está autorizado para nenhuma oferta privada no momento"
+    },
+    "errors": {
+      "loadContracts": "Erro ao carregar ofertas privadas. Tente novamente mais tarde."
+    }
+  },
+  "paymentFrequency": {
+    "daily": "Diário",
+    "weekly": "Semanal",
+    "biweekly": "Quinzenal",
+    "monthly": "Mensal",
+    "bimonthly": "Bimestral",
+    "quarterly": "Trimestral",
+    "semiannual": "Semestral",
+    "annual": "Anual",
+    "single": "única",
+    "days": "{{count}} dias"
+  },
+  "productCard": {
+    "loading": "Carregando...",
+    "monthlyRentability": "Rentabilidade mensal",
+    "equivalentTo": "Equivalente a",
+    "assetType": "Tipo do ativo",
+    "maturity": "Vencimento",
+    "remuneration": "Remuneração",
+    "captured": "captado",
+    "minInvestment": "Investimento mínimo:",
+    "investButton": "Investir",
+    "cdiPreposition": "do",
+    "cdiTooltip": "Valor referencial do CDI atualizado em {{date}}. Utilizado puramente com fins comparativo.",
+    "status": {
+      "collecting": "Em captação",
+      "completed": "Concluído",
+      "closed": "Fechado",
+      "open": "Em captação",
+      "active": "Em captação"
+    },
+    "assetTypes": {
+      "receivable": "Recebível",
+      "participation": "Participação",
+      "equity": "Participação",
+      "debenture": "Debênture",
+      "cri": "CRI",
+      "cra": "CRA",
+      "royalty": "Royalty",
+      "agribusiness": "Agronegócio",
+      "real_estate": "Imobiliário",
+      "credit": "Crédito",
+      "other": "Outro"
+    }
+  },
+  "sidebar": {
+    "collecting": "Em captação",
+    "monthlyRentability": "Rentabilidade mensal",
+    "equivalentTo": "Equivalente a",
+    "assetType": "Tipo de ativo",
+    "maturity": "Vencimento:",
+    "installment": "Parcela",
+    "assetAvailability": "Disponibilidade do ativo",
+    "tokensIssued": "Quantidade a captar",
+    "capturedAmount": "Quantidade captada",
+    "minInvestment": "Investimento mínimo",
+    "investButton": "Investir",
+    "loginButton": "Login",
+    "taxExemption": "Isenção de imposto",
+    "taxExemptionText": "Isento de imposto de renda quando as alienações (liquidação de tokens) não ultrapassarem R$ 35 mil por mês.",
+    "aboutAsset": "Sobre o ativo",
+    "aboutAssetEmpty": "Informações sobre o ativo não disponíveis."
+  },
+  "detailPage": {
+    "backButton": "Voltar",
+    "productNotFound": "Produto não encontrado",
+    "assetAvailability": "Disponibilidade do Ativo:",
+    "minimumInvestment": "Investimento mínimo:",
+    "investmentAmountLabel": "Defina o valor do seu Investimento",
+    "estimatedValue": "Valor estimado a receber",
+    "viewLastTransactions": "Ver últimas transações",
+    "viewLastInvestments": "Ver últimos investimentos",
+    "invest": "Investir",
+    "withdraw": "Retirar",
+    "buy": "Comprar",
+    "reinvest": "Reinvestir",
+    "claim": "Resgatar",
+    "aboutAssetTitle": "Sobre o ativo",
+    "aboutAssetEmpty": "Informações sobre o ativo não disponíveis.",
+    "aboutIssuerTitle": "Sobre o emissor",
+    "issuerFoundationYear": "Ano de fundação",
+    "issuerProjects": "Projetos",
+    "documentsTitle": "Documentos",
+    "documentWhitepaper": "Lâmina",
+    "documentEssentialInfo": "Informações Essenciais",
+    "documentOfferInfo": "Informações da Oferta Pública",
+    "guaranteesTitle": "Garantias",
+    "risksTitle": "Riscos",
+    "tokenHistoryTitle": "Registro Histórico do Token",
+    "blockchainTitle": "Registro blockchain",
+    "blockchainNetwork": "Rede Blockchain",
+    "contractAddress": "Endereço do Contrato",
+    "errorLoading": "Erro ao carregar detalhes do produto",
+    "issuer": "Emissor",
+    "toReceive": "A Receber",
+    "myInvestment": "Meu Investimento",
+    "risk": "Risco",
+    "riskLevels": {
+      "veryLow": "Muito Baixo",
+      "low": "Baixo",
+      "medium": "Médio",
+      "high": "Alto",
+      "veryHigh": "Muito Alto"
+    }
+  },
+  "productHeader": {
+    "monthlyProfitability": "Rentabilidade Mensal",
+    "maturity": "Vencimento:",
+    "amountToRaise": "Quantidade a captar:",
+    "amountRaised": "Quantidade captada:",
+    "investors": "Investidores:",
+    "taxExemption": "Isento de imposto de renda quando as alienações (liquidação de tokens) não ultrapassarem R$ 35 mil por mês.",
+    "status": {
+      "activeCollecting": "Ativo em captação",
+      "completed": "Concluído"
+    }
+  },
+  "transactionsModal": {
+    "title": "Histórico de investimentos em {{productCode}}",
+    "titleFallback": "Histórico de investimentos em produto",
+    "loading": "Carregando...",
+    "errorTitle": "Erro ao carregar transações",
+    "errorContractAddress": "Endereço do contrato não disponível",
+    "errorGeneric": "Não foi possível carregar as transações",
+    "retryButton": "Tentar novamente",
+    "closeButton": "Fechar",
+    "emptyState": "Ainda não há investimentos nesse ativo",
+    "table": {
+      "headers": {
+        "investment": "Investimento",
+        "date": "Data",
+        "hash": "Hash",
+        "value": "Valor"
+      },
+      "investmentLabel": "Investimento"
+    },
+    "pagination": {
+      "showing": "Mostrando {{from}} a {{to}} de {{total}} registros"
+    }
+  },
+  "modals": {
+    "stake": {
+      "title": "Fazer Stake no Contrato",
+      "newStake": "Novo Stake",
+      "description": "Digite o valor que deseja fazer stake no contrato.",
+      "availableBalance": "Saldo disponível:",
+      "minStakeValue": "Valor mínimo de stake:",
+      "amountLabel": "Valor para stake ({{symbol}})",
+      "maxButton": "MAX",
+      "decimalHint": "Use vírgula para decimais (ex: 1.197,654365) ou ponto que será convertido automaticamente",
+      "insufficientValue": "⚠️ Valor insuficiente:",
+      "insufficientValueDesc": "O valor mínimo para stake é {{minValue}} {{symbol}}",
+      "insufficientBalance": "⚠️ Saldo insuficiente:",
+      "insufficientBalanceDesc": "Você não tem saldo suficiente para esta operação",
+      "emissionLimitReached": "⚠️ Limite de emissão atingido:",
+      "emissionLimitDesc": "O valor máximo disponível para investimento é {{available}} {{symbol}}",
+      "noteTitle": "Nota:",
+      "noteDesc": "O stake será processado na blockchain e você começará a receber rewards baseados no valor investido.",
+      "importantTitle": "⏳ Importante:",
+      "importantDesc": "Após clicar em \"Confirmar Stake\", aguarde na tela enquanto a transação é processada na blockchain. A tela fechará automaticamente quando a transação for confirmada.",
+      "cancelButton": "Cancelar",
+      "confirmButton": "Confirmar Stake",
+      "processing": "Processando...",
+      "successMessage": "Stake de {{amount}} {{symbol}} realizado com sucesso!",
+      "errorInvalidAmount": "Digite um valor válido para fazer stake",
+      "errorInsufficientBalance": "Saldo insuficiente",
+      "errorMinValue": "Valor mínimo para stake é {{minValue}} {{symbol}}",
+      "errorMaxEmission": "O valor máximo disponível para investimento é {{available}} {{symbol}}. Limite total de emissão: {{totalEmission}} {{symbol}}",
+      "maxAdjusted": "Valor máximo ajustado para {{amount}} {{symbol}}. Este é o limite disponível no contrato. Seu saldo: {{balance}} {{symbol}}",
+      "emissionLimitFull": "Limite de emissão atingido. Não há mais espaço disponível para novos investimentos neste contrato."
+    },
+    "unstake": {
+      "title": "Fazer Unstake do Contrato",
+      "unstakeTitle": "Unstake de Tokens",
+      "description": "Digite o valor que deseja fazer unstake do contrato.",
+      "availableBalance": "Saldo disponível:",
+      "amountLabel": "Valor para unstake ({{symbol}})",
+      "maxButton": "MAX",
+      "decimalHint": "Use vírgula para decimais (ex: 1.197,654365) ou ponto que será convertido automaticamente",
+      "noteTitle": "Nota:",
+      "noteDesc": "O unstake será processado na blockchain e o valor será removido do seu saldo de stake no contrato.",
+      "importantTitle": "⏳ Importante:",
+      "importantDesc": "Após clicar em \"Confirmar Unstake\", aguarde na tela enquanto a transação é processada na blockchain. A tela fechará automaticamente quando a transação for confirmada.",
+      "cancelButton": "Cancelar",
+      "confirmButton": "Confirmar Unstake",
+      "processing": "Processando...",
+      "successMessage": "Unstake de {{amount}} {{symbol}} realizado com sucesso!",
+      "errorInvalidAmount": "Digite um valor válido para fazer unstake",
+      "errorExceedsBalance": "Valor maior que o saldo disponível",
+      "exceedsStake": "⚠️ Valor excede saldo em stake:",
+      "exceedsStakeDesc": "O valor máximo que você pode resgatar é {{stakeBalance}} {{symbol}}"
+    },
+    "compound": {
+      "title": "Reinvestir Rewards",
+      "autoReinvest": "Reinvestimento Automático",
+      "description": "Seus rewards serão automaticamente reinvestidos para gerar mais rendimentos.",
+      "amountToReinvest": "Valor a reinvestir:",
+      "emissionLimitReached": "⚠️ Limite de emissão atingido:",
+      "emissionLimitDesc": "Não é possível reinvestir pois o valor a reinvestir ({{rewardsValue}} {{symbol}}) excede o limite disponível ({{available}} {{symbol}}). Limite total de emissão: {{totalEmission}} {{symbol}}. Por favor, resgate seus recebíveis primeiro.",
+      "noteTitle": "Nota:",
+      "noteDesc": "O reinvestimento aumentará seu saldo em stake, potencializando seus rendimentos futuros através de juros compostos.",
+      "importantTitle": "⏳ Importante:",
+      "importantDesc": "Após clicar em \"Confirmar Reinvestimento\", aguarde na tela enquanto a transação é processada na blockchain. A tela fechará automaticamente quando a transação for confirmada.",
+      "cancelButton": "Cancelar",
+      "confirmButton": "Confirmar Reinvestimento",
+      "processing": "Processando...",
+      "successMessage": "Rewards reinvestidos com sucesso!",
+      "errorExceedsLimit": "Não é possível reinvestir. O valor a reinvestir ({{rewardsValue}} {{symbol}}) excede o limite disponível ({{available}} {{symbol}}). Por favor, resgate seus recebíveis primeiro."
+    },
+    "claim": {
+      "title": "Receber Rewards",
+      "confirmationTitle": "Confirmação de Recebimento",
+      "description": "Você está prestes a receber seus rewards acumulados.",
+      "amountToReceive": "Valor a receber:",
+      "noteDesc": "Os tokens serão enviados diretamente para sua carteira após a confirmação.",
+      "importantTitle": "⏳ Importante:",
+      "importantDesc": "Após clicar em \"Confirmar\", aguarde na tela enquanto a transação é processada na blockchain. A tela fechará automaticamente quando a transação for confirmada.",
+      "cancelButton": "Cancelar",
+      "confirmButton": "Confirmar",
+      "processing": "Processando...",
+      "successMessage": "Rewards recebidos com sucesso!"
+    }
+  }
+}

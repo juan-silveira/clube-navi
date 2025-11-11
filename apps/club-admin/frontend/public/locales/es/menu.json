@@ -1,0 +1,37 @@
+{
+  "items": {
+    "deposit": "Depositar",
+    "exchange": "Compra y Venta",
+    "security": "Seguridad",
+    "transfer": "Transferir",
+    "withdraw": "Retirar",
+    "dashboard": "Panel",
+    "statement": "Extracto",
+    "incomeReport": "Informe de Ingresos",
+    "helpCenter": "Centro de Ayuda",
+    "userSearch": "Búsqueda de Usuarios",
+    "accountData": "Datos de la Cuenta",
+    "investments": "Mis Inversiones",
+    "translations": "Traducciones",
+    "adminDashboard": "Panel de Administración",
+    "contractDeploy": "Implementación de Contratos",
+    "globalSettings": "Configuración Global",
+    "userManagement": "Gestión de Usuarios",
+    "financialReports": "Informes Financieros",
+    "feesAndDeadlines": "Tarifas y Plazos",
+    "stakesManagement": "Gestión de Stakes",
+    "clubs": "Gestión de Clubes",
+    "clubAdmins": "Admins de los Clubes",
+    "superAdmins": "Super Admins",
+    "modules": "Módulos del Sistema"
+  },
+  "sections": {
+    "menu": "menú",
+    "support": "Soporte y Ayuda",
+    "financial": "Financiero",
+    "investments": "Inversiones",
+    "userSettings": "Configuración del Usuario",
+    "systemSettings": "Configuración del Sistema",
+    "companySettings": "Configuración de la Empresa"
+  }
+}

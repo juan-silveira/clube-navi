@@ -1,0 +1,97 @@
+{
+  "title": "Financial Report",
+  "subtitle": "View all balances, stakes, and orders for all users",
+  "stats": {
+    "totalUsers": "Total Users",
+    "totalTokens": "Total Tokens",
+    "activeOrders": "Active Orders",
+    "companies": "Companies",
+    "stakeContracts": "Stake Contracts"
+  },
+  "filters": {
+    "search": {
+      "label": "Search",
+      "placeholder": "Name, email or Tax ID"
+    },
+    "company": {
+      "all": "All companies",
+      "label": "Company",
+      "placeholder": "All companies"
+    },
+    "network": {
+      "all": "All networks",
+      "label": "Network",
+      "placeholder": "All networks"
+    },
+    "balanceFilter": {
+      "label": "Filter Balance",
+      "all": "All",
+      "with": "Only with balance",
+      "without": "Only without balance"
+    },
+    "tokens": {
+      "label": "Tokens",
+      "placeholder": "Select tokens to display (all if empty)",
+      "selectAll": "Select all",
+      "deselectAll": "Clear"
+    },
+    "clear": "Clear",
+    "apply": "Apply"
+  },
+  "table": {
+    "title": "Detailed Report",
+    "loading": "Loading...",
+    "totals": "TOTAL",
+    "columns": {
+      "user": "User",
+      "company": "Company",
+      "balance": "Balance",
+      "stake": "Stake",
+      "order": "Order",
+      "total": "Total"
+    },
+    "empty": {
+      "title": "No data found",
+      "description": "Adjust the filters or wait for data to load"
+    }
+  },
+  "buttons": {
+    "exportCSV": "Export CSV",
+    "refresh": "Refresh",
+    "syncBlockchain": "Sync Blockchain"
+  },
+  "messages": {
+    "loadError": "Error loading financial report",
+    "exportSuccess": "Report exported successfully",
+    "syncStarted": "Sync started. Data will be updated shortly.",
+    "syncError": "Error syncing with blockchain"
+  },
+  "history": {
+    "title": "History",
+    "deposits": "Deposits",
+    "withdrawals": "Withdrawals",
+    "transfersSent": "Sent",
+    "transfersReceived": "Received"
+  },
+  "orders": {
+    "active": "Active Orders",
+    "cancelled": "Cancelled Orders",
+    "executed": "Executed Orders",
+    "type": "Type",
+    "side": "Side",
+    "price": "Price",
+    "amount": "Amount",
+    "remaining": "Remaining",
+    "exchange": "Exchange",
+    "pair": "Pair",
+    "additionalTrades": "+ {{count}} additional trades"
+  },
+  "stakes": {
+    "active": "Active Stakes",
+    "contract": "Contract",
+    "token": "Token",
+    "balance": "Balance",
+    "network": "Network",
+    "address": "Address"
+  }
+}

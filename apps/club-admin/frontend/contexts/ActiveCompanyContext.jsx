@@ -1,0 +1,129 @@
+'use client';
+
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import useAuthStore from '@/store/authStore';
+import { whitelabelService } from '@/services/api';
+
+const ActiveCompanyContext = createContext();
+
+export const ActiveCompanyProvider = ({ children }) => {
+  const { user, isAuthenticated } = useAuthStore();
+  const [currentCompany, setCurrentCompany] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // No club-admin, não precisa buscar company do backend
+  // O clube já está definido pelo subdomínio
+  useEffect(() => {
+    const fetchCurrentCompany = async () => {
+      if (!isAuthenticated || !user) {
+        setLoading(false);
+        return;
+      }
+
+      // No club-admin, sempre setamos null pois não há múltiplas companies
+      console.log('🔐 Club-admin - não busca company (definido por subdomínio)');
+      setCurrentCompany(null);
+      setLoading(false);
+    };
+
+    fetchCurrentCompany();
+  }, [isAuthenticated, user]);
+
+  // Pegar dados da company ativa a partir do user.userCompanies
+  const activeCompany = useMemo(() => {
+    if (!user?.userCompanies || !currentCompany?.id) return null;
+
+    return user.userCompanies.find(uc => uc.companyId === currentCompany.id);
+  }, [user, currentCompany]);
+
+  // Pegar role do usuário na company ativa
+  const activeRole = useMemo(() => {
+    return activeCompany?.role || 'USER';
+  }, [activeCompany]);
+
+  // Calcular permissões baseadas APENAS na company ativa
+  const permissions = useMemo(() => {
+    // Super admins do sistema têm TODAS as permissões
+    if (user?.email?.includes('@clubedigital.com')) {
+      return {
+        isAdmin: true,
+        isAppAdmin: true,
+        isSuperAdmin: true,
+        canViewCompanySettings: true,
+        canViewSystemSettings: true,
+        canViewSensitiveData: true,
+        canManageRoles: true,
+        role: 'SUPER_ADMIN'
+      };
+    }
+
+    if (!activeCompany) {
+      return {
+        isAdmin: false,
+        isAppAdmin: false,
+        isSuperAdmin: false,
+        canViewCompanySettings: false,
+        canViewSystemSettings: false,
+        canViewSensitiveData: false,
+        canManageRoles: false,
+        role: 'USER'
+      };
+    }
+
+    const role = activeCompany.role;
+    const isAdmin = role === 'ADMIN';
+    const isAppAdmin = role === 'APP_ADMIN';
+    const isSuperAdmin = role === 'SUPER_ADMIN';
+
+    return {
+      isAdmin,
+      isAppAdmin,
+      isSuperAdmin,
+      canViewCompanySettings: isAdmin || isAppAdmin || isSuperAdmin,
+      canViewSystemSettings: isAppAdmin || isSuperAdmin,
+      canViewSensitiveData: isSuperAdmin,
+      canManageRoles: isSuperAdmin,
+      role: role
+    };
+  }, [activeCompany, user]);
+
+  const value = {
+    currentCompany,
+    activeCompany,
+    activeRole,
+    permissions,
+    loading
+  };
+
+  return (
+    <ActiveCompanyContext.Provider value={value}>
+      {children}
+    </ActiveCompanyContext.Provider>
+  );
+};
+
+export const useActiveCompany = () => {
+  const context = useContext(ActiveCompanyContext);
+  if (!context) {
+    // Return default values instead of throwing error during SSR or before mount
+    return {
+      currentCompany: null,
+      activeCompany: null,
+      activeRole: 'USER',
+      permissions: {
+        isAdmin: false,
+        isAppAdmin: false,
+        isSuperAdmin: false,
+        canViewCompanySettings: false,
+        canViewSystemSettings: false,
+        canViewSensitiveData: false,
+        canManageRoles: false,
+        role: 'USER'
+      },
+      loading: true
+    };
+  }
+  return context;
+};
+
+export default ActiveCompanyContext;

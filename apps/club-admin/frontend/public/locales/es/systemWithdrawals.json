@@ -1,0 +1,96 @@
+{
+  "title": "Gestión de Retiros",
+  "subtitle": "Gestione retiros pendientes de aprobación manual",
+  "modal": {
+    "title": "Confirmar Pago PIX",
+    "details": {
+      "type": "Tipo:",
+      "title": "Detalles del Retiro",
+      "pixKey": "Clave PIX:",
+      "valueToSend": "Valor a enviar:",
+      "transactionId": "ID de Transacción:"
+    },
+    "warning": {
+      "title": "Confirmación de Pago Manual",
+      "message": "Está confirmando el pago manual del retiro. Asegúrese de que el PIX se envió correctamente."
+    },
+    "receiptCode": {
+      "label": "Código del Recibo/Comprobante *",
+      "helper": "Ingrese el código de confirmación o ID de la transacción PIX",
+      "placeholder": "Ingrese el código del comprobante del pago PIX"
+    }
+  },
+  "stats": {
+    "total": "Total",
+    "failed": "Fallidos",
+    "pending": "Pendientes",
+    "confirmed": "Confirmados"
+  },
+  "table": {
+    "title": "Retiros",
+    "loading": "Cargando retiros...",
+    "values": {
+      "fee": "Tarifa:",
+      "net": "Neto:",
+      "requested": "Solicitado:"
+    },
+    "empty": {
+      "title": "No se encontraron retiros",
+      "subtitle": "Intente ajustar los filtros para ver más resultados"
+    },
+    "columns": {
+      "user": "Usuario",
+      "pixKey": "Clave PIX",
+      "status": "Estado",
+      "values": "Valores",
+      "actions": "Acciones",
+      "burnHash": "Hash Burn",
+      "dateTime": "Fecha/Hora",
+      "receiptCode": "Código Recibo"
+    },
+    "pagination": {
+      "showing": "Mostrando {{from}} a {{to}} de {{total}} registros",
+      "perPage10": "10 por página",
+      "perPage20": "20 por página",
+      "perPage50": "50 por página"
+    }
+  },
+  "buttons": {
+    "clear": "Limpiar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "refresh": "Actualizar",
+    "confirmPayment": "Confirmar Pago"
+  },
+  "status": {
+    "FAILED": "Fallido",
+    "PENDING": "Pendiente",
+    "CONFIRMED": "Confirmado"
+  },
+  "messages": {
+    "copied": "Copiado al portapapeles",
+    "authError": "Error de autenticación al cargar retiros",
+    "loadError": "Error al cargar retiros",
+    "confirmError": "Error al confirmar el pago",
+    "rateLimitError": "Demasiadas solicitudes simultáneas. Espere un momento.",
+    "enterReceiptCode": "Por favor, ingrese el código del recibo",
+    "genericLoadError": "Error al cargar retiros. Inténtelo de nuevo.",
+    "paymentConfirmed": "¡Pago confirmado con éxito!",
+    "noWithdrawalsFound": "No se encontraron retiros o respuesta inválida"
+  },
+  "tooltips": {
+    "copyCode": "Copiar código",
+    "viewTransaction": "Ver transacción en el explorador: {{hash}}"
+  },
+  "filters": {
+    "status": {
+      "all": "Todos los Estados",
+      "label": "Estado",
+      "placeholder": "Estado"
+    },
+    "search": {
+      "label": "Buscar",
+      "placeholder": "Usuario, email, clave PIX..."
+    }
+  }
+}

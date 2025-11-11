@@ -1,0 +1,96 @@
+{
+  "title": "Withdrawal Management",
+  "subtitle": "Manage pending withdrawals awaiting manual approval",
+  "modal": {
+    "title": "Confirm PIX Payment",
+    "details": {
+      "type": "Type:",
+      "title": "Withdrawal Details",
+      "pixKey": "PIX Key:",
+      "valueToSend": "Amount to send:",
+      "transactionId": "Transaction ID:"
+    },
+    "warning": {
+      "title": "Manual Payment Confirmation",
+      "message": "You are confirming the manual payment of the withdrawal. Make sure the PIX was sent correctly."
+    },
+    "receiptCode": {
+      "label": "Receipt/Proof Code *",
+      "helper": "Enter the confirmation code or PIX transaction ID",
+      "placeholder": "Enter the PIX payment proof code"
+    }
+  },
+  "stats": {
+    "total": "Total",
+    "failed": "Failed",
+    "pending": "Pending",
+    "confirmed": "Confirmed"
+  },
+  "table": {
+    "title": "Withdrawals",
+    "loading": "Loading withdrawals...",
+    "values": {
+      "fee": "Fee:",
+      "net": "Net:",
+      "requested": "Requested:"
+    },
+    "empty": {
+      "title": "No withdrawals found",
+      "subtitle": "Try adjusting the filters to see more results"
+    },
+    "columns": {
+      "user": "User",
+      "pixKey": "PIX Key",
+      "status": "Status",
+      "values": "Values",
+      "actions": "Actions",
+      "burnHash": "Burn Hash",
+      "dateTime": "Date/Time",
+      "receiptCode": "Receipt Code"
+    },
+    "pagination": {
+      "showing": "Showing {{from}} to {{to}} of {{total}} records",
+      "perPage10": "10 per page",
+      "perPage20": "20 per page",
+      "perPage50": "50 per page"
+    }
+  },
+  "buttons": {
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "refresh": "Refresh",
+    "confirmPayment": "Confirm Payment"
+  },
+  "status": {
+    "FAILED": "Failed",
+    "PENDING": "Pending",
+    "CONFIRMED": "Confirmed"
+  },
+  "messages": {
+    "copied": "Copied to clipboard",
+    "authError": "Authentication error loading withdrawals",
+    "loadError": "Error loading withdrawals",
+    "confirmError": "Error confirming payment",
+    "rateLimitError": "Too many simultaneous requests. Please wait a moment.",
+    "enterReceiptCode": "Please enter the receipt code",
+    "genericLoadError": "Error loading withdrawals. Please try again.",
+    "paymentConfirmed": "Payment confirmed successfully!",
+    "noWithdrawalsFound": "No withdrawals found or invalid response"
+  },
+  "tooltips": {
+    "copyCode": "Copy code",
+    "viewTransaction": "View transaction on explorer: {{hash}}"
+  },
+  "filters": {
+    "status": {
+      "all": "All Statuses",
+      "label": "Status",
+      "placeholder": "Status"
+    },
+    "search": {
+      "label": "Search",
+      "placeholder": "User, email, PIX key..."
+    }
+  }
+}

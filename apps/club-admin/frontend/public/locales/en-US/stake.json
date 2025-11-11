@@ -1,0 +1,111 @@
+{
+  "title": "Stake",
+  "pageTitle": "Stake",
+  "invest": {
+    "title": "Invest in Stake",
+    "subtitle": "Invest your PCN to generate passive income",
+    "summary": {
+      "title": "Operation Summary",
+      "status": "Status:",
+      "benefit1": "Automatic passive income",
+      "benefit2": "Participation in protocol rewards",
+      "benefit3": "No transaction fees (paid by admin)",
+      "benefits": "Stake Benefits:",
+      "lockPeriod": "Lock period:",
+      "processing": "Processing...",
+      "statusValue": "Ready to invest",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm Investment",
+      "operationType": "Operation type:",
+      "amountToInvest": "Amount to invest",
+      "estimatedReturn": "Estimated return:",
+      "lockPeriodValue": "According to contract",
+      "estimatedReturnValue": "Variable"
+    },
+    "investmentInfo": {
+      "title": "Investment Information",
+      "gasFee": "Gas fee:",
+      "gasFree": "Free (paid by admin)",
+      "network": "Network:",
+      "contract": "Contract:",
+      "stakeTitle": "PCN Stake",
+      "stakeDescription": "Your tokens will be locked in the smart contract and will start generating returns immediately."
+    },
+    "investmentAmount": {
+      "title": "Investment Amount",
+      "maxButton": "Maximum",
+      "amountLabel": "Amount to invest (PCN)",
+      "validAmount": "Valid amount for investment",
+      "warningMessage": "After investing, your tokens will be locked in the contract. You will be able to track your returns and request withdrawals according to the contract rules.",
+      "availableBalance": "Available balance:",
+      "amountPlaceholder": "0.000000",
+      "enterPositiveValue": "Enter a value greater than zero",
+      "insufficientBalance": "Insufficient balance"
+    }
+  },
+  "withdraw": {
+    "title": "Withdraw from Stake",
+    "subtitle": "Withdraw your tokens from stake to your wallet",
+    "summary": {
+      "title": "Operation Summary",
+      "status": "Status:",
+      "warning1": "This action cannot be undone",
+      "warning2": "You will stop receiving rewards on the withdrawn amount",
+      "warning3": "Check the contract penalty rules",
+      "processing": "Processing...",
+      "destination": "Token destination:",
+      "statusReady": "Ready to withdraw",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm Withdrawal",
+      "operationType": "Operation type:",
+      "processingTime": "Processing time:",
+      "remainingStake": "Remaining in stake:",
+      "statusNoBalance": "No staked balance",
+      "amountToWithdraw": "Amount to withdraw",
+      "destinationValue": "Your wallet",
+      "importantWarning": "Important warning:",
+      "noBalanceMessage": "You do not have tokens staked in this contract.",
+      "noBalanceWarning": "Warning:",
+      "operationTypeValue": "Unstake",
+      "processingTimeValue": "Immediate"
+    },
+    "withdrawalInfo": {
+      "title": "Withdrawal Information",
+      "gasFee": "Gas fee:",
+      "gasFree": "Free (paid by admin)",
+      "network": "Network:",
+      "contract": "Contract:",
+      "partialAllowed": "Allowed",
+      "withdrawalTitle": "Stake Withdrawal",
+      "partialNotAllowed": "Not allowed (total withdrawal required)",
+      "partialWithdrawal": "Partial withdrawal:",
+      "withdrawalDescription": "Your tokens will be unlocked and sent to your wallet."
+    },
+    "withdrawalAmount": {
+      "title": "Withdrawal Amount",
+      "maxButton": "Maximum",
+      "amountLabel": "Amount to withdraw (PCN)",
+      "validAmount": "Valid amount for withdrawal",
+      "stakedBalance": "Staked balance:",
+      "exceedsBalance": "Amount exceeds staked balance",
+      "amountLabelTotal": "Amount to withdraw (PCN) - Total required",
+      "noPartialWarning": "This contract does not allow partial withdrawal. You must withdraw the entire staked amount at once.",
+      "amountPlaceholder": "0.000000",
+      "withdrawalMessage": "After withdrawal, tokens will be sent directly to your wallet. Penalty fees may apply depending on contract rules.",
+      "enterPositiveValue": "Enter a value greater than zero",
+      "totalStakedMessage": "This is the total amount you have invested in this contract"
+    }
+  },
+  "messages": {
+    "errorInvesting": "Error making investment",
+    "enterValidValue": "Please enter a valid value",
+    "errorWithdrawing": "Error making withdrawal",
+    "errorLoadingStake": "Error loading stake information",
+    "investmentSuccess": "Investment completed successfully!",
+    "withdrawalSuccess": "Withdrawal completed successfully!",
+    "amountExceedsStake": "Amount exceeds staked balance",
+    "insufficientBalance": "Insufficient balance",
+    "contractNotSpecified": "Contract not specified",
+    "errorLoadingContract": "Error loading contract information"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "title": "Withdraw",
+  "subtitle": "Convert your cBRL to reais and receive via PIX",
+  "pageTitle": "Withdraw",
+  "step0": {
+    "title": "Register Your PIX Key",
+    "subtitle": "To make withdrawals, you need to have a registered PIX key. The key must belong to the same CPF as your account.",
+    "verifyingKeys": "Checking registered PIX keys...",
+    "registerButton": "Register PIX Key"
+  },
+  "step1": {
+    "title": "Withdrawal Amount",
+    "inCBRL": "in cBRL",
+    "feeLabel": "Fee",
+    "subtitle": "Enter the amount in cBRL you want to withdraw",
+    "maxButton": "MAX",
+    "minAmount": "Minimum: R$ 10.00",
+    "feeLoading": "Loading...",
+    "amountLabel": "Withdrawal Amount (cBRL)",
+    "changeButton": "Change",
+    "keyTypes": {
+      "cpf": "CPF",
+      "email": "Email",
+      "phone": "Phone",
+      "random": "Random key"
+    },
+    "continueButton": "Continue",
+    "feeCalculating": "Calculating...",
+    "checkingBalance": "Checking balance...",
+    "availableBalance": "Available balance",
+    "registeredPixKey": "Registered PIX key",
+    "syncingBlockchain": "Synchronizing with blockchain..."
+  },
+  "step2": {
+    "title": "Confirm Withdrawal",
+    "subtitle": "Review the details before confirming",
+    "sendingTo": "Sending to:",
+    "backButton": "Back",
+    "processing": "Processing...",
+    "withdrawFee": "Withdrawal fee:",
+    "confirmButton": "Confirm Withdrawal",
+    "importantNote": "Important:",
+    "importantText": "Upon confirmation, {{amount}} cBRL will be burned from your wallet and {{netAmount}} will be sent via PIX.",
+    "youWillReceive": "You will receive:",
+    "requestedAmount": "Requested amount:"
+  },
+  "steps": {
+    "amount": "Amount",
+    "confirmation": "Confirmation"
+  },
+  "twoFactor": {
+    "title": "2FA Verification - Withdrawal"
+  },
+  "messages": {
+    "invalid2FA": "Invalid 2FA code",
+    "executingBurn": "Executing token burn on blockchain...",
+    "invalidAmount": "Invalid amount",
+    "tryAgainLater": "Please try again later",
+    "minAmountError": "Minimum amount",
+    "errorConfirming": "Error confirming withdrawal",
+    "errorInitiating": "Error initiating withdrawal",
+    "errorProcessing": "Error processing withdrawal",
+    "withdrawSuccess": "Withdrawal initiated successfully!",
+    "minAmountMessage": "The minimum withdrawal amount is R$ 10.00",
+    "pixKeyRegistered": "PIX key registered",
+    "invalid2FAMessage": "Enter the correct code from your authenticator app",
+    "withdrawInitiated": "Withdrawal initiated",
+    "initiatingWithdraw": "Initiating withdrawal",
+    "verifyingDocuments": "Verifying documents...",
+    "insufficientBalance": "Insufficient balance",
+    "pixKeyNotRegistered": "PIX key not registered",
+    "preparingTransaction": "Preparing transaction...",
+    "withdrawSuccessMessage": "Will be reviewed and sent within 24h to your PIX key",
+    "pixKeyRegisteredMessage": "You can now make withdrawals",
+    "insufficientBalanceMessage": "Your available balance is {{balance}}"
+  }
+}

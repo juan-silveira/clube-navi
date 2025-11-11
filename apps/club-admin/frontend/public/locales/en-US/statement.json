@@ -1,0 +1,100 @@
+{
+  "error": "Error loading transactions",
+  "title": "Statement",
+  "loading": "Loading transactions...",
+  "pageTitle": "Statement",
+  "table": {
+    "date": "Date",
+    "type": "Type",
+    "title": "Transactions",
+    "token": "Token",
+    "amount": "Amount",
+    "status": "Status",
+    "txHash": "TxHash",
+    "company": "Company",
+    "adjustFilters": "Try adjusting the filters to see more results",
+    "noTransactions": "No transactions found"
+  },
+  "header": {
+    "title": "Transaction Statement",
+    "subtitle": "Complete history of all your transactions",
+    "exportButton": "Export"
+  },
+  "filters": {
+    "token": "Token",
+    "status": "Status",
+    "typeLabel": "Type:",
+    "tokenLabel": "Token:",
+    "clearButton": "Clear",
+    "statusLabel": "Status:",
+    "itemsPerPage": "Items per page",
+    "activeFilters": "Active filters:",
+    "transactionType": "Transaction Type",
+    "typePlaceholder": "Filter by type",
+    "tokenPlaceholder": "Filter by token",
+    "statusPlaceholder": "Filter by status"
+  },
+  "pagination": {
+    "of": "of",
+    "to": "to",
+    "records": "records",
+    "showing": "Showing"
+  },
+  "itemsPerPage": {
+    "10": "10 per page",
+    "20": "20 per page",
+    "50": "50 per page",
+    "100": "100 per page"
+  },
+  "orderDetails": {
+    "id": "ID:",
+    "pair": "Pair:",
+    "type": "Type:",
+    "price": "Price:",
+    "title": "Order Details",
+    "total": "total",
+    "amount": "Amount:",
+    "filled": "Filled:",
+    "txHash": "TxHash:",
+    "executed": "executed",
+    "progress": "Progress",
+    "operation": "Operation:",
+    "remaining": "Remaining:",
+    "orderStatus": "Order Status:"
+  },
+  "typeOptions": {
+    "all": "All types",
+    "deposit": "Deposit",
+    "dividend": "Dividend",
+    "exchange": "Exchange",
+    "transfer": "Transfer",
+    "withdraw": "Withdrawal",
+    "investment": "Investment",
+    "redemption": "Redemption"
+  },
+  "tokenOptions": {
+    "all": "All tokens"
+  },
+  "statusOptions": {
+    "all": "All statuses",
+    "failed": "Failed",
+    "pending": "Pending",
+    "cancelled": "Cancelled",
+    "confirmed": "Confirmed"
+  },
+  "transactionTypes": {
+    "buy": "Buy",
+    "sell": "Sell",
+    "stake": "Investment",
+    "cancel": "Cancellation",
+    "deposit": "Deposit",
+    "unstake": "Redemption",
+    "exchange": "Exchange",
+    "transfer": "Transfer",
+    "withdraw": "Withdrawal",
+    "stake_reward": "Dividend",
+    "contract_call": "Contract Call",
+    "contract_read": "Contract Read",
+    "contract_deploy": "Contract Deploy"
+  }
+}

@@ -14,11 +14,13 @@ const { resolveClubMiddleware } = require('../middleware/club-resolution.middlew
 /**
  * POST /api/club-admin/auth/login
  * Login de Club Admin
+ * NOTA: resolveClubMiddleware já foi aplicado no app.js para toda a rota /api/club-admin/auth
  */
-router.post('/login', resolveClubMiddleware, async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const club = req.club;
+    const clubPrisma = req.clubPrisma;
 
     if (!email || !password) {
       return res.status(400).json({
@@ -27,24 +29,16 @@ router.post('/login', resolveClubMiddleware, async (req, res) => {
       });
     }
 
-    // Buscar admin no Master DB filtrado por clube
-    const admin = await masterPrisma.clubAdmin.findFirst({
-      where: {
-        email: email.toLowerCase(),
-        clubId: club.id,
-        isActive: true
-      },
-      include: {
-        club: {
-          select: {
-            id: true,
-            slug: true,
-            companyName: true,
-            status: true
-          }
-        }
-      }
-    });
+    // Buscar admin no Club DB (users table com user_type = 'admin')
+    // Using raw query to bypass Prisma enum validation until client is properly regenerated
+    const admins = await clubPrisma.$queryRaw`
+      SELECT * FROM users
+      WHERE email = ${email.toLowerCase()}
+      AND user_type = 'admin'
+      AND is_active = true
+      LIMIT 1
+    `;
+    const admin = admins[0];
 
     if (!admin) {
       return res.status(401).json({
@@ -64,7 +58,7 @@ router.post('/login', resolveClubMiddleware, async (req, res) => {
     }
 
     // Verificar status do clube
-    if (admin.club.status === 'suspended' || admin.club.status === 'cancelled') {
+    if (club.status === 'suspended' || club.status === 'cancelled') {
       return res.status(403).json({
         success: false,
         message: 'Club account is not active'
@@ -74,10 +68,10 @@ router.post('/login', resolveClubMiddleware, async (req, res) => {
     // Gerar JWT token
     const token = jwt.sign(
       {
-        adminId: admin.id,
-        clubId: admin.clubId,
+        userId: admin.id,
+        clubId: club.id,
         email: admin.email,
-        role: admin.role,
+        userType: admin.user_type,
         type: 'club-admin'
       },
       process.env.JWT_SECRET || 'your-secret-key',
@@ -85,16 +79,19 @@ router.post('/login', resolveClubMiddleware, async (req, res) => {
     );
 
     // Retornar dados do admin (sem senha)
+    // Note: Raw query returns snake_case fields
     const adminData = {
       id: admin.id,
       email: admin.email,
-      name: admin.name,
-      role: admin.role,
-      clubId: admin.clubId,
-      clubSlug: admin.club.slug,
-      clubName: admin.club.companyName,
-      isActive: admin.isActive,
-      createdAt: admin.createdAt
+      name: `${admin.first_name} ${admin.last_name}`,
+      firstName: admin.first_name,
+      lastName: admin.last_name,
+      userType: admin.user_type,
+      clubId: club.id,
+      clubSlug: club.slug,
+      clubName: club.companyName,
+      isActive: admin.is_active,
+      createdAt: admin.created_at
     };
 
     res.json({
@@ -119,30 +116,25 @@ router.post('/login', resolveClubMiddleware, async (req, res) => {
 /**
  * GET /api/club-admin/auth/me
  * Obter dados do admin autenticado
+ * NOTA: resolveClubMiddleware já foi aplicado no app.js
  */
 router.get('/me', authenticateClubAdmin, async (req, res) => {
   try {
-    const { adminId } = req.clubAdmin;
+    const { adminId, clubId, clubSlug } = req.clubAdmin;
+    const club = req.club;
+    const clubPrisma = req.clubPrisma;
 
-    const admin = await masterPrisma.clubAdmin.findUnique({
+    const admin = await clubPrisma.user.findUnique({
       where: { id: adminId },
       select: {
         id: true,
         email: true,
-        name: true,
-        role: true,
-        clubId: true,
+        firstName: true,
+        lastName: true,
+        userType: true,
         isActive: true,
         createdAt: true,
-        updatedAt: true,
-        club: {
-          select: {
-            id: true,
-            slug: true,
-            companyName: true,
-            status: true
-          }
-        }
+        updatedAt: true
       }
     });
 
@@ -157,8 +149,10 @@ router.get('/me', authenticateClubAdmin, async (req, res) => {
       success: true,
       data: {
         ...admin,
-        clubSlug: admin.club.slug,
-        clubName: admin.club.companyName
+        name: `${admin.firstName} ${admin.lastName}`,
+        clubId: club.id,
+        clubSlug: club.slug,
+        clubName: club.companyName
       }
     });
 

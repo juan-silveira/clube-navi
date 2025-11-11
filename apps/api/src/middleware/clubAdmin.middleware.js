@@ -8,6 +8,8 @@ const { masterPrisma } = require('../database');
 
 /**
  * Authenticate club admin via JWT
+ * IMPORTANTE: Este middleware DEVE ser usado DEPOIS do resolveClubMiddleware
+ * para que req.club e req.clubPrisma estejam disponíveis
  */
 async function authenticateClubAdmin(req, res, next) {
   try {
@@ -42,19 +44,26 @@ async function authenticateClubAdmin(req, res, next) {
       });
     }
 
-    // Verify admin still exists and is active
-    const admin = await masterPrisma.clubAdmin.findUnique({
-      where: { id: decoded.adminId },
-      include: {
-        club: {
-          select: {
-            id: true,
-            slug: true,
-            status: true
-          }
-        }
-      }
-    });
+    // CRÍTICO: Precisamos do club e clubPrisma do middleware anterior
+    if (!req.club || !req.clubPrisma) {
+      console.error('❌ [Club Admin Middleware] req.club ou req.clubPrisma não disponível! Certifique-se de que resolveClubMiddleware foi executado antes.');
+      return res.status(500).json({
+        success: false,
+        message: 'Internal server error - club context missing'
+      });
+    }
+
+    const club = req.club;
+    const clubPrisma = req.clubPrisma;
+
+    // Verify admin still exists and is active no Club DB
+    // Using raw query to bypass Prisma enum validation until client is properly regenerated
+    const admins = await clubPrisma.$queryRaw`
+      SELECT * FROM users
+      WHERE id = ${decoded.userId}::uuid
+      LIMIT 1
+    `;
+    const admin = admins[0];
 
     if (!admin) {
       return res.status(401).json({
@@ -63,14 +72,23 @@ async function authenticateClubAdmin(req, res, next) {
       });
     }
 
-    if (!admin.isActive) {
+    // Note: Raw query returns snake_case fields
+    if (admin.user_type !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'User is not an admin'
+      });
+    }
+
+    if (!admin.is_active) {
       return res.status(403).json({
         success: false,
         message: 'Admin account is deactivated'
       });
     }
 
-    if (admin.club.status === 'suspended' || admin.club.status === 'cancelled') {
+    // Verificar status do clube
+    if (club.status === 'suspended' || club.status === 'cancelled') {
       return res.status(403).json({
         success: false,
         message: 'Club account is not active'
@@ -80,10 +98,10 @@ async function authenticateClubAdmin(req, res, next) {
     // Attach admin info to request
     req.clubAdmin = {
       adminId: admin.id,
-      clubId: admin.clubId,
+      clubId: club.id,
       email: admin.email,
-      role: admin.role,
-      clubSlug: admin.club.slug
+      userType: admin.userType,
+      clubSlug: club.slug
     };
 
     next();

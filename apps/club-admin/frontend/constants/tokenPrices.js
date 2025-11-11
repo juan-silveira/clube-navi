@@ -1,0 +1,60 @@
+/**
+ * Preços dos tokens em BRL (mock)
+ * Centralizados para manter consistência entre todos os componentes
+ * TODO: Substituir por dados reais do backend/API de preços
+ */
+
+export const TOKEN_PRICES = {
+  'AZE': 1.00,
+  'AZE-t': 1.00,  // Preço diferente para testar se funciona
+  'cBRL': 1.00,
+  'CNT': 1.00,
+  'MJD': 1.00,
+  'PCN': 1.00
+};
+
+// Função helper para obter preço de um token
+export const getTokenPrice = (symbol) => {
+  return TOKEN_PRICES[symbol] || 1.00; // Fallback para R$ 1,00
+};
+
+// Função helper para calcular valor em BRL
+export const calculateTokenValueBRL = (balance, symbol) => {
+  const price = getTokenPrice(symbol);
+  return parseFloat(balance) * price;
+};
+
+// Função para formatar valor em BRL (2 casas decimais para valores em BRL)
+export const formatCurrency = (value) => {
+  if (!value || isNaN(value)) return 'R$ 0,00';
+  
+  const numericValue = parseFloat(value);
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(numericValue);
+};
+
+// Função para formatar valor em BRL com mais precisão (até 8 casas decimais para valores de tokens)
+export const formatCurrencyPrecise = (value, maxDecimals = 8) => {
+  if (!value || isNaN(value)) return 'R$ 0,00';
+  
+  const numericValue = parseFloat(value);
+  
+  // Se o valor for muito pequeno, usar mais casas decimais
+  let decimals = 2;
+  if (numericValue < 0.01) {
+    decimals = Math.min(maxDecimals, 8);
+  } else if (numericValue < 1) {
+    decimals = Math.min(maxDecimals, 4);
+  }
+  
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: decimals
+  }).format(numericValue);
+};

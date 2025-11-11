@@ -1,0 +1,85 @@
+{
+  "title": "Contract Deploy",
+  "subtitle": "Deploy new Token, Exchange or Stake contracts",
+  "result": {
+    "title": "✅ Successfully Deployed!",
+    "txHash": "TX Hash:",
+    "address": "Address:",
+    "gasUsed": "Gas Used:",
+    "blockNumber": "Block:"
+  },
+  "buttons": {
+    "deploy": "🚀 Deploy",
+    "deploying": "Deploying..."
+  },
+  "parameters": {
+    "title": "Contract Parameters",
+    "required": "*",
+    "token": {
+      "name": "Token Name",
+      "symbol": "Symbol",
+      "contractName": "Contract name",
+      "initialSupply": "Initial Supply",
+      "namePlaceholder": "Ex: My Test Token",
+      "symbolPlaceholder": "Ex: MTT",
+      "initialSupplyPlaceholder": "Ex: 100000"
+    },
+    "exchange": {
+      "tokenA": "Token A (Address)",
+      "tokenB": "Token B (Address)",
+      "feeRecipient": "Fee Wallet",
+      "feeCalculated": "Fee: {{fee}}%",
+      "feeBasisPoints": "Fee (in basis points)",
+      "feePlaceholder": "Ex: 35 (for 0.35%)",
+      "addressPlaceholder": "0x..."
+    },
+    "stake": {
+      "whitelist": "Whitelist (optional)",
+      "stakeToken": "Stake Token",
+      "rewardToken": "Reward Token (optional)",
+      "cycleStartDate": "Cycle Start Date (optional)",
+      "minStakeAmount": "Minimum Stake Amount (Wei)",
+      "whitelistCount": "{{count}} addresses",
+      "addressPlaceholder": "0x...",
+      "cycleStartTimestamp": "Timestamp: {{timestamp}} (12:00 PM Brasília time)",
+      "whitelistPlaceholder": "One address per line\n0x...\n0x...",
+      "rewardTokenPlaceholder": "0x... (leave empty to use the same as stake)",
+      "minStakeAmountPlaceholder": "Ex: 1000000000000000000 (1 token with 18 decimals)"
+    }
+  },
+  "success": {
+    "deployed": "Contract deployed successfully!"
+  },
+  "contractType": {
+    "label": "Contract Type",
+    "stake": {
+      "title": "Stake",
+      "description": "Staking Contract"
+    },
+    "token": {
+      "title": "Token",
+      "description": "ERC20 Token"
+    },
+    "exchange": {
+      "title": "Exchange",
+      "description": "Trading Exchange"
+    }
+  },
+  "errors": {
+    "deployError": "Error deploying contract",
+    "genericError": "Deploy error",
+    "requiredFields": "Fill in all required fields"
+  },
+  "contractPreview": {
+    "title": "📄 Contract Preview",
+    "tip": {
+      "title": "What will be deployed:",
+      "token": {
+        "item1": "ERC20 Token with access roles",
+        "item2": "Mint function to create new tokens",
+        "item3": "Burn function to burn tokens",
+        "item4": "Gasless function for transfers without user gas"
+      }
+    }
+  }
+}

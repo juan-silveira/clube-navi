@@ -140,6 +140,41 @@ const authenticateToken = async (req, res, next) => {
       };
 
       req.superAdmin = decoded; // Keep decoded token data
+    } else if (decoded.type === 'club-admin') {
+      // Club Admin authentication - usar decoded.userId e req.clubPrisma
+      console.log('🔍 JWT Middleware - Autenticando Club Admin');
+
+      if (!req.clubPrisma) {
+        console.log('⚠️ JWT Middleware - clubPrisma não disponível para club-admin');
+        return res.status(401).json({
+          success: false,
+          message: 'Contexto de clube não disponível'
+        });
+      }
+
+      user = await req.clubPrisma.user.findUnique({
+        where: { id: decoded.userId }
+      });
+
+      if (!user || !user.isActive) {
+        return res.status(401).json({
+          success: false,
+          message: 'Club Admin não encontrado ou inativo'
+        });
+      }
+
+      if (user.userType !== 'admin') {
+        return res.status(403).json({
+          success: false,
+          message: 'User is not a club admin'
+        });
+      }
+
+      // Add club admin flags
+      user.isClubAdmin = true;
+      user.isAdmin = true;
+      user.type = 'club-admin';
+      user.roles = ['club-admin'];
     } else {
       // Regular user authentication - use tenant database
       console.log('🔍 JWT Middleware - Autenticando usuário do clube');

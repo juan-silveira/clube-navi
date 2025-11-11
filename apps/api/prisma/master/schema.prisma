@@ -75,6 +75,7 @@ model Club {
   stats             ClubStats?
   cashbackConfig    ClubCashbackConfig?
   withdrawalConfig  ClubWithdrawalConfig?
+  notifications     Notification[]
 
   @@index([slug])
   @@index([subdomain])
@@ -338,6 +339,52 @@ model ClubUsageStats {
 }
 
 // ==========================================
+// NOTIFICATIONS (Push Notifications)
+// ==========================================
+
+model Notification {
+  id                String              @id @default(uuid()) @db.Uuid
+  clubId            String?             @map("club_id") @db.Uuid
+
+  // Tipo e destinatários
+  notificationType  NotificationType    @map("notification_type")
+  targetType        NotificationTarget  @map("target_type")
+  targetClubIds     String[]            @map("target_club_ids")
+
+  // Conteúdo
+  title             String              @db.VarChar(255)
+  message           String              @db.Text
+  data              Json?               @default("{}")
+
+  // Estatísticas de envio
+  totalSent         Int                 @default(0) @map("total_sent")
+  totalDelivered    Int                 @default(0) @map("total_delivered")
+  totalFailed       Int                 @default(0) @map("total_failed")
+  totalClicked      Int                 @default(0) @map("total_clicked")
+
+  // Status e timestamp
+  status            NotificationStatus  @default(pending)
+  scheduledFor      DateTime?           @map("scheduled_for") @db.Timestamptz(6)
+  sentAt            DateTime?           @map("sent_at") @db.Timestamptz(6)
+
+  // Metadados
+  sentBy            String              @map("sent_by") @db.Uuid // ID do SuperAdmin
+  errorLog          Json?               @map("error_log") @default("[]")
+
+  createdAt         DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime            @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  club              Club?               @relation(fields: [clubId], references: [id], onDelete: SetNull)
+
+  @@index([clubId])
+  @@index([status])
+  @@index([notificationType])
+  @@index([sentAt])
+  @@index([scheduledFor])
+  @@map("notifications")
+}
+
+// ==========================================
 // ENUMS
 // ==========================================
 
@@ -380,4 +427,28 @@ enum AdminRole {
   admin
   manager
   support
+}
+
+enum NotificationType {
+  push_notification
+  email
+  sms
+  in_app
+}
+
+enum NotificationTarget {
+  all_clubs
+  specific_clubs
+  active_clubs
+  trial_clubs
+  suspended_clubs
+}
+
+enum NotificationStatus {
+  pending
+  scheduled
+  sending
+  sent
+  failed
+  cancelled
 }

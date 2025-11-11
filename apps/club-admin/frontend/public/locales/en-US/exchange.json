@@ -1,0 +1,212 @@
+{
+  "title": "Exchange",
+  "pageTitle": "Exchange",
+  "chart": {
+    "title": "Chart",
+    "low24h": "Low 24h",
+    "noData": "No price data available",
+    "high24h": "High 24h",
+    "loading": "Loading chart...",
+    "interval": "Interval",
+    "timeAxis": "Time",
+    "tryAgain": "Try again",
+    "change24h": "Change 24h",
+    "lastPrice": "Last Price",
+    "priceAxis": "Price",
+    "volume24h": "Volume 24h",
+    "noDataHint": "Charts will appear when there are trades for {{symbol}}",
+    "errorLoadingData": "Error loading chart data",
+    "errorInitializing": "Error initializing chart",
+    "errorCreatingChart": "Error creating chart: {{message}}",
+    "errorLoadingLibrary": "Error loading chart library"
+  },
+  "swapForm": {
+    "buy": "Buy",
+    "max": "Max",
+    "sell": "Sell",
+    "title": "Swap",
+    "orders": "orders",
+    "calculating": "Calculating...",
+    "averagePrice": "Average Price",
+    "maxVariation": "Maximum variation",
+    "minToReceive": "Minimum to receive",
+    "noTokenFound": "No tokens found",
+    "selectTokens": "Select tokens",
+    "autoRefreshIn": "Auto refresh in",
+    "connectWallet": "Connect Wallet",
+    "exchangeFound": "Exchange found for {{pair}}",
+    "errorExecuting": "Error executing order",
+    "priceVariation": "Price variation",
+    "errorConnecting": "Error connecting to server",
+    "ordersToExecute": "Orders to execute",
+    "errorCalculating": "Error calculating value to receive",
+    "exchangeNotFound": "No exchange found for {{pair}}",
+    "errorGettingQuote": "Error getting quote",
+    "noOrdersAvailable": "No orders available in the market",
+    "insufficientLiquidity": "Insufficient liquidity. Maximum available: {{amount}} tokens",
+    "priceVariationTooltip": "Protection against price variation during transaction execution"
+  },
+  "bookPage": {
+    "pair": "Pair",
+    "title": "Order Book",
+    "balance": "Balance",
+    "subtitle": "Trading with full price control",
+    "success": {
+      "limitBuy": "Limit buy order created successfully! Data will be updated in ~10s after blockchain confirmation.",
+      "limitSell": "Limit sell order created successfully! Data will be updated in ~10s after blockchain confirmation.",
+      "orderCancelled": "Order canceled successfully! Wait for blockchain confirmation."
+    },
+    "errors": {
+      "cancelOrder": "Error canceling order",
+      "createOrder": "Error creating order",
+      "userNotFound": "Demo: User not found in database. In production, this error would not occur for authenticated users.",
+      "loadExchanges": "Error loading exchanges"
+    },
+    "pollingStatus": {
+      "active": "Automatic updates (Polling 5s)",
+      "paused": "System paused",
+      "description": "(automatic updates every 5s)",
+      "descriptionPaused": "(static data)"
+    },
+    "selectExchange": {
+      "title": "Select an Exchange",
+      "description": "Choose a trading pair from the selector above to start"
+    }
+  },
+  "orderForm": {
+    "buy": "Buy",
+    "sell": "Sell"
+  },
+  "tooltips": {
+    "back": "Back"
+  },
+  "myOrders": {
+    "title": "My Orders",
+    "table": {
+      "pair": "Pair",
+      "type": "Type",
+      "price": "Price",
+      "total": "Total",
+      "status": "Status",
+      "actions": "Actions",
+      "initialAmount": "Initial Qty",
+      "remainingAmount": "Remaining Qty"
+    },
+    "filters": {
+      "all": "All",
+      "buy": "Buy",
+      "pair": "Pair",
+      "sell": "Sell",
+      "type": "Type",
+      "active": "Active",
+      "allPairs": "All",
+      "allTypes": "All",
+      "executed": "Executed",
+      "cancelled": "Cancelled",
+      "clearFilters": "Clear Filters"
+    },
+    "status": {
+      "active": "ACTIVE",
+      "executed": "EXECUTED",
+      "cancelled": "CANCELLED",
+      "processing": "Processing..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "cancelling": "Cancelling..."
+    },
+    "cancelModal": {
+      "no": "No",
+      "yes": "Yes, Cancel",
+      "title": "Confirm Cancellation",
+      "warning": "This action cannot be undone.",
+      "descriptionBuy": "Do you really want to cancel this buy order?",
+      "descriptionSell": "Do you really want to cancel this sell order?"
+    },
+    "empty": {
+      "noOrders": "No orders found",
+      "noOrdersPage": "No orders on this page"
+    },
+    "pagination": {
+      "next": "Next",
+      "showing": "Showing {{from}} to {{to}} of {{total}} orders",
+      "previous": "Previous",
+      "itemsPerPage": "Items per page:"
+    }
+  },
+  "orderBook": {
+    "buys": "Buys ↑",
+    "price": "Price",
+    "sells": "Sells ↓",
+    "total": "Total",
+    "spread": "Spread",
+    "loading": "Loading order book...",
+    "quantity": "Quantity",
+    "tryAgain": "Try again",
+    "lastPrice": "Last Price:",
+    "noAggregation": "No aggregation",
+    "noActiveOrders": "No active orders",
+    "createOrderPrompt": "Create an order and start the book"
+  },
+  "marketPage": {
+    "title": "Market",
+    "balance": "Balance",
+    "subtitle": "Immediate execution at the best available price",
+    "errors": {
+      "noOrders": "No orders available in the market to execute your order.",
+      "sameToken": "Cannot select {{symbol}} in both fields",
+      "userNotFound": "Demo: User not found in database. In production, this error would not occur for authenticated users.",
+      "loadContracts": "Error loading contracts",
+      "insufficientLiquidity": "Insufficient liquidity"
+    },
+    "success": {
+      "limitBuy": "Buy order executed successfully! Gasless transaction processed.",
+      "limitSell": "Sell order executed successfully! Gasless transaction processed.",
+      "marketBuy": "Market buy order executed successfully!",
+      "marketSell": "Market sell order executed successfully!"
+    },
+    "exchangeNotFound": {
+      "title": "Exchange Not Found",
+      "contact": "Contact the administrator to register this trading pair",
+      "description": "There is no registered exchange contract for the {{pair}} pair"
+    }
+  },
+  "recentTrades": {
+    "time": "Time",
+    "user": "User",
+    "price": "Price",
+    "title": "Recent Trades",
+    "total": "Total",
+    "status": "Status",
+    "invoice": "Invoice",
+    "loading": "Loading trades...",
+    "noTrades": "No recent trades",
+    "quantity": "Qty",
+    "tryAgain": "Try again",
+    "waitingForTrades": "Waiting for first trades for {{symbol}}"
+  },
+  "limitForm": {
+    "available": "Available:",
+    "orderTitle": "{{type}} Order",
+    "priceLabel": "Price per {{base}} (in {{quote}})",
+    "totalToPay": "Total to pay:",
+    "creatingOrder": "Creating order...",
+    "quantityLabel": "Quantity of {{base}}",
+    "totalToReceive": "Total to receive:",
+    "createOrderButton": "Create {{type}} Order",
+    "errorCreatingOrder": "Error creating order"
+  },
+  "selectionPage": {
+    "title": "Operation Type",
+    "helpText": "Choose <strong>Market</strong> for immediate execution at the best available price or <strong>Limit</strong> to set your own price",
+    "subtitle": "Choose how you want to trade",
+    "limit": {
+      "title": "Limit",
+      "subtitle": "Price control"
+    },
+    "market": {
+      "title": "Market",
+      "subtitle": "Immediate execution"
+    }
+  }
+}

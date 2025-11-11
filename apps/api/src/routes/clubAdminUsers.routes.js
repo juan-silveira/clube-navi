@@ -215,4 +215,170 @@ router.patch('/:userId/status', authenticateClubAdmin, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/club-admin/users
+ * Criar novo usuário
+ */
+router.post('/', authenticateClubAdmin, async (req, res) => {
+  try {
+    const clubPrisma = req.clubPrisma;
+    const { name, email, cpf, phone, type = 'consumer', isActive = true } = req.body;
+
+    // Validações
+    if (!name || !email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name and email are required'
+      });
+    }
+
+    // Verificar se email já existe
+    const existingUser = await clubPrisma.user.findUnique({
+      where: { email }
+    });
+
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email already exists'
+      });
+    }
+
+    // Criar usuário
+    const user = await clubPrisma.user.create({
+      data: {
+        name,
+        email,
+        cpf: cpf || null,
+        phone: phone || null,
+        type,
+        userType: type, // Compatibilidade
+        isActive,
+        emailConfirmed: false,
+        password: '', // Será definida pelo usuário no primeiro acesso
+      }
+    });
+
+    res.json({
+      success: true,
+      data: user,
+      message: 'User created successfully'
+    });
+
+  } catch (error) {
+    console.error('❌ [Club Admin Users] Create error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
+
+/**
+ * PUT /api/club-admin/users/:userId
+ * Atualizar usuário
+ */
+router.put('/:userId', authenticateClubAdmin, async (req, res) => {
+  try {
+    const clubPrisma = req.clubPrisma;
+    const { userId } = req.params;
+    const { name, email, cpf, phone, type, isActive } = req.body;
+
+    // Verificar se usuário existe
+    const existingUser = await clubPrisma.user.findUnique({
+      where: { id: userId }
+    });
+
+    if (!existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Se email foi alterado, verificar se já existe
+    if (email && email !== existingUser.email) {
+      const emailExists = await clubPrisma.user.findUnique({
+        where: { email }
+      });
+
+      if (emailExists) {
+        return res.status(400).json({
+          success: false,
+          message: 'Email already exists'
+        });
+      }
+    }
+
+    // Atualizar usuário
+    const updatedUser = await clubPrisma.user.update({
+      where: { id: userId },
+      data: {
+        ...(name !== undefined && { name }),
+        ...(email !== undefined && { email }),
+        ...(cpf !== undefined && { cpf }),
+        ...(phone !== undefined && { phone }),
+        ...(type !== undefined && { type, userType: type }),
+        ...(isActive !== undefined && { isActive }),
+      }
+    });
+
+    res.json({
+      success: true,
+      data: updatedUser,
+      message: 'User updated successfully'
+    });
+
+  } catch (error) {
+    console.error('❌ [Club Admin Users] Update error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
+
+/**
+ * DELETE /api/club-admin/users/:userId
+ * Deletar usuário
+ */
+router.delete('/:userId', authenticateClubAdmin, async (req, res) => {
+  try {
+    const clubPrisma = req.clubPrisma;
+    const { userId } = req.params;
+
+    // Verificar se usuário existe
+    const existingUser = await clubPrisma.user.findUnique({
+      where: { id: userId }
+    });
+
+    if (!existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Deletar usuário
+    await clubPrisma.user.delete({
+      where: { id: userId }
+    });
+
+    res.json({
+      success: true,
+      message: 'User deleted successfully'
+    });
+
+  } catch (error) {
+    console.error('❌ [Club Admin Users] Delete error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
+
 module.exports = router;

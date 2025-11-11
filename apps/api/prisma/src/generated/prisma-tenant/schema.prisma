@@ -299,6 +299,7 @@ model Notification {
 enum UserType {
   consumer
   merchant
+  admin
 }
 
 enum MerchantStatus {

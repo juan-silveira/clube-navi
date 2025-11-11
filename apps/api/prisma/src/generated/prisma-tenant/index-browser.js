@@ -406,7 +406,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.UserType = exports.$Enums.UserType = {
   consumer: 'consumer',
-  merchant: 'merchant'
+  merchant: 'merchant',
+  admin: 'admin'
 };
 
 exports.MerchantStatus = exports.$Enums.MerchantStatus = {

@@ -1,0 +1,103 @@
+{
+  "interact": {
+    "title": "Contract Interaction",
+    "loading": "Loading...",
+    "subtitle": "Execute functions on registered smart contracts",
+    "errors": {
+      "gas": "Gas Error",
+      "admin": "Permission Error",
+      "noAbi": "This contract has no registered ABI. Please re-register the contract.",
+      "revert": "Transaction Reverted",
+      "general": "Error",
+      "network": "Network Error",
+      "timeout": "Timeout",
+      "updateError": "Error updating contract ABI",
+      "accessDenied": "Access Denied",
+      "loadingError": "Error loading contracts",
+      "networkError": "Network error executing function '{{functionName}}' - Try again",
+      "adminNotFound": "Administrator address not configured for this contract - Contact the administrator",
+      "callException": "Execution Error",
+      "updateSuccess": "ABI updated successfully!",
+      "executeSuccess": "Function {{functionName}} executed successfully",
+      "functionFailed": "Function '{{functionName}}' failed - Check if parameters are correct or if the function exists in the contract",
+      "functionTimeout": "Function '{{functionName}}' timed out - This function may not exist in the deployed contract or the network may be congested",
+      "insufficientGas": "Insufficient gas to execute '{{functionName}}' - Try increasing the gas limit",
+      "missingFunction": "Function Not Found",
+      "processingError": "Error processing contract ABI",
+      "functionNotFound": "Function '{{functionName}}' was not found in the deployed contract",
+      "transactionSuccess": "Transaction sent successfully! Hash: {{txHash}}",
+      "transactionReverted": "Transaction '{{functionName}}' was reverted by the contract - Check function conditions",
+      "functionNotAvailable": "Function '{{functionName}}' is not available in the deployed contract"
+    },
+    "tips": {
+      "title": "Tip",
+      "suggestion": "Suggestion",
+      "networkIssue": "Network",
+      "adminRequired": "This function requires administrator permissions in the smart contract. To execute functions with access control it is necessary to connect an admin wallet directly to the contract.",
+      "exchangePrice": "Exchange: Enter the price per token in cBRL. For example, \"1.50\" means 1.50 cBRL per token.",
+      "matchingOrders": "Matching: Enter order IDs separated by commas (e.g. \"1,2,3\"). These orders will be matched together.",
+      "checkParameters": "Check if all parameters are in the correct format and if you have the necessary permissions to execute this function.",
+      "amountConversion": "Tip: Enter whole numbers (e.g. \"1\" for 1 token). The system automatically converts to wei format.",
+      "percentageFormat": "Percentage: Enter the value multiplied by 100 (5.40% = 540, 10.48% = 1048). The value will be sent exactly as entered.",
+      "restrictedAccess": "Restricted Access",
+      "slippageProtection": "Slippage Protection: Enter the minimum amount you are willing to receive. Leave empty for no slippage protection.",
+      "connectivityProblem": "Connectivity problem. Wait a few seconds and try again.",
+      "functionNotImplemented": "This function may be defined in the ABI but not implemented in the deployed contract. Check if the contract was deployed with the latest version."
+    },
+    "results": {
+      "txHash": "TX Hash",
+      "gasUsed": "Gas Used",
+      "success": "Success"
+    },
+    "functions": {
+      "param": "parameter",
+      "params": "parameters",
+      "executing": "Executing...",
+      "read": {
+        "none": "No read functions available",
+        "title": "Read Functions",
+        "subtitle": "No gas cost",
+        "queryButton": "Query"
+      },
+      "parameters": "Parameters",
+      "write": {
+        "none": "No write functions available",
+        "title": "Write Functions",
+        "subtitle": "Requires gas",
+        "sendButton": "Send Transaction"
+      }
+    },
+    "abiMissing": {
+      "title": "ABI not found",
+      "updating": "Updating ABI...",
+      "description": "This contract was registered without ABI. Click the button below to add the default stake ABI.",
+      "updateButton": "Update ABI"
+    },
+    "placeholders": {
+      "orderId": "Enter order ID to cancel",
+      "enterType": "Enter {{type}}",
+      "orderPrice": "Enter price in cBRL (e.g. 1.25 for 1.25 cBRL per token)",
+      "amountInWei": "Enter amount (1 = 1 token, auto-converts to wei)",
+      "buyOrderIds": "Enter buy order IDs (comma separated)",
+      "orderAmount": "Enter token amount (e.g. 100 for 100 tokens)",
+      "minAmountOut": "Minimum amount to receive (slippage protection)",
+      "sellOrderIds": "Enter sell order IDs (comma separated)",
+      "marketBuyAmount": "Enter amount to spend (cBRL)",
+      "marketSellAmount": "Enter amount to sell (tokens)",
+      "distributionPercentage": "Enter percentage (e.g. 540 for 5.40%, 1048 for 10.48%)"
+    },
+    "timestampHelper": {
+      "title": "Timestamp Helper",
+      "useNow": "Use Now ({{timestamp}})",
+      "current": "Current: {{date}}"
+    },
+    "contractSelector": {
+      "admin": "Admin",
+      "title": "Select Contract",
+      "network": "Network",
+      "noContracts": "No contracts registered yet",
+      "totalInOtherNetworks": "Total contracts in other networks: {{count}}",
+      "noContractsForNetwork": "No contracts found for network {{network}}"
+    }
+  }
+}

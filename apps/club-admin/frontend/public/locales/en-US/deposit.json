@@ -1,0 +1,66 @@
+{
+  "title": "Deposit",
+  "subtitle": "Add funds to your Clube Digital account in Reais",
+  "pageTitle": "Deposit",
+  "step2": {
+    "fee": "Fee (R$ 3.00 fixed):",
+    "title": "Review Deposit",
+    "subtitle": "Review the details before confirming",
+    "vipLevel": "VIP {{level}}",
+    "backButton": "Back",
+    "processing": "Processing...",
+    "totalToPay": "Total Amount to Pay:",
+    "calculating": "Calculating fees...",
+    "finalAmount": "Final Amount (cBRL):",
+    "depositButton": "Make Deposit",
+    "desiredAmount": "Desired Amount:",
+    "importantNote": "Important:",
+    "importantText": "The amount will be converted to cBRL on the Azore blockchain after payment confirmation."
+  },
+  "step1": {
+    "title": "Deposit Amount",
+    "subtitle": "Enter the amount you want to deposit in Reais",
+    "minAmount": "Minimum amount: R$ 0.01",
+    "amountLabel": "Amount (R$)",
+    "continueButton": "Continue",
+    "depositTokensButton": "Deposit Tokens"
+  },
+  "steps": {
+    "amount": "Amount",
+    "confirmation": "Confirmation"
+  },
+  "tokenModal": {
+    "name": "Name:",
+    "howTo": "How to deposit tokens",
+    "title": "Deposit Tokens",
+    "rpcUrl": "RPC URL:",
+    "symbol": "Symbol:",
+    "chainId": "Chain ID:",
+    "explorer": "Explorer:",
+    "closeButton": "Close",
+    "description": "To deposit tokens, you need to have the Azore network configured in your",
+    "networkData": "Azore network data:",
+    "yourAddress": "Your Address",
+    "addToMetamask": "Add to MetaMask"
+  },
+  "messages": {
+    "apiError": "API Error",
+    "errorTitle": "Deposit error",
+    "depositError": "Error processing deposit",
+    "invalidValue": "Invalid value",
+    "networkAdded": "Azore network added!",
+    "successTitle": "Deposit initiated successfully!",
+    "invalidAmount": "Please enter a valid amount of at least R$ 0.01",
+    "networkExists": "Network already exists",
+    "tryAgainLater": "Please try again later.",
+    "successMessage": "Redirecting to PIX payment...",
+    "installMetamask": "Please install MetaMask to continue.",
+    "metamaskNotFound": "MetaMask not found",
+    "errorAddingNetwork": "Error adding network",
+    "networkAddedMessage": "The Azore network has been added to your MetaMask.",
+    "networkExistsMessage": "The Azore network is already configured in your MetaMask.",
+    "apiCommunicationError": "API communication error",
+    "transactionIdNotFound": "Transaction ID not found in response",
+    "errorAddingNetworkMessage": "Could not add the Azore network."
+  }
+}

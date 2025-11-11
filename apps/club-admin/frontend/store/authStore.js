@@ -1,72 +1,66 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
-const useAuthStore = create(
-  persist(
-    (set, get) => ({
-      // Estado
-      admin: null,
+const useAuthStore = create((set) => ({
+  // Estado SIMPLES
+  user: null,
+  accessToken: null,
+  isAuthenticated: false,
+
+  // Login - salvar usuário e token
+  login: (user, accessToken) => {
+    console.log('✅ [AuthStore] Login:', user);
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('club_admin_user', JSON.stringify(user));
+      localStorage.setItem('club_admin_token', accessToken);
+    }
+
+    set({
+      user,
+      accessToken,
+      isAuthenticated: true,
+    });
+  },
+
+  // Logout - limpar tudo
+  logout: () => {
+    console.log('🚪 [AuthStore] Logout');
+
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('club_admin_user');
+      localStorage.removeItem('club_admin_token');
+    }
+
+    set({
+      user: null,
       accessToken: null,
       isAuthenticated: false,
-      isLoading: false,
+    });
+  },
 
-      // Ações
-      setAdmin: (admin) => set({ admin }),
+  // Carregar do localStorage ao iniciar
+  loadFromStorage: () => {
+    if (typeof window !== 'undefined') {
+      const userStr = localStorage.getItem('club_admin_user');
+      const token = localStorage.getItem('club_admin_token');
 
-      setToken: (accessToken) =>
-        set({ accessToken, isAuthenticated: true }),
-
-      setLoading: (loading) => set({ isLoading: loading }),
-
-      login: (admin, accessToken) => {
-        set({
-          admin,
-          accessToken,
-          isAuthenticated: true,
-        });
-
-        // Salvar no localStorage também
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('club_admin_token', accessToken);
-          localStorage.setItem('club_admin_user', JSON.stringify(admin));
-        }
-      },
-
-      logout: () => {
-        set({
-          admin: null,
-          accessToken: null,
-          isAuthenticated: false,
-        });
-
-        // Limpar localStorage
-        if (typeof window !== 'undefined') {
-          localStorage.removeItem('club_admin_token');
+      if (userStr && token) {
+        try {
+          const user = JSON.parse(userStr);
+          set({
+            user,
+            accessToken: token,
+            isAuthenticated: true,
+          });
+          console.log('✅ [AuthStore] Carregado:', user.email);
+        } catch (e) {
+          console.error('❌ [AuthStore] Erro:', e);
           localStorage.removeItem('club_admin_user');
+          localStorage.removeItem('club_admin_token');
         }
-      },
-
-      updateAdmin: (updates) => {
-        const currentAdmin = get().admin;
-        if (currentAdmin) {
-          const updatedAdmin = { ...currentAdmin, ...updates };
-          set({ admin: updatedAdmin });
-
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('club_admin_user', JSON.stringify(updatedAdmin));
-          }
-        }
-      },
-    }),
-    {
-      name: 'club-admin-auth',
-      partialize: (state) => ({
-        admin: state.admin,
-        accessToken: state.accessToken,
-        isAuthenticated: state.isAuthenticated,
-      }),
+      }
     }
-  )
-);
+  },
+}));
 
 export default useAuthStore;

@@ -1,0 +1,123 @@
+{
+  "title": "Document Validation",
+  "approved": "Approved",
+  "subtitle": "Review and validate documents submitted by users",
+  "table": {
+    "file": "File:",
+    "type": "Type:",
+    "empty": "No documents found",
+    "title": "Documents",
+    "users": "user",
+    "loading": "Loading documents...",
+    "document": "document",
+    "uploaded": "Uploaded:",
+    "usersPlural": "users",
+    "documentsPlural": "documents",
+    "rejectionReason": "Rejection Reason:"
+  },
+  "selectFiles": "Select files to upload",
+  "stats": {
+    "total": "Total",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "uploadSingle": "Upload Document",
+  "buttons": {
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "reject": "Reject",
+    "approve": "Approve",
+    "refresh": "Refresh",
+    "rejectDocument": "Reject Document",
+    "approveDocument": "Approve Document"
+  },
+  "selectedCount": "{{count}} document(s) selected",
+  "status": {
+    "notSent": "Not sent",
+    "pending": "Pending",
+    "unknown": "Unknown",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "uploadMultiple": "Upload {{count}} Documents",
+  "warnings": {
+    "item1": "ID, Driver's License, Passport or Professional Card",
+    "item2": "Clear photos, without reflections or shadows",
+    "item3": "Use the same document in all 3 photos",
+    "item4": "Analysis within 2 business days",
+    "title": "Accepted Documents"
+  },
+  "uploadDocuments": "Upload Documents",
+  "uploader": {
+    "remove": "Remove",
+    "preview": "File preview",
+    "dropHere": "Drop here",
+    "fileTypes": "JPEG, PNG, PDF (max. 10MB)",
+    "uploading": "Uploading",
+    "previewNew": "Preview of new file",
+    "uploadedOn": "Uploaded on",
+    "clickOrDrag": "Click or drag",
+    "rejectionReason": "Reason for Rejection"
+  },
+  "imageModal": {
+    "close": "Close",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "resetZoom": "Reset zoom (100%)",
+    "pdfInstructions": "Use the PDF viewer controls to navigate • Press ESC or click X to close",
+    "imageInstructions": "Use + and - buttons to zoom (50% - 300%) • Press ESC or click X to close"
+  },
+  "messages": {
+    "success": "Document uploaded successfully!",
+    "loadError": "Error loading documents for validation",
+    "rejectSuccess": "Document rejected",
+    "approveSuccess": "Document approved successfully",
+    "successMultiple": "{{count}} document(s) uploaded successfully!",
+    "validationError": "Error validating document",
+    "noDocumentsSelected": "No documents selected for upload",
+    "rejectionReasonRequired": "Please provide a rejection reason"
+  },
+  "modal": {
+    "clickToView": "Click to view",
+    "pdfDocument": "PDF Document",
+    "rejectTitle": "Reject Document",
+    "approveTitle": "Approve Document",
+    "rejectionReasonLabel": "Rejection Reason *",
+    "clickToViewFullscreen": "Click to view in fullscreen",
+    "rejectionReasonPlaceholder": "Describe the reason for rejection..."
+  },
+  "documentTypes": {
+    "front": {
+      "label": "Document Front",
+      "description": "Photo of the front of your identity document"
+    },
+    "back": {
+      "label": "Document Back",
+      "description": "Photo of the back of your identity document"
+    },
+    "selfie": {
+      "label": "Selfie with Document",
+      "description": "Photo of yourself holding the document near your face"
+    }
+  },
+  "filters": {
+    "status": {
+      "all": "All Statuses",
+      "label": "Status"
+    },
+    "search": {
+      "label": "Search",
+      "placeholder": "Name, email..."
+    },
+    "documentType": {
+      "all": "All Types",
+      "label": "Document Type"
+    }
+  },
+  "errors": {
+    "fileTooLarge": "File too large. Maximum: 10MB.",
+    "uploadFailed": "Error uploading document",
+    "invalidFileType": "File type not allowed. Use JPEG, PNG, HEIC, WEBP or PDF."
+  }
+}

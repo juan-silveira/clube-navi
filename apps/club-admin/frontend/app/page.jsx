@@ -1,25 +1,37 @@
 "use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/store/authStore";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import useAuthStore from '@/store/authStore';
-
-export default function HomePage() {
+const HomePage = () => {
   const router = useRouter();
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, loadFromStorage } = useAuthStore();
 
   useEffect(() => {
-    // Redirecionar baseado no estado de autenticação
-    if (isAuthenticated) {
-      router.push('/dashboard');
-    } else {
-      router.push('/auth/login');
-    }
-  }, [isAuthenticated, router]);
+    // Carregar do localStorage
+    loadFromStorage();
 
+    // Esperar um pouco para garantir que carregou
+    setTimeout(() => {
+      const { isAuthenticated } = useAuthStore.getState();
+
+      if (isAuthenticated) {
+        router.replace('/dashboard');
+      } else {
+        router.replace('/login');
+      }
+    }, 100);
+  }, []);
+
+  // Página de loading enquanto redireciona
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-slate-900">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+        <p className="text-slate-600 dark:text-slate-400">Carregando...</p>
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage;

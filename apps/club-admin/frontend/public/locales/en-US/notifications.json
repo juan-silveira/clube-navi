@@ -1,0 +1,87 @@
+{
+  "title": "Notifications",
+  "loading": "Loading notifications...",
+  "subtitle": "Manage your system notifications",
+  "pageTitle": "Notifications",
+  "filter": {
+    "all": "All",
+    "read": "Read",
+    "label": "Filter:",
+    "unread": "Unread",
+    "deleted": "Deleted",
+    "favorite": "Favorites"
+  },
+  "details": {
+    "back": "Back",
+    "title": "Notification Details",
+    "tooltips": {
+      "delete": "Delete",
+      "markAsRead": "Mark as read",
+      "markAsUnread": "Mark as unread",
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites"
+    }
+  },
+  "emptyState": {
+    "all": "You have no notifications at the moment.",
+    "read": "No read notifications found.",
+    "title": "No notifications",
+    "unread": "No unread notifications found.",
+    "default": "No notifications found.",
+    "deleted": "No deleted notifications found.",
+    "favorite": "No favorite notifications found."
+  },
+  "counter": {
+    "selected": "{{count}} selected",
+    "notifications_one": "{{count}} notification",
+    "notifications_other": "{{count}} notifications"
+  },
+  "actions": {
+    "selectAll": "Select all",
+    "markAsRead": "Mark as read",
+    "markAllAsRead": "Mark all as read",
+    "deleteSelected": "Delete selected",
+    "markAllAsUnread": "Mark all as unread"
+  },
+  "alerts": {
+    "movedToTrash": "Notification moved to Trash",
+    "deletionCompleted": "Deletion completed",
+    "notificationRestored": "Notification restored successfully!",
+    "restorationCompleted": "Restoration completed",
+    "notificationsRestored": "Notifications restored successfully!",
+    "allNotificationsRestored": "All notifications restored successfully!",
+    "notificationsMovedToTrash": "Notifications moved to Trash",
+    "errorDeletingNotifications": "Error deleting notifications",
+    "errorRestoringNotification": "Error restoring notification",
+    "errorRestoringNotifications": "Error restoring notifications",
+    "allNotificationsMovedToTrash": "All notifications moved to Trash"
+  },
+  "pagination": {
+    "lastPage": "Last page",
+    "nextPage": "Next page",
+    "firstPage": "First page",
+    "previousPage": "Previous page"
+  },
+  "item": {
+    "tooltips": {
+      "delete": "Delete",
+      "restore": "Restore",
+      "markAsRead": "Mark as read",
+      "markAsUnread": "Mark as unread"
+    }
+  },
+  "modals": {
+    "deleteAll": {
+      "title": "Delete all notifications",
+      "cancel": "Cancel",
+      "confirm": "Yes, delete all!",
+      "message": "Are you sure you want to delete all {{count}} notifications?"
+    },
+    "deleteMultiple": {
+      "title": "Delete notifications",
+      "cancel": "Cancel",
+      "confirm": "Yes, delete!",
+      "message": "Are you sure you want to delete {{count}} notification(s)?"
+    }
+  }
+}

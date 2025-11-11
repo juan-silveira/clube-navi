@@ -1,0 +1,191 @@
+{
+  "title": "Company Management",
+  "subtitle": "Manage all companies and their whitelabel configurations",
+  "stats": {
+    "total": "Total",
+    "active": "Active",
+    "inactive": "Inactive",
+    "customBranding": "Customized",
+    "defaultBranding": "Default"
+  },
+  "table": {
+    "title": "Companies",
+    "loading": "Loading companies...",
+    "empty": {
+      "title": "No companies found",
+      "subtitle": "Try adjusting the filters to see more results"
+    },
+    "stats": {
+      "users": "users",
+      "transactions": "transactions"
+    },
+    "columns": {
+      "stats": "Statistics",
+      "status": "Status",
+      "actions": "Actions",
+      "company": "Company",
+      "activity": "Activity",
+      "branding": "Customization"
+    },
+    "activity": {
+      "today": "Today",
+      "active": "Active:",
+      "created": "Created:",
+      "daysAgo": "{{days}} days ago",
+      "noRecentActivity": "No recent activity"
+    },
+    "pagination": {
+      "showing": "Showing {{from}} to {{to}} of {{total}} records",
+      "perPage10": "10 per page",
+      "perPage20": "20 per page",
+      "perPage50": "50 per page",
+      "perPage100": "100 per page"
+    },
+    "brandingStatus": {
+      "custom": "Customized",
+      "default": "Default"
+    }
+  },
+  "buttons": {
+    "save": "Save Settings",
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "upload": "Click to upload",
+    "refresh": "Refresh",
+    "exportCSV": "Export CSV"
+  },
+  "status": {
+    "active": "Active",
+    "pending": "Pending",
+    "inactive": "Inactive"
+  },
+  "actions": {
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "editBranding": "Edit Branding",
+    "manageStakes": "Manage Stakes"
+  },
+  "filters": {
+    "status": {
+      "all": "All Statuses",
+      "label": "Status",
+      "placeholder": "Status"
+    },
+    "branding": {
+      "all": "All",
+      "label": "Customization",
+      "custom": "Customized",
+      "default": "Default",
+      "placeholder": "Branding"
+    },
+    "search": {
+      "label": "Search",
+      "placeholder": "Company name or alias"
+    },
+    "activeFilters": "Active filters",
+    "lastActivity": {
+      "label": "Last Activity",
+      "lastDay": "Last day",
+      "anyPeriod": "Any period",
+      "last7Days": "Last 7 days",
+      "last30Days": "Last 30 days",
+      "last90Days": "Last 90 days",
+      "placeholder": "Period"
+    },
+    "activeLabels": {
+      "search": "Search",
+      "status": "Status",
+      "activity": "Activity",
+      "branding": "Branding"
+    }
+  },
+  "messages": {
+    "loadError": "Error loading companies",
+    "saveError": "Error saving settings",
+    "actionError": "Error executing action",
+    "saveSuccess": "Branding settings saved successfully!",
+    "uploadError": "Error uploading file",
+    "noPermission": "You don't have permission for this action",
+    "activateError": "Error activating company",
+    "uploadSuccess": "{{assetType}} uploaded successfully!",
+    "uploadingAsset": "Uploading {{assetType}}...",
+    "activateSuccess": "{{name}} has been activated",
+    "deactivateError": "Error deactivating company",
+    "deactivateSuccess": "{{name}} has been deactivated"
+  },
+  "branding": {
+    "modalTitle": "Branding Configuration",
+    "colors": {
+      "text": "Text Color",
+      "accent": "Accent Color",
+      "primary": "Primary Color",
+      "secondary": "Secondary Color",
+      "background": "Background Color"
+    },
+    "images": {
+      "width": "Width",
+      "height": "Height",
+      "favicon": "Favicon",
+      "darkLogo": "Dark Logo",
+      "mainLogo": "Main Logo",
+      "dimensionsTip": "Use \"100%\" to fill all available space, or pixel values for fixed sizes. \"auto\" maintains the original aspect ratio.",
+      "dimensionsHint": "Use %, px or auto",
+      "urlPlaceholder": "Image URL",
+      "backgroundImage": "Background Image",
+      "widthPlaceholder": "Ex: 100%, 500px, auto",
+      "heightPlaceholder": "Ex: 100%, 400px, auto",
+      "backgroundDimensions": "Background Image Dimensions"
+    },
+    "layout": {
+      "style": "Layout Style",
+      "fontSize": "Font Size",
+      "borderRadius": "Rounded Borders (px)",
+      "styles": {
+        "default": "Default",
+        "sidebar": "Sidebar",
+        "centered": "Centered",
+        "fullscreen": "Fullscreen"
+      },
+      "fontSizes": {
+        "large": "Large",
+        "small": "Small",
+        "medium": "Medium"
+      },
+      "borderRadiusPlaceholder": "8"
+    },
+    "urls": {
+      "support": "Support URL",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "supportPlaceholder": "https://support.company.com",
+      "privacyPolicyPlaceholder": "https://company.com/privacy",
+      "termsOfServicePlaceholder": "https://company.com/terms"
+    },
+    "sections": {
+      "urls": "URLs",
+      "texts": "Texts",
+      "colors": "Colors",
+      "images": "Images",
+      "layout": "Layout and Style",
+      "preview": "Preview"
+    },
+    "preview": {
+      "mobile": "Mobile",
+      "desktop": "Desktop"
+    },
+    "texts": {
+      "brandName": "Brand Name",
+      "footerText": "Footer Text",
+      "loginTitle": "Login Screen Title",
+      "contactEmail": "Contact Email",
+      "loginSubtitle": "Login Screen Subtitle",
+      "welcomeMessage": "Welcome Message",
+      "brandNamePlaceholder": "Brand name",
+      "footerTextPlaceholder": "© 2025 Company. All rights reserved.",
+      "loginTitlePlaceholder": "Welcome to Clube Digital",
+      "contactEmailPlaceholder": "support@company.com",
+      "loginSubtitlePlaceholder": "Leading blockchain platform",
+      "welcomeMessagePlaceholder": "Welcome! Your trusted platform..."
+    }
+  }
+}

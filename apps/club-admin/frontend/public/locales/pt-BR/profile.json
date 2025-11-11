@@ -1,0 +1,57 @@
+{
+  "info": {
+    "cpf": "CPF",
+    "email": "EMAIL",
+    "phone": "PHONE",
+    "title": "Info",
+    "active": "Ativo",
+    "status": "STATUS",
+    "inactive": "Inativo",
+    "birthDate": "DATA DE NASCIMENTO",
+    "publicKey": "CHAVE PÚBLICA",
+    "currentCompany": "EMPRESA ATUAL"
+  },
+  "pageTitle": "Perfil do Usuário",
+  "roles": {
+    "USER": "Usuário",
+    "ADMIN": "Admin do Company",
+    "APP_ADMIN": "Admin Clube Digital",
+    "SUPER_ADMIN": "Super Admin"
+  },
+  "defaultUser": "Usuário",
+  "notInformed": "Não informado",
+  "balances": {
+    "AZE": "Saldo da Coin Azore (AZE)",
+    "cBRL": "Saldo em Real Digital (cBRL)",
+    "title": "Saldos Atuais",
+    "table": {
+      "logo": "Logo",
+      "name": "Nome",
+      "symbol": "Sigla",
+      "address": "Endereço:",
+      "balance": "Saldo",
+      "network": "Rede:",
+      "noBalance": "Nenhum saldo disponível. Faça login para ver seus balances.",
+      "totalTokens": "Total de Tokens:"
+    }
+  },
+  "pixKeys": {
+    "title": "Chaves PIX",
+    "noKeys": "Nenhuma chave PIX cadastrada",
+    "remove": "Remover",
+    "default": "Padrão",
+    "addButton": "Adicionar",
+    "types": {
+      "cpf": "CPF",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "random": "Chave Aleatória"
+    },
+    "setDefault": "Tornar padrão",
+    "errorRemove": "Erro ao remover chave PIX",
+    "registeredAt": "Cadastrada em",
+    "registerFirst": "Cadastrar primeira chave",
+    "errorSetDefault": "Erro ao definir chave padrão"
+  },
+  "roleNotDefined": "Role não definida"
+}
