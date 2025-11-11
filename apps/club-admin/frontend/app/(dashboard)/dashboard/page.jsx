@@ -151,7 +151,7 @@ const Dashboard = () => {
       </div>
 
       {/* Estatísticas Financeiras - Linha 2 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard
           title="Volume Total"
           value={`R$ ${Number(stats?.financial?.totalVolume || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
@@ -166,6 +166,14 @@ const Dashboard = () => {
           subtitle={`R$ ${Number(stats?.financial?.cashback30d || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} últimos 30 dias`}
           icon="heroicons:gift"
           color="warning"
+        />
+
+        <StatCard
+          title="Ticket Médio Cashback"
+          value={`R$ ${Number(stats?.financial?.avgCashbackTicket || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+          subtitle="Por transação"
+          icon="heroicons:chart-bar"
+          color="info"
         />
 
         <StatCard

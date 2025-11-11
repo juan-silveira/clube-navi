@@ -143,6 +143,11 @@ router.get('/club-stats', authenticateClubAdmin, async (req, res) => {
       ? (totalCashback / totalVolume) * 100
       : 0;
 
+    // Calcular ticket médio de cashback (valor médio de cashback por transação)
+    const avgCashbackTicket = confirmedTransactions > 0
+      ? totalCashback / confirmedTransactions
+      : 0;
+
     // GRÁFICO - Transações dos últimos 30 dias (usando tabela purchases)
     const chartData = [];
     for (let i = 29; i >= 0; i--) {
@@ -294,7 +299,8 @@ router.get('/club-stats', authenticateClubAdmin, async (req, res) => {
           volume30d: financial30d._sum.totalAmount || 0,
           cashback30d: financial30d._sum.consumerCashback || 0,
           avgTicket: financialData._avg.totalAmount || 0,
-          avgCashbackRate: avgCashbackRate
+          avgCashbackRate: avgCashbackRate,
+          avgCashbackTicket: avgCashbackTicket
         },
         performance: {
           successRate,
