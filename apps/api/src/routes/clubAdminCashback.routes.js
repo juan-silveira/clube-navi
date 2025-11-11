@@ -18,8 +18,9 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
       },
       _sum: {
         consumerCashback: true,
-        merchantCashback: true,
-        clubCashback: true
+        consumerReferrerFee: true,
+        merchantReferrerFee: true,
+        platformFee: true
       },
       _count: {
         id: true
@@ -83,8 +84,9 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
 
     const totalDistributed =
       Number(totalStats._sum.consumerCashback || 0) +
-      Number(totalStats._sum.merchantCashback || 0) +
-      Number(totalStats._sum.clubCashback || 0);
+      Number(totalStats._sum.consumerReferrerFee || 0) +
+      Number(totalStats._sum.merchantReferrerFee || 0) +
+      Number(totalStats._sum.platformFee || 0);
 
     const avgCashback = totalStats._count.id > 0
       ? Number(totalStats._sum.consumerCashback || 0) / totalStats._count.id
