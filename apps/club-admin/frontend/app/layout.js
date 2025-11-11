@@ -18,6 +18,7 @@ import { CompanyProvider } from "@/contexts/CompanyContext";
 import { ConfigProvider } from "@/contexts/ConfigContext";
 import { ActiveCompanyProvider } from "@/contexts/ActiveCompanyContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { NotificationProvider } from "@/contexts/NotificationContext";
 import NoSSR from "@/components/wrappers/NoSSR";
 
 export default function RootLayout({ children }) {
@@ -30,13 +31,15 @@ export default function RootLayout({ children }) {
               <LanguageProvider>
                 <ConfigProvider>
                   <AlertProvider>
-                    <CompanyProvider>
-                      <ActiveCompanyProvider>
-                        <div suppressHydrationWarning>
-                          {children}
-                        </div>
-                      </ActiveCompanyProvider>
-                    </CompanyProvider>
+                    <NotificationProvider>
+                      <CompanyProvider>
+                        <ActiveCompanyProvider>
+                          <div suppressHydrationWarning>
+                            {children}
+                          </div>
+                        </ActiveCompanyProvider>
+                      </CompanyProvider>
+                    </NotificationProvider>
                   </AlertProvider>
                 </ConfigProvider>
               </LanguageProvider>

@@ -1192,4 +1192,60 @@ export const groupsService = {
   }
 };
 
+// Club Admin API - instância pré-configurada para Club Admin
+export const clubAdminApi = axios.create({
+  baseURL: `${API_BASE_URL}/api/club-admin`,
+  timeout: 60000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Adicionar interceptor de autenticação para clubAdminApi
+clubAdminApi.interceptors.request.use(
+  (config) => {
+    const { accessToken } = useAuthStore.getState();
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Adicionar interceptor de resposta para clubAdminApi
+clubAdminApi.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    // Mesma lógica de tratamento de erro da API principal
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      const { refreshToken, logout, isAuthenticated } = useAuthStore.getState();
+
+      if (isAuthenticated && refreshToken) {
+        try {
+          const response = await axios.post(`${API_BASE_URL}/api/auth/refresh`, {
+            refreshToken
+          });
+
+          const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data.data;
+          useAuthStore.getState().setTokens(newAccessToken, newRefreshToken);
+
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+          return clubAdminApi(originalRequest);
+        } catch (refreshError) {
+          logout('invalid_refresh_token');
+          setTimeout(() => window.location.href = '/login', 1000);
+          return Promise.reject(refreshError);
+        }
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default api;
