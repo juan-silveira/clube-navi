@@ -170,7 +170,7 @@ const Dashboard = () => {
 
         <StatCard
           title="Taxa Média Cashback"
-          value={`${(stats?.financial?.avgCashbackRate || 0).toFixed(1)}%`}
+          value={`${(stats?.financial?.avgCashbackRate || 0).toFixed(2)}%`}
           subtitle="Percentual médio"
           icon="heroicons:receipt-percent"
           color="info"
