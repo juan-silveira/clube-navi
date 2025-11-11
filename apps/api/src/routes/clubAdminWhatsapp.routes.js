@@ -13,32 +13,49 @@ const { authenticateClubAdmin } = require('../middleware/clubAdmin.middleware');
  */
 router.get('/templates', authenticateClubAdmin, async (req, res) => {
   try {
-    // Templates padrão para mensagens WhatsApp
+    // Templates padrão para mensagens WhatsApp (baseado no sistema admin)
     const templates = [
       {
         id: 'welcome',
         name: 'Boas-vindas',
-        message: 'Olá {nome}! Bem-vindo ao nosso clube de benefícios. Aproveite as vantagens exclusivas!'
+        message: '👋 *Bem-vindo ao Clube!*\n\nOlá!\n\nFicamos felizes em tê-lo conosco. Nossa plataforma oferece benefícios exclusivos e cashback em suas compras.\n\nSe precisar de ajuda, estamos à disposição!',
+        isSystem: true
+      },
+      {
+        id: 'cashback_available',
+        name: 'Cashback Disponível',
+        message: '💰 *Cashback Disponível!*\n\nOlá!\n\nVocê tem cashback disponível para usar em suas próximas compras.\n\nAproveite os benefícios do clube!',
+        isSystem: true
       },
       {
         id: 'promotion',
-        name: 'Promoção',
-        message: 'Olá {nome}! Temos uma promoção especial para você. Confira agora!'
+        name: 'Promoção Especial',
+        message: '🎉 *Promoção Especial!*\n\nOlá!\n\nTemos uma promoção especial para você! Confira as ofertas exclusivas dos nossos parceiros.\n\nNão perca essa oportunidade!',
+        isSystem: true
       },
       {
         id: 'reminder',
-        name: 'Lembrete',
-        message: 'Olá {nome}! Não se esqueça de usar seus benefícios antes que expirem.'
+        name: 'Lembrete de Benefícios',
+        message: '⏰ *Lembrete Importante*\n\nOlá!\n\nNão se esqueça de usar seus benefícios e cashback acumulado.\n\nAproveite enquanto é tempo!',
+        isSystem: true
       },
       {
-        id: 'cashback',
-        name: 'Cashback Disponível',
-        message: 'Olá {nome}! Você tem cashback disponível para usar. Aproveite!'
+        id: 'general_announcement',
+        name: 'Comunicado Geral',
+        message: '📢 *Comunicado Importante*\n\nOlá!\n\n[Digite aqui o conteúdo do comunicado]\n\nAtenciosamente,\nEquipe do Clube',
+        isSystem: true
+      },
+      {
+        id: 'new_partner',
+        name: 'Novo Parceiro',
+        message: '🤝 *Novo Parceiro no Clube!*\n\nOlá!\n\nTemos um novo parceiro com benefícios exclusivos para você.\n\nConfira as vantagens e aproveite!',
+        isSystem: true
       },
       {
         id: 'custom',
-        name: 'Personalizada',
-        message: ''
+        name: 'Mensagem Personalizada',
+        message: '',
+        isSystem: true
       }
     ];
 
