@@ -43,9 +43,11 @@ const WhatsAppMessagingPage = () => {
   const fetchUsers = async () => {
     try {
       const response = await clubAdminApi.get('/users');
-      if (response.data) {
-        const usersList = response.data.users || [];
-        const sortedUsers = usersList.sort((a, b) =>
+      if (response.data && response.data.success) {
+        const usersList = response.data.data || [];
+        // Filtrar apenas usuários com telefone
+        const usersWithPhone = usersList.filter(user => user.phone);
+        const sortedUsers = usersWithPhone.sort((a, b) =>
           `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`, 'pt-BR')
         );
         setUsers(sortedUsers);
@@ -76,8 +78,8 @@ const WhatsAppMessagingPage = () => {
     setLoadingTemplates(true);
     try {
       const response = await clubAdminApi.get('/whatsapp/templates');
-      if (response.data) {
-        setTemplates(response.data || []);
+      if (response.data && response.data.success) {
+        setTemplates(response.data.data || []);
       }
     } catch (error) {
       console.error('Erro ao carregar templates:', error);
@@ -95,9 +97,9 @@ const WhatsAppMessagingPage = () => {
     setLoadingHistory(true);
     try {
       const response = await clubAdminApi.get(`/whatsapp/history?page=${historyPage}&limit=10`);
-      if (response.data) {
-        setHistory(response.data.messages || []);
-        setHistoryTotal(response.data.total || 0);
+      if (response.data && response.data.success) {
+        setHistory(response.data.data?.messages || []);
+        setHistoryTotal(response.data.data?.pagination?.total || 0);
       }
     } catch (error) {
       console.error('Erro ao carregar histórico:', error);
@@ -131,19 +133,20 @@ const WhatsAppMessagingPage = () => {
     setSending(true);
     try {
       const response = await clubAdminApi.post('/whatsapp/send', {
-        recipientUserIds: selectedUsers,
-        message: message.trim(),
-        templateId: selectedTemplate || null
+        userIds: selectedUsers,
+        message: message.trim()
       });
 
       if (response.data.success) {
-        const { successCount, failureCount } = response.data;
-        if (failureCount === 0) {
-          showSuccess(`Mensagem enviada para ${successCount} usuários!`);
-        } else if (successCount === 0) {
-          showError(`Falha ao enviar para ${failureCount} usuários`);
+        const totalSent = response.data.data?.totalSent || 0;
+        const totalFailed = response.data.data?.totalFailed || 0;
+
+        if (totalFailed === 0) {
+          showSuccess(`Mensagem enviada para ${totalSent} usuário(s)!`);
+        } else if (totalSent === 0) {
+          showError(`Falha ao enviar para ${totalFailed} usuário(s)`);
         } else {
-          showSuccess(`Enviado para ${successCount} usuários (${failureCount} falhas)`);
+          showSuccess(`Enviado para ${totalSent} usuário(s) (${totalFailed} falhas)`);
         }
 
         setSelectedUsers([]);

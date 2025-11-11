@@ -831,6 +831,10 @@ app.use('/api/club-admin/transactions', resolveClubMiddleware, clubAdminTransact
 const clubAdminCashbackRoutes = require('./routes/clubAdminCashback.routes');
 app.use('/api/club-admin/cashback', resolveClubMiddleware, clubAdminCashbackRoutes);
 
+// Rotas de WhatsApp do clube
+const clubAdminWhatsappRoutes = require('./routes/clubAdminWhatsapp.routes');
+app.use('/api/club-admin/whatsapp', resolveClubMiddleware, clubAdminWhatsappRoutes);
+
 // Rotas de recuperação de senha (públicas)
 app.use('/api/password-reset', loginRateLimiter, passwordResetRoutes);
 
