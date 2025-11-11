@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateClubAdmin } = require('../middleware/clubAdmin.middleware');
-const { getPrismaForClub } = require('../config/prisma.config');
+const { getPrismaForClub, masterPrisma } = require('../config/prisma');
 
 /**
  * GET /api/club-admin/cashback/stats
@@ -74,7 +74,6 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
     }));
 
     // Buscar configuração do clube no master database
-    const { masterPrisma } = require('../config/prisma.config');
     const club = await masterPrisma.club.findUnique({
       where: { id: req.user.clubId },
       include: {
@@ -122,7 +121,6 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
  */
 router.post('/config', authenticateClubAdmin, async (req, res) => {
   try {
-    const { masterPrisma } = require('../config/prisma.config');
     const {
       consumerPercentage,
       clubPercentage,
