@@ -335,30 +335,32 @@ router.get('/users', authenticateClubAdmin, async (req, res) => {
     const clubPrisma = req.clubPrisma;
     const { userType } = req.query;
 
-    const where = {};
+    // Usar raw query para evitar validação de enum UserType
+    let query = `
+      SELECT
+        id,
+        first_name as "firstName",
+        last_name as "lastName",
+        email,
+        username,
+        cpf,
+        phone,
+        is_active as "isActive",
+        user_type as "userType",
+        created_at as "createdAt",
+        updated_at as "updatedAt"
+      FROM users
+    `;
+
+    const params = [];
     if (userType) {
-      where.userType = userType;
+      query += ` WHERE user_type = $1`;
+      params.push(userType);
     }
 
-    const users = await clubPrisma.user.findMany({
-      where,
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        username: true,
-        cpf: true,
-        phone: true,
-        isActive: true,
-        userType: true,
-        createdAt: true,
-        updatedAt: true
-      },
-      orderBy: {
-        createdAt: 'desc'
-      }
-    });
+    query += ` ORDER BY created_at DESC`;
+
+    const users = await clubPrisma.$queryRawUnsafe(query, ...params);
 
     res.json({
       success: true,
