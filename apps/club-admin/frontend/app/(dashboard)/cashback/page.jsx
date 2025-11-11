@@ -302,13 +302,18 @@ const CashbackPage = () => {
 
               {/* Paginação */}
               {stats.pagination && stats.pagination.totalPages > 1 && (
-                <div className="flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-4">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-4">
                   <div className="text-sm text-slate-600 dark:text-slate-400">
-                    Mostrando {((currentPage - 1) * transactionsPerPage) + 1} a{' '}
-                    {Math.min(currentPage * transactionsPerPage, stats.pagination.total)} de{' '}
-                    {stats.pagination.total} transações
+                    Mostrando <span className="font-semibold text-slate-900 dark:text-white">
+                      {((currentPage - 1) * transactionsPerPage) + 1}
+                    </span> a <span className="font-semibold text-slate-900 dark:text-white">
+                      {Math.min(currentPage * transactionsPerPage, stats.pagination.total)}
+                    </span> de <span className="font-semibold text-slate-900 dark:text-white">
+                      {stats.pagination.total}
+                    </span> transações
                   </div>
-                  <div className="flex gap-2">
+
+                  <div className="flex items-center gap-2">
                     <Button
                       text="Anterior"
                       className="btn-outline-secondary btn-sm"
@@ -316,6 +321,17 @@ const CashbackPage = () => {
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                       disabled={currentPage === 1}
                     />
+
+                    {/* Indicador de página */}
+                    <div className="flex items-center gap-1 px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-md">
+                      <span className="text-sm font-medium text-slate-900 dark:text-white">
+                        Página {currentPage}
+                      </span>
+                      <span className="text-sm text-slate-500 dark:text-slate-400">
+                        de {stats.pagination.totalPages}
+                      </span>
+                    </div>
+
                     <Button
                       text="Próxima"
                       className="btn-outline-secondary btn-sm"
