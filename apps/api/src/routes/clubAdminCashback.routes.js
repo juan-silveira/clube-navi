@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateClubAdmin } = require('../middleware/clubAdmin.middleware');
-const { getPrismaForClub, masterPrisma } = require('../config/prisma');
+const { masterPrisma } = require('../database');
 
 /**
  * GET /api/club-admin/cashback/stats
@@ -9,7 +9,8 @@ const { getPrismaForClub, masterPrisma } = require('../config/prisma');
  */
 router.get('/stats', authenticateClubAdmin, async (req, res) => {
   try {
-    const clubPrisma = getPrismaForClub(req.user.clubId);
+    const clubPrisma = req.clubPrisma;
+    const clubId = req.clubAdmin?.clubId;
 
     // Total distribuído
     const totalStats = await clubPrisma.purchase.aggregate({
@@ -76,7 +77,7 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
 
     // Buscar configuração do clube no master database
     const club = await masterPrisma.club.findUnique({
-      where: { id: req.user.clubId },
+      where: { id: clubId },
       include: {
         cashbackConfig: true
       }
@@ -113,7 +114,13 @@ router.get('/stats', authenticateClubAdmin, async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao buscar estatísticas de cashback:', error);
-    res.status(500).json({ error: 'Erro ao buscar estatísticas de cashback' });
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      name: error.name,
+      code: error.code
+    });
+    res.status(500).json({ error: 'Erro ao buscar estatísticas de cashback', details: error.message });
   }
 });
 
@@ -157,8 +164,13 @@ router.post('/config', authenticateClubAdmin, async (req, res) => {
     }
 
     // Verificar se já existe configuração
+    const clubId = req.clubAdmin?.clubId || req.user?.clubId;
+    if (!clubId) {
+      return res.status(400).json({ error: 'Club ID not found in request' });
+    }
+
     const existingConfig = await masterPrisma.clubCashbackConfig.findUnique({
-      where: { clubId: req.user.clubId }
+      where: { clubId }
     });
 
     let updatedConfig;
@@ -166,7 +178,7 @@ router.post('/config', authenticateClubAdmin, async (req, res) => {
     if (existingConfig) {
       // Atualizar configuração existente
       updatedConfig = await masterPrisma.clubCashbackConfig.update({
-        where: { clubId: req.user.clubId },
+        where: { clubId },
         data: {
           consumerPercent: Number(consumerPercentage),
           clubPercent: Number(clubPercentage),
@@ -178,7 +190,7 @@ router.post('/config', authenticateClubAdmin, async (req, res) => {
       // Criar nova configuração
       updatedConfig = await masterPrisma.clubCashbackConfig.create({
         data: {
-          clubId: req.user.clubId,
+          clubId,
           consumerPercent: Number(consumerPercentage),
           clubPercent: Number(clubPercentage),
           consumerReferrerPercent: Number(consumerReferrerPercentage || 0),
