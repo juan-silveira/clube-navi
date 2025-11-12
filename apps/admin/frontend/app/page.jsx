@@ -29,8 +29,8 @@ const HomePage = () => {
 
     // Redirecionar para o dashboard correto
     if (isSuperAdmin) {
-      console.log('✅ Redirecionando para /dashboard/admin');
-      router.replace('/dashboard/admin');
+      console.log('✅ Redirecionando para /system');
+      router.replace('/system');
     } else {
       console.log('✅ Redirecionando para /dashboard');
       router.replace('/dashboard');

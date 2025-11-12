@@ -7,6 +7,7 @@ import Textinput from "@/components/ui/Textinput";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import Tooltip from "@/components/ui/Tooltip";
+import Dropdown from "@/components/ui/Dropdown";
 import usePermissions from "@/hooks/usePermissions";
 import { useRouter } from "next/navigation";
 import { useAlertContext } from '@/contexts/AlertContext';
@@ -20,7 +21,12 @@ import {
   TrendingUp,
   Calendar,
   Eye,
-  Settings
+  MoreVertical,
+  Edit,
+  Shield,
+  Palette,
+  CheckCircle,
+  XCircle
 } from 'lucide-react';
 
 const ClubsPage = () => {
@@ -155,6 +161,40 @@ const ClubsPage = () => {
       style: 'currency',
       currency: 'BRL'
     }).format(value || 0);
+  };
+
+  const handleClubAction = (action, club) => {
+    switch (action) {
+      case 'view':
+        router.push(`/system/clubs/${club.id}`);
+        break;
+      case 'edit':
+        router.push(`/system/clubs/${club.id}/edit`);
+        break;
+      case 'branding':
+        router.push(`/system/clubs/${club.id}/branding`);
+        break;
+      case 'manage-admins':
+        router.push(`/system/clubs/${club.id}/admins`);
+        break;
+      case 'toggle-status':
+        handleToggleStatus(club);
+        break;
+      default:
+        console.log('Action:', action, 'Club:', club.companyName);
+    }
+  };
+
+  const handleToggleStatus = async (club) => {
+    try {
+      const newStatus = club.status === 'active' ? 'suspended' : 'active';
+      // TODO: Implement API call
+      showSuccess(`Clube ${newStatus === 'active' ? 'ativado' : 'desativado'} com sucesso`);
+      loadTenants();
+    } catch (error) {
+      console.error('Error toggling club status:', error);
+      showError('Erro ao alterar status do clube');
+    }
   };
 
   return (
@@ -414,22 +454,82 @@ const ClubsPage = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Tooltip content="Ver detalhes">
+                      <Dropdown
+                        label={<MoreVertical size={16} className="text-gray-500 dark:text-gray-400" />}
+                        labelClass="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                        classMenuItems="mt-2 w-[200px] right-0"
+                      >
                         <button
-                          className="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 mr-3"
-                          onClick={() => router.push(`/system/clubs/${clube.id}`)}
+                          onClick={() => handleClubAction('view', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
                         >
-                          <Eye className="w-4 h-4" />
+                          <Eye size={14} className="mr-2" />
+                          Ver Detalhes
                         </button>
-                      </Tooltip>
-                      <Tooltip content="Configurações">
+
                         <button
-                          className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                          onClick={() => router.push(`/system/clubs/${clube.id}/settings`)}
+                          onClick={() => handleClubAction('edit', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
                         >
-                          <Settings className="w-4 h-4" />
+                          <Edit size={14} className="mr-2" />
+                          Editar
                         </button>
-                      </Tooltip>
+
+                        <button
+                          onClick={() => handleClubAction('branding', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <Palette size={14} className="mr-2" />
+                          Branding
+                        </button>
+
+                        <button
+                          onClick={() => handleClubAction('manage-admins', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <Shield size={14} className="mr-2" />
+                          Gerenciar Admins
+                        </button>
+
+                        <div className={`border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`} />
+
+                        <button
+                          onClick={() => handleClubAction('toggle-status', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            clube.status === 'active'
+                              ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
+                              : 'text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20'
+                          }`}
+                        >
+                          {clube.status === 'active' ? (
+                            <>
+                              <XCircle size={14} className="mr-2" />
+                              Desativar
+                            </>
+                          ) : (
+                            <>
+                              <CheckCircle size={14} className="mr-2" />
+                              Ativar
+                            </>
+                          )}
+                        </button>
+                      </Dropdown>
                     </td>
                   </tr>
                 ))

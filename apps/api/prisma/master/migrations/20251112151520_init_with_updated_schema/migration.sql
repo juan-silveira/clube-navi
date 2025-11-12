@@ -1,11 +1,8 @@
 -- CreateEnum
-CREATE TYPE "TenantStatus" AS ENUM ('trial', 'active', 'suspended', 'cancelled', 'expired');
+CREATE TYPE "app_store_status" AS ENUM ('DRAFT', 'PENDING_REVIEW', 'IN_REVIEW', 'REJECTED', 'PUBLISHED', 'REMOVED');
 
 -- CreateEnum
-CREATE TYPE "SubscriptionPlan" AS ENUM ('BASIC', 'PRO', 'ENTERPRISE');
-
--- CreateEnum
-CREATE TYPE "SubscriptionStatus" AS ENUM ('TRIAL', 'ACTIVE', 'PAST_DUE', 'SUSPENDED', 'CANCELED');
+CREATE TYPE "Plan" AS ENUM ('basic', 'pro', 'premium', 'custom');
 
 -- CreateEnum
 CREATE TYPE "ModuleKey" AS ENUM ('marketplace', 'internet', 'cinema', 'telemedicine', 'giftcards', 'insurance', 'streaming', 'referrals', 'cashback', 'telecom');
@@ -13,13 +10,22 @@ CREATE TYPE "ModuleKey" AS ENUM ('marketplace', 'internet', 'cinema', 'telemedic
 -- CreateEnum
 CREATE TYPE "AdminRole" AS ENUM ('admin', 'manager', 'support');
 
+-- CreateEnum
+CREATE TYPE "NotificationType" AS ENUM ('push_notification', 'email', 'sms', 'in_app');
+
+-- CreateEnum
+CREATE TYPE "NotificationTarget" AS ENUM ('all_clubs', 'specific_clubs', 'active_clubs', 'trial_clubs', 'suspended_clubs');
+
+-- CreateEnum
+CREATE TYPE "NotificationStatus" AS ENUM ('pending', 'scheduled', 'sending', 'sent', 'failed', 'cancelled');
+
 -- CreateTable
 CREATE TABLE "clubs" (
     "id" UUID NOT NULL,
     "slug" VARCHAR(50) NOT NULL,
     "company_name" VARCHAR(255) NOT NULL,
     "company_document" VARCHAR(18) NOT NULL,
-    "status" "TenantStatus" NOT NULL DEFAULT 'trial',
+    "is_active" BOOLEAN NOT NULL DEFAULT false,
     "database_host" VARCHAR(255) NOT NULL,
     "database_port" INTEGER NOT NULL DEFAULT 5432,
     "database_name" VARCHAR(100) NOT NULL,
@@ -31,8 +37,7 @@ CREATE TABLE "clubs" (
     "max_users" INTEGER NOT NULL DEFAULT 1000,
     "max_admins" INTEGER NOT NULL DEFAULT 10,
     "max_storage_gb" INTEGER NOT NULL DEFAULT 50,
-    "subscription_plan" "SubscriptionPlan" NOT NULL DEFAULT 'BASIC',
-    "subscription_status" "SubscriptionStatus" NOT NULL DEFAULT 'TRIAL',
+    "plan" "Plan" NOT NULL DEFAULT 'basic',
     "monthly_fee" DECIMAL(10,2) NOT NULL DEFAULT 0,
     "trial_ends_at" TIMESTAMPTZ(6),
     "next_billing_date" TIMESTAMPTZ(6),
@@ -68,6 +73,34 @@ CREATE TABLE "club_brandings" (
     "updated_at" TIMESTAMPTZ(6) NOT NULL,
 
     CONSTRAINT "club_brandings_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "club_app_configs" (
+    "id" UUID NOT NULL,
+    "club_id" UUID NOT NULL,
+    "app_name" VARCHAR(100) NOT NULL,
+    "tenant_slug" VARCHAR(50) NOT NULL,
+    "app_description" TEXT,
+    "bundle_id" VARCHAR(100) NOT NULL,
+    "package_name" VARCHAR(100) NOT NULL,
+    "url_scheme" VARCHAR(50) NOT NULL,
+    "app_icon_url" VARCHAR(500) NOT NULL,
+    "splash_screen_url" VARCHAR(500) NOT NULL,
+    "splash_background_color" VARCHAR(7) NOT NULL DEFAULT '#FFFFFF',
+    "current_version" VARCHAR(20) NOT NULL DEFAULT '1.0.0',
+    "ios_build_number" INTEGER NOT NULL DEFAULT 1,
+    "android_build_number" INTEGER NOT NULL DEFAULT 1,
+    "app_store_status" "app_store_status" NOT NULL DEFAULT 'DRAFT',
+    "play_store_status" "app_store_status" NOT NULL DEFAULT 'DRAFT',
+    "app_store_url" VARCHAR(500),
+    "play_store_url" VARCHAR(500),
+    "auto_build_enabled" BOOLEAN NOT NULL DEFAULT true,
+    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ(6) NOT NULL,
+    "published_at" TIMESTAMPTZ(6),
+
+    CONSTRAINT "club_app_configs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -219,6 +252,31 @@ CREATE TABLE "club_usage_stats" (
     CONSTRAINT "club_usage_stats_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "notifications" (
+    "id" UUID NOT NULL,
+    "club_id" UUID,
+    "notification_type" "NotificationType" NOT NULL,
+    "target_type" "NotificationTarget" NOT NULL,
+    "target_club_ids" TEXT[],
+    "title" VARCHAR(255) NOT NULL,
+    "message" TEXT NOT NULL,
+    "data" JSONB DEFAULT '{}',
+    "total_sent" INTEGER NOT NULL DEFAULT 0,
+    "total_delivered" INTEGER NOT NULL DEFAULT 0,
+    "total_failed" INTEGER NOT NULL DEFAULT 0,
+    "total_clicked" INTEGER NOT NULL DEFAULT 0,
+    "status" "NotificationStatus" NOT NULL DEFAULT 'pending',
+    "scheduled_for" TIMESTAMPTZ(6),
+    "sent_at" TIMESTAMPTZ(6),
+    "sent_by" UUID NOT NULL,
+    "error_log" JSONB DEFAULT '[]',
+    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ(6) NOT NULL,
+
+    CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "clubs_slug_key" ON "clubs"("slug");
 
@@ -241,13 +299,40 @@ CREATE INDEX "clubs_slug_idx" ON "clubs"("slug");
 CREATE INDEX "clubs_subdomain_idx" ON "clubs"("subdomain");
 
 -- CreateIndex
-CREATE INDEX "clubs_status_idx" ON "clubs"("status");
-
--- CreateIndex
-CREATE INDEX "idx_clubs_subscription_status" ON "clubs"("subscription_status");
+CREATE INDEX "clubs_is_active_idx" ON "clubs"("is_active");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "club_brandings_club_id_key" ON "club_brandings"("club_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "club_app_configs_club_id_key" ON "club_app_configs"("club_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "club_app_configs_tenant_slug_key" ON "club_app_configs"("tenant_slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "club_app_configs_bundle_id_key" ON "club_app_configs"("bundle_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "club_app_configs_package_name_key" ON "club_app_configs"("package_name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "club_app_configs_url_scheme_key" ON "club_app_configs"("url_scheme");
+
+-- CreateIndex
+CREATE INDEX "club_app_configs_tenant_slug_idx" ON "club_app_configs"("tenant_slug");
+
+-- CreateIndex
+CREATE INDEX "club_app_configs_bundle_id_idx" ON "club_app_configs"("bundle_id");
+
+-- CreateIndex
+CREATE INDEX "club_app_configs_package_name_idx" ON "club_app_configs"("package_name");
+
+-- CreateIndex
+CREATE INDEX "club_app_configs_app_store_status_idx" ON "club_app_configs"("app_store_status");
+
+-- CreateIndex
+CREATE INDEX "club_app_configs_play_store_status_idx" ON "club_app_configs"("play_store_status");
 
 -- CreateIndex
 CREATE INDEX "club_modules_club_id_idx" ON "club_modules"("club_id");
@@ -306,8 +391,26 @@ CREATE INDEX "club_usage_stats_date_idx" ON "club_usage_stats"("date");
 -- CreateIndex
 CREATE UNIQUE INDEX "club_usage_stats_club_id_date_key" ON "club_usage_stats"("club_id", "date");
 
+-- CreateIndex
+CREATE INDEX "notifications_club_id_idx" ON "notifications"("club_id");
+
+-- CreateIndex
+CREATE INDEX "notifications_status_idx" ON "notifications"("status");
+
+-- CreateIndex
+CREATE INDEX "notifications_notification_type_idx" ON "notifications"("notification_type");
+
+-- CreateIndex
+CREATE INDEX "notifications_sent_at_idx" ON "notifications"("sent_at");
+
+-- CreateIndex
+CREATE INDEX "notifications_scheduled_for_idx" ON "notifications"("scheduled_for");
+
 -- AddForeignKey
 ALTER TABLE "club_brandings" ADD CONSTRAINT "club_brandings_club_id_fkey" FOREIGN KEY ("club_id") REFERENCES "clubs"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "club_app_configs" ADD CONSTRAINT "club_app_configs_club_id_fkey" FOREIGN KEY ("club_id") REFERENCES "clubs"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "club_modules" ADD CONSTRAINT "club_modules_club_id_fkey" FOREIGN KEY ("club_id") REFERENCES "clubs"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -329,3 +432,6 @@ ALTER TABLE "club_api_keys" ADD CONSTRAINT "club_api_keys_club_id_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "club_usage_stats" ADD CONSTRAINT "club_usage_stats_club_id_fkey" FOREIGN KEY ("club_id") REFERENCES "clubs"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "notifications" ADD CONSTRAINT "notifications_club_id_fkey" FOREIGN KEY ("club_id") REFERENCES "clubs"("id") ON DELETE SET NULL ON UPDATE CASCADE;

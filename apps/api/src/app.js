@@ -839,6 +839,10 @@ app.use('/api/club-admin/whatsapp', resolveClubMiddleware, clubAdminWhatsappRout
 const clubAdminPushNotificationsRoutes = require('./routes/clubAdminPushNotifications.routes');
 app.use('/api/club-admin/push-notifications', resolveClubMiddleware, clubAdminPushNotificationsRoutes);
 
+// Rotas de branding do clube - Endpoints públicos (sem middleware)
+const clubAdminBrandingPublicRoutes = require('./routes/clubAdminBrandingPublic.routes');
+app.use('/api/public/club-admin', clubAdminBrandingPublicRoutes);
+
 // Rotas de branding do clube (DEPRECATED - manter para compatibilidade)
 const clubAdminBrandingRoutes = require('./routes/clubAdminBranding.routes');
 app.use('/api/club-admin/branding', resolveClubMiddleware, clubAdminBrandingRoutes);
@@ -846,6 +850,10 @@ app.use('/api/club-admin/branding', resolveClubMiddleware, clubAdminBrandingRout
 // Rotas de branding OTA (novo sistema)
 const clubAdminBrandingOtaRoutes = require('./routes/clubAdminBrandingOta.routes');
 app.use('/api/club-admin/branding-ota', resolveClubMiddleware, clubAdminBrandingOtaRoutes);
+
+// Rotas de upload de branding OTA
+const clubAdminBrandingOtaUploadRoutes = require('./routes/clubAdminBrandingOtaUpload.routes');
+app.use('/api/club-admin/branding-ota', resolveClubMiddleware, clubAdminBrandingOtaUploadRoutes);
 
 // Rotas de módulos do clube
 const clubAdminModulesRoutes = require('./routes/clubAdminModules.routes');
@@ -1194,6 +1202,10 @@ app.get('/api/admin/stats', authenticateJWT, requireSuperAdmin, async (req, res)
 const adminAppConfigRoutes = require('./routes/admin/appConfig.routes');
 app.use('/api/admin/app-config', adminAppConfigRoutes);
 
+// Rotas de upload de app config (Super Admin)
+const adminAppConfigUploadRoutes = require('./routes/admin/appConfigUpload.routes');
+app.use('/api/admin/app-config', adminAppConfigUploadRoutes);
+
 // REMOVIDO - arquivo não existe mais
 // app.use('/api/admin/financial-report', authenticateJWT, financialReportRoutes);
 // Usar authenticateToken (JWT) para permitir acesso via frontend com Bearer token
@@ -1425,5 +1437,9 @@ app.use('*', (req, res) => {
 app.use(databaseErrorTracking);
 app.use(errorTracking);
 // app.use(errorLogger);
+
+// Initialize cron jobs
+const { initClubStatsSyncJob } = require('./jobs/club-stats-sync.job');
+initClubStatsSyncJob();
 
 module.exports = app; 

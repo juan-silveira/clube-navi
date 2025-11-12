@@ -134,27 +134,80 @@ npm run seed
 
 ### 5. Rodar o Projeto
 
-#### Desenvolvimento - Tudo junto:
+**🚀 Quick Start - Rodar TUDO de uma vez:**
+
 ```bash
-npm run dev:full
+# Via NPM
+npm run dev:everything
+
+# Via Make
+make dev-everything
+
+# Via Script (mais amigável)
+./dev.sh all
 ```
 
 Isso iniciará:
-- **API**: http://localhost:8033
-- **Admin**: http://localhost:3033
-- **Mobile**: Expo Dev Server
+- ✅ **API**: http://localhost:8033
+- ✅ **Admin**: http://localhost:3033
+- ✅ **Club-Admin**: http://localhost:3000
+- ✅ **Mobile**: Expo Dev Server
 
-#### Ou rodar separadamente:
+**📚 Ver todos os comandos disponíveis:**
+- `make help` - Lista todos os comandos Make
+- `./dev.sh` - Menu interativo do script
+- Ver [DEV_COMMANDS.md](./DEV_COMMANDS.md) - Documentação completa
+- Ver [QUICK_START.md](./QUICK_START.md) - Guia rápido
+
+#### Outras combinações úteis:
+
+```bash
+# Backend + Admin
+npm run dev:all
+# ou
+make dev
+
+# Backend + Club-Admin
+npm run dev:club-admin
+# ou
+make dev-club-admin
+
+# Backend + Admin + Mobile (sem club-admin)
+npm run dev:full
+# ou
+make dev-all
+```
+
+#### Serviços individuais:
 
 ```bash
 # Backend API
 npm run dev:api
+# ou
+make dev-api
 
 # Admin Web
 npm run dev:frontend
+# ou
+make dev-frontend
+
+# Club-Admin Web
+npm run dev:club-admin-only
+# ou
+make dev-club-admin-only
 
 # Mobile App
 npm run dev:mobile
+# ou
+make dev-mobile
+```
+
+#### Parar todos os serviços:
+
+```bash
+make stop
+# ou
+./dev.sh stop
 ```
 
 ---

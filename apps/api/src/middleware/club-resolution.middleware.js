@@ -45,6 +45,11 @@ function extractClubeIdentifier(req) {
   // Extrai: empresa-a
   const parts = cleanHost.split('.');
 
+  // Detectar localhost subdomain (ex: clubenavi.localhost)
+  if (parts.length === 2 && parts[1] === 'localhost') {
+    return { type: 'subdomain', value: parts[0] };
+  }
+
   // Se tiver 4+ partes, primeiro é o subdomain
   if (parts.length >= 4) {
     const subdomain = parts[0];

@@ -30,15 +30,34 @@ dev-all: ## Roda Backend + Frontend + Mobile
 	@echo "$(YELLOW)Mobile: Expo$(NC)"
 	@npm run dev:full
 
+dev-everything: ## Roda TUDO: Backend + Admin + Club-Admin + Mobile
+	@echo "$(GREEN)🚀 Iniciando TODOS os serviços...$(NC)"
+	@echo "$(YELLOW)Backend (API): http://localhost:8033$(NC)"
+	@echo "$(YELLOW)Admin Frontend: http://localhost:3033$(NC)"
+	@echo "$(YELLOW)Club-Admin Frontend: http://localhost:3000$(NC)"
+	@echo "$(YELLOW)Mobile: Expo$(NC)"
+	@npm run dev:everything
+
+dev-club-admin: ## Roda Backend + Club-Admin
+	@echo "$(GREEN)🚀 Iniciando Backend + Club-Admin...$(NC)"
+	@echo "$(YELLOW)Backend: http://localhost:8033$(NC)"
+	@echo "$(YELLOW)Club-Admin: http://localhost:3000$(NC)"
+	@npm run dev:club-admin
+
 dev-api: ## Roda apenas o Backend (8033)
 	@echo "$(GREEN)🔧 Iniciando Backend...$(NC)"
 	@echo "$(YELLOW)Backend: http://localhost:8033$(NC)"
 	@cd apps/api && npm run dev
 
-dev-frontend: ## Roda apenas o Frontend (3033)
-	@echo "$(GREEN)🖥️  Iniciando Frontend...$(NC)"
-	@echo "$(YELLOW)Frontend: http://localhost:3033$(NC)"
+dev-frontend: ## Roda apenas o Admin Frontend (3033)
+	@echo "$(GREEN)🖥️  Iniciando Admin Frontend...$(NC)"
+	@echo "$(YELLOW)Admin Frontend: http://localhost:3033$(NC)"
 	@cd apps/admin/frontend && npm run dev -- -p 3033
+
+dev-club-admin-only: ## Roda apenas o Club-Admin Frontend (3000)
+	@echo "$(GREEN)🏢 Iniciando Club-Admin Frontend...$(NC)"
+	@echo "$(YELLOW)Club-Admin: http://localhost:3000$(NC)"
+	@cd apps/club-admin/frontend && npm run dev
 
 dev-mobile: ## Roda apenas o Mobile (Expo)
 	@echo "$(GREEN)📱 Iniciando Mobile...$(NC)"

@@ -7,20 +7,22 @@ import Textinput from "@/components/ui/Textinput";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import Tooltip from "@/components/ui/Tooltip";
+import Dropdown from "@/components/ui/Dropdown";
 import usePermissions from "@/hooks/usePermissions";
 import { useRouter } from "next/navigation";
 import { useAlertContext } from '@/contexts/AlertContext';
-import { clubsService } from '@/services/api';
+import clubsService from '@/services/clubsService';
 import {
-  Search,
-  RefreshCw,
   Building,
   Users,
-  DollarSign,
   TrendingUp,
-  Calendar,
   Eye,
-  Settings
+  MoreVertical,
+  Edit,
+  Palette,
+  UserCog,
+  Power,
+  PowerOff
 } from 'lucide-react';
 
 const ClubsPage = () => {
@@ -38,15 +40,15 @@ const ClubsPage = () => {
   // Filtros
   const [filters, setFilters] = useState({
     search: '',
-    status: '',
-    subscriptionStatus: ''
+    isActive: '',
+    plan: ''
   });
 
   // Estatísticas
   const [stats, setStats] = useState({
     total: 0,
     active: 0,
-    trial: 0
+    inactive: 0
   });
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const ClubsPage = () => {
         ...filters
       };
 
-      const response = await clubsService.list(params);
+      const response = await clubsService.listClubs(params);
 
       if (response.success) {
         setTenants(response.data.clubs);
@@ -77,18 +79,18 @@ const ClubsPage = () => {
         setTotalTenants(response.data.pagination.total);
 
         // Calculate stats
-        const activeCount = response.data.clubs.filter(t => t.status === 'active').length;
-        const trialCount = response.data.clubs.filter(t => t.status === 'trial').length;
+        const activeCount = response.data.clubs.filter(t => t.isActive === true).length;
+        const inactiveCount = response.data.clubs.filter(t => t.isActive === false).length;
 
         setStats({
           total: response.data.pagination.total,
           active: activeCount,
-          trial: trialCount
+          inactive: inactiveCount
         });
       }
     } catch (error) {
       console.error('Error loading clubs:', error);
-      showError('Erro ao carregar clubs');
+      showError('Erro ao carregar clubes');
     } finally {
       setLoading(false);
     }
@@ -102,47 +104,49 @@ const ClubsPage = () => {
   const handleClearFilters = () => {
     setFilters({
       search: '',
-      status: '',
-      subscriptionStatus: ''
+      isActive: '',
+      plan: ''
     });
     setCurrentPage(1);
     setTimeout(() => loadTenants(), 100);
   };
 
-  const getStatusBadge = (status) => {
-    const statusMap = {
-      trial: { label: 'Trial', className: 'bg-info-500' },
-      active: { label: 'Ativo', className: 'bg-success-500' },
-      suspended: { label: 'Suspenso', className: 'bg-warning-500' },
-      cancelled: { label: 'Cancelado', className: 'bg-danger-500' },
-      expired: { label: 'Expirado', className: 'bg-secondary-500' }
+  const getStatusBadge = (isActive) => {
+    return isActive ? (
+      <Badge className="bg-success-500">Ativo</Badge>
+    ) : (
+      <Badge className="bg-danger-500">Inativo</Badge>
+    );
+  };
+
+  const getPlanBadge = (plan) => {
+    const planMap = {
+      basic: { label: 'Basic', className: 'bg-slate-500' },
+      pro: { label: 'Pro', className: 'bg-blue-500' },
+      premium: { label: 'Premium', className: 'bg-purple-500' },
+      custom: { label: 'Custom', className: 'bg-orange-500' }
     };
 
-    const statusInfo = statusMap[status] || { label: status, className: 'bg-secondary-500' };
+    const planInfo = planMap[plan] || { label: plan, className: 'bg-secondary-500' };
 
     return (
-      <Badge className={statusInfo.className}>
-        {statusInfo.label}
+      <Badge className={planInfo.className}>
+        {planInfo.label}
       </Badge>
     );
   };
 
-  const getSubscriptionBadge = (subscriptionStatus) => {
-    const statusMap = {
-      TRIAL: { label: 'Trial', className: 'bg-info-500' },
-      ACTIVE: { label: 'Ativo', className: 'bg-success-500' },
-      PAST_DUE: { label: 'Atrasado', className: 'bg-warning-500' },
-      SUSPENDED: { label: 'Suspenso', className: 'bg-danger-500' },
-      CANCELED: { label: 'Cancelado', className: 'bg-secondary-500' }
-    };
-
-    const statusInfo = statusMap[subscriptionStatus] || { label: subscriptionStatus, className: 'bg-secondary-500' };
-
-    return (
-      <Badge className={statusInfo.className}>
-        {statusInfo.label}
-      </Badge>
-    );
+  const handleToggleStatus = async (club) => {
+    try {
+      const response = await clubsService.toggleClubStatus(club.id);
+      if (response.success) {
+        showSuccess(response.message);
+        loadTenants();
+      }
+    } catch (error) {
+      console.error('Error toggling club status:', error);
+      showError('Erro ao alterar status do clube');
+    }
   };
 
   const formatDate = (date) => {
@@ -157,6 +161,28 @@ const ClubsPage = () => {
     }).format(value || 0);
   };
 
+  const handleClubAction = (action, club) => {
+    switch (action) {
+      case 'view':
+        router.push(`/system/clubs/${club.id}`);
+        break;
+      case 'edit':
+        router.push(`/system/clubs/${club.id}/edit`);
+        break;
+      case 'branding':
+        router.push(`/system/clubs/${club.id}/branding`);
+        break;
+      case 'manage-admins':
+        router.push(`/system/clubs/${club.id}/admins`);
+        break;
+      case 'toggle-status':
+        handleToggleStatus(club);
+        break;
+      default:
+        console.log('Action:', action, 'Club:', club.companyName);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -169,14 +195,21 @@ const ClubsPage = () => {
             Gerenciamento de clubes do sistema
           </p>
         </div>
-        <Button
-          icon="heroicons-outline:refresh"
-          className="btn-primary"
-          isLoading={loading}
-          onClick={loadTenants}
-        >
-          <RefreshCw className="w-4 h-4" />
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            icon="heroicons-outline:arrow-path"
+            className="btn-secondary"
+            isLoading={loading}
+            onClick={loadTenants}
+            text="Atualizar"
+          />
+          <Button
+            className="btn-primary"
+            onClick={() => router.push('/system/clubs/new')}
+            icon="heroicons-outline:plus"
+            text="Novo Clube"
+          />
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -220,16 +253,16 @@ const ClubsPage = () => {
         <Card>
           <div className="flex items-center gap-4">
             <div className="flex-none">
-              <div className="h-12 w-12 rounded-full bg-info-500/10 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-info-500" />
+              <div className="h-12 w-12 rounded-full bg-danger-500/10 flex items-center justify-center">
+                <PowerOff className="w-6 h-6 text-danger-500" />
               </div>
             </div>
             <div className="flex-1">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Em Trial
+                Inativos
               </p>
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                {stats.trial}
+                {stats.inactive}
               </h3>
             </div>
           </div>
@@ -246,35 +279,30 @@ const ClubsPage = () => {
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-              icon={<Search className="w-4 h-4" />}
             />
           </div>
           <div>
             <select
               className="form-control py-2"
-              value={filters.status}
-              onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+              value={filters.isActive}
+              onChange={(e) => setFilters({ ...filters, isActive: e.target.value })}
             >
               <option value="">Todos os status</option>
-              <option value="trial">Trial</option>
-              <option value="active">Ativo</option>
-              <option value="suspended">Suspenso</option>
-              <option value="cancelled">Cancelado</option>
-              <option value="expired">Expirado</option>
+              <option value="true">Ativo</option>
+              <option value="false">Inativo</option>
             </select>
           </div>
           <div>
             <select
               className="form-control py-2"
-              value={filters.subscriptionStatus}
-              onChange={(e) => setFilters({ ...filters, subscriptionStatus: e.target.value })}
+              value={filters.plan}
+              onChange={(e) => setFilters({ ...filters, plan: e.target.value })}
             >
-              <option value="">Todas as assinaturas</option>
-              <option value="TRIAL">Trial</option>
-              <option value="ACTIVE">Ativo</option>
-              <option value="PAST_DUE">Atrasado</option>
-              <option value="SUSPENDED">Suspenso</option>
-              <option value="CANCELED">Cancelado</option>
+              <option value="">Todos os planos</option>
+              <option value="basic">Basic</option>
+              <option value="pro">Pro</option>
+              <option value="premium">Premium</option>
+              <option value="custom">Custom</option>
             </select>
           </div>
         </div>
@@ -283,16 +311,15 @@ const ClubsPage = () => {
             className="btn-primary"
             onClick={handleSearch}
             isLoading={loading}
-          >
-            <Search className="w-4 h-4 mr-2" />
-            Buscar
-          </Button>
+            icon="heroicons-outline:magnifying-glass"
+            text="Buscar"
+          />
           <Button
             className="btn-secondary"
             onClick={handleClearFilters}
-          >
-            Limpar Filtros
-          </Button>
+            icon="heroicons-outline:x-mark"
+            text="Limpar Filtros"
+          />
         </div>
       </Card>
 
@@ -389,13 +416,10 @@ const ClubsPage = () => {
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {getStatusBadge(clube.status)}
+                      {getStatusBadge(clube.isActive)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-900 dark:text-white">
-                        {clube.subscriptionPlan}
-                      </div>
-                      {getSubscriptionBadge(clube.subscriptionStatus)}
+                      {getPlanBadge(clube.plan)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center text-sm text-slate-900 dark:text-white">
@@ -414,22 +438,82 @@ const ClubsPage = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Tooltip content="Ver detalhes">
+                      <Dropdown
+                        label={<MoreVertical size={16} className="text-gray-500 dark:text-gray-400" />}
+                        labelClass="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                        classMenuItems="mt-2 w-[200px]"
+                      >
                         <button
-                          className="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 mr-3"
-                          onClick={() => router.push(`/system/clubs/${clube.id}`)}
+                          onClick={() => handleClubAction('view', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
                         >
-                          <Eye className="w-4 h-4" />
+                          <Eye size={14} className="mr-2" />
+                          Ver Detalhes
                         </button>
-                      </Tooltip>
-                      <Tooltip content="Configurações">
+
                         <button
-                          className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                          onClick={() => router.push(`/system/clubs/${clube.id}/settings`)}
+                          onClick={() => handleClubAction('edit', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
                         >
-                          <Settings className="w-4 h-4" />
+                          <Edit size={14} className="mr-2" />
+                          Editar
                         </button>
-                      </Tooltip>
+
+                        <button
+                          onClick={() => handleClubAction('branding', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <Palette size={14} className="mr-2" />
+                          Branding
+                        </button>
+
+                        <button
+                          onClick={() => handleClubAction('manage-admins', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark
+                              ? 'text-gray-300 hover:bg-gray-700'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <UserCog size={14} className="mr-2" />
+                          Gerenciar Admins
+                        </button>
+
+                        <div className="border-t border-gray-100 dark:border-gray-600"></div>
+
+                        <button
+                          onClick={() => handleClubAction('toggle-status', clube)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            clube.isActive
+                              ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
+                              : 'text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20'
+                          }`}
+                        >
+                          {clube.isActive ? (
+                            <>
+                              <PowerOff size={14} className="mr-2" />
+                              Desativar
+                            </>
+                          ) : (
+                            <>
+                              <Power size={14} className="mr-2" />
+                              Ativar
+                            </>
+                          )}
+                        </button>
+                      </Dropdown>
                     </td>
                   </tr>
                 ))
@@ -445,9 +529,9 @@ const ClubsPage = () => {
               className="btn-secondary"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
-            >
-              Anterior
-            </Button>
+              icon="heroicons-outline:chevron-left"
+              text="Anterior"
+            />
             <span className="text-sm text-slate-600 dark:text-slate-400">
               Página {currentPage} de {totalPages}
             </span>
@@ -455,9 +539,10 @@ const ClubsPage = () => {
               className="btn-secondary"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
-            >
-              Próxima
-            </Button>
+              icon="heroicons-outline:chevron-right"
+              text="Próxima"
+              iconPosition="right"
+            />
           </div>
         )}
       </Card>

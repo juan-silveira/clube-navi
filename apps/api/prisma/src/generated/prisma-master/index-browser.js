@@ -125,7 +125,7 @@ exports.Prisma.ClubScalarFieldEnum = {
   slug: 'slug',
   companyName: 'companyName',
   companyDocument: 'companyDocument',
-  status: 'status',
+  isActive: 'isActive',
   databaseHost: 'databaseHost',
   databasePort: 'databasePort',
   databaseName: 'databaseName',
@@ -137,8 +137,7 @@ exports.Prisma.ClubScalarFieldEnum = {
   maxUsers: 'maxUsers',
   maxAdmins: 'maxAdmins',
   maxStorageGB: 'maxStorageGB',
-  subscriptionPlan: 'subscriptionPlan',
-  subscriptionStatus: 'subscriptionStatus',
+  plan: 'plan',
   monthlyFee: 'monthlyFee',
   trialEndsAt: 'trialEndsAt',
   nextBillingDate: 'nextBillingDate',
@@ -167,6 +166,13 @@ exports.Prisma.ClubBrandingScalarFieldEnum = {
   appDescription: 'appDescription',
   appStoreUrl: 'appStoreUrl',
   playStoreUrl: 'playStoreUrl',
+  loginDescriptionPt: 'loginDescriptionPt',
+  loginDescriptionEn: 'loginDescriptionEn',
+  loginDescriptionEs: 'loginDescriptionEs',
+  loginWelcomePt: 'loginWelcomePt',
+  loginWelcomeEn: 'loginWelcomeEn',
+  loginWelcomeEs: 'loginWelcomeEs',
+  loginIllustrationUrl: 'loginIllustrationUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -225,6 +231,7 @@ exports.Prisma.ClubStatsScalarFieldEnum = {
   revenue30d: 'revenue30d',
   purchases30d: 'purchases30d',
   cashback30d: 'cashback30d',
+  lastSyncAt: 'lastSyncAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -369,26 +376,11 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
-exports.ClubStatus = exports.$Enums.ClubStatus = {
-  trial: 'trial',
-  active: 'active',
-  suspended: 'suspended',
-  cancelled: 'cancelled',
-  expired: 'expired'
-};
-
-exports.SubscriptionPlan = exports.$Enums.SubscriptionPlan = {
-  BASIC: 'BASIC',
-  PRO: 'PRO',
-  ENTERPRISE: 'ENTERPRISE'
-};
-
-exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
-  TRIAL: 'TRIAL',
-  ACTIVE: 'ACTIVE',
-  PAST_DUE: 'PAST_DUE',
-  SUSPENDED: 'SUSPENDED',
-  CANCELED: 'CANCELED'
+exports.Plan = exports.$Enums.Plan = {
+  basic: 'basic',
+  pro: 'pro',
+  premium: 'premium',
+  custom: 'custom'
 };
 
 exports.AppStoreStatus = exports.$Enums.AppStoreStatus = {

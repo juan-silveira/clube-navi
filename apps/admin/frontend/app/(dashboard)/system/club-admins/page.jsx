@@ -6,133 +6,150 @@ import Card from "@/components/ui/Card";
 import Textinput from "@/components/ui/Textinput";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
-import Tooltip from "@/components/ui/Tooltip";
+import Dropdown from "@/components/ui/Dropdown";
 import usePermissions from "@/hooks/usePermissions";
 import { useRouter } from "next/navigation";
-import { useAlertContext } from '@/contexts/AlertContext';
-import { clubAdminsService } from '@/services/api';
 import {
   Search,
   RefreshCw,
   UserCog,
   Users,
   Shield,
-  Calendar,
   Eye,
   CheckCircle,
   XCircle,
-  Clock
+  Clock,
+  MoreVertical,
+  Edit,
+  Lock,
+  Unlock,
+  UserPlus
 } from 'lucide-react';
 
+// Mock data
+const mockClubAdmins = [
+  {
+    id: 1,
+    name: 'João Silva',
+    email: 'joao@clube-navi.com',
+    role: 'admin',
+    isActive: true,
+    lastLoginAt: '2025-01-12T10:30:00',
+    club: {
+      id: 1,
+      companyName: 'Clube Navi',
+      slug: 'clube-navi',
+      branding: {
+        appName: 'Clube Navi',
+        logoUrl: 'https://via.placeholder.com/40'
+      }
+    }
+  },
+  {
+    id: 2,
+    name: 'Maria Santos',
+    email: 'maria@empresa-teste.com',
+    role: 'admin',
+    isActive: true,
+    lastLoginAt: '2025-01-11T15:20:00',
+    club: {
+      id: 2,
+      companyName: 'Empresa Teste',
+      slug: 'empresa-teste',
+      branding: {
+        appName: 'Empresa Teste',
+        logoUrl: 'https://via.placeholder.com/40'
+      }
+    }
+  },
+  {
+    id: 3,
+    name: 'Carlos Oliveira',
+    email: 'carlos@clube-navi.com',
+    role: 'manager',
+    isActive: false,
+    lastLoginAt: '2025-01-10T09:15:00',
+    club: {
+      id: 1,
+      companyName: 'Clube Navi',
+      slug: 'clube-navi',
+      branding: {
+        appName: 'Clube Navi',
+        logoUrl: 'https://via.placeholder.com/40'
+      }
+    }
+  }
+];
+
 const ClubAdminsPage = () => {
-  const { showSuccess, showError } = useAlertContext();
   const router = useRouter();
   const permissions = usePermissions();
   const [isDark] = useDarkMode();
-  const [clubAdmins, setClubAdmins] = useState([]);
+  const [clubAdmins, setClubAdmins] = useState(mockClubAdmins);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalAdmins, setTotalAdmins] = useState(0);
   const itemsPerPage = 20;
 
   // Filtros
   const [filters, setFilters] = useState({
     search: '',
     isActive: '',
-    role: '',
-    clubId: ''
+    role: ''
   });
 
-  // Estatísticas
-  const [stats, setStats] = useState({
-    total: 0,
-    active: 0,
-    inactive: 0,
+  // Estatísticas (mock)
+  const stats = {
+    total: 3,
+    active: 2,
+    inactive: 1,
     byRole: {
       super_admin: 0,
-      admin: 0,
-      manager: 0
+      admin: 2,
+      manager: 1
     }
-  });
+  };
 
   useEffect(() => {
     if (!permissions.canViewSystemSettings) {
       router.push("/dashboard");
-      return;
     }
-
-    loadAdmins();
-    loadStats();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [permissions.canViewSystemSettings, router, currentPage]);
+  }, [permissions.canViewSystemSettings, router]);
 
-  const loadStats = async () => {
-    try {
-      const response = await clubAdminsService.getStats();
-      if (response.success) {
-        setStats(response.data);
-      }
-    } catch (error) {
-      console.error('Error loading stats:', error);
-    }
-  };
-
-  const loadAdmins = async () => {
-    try {
-      setLoading(true);
-
-      const params = {
-        page: currentPage,
-        limit: itemsPerPage,
-        ...filters
-      };
-
-      const response = await clubAdminsService.list(params);
-
-      if (response.success) {
-        setClubAdmins(response.data.clubAdmins);
-        setTotalPages(response.data.pagination.totalPages);
-        setTotalAdmins(response.data.pagination.total);
-      }
-    } catch (error) {
-      console.error('Error loading club admins:', error);
-      showError('Erro ao carregar administradores');
-    } finally {
-      setLoading(false);
+  const handleAdminAction = (action, admin) => {
+    switch (action) {
+      case 'view':
+        router.push(`/system/club-admins/${admin.id}`);
+        break;
+      case 'edit':
+        router.push(`/system/club-admins/${admin.id}/edit`);
+        break;
+      case 'toggle-status':
+        console.log('Toggle status:', admin.name);
+        break;
+      default:
+        console.log('Action:', action, 'Admin:', admin.name);
     }
   };
 
   const handleSearch = () => {
     setCurrentPage(1);
-    loadAdmins();
+    // TODO: Implement search with API
+    console.log('Search filters:', filters);
   };
 
   const handleClearFilters = () => {
     setFilters({
       search: '',
       isActive: '',
-      role: '',
-      clubId: ''
+      role: ''
     });
     setCurrentPage(1);
-    setTimeout(() => loadAdmins(), 100);
+    setClubAdmins(mockClubAdmins);
   };
 
-  const handleToggleStatus = async (admin) => {
-    try {
-      const newStatus = !admin.isActive;
-      const response = await clubAdminsService.updateStatus(admin.id, newStatus);
-
-      if (response.success) {
-        showSuccess(`Admin ${newStatus ? 'ativado' : 'desativado'} com sucesso`);
-        loadAdmins();
-        loadStats();
-      }
-    } catch (error) {
-      console.error('Error toggling admin status:', error);
-      showError('Erro ao alterar status do administrador');
-    }
+  const handleRefresh = () => {
+    setClubAdmins(mockClubAdmins);
   };
 
   const getRoleBadge = (role) => {
@@ -186,17 +203,23 @@ const ClubAdminsPage = () => {
             Gerencie os administradores de todos os clubes
           </p>
         </div>
-        <Button
-          icon="heroicons-outline:refresh"
-          className="btn-primary"
-          onClick={() => {
-            loadAdmins();
-            loadStats();
-          }}
-          isLoading={loading}
-        >
-          Atualizar
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            icon="heroicons-outline:refresh"
+            className="btn-secondary"
+            onClick={handleRefresh}
+            isLoading={loading}
+          >
+            Atualizar
+          </Button>
+          <Button
+            className="btn-primary"
+            onClick={() => router.push('/system/club-admins/new')}
+          >
+            <UserPlus className="w-4 h-4 mr-2" />
+            Novo Administrador
+          </Button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -320,7 +343,7 @@ const ClubAdminsPage = () => {
       </Card>
 
       {/* Table */}
-      <Card title={`Administradores (${totalAdmins})`} noborder>
+      <Card title={`Administradores (${clubAdmins.length})`} noborder>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
             <thead className="bg-slate-50 dark:bg-slate-800">
@@ -405,25 +428,52 @@ const ClubAdminsPage = () => {
                         {formatDate(admin.lastLoginAt)}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-2">
-                        <Tooltip content={admin.isActive ? "Desativar" : "Ativar"}>
-                          <button
-                            onClick={() => handleToggleStatus(admin)}
-                            className={`p-2 rounded-lg transition-colors ${
-                              admin.isActive
-                                ? 'bg-danger-500/10 text-danger-500 hover:bg-danger-500/20'
-                                : 'bg-success-500/10 text-success-500 hover:bg-success-500/20'
-                            }`}
-                          >
-                            {admin.isActive ? (
-                              <XCircle className="w-4 h-4" />
-                            ) : (
-                              <CheckCircle className="w-4 h-4" />
-                            )}
-                          </button>
-                        </Tooltip>
-                      </div>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <Dropdown
+                        label={<MoreVertical size={16} className="text-gray-500 dark:text-gray-400" />}
+                        labelClass="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                        classMenuItems="mt-2 w-[200px]"
+                      >
+                        <button
+                          onClick={() => handleAdminAction('view', admin)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <Eye size={14} className="mr-2" />
+                          Ver Detalhes
+                        </button>
+                        <button
+                          onClick={() => handleAdminAction('edit', admin)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            isDark ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <Edit size={14} className="mr-2" />
+                          Editar
+                        </button>
+                        <div className={`border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`} />
+                        <button
+                          onClick={() => handleAdminAction('toggle-status', admin)}
+                          className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            admin.isActive
+                              ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
+                              : 'text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20'
+                          }`}
+                        >
+                          {admin.isActive ? (
+                            <>
+                              <Lock size={14} className="mr-2" />
+                              Bloquear
+                            </>
+                          ) : (
+                            <>
+                              <Unlock size={14} className="mr-2" />
+                              Desbloquear
+                            </>
+                          )}
+                        </button>
+                      </Dropdown>
                     </td>
                   </tr>
                 ))
@@ -431,31 +481,6 @@ const ClubAdminsPage = () => {
             </tbody>
           </table>
         </div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 dark:border-slate-700">
-            <div className="text-sm text-slate-600 dark:text-slate-300">
-              Página {currentPage} de {totalPages}
-            </div>
-            <div className="flex gap-2">
-              <Button
-                className="btn-secondary"
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}
-              >
-                Anterior
-              </Button>
-              <Button
-                className="btn-secondary"
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(currentPage + 1)}
-              >
-                Próxima
-              </Button>
-            </div>
-          </div>
-        )}
       </Card>
     </div>
   );

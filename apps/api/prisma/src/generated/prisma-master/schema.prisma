@@ -20,11 +20,11 @@ datasource db {
 // ==========================================
 
 model Club {
-  id              String     @id @default(uuid()) @db.Uuid
-  slug            String     @unique @db.VarChar(50)
-  companyName     String     @map("company_name") @db.VarChar(255)
-  companyDocument String     @unique @map("company_document") @db.VarChar(18)
-  status          ClubStatus @default(trial)
+  id              String  @id @default(uuid()) @db.Uuid
+  slug            String  @unique @db.VarChar(50)
+  companyName     String  @map("company_name") @db.VarChar(255)
+  companyDocument String  @unique @map("company_document") @db.VarChar(18)
+  isActive        Boolean @default(false) @map("is_active")
 
   // Database connection
   databaseHost     String @map("database_host") @db.VarChar(255)
@@ -44,9 +44,8 @@ model Club {
   maxStorageGB Int @default(50) @map("max_storage_gb")
 
   // Billing & Subscription
-  subscriptionPlan   SubscriptionPlan   @default(BASIC) @map("subscription_plan")
-  subscriptionStatus SubscriptionStatus @default(TRIAL) @map("subscription_status")
-  monthlyFee         Decimal            @default(0) @map("monthly_fee") @db.Decimal(10, 2)
+  plan       Plan    @default(basic) @map("plan")
+  monthlyFee Decimal @default(0) @map("monthly_fee") @db.Decimal(10, 2)
 
   // Datas de cobrança
   trialEndsAt     DateTime? @map("trial_ends_at") @db.Timestamptz(6)
@@ -80,8 +79,7 @@ model Club {
 
   @@index([slug])
   @@index([subdomain])
-  @@index([status])
-  @@index([subscriptionStatus], map: "idx_clubs_subscription_status")
+  @@index([isActive])
   @@map("clubs")
 }
 
@@ -110,6 +108,15 @@ model ClubBranding {
   appDescription String? @map("app_description") @db.Text
   appStoreUrl    String? @map("app_store_url") @db.VarChar(500)
   playStoreUrl   String? @map("play_store_url") @db.VarChar(500)
+
+  // Login Page Customization
+  loginDescriptionPt   String? @map("login_description_pt") @db.Text
+  loginDescriptionEn   String? @map("login_description_en") @db.Text
+  loginDescriptionEs   String? @map("login_description_es") @db.Text
+  loginWelcomePt       String? @map("login_welcome_pt") @db.VarChar(200)
+  loginWelcomeEn       String? @map("login_welcome_en") @db.VarChar(200)
+  loginWelcomeEs       String? @map("login_welcome_es") @db.VarChar(200)
+  loginIllustrationUrl String? @map("login_illustration_url") @db.VarChar(500)
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
@@ -239,6 +246,9 @@ model ClubStats {
   revenue30d   Decimal @default(0) @map("revenue_30d") @db.Decimal(15, 2)
   purchases30d Int     @default(0) @map("purchases_30d")
   cashback30d  Decimal @default(0) @map("cashback_30d") @db.Decimal(15, 2)
+
+  // Sync tracking
+  lastSyncAt DateTime? @map("last_sync_at") @db.Timestamptz(6)
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
@@ -455,26 +465,11 @@ model Notification {
 // ENUMS
 // ==========================================
 
-enum ClubStatus {
-  trial
-  active
-  suspended
-  cancelled
-  expired
-}
-
-enum SubscriptionPlan {
-  BASIC // Até 1.000 usuários - R$ 500/mês
-  PRO // Até 10.000 usuários - R$ 2.000/mês
-  ENTERPRISE // Ilimitado - R$ 5.000/mês
-}
-
-enum SubscriptionStatus {
-  TRIAL // 30 dias grátis
-  ACTIVE // Pagando normalmente
-  PAST_DUE // Atraso no pagamento
-  SUSPENDED // Suspenso por falta de pagamento
-  CANCELED // Cancelado pelo club
+enum Plan {
+  basic
+  pro
+  premium
+  custom
 }
 
 enum ModuleKey {

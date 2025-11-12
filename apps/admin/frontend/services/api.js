@@ -130,7 +130,10 @@ api.interceptors.request.use(
         '/api/notifications/unread-count',
         '/api/notifications/unread',
         '/api/notifications/preferences',
-        '/api/auth/me'
+        '/api/auth/me',
+        '/api/super-admin/pub-config',
+        '/api/config/pub-config',
+        '/pub-config'
       ];
 
       const isBlocked = blockedEndpoints.some(endpoint => config.url?.includes(endpoint));

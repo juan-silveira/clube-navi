@@ -95,35 +95,14 @@ export namespace $Enums {
 export type AppStoreStatus = (typeof AppStoreStatus)[keyof typeof AppStoreStatus]
 
 
-export const ClubStatus: {
-  trial: 'trial',
-  active: 'active',
-  suspended: 'suspended',
-  cancelled: 'cancelled',
-  expired: 'expired'
+export const Plan: {
+  basic: 'basic',
+  pro: 'pro',
+  premium: 'premium',
+  custom: 'custom'
 };
 
-export type ClubStatus = (typeof ClubStatus)[keyof typeof ClubStatus]
-
-
-export const SubscriptionPlan: {
-  BASIC: 'BASIC',
-  PRO: 'PRO',
-  ENTERPRISE: 'ENTERPRISE'
-};
-
-export type SubscriptionPlan = (typeof SubscriptionPlan)[keyof typeof SubscriptionPlan]
-
-
-export const SubscriptionStatus: {
-  TRIAL: 'TRIAL',
-  ACTIVE: 'ACTIVE',
-  PAST_DUE: 'PAST_DUE',
-  SUSPENDED: 'SUSPENDED',
-  CANCELED: 'CANCELED'
-};
-
-export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+export type Plan = (typeof Plan)[keyof typeof Plan]
 
 
 export const ModuleKey: {
@@ -189,17 +168,9 @@ export type AppStoreStatus = $Enums.AppStoreStatus
 
 export const AppStoreStatus: typeof $Enums.AppStoreStatus
 
-export type ClubStatus = $Enums.ClubStatus
+export type Plan = $Enums.Plan
 
-export const ClubStatus: typeof $Enums.ClubStatus
-
-export type SubscriptionPlan = $Enums.SubscriptionPlan
-
-export const SubscriptionPlan: typeof $Enums.SubscriptionPlan
-
-export type SubscriptionStatus = $Enums.SubscriptionStatus
-
-export const SubscriptionStatus: typeof $Enums.SubscriptionStatus
+export const Plan: typeof $Enums.Plan
 
 export type ModuleKey = $Enums.ModuleKey
 
@@ -2198,7 +2169,7 @@ export namespace Prisma {
     slug: string | null
     companyName: string | null
     companyDocument: string | null
-    status: $Enums.ClubStatus | null
+    isActive: boolean | null
     databaseHost: string | null
     databasePort: number | null
     databaseName: string | null
@@ -2210,8 +2181,7 @@ export namespace Prisma {
     maxUsers: number | null
     maxAdmins: number | null
     maxStorageGB: number | null
-    subscriptionPlan: $Enums.SubscriptionPlan | null
-    subscriptionStatus: $Enums.SubscriptionStatus | null
+    plan: $Enums.Plan | null
     monthlyFee: Decimal | null
     trialEndsAt: Date | null
     nextBillingDate: Date | null
@@ -2230,7 +2200,7 @@ export namespace Prisma {
     slug: string | null
     companyName: string | null
     companyDocument: string | null
-    status: $Enums.ClubStatus | null
+    isActive: boolean | null
     databaseHost: string | null
     databasePort: number | null
     databaseName: string | null
@@ -2242,8 +2212,7 @@ export namespace Prisma {
     maxUsers: number | null
     maxAdmins: number | null
     maxStorageGB: number | null
-    subscriptionPlan: $Enums.SubscriptionPlan | null
-    subscriptionStatus: $Enums.SubscriptionStatus | null
+    plan: $Enums.Plan | null
     monthlyFee: Decimal | null
     trialEndsAt: Date | null
     nextBillingDate: Date | null
@@ -2262,7 +2231,7 @@ export namespace Prisma {
     slug: number
     companyName: number
     companyDocument: number
-    status: number
+    isActive: number
     databaseHost: number
     databasePort: number
     databaseName: number
@@ -2274,8 +2243,7 @@ export namespace Prisma {
     maxUsers: number
     maxAdmins: number
     maxStorageGB: number
-    subscriptionPlan: number
-    subscriptionStatus: number
+    plan: number
     monthlyFee: number
     trialEndsAt: number
     nextBillingDate: number
@@ -2316,7 +2284,7 @@ export namespace Prisma {
     slug?: true
     companyName?: true
     companyDocument?: true
-    status?: true
+    isActive?: true
     databaseHost?: true
     databasePort?: true
     databaseName?: true
@@ -2328,8 +2296,7 @@ export namespace Prisma {
     maxUsers?: true
     maxAdmins?: true
     maxStorageGB?: true
-    subscriptionPlan?: true
-    subscriptionStatus?: true
+    plan?: true
     monthlyFee?: true
     trialEndsAt?: true
     nextBillingDate?: true
@@ -2348,7 +2315,7 @@ export namespace Prisma {
     slug?: true
     companyName?: true
     companyDocument?: true
-    status?: true
+    isActive?: true
     databaseHost?: true
     databasePort?: true
     databaseName?: true
@@ -2360,8 +2327,7 @@ export namespace Prisma {
     maxUsers?: true
     maxAdmins?: true
     maxStorageGB?: true
-    subscriptionPlan?: true
-    subscriptionStatus?: true
+    plan?: true
     monthlyFee?: true
     trialEndsAt?: true
     nextBillingDate?: true
@@ -2380,7 +2346,7 @@ export namespace Prisma {
     slug?: true
     companyName?: true
     companyDocument?: true
-    status?: true
+    isActive?: true
     databaseHost?: true
     databasePort?: true
     databaseName?: true
@@ -2392,8 +2358,7 @@ export namespace Prisma {
     maxUsers?: true
     maxAdmins?: true
     maxStorageGB?: true
-    subscriptionPlan?: true
-    subscriptionStatus?: true
+    plan?: true
     monthlyFee?: true
     trialEndsAt?: true
     nextBillingDate?: true
@@ -2499,7 +2464,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status: $Enums.ClubStatus
+    isActive: boolean
     databaseHost: string
     databasePort: number
     databaseName: string
@@ -2511,8 +2476,7 @@ export namespace Prisma {
     maxUsers: number
     maxAdmins: number
     maxStorageGB: number
-    subscriptionPlan: $Enums.SubscriptionPlan
-    subscriptionStatus: $Enums.SubscriptionStatus
+    plan: $Enums.Plan
     monthlyFee: Decimal
     trialEndsAt: Date | null
     nextBillingDate: Date | null
@@ -2550,7 +2514,7 @@ export namespace Prisma {
     slug?: boolean
     companyName?: boolean
     companyDocument?: boolean
-    status?: boolean
+    isActive?: boolean
     databaseHost?: boolean
     databasePort?: boolean
     databaseName?: boolean
@@ -2562,8 +2526,7 @@ export namespace Prisma {
     maxUsers?: boolean
     maxAdmins?: boolean
     maxStorageGB?: boolean
-    subscriptionPlan?: boolean
-    subscriptionStatus?: boolean
+    plan?: boolean
     monthlyFee?: boolean
     trialEndsAt?: boolean
     nextBillingDate?: boolean
@@ -2593,7 +2556,7 @@ export namespace Prisma {
     slug?: boolean
     companyName?: boolean
     companyDocument?: boolean
-    status?: boolean
+    isActive?: boolean
     databaseHost?: boolean
     databasePort?: boolean
     databaseName?: boolean
@@ -2605,8 +2568,7 @@ export namespace Prisma {
     maxUsers?: boolean
     maxAdmins?: boolean
     maxStorageGB?: boolean
-    subscriptionPlan?: boolean
-    subscriptionStatus?: boolean
+    plan?: boolean
     monthlyFee?: boolean
     trialEndsAt?: boolean
     nextBillingDate?: boolean
@@ -2625,7 +2587,7 @@ export namespace Prisma {
     slug?: boolean
     companyName?: boolean
     companyDocument?: boolean
-    status?: boolean
+    isActive?: boolean
     databaseHost?: boolean
     databasePort?: boolean
     databaseName?: boolean
@@ -2637,8 +2599,7 @@ export namespace Prisma {
     maxUsers?: boolean
     maxAdmins?: boolean
     maxStorageGB?: boolean
-    subscriptionPlan?: boolean
-    subscriptionStatus?: boolean
+    plan?: boolean
     monthlyFee?: boolean
     trialEndsAt?: boolean
     nextBillingDate?: boolean
@@ -2657,7 +2618,7 @@ export namespace Prisma {
     slug?: boolean
     companyName?: boolean
     companyDocument?: boolean
-    status?: boolean
+    isActive?: boolean
     databaseHost?: boolean
     databasePort?: boolean
     databaseName?: boolean
@@ -2669,8 +2630,7 @@ export namespace Prisma {
     maxUsers?: boolean
     maxAdmins?: boolean
     maxStorageGB?: boolean
-    subscriptionPlan?: boolean
-    subscriptionStatus?: boolean
+    plan?: boolean
     monthlyFee?: boolean
     trialEndsAt?: boolean
     nextBillingDate?: boolean
@@ -2684,7 +2644,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "companyName" | "companyDocument" | "status" | "databaseHost" | "databasePort" | "databaseName" | "databaseUser" | "databasePassword" | "subdomain" | "customDomain" | "adminSubdomain" | "maxUsers" | "maxAdmins" | "maxStorageGB" | "subscriptionPlan" | "subscriptionStatus" | "monthlyFee" | "trialEndsAt" | "nextBillingDate" | "lastBillingDate" | "totalBilled" | "outstandingBalance" | "contactName" | "contactEmail" | "contactPhone" | "createdAt" | "updatedAt", ExtArgs["result"]["club"]>
+  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "companyName" | "companyDocument" | "isActive" | "databaseHost" | "databasePort" | "databaseName" | "databaseUser" | "databasePassword" | "subdomain" | "customDomain" | "adminSubdomain" | "maxUsers" | "maxAdmins" | "maxStorageGB" | "plan" | "monthlyFee" | "trialEndsAt" | "nextBillingDate" | "lastBillingDate" | "totalBilled" | "outstandingBalance" | "contactName" | "contactEmail" | "contactPhone" | "createdAt" | "updatedAt", ExtArgs["result"]["club"]>
   export type ClubInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     branding?: boolean | Club$brandingArgs<ExtArgs>
     appConfig?: boolean | Club$appConfigArgs<ExtArgs>
@@ -2720,7 +2680,7 @@ export namespace Prisma {
       slug: string
       companyName: string
       companyDocument: string
-      status: $Enums.ClubStatus
+      isActive: boolean
       databaseHost: string
       databasePort: number
       databaseName: string
@@ -2732,8 +2692,7 @@ export namespace Prisma {
       maxUsers: number
       maxAdmins: number
       maxStorageGB: number
-      subscriptionPlan: $Enums.SubscriptionPlan
-      subscriptionStatus: $Enums.SubscriptionStatus
+      plan: $Enums.Plan
       monthlyFee: Prisma.Decimal
       trialEndsAt: Date | null
       nextBillingDate: Date | null
@@ -3182,7 +3141,7 @@ export namespace Prisma {
     readonly slug: FieldRef<"Club", 'String'>
     readonly companyName: FieldRef<"Club", 'String'>
     readonly companyDocument: FieldRef<"Club", 'String'>
-    readonly status: FieldRef<"Club", 'ClubStatus'>
+    readonly isActive: FieldRef<"Club", 'Boolean'>
     readonly databaseHost: FieldRef<"Club", 'String'>
     readonly databasePort: FieldRef<"Club", 'Int'>
     readonly databaseName: FieldRef<"Club", 'String'>
@@ -3194,8 +3153,7 @@ export namespace Prisma {
     readonly maxUsers: FieldRef<"Club", 'Int'>
     readonly maxAdmins: FieldRef<"Club", 'Int'>
     readonly maxStorageGB: FieldRef<"Club", 'Int'>
-    readonly subscriptionPlan: FieldRef<"Club", 'SubscriptionPlan'>
-    readonly subscriptionStatus: FieldRef<"Club", 'SubscriptionStatus'>
+    readonly plan: FieldRef<"Club", 'Plan'>
     readonly monthlyFee: FieldRef<"Club", 'Decimal'>
     readonly trialEndsAt: FieldRef<"Club", 'DateTime'>
     readonly nextBillingDate: FieldRef<"Club", 'DateTime'>
@@ -3853,6 +3811,13 @@ export namespace Prisma {
     appDescription: string | null
     appStoreUrl: string | null
     playStoreUrl: string | null
+    loginDescriptionPt: string | null
+    loginDescriptionEn: string | null
+    loginDescriptionEs: string | null
+    loginWelcomePt: string | null
+    loginWelcomeEn: string | null
+    loginWelcomeEs: string | null
+    loginIllustrationUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3872,6 +3837,13 @@ export namespace Prisma {
     appDescription: string | null
     appStoreUrl: string | null
     playStoreUrl: string | null
+    loginDescriptionPt: string | null
+    loginDescriptionEn: string | null
+    loginDescriptionEs: string | null
+    loginWelcomePt: string | null
+    loginWelcomeEn: string | null
+    loginWelcomeEs: string | null
+    loginIllustrationUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3891,6 +3863,13 @@ export namespace Prisma {
     appDescription: number
     appStoreUrl: number
     playStoreUrl: number
+    loginDescriptionPt: number
+    loginDescriptionEn: number
+    loginDescriptionEs: number
+    loginWelcomePt: number
+    loginWelcomeEn: number
+    loginWelcomeEs: number
+    loginIllustrationUrl: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3912,6 +3891,13 @@ export namespace Prisma {
     appDescription?: true
     appStoreUrl?: true
     playStoreUrl?: true
+    loginDescriptionPt?: true
+    loginDescriptionEn?: true
+    loginDescriptionEs?: true
+    loginWelcomePt?: true
+    loginWelcomeEn?: true
+    loginWelcomeEs?: true
+    loginIllustrationUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3931,6 +3917,13 @@ export namespace Prisma {
     appDescription?: true
     appStoreUrl?: true
     playStoreUrl?: true
+    loginDescriptionPt?: true
+    loginDescriptionEn?: true
+    loginDescriptionEs?: true
+    loginWelcomePt?: true
+    loginWelcomeEn?: true
+    loginWelcomeEs?: true
+    loginIllustrationUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3950,6 +3943,13 @@ export namespace Prisma {
     appDescription?: true
     appStoreUrl?: true
     playStoreUrl?: true
+    loginDescriptionPt?: true
+    loginDescriptionEn?: true
+    loginDescriptionEs?: true
+    loginWelcomePt?: true
+    loginWelcomeEn?: true
+    loginWelcomeEs?: true
+    loginIllustrationUrl?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4042,6 +4042,13 @@ export namespace Prisma {
     appDescription: string | null
     appStoreUrl: string | null
     playStoreUrl: string | null
+    loginDescriptionPt: string | null
+    loginDescriptionEn: string | null
+    loginDescriptionEs: string | null
+    loginWelcomePt: string | null
+    loginWelcomeEn: string | null
+    loginWelcomeEs: string | null
+    loginIllustrationUrl: string | null
     createdAt: Date
     updatedAt: Date
     _count: ClubBrandingCountAggregateOutputType | null
@@ -4078,6 +4085,13 @@ export namespace Prisma {
     appDescription?: boolean
     appStoreUrl?: boolean
     playStoreUrl?: boolean
+    loginDescriptionPt?: boolean
+    loginDescriptionEn?: boolean
+    loginDescriptionEs?: boolean
+    loginWelcomePt?: boolean
+    loginWelcomeEn?: boolean
+    loginWelcomeEs?: boolean
+    loginIllustrationUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
@@ -4098,6 +4112,13 @@ export namespace Prisma {
     appDescription?: boolean
     appStoreUrl?: boolean
     playStoreUrl?: boolean
+    loginDescriptionPt?: boolean
+    loginDescriptionEn?: boolean
+    loginDescriptionEs?: boolean
+    loginWelcomePt?: boolean
+    loginWelcomeEn?: boolean
+    loginWelcomeEs?: boolean
+    loginIllustrationUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
@@ -4118,6 +4139,13 @@ export namespace Prisma {
     appDescription?: boolean
     appStoreUrl?: boolean
     playStoreUrl?: boolean
+    loginDescriptionPt?: boolean
+    loginDescriptionEn?: boolean
+    loginDescriptionEs?: boolean
+    loginWelcomePt?: boolean
+    loginWelcomeEn?: boolean
+    loginWelcomeEs?: boolean
+    loginIllustrationUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
@@ -4138,11 +4166,18 @@ export namespace Prisma {
     appDescription?: boolean
     appStoreUrl?: boolean
     playStoreUrl?: boolean
+    loginDescriptionPt?: boolean
+    loginDescriptionEn?: boolean
+    loginDescriptionEs?: boolean
+    loginWelcomePt?: boolean
+    loginWelcomeEn?: boolean
+    loginWelcomeEs?: boolean
+    loginIllustrationUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ClubBrandingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "logoUrl" | "logoIconUrl" | "faviconUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "textColor" | "appName" | "appDescription" | "appStoreUrl" | "playStoreUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["clubBranding"]>
+  export type ClubBrandingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "logoUrl" | "logoIconUrl" | "faviconUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "textColor" | "appName" | "appDescription" | "appStoreUrl" | "playStoreUrl" | "loginDescriptionPt" | "loginDescriptionEn" | "loginDescriptionEs" | "loginWelcomePt" | "loginWelcomeEn" | "loginWelcomeEs" | "loginIllustrationUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["clubBranding"]>
   export type ClubBrandingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }
@@ -4173,6 +4208,13 @@ export namespace Prisma {
       appDescription: string | null
       appStoreUrl: string | null
       playStoreUrl: string | null
+      loginDescriptionPt: string | null
+      loginDescriptionEn: string | null
+      loginDescriptionEs: string | null
+      loginWelcomePt: string | null
+      loginWelcomeEn: string | null
+      loginWelcomeEs: string | null
+      loginIllustrationUrl: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["clubBranding"]>
@@ -4613,6 +4655,13 @@ export namespace Prisma {
     readonly appDescription: FieldRef<"ClubBranding", 'String'>
     readonly appStoreUrl: FieldRef<"ClubBranding", 'String'>
     readonly playStoreUrl: FieldRef<"ClubBranding", 'String'>
+    readonly loginDescriptionPt: FieldRef<"ClubBranding", 'String'>
+    readonly loginDescriptionEn: FieldRef<"ClubBranding", 'String'>
+    readonly loginDescriptionEs: FieldRef<"ClubBranding", 'String'>
+    readonly loginWelcomePt: FieldRef<"ClubBranding", 'String'>
+    readonly loginWelcomeEn: FieldRef<"ClubBranding", 'String'>
+    readonly loginWelcomeEs: FieldRef<"ClubBranding", 'String'>
+    readonly loginIllustrationUrl: FieldRef<"ClubBranding", 'String'>
     readonly createdAt: FieldRef<"ClubBranding", 'DateTime'>
     readonly updatedAt: FieldRef<"ClubBranding", 'DateTime'>
   }
@@ -7569,6 +7618,7 @@ export namespace Prisma {
     revenue30d: Decimal | null
     purchases30d: number | null
     cashback30d: Decimal | null
+    lastSyncAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7588,6 +7638,7 @@ export namespace Prisma {
     revenue30d: Decimal | null
     purchases30d: number | null
     cashback30d: Decimal | null
+    lastSyncAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7607,6 +7658,7 @@ export namespace Prisma {
     revenue30d: number
     purchases30d: number
     cashback30d: number
+    lastSyncAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7658,6 +7710,7 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
+    lastSyncAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7677,6 +7730,7 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
+    lastSyncAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7696,6 +7750,7 @@ export namespace Prisma {
     revenue30d?: true
     purchases30d?: true
     cashback30d?: true
+    lastSyncAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7802,6 +7857,7 @@ export namespace Prisma {
     revenue30d: Decimal
     purchases30d: number
     cashback30d: Decimal
+    lastSyncAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ClubStatsCountAggregateOutputType | null
@@ -7840,6 +7896,7 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
+    lastSyncAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
@@ -7860,6 +7917,7 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
+    lastSyncAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
@@ -7880,6 +7938,7 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
+    lastSyncAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
@@ -7900,11 +7959,12 @@ export namespace Prisma {
     revenue30d?: boolean
     purchases30d?: boolean
     cashback30d?: boolean
+    lastSyncAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ClubStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "totalUsers" | "totalConsumers" | "totalMerchants" | "activeUsers30d" | "totalPurchases" | "totalRevenue" | "totalCashbackPaid" | "totalPlatformFees" | "totalProducts" | "revenue30d" | "purchases30d" | "cashback30d" | "createdAt" | "updatedAt", ExtArgs["result"]["clubStats"]>
+  export type ClubStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "totalUsers" | "totalConsumers" | "totalMerchants" | "activeUsers30d" | "totalPurchases" | "totalRevenue" | "totalCashbackPaid" | "totalPlatformFees" | "totalProducts" | "revenue30d" | "purchases30d" | "cashback30d" | "lastSyncAt" | "createdAt" | "updatedAt", ExtArgs["result"]["clubStats"]>
   export type ClubStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }
@@ -7935,6 +7995,7 @@ export namespace Prisma {
       revenue30d: Prisma.Decimal
       purchases30d: number
       cashback30d: Prisma.Decimal
+      lastSyncAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["clubStats"]>
@@ -8375,6 +8436,7 @@ export namespace Prisma {
     readonly revenue30d: FieldRef<"ClubStats", 'Decimal'>
     readonly purchases30d: FieldRef<"ClubStats", 'Int'>
     readonly cashback30d: FieldRef<"ClubStats", 'Decimal'>
+    readonly lastSyncAt: FieldRef<"ClubStats", 'DateTime'>
     readonly createdAt: FieldRef<"ClubStats", 'DateTime'>
     readonly updatedAt: FieldRef<"ClubStats", 'DateTime'>
   }
@@ -18032,7 +18094,7 @@ export namespace Prisma {
     slug: 'slug',
     companyName: 'companyName',
     companyDocument: 'companyDocument',
-    status: 'status',
+    isActive: 'isActive',
     databaseHost: 'databaseHost',
     databasePort: 'databasePort',
     databaseName: 'databaseName',
@@ -18044,8 +18106,7 @@ export namespace Prisma {
     maxUsers: 'maxUsers',
     maxAdmins: 'maxAdmins',
     maxStorageGB: 'maxStorageGB',
-    subscriptionPlan: 'subscriptionPlan',
-    subscriptionStatus: 'subscriptionStatus',
+    plan: 'plan',
     monthlyFee: 'monthlyFee',
     trialEndsAt: 'trialEndsAt',
     nextBillingDate: 'nextBillingDate',
@@ -18077,6 +18138,13 @@ export namespace Prisma {
     appDescription: 'appDescription',
     appStoreUrl: 'appStoreUrl',
     playStoreUrl: 'playStoreUrl',
+    loginDescriptionPt: 'loginDescriptionPt',
+    loginDescriptionEn: 'loginDescriptionEn',
+    loginDescriptionEs: 'loginDescriptionEs',
+    loginWelcomePt: 'loginWelcomePt',
+    loginWelcomeEn: 'loginWelcomeEn',
+    loginWelcomeEs: 'loginWelcomeEs',
+    loginIllustrationUrl: 'loginIllustrationUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18144,6 +18212,7 @@ export namespace Prisma {
     revenue30d: 'revenue30d',
     purchases30d: 'purchases30d',
     cashback30d: 'cashback30d',
+    lastSyncAt: 'lastSyncAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18354,16 +18423,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ClubStatus'
+   * Reference to a field of type 'Boolean'
    */
-  export type EnumClubStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClubStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'ClubStatus[]'
-   */
-  export type ListEnumClubStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClubStatus[]'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -18382,30 +18444,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'SubscriptionPlan'
+   * Reference to a field of type 'Plan'
    */
-  export type EnumSubscriptionPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionPlan'>
+  export type EnumPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Plan'>
     
 
 
   /**
-   * Reference to a field of type 'SubscriptionPlan[]'
+   * Reference to a field of type 'Plan[]'
    */
-  export type ListEnumSubscriptionPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionPlan[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'SubscriptionStatus'
-   */
-  export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'SubscriptionStatus[]'
-   */
-  export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus[]'>
+  export type ListEnumPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Plan[]'>
     
 
 
@@ -18448,13 +18496,6 @@ export namespace Prisma {
    * Reference to a field of type 'AppStoreStatus[]'
    */
   export type ListEnumAppStoreStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppStoreStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -18567,7 +18608,7 @@ export namespace Prisma {
     slug?: StringFilter<"Club"> | string
     companyName?: StringFilter<"Club"> | string
     companyDocument?: StringFilter<"Club"> | string
-    status?: EnumClubStatusFilter<"Club"> | $Enums.ClubStatus
+    isActive?: BoolFilter<"Club"> | boolean
     databaseHost?: StringFilter<"Club"> | string
     databasePort?: IntFilter<"Club"> | number
     databaseName?: StringFilter<"Club"> | string
@@ -18579,8 +18620,7 @@ export namespace Prisma {
     maxUsers?: IntFilter<"Club"> | number
     maxAdmins?: IntFilter<"Club"> | number
     maxStorageGB?: IntFilter<"Club"> | number
-    subscriptionPlan?: EnumSubscriptionPlanFilter<"Club"> | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFilter<"Club"> | $Enums.SubscriptionStatus
+    plan?: EnumPlanFilter<"Club"> | $Enums.Plan
     monthlyFee?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
     trialEndsAt?: DateTimeNullableFilter<"Club"> | Date | string | null
     nextBillingDate?: DateTimeNullableFilter<"Club"> | Date | string | null
@@ -18609,7 +18649,7 @@ export namespace Prisma {
     slug?: SortOrder
     companyName?: SortOrder
     companyDocument?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     databaseHost?: SortOrder
     databasePort?: SortOrder
     databaseName?: SortOrder
@@ -18621,8 +18661,7 @@ export namespace Prisma {
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
     maxStorageGB?: SortOrder
-    subscriptionPlan?: SortOrder
-    subscriptionStatus?: SortOrder
+    plan?: SortOrder
     monthlyFee?: SortOrder
     trialEndsAt?: SortOrderInput | SortOrder
     nextBillingDate?: SortOrderInput | SortOrder
@@ -18657,7 +18696,7 @@ export namespace Prisma {
     OR?: ClubWhereInput[]
     NOT?: ClubWhereInput | ClubWhereInput[]
     companyName?: StringFilter<"Club"> | string
-    status?: EnumClubStatusFilter<"Club"> | $Enums.ClubStatus
+    isActive?: BoolFilter<"Club"> | boolean
     databaseHost?: StringFilter<"Club"> | string
     databasePort?: IntFilter<"Club"> | number
     databaseName?: StringFilter<"Club"> | string
@@ -18666,8 +18705,7 @@ export namespace Prisma {
     maxUsers?: IntFilter<"Club"> | number
     maxAdmins?: IntFilter<"Club"> | number
     maxStorageGB?: IntFilter<"Club"> | number
-    subscriptionPlan?: EnumSubscriptionPlanFilter<"Club"> | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFilter<"Club"> | $Enums.SubscriptionStatus
+    plan?: EnumPlanFilter<"Club"> | $Enums.Plan
     monthlyFee?: DecimalFilter<"Club"> | Decimal | DecimalJsLike | number | string
     trialEndsAt?: DateTimeNullableFilter<"Club"> | Date | string | null
     nextBillingDate?: DateTimeNullableFilter<"Club"> | Date | string | null
@@ -18696,7 +18734,7 @@ export namespace Prisma {
     slug?: SortOrder
     companyName?: SortOrder
     companyDocument?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     databaseHost?: SortOrder
     databasePort?: SortOrder
     databaseName?: SortOrder
@@ -18708,8 +18746,7 @@ export namespace Prisma {
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
     maxStorageGB?: SortOrder
-    subscriptionPlan?: SortOrder
-    subscriptionStatus?: SortOrder
+    plan?: SortOrder
     monthlyFee?: SortOrder
     trialEndsAt?: SortOrderInput | SortOrder
     nextBillingDate?: SortOrderInput | SortOrder
@@ -18736,7 +18773,7 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Club"> | string
     companyName?: StringWithAggregatesFilter<"Club"> | string
     companyDocument?: StringWithAggregatesFilter<"Club"> | string
-    status?: EnumClubStatusWithAggregatesFilter<"Club"> | $Enums.ClubStatus
+    isActive?: BoolWithAggregatesFilter<"Club"> | boolean
     databaseHost?: StringWithAggregatesFilter<"Club"> | string
     databasePort?: IntWithAggregatesFilter<"Club"> | number
     databaseName?: StringWithAggregatesFilter<"Club"> | string
@@ -18748,8 +18785,7 @@ export namespace Prisma {
     maxUsers?: IntWithAggregatesFilter<"Club"> | number
     maxAdmins?: IntWithAggregatesFilter<"Club"> | number
     maxStorageGB?: IntWithAggregatesFilter<"Club"> | number
-    subscriptionPlan?: EnumSubscriptionPlanWithAggregatesFilter<"Club"> | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusWithAggregatesFilter<"Club"> | $Enums.SubscriptionStatus
+    plan?: EnumPlanWithAggregatesFilter<"Club"> | $Enums.Plan
     monthlyFee?: DecimalWithAggregatesFilter<"Club"> | Decimal | DecimalJsLike | number | string
     trialEndsAt?: DateTimeNullableWithAggregatesFilter<"Club"> | Date | string | null
     nextBillingDate?: DateTimeNullableWithAggregatesFilter<"Club"> | Date | string | null
@@ -18781,6 +18817,13 @@ export namespace Prisma {
     appDescription?: StringNullableFilter<"ClubBranding"> | string | null
     appStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
     playStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    loginDescriptionPt?: StringNullableFilter<"ClubBranding"> | string | null
+    loginDescriptionEn?: StringNullableFilter<"ClubBranding"> | string | null
+    loginDescriptionEs?: StringNullableFilter<"ClubBranding"> | string | null
+    loginWelcomePt?: StringNullableFilter<"ClubBranding"> | string | null
+    loginWelcomeEn?: StringNullableFilter<"ClubBranding"> | string | null
+    loginWelcomeEs?: StringNullableFilter<"ClubBranding"> | string | null
+    loginIllustrationUrl?: StringNullableFilter<"ClubBranding"> | string | null
     createdAt?: DateTimeFilter<"ClubBranding"> | Date | string
     updatedAt?: DateTimeFilter<"ClubBranding"> | Date | string
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
@@ -18801,6 +18844,13 @@ export namespace Prisma {
     appDescription?: SortOrderInput | SortOrder
     appStoreUrl?: SortOrderInput | SortOrder
     playStoreUrl?: SortOrderInput | SortOrder
+    loginDescriptionPt?: SortOrderInput | SortOrder
+    loginDescriptionEn?: SortOrderInput | SortOrder
+    loginDescriptionEs?: SortOrderInput | SortOrder
+    loginWelcomePt?: SortOrderInput | SortOrder
+    loginWelcomeEn?: SortOrderInput | SortOrder
+    loginWelcomeEs?: SortOrderInput | SortOrder
+    loginIllustrationUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     club?: ClubOrderByWithRelationInput
@@ -18824,6 +18874,13 @@ export namespace Prisma {
     appDescription?: StringNullableFilter<"ClubBranding"> | string | null
     appStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
     playStoreUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    loginDescriptionPt?: StringNullableFilter<"ClubBranding"> | string | null
+    loginDescriptionEn?: StringNullableFilter<"ClubBranding"> | string | null
+    loginDescriptionEs?: StringNullableFilter<"ClubBranding"> | string | null
+    loginWelcomePt?: StringNullableFilter<"ClubBranding"> | string | null
+    loginWelcomeEn?: StringNullableFilter<"ClubBranding"> | string | null
+    loginWelcomeEs?: StringNullableFilter<"ClubBranding"> | string | null
+    loginIllustrationUrl?: StringNullableFilter<"ClubBranding"> | string | null
     createdAt?: DateTimeFilter<"ClubBranding"> | Date | string
     updatedAt?: DateTimeFilter<"ClubBranding"> | Date | string
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
@@ -18844,6 +18901,13 @@ export namespace Prisma {
     appDescription?: SortOrderInput | SortOrder
     appStoreUrl?: SortOrderInput | SortOrder
     playStoreUrl?: SortOrderInput | SortOrder
+    loginDescriptionPt?: SortOrderInput | SortOrder
+    loginDescriptionEn?: SortOrderInput | SortOrder
+    loginDescriptionEs?: SortOrderInput | SortOrder
+    loginWelcomePt?: SortOrderInput | SortOrder
+    loginWelcomeEn?: SortOrderInput | SortOrder
+    loginWelcomeEs?: SortOrderInput | SortOrder
+    loginIllustrationUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ClubBrandingCountOrderByAggregateInput
@@ -18869,6 +18933,13 @@ export namespace Prisma {
     appDescription?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
     appStoreUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
     playStoreUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginDescriptionPt?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginDescriptionEn?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginDescriptionEs?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginWelcomePt?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginWelcomeEn?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginWelcomeEs?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    loginIllustrationUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
   }
@@ -19121,6 +19192,7 @@ export namespace Prisma {
     revenue30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFilter<"ClubStats"> | number
     cashback30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: DateTimeNullableFilter<"ClubStats"> | Date | string | null
     createdAt?: DateTimeFilter<"ClubStats"> | Date | string
     updatedAt?: DateTimeFilter<"ClubStats"> | Date | string
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
@@ -19141,6 +19213,7 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
+    lastSyncAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     club?: ClubOrderByWithRelationInput
@@ -19164,6 +19237,7 @@ export namespace Prisma {
     revenue30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFilter<"ClubStats"> | number
     cashback30d?: DecimalFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: DateTimeNullableFilter<"ClubStats"> | Date | string | null
     createdAt?: DateTimeFilter<"ClubStats"> | Date | string
     updatedAt?: DateTimeFilter<"ClubStats"> | Date | string
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
@@ -19184,6 +19258,7 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
+    lastSyncAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ClubStatsCountOrderByAggregateInput
@@ -19211,6 +19286,7 @@ export namespace Prisma {
     revenue30d?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
     purchases30d?: IntWithAggregatesFilter<"ClubStats"> | number
     cashback30d?: DecimalWithAggregatesFilter<"ClubStats"> | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: DateTimeNullableWithAggregatesFilter<"ClubStats"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ClubStats"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ClubStats"> | Date | string
   }
@@ -19901,7 +19977,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -19913,8 +19989,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -19943,7 +20018,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -19955,8 +20030,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -19985,7 +20059,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -19997,8 +20071,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20027,7 +20100,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20039,8 +20112,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20069,7 +20141,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -20081,8 +20153,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -20101,7 +20172,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20113,8 +20184,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20133,7 +20203,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -20145,8 +20215,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20174,6 +20243,13 @@ export namespace Prisma {
     appDescription?: string | null
     appStoreUrl?: string | null
     playStoreUrl?: string | null
+    loginDescriptionPt?: string | null
+    loginDescriptionEn?: string | null
+    loginDescriptionEs?: string | null
+    loginWelcomePt?: string | null
+    loginWelcomeEn?: string | null
+    loginWelcomeEs?: string | null
+    loginIllustrationUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     club: ClubCreateNestedOneWithoutBrandingInput
@@ -20194,6 +20270,13 @@ export namespace Prisma {
     appDescription?: string | null
     appStoreUrl?: string | null
     playStoreUrl?: string | null
+    loginDescriptionPt?: string | null
+    loginDescriptionEn?: string | null
+    loginDescriptionEs?: string | null
+    loginWelcomePt?: string | null
+    loginWelcomeEn?: string | null
+    loginWelcomeEs?: string | null
+    loginIllustrationUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20212,6 +20295,13 @@ export namespace Prisma {
     appDescription?: NullableStringFieldUpdateOperationsInput | string | null
     appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionPt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomePt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginIllustrationUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     club?: ClubUpdateOneRequiredWithoutBrandingNestedInput
@@ -20232,6 +20322,13 @@ export namespace Prisma {
     appDescription?: NullableStringFieldUpdateOperationsInput | string | null
     appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionPt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomePt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginIllustrationUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20251,6 +20348,13 @@ export namespace Prisma {
     appDescription?: string | null
     appStoreUrl?: string | null
     playStoreUrl?: string | null
+    loginDescriptionPt?: string | null
+    loginDescriptionEn?: string | null
+    loginDescriptionEs?: string | null
+    loginWelcomePt?: string | null
+    loginWelcomeEn?: string | null
+    loginWelcomeEs?: string | null
+    loginIllustrationUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20269,6 +20373,13 @@ export namespace Prisma {
     appDescription?: NullableStringFieldUpdateOperationsInput | string | null
     appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionPt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomePt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginIllustrationUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20288,6 +20399,13 @@ export namespace Prisma {
     appDescription?: NullableStringFieldUpdateOperationsInput | string | null
     appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionPt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomePt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginIllustrationUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20577,6 +20695,7 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
+    lastSyncAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     club: ClubCreateNestedOneWithoutStatsInput
@@ -20597,6 +20716,7 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
+    lastSyncAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20615,6 +20735,7 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     club?: ClubUpdateOneRequiredWithoutStatsNestedInput
@@ -20635,6 +20756,7 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20654,6 +20776,7 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
+    lastSyncAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20672,6 +20795,7 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20691,6 +20815,7 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21493,11 +21618,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type EnumClubStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumClubStatusFilter<$PrismaModel> | $Enums.ClubStatus
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -21526,18 +21649,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type EnumSubscriptionPlanFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionPlanFilter<$PrismaModel> | $Enums.SubscriptionPlan
-  }
-
-  export type EnumSubscriptionStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionStatusFilter<$PrismaModel> | $Enums.SubscriptionStatus
+  export type EnumPlanFilter<$PrismaModel = never> = {
+    equals?: $Enums.Plan | EnumPlanFieldRefInput<$PrismaModel>
+    in?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanFilter<$PrismaModel> | $Enums.Plan
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -21658,7 +21774,7 @@ export namespace Prisma {
     slug?: SortOrder
     companyName?: SortOrder
     companyDocument?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     databaseHost?: SortOrder
     databasePort?: SortOrder
     databaseName?: SortOrder
@@ -21670,8 +21786,7 @@ export namespace Prisma {
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
     maxStorageGB?: SortOrder
-    subscriptionPlan?: SortOrder
-    subscriptionStatus?: SortOrder
+    plan?: SortOrder
     monthlyFee?: SortOrder
     trialEndsAt?: SortOrder
     nextBillingDate?: SortOrder
@@ -21700,7 +21815,7 @@ export namespace Prisma {
     slug?: SortOrder
     companyName?: SortOrder
     companyDocument?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     databaseHost?: SortOrder
     databasePort?: SortOrder
     databaseName?: SortOrder
@@ -21712,8 +21827,7 @@ export namespace Prisma {
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
     maxStorageGB?: SortOrder
-    subscriptionPlan?: SortOrder
-    subscriptionStatus?: SortOrder
+    plan?: SortOrder
     monthlyFee?: SortOrder
     trialEndsAt?: SortOrder
     nextBillingDate?: SortOrder
@@ -21732,7 +21846,7 @@ export namespace Prisma {
     slug?: SortOrder
     companyName?: SortOrder
     companyDocument?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     databaseHost?: SortOrder
     databasePort?: SortOrder
     databaseName?: SortOrder
@@ -21744,8 +21858,7 @@ export namespace Prisma {
     maxUsers?: SortOrder
     maxAdmins?: SortOrder
     maxStorageGB?: SortOrder
-    subscriptionPlan?: SortOrder
-    subscriptionStatus?: SortOrder
+    plan?: SortOrder
     monthlyFee?: SortOrder
     trialEndsAt?: SortOrder
     nextBillingDate?: SortOrder
@@ -21802,14 +21915,12 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type EnumClubStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumClubStatusWithAggregatesFilter<$PrismaModel> | $Enums.ClubStatus
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumClubStatusFilter<$PrismaModel>
-    _max?: NestedEnumClubStatusFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -21846,24 +21957,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type EnumSubscriptionPlanWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionPlanWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionPlan
+  export type EnumPlanWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Plan | EnumPlanFieldRefInput<$PrismaModel>
+    in?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanWithAggregatesFilter<$PrismaModel> | $Enums.Plan
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
-    _max?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
-  }
-
-  export type EnumSubscriptionStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
-    _max?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
+    _min?: NestedEnumPlanFilter<$PrismaModel>
+    _max?: NestedEnumPlanFilter<$PrismaModel>
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -21930,6 +22031,13 @@ export namespace Prisma {
     appDescription?: SortOrder
     appStoreUrl?: SortOrder
     playStoreUrl?: SortOrder
+    loginDescriptionPt?: SortOrder
+    loginDescriptionEn?: SortOrder
+    loginDescriptionEs?: SortOrder
+    loginWelcomePt?: SortOrder
+    loginWelcomeEn?: SortOrder
+    loginWelcomeEs?: SortOrder
+    loginIllustrationUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21949,6 +22057,13 @@ export namespace Prisma {
     appDescription?: SortOrder
     appStoreUrl?: SortOrder
     playStoreUrl?: SortOrder
+    loginDescriptionPt?: SortOrder
+    loginDescriptionEn?: SortOrder
+    loginDescriptionEs?: SortOrder
+    loginWelcomePt?: SortOrder
+    loginWelcomeEn?: SortOrder
+    loginWelcomeEs?: SortOrder
+    loginIllustrationUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21968,6 +22083,13 @@ export namespace Prisma {
     appDescription?: SortOrder
     appStoreUrl?: SortOrder
     playStoreUrl?: SortOrder
+    loginDescriptionPt?: SortOrder
+    loginDescriptionEn?: SortOrder
+    loginDescriptionEs?: SortOrder
+    loginWelcomePt?: SortOrder
+    loginWelcomeEn?: SortOrder
+    loginWelcomeEs?: SortOrder
+    loginIllustrationUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21977,11 +22099,6 @@ export namespace Prisma {
     in?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumAppStoreStatusFilter<$PrismaModel> | $Enums.AppStoreStatus
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type ClubAppConfigCountOrderByAggregateInput = {
@@ -22077,14 +22194,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAppStoreStatusFilter<$PrismaModel>
     _max?: NestedEnumAppStoreStatusFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumModuleKeyFilter<$PrismaModel = never> = {
@@ -22221,6 +22330,7 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
+    lastSyncAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22255,6 +22365,7 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
+    lastSyncAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22274,6 +22385,7 @@ export namespace Prisma {
     revenue30d?: SortOrder
     purchases30d?: SortOrder
     cashback30d?: SortOrder
+    lastSyncAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23009,8 +23121,8 @@ export namespace Prisma {
     set?: string
   }
 
-  export type EnumClubStatusFieldUpdateOperationsInput = {
-    set?: $Enums.ClubStatus
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -23025,12 +23137,8 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type EnumSubscriptionPlanFieldUpdateOperationsInput = {
-    set?: $Enums.SubscriptionPlan
-  }
-
-  export type EnumSubscriptionStatusFieldUpdateOperationsInput = {
-    set?: $Enums.SubscriptionStatus
+  export type EnumPlanFieldUpdateOperationsInput = {
+    set?: $Enums.Plan
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -23313,10 +23421,6 @@ export namespace Prisma {
     set?: $Enums.AppStoreStatus
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type ClubUpdateOneRequiredWithoutAppConfigNestedInput = {
     create?: XOR<ClubCreateWithoutAppConfigInput, ClubUncheckedCreateWithoutAppConfigInput>
     connectOrCreate?: ClubCreateOrConnectWithoutAppConfigInput
@@ -23493,11 +23597,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumClubStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumClubStatusFilter<$PrismaModel> | $Enums.ClubStatus
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -23525,18 +23627,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedEnumSubscriptionPlanFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionPlanFilter<$PrismaModel> | $Enums.SubscriptionPlan
-  }
-
-  export type NestedEnumSubscriptionStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionStatusFilter<$PrismaModel> | $Enums.SubscriptionStatus
+  export type NestedEnumPlanFilter<$PrismaModel = never> = {
+    equals?: $Enums.Plan | EnumPlanFieldRefInput<$PrismaModel>
+    in?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanFilter<$PrismaModel> | $Enums.Plan
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
@@ -23603,14 +23698,12 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedEnumClubStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ClubStatus | EnumClubStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ClubStatus[] | ListEnumClubStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumClubStatusWithAggregatesFilter<$PrismaModel> | $Enums.ClubStatus
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumClubStatusFilter<$PrismaModel>
-    _max?: NestedEnumClubStatusFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -23668,24 +23761,14 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumSubscriptionPlanWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionPlanWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionPlan
+  export type NestedEnumPlanWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Plan | EnumPlanFieldRefInput<$PrismaModel>
+    in?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanWithAggregatesFilter<$PrismaModel> | $Enums.Plan
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
-    _max?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
-  }
-
-  export type NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
-    _max?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
+    _min?: NestedEnumPlanFilter<$PrismaModel>
+    _max?: NestedEnumPlanFilter<$PrismaModel>
   }
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -23739,11 +23822,6 @@ export namespace Prisma {
     not?: NestedEnumAppStoreStatusFilter<$PrismaModel> | $Enums.AppStoreStatus
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedEnumAppStoreStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.AppStoreStatus | EnumAppStoreStatusFieldRefInput<$PrismaModel>
     in?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
@@ -23752,14 +23830,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAppStoreStatusFilter<$PrismaModel>
     _max?: NestedEnumAppStoreStatusFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumModuleKeyFilter<$PrismaModel = never> = {
@@ -23932,6 +24002,13 @@ export namespace Prisma {
     appDescription?: string | null
     appStoreUrl?: string | null
     playStoreUrl?: string | null
+    loginDescriptionPt?: string | null
+    loginDescriptionEn?: string | null
+    loginDescriptionEs?: string | null
+    loginWelcomePt?: string | null
+    loginWelcomeEn?: string | null
+    loginWelcomeEs?: string | null
+    loginIllustrationUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23950,6 +24027,13 @@ export namespace Prisma {
     appDescription?: string | null
     appStoreUrl?: string | null
     playStoreUrl?: string | null
+    loginDescriptionPt?: string | null
+    loginDescriptionEn?: string | null
+    loginDescriptionEs?: string | null
+    loginWelcomePt?: string | null
+    loginWelcomeEn?: string | null
+    loginWelcomeEs?: string | null
+    loginIllustrationUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24154,6 +24238,7 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
+    lastSyncAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24172,6 +24257,7 @@ export namespace Prisma {
     revenue30d?: Decimal | DecimalJsLike | number | string
     purchases30d?: number
     cashback30d?: Decimal | DecimalJsLike | number | string
+    lastSyncAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24306,6 +24392,13 @@ export namespace Prisma {
     appDescription?: NullableStringFieldUpdateOperationsInput | string | null
     appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionPt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomePt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginIllustrationUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24324,6 +24417,13 @@ export namespace Prisma {
     appDescription?: NullableStringFieldUpdateOperationsInput | string | null
     appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionPt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginDescriptionEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomePt?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEn?: NullableStringFieldUpdateOperationsInput | string | null
+    loginWelcomeEs?: NullableStringFieldUpdateOperationsInput | string | null
+    loginIllustrationUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24536,6 +24636,7 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24554,6 +24655,7 @@ export namespace Prisma {
     revenue30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     purchases30d?: IntFieldUpdateOperationsInput | number
     cashback30d?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    lastSyncAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24664,7 +24766,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -24676,8 +24778,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -24705,7 +24806,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -24717,8 +24818,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -24762,7 +24862,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -24774,8 +24874,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24803,7 +24902,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -24815,8 +24914,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24844,7 +24942,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -24856,8 +24954,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -24885,7 +24982,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -24897,8 +24994,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -24942,7 +25038,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -24954,8 +25050,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24983,7 +25078,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -24995,8 +25090,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25024,7 +25118,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25036,8 +25130,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25065,7 +25158,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25077,8 +25170,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25122,7 +25214,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25134,8 +25226,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25163,7 +25254,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25175,8 +25266,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25204,7 +25294,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25216,8 +25306,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25245,7 +25334,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25257,8 +25346,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25302,7 +25390,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25314,8 +25402,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25343,7 +25430,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25355,8 +25442,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25384,7 +25470,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25396,8 +25482,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25425,7 +25510,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25437,8 +25522,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25482,7 +25566,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25494,8 +25578,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25523,7 +25606,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25535,8 +25618,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25564,7 +25646,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25576,8 +25658,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25605,7 +25686,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25617,8 +25698,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25662,7 +25742,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25674,8 +25754,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25703,7 +25782,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25715,8 +25794,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25744,7 +25822,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25756,8 +25834,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25785,7 +25862,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25797,8 +25874,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25842,7 +25918,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25854,8 +25930,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25883,7 +25958,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -25895,8 +25970,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25924,7 +25998,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25936,8 +26010,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -25965,7 +26038,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -25977,8 +26050,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -26022,7 +26094,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -26034,8 +26106,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26063,7 +26134,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -26075,8 +26146,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26104,7 +26174,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -26116,8 +26186,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -26145,7 +26214,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -26157,8 +26226,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -26202,7 +26270,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -26214,8 +26282,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26243,7 +26310,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -26255,8 +26322,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26284,7 +26350,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -26296,8 +26362,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -26325,7 +26390,7 @@ export namespace Prisma {
     slug: string
     companyName: string
     companyDocument: string
-    status?: $Enums.ClubStatus
+    isActive?: boolean
     databaseHost: string
     databasePort?: number
     databaseName: string
@@ -26337,8 +26402,7 @@ export namespace Prisma {
     maxUsers?: number
     maxAdmins?: number
     maxStorageGB?: number
-    subscriptionPlan?: $Enums.SubscriptionPlan
-    subscriptionStatus?: $Enums.SubscriptionStatus
+    plan?: $Enums.Plan
     monthlyFee?: Decimal | DecimalJsLike | number | string
     trialEndsAt?: Date | string | null
     nextBillingDate?: Date | string | null
@@ -26382,7 +26446,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -26394,8 +26458,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26423,7 +26486,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     databaseHost?: StringFieldUpdateOperationsInput | string
     databasePort?: IntFieldUpdateOperationsInput | number
     databaseName?: StringFieldUpdateOperationsInput | string
@@ -26435,8 +26498,7 @@ export namespace Prisma {
     maxUsers?: IntFieldUpdateOperationsInput | number
     maxAdmins?: IntFieldUpdateOperationsInput | number
     maxStorageGB?: IntFieldUpdateOperationsInput | number
-    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
-    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

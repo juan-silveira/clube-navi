@@ -1088,6 +1088,243 @@ class S3Service {
       throw error;
     }
   }
+
+  // ===== MÉTODOS PARA APP BRANDING (URLs FIXAS) =====
+
+  /**
+   * Upload com URL fixa - substitui o arquivo no mesmo caminho
+   * Usado para ícones de app, splash screens, etc.
+   * @param {string} tenantSlug - Slug do tenant
+   * @param {object} file - Arquivo do multer
+   * @param {string} assetType - Tipo: 'app-icon', 'splash', 'logo-header', 'logo-menu', 'logo-footer', 'banner-home', 'banner-promo'
+   * @param {string} folder - 'build' (requer rebuild) ou 'runtime' (OTA)
+   */
+  async uploadTenantAsset(tenantSlug, file, assetType, folder = 'runtime') {
+    try {
+      // Validar arquivo
+      this.validateImageFile(file);
+
+      // Determinar extensão baseado no tipo de arquivo
+      const extension = path.extname(file.originalname) || '.png';
+
+      // Mapear tipo de asset para nome de arquivo fixo
+      const fileNameMap = {
+        'app-icon': 'app-icon.png',
+        'splash': 'splash.png',
+        'logo-header': 'logo-header.png',
+        'logo-menu': 'logo-menu.png',
+        'logo-footer': 'logo-footer.png',
+        'banner-home': 'banner-home.png',
+        'banner-promo': 'banner-promo.png'
+      };
+
+      const fileName = fileNameMap[assetType] || `${assetType}${extension}`;
+
+      // Construir chave com estrutura de pastas: tenants/{slug}/{build|runtime}/{filename}
+      const key = `tenants/${tenantSlug}/${folder}/${fileName}`;
+
+      console.log(`📤 [S3Service] Uploading tenant asset: ${key}`);
+
+      // Configurar parâmetros de upload
+      const uploadParams = {
+        Bucket: this.bucketName,
+        Key: key,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+        CacheControl: 'public, max-age=3600', // Cache de 1 hora
+        Metadata: {
+          tenantSlug: tenantSlug,
+          assetType: assetType,
+          folder: folder,
+          uploadDate: new Date().toISOString()
+        }
+      };
+
+      // Fazer upload (substitui se já existe)
+      let result;
+      try {
+        result = await this.s3.upload(uploadParams).promise();
+      } catch (uploadError) {
+        if (uploadError.code === 'AccessControlListNotSupported' || uploadError.message.includes('ACL')) {
+          console.warn('⚠️ ACL não suportado, tentando sem ACL...');
+          delete uploadParams.ACL;
+          result = await this.s3.upload(uploadParams).promise();
+        } else {
+          throw uploadError;
+        }
+      }
+
+      console.log(`✅ [S3Service] Tenant asset uploaded: ${result.Key}`);
+
+      // Construir URL pública fixa
+      const publicUrl = `https://${this.bucketName}.s3.${this.region}.amazonaws.com/${result.Key}`;
+
+      return {
+        success: true,
+        url: publicUrl,
+        key: result.Key,
+        bucket: result.Bucket,
+        etag: result.ETag,
+        assetType: assetType,
+        folder: folder
+      };
+
+    } catch (error) {
+      console.error(`❌ [S3Service] Erro no upload de ${assetType}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Upload de ícone do app (build-time) - 1024x1024px
+   */
+  async uploadAppIcon(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'app-icon', 'build');
+  }
+
+  /**
+   * Upload de splash screen (build-time)
+   */
+  async uploadSplashScreen(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'splash', 'build');
+  }
+
+  /**
+   * Upload de logo interno do header (OTA)
+   */
+  async uploadLogoHeader(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'logo-header', 'runtime');
+  }
+
+  /**
+   * Upload de logo interno do menu (OTA)
+   */
+  async uploadLogoMenu(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'logo-menu', 'runtime');
+  }
+
+  /**
+   * Upload de logo interno do footer (OTA)
+   */
+  async uploadLogoFooter(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'logo-footer', 'runtime');
+  }
+
+  /**
+   * Upload de banner da home (OTA)
+   */
+  async uploadBannerHome(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'banner-home', 'runtime');
+  }
+
+  /**
+   * Upload de banner de promoção (OTA)
+   */
+  async uploadBannerPromo(tenantSlug, file) {
+    return this.uploadTenantAsset(tenantSlug, file, 'banner-promo', 'runtime');
+  }
+
+  /**
+   * Deletar asset de um tenant
+   */
+  async deleteTenantAsset(tenantSlug, assetType, folder = 'runtime') {
+    try {
+      const fileNameMap = {
+        'app-icon': 'app-icon.png',
+        'splash': 'splash.png',
+        'logo-header': 'logo-header.png',
+        'logo-menu': 'logo-menu.png',
+        'logo-footer': 'logo-footer.png',
+        'banner-home': 'banner-home.png',
+        'banner-promo': 'banner-promo.png'
+      };
+
+      const fileName = fileNameMap[assetType];
+      if (!fileName) {
+        throw new Error(`Tipo de asset inválido: ${assetType}`);
+      }
+
+      const key = `tenants/${tenantSlug}/${folder}/${fileName}`;
+
+      await this.deleteFile(key);
+
+      console.log(`✅ [S3Service] Tenant asset deletado: ${key}`);
+
+      return {
+        success: true,
+        message: 'Asset deletado com sucesso'
+      };
+
+    } catch (error) {
+      console.error(`❌ [S3Service] Erro ao deletar ${assetType}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Deletar todos os assets de um tenant
+   */
+  async deleteAllTenantAssets(tenantSlug) {
+    try {
+      const prefix = `tenants/${tenantSlug}/`;
+      return await this.deleteFilesByPrefix(prefix);
+    } catch (error) {
+      console.error('❌ [S3Service] Erro ao deletar assets do tenant:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Verificar se asset do tenant existe
+   */
+  async tenantAssetExists(tenantSlug, assetType, folder = 'runtime') {
+    try {
+      const fileNameMap = {
+        'app-icon': 'app-icon.png',
+        'splash': 'splash.png',
+        'logo-header': 'logo-header.png',
+        'logo-menu': 'logo-menu.png',
+        'logo-footer': 'logo-footer.png',
+        'banner-home': 'banner-home.png',
+        'banner-promo': 'banner-promo.png'
+      };
+
+      const fileName = fileNameMap[assetType];
+      if (!fileName) {
+        throw new Error(`Tipo de asset inválido: ${assetType}`);
+      }
+
+      const key = `tenants/${tenantSlug}/${folder}/${fileName}`;
+      return await this.fileExists(key);
+
+    } catch (error) {
+      console.error(`❌ [S3Service] Erro ao verificar ${assetType}:`, error);
+      return false;
+    }
+  }
+
+  /**
+   * Obter URL pública de um asset do tenant
+   */
+  getTenantAssetUrl(tenantSlug, assetType, folder = 'runtime') {
+    const fileNameMap = {
+      'app-icon': 'app-icon.png',
+      'splash': 'splash.png',
+      'logo-header': 'logo-header.png',
+      'logo-menu': 'logo-menu.png',
+      'logo-footer': 'logo-footer.png',
+      'banner-home': 'banner-home.png',
+      'banner-promo': 'banner-promo.png'
+    };
+
+    const fileName = fileNameMap[assetType];
+    if (!fileName) {
+      throw new Error(`Tipo de asset inválido: ${assetType}`);
+    }
+
+    const key = `tenants/${tenantSlug}/${folder}/${fileName}`;
+    return `https://${this.bucketName}.s3.${this.region}.amazonaws.com/${key}`;
+  }
 }
 
 // Exportar instância única
