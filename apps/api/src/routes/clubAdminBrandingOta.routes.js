@@ -249,6 +249,7 @@ router.get('/app-info', authenticateClubAdmin, async (req, res) => {
         appDescription: true,
         appIconUrl: true,
         splashScreenUrl: true,
+        splashBackgroundColor: true,
         currentVersion: true,
         appStoreUrl: true,
         playStoreUrl: true,

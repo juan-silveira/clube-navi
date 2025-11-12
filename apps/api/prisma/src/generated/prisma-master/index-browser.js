@@ -182,6 +182,7 @@ exports.Prisma.ClubAppConfigScalarFieldEnum = {
   urlScheme: 'urlScheme',
   appIconUrl: 'appIconUrl',
   splashScreenUrl: 'splashScreenUrl',
+  splashBackgroundColor: 'splashBackgroundColor',
   currentVersion: 'currentVersion',
   iosBuildNumber: 'iosBuildNumber',
   androidBuildNumber: 'androidBuildNumber',

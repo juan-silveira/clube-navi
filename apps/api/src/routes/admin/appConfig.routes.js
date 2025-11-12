@@ -157,6 +157,9 @@ router.post('/', authenticateSuperAdmin, async (req, res) => {
     const defaultIconUrl = `https://cdn.clubedigital.com/tenants/${finalSlug}/build/app-icon.png`;
     const defaultSplashUrl = `https://cdn.clubedigital.com/tenants/${finalSlug}/build/splash.png`;
 
+    // Splash background color (default ou fornecido)
+    const splashBgColor = req.body.splashBackgroundColor || '#FFFFFF';
+
     console.log('📱 [Admin App Config] Criando configuração:', {
       clubId,
       appName,
@@ -176,7 +179,8 @@ router.post('/', authenticateSuperAdmin, async (req, res) => {
         packageName,
         urlScheme,
         appIconUrl: defaultIconUrl,
-        splashScreenUrl: defaultSplashUrl
+        splashScreenUrl: defaultSplashUrl,
+        splashBackgroundColor: splashBgColor
       },
       include: {
         club: {
@@ -217,6 +221,7 @@ router.put('/:clubId', authenticateSuperAdmin, async (req, res) => {
       appDescription,
       appIconUrl,
       splashScreenUrl,
+      splashBackgroundColor,
       appStoreUrl,
       playStoreUrl,
       appStoreStatus,
@@ -246,6 +251,7 @@ router.put('/:clubId', authenticateSuperAdmin, async (req, res) => {
     if (appDescription !== undefined) updateData.appDescription = appDescription;
     if (appIconUrl) updateData.appIconUrl = appIconUrl;
     if (splashScreenUrl) updateData.splashScreenUrl = splashScreenUrl;
+    if (splashBackgroundColor) updateData.splashBackgroundColor = splashBackgroundColor;
     if (appStoreUrl !== undefined) updateData.appStoreUrl = appStoreUrl;
     if (playStoreUrl !== undefined) updateData.playStoreUrl = playStoreUrl;
     if (appStoreStatus) updateData.appStoreStatus = appStoreStatus;

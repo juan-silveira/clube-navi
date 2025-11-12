@@ -5062,6 +5062,7 @@ export namespace Prisma {
     urlScheme: string | null
     appIconUrl: string | null
     splashScreenUrl: string | null
+    splashBackgroundColor: string | null
     currentVersion: string | null
     iosBuildNumber: number | null
     androidBuildNumber: number | null
@@ -5086,6 +5087,7 @@ export namespace Prisma {
     urlScheme: string | null
     appIconUrl: string | null
     splashScreenUrl: string | null
+    splashBackgroundColor: string | null
     currentVersion: string | null
     iosBuildNumber: number | null
     androidBuildNumber: number | null
@@ -5110,6 +5112,7 @@ export namespace Prisma {
     urlScheme: number
     appIconUrl: number
     splashScreenUrl: number
+    splashBackgroundColor: number
     currentVersion: number
     iosBuildNumber: number
     androidBuildNumber: number
@@ -5146,6 +5149,7 @@ export namespace Prisma {
     urlScheme?: true
     appIconUrl?: true
     splashScreenUrl?: true
+    splashBackgroundColor?: true
     currentVersion?: true
     iosBuildNumber?: true
     androidBuildNumber?: true
@@ -5170,6 +5174,7 @@ export namespace Prisma {
     urlScheme?: true
     appIconUrl?: true
     splashScreenUrl?: true
+    splashBackgroundColor?: true
     currentVersion?: true
     iosBuildNumber?: true
     androidBuildNumber?: true
@@ -5194,6 +5199,7 @@ export namespace Prisma {
     urlScheme?: true
     appIconUrl?: true
     splashScreenUrl?: true
+    splashBackgroundColor?: true
     currentVersion?: true
     iosBuildNumber?: true
     androidBuildNumber?: true
@@ -5305,6 +5311,7 @@ export namespace Prisma {
     urlScheme: string
     appIconUrl: string
     splashScreenUrl: string
+    splashBackgroundColor: string
     currentVersion: string
     iosBuildNumber: number
     androidBuildNumber: number
@@ -5348,6 +5355,7 @@ export namespace Prisma {
     urlScheme?: boolean
     appIconUrl?: boolean
     splashScreenUrl?: boolean
+    splashBackgroundColor?: boolean
     currentVersion?: boolean
     iosBuildNumber?: boolean
     androidBuildNumber?: boolean
@@ -5373,6 +5381,7 @@ export namespace Prisma {
     urlScheme?: boolean
     appIconUrl?: boolean
     splashScreenUrl?: boolean
+    splashBackgroundColor?: boolean
     currentVersion?: boolean
     iosBuildNumber?: boolean
     androidBuildNumber?: boolean
@@ -5398,6 +5407,7 @@ export namespace Prisma {
     urlScheme?: boolean
     appIconUrl?: boolean
     splashScreenUrl?: boolean
+    splashBackgroundColor?: boolean
     currentVersion?: boolean
     iosBuildNumber?: boolean
     androidBuildNumber?: boolean
@@ -5423,6 +5433,7 @@ export namespace Prisma {
     urlScheme?: boolean
     appIconUrl?: boolean
     splashScreenUrl?: boolean
+    splashBackgroundColor?: boolean
     currentVersion?: boolean
     iosBuildNumber?: boolean
     androidBuildNumber?: boolean
@@ -5436,7 +5447,7 @@ export namespace Prisma {
     publishedAt?: boolean
   }
 
-  export type ClubAppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "appName" | "tenantSlug" | "appDescription" | "bundleId" | "packageName" | "urlScheme" | "appIconUrl" | "splashScreenUrl" | "currentVersion" | "iosBuildNumber" | "androidBuildNumber" | "appStoreStatus" | "playStoreStatus" | "appStoreUrl" | "playStoreUrl" | "autoBuildEnabled" | "createdAt" | "updatedAt" | "publishedAt", ExtArgs["result"]["clubAppConfig"]>
+  export type ClubAppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "appName" | "tenantSlug" | "appDescription" | "bundleId" | "packageName" | "urlScheme" | "appIconUrl" | "splashScreenUrl" | "splashBackgroundColor" | "currentVersion" | "iosBuildNumber" | "androidBuildNumber" | "appStoreStatus" | "playStoreStatus" | "appStoreUrl" | "playStoreUrl" | "autoBuildEnabled" | "createdAt" | "updatedAt" | "publishedAt", ExtArgs["result"]["clubAppConfig"]>
   export type ClubAppConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }
@@ -5463,6 +5474,7 @@ export namespace Prisma {
       urlScheme: string
       appIconUrl: string
       splashScreenUrl: string
+      splashBackgroundColor: string
       currentVersion: string
       iosBuildNumber: number
       androidBuildNumber: number
@@ -5908,6 +5920,7 @@ export namespace Prisma {
     readonly urlScheme: FieldRef<"ClubAppConfig", 'String'>
     readonly appIconUrl: FieldRef<"ClubAppConfig", 'String'>
     readonly splashScreenUrl: FieldRef<"ClubAppConfig", 'String'>
+    readonly splashBackgroundColor: FieldRef<"ClubAppConfig", 'String'>
     readonly currentVersion: FieldRef<"ClubAppConfig", 'String'>
     readonly iosBuildNumber: FieldRef<"ClubAppConfig", 'Int'>
     readonly androidBuildNumber: FieldRef<"ClubAppConfig", 'Int'>
@@ -18082,6 +18095,7 @@ export namespace Prisma {
     urlScheme: 'urlScheme',
     appIconUrl: 'appIconUrl',
     splashScreenUrl: 'splashScreenUrl',
+    splashBackgroundColor: 'splashBackgroundColor',
     currentVersion: 'currentVersion',
     iosBuildNumber: 'iosBuildNumber',
     androidBuildNumber: 'androidBuildNumber',
@@ -18873,6 +18887,7 @@ export namespace Prisma {
     urlScheme?: StringFilter<"ClubAppConfig"> | string
     appIconUrl?: StringFilter<"ClubAppConfig"> | string
     splashScreenUrl?: StringFilter<"ClubAppConfig"> | string
+    splashBackgroundColor?: StringFilter<"ClubAppConfig"> | string
     currentVersion?: StringFilter<"ClubAppConfig"> | string
     iosBuildNumber?: IntFilter<"ClubAppConfig"> | number
     androidBuildNumber?: IntFilter<"ClubAppConfig"> | number
@@ -18898,6 +18913,7 @@ export namespace Prisma {
     urlScheme?: SortOrder
     appIconUrl?: SortOrder
     splashScreenUrl?: SortOrder
+    splashBackgroundColor?: SortOrder
     currentVersion?: SortOrder
     iosBuildNumber?: SortOrder
     androidBuildNumber?: SortOrder
@@ -18926,6 +18942,7 @@ export namespace Prisma {
     appDescription?: StringNullableFilter<"ClubAppConfig"> | string | null
     appIconUrl?: StringFilter<"ClubAppConfig"> | string
     splashScreenUrl?: StringFilter<"ClubAppConfig"> | string
+    splashBackgroundColor?: StringFilter<"ClubAppConfig"> | string
     currentVersion?: StringFilter<"ClubAppConfig"> | string
     iosBuildNumber?: IntFilter<"ClubAppConfig"> | number
     androidBuildNumber?: IntFilter<"ClubAppConfig"> | number
@@ -18951,6 +18968,7 @@ export namespace Prisma {
     urlScheme?: SortOrder
     appIconUrl?: SortOrder
     splashScreenUrl?: SortOrder
+    splashBackgroundColor?: SortOrder
     currentVersion?: SortOrder
     iosBuildNumber?: SortOrder
     androidBuildNumber?: SortOrder
@@ -18983,6 +19001,7 @@ export namespace Prisma {
     urlScheme?: StringWithAggregatesFilter<"ClubAppConfig"> | string
     appIconUrl?: StringWithAggregatesFilter<"ClubAppConfig"> | string
     splashScreenUrl?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    splashBackgroundColor?: StringWithAggregatesFilter<"ClubAppConfig"> | string
     currentVersion?: StringWithAggregatesFilter<"ClubAppConfig"> | string
     iosBuildNumber?: IntWithAggregatesFilter<"ClubAppConfig"> | number
     androidBuildNumber?: IntWithAggregatesFilter<"ClubAppConfig"> | number
@@ -20283,6 +20302,7 @@ export namespace Prisma {
     urlScheme: string
     appIconUrl: string
     splashScreenUrl: string
+    splashBackgroundColor?: string
     currentVersion?: string
     iosBuildNumber?: number
     androidBuildNumber?: number
@@ -20308,6 +20328,7 @@ export namespace Prisma {
     urlScheme: string
     appIconUrl: string
     splashScreenUrl: string
+    splashBackgroundColor?: string
     currentVersion?: string
     iosBuildNumber?: number
     androidBuildNumber?: number
@@ -20331,6 +20352,7 @@ export namespace Prisma {
     urlScheme?: StringFieldUpdateOperationsInput | string
     appIconUrl?: StringFieldUpdateOperationsInput | string
     splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    splashBackgroundColor?: StringFieldUpdateOperationsInput | string
     currentVersion?: StringFieldUpdateOperationsInput | string
     iosBuildNumber?: IntFieldUpdateOperationsInput | number
     androidBuildNumber?: IntFieldUpdateOperationsInput | number
@@ -20356,6 +20378,7 @@ export namespace Prisma {
     urlScheme?: StringFieldUpdateOperationsInput | string
     appIconUrl?: StringFieldUpdateOperationsInput | string
     splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    splashBackgroundColor?: StringFieldUpdateOperationsInput | string
     currentVersion?: StringFieldUpdateOperationsInput | string
     iosBuildNumber?: IntFieldUpdateOperationsInput | number
     androidBuildNumber?: IntFieldUpdateOperationsInput | number
@@ -20380,6 +20403,7 @@ export namespace Prisma {
     urlScheme: string
     appIconUrl: string
     splashScreenUrl: string
+    splashBackgroundColor?: string
     currentVersion?: string
     iosBuildNumber?: number
     androidBuildNumber?: number
@@ -20403,6 +20427,7 @@ export namespace Prisma {
     urlScheme?: StringFieldUpdateOperationsInput | string
     appIconUrl?: StringFieldUpdateOperationsInput | string
     splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    splashBackgroundColor?: StringFieldUpdateOperationsInput | string
     currentVersion?: StringFieldUpdateOperationsInput | string
     iosBuildNumber?: IntFieldUpdateOperationsInput | number
     androidBuildNumber?: IntFieldUpdateOperationsInput | number
@@ -20427,6 +20452,7 @@ export namespace Prisma {
     urlScheme?: StringFieldUpdateOperationsInput | string
     appIconUrl?: StringFieldUpdateOperationsInput | string
     splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    splashBackgroundColor?: StringFieldUpdateOperationsInput | string
     currentVersion?: StringFieldUpdateOperationsInput | string
     iosBuildNumber?: IntFieldUpdateOperationsInput | number
     androidBuildNumber?: IntFieldUpdateOperationsInput | number
@@ -21969,6 +21995,7 @@ export namespace Prisma {
     urlScheme?: SortOrder
     appIconUrl?: SortOrder
     splashScreenUrl?: SortOrder
+    splashBackgroundColor?: SortOrder
     currentVersion?: SortOrder
     iosBuildNumber?: SortOrder
     androidBuildNumber?: SortOrder
@@ -21998,6 +22025,7 @@ export namespace Prisma {
     urlScheme?: SortOrder
     appIconUrl?: SortOrder
     splashScreenUrl?: SortOrder
+    splashBackgroundColor?: SortOrder
     currentVersion?: SortOrder
     iosBuildNumber?: SortOrder
     androidBuildNumber?: SortOrder
@@ -22022,6 +22050,7 @@ export namespace Prisma {
     urlScheme?: SortOrder
     appIconUrl?: SortOrder
     splashScreenUrl?: SortOrder
+    splashBackgroundColor?: SortOrder
     currentVersion?: SortOrder
     iosBuildNumber?: SortOrder
     androidBuildNumber?: SortOrder
@@ -23940,6 +23969,7 @@ export namespace Prisma {
     urlScheme: string
     appIconUrl: string
     splashScreenUrl: string
+    splashBackgroundColor?: string
     currentVersion?: string
     iosBuildNumber?: number
     androidBuildNumber?: number
@@ -23963,6 +23993,7 @@ export namespace Prisma {
     urlScheme: string
     appIconUrl: string
     splashScreenUrl: string
+    splashBackgroundColor?: string
     currentVersion?: string
     iosBuildNumber?: number
     androidBuildNumber?: number
@@ -24318,6 +24349,7 @@ export namespace Prisma {
     urlScheme?: StringFieldUpdateOperationsInput | string
     appIconUrl?: StringFieldUpdateOperationsInput | string
     splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    splashBackgroundColor?: StringFieldUpdateOperationsInput | string
     currentVersion?: StringFieldUpdateOperationsInput | string
     iosBuildNumber?: IntFieldUpdateOperationsInput | number
     androidBuildNumber?: IntFieldUpdateOperationsInput | number
@@ -24341,6 +24373,7 @@ export namespace Prisma {
     urlScheme?: StringFieldUpdateOperationsInput | string
     appIconUrl?: StringFieldUpdateOperationsInput | string
     splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    splashBackgroundColor?: StringFieldUpdateOperationsInput | string
     currentVersion?: StringFieldUpdateOperationsInput | string
     iosBuildNumber?: IntFieldUpdateOperationsInput | number
     androidBuildNumber?: IntFieldUpdateOperationsInput | number
