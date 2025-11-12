@@ -68,6 +68,7 @@ model Club {
 
   // Relations
   branding          ClubBranding?
+  appConfig         ClubAppConfig?
   modules           ClubModule[]
   admins            ClubAdmin[]
   apiKeys           ClubApiKey[]
@@ -116,6 +117,71 @@ model ClubBranding {
   club            Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
 
   @@map("club_brandings")
+}
+
+// ==========================================
+// APP CONFIGURATION (Build-time settings)
+// ==========================================
+
+model ClubAppConfig {
+  id               String   @id @default(uuid()) @db.Uuid
+  clubId           String   @unique @map("club_id") @db.Uuid
+
+  // App Identification (Build-time only)
+  appName          String   @map("app_name") @db.VarChar(100)              // "Clube Force"
+  tenantSlug       String   @unique @map("tenant_slug") @db.VarChar(50)    // "clube-force"
+  appDescription   String?  @map("app_description") @db.Text
+
+  // Bundle Identifiers (Unique per tenant)
+  bundleId         String   @unique @map("bundle_id") @db.VarChar(100)     // "com.clubedigital.clubeforce"
+  packageName      String   @unique @map("package_name") @db.VarChar(100)  // "com.clubedigital.clubeforce"
+  urlScheme        String   @unique @map("url_scheme") @db.VarChar(50)     // "clubedigitalclubeforce"
+
+  // Build Assets (Fixed URLs on S3)
+  appIconUrl       String   @map("app_icon_url") @db.VarChar(500)          // App icon (home screen)
+  splashScreenUrl  String   @map("splash_screen_url") @db.VarChar(500)     // Native splash screen
+
+  // Version Control
+  currentVersion   String   @default("1.0.0") @map("current_version") @db.VarChar(20)
+  iosBuildNumber   Int      @default(1) @map("ios_build_number")
+  androidBuildNumber Int    @default(1) @map("android_build_number")
+
+  // Store Status
+  appStoreStatus   AppStoreStatus @default(DRAFT) @map("app_store_status")
+  playStoreStatus  AppStoreStatus @default(DRAFT) @map("play_store_status")
+
+  // Store URLs (after publication)
+  appStoreUrl      String?  @map("app_store_url") @db.VarChar(500)
+  playStoreUrl     String?  @map("play_store_url") @db.VarChar(500)
+
+  // Build Automation
+  autoBuildEnabled Boolean  @default(true) @map("auto_build_enabled")     // Include in mass builds
+
+  // Timestamps
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  publishedAt      DateTime? @map("published_at") @db.Timestamptz(6)
+
+  // Relations
+  club             Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+
+  @@index([tenantSlug])
+  @@index([bundleId])
+  @@index([packageName])
+  @@index([appStoreStatus])
+  @@index([playStoreStatus])
+  @@map("club_app_configs")
+}
+
+enum AppStoreStatus {
+  DRAFT
+  PENDING_REVIEW
+  IN_REVIEW
+  REJECTED
+  PUBLISHED
+  REMOVED
+
+  @@map("app_store_status")
 }
 
 // ==========================================
