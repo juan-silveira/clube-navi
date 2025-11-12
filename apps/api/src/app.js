@@ -839,9 +839,13 @@ app.use('/api/club-admin/whatsapp', resolveClubMiddleware, clubAdminWhatsappRout
 const clubAdminPushNotificationsRoutes = require('./routes/clubAdminPushNotifications.routes');
 app.use('/api/club-admin/push-notifications', resolveClubMiddleware, clubAdminPushNotificationsRoutes);
 
-// Rotas de branding do clube
+// Rotas de branding do clube (DEPRECATED - manter para compatibilidade)
 const clubAdminBrandingRoutes = require('./routes/clubAdminBranding.routes');
 app.use('/api/club-admin/branding', resolveClubMiddleware, clubAdminBrandingRoutes);
+
+// Rotas de branding OTA (novo sistema)
+const clubAdminBrandingOtaRoutes = require('./routes/clubAdminBrandingOta.routes');
+app.use('/api/club-admin/branding-ota', resolveClubMiddleware, clubAdminBrandingOtaRoutes);
 
 // Rotas de módulos do clube
 const clubAdminModulesRoutes = require('./routes/clubAdminModules.routes');
@@ -1186,6 +1190,10 @@ app.get('/api/admin/stats', authenticateJWT, requireSuperAdmin, async (req, res)
 // Rotas admin (com autenticação admin)
 // Nota: rotas mais específicas devem vir ANTES das rotas gerais
 // Financial report usa JWT (para acesso via dashboard web)
+// Rotas de configuração de apps (Super Admin)
+const adminAppConfigRoutes = require('./routes/admin/appConfig.routes');
+app.use('/api/admin/app-config', adminAppConfigRoutes);
+
 // REMOVIDO - arquivo não existe mais
 // app.use('/api/admin/financial-report', authenticateJWT, financialReportRoutes);
 // Usar authenticateToken (JWT) para permitir acesso via frontend com Bearer token

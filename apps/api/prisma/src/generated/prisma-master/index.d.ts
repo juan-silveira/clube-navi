@@ -24,6 +24,11 @@ export type Club = $Result.DefaultSelection<Prisma.$ClubPayload>
  */
 export type ClubBranding = $Result.DefaultSelection<Prisma.$ClubBrandingPayload>
 /**
+ * Model ClubAppConfig
+ * 
+ */
+export type ClubAppConfig = $Result.DefaultSelection<Prisma.$ClubAppConfigPayload>
+/**
  * Model ClubModule
  * 
  */
@@ -68,12 +73,29 @@ export type ClubApiKey = $Result.DefaultSelection<Prisma.$ClubApiKeyPayload>
  * 
  */
 export type ClubUsageStats = $Result.DefaultSelection<Prisma.$ClubUsageStatsPayload>
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const ClubStatus: {
+  export const AppStoreStatus: {
+  DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  IN_REVIEW: 'IN_REVIEW',
+  REJECTED: 'REJECTED',
+  PUBLISHED: 'PUBLISHED',
+  REMOVED: 'REMOVED'
+};
+
+export type AppStoreStatus = (typeof AppStoreStatus)[keyof typeof AppStoreStatus]
+
+
+export const ClubStatus: {
   trial: 'trial',
   active: 'active',
   suspended: 'suspended',
@@ -128,7 +150,44 @@ export const AdminRole: {
 
 export type AdminRole = (typeof AdminRole)[keyof typeof AdminRole]
 
+
+export const NotificationType: {
+  push_notification: 'push_notification',
+  email: 'email',
+  sms: 'sms',
+  in_app: 'in_app'
+};
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const NotificationTarget: {
+  all_clubs: 'all_clubs',
+  specific_clubs: 'specific_clubs',
+  active_clubs: 'active_clubs',
+  trial_clubs: 'trial_clubs',
+  suspended_clubs: 'suspended_clubs'
+};
+
+export type NotificationTarget = (typeof NotificationTarget)[keyof typeof NotificationTarget]
+
+
+export const NotificationStatus: {
+  pending: 'pending',
+  scheduled: 'scheduled',
+  sending: 'sending',
+  sent: 'sent',
+  failed: 'failed',
+  cancelled: 'cancelled'
+};
+
+export type NotificationStatus = (typeof NotificationStatus)[keyof typeof NotificationStatus]
+
 }
+
+export type AppStoreStatus = $Enums.AppStoreStatus
+
+export const AppStoreStatus: typeof $Enums.AppStoreStatus
 
 export type ClubStatus = $Enums.ClubStatus
 
@@ -149,6 +208,18 @@ export const ModuleKey: typeof $Enums.ModuleKey
 export type AdminRole = $Enums.AdminRole
 
 export const AdminRole: typeof $Enums.AdminRole
+
+export type NotificationType = $Enums.NotificationType
+
+export const NotificationType: typeof $Enums.NotificationType
+
+export type NotificationTarget = $Enums.NotificationTarget
+
+export const NotificationTarget: typeof $Enums.NotificationTarget
+
+export type NotificationStatus = $Enums.NotificationStatus
+
+export const NotificationStatus: typeof $Enums.NotificationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -289,6 +360,16 @@ export class PrismaClient<
   get clubBranding(): Prisma.ClubBrandingDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.clubAppConfig`: Exposes CRUD operations for the **ClubAppConfig** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClubAppConfigs
+    * const clubAppConfigs = await prisma.clubAppConfig.findMany()
+    * ```
+    */
+  get clubAppConfig(): Prisma.ClubAppConfigDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.clubModule`: Exposes CRUD operations for the **ClubModule** model.
     * Example usage:
     * ```ts
@@ -377,6 +458,16 @@ export class PrismaClient<
     * ```
     */
   get clubUsageStats(): Prisma.ClubUsageStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Notifications
+    * const notifications = await prisma.notification.findMany()
+    * ```
+    */
+  get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -820,6 +911,7 @@ export namespace Prisma {
   export const ModelName: {
     Club: 'Club',
     ClubBranding: 'ClubBranding',
+    ClubAppConfig: 'ClubAppConfig',
     ClubModule: 'ClubModule',
     ClubStats: 'ClubStats',
     GlobalStats: 'GlobalStats',
@@ -828,7 +920,8 @@ export namespace Prisma {
     ClubAdmin: 'ClubAdmin',
     SuperAdmin: 'SuperAdmin',
     ClubApiKey: 'ClubApiKey',
-    ClubUsageStats: 'ClubUsageStats'
+    ClubUsageStats: 'ClubUsageStats',
+    Notification: 'Notification'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -847,7 +940,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "club" | "clubBranding" | "clubModule" | "clubStats" | "globalStats" | "clubCashbackConfig" | "clubWithdrawalConfig" | "clubAdmin" | "superAdmin" | "clubApiKey" | "clubUsageStats"
+      modelProps: "club" | "clubBranding" | "clubAppConfig" | "clubModule" | "clubStats" | "globalStats" | "clubCashbackConfig" | "clubWithdrawalConfig" | "clubAdmin" | "superAdmin" | "clubApiKey" | "clubUsageStats" | "notification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -996,6 +1089,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ClubBrandingCountArgs<ExtArgs>
             result: $Utils.Optional<ClubBrandingCountAggregateOutputType> | number
+          }
+        }
+      }
+      ClubAppConfig: {
+        payload: Prisma.$ClubAppConfigPayload<ExtArgs>
+        fields: Prisma.ClubAppConfigFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClubAppConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClubAppConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>
+          }
+          findFirst: {
+            args: Prisma.ClubAppConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClubAppConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>
+          }
+          findMany: {
+            args: Prisma.ClubAppConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>[]
+          }
+          create: {
+            args: Prisma.ClubAppConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>
+          }
+          createMany: {
+            args: Prisma.ClubAppConfigCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClubAppConfigCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>[]
+          }
+          delete: {
+            args: Prisma.ClubAppConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>
+          }
+          update: {
+            args: Prisma.ClubAppConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClubAppConfigDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClubAppConfigUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClubAppConfigUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>[]
+          }
+          upsert: {
+            args: Prisma.ClubAppConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubAppConfigPayload>
+          }
+          aggregate: {
+            args: Prisma.ClubAppConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubAppConfig>
+          }
+          groupBy: {
+            args: Prisma.ClubAppConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubAppConfigGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClubAppConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubAppConfigCountAggregateOutputType> | number
           }
         }
       }
@@ -1665,6 +1832,80 @@ export namespace Prisma {
           }
         }
       }
+      Notification: {
+        payload: Prisma.$NotificationPayload<ExtArgs>
+        fields: Prisma.NotificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          update: {
+            args: Prisma.NotificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotification>
+          }
+          groupBy: {
+            args: Prisma.NotificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1763,6 +2004,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     club?: ClubOmit
     clubBranding?: ClubBrandingOmit
+    clubAppConfig?: ClubAppConfigOmit
     clubModule?: ClubModuleOmit
     clubStats?: ClubStatsOmit
     globalStats?: GlobalStatsOmit
@@ -1772,6 +2014,7 @@ export namespace Prisma {
     superAdmin?: SuperAdminOmit
     clubApiKey?: ClubApiKeyOmit
     clubUsageStats?: ClubUsageStatsOmit
+    notification?: NotificationOmit
   }
 
   /* Types for Logging */
@@ -1856,6 +2099,7 @@ export namespace Prisma {
     admins: number
     apiKeys: number
     usageStats: number
+    notifications: number
   }
 
   export type ClubCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1863,6 +2107,7 @@ export namespace Prisma {
     admins?: boolean | ClubCountOutputTypeCountAdminsArgs
     apiKeys?: boolean | ClubCountOutputTypeCountApiKeysArgs
     usageStats?: boolean | ClubCountOutputTypeCountUsageStatsArgs
+    notifications?: boolean | ClubCountOutputTypeCountNotificationsArgs
   }
 
   // Custom InputTypes
@@ -1902,6 +2147,13 @@ export namespace Prisma {
    */
   export type ClubCountOutputTypeCountUsageStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ClubUsageStatsWhereInput
+  }
+
+  /**
+   * ClubCountOutputType without action
+   */
+  export type ClubCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
   }
 
 
@@ -2324,6 +2576,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     branding?: boolean | Club$brandingArgs<ExtArgs>
+    appConfig?: boolean | Club$appConfigArgs<ExtArgs>
     modules?: boolean | Club$modulesArgs<ExtArgs>
     admins?: boolean | Club$adminsArgs<ExtArgs>
     apiKeys?: boolean | Club$apiKeysArgs<ExtArgs>
@@ -2331,6 +2584,7 @@ export namespace Prisma {
     stats?: boolean | Club$statsArgs<ExtArgs>
     cashbackConfig?: boolean | Club$cashbackConfigArgs<ExtArgs>
     withdrawalConfig?: boolean | Club$withdrawalConfigArgs<ExtArgs>
+    notifications?: boolean | Club$notificationsArgs<ExtArgs>
     _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["club"]>
 
@@ -2433,6 +2687,7 @@ export namespace Prisma {
   export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "companyName" | "companyDocument" | "status" | "databaseHost" | "databasePort" | "databaseName" | "databaseUser" | "databasePassword" | "subdomain" | "customDomain" | "adminSubdomain" | "maxUsers" | "maxAdmins" | "maxStorageGB" | "subscriptionPlan" | "subscriptionStatus" | "monthlyFee" | "trialEndsAt" | "nextBillingDate" | "lastBillingDate" | "totalBilled" | "outstandingBalance" | "contactName" | "contactEmail" | "contactPhone" | "createdAt" | "updatedAt", ExtArgs["result"]["club"]>
   export type ClubInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     branding?: boolean | Club$brandingArgs<ExtArgs>
+    appConfig?: boolean | Club$appConfigArgs<ExtArgs>
     modules?: boolean | Club$modulesArgs<ExtArgs>
     admins?: boolean | Club$adminsArgs<ExtArgs>
     apiKeys?: boolean | Club$apiKeysArgs<ExtArgs>
@@ -2440,6 +2695,7 @@ export namespace Prisma {
     stats?: boolean | Club$statsArgs<ExtArgs>
     cashbackConfig?: boolean | Club$cashbackConfigArgs<ExtArgs>
     withdrawalConfig?: boolean | Club$withdrawalConfigArgs<ExtArgs>
+    notifications?: boolean | Club$notificationsArgs<ExtArgs>
     _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClubIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2449,6 +2705,7 @@ export namespace Prisma {
     name: "Club"
     objects: {
       branding: Prisma.$ClubBrandingPayload<ExtArgs> | null
+      appConfig: Prisma.$ClubAppConfigPayload<ExtArgs> | null
       modules: Prisma.$ClubModulePayload<ExtArgs>[]
       admins: Prisma.$ClubAdminPayload<ExtArgs>[]
       apiKeys: Prisma.$ClubApiKeyPayload<ExtArgs>[]
@@ -2456,6 +2713,7 @@ export namespace Prisma {
       stats: Prisma.$ClubStatsPayload<ExtArgs> | null
       cashbackConfig: Prisma.$ClubCashbackConfigPayload<ExtArgs> | null
       withdrawalConfig: Prisma.$ClubWithdrawalConfigPayload<ExtArgs> | null
+      notifications: Prisma.$NotificationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2882,6 +3140,7 @@ export namespace Prisma {
   export interface Prisma__ClubClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     branding<T extends Club$brandingArgs<ExtArgs> = {}>(args?: Subset<T, Club$brandingArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    appConfig<T extends Club$appConfigArgs<ExtArgs> = {}>(args?: Subset<T, Club$appConfigArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     modules<T extends Club$modulesArgs<ExtArgs> = {}>(args?: Subset<T, Club$modulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends Club$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Club$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apiKeys<T extends Club$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, Club$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2889,6 +3148,7 @@ export namespace Prisma {
     stats<T extends Club$statsArgs<ExtArgs> = {}>(args?: Subset<T, Club$statsArgs<ExtArgs>>): Prisma__ClubStatsClient<$Result.GetResult<Prisma.$ClubStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     cashbackConfig<T extends Club$cashbackConfigArgs<ExtArgs> = {}>(args?: Subset<T, Club$cashbackConfigArgs<ExtArgs>>): Prisma__ClubCashbackConfigClient<$Result.GetResult<Prisma.$ClubCashbackConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     withdrawalConfig<T extends Club$withdrawalConfigArgs<ExtArgs> = {}>(args?: Subset<T, Club$withdrawalConfigArgs<ExtArgs>>): Prisma__ClubWithdrawalConfigClient<$Result.GetResult<Prisma.$ClubWithdrawalConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    notifications<T extends Club$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, Club$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3354,6 +3614,25 @@ export namespace Prisma {
   }
 
   /**
+   * Club.appConfig
+   */
+  export type Club$appConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    where?: ClubAppConfigWhereInput
+  }
+
+  /**
    * Club.modules
    */
   export type Club$modulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3504,6 +3783,30 @@ export namespace Prisma {
      */
     include?: ClubWithdrawalConfigInclude<ExtArgs> | null
     where?: ClubWithdrawalConfigWhereInput
+  }
+
+  /**
+   * Club.notifications
+   */
+  export type Club$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
   }
 
   /**
@@ -4723,6 +5026,1310 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ClubBrandingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClubAppConfig
+   */
+
+  export type AggregateClubAppConfig = {
+    _count: ClubAppConfigCountAggregateOutputType | null
+    _avg: ClubAppConfigAvgAggregateOutputType | null
+    _sum: ClubAppConfigSumAggregateOutputType | null
+    _min: ClubAppConfigMinAggregateOutputType | null
+    _max: ClubAppConfigMaxAggregateOutputType | null
+  }
+
+  export type ClubAppConfigAvgAggregateOutputType = {
+    iosBuildNumber: number | null
+    androidBuildNumber: number | null
+  }
+
+  export type ClubAppConfigSumAggregateOutputType = {
+    iosBuildNumber: number | null
+    androidBuildNumber: number | null
+  }
+
+  export type ClubAppConfigMinAggregateOutputType = {
+    id: string | null
+    clubId: string | null
+    appName: string | null
+    tenantSlug: string | null
+    appDescription: string | null
+    bundleId: string | null
+    packageName: string | null
+    urlScheme: string | null
+    appIconUrl: string | null
+    splashScreenUrl: string | null
+    currentVersion: string | null
+    iosBuildNumber: number | null
+    androidBuildNumber: number | null
+    appStoreStatus: $Enums.AppStoreStatus | null
+    playStoreStatus: $Enums.AppStoreStatus | null
+    appStoreUrl: string | null
+    playStoreUrl: string | null
+    autoBuildEnabled: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    publishedAt: Date | null
+  }
+
+  export type ClubAppConfigMaxAggregateOutputType = {
+    id: string | null
+    clubId: string | null
+    appName: string | null
+    tenantSlug: string | null
+    appDescription: string | null
+    bundleId: string | null
+    packageName: string | null
+    urlScheme: string | null
+    appIconUrl: string | null
+    splashScreenUrl: string | null
+    currentVersion: string | null
+    iosBuildNumber: number | null
+    androidBuildNumber: number | null
+    appStoreStatus: $Enums.AppStoreStatus | null
+    playStoreStatus: $Enums.AppStoreStatus | null
+    appStoreUrl: string | null
+    playStoreUrl: string | null
+    autoBuildEnabled: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    publishedAt: Date | null
+  }
+
+  export type ClubAppConfigCountAggregateOutputType = {
+    id: number
+    clubId: number
+    appName: number
+    tenantSlug: number
+    appDescription: number
+    bundleId: number
+    packageName: number
+    urlScheme: number
+    appIconUrl: number
+    splashScreenUrl: number
+    currentVersion: number
+    iosBuildNumber: number
+    androidBuildNumber: number
+    appStoreStatus: number
+    playStoreStatus: number
+    appStoreUrl: number
+    playStoreUrl: number
+    autoBuildEnabled: number
+    createdAt: number
+    updatedAt: number
+    publishedAt: number
+    _all: number
+  }
+
+
+  export type ClubAppConfigAvgAggregateInputType = {
+    iosBuildNumber?: true
+    androidBuildNumber?: true
+  }
+
+  export type ClubAppConfigSumAggregateInputType = {
+    iosBuildNumber?: true
+    androidBuildNumber?: true
+  }
+
+  export type ClubAppConfigMinAggregateInputType = {
+    id?: true
+    clubId?: true
+    appName?: true
+    tenantSlug?: true
+    appDescription?: true
+    bundleId?: true
+    packageName?: true
+    urlScheme?: true
+    appIconUrl?: true
+    splashScreenUrl?: true
+    currentVersion?: true
+    iosBuildNumber?: true
+    androidBuildNumber?: true
+    appStoreStatus?: true
+    playStoreStatus?: true
+    appStoreUrl?: true
+    playStoreUrl?: true
+    autoBuildEnabled?: true
+    createdAt?: true
+    updatedAt?: true
+    publishedAt?: true
+  }
+
+  export type ClubAppConfigMaxAggregateInputType = {
+    id?: true
+    clubId?: true
+    appName?: true
+    tenantSlug?: true
+    appDescription?: true
+    bundleId?: true
+    packageName?: true
+    urlScheme?: true
+    appIconUrl?: true
+    splashScreenUrl?: true
+    currentVersion?: true
+    iosBuildNumber?: true
+    androidBuildNumber?: true
+    appStoreStatus?: true
+    playStoreStatus?: true
+    appStoreUrl?: true
+    playStoreUrl?: true
+    autoBuildEnabled?: true
+    createdAt?: true
+    updatedAt?: true
+    publishedAt?: true
+  }
+
+  export type ClubAppConfigCountAggregateInputType = {
+    id?: true
+    clubId?: true
+    appName?: true
+    tenantSlug?: true
+    appDescription?: true
+    bundleId?: true
+    packageName?: true
+    urlScheme?: true
+    appIconUrl?: true
+    splashScreenUrl?: true
+    currentVersion?: true
+    iosBuildNumber?: true
+    androidBuildNumber?: true
+    appStoreStatus?: true
+    playStoreStatus?: true
+    appStoreUrl?: true
+    playStoreUrl?: true
+    autoBuildEnabled?: true
+    createdAt?: true
+    updatedAt?: true
+    publishedAt?: true
+    _all?: true
+  }
+
+  export type ClubAppConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClubAppConfig to aggregate.
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubAppConfigs to fetch.
+     */
+    orderBy?: ClubAppConfigOrderByWithRelationInput | ClubAppConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClubAppConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubAppConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubAppConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClubAppConfigs
+    **/
+    _count?: true | ClubAppConfigCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClubAppConfigAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClubAppConfigSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClubAppConfigMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClubAppConfigMaxAggregateInputType
+  }
+
+  export type GetClubAppConfigAggregateType<T extends ClubAppConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubAppConfig]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClubAppConfig[P]>
+      : GetScalarType<T[P], AggregateClubAppConfig[P]>
+  }
+
+
+
+
+  export type ClubAppConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubAppConfigWhereInput
+    orderBy?: ClubAppConfigOrderByWithAggregationInput | ClubAppConfigOrderByWithAggregationInput[]
+    by: ClubAppConfigScalarFieldEnum[] | ClubAppConfigScalarFieldEnum
+    having?: ClubAppConfigScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClubAppConfigCountAggregateInputType | true
+    _avg?: ClubAppConfigAvgAggregateInputType
+    _sum?: ClubAppConfigSumAggregateInputType
+    _min?: ClubAppConfigMinAggregateInputType
+    _max?: ClubAppConfigMaxAggregateInputType
+  }
+
+  export type ClubAppConfigGroupByOutputType = {
+    id: string
+    clubId: string
+    appName: string
+    tenantSlug: string
+    appDescription: string | null
+    bundleId: string
+    packageName: string
+    urlScheme: string
+    appIconUrl: string
+    splashScreenUrl: string
+    currentVersion: string
+    iosBuildNumber: number
+    androidBuildNumber: number
+    appStoreStatus: $Enums.AppStoreStatus
+    playStoreStatus: $Enums.AppStoreStatus
+    appStoreUrl: string | null
+    playStoreUrl: string | null
+    autoBuildEnabled: boolean
+    createdAt: Date
+    updatedAt: Date
+    publishedAt: Date | null
+    _count: ClubAppConfigCountAggregateOutputType | null
+    _avg: ClubAppConfigAvgAggregateOutputType | null
+    _sum: ClubAppConfigSumAggregateOutputType | null
+    _min: ClubAppConfigMinAggregateOutputType | null
+    _max: ClubAppConfigMaxAggregateOutputType | null
+  }
+
+  type GetClubAppConfigGroupByPayload<T extends ClubAppConfigGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClubAppConfigGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClubAppConfigGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClubAppConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubAppConfigGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClubAppConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clubId?: boolean
+    appName?: boolean
+    tenantSlug?: boolean
+    appDescription?: boolean
+    bundleId?: boolean
+    packageName?: boolean
+    urlScheme?: boolean
+    appIconUrl?: boolean
+    splashScreenUrl?: boolean
+    currentVersion?: boolean
+    iosBuildNumber?: boolean
+    androidBuildNumber?: boolean
+    appStoreStatus?: boolean
+    playStoreStatus?: boolean
+    appStoreUrl?: boolean
+    playStoreUrl?: boolean
+    autoBuildEnabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishedAt?: boolean
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubAppConfig"]>
+
+  export type ClubAppConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clubId?: boolean
+    appName?: boolean
+    tenantSlug?: boolean
+    appDescription?: boolean
+    bundleId?: boolean
+    packageName?: boolean
+    urlScheme?: boolean
+    appIconUrl?: boolean
+    splashScreenUrl?: boolean
+    currentVersion?: boolean
+    iosBuildNumber?: boolean
+    androidBuildNumber?: boolean
+    appStoreStatus?: boolean
+    playStoreStatus?: boolean
+    appStoreUrl?: boolean
+    playStoreUrl?: boolean
+    autoBuildEnabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishedAt?: boolean
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubAppConfig"]>
+
+  export type ClubAppConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clubId?: boolean
+    appName?: boolean
+    tenantSlug?: boolean
+    appDescription?: boolean
+    bundleId?: boolean
+    packageName?: boolean
+    urlScheme?: boolean
+    appIconUrl?: boolean
+    splashScreenUrl?: boolean
+    currentVersion?: boolean
+    iosBuildNumber?: boolean
+    androidBuildNumber?: boolean
+    appStoreStatus?: boolean
+    playStoreStatus?: boolean
+    appStoreUrl?: boolean
+    playStoreUrl?: boolean
+    autoBuildEnabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishedAt?: boolean
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clubAppConfig"]>
+
+  export type ClubAppConfigSelectScalar = {
+    id?: boolean
+    clubId?: boolean
+    appName?: boolean
+    tenantSlug?: boolean
+    appDescription?: boolean
+    bundleId?: boolean
+    packageName?: boolean
+    urlScheme?: boolean
+    appIconUrl?: boolean
+    splashScreenUrl?: boolean
+    currentVersion?: boolean
+    iosBuildNumber?: boolean
+    androidBuildNumber?: boolean
+    appStoreStatus?: boolean
+    playStoreStatus?: boolean
+    appStoreUrl?: boolean
+    playStoreUrl?: boolean
+    autoBuildEnabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishedAt?: boolean
+  }
+
+  export type ClubAppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "appName" | "tenantSlug" | "appDescription" | "bundleId" | "packageName" | "urlScheme" | "appIconUrl" | "splashScreenUrl" | "currentVersion" | "iosBuildNumber" | "androidBuildNumber" | "appStoreStatus" | "playStoreStatus" | "appStoreUrl" | "playStoreUrl" | "autoBuildEnabled" | "createdAt" | "updatedAt" | "publishedAt", ExtArgs["result"]["clubAppConfig"]>
+  export type ClubAppConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }
+  export type ClubAppConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }
+  export type ClubAppConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | ClubDefaultArgs<ExtArgs>
+  }
+
+  export type $ClubAppConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubAppConfig"
+    objects: {
+      club: Prisma.$ClubPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clubId: string
+      appName: string
+      tenantSlug: string
+      appDescription: string | null
+      bundleId: string
+      packageName: string
+      urlScheme: string
+      appIconUrl: string
+      splashScreenUrl: string
+      currentVersion: string
+      iosBuildNumber: number
+      androidBuildNumber: number
+      appStoreStatus: $Enums.AppStoreStatus
+      playStoreStatus: $Enums.AppStoreStatus
+      appStoreUrl: string | null
+      playStoreUrl: string | null
+      autoBuildEnabled: boolean
+      createdAt: Date
+      updatedAt: Date
+      publishedAt: Date | null
+    }, ExtArgs["result"]["clubAppConfig"]>
+    composites: {}
+  }
+
+  type ClubAppConfigGetPayload<S extends boolean | null | undefined | ClubAppConfigDefaultArgs> = $Result.GetResult<Prisma.$ClubAppConfigPayload, S>
+
+  type ClubAppConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubAppConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubAppConfigCountAggregateInputType | true
+    }
+
+  export interface ClubAppConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubAppConfig'], meta: { name: 'ClubAppConfig' } }
+    /**
+     * Find zero or one ClubAppConfig that matches the filter.
+     * @param {ClubAppConfigFindUniqueArgs} args - Arguments to find a ClubAppConfig
+     * @example
+     * // Get one ClubAppConfig
+     * const clubAppConfig = await prisma.clubAppConfig.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClubAppConfigFindUniqueArgs>(args: SelectSubset<T, ClubAppConfigFindUniqueArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClubAppConfig that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClubAppConfigFindUniqueOrThrowArgs} args - Arguments to find a ClubAppConfig
+     * @example
+     * // Get one ClubAppConfig
+     * const clubAppConfig = await prisma.clubAppConfig.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClubAppConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubAppConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClubAppConfig that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigFindFirstArgs} args - Arguments to find a ClubAppConfig
+     * @example
+     * // Get one ClubAppConfig
+     * const clubAppConfig = await prisma.clubAppConfig.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClubAppConfigFindFirstArgs>(args?: SelectSubset<T, ClubAppConfigFindFirstArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClubAppConfig that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigFindFirstOrThrowArgs} args - Arguments to find a ClubAppConfig
+     * @example
+     * // Get one ClubAppConfig
+     * const clubAppConfig = await prisma.clubAppConfig.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClubAppConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubAppConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClubAppConfigs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClubAppConfigs
+     * const clubAppConfigs = await prisma.clubAppConfig.findMany()
+     * 
+     * // Get first 10 ClubAppConfigs
+     * const clubAppConfigs = await prisma.clubAppConfig.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clubAppConfigWithIdOnly = await prisma.clubAppConfig.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClubAppConfigFindManyArgs>(args?: SelectSubset<T, ClubAppConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClubAppConfig.
+     * @param {ClubAppConfigCreateArgs} args - Arguments to create a ClubAppConfig.
+     * @example
+     * // Create one ClubAppConfig
+     * const ClubAppConfig = await prisma.clubAppConfig.create({
+     *   data: {
+     *     // ... data to create a ClubAppConfig
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClubAppConfigCreateArgs>(args: SelectSubset<T, ClubAppConfigCreateArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClubAppConfigs.
+     * @param {ClubAppConfigCreateManyArgs} args - Arguments to create many ClubAppConfigs.
+     * @example
+     * // Create many ClubAppConfigs
+     * const clubAppConfig = await prisma.clubAppConfig.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClubAppConfigCreateManyArgs>(args?: SelectSubset<T, ClubAppConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClubAppConfigs and returns the data saved in the database.
+     * @param {ClubAppConfigCreateManyAndReturnArgs} args - Arguments to create many ClubAppConfigs.
+     * @example
+     * // Create many ClubAppConfigs
+     * const clubAppConfig = await prisma.clubAppConfig.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClubAppConfigs and only return the `id`
+     * const clubAppConfigWithIdOnly = await prisma.clubAppConfig.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClubAppConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubAppConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClubAppConfig.
+     * @param {ClubAppConfigDeleteArgs} args - Arguments to delete one ClubAppConfig.
+     * @example
+     * // Delete one ClubAppConfig
+     * const ClubAppConfig = await prisma.clubAppConfig.delete({
+     *   where: {
+     *     // ... filter to delete one ClubAppConfig
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClubAppConfigDeleteArgs>(args: SelectSubset<T, ClubAppConfigDeleteArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClubAppConfig.
+     * @param {ClubAppConfigUpdateArgs} args - Arguments to update one ClubAppConfig.
+     * @example
+     * // Update one ClubAppConfig
+     * const clubAppConfig = await prisma.clubAppConfig.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClubAppConfigUpdateArgs>(args: SelectSubset<T, ClubAppConfigUpdateArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClubAppConfigs.
+     * @param {ClubAppConfigDeleteManyArgs} args - Arguments to filter ClubAppConfigs to delete.
+     * @example
+     * // Delete a few ClubAppConfigs
+     * const { count } = await prisma.clubAppConfig.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClubAppConfigDeleteManyArgs>(args?: SelectSubset<T, ClubAppConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClubAppConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClubAppConfigs
+     * const clubAppConfig = await prisma.clubAppConfig.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClubAppConfigUpdateManyArgs>(args: SelectSubset<T, ClubAppConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClubAppConfigs and returns the data updated in the database.
+     * @param {ClubAppConfigUpdateManyAndReturnArgs} args - Arguments to update many ClubAppConfigs.
+     * @example
+     * // Update many ClubAppConfigs
+     * const clubAppConfig = await prisma.clubAppConfig.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClubAppConfigs and only return the `id`
+     * const clubAppConfigWithIdOnly = await prisma.clubAppConfig.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClubAppConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubAppConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClubAppConfig.
+     * @param {ClubAppConfigUpsertArgs} args - Arguments to update or create a ClubAppConfig.
+     * @example
+     * // Update or create a ClubAppConfig
+     * const clubAppConfig = await prisma.clubAppConfig.upsert({
+     *   create: {
+     *     // ... data to create a ClubAppConfig
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClubAppConfig we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClubAppConfigUpsertArgs>(args: SelectSubset<T, ClubAppConfigUpsertArgs<ExtArgs>>): Prisma__ClubAppConfigClient<$Result.GetResult<Prisma.$ClubAppConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClubAppConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigCountArgs} args - Arguments to filter ClubAppConfigs to count.
+     * @example
+     * // Count the number of ClubAppConfigs
+     * const count = await prisma.clubAppConfig.count({
+     *   where: {
+     *     // ... the filter for the ClubAppConfigs we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClubAppConfigCountArgs>(
+      args?: Subset<T, ClubAppConfigCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClubAppConfigCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClubAppConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClubAppConfigAggregateArgs>(args: Subset<T, ClubAppConfigAggregateArgs>): Prisma.PrismaPromise<GetClubAppConfigAggregateType<T>>
+
+    /**
+     * Group by ClubAppConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAppConfigGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClubAppConfigGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClubAppConfigGroupByArgs['orderBy'] }
+        : { orderBy?: ClubAppConfigGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClubAppConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubAppConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClubAppConfig model
+   */
+  readonly fields: ClubAppConfigFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClubAppConfig.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClubAppConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    club<T extends ClubDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClubDefaultArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClubAppConfig model
+   */
+  interface ClubAppConfigFieldRefs {
+    readonly id: FieldRef<"ClubAppConfig", 'String'>
+    readonly clubId: FieldRef<"ClubAppConfig", 'String'>
+    readonly appName: FieldRef<"ClubAppConfig", 'String'>
+    readonly tenantSlug: FieldRef<"ClubAppConfig", 'String'>
+    readonly appDescription: FieldRef<"ClubAppConfig", 'String'>
+    readonly bundleId: FieldRef<"ClubAppConfig", 'String'>
+    readonly packageName: FieldRef<"ClubAppConfig", 'String'>
+    readonly urlScheme: FieldRef<"ClubAppConfig", 'String'>
+    readonly appIconUrl: FieldRef<"ClubAppConfig", 'String'>
+    readonly splashScreenUrl: FieldRef<"ClubAppConfig", 'String'>
+    readonly currentVersion: FieldRef<"ClubAppConfig", 'String'>
+    readonly iosBuildNumber: FieldRef<"ClubAppConfig", 'Int'>
+    readonly androidBuildNumber: FieldRef<"ClubAppConfig", 'Int'>
+    readonly appStoreStatus: FieldRef<"ClubAppConfig", 'AppStoreStatus'>
+    readonly playStoreStatus: FieldRef<"ClubAppConfig", 'AppStoreStatus'>
+    readonly appStoreUrl: FieldRef<"ClubAppConfig", 'String'>
+    readonly playStoreUrl: FieldRef<"ClubAppConfig", 'String'>
+    readonly autoBuildEnabled: FieldRef<"ClubAppConfig", 'Boolean'>
+    readonly createdAt: FieldRef<"ClubAppConfig", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubAppConfig", 'DateTime'>
+    readonly publishedAt: FieldRef<"ClubAppConfig", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClubAppConfig findUnique
+   */
+  export type ClubAppConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which ClubAppConfig to fetch.
+     */
+    where: ClubAppConfigWhereUniqueInput
+  }
+
+  /**
+   * ClubAppConfig findUniqueOrThrow
+   */
+  export type ClubAppConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which ClubAppConfig to fetch.
+     */
+    where: ClubAppConfigWhereUniqueInput
+  }
+
+  /**
+   * ClubAppConfig findFirst
+   */
+  export type ClubAppConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which ClubAppConfig to fetch.
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubAppConfigs to fetch.
+     */
+    orderBy?: ClubAppConfigOrderByWithRelationInput | ClubAppConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClubAppConfigs.
+     */
+    cursor?: ClubAppConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubAppConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubAppConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClubAppConfigs.
+     */
+    distinct?: ClubAppConfigScalarFieldEnum | ClubAppConfigScalarFieldEnum[]
+  }
+
+  /**
+   * ClubAppConfig findFirstOrThrow
+   */
+  export type ClubAppConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which ClubAppConfig to fetch.
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubAppConfigs to fetch.
+     */
+    orderBy?: ClubAppConfigOrderByWithRelationInput | ClubAppConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClubAppConfigs.
+     */
+    cursor?: ClubAppConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubAppConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubAppConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClubAppConfigs.
+     */
+    distinct?: ClubAppConfigScalarFieldEnum | ClubAppConfigScalarFieldEnum[]
+  }
+
+  /**
+   * ClubAppConfig findMany
+   */
+  export type ClubAppConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which ClubAppConfigs to fetch.
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubAppConfigs to fetch.
+     */
+    orderBy?: ClubAppConfigOrderByWithRelationInput | ClubAppConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClubAppConfigs.
+     */
+    cursor?: ClubAppConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubAppConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubAppConfigs.
+     */
+    skip?: number
+    distinct?: ClubAppConfigScalarFieldEnum | ClubAppConfigScalarFieldEnum[]
+  }
+
+  /**
+   * ClubAppConfig create
+   */
+  export type ClubAppConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClubAppConfig.
+     */
+    data: XOR<ClubAppConfigCreateInput, ClubAppConfigUncheckedCreateInput>
+  }
+
+  /**
+   * ClubAppConfig createMany
+   */
+  export type ClubAppConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClubAppConfigs.
+     */
+    data: ClubAppConfigCreateManyInput | ClubAppConfigCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClubAppConfig createManyAndReturn
+   */
+  export type ClubAppConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClubAppConfigs.
+     */
+    data: ClubAppConfigCreateManyInput | ClubAppConfigCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClubAppConfig update
+   */
+  export type ClubAppConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClubAppConfig.
+     */
+    data: XOR<ClubAppConfigUpdateInput, ClubAppConfigUncheckedUpdateInput>
+    /**
+     * Choose, which ClubAppConfig to update.
+     */
+    where: ClubAppConfigWhereUniqueInput
+  }
+
+  /**
+   * ClubAppConfig updateMany
+   */
+  export type ClubAppConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClubAppConfigs.
+     */
+    data: XOR<ClubAppConfigUpdateManyMutationInput, ClubAppConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which ClubAppConfigs to update
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * Limit how many ClubAppConfigs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClubAppConfig updateManyAndReturn
+   */
+  export type ClubAppConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * The data used to update ClubAppConfigs.
+     */
+    data: XOR<ClubAppConfigUpdateManyMutationInput, ClubAppConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which ClubAppConfigs to update
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * Limit how many ClubAppConfigs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClubAppConfig upsert
+   */
+  export type ClubAppConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClubAppConfig to update in case it exists.
+     */
+    where: ClubAppConfigWhereUniqueInput
+    /**
+     * In case the ClubAppConfig found by the `where` argument doesn't exist, create a new ClubAppConfig with this data.
+     */
+    create: XOR<ClubAppConfigCreateInput, ClubAppConfigUncheckedCreateInput>
+    /**
+     * In case the ClubAppConfig was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClubAppConfigUpdateInput, ClubAppConfigUncheckedUpdateInput>
+  }
+
+  /**
+   * ClubAppConfig delete
+   */
+  export type ClubAppConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
+    /**
+     * Filter which ClubAppConfig to delete.
+     */
+    where: ClubAppConfigWhereUniqueInput
+  }
+
+  /**
+   * ClubAppConfig deleteMany
+   */
+  export type ClubAppConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClubAppConfigs to delete
+     */
+    where?: ClubAppConfigWhereInput
+    /**
+     * Limit how many ClubAppConfigs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClubAppConfig without action
+   */
+  export type ClubAppConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubAppConfig
+     */
+    select?: ClubAppConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubAppConfig
+     */
+    omit?: ClubAppConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubAppConfigInclude<ExtArgs> | null
   }
 
 
@@ -15101,6 +16708,1299 @@ export namespace Prisma {
 
 
   /**
+   * Model Notification
+   */
+
+  export type AggregateNotification = {
+    _count: NotificationCountAggregateOutputType | null
+    _avg: NotificationAvgAggregateOutputType | null
+    _sum: NotificationSumAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  export type NotificationAvgAggregateOutputType = {
+    totalSent: number | null
+    totalDelivered: number | null
+    totalFailed: number | null
+    totalClicked: number | null
+  }
+
+  export type NotificationSumAggregateOutputType = {
+    totalSent: number | null
+    totalDelivered: number | null
+    totalFailed: number | null
+    totalClicked: number | null
+  }
+
+  export type NotificationMinAggregateOutputType = {
+    id: string | null
+    clubId: string | null
+    notificationType: $Enums.NotificationType | null
+    targetType: $Enums.NotificationTarget | null
+    title: string | null
+    message: string | null
+    totalSent: number | null
+    totalDelivered: number | null
+    totalFailed: number | null
+    totalClicked: number | null
+    status: $Enums.NotificationStatus | null
+    scheduledFor: Date | null
+    sentAt: Date | null
+    sentBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NotificationMaxAggregateOutputType = {
+    id: string | null
+    clubId: string | null
+    notificationType: $Enums.NotificationType | null
+    targetType: $Enums.NotificationTarget | null
+    title: string | null
+    message: string | null
+    totalSent: number | null
+    totalDelivered: number | null
+    totalFailed: number | null
+    totalClicked: number | null
+    status: $Enums.NotificationStatus | null
+    scheduledFor: Date | null
+    sentAt: Date | null
+    sentBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NotificationCountAggregateOutputType = {
+    id: number
+    clubId: number
+    notificationType: number
+    targetType: number
+    targetClubIds: number
+    title: number
+    message: number
+    data: number
+    totalSent: number
+    totalDelivered: number
+    totalFailed: number
+    totalClicked: number
+    status: number
+    scheduledFor: number
+    sentAt: number
+    sentBy: number
+    errorLog: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NotificationAvgAggregateInputType = {
+    totalSent?: true
+    totalDelivered?: true
+    totalFailed?: true
+    totalClicked?: true
+  }
+
+  export type NotificationSumAggregateInputType = {
+    totalSent?: true
+    totalDelivered?: true
+    totalFailed?: true
+    totalClicked?: true
+  }
+
+  export type NotificationMinAggregateInputType = {
+    id?: true
+    clubId?: true
+    notificationType?: true
+    targetType?: true
+    title?: true
+    message?: true
+    totalSent?: true
+    totalDelivered?: true
+    totalFailed?: true
+    totalClicked?: true
+    status?: true
+    scheduledFor?: true
+    sentAt?: true
+    sentBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NotificationMaxAggregateInputType = {
+    id?: true
+    clubId?: true
+    notificationType?: true
+    targetType?: true
+    title?: true
+    message?: true
+    totalSent?: true
+    totalDelivered?: true
+    totalFailed?: true
+    totalClicked?: true
+    status?: true
+    scheduledFor?: true
+    sentAt?: true
+    sentBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NotificationCountAggregateInputType = {
+    id?: true
+    clubId?: true
+    notificationType?: true
+    targetType?: true
+    targetClubIds?: true
+    title?: true
+    message?: true
+    data?: true
+    totalSent?: true
+    totalDelivered?: true
+    totalFailed?: true
+    totalClicked?: true
+    status?: true
+    scheduledFor?: true
+    sentAt?: true
+    sentBy?: true
+    errorLog?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NotificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notification to aggregate.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Notifications
+    **/
+    _count?: true | NotificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NotificationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NotificationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type GetNotificationAggregateType<T extends NotificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotification[P]>
+      : GetScalarType<T[P], AggregateNotification[P]>
+  }
+
+
+
+
+  export type NotificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithAggregationInput | NotificationOrderByWithAggregationInput[]
+    by: NotificationScalarFieldEnum[] | NotificationScalarFieldEnum
+    having?: NotificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationCountAggregateInputType | true
+    _avg?: NotificationAvgAggregateInputType
+    _sum?: NotificationSumAggregateInputType
+    _min?: NotificationMinAggregateInputType
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type NotificationGroupByOutputType = {
+    id: string
+    clubId: string | null
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds: string[]
+    title: string
+    message: string
+    data: JsonValue | null
+    totalSent: number
+    totalDelivered: number
+    totalFailed: number
+    totalClicked: number
+    status: $Enums.NotificationStatus
+    scheduledFor: Date | null
+    sentAt: Date | null
+    sentBy: string
+    errorLog: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: NotificationCountAggregateOutputType | null
+    _avg: NotificationAvgAggregateOutputType | null
+    _sum: NotificationSumAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  type GetNotificationGroupByPayload<T extends NotificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clubId?: boolean
+    notificationType?: boolean
+    targetType?: boolean
+    targetClubIds?: boolean
+    title?: boolean
+    message?: boolean
+    data?: boolean
+    totalSent?: boolean
+    totalDelivered?: boolean
+    totalFailed?: boolean
+    totalClicked?: boolean
+    status?: boolean
+    scheduledFor?: boolean
+    sentAt?: boolean
+    sentBy?: boolean
+    errorLog?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    club?: boolean | Notification$clubArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clubId?: boolean
+    notificationType?: boolean
+    targetType?: boolean
+    targetClubIds?: boolean
+    title?: boolean
+    message?: boolean
+    data?: boolean
+    totalSent?: boolean
+    totalDelivered?: boolean
+    totalFailed?: boolean
+    totalClicked?: boolean
+    status?: boolean
+    scheduledFor?: boolean
+    sentAt?: boolean
+    sentBy?: boolean
+    errorLog?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    club?: boolean | Notification$clubArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clubId?: boolean
+    notificationType?: boolean
+    targetType?: boolean
+    targetClubIds?: boolean
+    title?: boolean
+    message?: boolean
+    data?: boolean
+    totalSent?: boolean
+    totalDelivered?: boolean
+    totalFailed?: boolean
+    totalClicked?: boolean
+    status?: boolean
+    scheduledFor?: boolean
+    sentAt?: boolean
+    sentBy?: boolean
+    errorLog?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    club?: boolean | Notification$clubArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectScalar = {
+    id?: boolean
+    clubId?: boolean
+    notificationType?: boolean
+    targetType?: boolean
+    targetClubIds?: boolean
+    title?: boolean
+    message?: boolean
+    data?: boolean
+    totalSent?: boolean
+    totalDelivered?: boolean
+    totalFailed?: boolean
+    totalClicked?: boolean
+    status?: boolean
+    scheduledFor?: boolean
+    sentAt?: boolean
+    sentBy?: boolean
+    errorLog?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "notificationType" | "targetType" | "targetClubIds" | "title" | "message" | "data" | "totalSent" | "totalDelivered" | "totalFailed" | "totalClicked" | "status" | "scheduledFor" | "sentAt" | "sentBy" | "errorLog" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
+  export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | Notification$clubArgs<ExtArgs>
+  }
+  export type NotificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | Notification$clubArgs<ExtArgs>
+  }
+  export type NotificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    club?: boolean | Notification$clubArgs<ExtArgs>
+  }
+
+  export type $NotificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Notification"
+    objects: {
+      club: Prisma.$ClubPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clubId: string | null
+      notificationType: $Enums.NotificationType
+      targetType: $Enums.NotificationTarget
+      targetClubIds: string[]
+      title: string
+      message: string
+      data: Prisma.JsonValue | null
+      totalSent: number
+      totalDelivered: number
+      totalFailed: number
+      totalClicked: number
+      status: $Enums.NotificationStatus
+      scheduledFor: Date | null
+      sentAt: Date | null
+      sentBy: string
+      errorLog: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["notification"]>
+    composites: {}
+  }
+
+  type NotificationGetPayload<S extends boolean | null | undefined | NotificationDefaultArgs> = $Result.GetResult<Prisma.$NotificationPayload, S>
+
+  type NotificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationCountAggregateInputType | true
+    }
+
+  export interface NotificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Notification'], meta: { name: 'Notification' } }
+    /**
+     * Find zero or one Notification that matches the filter.
+     * @param {NotificationFindUniqueArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationFindUniqueArgs>(args: SelectSubset<T, NotificationFindUniqueArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Notification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationFindUniqueOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationFindFirstArgs>(args?: SelectSubset<T, NotificationFindFirstArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Notifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notifications
+     * const notifications = await prisma.notification.findMany()
+     * 
+     * // Get first 10 Notifications
+     * const notifications = await prisma.notification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const notificationWithIdOnly = await prisma.notification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NotificationFindManyArgs>(args?: SelectSubset<T, NotificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Notification.
+     * @param {NotificationCreateArgs} args - Arguments to create a Notification.
+     * @example
+     * // Create one Notification
+     * const Notification = await prisma.notification.create({
+     *   data: {
+     *     // ... data to create a Notification
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationCreateArgs>(args: SelectSubset<T, NotificationCreateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Notifications.
+     * @param {NotificationCreateManyArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationCreateManyArgs>(args?: SelectSubset<T, NotificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Notifications and returns the data saved in the database.
+     * @param {NotificationCreateManyAndReturnArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Notification.
+     * @param {NotificationDeleteArgs} args - Arguments to delete one Notification.
+     * @example
+     * // Delete one Notification
+     * const Notification = await prisma.notification.delete({
+     *   where: {
+     *     // ... filter to delete one Notification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationDeleteArgs>(args: SelectSubset<T, NotificationDeleteArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Notification.
+     * @param {NotificationUpdateArgs} args - Arguments to update one Notification.
+     * @example
+     * // Update one Notification
+     * const notification = await prisma.notification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationUpdateArgs>(args: SelectSubset<T, NotificationUpdateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Notifications.
+     * @param {NotificationDeleteManyArgs} args - Arguments to filter Notifications to delete.
+     * @example
+     * // Delete a few Notifications
+     * const { count } = await prisma.notification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationDeleteManyArgs>(args?: SelectSubset<T, NotificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationUpdateManyArgs>(args: SelectSubset<T, NotificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications and returns the data updated in the database.
+     * @param {NotificationUpdateManyAndReturnArgs} args - Arguments to update many Notifications.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotificationUpdateManyAndReturnArgs>(args: SelectSubset<T, NotificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Notification.
+     * @param {NotificationUpsertArgs} args - Arguments to update or create a Notification.
+     * @example
+     * // Update or create a Notification
+     * const notification = await prisma.notification.upsert({
+     *   create: {
+     *     // ... data to create a Notification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Notification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationUpsertArgs>(args: SelectSubset<T, NotificationUpsertArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationCountArgs} args - Arguments to filter Notifications to count.
+     * @example
+     * // Count the number of Notifications
+     * const count = await prisma.notification.count({
+     *   where: {
+     *     // ... the filter for the Notifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationCountArgs>(
+      args?: Subset<T, NotificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationAggregateArgs>(args: Subset<T, NotificationAggregateArgs>): Prisma.PrismaPromise<GetNotificationAggregateType<T>>
+
+    /**
+     * Group by Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Notification model
+   */
+  readonly fields: NotificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Notification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    club<T extends Notification$clubArgs<ExtArgs> = {}>(args?: Subset<T, Notification$clubArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Notification model
+   */
+  interface NotificationFieldRefs {
+    readonly id: FieldRef<"Notification", 'String'>
+    readonly clubId: FieldRef<"Notification", 'String'>
+    readonly notificationType: FieldRef<"Notification", 'NotificationType'>
+    readonly targetType: FieldRef<"Notification", 'NotificationTarget'>
+    readonly targetClubIds: FieldRef<"Notification", 'String[]'>
+    readonly title: FieldRef<"Notification", 'String'>
+    readonly message: FieldRef<"Notification", 'String'>
+    readonly data: FieldRef<"Notification", 'Json'>
+    readonly totalSent: FieldRef<"Notification", 'Int'>
+    readonly totalDelivered: FieldRef<"Notification", 'Int'>
+    readonly totalFailed: FieldRef<"Notification", 'Int'>
+    readonly totalClicked: FieldRef<"Notification", 'Int'>
+    readonly status: FieldRef<"Notification", 'NotificationStatus'>
+    readonly scheduledFor: FieldRef<"Notification", 'DateTime'>
+    readonly sentAt: FieldRef<"Notification", 'DateTime'>
+    readonly sentBy: FieldRef<"Notification", 'String'>
+    readonly errorLog: FieldRef<"Notification", 'Json'>
+    readonly createdAt: FieldRef<"Notification", 'DateTime'>
+    readonly updatedAt: FieldRef<"Notification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Notification findUnique
+   */
+  export type NotificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findUniqueOrThrow
+   */
+  export type NotificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findFirst
+   */
+  export type NotificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findFirstOrThrow
+   */
+  export type NotificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findMany
+   */
+  export type NotificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notifications to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification create
+   */
+  export type NotificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Notification.
+     */
+    data: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+  }
+
+  /**
+   * Notification createMany
+   */
+  export type NotificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Notification createManyAndReturn
+   */
+  export type NotificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification update
+   */
+  export type NotificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Notification.
+     */
+    data: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+    /**
+     * Choose, which Notification to update.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification updateMany
+   */
+  export type NotificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification updateManyAndReturn
+   */
+  export type NotificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification upsert
+   */
+  export type NotificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Notification to update in case it exists.
+     */
+    where: NotificationWhereUniqueInput
+    /**
+     * In case the Notification found by the `where` argument doesn't exist, create a new Notification with this data.
+     */
+    create: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+    /**
+     * In case the Notification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+  }
+
+  /**
+   * Notification delete
+   */
+  export type NotificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter which Notification to delete.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification deleteMany
+   */
+  export type NotificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notifications to delete
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification.club
+   */
+  export type Notification$clubArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClubInclude<ExtArgs> | null
+    where?: ClubWhereInput
+  }
+
+  /**
+   * Notification without action
+   */
+  export type NotificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15169,6 +18069,33 @@ export namespace Prisma {
   };
 
   export type ClubBrandingScalarFieldEnum = (typeof ClubBrandingScalarFieldEnum)[keyof typeof ClubBrandingScalarFieldEnum]
+
+
+  export const ClubAppConfigScalarFieldEnum: {
+    id: 'id',
+    clubId: 'clubId',
+    appName: 'appName',
+    tenantSlug: 'tenantSlug',
+    appDescription: 'appDescription',
+    bundleId: 'bundleId',
+    packageName: 'packageName',
+    urlScheme: 'urlScheme',
+    appIconUrl: 'appIconUrl',
+    splashScreenUrl: 'splashScreenUrl',
+    currentVersion: 'currentVersion',
+    iosBuildNumber: 'iosBuildNumber',
+    androidBuildNumber: 'androidBuildNumber',
+    appStoreStatus: 'appStoreStatus',
+    playStoreStatus: 'playStoreStatus',
+    appStoreUrl: 'appStoreUrl',
+    playStoreUrl: 'playStoreUrl',
+    autoBuildEnabled: 'autoBuildEnabled',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    publishedAt: 'publishedAt'
+  };
+
+  export type ClubAppConfigScalarFieldEnum = (typeof ClubAppConfigScalarFieldEnum)[keyof typeof ClubAppConfigScalarFieldEnum]
 
 
   export const ClubModuleScalarFieldEnum: {
@@ -15318,6 +18245,31 @@ export namespace Prisma {
   };
 
   export type ClubUsageStatsScalarFieldEnum = (typeof ClubUsageStatsScalarFieldEnum)[keyof typeof ClubUsageStatsScalarFieldEnum]
+
+
+  export const NotificationScalarFieldEnum: {
+    id: 'id',
+    clubId: 'clubId',
+    notificationType: 'notificationType',
+    targetType: 'targetType',
+    targetClubIds: 'targetClubIds',
+    title: 'title',
+    message: 'message',
+    data: 'data',
+    totalSent: 'totalSent',
+    totalDelivered: 'totalDelivered',
+    totalFailed: 'totalFailed',
+    totalClicked: 'totalClicked',
+    status: 'status',
+    scheduledFor: 'scheduledFor',
+    sentAt: 'sentAt',
+    sentBy: 'sentBy',
+    errorLog: 'errorLog',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15472,6 +18424,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'AppStoreStatus'
+   */
+  export type EnumAppStoreStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppStoreStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'AppStoreStatus[]'
+   */
+  export type ListEnumAppStoreStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppStoreStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'ModuleKey'
    */
   export type EnumModuleKeyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModuleKey'>
@@ -15482,13 +18455,6 @@ export namespace Prisma {
    * Reference to a field of type 'ModuleKey[]'
    */
   export type ListEnumModuleKeyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModuleKey[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -15517,6 +18483,48 @@ export namespace Prisma {
    * Reference to a field of type 'AdminRole[]'
    */
   export type ListEnumAdminRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdminRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationType'
+   */
+  export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationType[]'
+   */
+  export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationTarget'
+   */
+  export type EnumNotificationTargetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationTarget'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationTarget[]'
+   */
+  export type ListEnumNotificationTargetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationTarget[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationStatus'
+   */
+  export type EnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationStatus[]'
+   */
+  export type ListEnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus[]'>
     
 
 
@@ -15571,6 +18579,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Club"> | Date | string
     updatedAt?: DateTimeFilter<"Club"> | Date | string
     branding?: XOR<ClubBrandingNullableScalarRelationFilter, ClubBrandingWhereInput> | null
+    appConfig?: XOR<ClubAppConfigNullableScalarRelationFilter, ClubAppConfigWhereInput> | null
     modules?: ClubModuleListRelationFilter
     admins?: ClubAdminListRelationFilter
     apiKeys?: ClubApiKeyListRelationFilter
@@ -15578,6 +18587,7 @@ export namespace Prisma {
     stats?: XOR<ClubStatsNullableScalarRelationFilter, ClubStatsWhereInput> | null
     cashbackConfig?: XOR<ClubCashbackConfigNullableScalarRelationFilter, ClubCashbackConfigWhereInput> | null
     withdrawalConfig?: XOR<ClubWithdrawalConfigNullableScalarRelationFilter, ClubWithdrawalConfigWhereInput> | null
+    notifications?: NotificationListRelationFilter
   }
 
   export type ClubOrderByWithRelationInput = {
@@ -15611,6 +18621,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     branding?: ClubBrandingOrderByWithRelationInput
+    appConfig?: ClubAppConfigOrderByWithRelationInput
     modules?: ClubModuleOrderByRelationAggregateInput
     admins?: ClubAdminOrderByRelationAggregateInput
     apiKeys?: ClubApiKeyOrderByRelationAggregateInput
@@ -15618,6 +18629,7 @@ export namespace Prisma {
     stats?: ClubStatsOrderByWithRelationInput
     cashbackConfig?: ClubCashbackConfigOrderByWithRelationInput
     withdrawalConfig?: ClubWithdrawalConfigOrderByWithRelationInput
+    notifications?: NotificationOrderByRelationAggregateInput
   }
 
   export type ClubWhereUniqueInput = Prisma.AtLeast<{
@@ -15654,6 +18666,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Club"> | Date | string
     updatedAt?: DateTimeFilter<"Club"> | Date | string
     branding?: XOR<ClubBrandingNullableScalarRelationFilter, ClubBrandingWhereInput> | null
+    appConfig?: XOR<ClubAppConfigNullableScalarRelationFilter, ClubAppConfigWhereInput> | null
     modules?: ClubModuleListRelationFilter
     admins?: ClubAdminListRelationFilter
     apiKeys?: ClubApiKeyListRelationFilter
@@ -15661,6 +18674,7 @@ export namespace Prisma {
     stats?: XOR<ClubStatsNullableScalarRelationFilter, ClubStatsWhereInput> | null
     cashbackConfig?: XOR<ClubCashbackConfigNullableScalarRelationFilter, ClubCashbackConfigWhereInput> | null
     withdrawalConfig?: XOR<ClubWithdrawalConfigNullableScalarRelationFilter, ClubWithdrawalConfigWhereInput> | null
+    notifications?: NotificationListRelationFilter
   }, "id" | "slug" | "companyDocument" | "subdomain" | "customDomain" | "adminSubdomain">
 
   export type ClubOrderByWithAggregationInput = {
@@ -15843,6 +18857,143 @@ export namespace Prisma {
     playStoreUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
+  }
+
+  export type ClubAppConfigWhereInput = {
+    AND?: ClubAppConfigWhereInput | ClubAppConfigWhereInput[]
+    OR?: ClubAppConfigWhereInput[]
+    NOT?: ClubAppConfigWhereInput | ClubAppConfigWhereInput[]
+    id?: UuidFilter<"ClubAppConfig"> | string
+    clubId?: UuidFilter<"ClubAppConfig"> | string
+    appName?: StringFilter<"ClubAppConfig"> | string
+    tenantSlug?: StringFilter<"ClubAppConfig"> | string
+    appDescription?: StringNullableFilter<"ClubAppConfig"> | string | null
+    bundleId?: StringFilter<"ClubAppConfig"> | string
+    packageName?: StringFilter<"ClubAppConfig"> | string
+    urlScheme?: StringFilter<"ClubAppConfig"> | string
+    appIconUrl?: StringFilter<"ClubAppConfig"> | string
+    splashScreenUrl?: StringFilter<"ClubAppConfig"> | string
+    currentVersion?: StringFilter<"ClubAppConfig"> | string
+    iosBuildNumber?: IntFilter<"ClubAppConfig"> | number
+    androidBuildNumber?: IntFilter<"ClubAppConfig"> | number
+    appStoreStatus?: EnumAppStoreStatusFilter<"ClubAppConfig"> | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFilter<"ClubAppConfig"> | $Enums.AppStoreStatus
+    appStoreUrl?: StringNullableFilter<"ClubAppConfig"> | string | null
+    playStoreUrl?: StringNullableFilter<"ClubAppConfig"> | string | null
+    autoBuildEnabled?: BoolFilter<"ClubAppConfig"> | boolean
+    createdAt?: DateTimeFilter<"ClubAppConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubAppConfig"> | Date | string
+    publishedAt?: DateTimeNullableFilter<"ClubAppConfig"> | Date | string | null
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }
+
+  export type ClubAppConfigOrderByWithRelationInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    appName?: SortOrder
+    tenantSlug?: SortOrder
+    appDescription?: SortOrderInput | SortOrder
+    bundleId?: SortOrder
+    packageName?: SortOrder
+    urlScheme?: SortOrder
+    appIconUrl?: SortOrder
+    splashScreenUrl?: SortOrder
+    currentVersion?: SortOrder
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+    appStoreStatus?: SortOrder
+    playStoreStatus?: SortOrder
+    appStoreUrl?: SortOrderInput | SortOrder
+    playStoreUrl?: SortOrderInput | SortOrder
+    autoBuildEnabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    club?: ClubOrderByWithRelationInput
+  }
+
+  export type ClubAppConfigWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    clubId?: string
+    tenantSlug?: string
+    bundleId?: string
+    packageName?: string
+    urlScheme?: string
+    AND?: ClubAppConfigWhereInput | ClubAppConfigWhereInput[]
+    OR?: ClubAppConfigWhereInput[]
+    NOT?: ClubAppConfigWhereInput | ClubAppConfigWhereInput[]
+    appName?: StringFilter<"ClubAppConfig"> | string
+    appDescription?: StringNullableFilter<"ClubAppConfig"> | string | null
+    appIconUrl?: StringFilter<"ClubAppConfig"> | string
+    splashScreenUrl?: StringFilter<"ClubAppConfig"> | string
+    currentVersion?: StringFilter<"ClubAppConfig"> | string
+    iosBuildNumber?: IntFilter<"ClubAppConfig"> | number
+    androidBuildNumber?: IntFilter<"ClubAppConfig"> | number
+    appStoreStatus?: EnumAppStoreStatusFilter<"ClubAppConfig"> | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFilter<"ClubAppConfig"> | $Enums.AppStoreStatus
+    appStoreUrl?: StringNullableFilter<"ClubAppConfig"> | string | null
+    playStoreUrl?: StringNullableFilter<"ClubAppConfig"> | string | null
+    autoBuildEnabled?: BoolFilter<"ClubAppConfig"> | boolean
+    createdAt?: DateTimeFilter<"ClubAppConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubAppConfig"> | Date | string
+    publishedAt?: DateTimeNullableFilter<"ClubAppConfig"> | Date | string | null
+    club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
+  }, "id" | "clubId" | "tenantSlug" | "bundleId" | "packageName" | "urlScheme">
+
+  export type ClubAppConfigOrderByWithAggregationInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    appName?: SortOrder
+    tenantSlug?: SortOrder
+    appDescription?: SortOrderInput | SortOrder
+    bundleId?: SortOrder
+    packageName?: SortOrder
+    urlScheme?: SortOrder
+    appIconUrl?: SortOrder
+    splashScreenUrl?: SortOrder
+    currentVersion?: SortOrder
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+    appStoreStatus?: SortOrder
+    playStoreStatus?: SortOrder
+    appStoreUrl?: SortOrderInput | SortOrder
+    playStoreUrl?: SortOrderInput | SortOrder
+    autoBuildEnabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    _count?: ClubAppConfigCountOrderByAggregateInput
+    _avg?: ClubAppConfigAvgOrderByAggregateInput
+    _max?: ClubAppConfigMaxOrderByAggregateInput
+    _min?: ClubAppConfigMinOrderByAggregateInput
+    _sum?: ClubAppConfigSumOrderByAggregateInput
+  }
+
+  export type ClubAppConfigScalarWhereWithAggregatesInput = {
+    AND?: ClubAppConfigScalarWhereWithAggregatesInput | ClubAppConfigScalarWhereWithAggregatesInput[]
+    OR?: ClubAppConfigScalarWhereWithAggregatesInput[]
+    NOT?: ClubAppConfigScalarWhereWithAggregatesInput | ClubAppConfigScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubAppConfig"> | string
+    clubId?: UuidWithAggregatesFilter<"ClubAppConfig"> | string
+    appName?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    tenantSlug?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    appDescription?: StringNullableWithAggregatesFilter<"ClubAppConfig"> | string | null
+    bundleId?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    packageName?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    urlScheme?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    appIconUrl?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    splashScreenUrl?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    currentVersion?: StringWithAggregatesFilter<"ClubAppConfig"> | string
+    iosBuildNumber?: IntWithAggregatesFilter<"ClubAppConfig"> | number
+    androidBuildNumber?: IntWithAggregatesFilter<"ClubAppConfig"> | number
+    appStoreStatus?: EnumAppStoreStatusWithAggregatesFilter<"ClubAppConfig"> | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusWithAggregatesFilter<"ClubAppConfig"> | $Enums.AppStoreStatus
+    appStoreUrl?: StringNullableWithAggregatesFilter<"ClubAppConfig"> | string | null
+    playStoreUrl?: StringNullableWithAggregatesFilter<"ClubAppConfig"> | string | null
+    autoBuildEnabled?: BoolWithAggregatesFilter<"ClubAppConfig"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ClubAppConfig"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubAppConfig"> | Date | string
+    publishedAt?: DateTimeNullableWithAggregatesFilter<"ClubAppConfig"> | Date | string | null
   }
 
   export type ClubModuleWhereInput = {
@@ -16599,6 +19750,133 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ClubUsageStats"> | Date | string
   }
 
+  export type NotificationWhereInput = {
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    id?: UuidFilter<"Notification"> | string
+    clubId?: UuidNullableFilter<"Notification"> | string | null
+    notificationType?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFilter<"Notification"> | $Enums.NotificationTarget
+    targetClubIds?: StringNullableListFilter<"Notification">
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    data?: JsonNullableFilter<"Notification">
+    totalSent?: IntFilter<"Notification"> | number
+    totalDelivered?: IntFilter<"Notification"> | number
+    totalFailed?: IntFilter<"Notification"> | number
+    totalClicked?: IntFilter<"Notification"> | number
+    status?: EnumNotificationStatusFilter<"Notification"> | $Enums.NotificationStatus
+    scheduledFor?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    sentAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    sentBy?: UuidFilter<"Notification"> | string
+    errorLog?: JsonNullableFilter<"Notification">
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
+    club?: XOR<ClubNullableScalarRelationFilter, ClubWhereInput> | null
+  }
+
+  export type NotificationOrderByWithRelationInput = {
+    id?: SortOrder
+    clubId?: SortOrderInput | SortOrder
+    notificationType?: SortOrder
+    targetType?: SortOrder
+    targetClubIds?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    data?: SortOrderInput | SortOrder
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+    status?: SortOrder
+    scheduledFor?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    sentBy?: SortOrder
+    errorLog?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    club?: ClubOrderByWithRelationInput
+  }
+
+  export type NotificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    clubId?: UuidNullableFilter<"Notification"> | string | null
+    notificationType?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFilter<"Notification"> | $Enums.NotificationTarget
+    targetClubIds?: StringNullableListFilter<"Notification">
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    data?: JsonNullableFilter<"Notification">
+    totalSent?: IntFilter<"Notification"> | number
+    totalDelivered?: IntFilter<"Notification"> | number
+    totalFailed?: IntFilter<"Notification"> | number
+    totalClicked?: IntFilter<"Notification"> | number
+    status?: EnumNotificationStatusFilter<"Notification"> | $Enums.NotificationStatus
+    scheduledFor?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    sentAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    sentBy?: UuidFilter<"Notification"> | string
+    errorLog?: JsonNullableFilter<"Notification">
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
+    club?: XOR<ClubNullableScalarRelationFilter, ClubWhereInput> | null
+  }, "id">
+
+  export type NotificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    clubId?: SortOrderInput | SortOrder
+    notificationType?: SortOrder
+    targetType?: SortOrder
+    targetClubIds?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    data?: SortOrderInput | SortOrder
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+    status?: SortOrder
+    scheduledFor?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    sentBy?: SortOrder
+    errorLog?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: NotificationCountOrderByAggregateInput
+    _avg?: NotificationAvgOrderByAggregateInput
+    _max?: NotificationMaxOrderByAggregateInput
+    _min?: NotificationMinOrderByAggregateInput
+    _sum?: NotificationSumOrderByAggregateInput
+  }
+
+  export type NotificationScalarWhereWithAggregatesInput = {
+    AND?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    OR?: NotificationScalarWhereWithAggregatesInput[]
+    NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Notification"> | string
+    clubId?: UuidNullableWithAggregatesFilter<"Notification"> | string | null
+    notificationType?: EnumNotificationTypeWithAggregatesFilter<"Notification"> | $Enums.NotificationType
+    targetType?: EnumNotificationTargetWithAggregatesFilter<"Notification"> | $Enums.NotificationTarget
+    targetClubIds?: StringNullableListFilter<"Notification">
+    title?: StringWithAggregatesFilter<"Notification"> | string
+    message?: StringWithAggregatesFilter<"Notification"> | string
+    data?: JsonNullableWithAggregatesFilter<"Notification">
+    totalSent?: IntWithAggregatesFilter<"Notification"> | number
+    totalDelivered?: IntWithAggregatesFilter<"Notification"> | number
+    totalFailed?: IntWithAggregatesFilter<"Notification"> | number
+    totalClicked?: IntWithAggregatesFilter<"Notification"> | number
+    status?: EnumNotificationStatusWithAggregatesFilter<"Notification"> | $Enums.NotificationStatus
+    scheduledFor?: DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
+    sentAt?: DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
+    sentBy?: UuidWithAggregatesFilter<"Notification"> | string
+    errorLog?: JsonNullableWithAggregatesFilter<"Notification">
+    createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+  }
+
   export type ClubCreateInput = {
     id?: string
     slug: string
@@ -16630,6 +19908,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
@@ -16637,6 +19916,7 @@ export namespace Prisma {
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateInput = {
@@ -16670,6 +19950,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
@@ -16677,6 +19958,7 @@ export namespace Prisma {
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubUpdateInput = {
@@ -16710,6 +19992,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
@@ -16717,6 +20000,7 @@ export namespace Prisma {
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateInput = {
@@ -16750,6 +20034,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
@@ -16757,6 +20042,7 @@ export namespace Prisma {
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateManyInput = {
@@ -16985,6 +20271,173 @@ export namespace Prisma {
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubAppConfigCreateInput = {
+    id?: string
+    appName: string
+    tenantSlug: string
+    appDescription?: string | null
+    bundleId: string
+    packageName: string
+    urlScheme: string
+    appIconUrl: string
+    splashScreenUrl: string
+    currentVersion?: string
+    iosBuildNumber?: number
+    androidBuildNumber?: number
+    appStoreStatus?: $Enums.AppStoreStatus
+    playStoreStatus?: $Enums.AppStoreStatus
+    appStoreUrl?: string | null
+    playStoreUrl?: string | null
+    autoBuildEnabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+    club: ClubCreateNestedOneWithoutAppConfigInput
+  }
+
+  export type ClubAppConfigUncheckedCreateInput = {
+    id?: string
+    clubId: string
+    appName: string
+    tenantSlug: string
+    appDescription?: string | null
+    bundleId: string
+    packageName: string
+    urlScheme: string
+    appIconUrl: string
+    splashScreenUrl: string
+    currentVersion?: string
+    iosBuildNumber?: number
+    androidBuildNumber?: number
+    appStoreStatus?: $Enums.AppStoreStatus
+    playStoreStatus?: $Enums.AppStoreStatus
+    appStoreUrl?: string | null
+    playStoreUrl?: string | null
+    autoBuildEnabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type ClubAppConfigUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    tenantSlug?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    bundleId?: StringFieldUpdateOperationsInput | string
+    packageName?: StringFieldUpdateOperationsInput | string
+    urlScheme?: StringFieldUpdateOperationsInput | string
+    appIconUrl?: StringFieldUpdateOperationsInput | string
+    splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    currentVersion?: StringFieldUpdateOperationsInput | string
+    iosBuildNumber?: IntFieldUpdateOperationsInput | number
+    androidBuildNumber?: IntFieldUpdateOperationsInput | number
+    appStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    autoBuildEnabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    club?: ClubUpdateOneRequiredWithoutAppConfigNestedInput
+  }
+
+  export type ClubAppConfigUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    tenantSlug?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    bundleId?: StringFieldUpdateOperationsInput | string
+    packageName?: StringFieldUpdateOperationsInput | string
+    urlScheme?: StringFieldUpdateOperationsInput | string
+    appIconUrl?: StringFieldUpdateOperationsInput | string
+    splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    currentVersion?: StringFieldUpdateOperationsInput | string
+    iosBuildNumber?: IntFieldUpdateOperationsInput | number
+    androidBuildNumber?: IntFieldUpdateOperationsInput | number
+    appStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    autoBuildEnabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ClubAppConfigCreateManyInput = {
+    id?: string
+    clubId: string
+    appName: string
+    tenantSlug: string
+    appDescription?: string | null
+    bundleId: string
+    packageName: string
+    urlScheme: string
+    appIconUrl: string
+    splashScreenUrl: string
+    currentVersion?: string
+    iosBuildNumber?: number
+    androidBuildNumber?: number
+    appStoreStatus?: $Enums.AppStoreStatus
+    playStoreStatus?: $Enums.AppStoreStatus
+    appStoreUrl?: string | null
+    playStoreUrl?: string | null
+    autoBuildEnabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type ClubAppConfigUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    tenantSlug?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    bundleId?: StringFieldUpdateOperationsInput | string
+    packageName?: StringFieldUpdateOperationsInput | string
+    urlScheme?: StringFieldUpdateOperationsInput | string
+    appIconUrl?: StringFieldUpdateOperationsInput | string
+    splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    currentVersion?: StringFieldUpdateOperationsInput | string
+    iosBuildNumber?: IntFieldUpdateOperationsInput | number
+    androidBuildNumber?: IntFieldUpdateOperationsInput | number
+    appStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    autoBuildEnabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ClubAppConfigUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    tenantSlug?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    bundleId?: StringFieldUpdateOperationsInput | string
+    packageName?: StringFieldUpdateOperationsInput | string
+    urlScheme?: StringFieldUpdateOperationsInput | string
+    appIconUrl?: StringFieldUpdateOperationsInput | string
+    splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    currentVersion?: StringFieldUpdateOperationsInput | string
+    iosBuildNumber?: IntFieldUpdateOperationsInput | number
+    androidBuildNumber?: IntFieldUpdateOperationsInput | number
+    appStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    autoBuildEnabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClubModuleCreateInput = {
@@ -17834,6 +21287,159 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationCreateInput = {
+    id?: string
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds?: NotificationCreatetargetClubIdsInput | string[]
+    title: string
+    message: string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: number
+    totalDelivered?: number
+    totalFailed?: number
+    totalClicked?: number
+    status?: $Enums.NotificationStatus
+    scheduledFor?: Date | string | null
+    sentAt?: Date | string | null
+    sentBy: string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    club?: ClubCreateNestedOneWithoutNotificationsInput
+  }
+
+  export type NotificationUncheckedCreateInput = {
+    id?: string
+    clubId?: string | null
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds?: NotificationCreatetargetClubIdsInput | string[]
+    title: string
+    message: string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: number
+    totalDelivered?: number
+    totalFailed?: number
+    totalClicked?: number
+    status?: $Enums.NotificationStatus
+    scheduledFor?: Date | string | null
+    sentAt?: Date | string | null
+    sentBy: string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    club?: ClubUpdateOneWithoutNotificationsNestedInput
+  }
+
+  export type NotificationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: NullableStringFieldUpdateOperationsInput | string | null
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationCreateManyInput = {
+    id?: string
+    clubId?: string | null
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds?: NotificationCreatetargetClubIdsInput | string[]
+    title: string
+    message: string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: number
+    totalDelivered?: number
+    totalFailed?: number
+    totalClicked?: number
+    status?: $Enums.NotificationStatus
+    scheduledFor?: Date | string | null
+    sentAt?: Date | string | null
+    sentBy: string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clubId?: NullableStringFieldUpdateOperationsInput | string | null
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17946,6 +21552,11 @@ export namespace Prisma {
     isNot?: ClubBrandingWhereInput | null
   }
 
+  export type ClubAppConfigNullableScalarRelationFilter = {
+    is?: ClubAppConfigWhereInput | null
+    isNot?: ClubAppConfigWhereInput | null
+  }
+
   export type ClubModuleListRelationFilter = {
     every?: ClubModuleWhereInput
     some?: ClubModuleWhereInput
@@ -17985,6 +21596,12 @@ export namespace Prisma {
     isNot?: ClubWithdrawalConfigWhereInput | null
   }
 
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18003,6 +21620,10 @@ export namespace Prisma {
   }
 
   export type ClubUsageStatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18325,16 +21946,123 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EnumModuleKeyFilter<$PrismaModel = never> = {
-    equals?: $Enums.ModuleKey | EnumModuleKeyFieldRefInput<$PrismaModel>
-    in?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
-    not?: NestedEnumModuleKeyFilter<$PrismaModel> | $Enums.ModuleKey
+  export type EnumAppStoreStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AppStoreStatus | EnumAppStoreStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAppStoreStatusFilter<$PrismaModel> | $Enums.AppStoreStatus
   }
 
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type ClubAppConfigCountOrderByAggregateInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    appName?: SortOrder
+    tenantSlug?: SortOrder
+    appDescription?: SortOrder
+    bundleId?: SortOrder
+    packageName?: SortOrder
+    urlScheme?: SortOrder
+    appIconUrl?: SortOrder
+    splashScreenUrl?: SortOrder
+    currentVersion?: SortOrder
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+    appStoreStatus?: SortOrder
+    playStoreStatus?: SortOrder
+    appStoreUrl?: SortOrder
+    playStoreUrl?: SortOrder
+    autoBuildEnabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    publishedAt?: SortOrder
+  }
+
+  export type ClubAppConfigAvgOrderByAggregateInput = {
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+  }
+
+  export type ClubAppConfigMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    appName?: SortOrder
+    tenantSlug?: SortOrder
+    appDescription?: SortOrder
+    bundleId?: SortOrder
+    packageName?: SortOrder
+    urlScheme?: SortOrder
+    appIconUrl?: SortOrder
+    splashScreenUrl?: SortOrder
+    currentVersion?: SortOrder
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+    appStoreStatus?: SortOrder
+    playStoreStatus?: SortOrder
+    appStoreUrl?: SortOrder
+    playStoreUrl?: SortOrder
+    autoBuildEnabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    publishedAt?: SortOrder
+  }
+
+  export type ClubAppConfigMinOrderByAggregateInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    appName?: SortOrder
+    tenantSlug?: SortOrder
+    appDescription?: SortOrder
+    bundleId?: SortOrder
+    packageName?: SortOrder
+    urlScheme?: SortOrder
+    appIconUrl?: SortOrder
+    splashScreenUrl?: SortOrder
+    currentVersion?: SortOrder
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+    appStoreStatus?: SortOrder
+    playStoreStatus?: SortOrder
+    appStoreUrl?: SortOrder
+    playStoreUrl?: SortOrder
+    autoBuildEnabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    publishedAt?: SortOrder
+  }
+
+  export type ClubAppConfigSumOrderByAggregateInput = {
+    iosBuildNumber?: SortOrder
+    androidBuildNumber?: SortOrder
+  }
+
+  export type EnumAppStoreStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AppStoreStatus | EnumAppStoreStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAppStoreStatusWithAggregatesFilter<$PrismaModel> | $Enums.AppStoreStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAppStoreStatusFilter<$PrismaModel>
+    _max?: NestedEnumAppStoreStatusFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumModuleKeyFilter<$PrismaModel = never> = {
+    equals?: $Enums.ModuleKey | EnumModuleKeyFieldRefInput<$PrismaModel>
+    in?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
+    not?: NestedEnumModuleKeyFilter<$PrismaModel> | $Enums.ModuleKey
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -18421,14 +22149,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumModuleKeyFilter<$PrismaModel>
     _max?: NestedEnumModuleKeyFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -18961,10 +22681,181 @@ export namespace Prisma {
     activeUsers?: SortOrder
   }
 
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type EnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
+  export type EnumNotificationTargetFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationTarget | EnumNotificationTargetFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTargetFilter<$PrismaModel> | $Enums.NotificationTarget
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumNotificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationStatus | EnumNotificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationStatusFilter<$PrismaModel> | $Enums.NotificationStatus
+  }
+
+  export type ClubNullableScalarRelationFilter = {
+    is?: ClubWhereInput | null
+    isNot?: ClubWhereInput | null
+  }
+
+  export type NotificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    notificationType?: SortOrder
+    targetType?: SortOrder
+    targetClubIds?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    data?: SortOrder
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+    status?: SortOrder
+    scheduledFor?: SortOrder
+    sentAt?: SortOrder
+    sentBy?: SortOrder
+    errorLog?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationAvgOrderByAggregateInput = {
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+  }
+
+  export type NotificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    notificationType?: SortOrder
+    targetType?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+    status?: SortOrder
+    scheduledFor?: SortOrder
+    sentAt?: SortOrder
+    sentBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    clubId?: SortOrder
+    notificationType?: SortOrder
+    targetType?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+    status?: SortOrder
+    scheduledFor?: SortOrder
+    sentAt?: SortOrder
+    sentBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationSumOrderByAggregateInput = {
+    totalSent?: SortOrder
+    totalDelivered?: SortOrder
+    totalFailed?: SortOrder
+    totalClicked?: SortOrder
+  }
+
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
+  }
+
+  export type EnumNotificationTargetWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationTarget | EnumNotificationTargetFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTargetWithAggregatesFilter<$PrismaModel> | $Enums.NotificationTarget
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTargetFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTargetFilter<$PrismaModel>
+  }
+
+  export type EnumNotificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationStatus | EnumNotificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.NotificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumNotificationStatusFilter<$PrismaModel>
+  }
+
   export type ClubBrandingCreateNestedOneWithoutClubInput = {
     create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
     connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
     connect?: ClubBrandingWhereUniqueInput
+  }
+
+  export type ClubAppConfigCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubAppConfigCreateWithoutClubInput, ClubAppConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubAppConfigCreateOrConnectWithoutClubInput
+    connect?: ClubAppConfigWhereUniqueInput
   }
 
   export type ClubModuleCreateNestedManyWithoutClubInput = {
@@ -19013,10 +22904,23 @@ export namespace Prisma {
     connect?: ClubWithdrawalConfigWhereUniqueInput
   }
 
+  export type NotificationCreateNestedManyWithoutClubInput = {
+    create?: XOR<NotificationCreateWithoutClubInput, NotificationUncheckedCreateWithoutClubInput> | NotificationCreateWithoutClubInput[] | NotificationUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutClubInput | NotificationCreateOrConnectWithoutClubInput[]
+    createMany?: NotificationCreateManyClubInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type ClubBrandingUncheckedCreateNestedOneWithoutClubInput = {
     create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
     connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
     connect?: ClubBrandingWhereUniqueInput
+  }
+
+  export type ClubAppConfigUncheckedCreateNestedOneWithoutClubInput = {
+    create?: XOR<ClubAppConfigCreateWithoutClubInput, ClubAppConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubAppConfigCreateOrConnectWithoutClubInput
+    connect?: ClubAppConfigWhereUniqueInput
   }
 
   export type ClubModuleUncheckedCreateNestedManyWithoutClubInput = {
@@ -19063,6 +22967,13 @@ export namespace Prisma {
     create?: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
     connectOrCreate?: ClubWithdrawalConfigCreateOrConnectWithoutClubInput
     connect?: ClubWithdrawalConfigWhereUniqueInput
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutClubInput = {
+    create?: XOR<NotificationCreateWithoutClubInput, NotificationUncheckedCreateWithoutClubInput> | NotificationCreateWithoutClubInput[] | NotificationUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutClubInput | NotificationCreateOrConnectWithoutClubInput[]
+    createMany?: NotificationCreateManyClubInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -19117,6 +23028,16 @@ export namespace Prisma {
     delete?: ClubBrandingWhereInput | boolean
     connect?: ClubBrandingWhereUniqueInput
     update?: XOR<XOR<ClubBrandingUpdateToOneWithWhereWithoutClubInput, ClubBrandingUpdateWithoutClubInput>, ClubBrandingUncheckedUpdateWithoutClubInput>
+  }
+
+  export type ClubAppConfigUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubAppConfigCreateWithoutClubInput, ClubAppConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubAppConfigCreateOrConnectWithoutClubInput
+    upsert?: ClubAppConfigUpsertWithoutClubInput
+    disconnect?: ClubAppConfigWhereInput | boolean
+    delete?: ClubAppConfigWhereInput | boolean
+    connect?: ClubAppConfigWhereUniqueInput
+    update?: XOR<XOR<ClubAppConfigUpdateToOneWithWhereWithoutClubInput, ClubAppConfigUpdateWithoutClubInput>, ClubAppConfigUncheckedUpdateWithoutClubInput>
   }
 
   export type ClubModuleUpdateManyWithoutClubNestedInput = {
@@ -19205,6 +23126,20 @@ export namespace Prisma {
     update?: XOR<XOR<ClubWithdrawalConfigUpdateToOneWithWhereWithoutClubInput, ClubWithdrawalConfigUpdateWithoutClubInput>, ClubWithdrawalConfigUncheckedUpdateWithoutClubInput>
   }
 
+  export type NotificationUpdateManyWithoutClubNestedInput = {
+    create?: XOR<NotificationCreateWithoutClubInput, NotificationUncheckedCreateWithoutClubInput> | NotificationCreateWithoutClubInput[] | NotificationUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutClubInput | NotificationCreateOrConnectWithoutClubInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutClubInput | NotificationUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: NotificationCreateManyClubInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutClubInput | NotificationUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutClubInput | NotificationUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type ClubBrandingUncheckedUpdateOneWithoutClubNestedInput = {
     create?: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
     connectOrCreate?: ClubBrandingCreateOrConnectWithoutClubInput
@@ -19213,6 +23148,16 @@ export namespace Prisma {
     delete?: ClubBrandingWhereInput | boolean
     connect?: ClubBrandingWhereUniqueInput
     update?: XOR<XOR<ClubBrandingUpdateToOneWithWhereWithoutClubInput, ClubBrandingUpdateWithoutClubInput>, ClubBrandingUncheckedUpdateWithoutClubInput>
+  }
+
+  export type ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput = {
+    create?: XOR<ClubAppConfigCreateWithoutClubInput, ClubAppConfigUncheckedCreateWithoutClubInput>
+    connectOrCreate?: ClubAppConfigCreateOrConnectWithoutClubInput
+    upsert?: ClubAppConfigUpsertWithoutClubInput
+    disconnect?: ClubAppConfigWhereInput | boolean
+    delete?: ClubAppConfigWhereInput | boolean
+    connect?: ClubAppConfigWhereUniqueInput
+    update?: XOR<XOR<ClubAppConfigUpdateToOneWithWhereWithoutClubInput, ClubAppConfigUpdateWithoutClubInput>, ClubAppConfigUncheckedUpdateWithoutClubInput>
   }
 
   export type ClubModuleUncheckedUpdateManyWithoutClubNestedInput = {
@@ -19301,6 +23246,20 @@ export namespace Prisma {
     update?: XOR<XOR<ClubWithdrawalConfigUpdateToOneWithWhereWithoutClubInput, ClubWithdrawalConfigUpdateWithoutClubInput>, ClubWithdrawalConfigUncheckedUpdateWithoutClubInput>
   }
 
+  export type NotificationUncheckedUpdateManyWithoutClubNestedInput = {
+    create?: XOR<NotificationCreateWithoutClubInput, NotificationUncheckedCreateWithoutClubInput> | NotificationCreateWithoutClubInput[] | NotificationUncheckedCreateWithoutClubInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutClubInput | NotificationCreateOrConnectWithoutClubInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutClubInput | NotificationUpsertWithWhereUniqueWithoutClubInput[]
+    createMany?: NotificationCreateManyClubInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutClubInput | NotificationUpdateWithWhereUniqueWithoutClubInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutClubInput | NotificationUpdateManyWithWhereWithoutClubInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type ClubCreateNestedOneWithoutBrandingInput = {
     create?: XOR<ClubCreateWithoutBrandingInput, ClubUncheckedCreateWithoutBrandingInput>
     connectOrCreate?: ClubCreateOrConnectWithoutBrandingInput
@@ -19315,6 +23274,28 @@ export namespace Prisma {
     update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutBrandingInput, ClubUpdateWithoutBrandingInput>, ClubUncheckedUpdateWithoutBrandingInput>
   }
 
+  export type ClubCreateNestedOneWithoutAppConfigInput = {
+    create?: XOR<ClubCreateWithoutAppConfigInput, ClubUncheckedCreateWithoutAppConfigInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutAppConfigInput
+    connect?: ClubWhereUniqueInput
+  }
+
+  export type EnumAppStoreStatusFieldUpdateOperationsInput = {
+    set?: $Enums.AppStoreStatus
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type ClubUpdateOneRequiredWithoutAppConfigNestedInput = {
+    create?: XOR<ClubCreateWithoutAppConfigInput, ClubUncheckedCreateWithoutAppConfigInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutAppConfigInput
+    upsert?: ClubUpsertWithoutAppConfigInput
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutAppConfigInput, ClubUpdateWithoutAppConfigInput>, ClubUncheckedUpdateWithoutAppConfigInput>
+  }
+
   export type ClubCreateNestedOneWithoutModulesInput = {
     create?: XOR<ClubCreateWithoutModulesInput, ClubUncheckedCreateWithoutModulesInput>
     connectOrCreate?: ClubCreateOrConnectWithoutModulesInput
@@ -19323,10 +23304,6 @@ export namespace Prisma {
 
   export type EnumModuleKeyFieldUpdateOperationsInput = {
     set?: $Enums.ModuleKey
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type ClubUpdateOneRequiredWithoutModulesNestedInput = {
@@ -19423,6 +23400,43 @@ export namespace Prisma {
     upsert?: ClubUpsertWithoutUsageStatsInput
     connect?: ClubWhereUniqueInput
     update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutUsageStatsInput, ClubUpdateWithoutUsageStatsInput>, ClubUncheckedUpdateWithoutUsageStatsInput>
+  }
+
+  export type NotificationCreatetargetClubIdsInput = {
+    set: string[]
+  }
+
+  export type ClubCreateNestedOneWithoutNotificationsInput = {
+    create?: XOR<ClubCreateWithoutNotificationsInput, ClubUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutNotificationsInput
+    connect?: ClubWhereUniqueInput
+  }
+
+  export type EnumNotificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationType
+  }
+
+  export type EnumNotificationTargetFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationTarget
+  }
+
+  export type NotificationUpdatetargetClubIdsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type EnumNotificationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationStatus
+  }
+
+  export type ClubUpdateOneWithoutNotificationsNestedInput = {
+    create?: XOR<ClubCreateWithoutNotificationsInput, ClubUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: ClubCreateOrConnectWithoutNotificationsInput
+    upsert?: ClubUpsertWithoutNotificationsInput
+    disconnect?: ClubWhereInput | boolean
+    delete?: ClubWhereInput | boolean
+    connect?: ClubWhereUniqueInput
+    update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutNotificationsInput, ClubUpdateWithoutNotificationsInput>, ClubUncheckedUpdateWithoutNotificationsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -19689,16 +23703,41 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumModuleKeyFilter<$PrismaModel = never> = {
-    equals?: $Enums.ModuleKey | EnumModuleKeyFieldRefInput<$PrismaModel>
-    in?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
-    not?: NestedEnumModuleKeyFilter<$PrismaModel> | $Enums.ModuleKey
+  export type NestedEnumAppStoreStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AppStoreStatus | EnumAppStoreStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAppStoreStatusFilter<$PrismaModel> | $Enums.AppStoreStatus
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumAppStoreStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AppStoreStatus | EnumAppStoreStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AppStoreStatus[] | ListEnumAppStoreStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAppStoreStatusWithAggregatesFilter<$PrismaModel> | $Enums.AppStoreStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAppStoreStatusFilter<$PrismaModel>
+    _max?: NestedEnumAppStoreStatusFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumModuleKeyFilter<$PrismaModel = never> = {
+    equals?: $Enums.ModuleKey | EnumModuleKeyFieldRefInput<$PrismaModel>
+    in?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ModuleKey[] | ListEnumModuleKeyFieldRefInput<$PrismaModel>
+    not?: NestedEnumModuleKeyFilter<$PrismaModel> | $Enums.ModuleKey
   }
 
   export type NestedEnumModuleKeyWithAggregatesFilter<$PrismaModel = never> = {
@@ -19709,14 +23748,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumModuleKeyFilter<$PrismaModel>
     _max?: NestedEnumModuleKeyFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -19782,6 +23813,82 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
+  export type NestedEnumNotificationTargetFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationTarget | EnumNotificationTargetFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTargetFilter<$PrismaModel> | $Enums.NotificationTarget
+  }
+
+  export type NestedEnumNotificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationStatus | EnumNotificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationStatusFilter<$PrismaModel> | $Enums.NotificationStatus
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotificationTargetWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationTarget | EnumNotificationTargetFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationTarget[] | ListEnumNotificationTargetFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTargetWithAggregatesFilter<$PrismaModel> | $Enums.NotificationTarget
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTargetFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTargetFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationStatus | EnumNotificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationStatus[] | ListEnumNotificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.NotificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumNotificationStatusFilter<$PrismaModel>
+  }
+
   export type ClubBrandingCreateWithoutClubInput = {
     id?: string
     logoUrl?: string | null
@@ -19821,6 +23928,57 @@ export namespace Prisma {
   export type ClubBrandingCreateOrConnectWithoutClubInput = {
     where: ClubBrandingWhereUniqueInput
     create: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
+  }
+
+  export type ClubAppConfigCreateWithoutClubInput = {
+    id?: string
+    appName: string
+    tenantSlug: string
+    appDescription?: string | null
+    bundleId: string
+    packageName: string
+    urlScheme: string
+    appIconUrl: string
+    splashScreenUrl: string
+    currentVersion?: string
+    iosBuildNumber?: number
+    androidBuildNumber?: number
+    appStoreStatus?: $Enums.AppStoreStatus
+    playStoreStatus?: $Enums.AppStoreStatus
+    appStoreUrl?: string | null
+    playStoreUrl?: string | null
+    autoBuildEnabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type ClubAppConfigUncheckedCreateWithoutClubInput = {
+    id?: string
+    appName: string
+    tenantSlug: string
+    appDescription?: string | null
+    bundleId: string
+    packageName: string
+    urlScheme: string
+    appIconUrl: string
+    splashScreenUrl: string
+    currentVersion?: string
+    iosBuildNumber?: number
+    androidBuildNumber?: number
+    appStoreStatus?: $Enums.AppStoreStatus
+    playStoreStatus?: $Enums.AppStoreStatus
+    appStoreUrl?: string | null
+    playStoreUrl?: string | null
+    autoBuildEnabled?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type ClubAppConfigCreateOrConnectWithoutClubInput = {
+    where: ClubAppConfigWhereUniqueInput
+    create: XOR<ClubAppConfigCreateWithoutClubInput, ClubAppConfigUncheckedCreateWithoutClubInput>
   }
 
   export type ClubModuleCreateWithoutClubInput = {
@@ -20040,6 +24198,58 @@ export namespace Prisma {
     create: XOR<ClubWithdrawalConfigCreateWithoutClubInput, ClubWithdrawalConfigUncheckedCreateWithoutClubInput>
   }
 
+  export type NotificationCreateWithoutClubInput = {
+    id?: string
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds?: NotificationCreatetargetClubIdsInput | string[]
+    title: string
+    message: string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: number
+    totalDelivered?: number
+    totalFailed?: number
+    totalClicked?: number
+    status?: $Enums.NotificationStatus
+    scheduledFor?: Date | string | null
+    sentAt?: Date | string | null
+    sentBy: string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationUncheckedCreateWithoutClubInput = {
+    id?: string
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds?: NotificationCreatetargetClubIdsInput | string[]
+    title: string
+    message: string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: number
+    totalDelivered?: number
+    totalFailed?: number
+    totalClicked?: number
+    status?: $Enums.NotificationStatus
+    scheduledFor?: Date | string | null
+    sentAt?: Date | string | null
+    sentBy: string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutClubInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutClubInput, NotificationUncheckedCreateWithoutClubInput>
+  }
+
+  export type NotificationCreateManyClubInputEnvelope = {
+    data: NotificationCreateManyClubInput | NotificationCreateManyClubInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClubBrandingUpsertWithoutClubInput = {
     update: XOR<ClubBrandingUpdateWithoutClubInput, ClubBrandingUncheckedUpdateWithoutClubInput>
     create: XOR<ClubBrandingCreateWithoutClubInput, ClubBrandingUncheckedCreateWithoutClubInput>
@@ -20085,6 +24295,63 @@ export namespace Prisma {
     playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubAppConfigUpsertWithoutClubInput = {
+    update: XOR<ClubAppConfigUpdateWithoutClubInput, ClubAppConfigUncheckedUpdateWithoutClubInput>
+    create: XOR<ClubAppConfigCreateWithoutClubInput, ClubAppConfigUncheckedCreateWithoutClubInput>
+    where?: ClubAppConfigWhereInput
+  }
+
+  export type ClubAppConfigUpdateToOneWithWhereWithoutClubInput = {
+    where?: ClubAppConfigWhereInput
+    data: XOR<ClubAppConfigUpdateWithoutClubInput, ClubAppConfigUncheckedUpdateWithoutClubInput>
+  }
+
+  export type ClubAppConfigUpdateWithoutClubInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    tenantSlug?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    bundleId?: StringFieldUpdateOperationsInput | string
+    packageName?: StringFieldUpdateOperationsInput | string
+    urlScheme?: StringFieldUpdateOperationsInput | string
+    appIconUrl?: StringFieldUpdateOperationsInput | string
+    splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    currentVersion?: StringFieldUpdateOperationsInput | string
+    iosBuildNumber?: IntFieldUpdateOperationsInput | number
+    androidBuildNumber?: IntFieldUpdateOperationsInput | number
+    appStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    autoBuildEnabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ClubAppConfigUncheckedUpdateWithoutClubInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    tenantSlug?: StringFieldUpdateOperationsInput | string
+    appDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    bundleId?: StringFieldUpdateOperationsInput | string
+    packageName?: StringFieldUpdateOperationsInput | string
+    urlScheme?: StringFieldUpdateOperationsInput | string
+    appIconUrl?: StringFieldUpdateOperationsInput | string
+    splashScreenUrl?: StringFieldUpdateOperationsInput | string
+    currentVersion?: StringFieldUpdateOperationsInput | string
+    iosBuildNumber?: IntFieldUpdateOperationsInput | number
+    androidBuildNumber?: IntFieldUpdateOperationsInput | number
+    appStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    playStoreStatus?: EnumAppStoreStatusFieldUpdateOperationsInput | $Enums.AppStoreStatus
+    appStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    playStoreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    autoBuildEnabled?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClubModuleUpsertWithWhereUniqueWithoutClubInput = {
@@ -20318,6 +24585,47 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationUpsertWithWhereUniqueWithoutClubInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutClubInput, NotificationUncheckedUpdateWithoutClubInput>
+    create: XOR<NotificationCreateWithoutClubInput, NotificationUncheckedCreateWithoutClubInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutClubInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutClubInput, NotificationUncheckedUpdateWithoutClubInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutClubInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutClubInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    id?: UuidFilter<"Notification"> | string
+    clubId?: UuidNullableFilter<"Notification"> | string | null
+    notificationType?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFilter<"Notification"> | $Enums.NotificationTarget
+    targetClubIds?: StringNullableListFilter<"Notification">
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    data?: JsonNullableFilter<"Notification">
+    totalSent?: IntFilter<"Notification"> | number
+    totalDelivered?: IntFilter<"Notification"> | number
+    totalFailed?: IntFilter<"Notification"> | number
+    totalClicked?: IntFilter<"Notification"> | number
+    status?: EnumNotificationStatusFilter<"Notification"> | $Enums.NotificationStatus
+    scheduledFor?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    sentAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    sentBy?: UuidFilter<"Notification"> | string
+    errorLog?: JsonNullableFilter<"Notification">
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
+  }
+
   export type ClubCreateWithoutBrandingInput = {
     id?: string
     slug: string
@@ -20348,6 +24656,7 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
@@ -20355,6 +24664,7 @@ export namespace Prisma {
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutBrandingInput = {
@@ -20387,6 +24697,7 @@ export namespace Prisma {
     contactPhone: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
@@ -20394,6 +24705,7 @@ export namespace Prisma {
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutBrandingInput = {
@@ -20442,6 +24754,7 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
@@ -20449,6 +24762,7 @@ export namespace Prisma {
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutBrandingInput = {
@@ -20481,6 +24795,7 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
@@ -20488,6 +24803,187 @@ export namespace Prisma {
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
+  }
+
+  export type ClubCreateWithoutAppConfigInput = {
+    id?: string
+    slug: string
+    companyName: string
+    companyDocument: string
+    status?: $Enums.ClubStatus
+    databaseHost: string
+    databasePort?: number
+    databaseName: string
+    databaseUser: string
+    databasePassword: string
+    subdomain?: string | null
+    customDomain?: string | null
+    adminSubdomain?: string | null
+    maxUsers?: number
+    maxAdmins?: number
+    maxStorageGB?: number
+    subscriptionPlan?: $Enums.SubscriptionPlan
+    subscriptionStatus?: $Enums.SubscriptionStatus
+    monthlyFee?: Decimal | DecimalJsLike | number | string
+    trialEndsAt?: Date | string | null
+    nextBillingDate?: Date | string | null
+    lastBillingDate?: Date | string | null
+    totalBilled?: Decimal | DecimalJsLike | number | string
+    outstandingBalance?: Decimal | DecimalJsLike | number | string
+    contactName: string
+    contactEmail: string
+    contactPhone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
+  }
+
+  export type ClubUncheckedCreateWithoutAppConfigInput = {
+    id?: string
+    slug: string
+    companyName: string
+    companyDocument: string
+    status?: $Enums.ClubStatus
+    databaseHost: string
+    databasePort?: number
+    databaseName: string
+    databaseUser: string
+    databasePassword: string
+    subdomain?: string | null
+    customDomain?: string | null
+    adminSubdomain?: string | null
+    maxUsers?: number
+    maxAdmins?: number
+    maxStorageGB?: number
+    subscriptionPlan?: $Enums.SubscriptionPlan
+    subscriptionStatus?: $Enums.SubscriptionStatus
+    monthlyFee?: Decimal | DecimalJsLike | number | string
+    trialEndsAt?: Date | string | null
+    nextBillingDate?: Date | string | null
+    lastBillingDate?: Date | string | null
+    totalBilled?: Decimal | DecimalJsLike | number | string
+    outstandingBalance?: Decimal | DecimalJsLike | number | string
+    contactName: string
+    contactEmail: string
+    contactPhone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
+  }
+
+  export type ClubCreateOrConnectWithoutAppConfigInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutAppConfigInput, ClubUncheckedCreateWithoutAppConfigInput>
+  }
+
+  export type ClubUpsertWithoutAppConfigInput = {
+    update: XOR<ClubUpdateWithoutAppConfigInput, ClubUncheckedUpdateWithoutAppConfigInput>
+    create: XOR<ClubCreateWithoutAppConfigInput, ClubUncheckedCreateWithoutAppConfigInput>
+    where?: ClubWhereInput
+  }
+
+  export type ClubUpdateToOneWithWhereWithoutAppConfigInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutAppConfigInput, ClubUncheckedUpdateWithoutAppConfigInput>
+  }
+
+  export type ClubUpdateWithoutAppConfigInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyDocument?: StringFieldUpdateOperationsInput | string
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    databaseHost?: StringFieldUpdateOperationsInput | string
+    databasePort?: IntFieldUpdateOperationsInput | number
+    databaseName?: StringFieldUpdateOperationsInput | string
+    databaseUser?: StringFieldUpdateOperationsInput | string
+    databasePassword?: StringFieldUpdateOperationsInput | string
+    subdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    adminSubdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUsers?: IntFieldUpdateOperationsInput | number
+    maxAdmins?: IntFieldUpdateOperationsInput | number
+    maxStorageGB?: IntFieldUpdateOperationsInput | number
+    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalBilled?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
+  }
+
+  export type ClubUncheckedUpdateWithoutAppConfigInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyDocument?: StringFieldUpdateOperationsInput | string
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    databaseHost?: StringFieldUpdateOperationsInput | string
+    databasePort?: IntFieldUpdateOperationsInput | number
+    databaseName?: StringFieldUpdateOperationsInput | string
+    databaseUser?: StringFieldUpdateOperationsInput | string
+    databasePassword?: StringFieldUpdateOperationsInput | string
+    subdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    adminSubdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUsers?: IntFieldUpdateOperationsInput | number
+    maxAdmins?: IntFieldUpdateOperationsInput | number
+    maxStorageGB?: IntFieldUpdateOperationsInput | number
+    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalBilled?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutModulesInput = {
@@ -20521,12 +25017,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutModulesInput = {
@@ -20560,12 +25058,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutModulesInput = {
@@ -20615,12 +25115,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutModulesInput = {
@@ -20654,12 +25156,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutStatsInput = {
@@ -20693,12 +25197,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutStatsInput = {
@@ -20732,12 +25238,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutStatsInput = {
@@ -20787,12 +25295,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutStatsInput = {
@@ -20826,12 +25336,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutCashbackConfigInput = {
@@ -20865,12 +25377,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutCashbackConfigInput = {
@@ -20904,12 +25418,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutCashbackConfigInput = {
@@ -20959,12 +25475,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutCashbackConfigInput = {
@@ -20998,12 +25516,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutWithdrawalConfigInput = {
@@ -21037,12 +25557,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutWithdrawalConfigInput = {
@@ -21076,12 +25598,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutWithdrawalConfigInput = {
@@ -21131,12 +25655,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutWithdrawalConfigInput = {
@@ -21170,12 +25696,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutAdminsInput = {
@@ -21209,12 +25737,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutAdminsInput = {
@@ -21248,12 +25778,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutAdminsInput = {
@@ -21303,12 +25835,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutAdminsInput = {
@@ -21342,12 +25876,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutApiKeysInput = {
@@ -21381,12 +25917,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutApiKeysInput = {
@@ -21420,12 +25958,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutApiKeysInput = {
@@ -21475,12 +26015,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutApiKeysInput = {
@@ -21514,12 +26056,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
   }
 
   export type ClubCreateWithoutUsageStatsInput = {
@@ -21553,12 +26097,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
     modules?: ClubModuleCreateNestedManyWithoutClubInput
     admins?: ClubAdminCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
     stats?: ClubStatsCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+    notifications?: NotificationCreateNestedManyWithoutClubInput
   }
 
   export type ClubUncheckedCreateWithoutUsageStatsInput = {
@@ -21592,12 +26138,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
     modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
     admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
     apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
     stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
     cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutClubInput
   }
 
   export type ClubCreateOrConnectWithoutUsageStatsInput = {
@@ -21647,12 +26195,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUpdateManyWithoutClubNestedInput
   }
 
   export type ClubUncheckedUpdateWithoutUsageStatsInput = {
@@ -21686,9 +26236,191 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
     modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
     admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
     apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutClubNestedInput
+  }
+
+  export type ClubCreateWithoutNotificationsInput = {
+    id?: string
+    slug: string
+    companyName: string
+    companyDocument: string
+    status?: $Enums.ClubStatus
+    databaseHost: string
+    databasePort?: number
+    databaseName: string
+    databaseUser: string
+    databasePassword: string
+    subdomain?: string | null
+    customDomain?: string | null
+    adminSubdomain?: string | null
+    maxUsers?: number
+    maxAdmins?: number
+    maxStorageGB?: number
+    subscriptionPlan?: $Enums.SubscriptionPlan
+    subscriptionStatus?: $Enums.SubscriptionStatus
+    monthlyFee?: Decimal | DecimalJsLike | number | string
+    trialEndsAt?: Date | string | null
+    nextBillingDate?: Date | string | null
+    lastBillingDate?: Date | string | null
+    totalBilled?: Decimal | DecimalJsLike | number | string
+    outstandingBalance?: Decimal | DecimalJsLike | number | string
+    contactName: string
+    contactEmail: string
+    contactPhone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branding?: ClubBrandingCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigCreateNestedOneWithoutClubInput
+    modules?: ClubModuleCreateNestedManyWithoutClubInput
+    admins?: ClubAdminCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsCreateNestedManyWithoutClubInput
+    stats?: ClubStatsCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigCreateNestedOneWithoutClubInput
+  }
+
+  export type ClubUncheckedCreateWithoutNotificationsInput = {
+    id?: string
+    slug: string
+    companyName: string
+    companyDocument: string
+    status?: $Enums.ClubStatus
+    databaseHost: string
+    databasePort?: number
+    databaseName: string
+    databaseUser: string
+    databasePassword: string
+    subdomain?: string | null
+    customDomain?: string | null
+    adminSubdomain?: string | null
+    maxUsers?: number
+    maxAdmins?: number
+    maxStorageGB?: number
+    subscriptionPlan?: $Enums.SubscriptionPlan
+    subscriptionStatus?: $Enums.SubscriptionStatus
+    monthlyFee?: Decimal | DecimalJsLike | number | string
+    trialEndsAt?: Date | string | null
+    nextBillingDate?: Date | string | null
+    lastBillingDate?: Date | string | null
+    totalBilled?: Decimal | DecimalJsLike | number | string
+    outstandingBalance?: Decimal | DecimalJsLike | number | string
+    contactName: string
+    contactEmail: string
+    contactPhone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branding?: ClubBrandingUncheckedCreateNestedOneWithoutClubInput
+    appConfig?: ClubAppConfigUncheckedCreateNestedOneWithoutClubInput
+    modules?: ClubModuleUncheckedCreateNestedManyWithoutClubInput
+    admins?: ClubAdminUncheckedCreateNestedManyWithoutClubInput
+    apiKeys?: ClubApiKeyUncheckedCreateNestedManyWithoutClubInput
+    usageStats?: ClubUsageStatsUncheckedCreateNestedManyWithoutClubInput
+    stats?: ClubStatsUncheckedCreateNestedOneWithoutClubInput
+    cashbackConfig?: ClubCashbackConfigUncheckedCreateNestedOneWithoutClubInput
+    withdrawalConfig?: ClubWithdrawalConfigUncheckedCreateNestedOneWithoutClubInput
+  }
+
+  export type ClubCreateOrConnectWithoutNotificationsInput = {
+    where: ClubWhereUniqueInput
+    create: XOR<ClubCreateWithoutNotificationsInput, ClubUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type ClubUpsertWithoutNotificationsInput = {
+    update: XOR<ClubUpdateWithoutNotificationsInput, ClubUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<ClubCreateWithoutNotificationsInput, ClubUncheckedCreateWithoutNotificationsInput>
+    where?: ClubWhereInput
+  }
+
+  export type ClubUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: ClubWhereInput
+    data: XOR<ClubUpdateWithoutNotificationsInput, ClubUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type ClubUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyDocument?: StringFieldUpdateOperationsInput | string
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    databaseHost?: StringFieldUpdateOperationsInput | string
+    databasePort?: IntFieldUpdateOperationsInput | number
+    databaseName?: StringFieldUpdateOperationsInput | string
+    databaseUser?: StringFieldUpdateOperationsInput | string
+    databasePassword?: StringFieldUpdateOperationsInput | string
+    subdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    adminSubdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUsers?: IntFieldUpdateOperationsInput | number
+    maxAdmins?: IntFieldUpdateOperationsInput | number
+    maxStorageGB?: IntFieldUpdateOperationsInput | number
+    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalBilled?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branding?: ClubBrandingUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUpdateManyWithoutClubNestedInput
+    stats?: ClubStatsUpdateOneWithoutClubNestedInput
+    cashbackConfig?: ClubCashbackConfigUpdateOneWithoutClubNestedInput
+    withdrawalConfig?: ClubWithdrawalConfigUpdateOneWithoutClubNestedInput
+  }
+
+  export type ClubUncheckedUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyDocument?: StringFieldUpdateOperationsInput | string
+    status?: EnumClubStatusFieldUpdateOperationsInput | $Enums.ClubStatus
+    databaseHost?: StringFieldUpdateOperationsInput | string
+    databasePort?: IntFieldUpdateOperationsInput | number
+    databaseName?: StringFieldUpdateOperationsInput | string
+    databaseUser?: StringFieldUpdateOperationsInput | string
+    databasePassword?: StringFieldUpdateOperationsInput | string
+    subdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    adminSubdomain?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUsers?: IntFieldUpdateOperationsInput | number
+    maxAdmins?: IntFieldUpdateOperationsInput | number
+    maxStorageGB?: IntFieldUpdateOperationsInput | number
+    subscriptionPlan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    monthlyFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastBillingDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalBilled?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    outstandingBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branding?: ClubBrandingUncheckedUpdateOneWithoutClubNestedInput
+    appConfig?: ClubAppConfigUncheckedUpdateOneWithoutClubNestedInput
+    modules?: ClubModuleUncheckedUpdateManyWithoutClubNestedInput
+    admins?: ClubAdminUncheckedUpdateManyWithoutClubNestedInput
+    apiKeys?: ClubApiKeyUncheckedUpdateManyWithoutClubNestedInput
+    usageStats?: ClubUsageStatsUncheckedUpdateManyWithoutClubNestedInput
     stats?: ClubStatsUncheckedUpdateOneWithoutClubNestedInput
     cashbackConfig?: ClubCashbackConfigUncheckedUpdateOneWithoutClubNestedInput
     withdrawalConfig?: ClubWithdrawalConfigUncheckedUpdateOneWithoutClubNestedInput
@@ -21736,6 +26468,27 @@ export namespace Prisma {
     storageUsedMB?: number
     activeUsers?: number
     createdAt?: Date | string
+  }
+
+  export type NotificationCreateManyClubInput = {
+    id?: string
+    notificationType: $Enums.NotificationType
+    targetType: $Enums.NotificationTarget
+    targetClubIds?: NotificationCreatetargetClubIdsInput | string[]
+    title: string
+    message: string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: number
+    totalDelivered?: number
+    totalFailed?: number
+    totalClicked?: number
+    status?: $Enums.NotificationStatus
+    scheduledFor?: Date | string | null
+    sentAt?: Date | string | null
+    sentBy: string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ClubModuleUpdateWithoutClubInput = {
@@ -21868,6 +26621,69 @@ export namespace Prisma {
     storageUsedMB?: IntFieldUpdateOperationsInput | number
     activeUsers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUpdateWithoutClubInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateWithoutClubInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutClubInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notificationType?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    targetType?: EnumNotificationTargetFieldUpdateOperationsInput | $Enums.NotificationTarget
+    targetClubIds?: NotificationUpdatetargetClubIdsInput | string[]
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    data?: NullableJsonNullValueInput | InputJsonValue
+    totalSent?: IntFieldUpdateOperationsInput | number
+    totalDelivered?: IntFieldUpdateOperationsInput | number
+    totalFailed?: IntFieldUpdateOperationsInput | number
+    totalClicked?: IntFieldUpdateOperationsInput | number
+    status?: EnumNotificationStatusFieldUpdateOperationsInput | $Enums.NotificationStatus
+    scheduledFor?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentBy?: StringFieldUpdateOperationsInput | string
+    errorLog?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

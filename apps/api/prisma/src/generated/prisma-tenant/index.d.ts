@@ -108,6 +108,11 @@ export type GroupUser = $Result.DefaultSelection<Prisma.$GroupUserPayload>
  * 
  */
 export type WhatsappMessage = $Result.DefaultSelection<Prisma.$WhatsappMessagePayload>
+/**
+ * Model ClubBranding
+ * 
+ */
+export type ClubBranding = $Result.DefaultSelection<Prisma.$ClubBrandingPayload>
 
 /**
  * Enums
@@ -616,6 +621,16 @@ export class PrismaClient<
     * ```
     */
   get whatsappMessage(): Prisma.WhatsappMessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clubBranding`: Exposes CRUD operations for the **ClubBranding** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClubBrandings
+    * const clubBrandings = await prisma.clubBranding.findMany()
+    * ```
+    */
+  get clubBranding(): Prisma.ClubBrandingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1075,7 +1090,8 @@ export namespace Prisma {
     UserRole: 'UserRole',
     Group: 'Group',
     GroupUser: 'GroupUser',
-    WhatsappMessage: 'WhatsappMessage'
+    WhatsappMessage: 'WhatsappMessage',
+    ClubBranding: 'ClubBranding'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1094,7 +1110,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userModule" | "userCashbackConfig" | "userPushToken" | "product" | "purchase" | "campaign" | "notification" | "pushNotificationCampaign" | "pushNotificationLog" | "analyticsEvent" | "userSession" | "role" | "permission" | "rolePermission" | "userRole" | "group" | "groupUser" | "whatsappMessage"
+      modelProps: "user" | "userModule" | "userCashbackConfig" | "userPushToken" | "product" | "purchase" | "campaign" | "notification" | "pushNotificationCampaign" | "pushNotificationLog" | "analyticsEvent" | "userSession" | "role" | "permission" | "rolePermission" | "userRole" | "group" | "groupUser" | "whatsappMessage" | "clubBranding"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2504,6 +2520,80 @@ export namespace Prisma {
           }
         }
       }
+      ClubBranding: {
+        payload: Prisma.$ClubBrandingPayload<ExtArgs>
+        fields: Prisma.ClubBrandingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClubBrandingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClubBrandingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
+          }
+          findFirst: {
+            args: Prisma.ClubBrandingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClubBrandingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
+          }
+          findMany: {
+            args: Prisma.ClubBrandingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>[]
+          }
+          create: {
+            args: Prisma.ClubBrandingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
+          }
+          createMany: {
+            args: Prisma.ClubBrandingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClubBrandingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>[]
+          }
+          delete: {
+            args: Prisma.ClubBrandingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
+          }
+          update: {
+            args: Prisma.ClubBrandingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClubBrandingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClubBrandingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClubBrandingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>[]
+          }
+          upsert: {
+            args: Prisma.ClubBrandingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubBrandingPayload>
+          }
+          aggregate: {
+            args: Prisma.ClubBrandingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClubBranding>
+          }
+          groupBy: {
+            args: Prisma.ClubBrandingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubBrandingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClubBrandingCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubBrandingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2619,6 +2709,7 @@ export namespace Prisma {
     group?: GroupOmit
     groupUser?: GroupUserOmit
     whatsappMessage?: WhatsappMessageOmit
+    clubBranding?: ClubBrandingOmit
   }
 
   /* Types for Logging */
@@ -25391,6 +25482,1248 @@ export namespace Prisma {
 
 
   /**
+   * Model ClubBranding
+   */
+
+  export type AggregateClubBranding = {
+    _count: ClubBrandingCountAggregateOutputType | null
+    _min: ClubBrandingMinAggregateOutputType | null
+    _max: ClubBrandingMaxAggregateOutputType | null
+  }
+
+  export type ClubBrandingMinAggregateOutputType = {
+    id: string | null
+    primaryColor: string | null
+    secondaryColor: string | null
+    accentColor: string | null
+    backgroundColor: string | null
+    textColor: string | null
+    logoHeaderUrl: string | null
+    logoMenuUrl: string | null
+    logoFooterUrl: string | null
+    bannerHomeUrl: string | null
+    bannerPromoUrl: string | null
+    welcomeMessage: string | null
+    aboutUs: string | null
+    termsUrl: string | null
+    privacyUrl: string | null
+    supportEmail: string | null
+    supportPhone: string | null
+    websiteUrl: string | null
+    instagramUrl: string | null
+    facebookUrl: string | null
+    twitterUrl: string | null
+    linkedinUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClubBrandingMaxAggregateOutputType = {
+    id: string | null
+    primaryColor: string | null
+    secondaryColor: string | null
+    accentColor: string | null
+    backgroundColor: string | null
+    textColor: string | null
+    logoHeaderUrl: string | null
+    logoMenuUrl: string | null
+    logoFooterUrl: string | null
+    bannerHomeUrl: string | null
+    bannerPromoUrl: string | null
+    welcomeMessage: string | null
+    aboutUs: string | null
+    termsUrl: string | null
+    privacyUrl: string | null
+    supportEmail: string | null
+    supportPhone: string | null
+    websiteUrl: string | null
+    instagramUrl: string | null
+    facebookUrl: string | null
+    twitterUrl: string | null
+    linkedinUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClubBrandingCountAggregateOutputType = {
+    id: number
+    primaryColor: number
+    secondaryColor: number
+    accentColor: number
+    backgroundColor: number
+    textColor: number
+    logoHeaderUrl: number
+    logoMenuUrl: number
+    logoFooterUrl: number
+    bannerHomeUrl: number
+    bannerPromoUrl: number
+    welcomeMessage: number
+    aboutUs: number
+    termsUrl: number
+    privacyUrl: number
+    supportEmail: number
+    supportPhone: number
+    websiteUrl: number
+    instagramUrl: number
+    facebookUrl: number
+    twitterUrl: number
+    linkedinUrl: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClubBrandingMinAggregateInputType = {
+    id?: true
+    primaryColor?: true
+    secondaryColor?: true
+    accentColor?: true
+    backgroundColor?: true
+    textColor?: true
+    logoHeaderUrl?: true
+    logoMenuUrl?: true
+    logoFooterUrl?: true
+    bannerHomeUrl?: true
+    bannerPromoUrl?: true
+    welcomeMessage?: true
+    aboutUs?: true
+    termsUrl?: true
+    privacyUrl?: true
+    supportEmail?: true
+    supportPhone?: true
+    websiteUrl?: true
+    instagramUrl?: true
+    facebookUrl?: true
+    twitterUrl?: true
+    linkedinUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClubBrandingMaxAggregateInputType = {
+    id?: true
+    primaryColor?: true
+    secondaryColor?: true
+    accentColor?: true
+    backgroundColor?: true
+    textColor?: true
+    logoHeaderUrl?: true
+    logoMenuUrl?: true
+    logoFooterUrl?: true
+    bannerHomeUrl?: true
+    bannerPromoUrl?: true
+    welcomeMessage?: true
+    aboutUs?: true
+    termsUrl?: true
+    privacyUrl?: true
+    supportEmail?: true
+    supportPhone?: true
+    websiteUrl?: true
+    instagramUrl?: true
+    facebookUrl?: true
+    twitterUrl?: true
+    linkedinUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClubBrandingCountAggregateInputType = {
+    id?: true
+    primaryColor?: true
+    secondaryColor?: true
+    accentColor?: true
+    backgroundColor?: true
+    textColor?: true
+    logoHeaderUrl?: true
+    logoMenuUrl?: true
+    logoFooterUrl?: true
+    bannerHomeUrl?: true
+    bannerPromoUrl?: true
+    welcomeMessage?: true
+    aboutUs?: true
+    termsUrl?: true
+    privacyUrl?: true
+    supportEmail?: true
+    supportPhone?: true
+    websiteUrl?: true
+    instagramUrl?: true
+    facebookUrl?: true
+    twitterUrl?: true
+    linkedinUrl?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClubBrandingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClubBranding to aggregate.
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubBrandings to fetch.
+     */
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClubBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClubBrandings
+    **/
+    _count?: true | ClubBrandingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClubBrandingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClubBrandingMaxAggregateInputType
+  }
+
+  export type GetClubBrandingAggregateType<T extends ClubBrandingAggregateArgs> = {
+        [P in keyof T & keyof AggregateClubBranding]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClubBranding[P]>
+      : GetScalarType<T[P], AggregateClubBranding[P]>
+  }
+
+
+
+
+  export type ClubBrandingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubBrandingWhereInput
+    orderBy?: ClubBrandingOrderByWithAggregationInput | ClubBrandingOrderByWithAggregationInput[]
+    by: ClubBrandingScalarFieldEnum[] | ClubBrandingScalarFieldEnum
+    having?: ClubBrandingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClubBrandingCountAggregateInputType | true
+    _min?: ClubBrandingMinAggregateInputType
+    _max?: ClubBrandingMaxAggregateInputType
+  }
+
+  export type ClubBrandingGroupByOutputType = {
+    id: string
+    primaryColor: string
+    secondaryColor: string
+    accentColor: string
+    backgroundColor: string
+    textColor: string
+    logoHeaderUrl: string | null
+    logoMenuUrl: string | null
+    logoFooterUrl: string | null
+    bannerHomeUrl: string | null
+    bannerPromoUrl: string | null
+    welcomeMessage: string | null
+    aboutUs: string | null
+    termsUrl: string | null
+    privacyUrl: string | null
+    supportEmail: string | null
+    supportPhone: string | null
+    websiteUrl: string | null
+    instagramUrl: string | null
+    facebookUrl: string | null
+    twitterUrl: string | null
+    linkedinUrl: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ClubBrandingCountAggregateOutputType | null
+    _min: ClubBrandingMinAggregateOutputType | null
+    _max: ClubBrandingMaxAggregateOutputType | null
+  }
+
+  type GetClubBrandingGroupByPayload<T extends ClubBrandingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClubBrandingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClubBrandingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClubBrandingGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubBrandingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClubBrandingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    accentColor?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    logoHeaderUrl?: boolean
+    logoMenuUrl?: boolean
+    logoFooterUrl?: boolean
+    bannerHomeUrl?: boolean
+    bannerPromoUrl?: boolean
+    welcomeMessage?: boolean
+    aboutUs?: boolean
+    termsUrl?: boolean
+    privacyUrl?: boolean
+    supportEmail?: boolean
+    supportPhone?: boolean
+    websiteUrl?: boolean
+    instagramUrl?: boolean
+    facebookUrl?: boolean
+    twitterUrl?: boolean
+    linkedinUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["clubBranding"]>
+
+  export type ClubBrandingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    accentColor?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    logoHeaderUrl?: boolean
+    logoMenuUrl?: boolean
+    logoFooterUrl?: boolean
+    bannerHomeUrl?: boolean
+    bannerPromoUrl?: boolean
+    welcomeMessage?: boolean
+    aboutUs?: boolean
+    termsUrl?: boolean
+    privacyUrl?: boolean
+    supportEmail?: boolean
+    supportPhone?: boolean
+    websiteUrl?: boolean
+    instagramUrl?: boolean
+    facebookUrl?: boolean
+    twitterUrl?: boolean
+    linkedinUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["clubBranding"]>
+
+  export type ClubBrandingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    accentColor?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    logoHeaderUrl?: boolean
+    logoMenuUrl?: boolean
+    logoFooterUrl?: boolean
+    bannerHomeUrl?: boolean
+    bannerPromoUrl?: boolean
+    welcomeMessage?: boolean
+    aboutUs?: boolean
+    termsUrl?: boolean
+    privacyUrl?: boolean
+    supportEmail?: boolean
+    supportPhone?: boolean
+    websiteUrl?: boolean
+    instagramUrl?: boolean
+    facebookUrl?: boolean
+    twitterUrl?: boolean
+    linkedinUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["clubBranding"]>
+
+  export type ClubBrandingSelectScalar = {
+    id?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    accentColor?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    logoHeaderUrl?: boolean
+    logoMenuUrl?: boolean
+    logoFooterUrl?: boolean
+    bannerHomeUrl?: boolean
+    bannerPromoUrl?: boolean
+    welcomeMessage?: boolean
+    aboutUs?: boolean
+    termsUrl?: boolean
+    privacyUrl?: boolean
+    supportEmail?: boolean
+    supportPhone?: boolean
+    websiteUrl?: boolean
+    instagramUrl?: boolean
+    facebookUrl?: boolean
+    twitterUrl?: boolean
+    linkedinUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClubBrandingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "textColor" | "logoHeaderUrl" | "logoMenuUrl" | "logoFooterUrl" | "bannerHomeUrl" | "bannerPromoUrl" | "welcomeMessage" | "aboutUs" | "termsUrl" | "privacyUrl" | "supportEmail" | "supportPhone" | "websiteUrl" | "instagramUrl" | "facebookUrl" | "twitterUrl" | "linkedinUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["clubBranding"]>
+
+  export type $ClubBrandingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClubBranding"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      primaryColor: string
+      secondaryColor: string
+      accentColor: string
+      backgroundColor: string
+      textColor: string
+      logoHeaderUrl: string | null
+      logoMenuUrl: string | null
+      logoFooterUrl: string | null
+      bannerHomeUrl: string | null
+      bannerPromoUrl: string | null
+      welcomeMessage: string | null
+      aboutUs: string | null
+      termsUrl: string | null
+      privacyUrl: string | null
+      supportEmail: string | null
+      supportPhone: string | null
+      websiteUrl: string | null
+      instagramUrl: string | null
+      facebookUrl: string | null
+      twitterUrl: string | null
+      linkedinUrl: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["clubBranding"]>
+    composites: {}
+  }
+
+  type ClubBrandingGetPayload<S extends boolean | null | undefined | ClubBrandingDefaultArgs> = $Result.GetResult<Prisma.$ClubBrandingPayload, S>
+
+  type ClubBrandingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubBrandingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubBrandingCountAggregateInputType | true
+    }
+
+  export interface ClubBrandingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClubBranding'], meta: { name: 'ClubBranding' } }
+    /**
+     * Find zero or one ClubBranding that matches the filter.
+     * @param {ClubBrandingFindUniqueArgs} args - Arguments to find a ClubBranding
+     * @example
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClubBrandingFindUniqueArgs>(args: SelectSubset<T, ClubBrandingFindUniqueArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClubBranding that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClubBrandingFindUniqueOrThrowArgs} args - Arguments to find a ClubBranding
+     * @example
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClubBrandingFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubBrandingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClubBranding that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingFindFirstArgs} args - Arguments to find a ClubBranding
+     * @example
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClubBrandingFindFirstArgs>(args?: SelectSubset<T, ClubBrandingFindFirstArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClubBranding that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingFindFirstOrThrowArgs} args - Arguments to find a ClubBranding
+     * @example
+     * // Get one ClubBranding
+     * const clubBranding = await prisma.clubBranding.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClubBrandingFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubBrandingFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClubBrandings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClubBrandings
+     * const clubBrandings = await prisma.clubBranding.findMany()
+     * 
+     * // Get first 10 ClubBrandings
+     * const clubBrandings = await prisma.clubBranding.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clubBrandingWithIdOnly = await prisma.clubBranding.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClubBrandingFindManyArgs>(args?: SelectSubset<T, ClubBrandingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClubBranding.
+     * @param {ClubBrandingCreateArgs} args - Arguments to create a ClubBranding.
+     * @example
+     * // Create one ClubBranding
+     * const ClubBranding = await prisma.clubBranding.create({
+     *   data: {
+     *     // ... data to create a ClubBranding
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClubBrandingCreateArgs>(args: SelectSubset<T, ClubBrandingCreateArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClubBrandings.
+     * @param {ClubBrandingCreateManyArgs} args - Arguments to create many ClubBrandings.
+     * @example
+     * // Create many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClubBrandingCreateManyArgs>(args?: SelectSubset<T, ClubBrandingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClubBrandings and returns the data saved in the database.
+     * @param {ClubBrandingCreateManyAndReturnArgs} args - Arguments to create many ClubBrandings.
+     * @example
+     * // Create many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClubBrandings and only return the `id`
+     * const clubBrandingWithIdOnly = await prisma.clubBranding.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClubBrandingCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubBrandingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClubBranding.
+     * @param {ClubBrandingDeleteArgs} args - Arguments to delete one ClubBranding.
+     * @example
+     * // Delete one ClubBranding
+     * const ClubBranding = await prisma.clubBranding.delete({
+     *   where: {
+     *     // ... filter to delete one ClubBranding
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClubBrandingDeleteArgs>(args: SelectSubset<T, ClubBrandingDeleteArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClubBranding.
+     * @param {ClubBrandingUpdateArgs} args - Arguments to update one ClubBranding.
+     * @example
+     * // Update one ClubBranding
+     * const clubBranding = await prisma.clubBranding.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClubBrandingUpdateArgs>(args: SelectSubset<T, ClubBrandingUpdateArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClubBrandings.
+     * @param {ClubBrandingDeleteManyArgs} args - Arguments to filter ClubBrandings to delete.
+     * @example
+     * // Delete a few ClubBrandings
+     * const { count } = await prisma.clubBranding.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClubBrandingDeleteManyArgs>(args?: SelectSubset<T, ClubBrandingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClubBrandings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClubBrandingUpdateManyArgs>(args: SelectSubset<T, ClubBrandingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClubBrandings and returns the data updated in the database.
+     * @param {ClubBrandingUpdateManyAndReturnArgs} args - Arguments to update many ClubBrandings.
+     * @example
+     * // Update many ClubBrandings
+     * const clubBranding = await prisma.clubBranding.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClubBrandings and only return the `id`
+     * const clubBrandingWithIdOnly = await prisma.clubBranding.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClubBrandingUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubBrandingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClubBranding.
+     * @param {ClubBrandingUpsertArgs} args - Arguments to update or create a ClubBranding.
+     * @example
+     * // Update or create a ClubBranding
+     * const clubBranding = await prisma.clubBranding.upsert({
+     *   create: {
+     *     // ... data to create a ClubBranding
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClubBranding we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClubBrandingUpsertArgs>(args: SelectSubset<T, ClubBrandingUpsertArgs<ExtArgs>>): Prisma__ClubBrandingClient<$Result.GetResult<Prisma.$ClubBrandingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClubBrandings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingCountArgs} args - Arguments to filter ClubBrandings to count.
+     * @example
+     * // Count the number of ClubBrandings
+     * const count = await prisma.clubBranding.count({
+     *   where: {
+     *     // ... the filter for the ClubBrandings we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClubBrandingCountArgs>(
+      args?: Subset<T, ClubBrandingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClubBrandingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClubBranding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClubBrandingAggregateArgs>(args: Subset<T, ClubBrandingAggregateArgs>): Prisma.PrismaPromise<GetClubBrandingAggregateType<T>>
+
+    /**
+     * Group by ClubBranding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubBrandingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClubBrandingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClubBrandingGroupByArgs['orderBy'] }
+        : { orderBy?: ClubBrandingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClubBrandingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubBrandingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClubBranding model
+   */
+  readonly fields: ClubBrandingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClubBranding.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClubBrandingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClubBranding model
+   */
+  interface ClubBrandingFieldRefs {
+    readonly id: FieldRef<"ClubBranding", 'String'>
+    readonly primaryColor: FieldRef<"ClubBranding", 'String'>
+    readonly secondaryColor: FieldRef<"ClubBranding", 'String'>
+    readonly accentColor: FieldRef<"ClubBranding", 'String'>
+    readonly backgroundColor: FieldRef<"ClubBranding", 'String'>
+    readonly textColor: FieldRef<"ClubBranding", 'String'>
+    readonly logoHeaderUrl: FieldRef<"ClubBranding", 'String'>
+    readonly logoMenuUrl: FieldRef<"ClubBranding", 'String'>
+    readonly logoFooterUrl: FieldRef<"ClubBranding", 'String'>
+    readonly bannerHomeUrl: FieldRef<"ClubBranding", 'String'>
+    readonly bannerPromoUrl: FieldRef<"ClubBranding", 'String'>
+    readonly welcomeMessage: FieldRef<"ClubBranding", 'String'>
+    readonly aboutUs: FieldRef<"ClubBranding", 'String'>
+    readonly termsUrl: FieldRef<"ClubBranding", 'String'>
+    readonly privacyUrl: FieldRef<"ClubBranding", 'String'>
+    readonly supportEmail: FieldRef<"ClubBranding", 'String'>
+    readonly supportPhone: FieldRef<"ClubBranding", 'String'>
+    readonly websiteUrl: FieldRef<"ClubBranding", 'String'>
+    readonly instagramUrl: FieldRef<"ClubBranding", 'String'>
+    readonly facebookUrl: FieldRef<"ClubBranding", 'String'>
+    readonly twitterUrl: FieldRef<"ClubBranding", 'String'>
+    readonly linkedinUrl: FieldRef<"ClubBranding", 'String'>
+    readonly createdAt: FieldRef<"ClubBranding", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClubBranding", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClubBranding findUnique
+   */
+  export type ClubBrandingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * Filter, which ClubBranding to fetch.
+     */
+    where: ClubBrandingWhereUniqueInput
+  }
+
+  /**
+   * ClubBranding findUniqueOrThrow
+   */
+  export type ClubBrandingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * Filter, which ClubBranding to fetch.
+     */
+    where: ClubBrandingWhereUniqueInput
+  }
+
+  /**
+   * ClubBranding findFirst
+   */
+  export type ClubBrandingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * Filter, which ClubBranding to fetch.
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubBrandings to fetch.
+     */
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClubBrandings.
+     */
+    cursor?: ClubBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClubBrandings.
+     */
+    distinct?: ClubBrandingScalarFieldEnum | ClubBrandingScalarFieldEnum[]
+  }
+
+  /**
+   * ClubBranding findFirstOrThrow
+   */
+  export type ClubBrandingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * Filter, which ClubBranding to fetch.
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubBrandings to fetch.
+     */
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClubBrandings.
+     */
+    cursor?: ClubBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClubBrandings.
+     */
+    distinct?: ClubBrandingScalarFieldEnum | ClubBrandingScalarFieldEnum[]
+  }
+
+  /**
+   * ClubBranding findMany
+   */
+  export type ClubBrandingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * Filter, which ClubBrandings to fetch.
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClubBrandings to fetch.
+     */
+    orderBy?: ClubBrandingOrderByWithRelationInput | ClubBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClubBrandings.
+     */
+    cursor?: ClubBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClubBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClubBrandings.
+     */
+    skip?: number
+    distinct?: ClubBrandingScalarFieldEnum | ClubBrandingScalarFieldEnum[]
+  }
+
+  /**
+   * ClubBranding create
+   */
+  export type ClubBrandingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ClubBranding.
+     */
+    data: XOR<ClubBrandingCreateInput, ClubBrandingUncheckedCreateInput>
+  }
+
+  /**
+   * ClubBranding createMany
+   */
+  export type ClubBrandingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClubBrandings.
+     */
+    data: ClubBrandingCreateManyInput | ClubBrandingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClubBranding createManyAndReturn
+   */
+  export type ClubBrandingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClubBrandings.
+     */
+    data: ClubBrandingCreateManyInput | ClubBrandingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClubBranding update
+   */
+  export type ClubBrandingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ClubBranding.
+     */
+    data: XOR<ClubBrandingUpdateInput, ClubBrandingUncheckedUpdateInput>
+    /**
+     * Choose, which ClubBranding to update.
+     */
+    where: ClubBrandingWhereUniqueInput
+  }
+
+  /**
+   * ClubBranding updateMany
+   */
+  export type ClubBrandingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClubBrandings.
+     */
+    data: XOR<ClubBrandingUpdateManyMutationInput, ClubBrandingUncheckedUpdateManyInput>
+    /**
+     * Filter which ClubBrandings to update
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * Limit how many ClubBrandings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClubBranding updateManyAndReturn
+   */
+  export type ClubBrandingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * The data used to update ClubBrandings.
+     */
+    data: XOR<ClubBrandingUpdateManyMutationInput, ClubBrandingUncheckedUpdateManyInput>
+    /**
+     * Filter which ClubBrandings to update
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * Limit how many ClubBrandings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClubBranding upsert
+   */
+  export type ClubBrandingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ClubBranding to update in case it exists.
+     */
+    where: ClubBrandingWhereUniqueInput
+    /**
+     * In case the ClubBranding found by the `where` argument doesn't exist, create a new ClubBranding with this data.
+     */
+    create: XOR<ClubBrandingCreateInput, ClubBrandingUncheckedCreateInput>
+    /**
+     * In case the ClubBranding was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClubBrandingUpdateInput, ClubBrandingUncheckedUpdateInput>
+  }
+
+  /**
+   * ClubBranding delete
+   */
+  export type ClubBrandingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+    /**
+     * Filter which ClubBranding to delete.
+     */
+    where: ClubBrandingWhereUniqueInput
+  }
+
+  /**
+   * ClubBranding deleteMany
+   */
+  export type ClubBrandingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClubBrandings to delete
+     */
+    where?: ClubBrandingWhereInput
+    /**
+     * Limit how many ClubBrandings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClubBranding without action
+   */
+  export type ClubBrandingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClubBranding
+     */
+    select?: ClubBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClubBranding
+     */
+    omit?: ClubBrandingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -25733,6 +27066,36 @@ export namespace Prisma {
   };
 
   export type WhatsappMessageScalarFieldEnum = (typeof WhatsappMessageScalarFieldEnum)[keyof typeof WhatsappMessageScalarFieldEnum]
+
+
+  export const ClubBrandingScalarFieldEnum: {
+    id: 'id',
+    primaryColor: 'primaryColor',
+    secondaryColor: 'secondaryColor',
+    accentColor: 'accentColor',
+    backgroundColor: 'backgroundColor',
+    textColor: 'textColor',
+    logoHeaderUrl: 'logoHeaderUrl',
+    logoMenuUrl: 'logoMenuUrl',
+    logoFooterUrl: 'logoFooterUrl',
+    bannerHomeUrl: 'bannerHomeUrl',
+    bannerPromoUrl: 'bannerPromoUrl',
+    welcomeMessage: 'welcomeMessage',
+    aboutUs: 'aboutUs',
+    termsUrl: 'termsUrl',
+    privacyUrl: 'privacyUrl',
+    supportEmail: 'supportEmail',
+    supportPhone: 'supportPhone',
+    websiteUrl: 'websiteUrl',
+    instagramUrl: 'instagramUrl',
+    facebookUrl: 'facebookUrl',
+    twitterUrl: 'twitterUrl',
+    linkedinUrl: 'linkedinUrl',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClubBrandingScalarFieldEnum = (typeof ClubBrandingScalarFieldEnum)[keyof typeof ClubBrandingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -27793,6 +29156,153 @@ export namespace Prisma {
     sentAt?: DateTimeWithAggregatesFilter<"WhatsappMessage"> | Date | string
   }
 
+  export type ClubBrandingWhereInput = {
+    AND?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    OR?: ClubBrandingWhereInput[]
+    NOT?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    id?: UuidFilter<"ClubBranding"> | string
+    primaryColor?: StringFilter<"ClubBranding"> | string
+    secondaryColor?: StringFilter<"ClubBranding"> | string
+    accentColor?: StringFilter<"ClubBranding"> | string
+    backgroundColor?: StringFilter<"ClubBranding"> | string
+    textColor?: StringFilter<"ClubBranding"> | string
+    logoHeaderUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    logoMenuUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    logoFooterUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    bannerHomeUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    bannerPromoUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    welcomeMessage?: StringNullableFilter<"ClubBranding"> | string | null
+    aboutUs?: StringNullableFilter<"ClubBranding"> | string | null
+    termsUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    privacyUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    supportEmail?: StringNullableFilter<"ClubBranding"> | string | null
+    supportPhone?: StringNullableFilter<"ClubBranding"> | string | null
+    websiteUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    instagramUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    facebookUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    twitterUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    linkedinUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    createdAt?: DateTimeFilter<"ClubBranding"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubBranding"> | Date | string
+  }
+
+  export type ClubBrandingOrderByWithRelationInput = {
+    id?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    accentColor?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    logoHeaderUrl?: SortOrderInput | SortOrder
+    logoMenuUrl?: SortOrderInput | SortOrder
+    logoFooterUrl?: SortOrderInput | SortOrder
+    bannerHomeUrl?: SortOrderInput | SortOrder
+    bannerPromoUrl?: SortOrderInput | SortOrder
+    welcomeMessage?: SortOrderInput | SortOrder
+    aboutUs?: SortOrderInput | SortOrder
+    termsUrl?: SortOrderInput | SortOrder
+    privacyUrl?: SortOrderInput | SortOrder
+    supportEmail?: SortOrderInput | SortOrder
+    supportPhone?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
+    instagramUrl?: SortOrderInput | SortOrder
+    facebookUrl?: SortOrderInput | SortOrder
+    twitterUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClubBrandingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    OR?: ClubBrandingWhereInput[]
+    NOT?: ClubBrandingWhereInput | ClubBrandingWhereInput[]
+    primaryColor?: StringFilter<"ClubBranding"> | string
+    secondaryColor?: StringFilter<"ClubBranding"> | string
+    accentColor?: StringFilter<"ClubBranding"> | string
+    backgroundColor?: StringFilter<"ClubBranding"> | string
+    textColor?: StringFilter<"ClubBranding"> | string
+    logoHeaderUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    logoMenuUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    logoFooterUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    bannerHomeUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    bannerPromoUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    welcomeMessage?: StringNullableFilter<"ClubBranding"> | string | null
+    aboutUs?: StringNullableFilter<"ClubBranding"> | string | null
+    termsUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    privacyUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    supportEmail?: StringNullableFilter<"ClubBranding"> | string | null
+    supportPhone?: StringNullableFilter<"ClubBranding"> | string | null
+    websiteUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    instagramUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    facebookUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    twitterUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    linkedinUrl?: StringNullableFilter<"ClubBranding"> | string | null
+    createdAt?: DateTimeFilter<"ClubBranding"> | Date | string
+    updatedAt?: DateTimeFilter<"ClubBranding"> | Date | string
+  }, "id">
+
+  export type ClubBrandingOrderByWithAggregationInput = {
+    id?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    accentColor?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    logoHeaderUrl?: SortOrderInput | SortOrder
+    logoMenuUrl?: SortOrderInput | SortOrder
+    logoFooterUrl?: SortOrderInput | SortOrder
+    bannerHomeUrl?: SortOrderInput | SortOrder
+    bannerPromoUrl?: SortOrderInput | SortOrder
+    welcomeMessage?: SortOrderInput | SortOrder
+    aboutUs?: SortOrderInput | SortOrder
+    termsUrl?: SortOrderInput | SortOrder
+    privacyUrl?: SortOrderInput | SortOrder
+    supportEmail?: SortOrderInput | SortOrder
+    supportPhone?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
+    instagramUrl?: SortOrderInput | SortOrder
+    facebookUrl?: SortOrderInput | SortOrder
+    twitterUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClubBrandingCountOrderByAggregateInput
+    _max?: ClubBrandingMaxOrderByAggregateInput
+    _min?: ClubBrandingMinOrderByAggregateInput
+  }
+
+  export type ClubBrandingScalarWhereWithAggregatesInput = {
+    AND?: ClubBrandingScalarWhereWithAggregatesInput | ClubBrandingScalarWhereWithAggregatesInput[]
+    OR?: ClubBrandingScalarWhereWithAggregatesInput[]
+    NOT?: ClubBrandingScalarWhereWithAggregatesInput | ClubBrandingScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ClubBranding"> | string
+    primaryColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    secondaryColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    accentColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    backgroundColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    textColor?: StringWithAggregatesFilter<"ClubBranding"> | string
+    logoHeaderUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    logoMenuUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    logoFooterUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    bannerHomeUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    bannerPromoUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    welcomeMessage?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    aboutUs?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    termsUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    privacyUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    supportEmail?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    supportPhone?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    websiteUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    instagramUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    facebookUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    twitterUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    linkedinUrl?: StringNullableWithAggregatesFilter<"ClubBranding"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClubBranding"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -29765,6 +31275,195 @@ export namespace Prisma {
     sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ClubBrandingCreateInput = {
+    id?: string
+    primaryColor?: string
+    secondaryColor?: string
+    accentColor?: string
+    backgroundColor?: string
+    textColor?: string
+    logoHeaderUrl?: string | null
+    logoMenuUrl?: string | null
+    logoFooterUrl?: string | null
+    bannerHomeUrl?: string | null
+    bannerPromoUrl?: string | null
+    welcomeMessage?: string | null
+    aboutUs?: string | null
+    termsUrl?: string | null
+    privacyUrl?: string | null
+    supportEmail?: string | null
+    supportPhone?: string | null
+    websiteUrl?: string | null
+    instagramUrl?: string | null
+    facebookUrl?: string | null
+    twitterUrl?: string | null
+    linkedinUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubBrandingUncheckedCreateInput = {
+    id?: string
+    primaryColor?: string
+    secondaryColor?: string
+    accentColor?: string
+    backgroundColor?: string
+    textColor?: string
+    logoHeaderUrl?: string | null
+    logoMenuUrl?: string | null
+    logoFooterUrl?: string | null
+    bannerHomeUrl?: string | null
+    bannerPromoUrl?: string | null
+    welcomeMessage?: string | null
+    aboutUs?: string | null
+    termsUrl?: string | null
+    privacyUrl?: string | null
+    supportEmail?: string | null
+    supportPhone?: string | null
+    websiteUrl?: string | null
+    instagramUrl?: string | null
+    facebookUrl?: string | null
+    twitterUrl?: string | null
+    linkedinUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubBrandingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    secondaryColor?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    textColor?: StringFieldUpdateOperationsInput | string
+    logoHeaderUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoMenuUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoFooterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerHomeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerPromoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    welcomeMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutUs?: NullableStringFieldUpdateOperationsInput | string | null
+    termsUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    privacyUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    supportPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubBrandingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    secondaryColor?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    textColor?: StringFieldUpdateOperationsInput | string
+    logoHeaderUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoMenuUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoFooterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerHomeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerPromoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    welcomeMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutUs?: NullableStringFieldUpdateOperationsInput | string | null
+    termsUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    privacyUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    supportPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubBrandingCreateManyInput = {
+    id?: string
+    primaryColor?: string
+    secondaryColor?: string
+    accentColor?: string
+    backgroundColor?: string
+    textColor?: string
+    logoHeaderUrl?: string | null
+    logoMenuUrl?: string | null
+    logoFooterUrl?: string | null
+    bannerHomeUrl?: string | null
+    bannerPromoUrl?: string | null
+    welcomeMessage?: string | null
+    aboutUs?: string | null
+    termsUrl?: string | null
+    privacyUrl?: string | null
+    supportEmail?: string | null
+    supportPhone?: string | null
+    websiteUrl?: string | null
+    instagramUrl?: string | null
+    facebookUrl?: string | null
+    twitterUrl?: string | null
+    linkedinUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubBrandingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    secondaryColor?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    textColor?: StringFieldUpdateOperationsInput | string
+    logoHeaderUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoMenuUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoFooterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerHomeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerPromoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    welcomeMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutUs?: NullableStringFieldUpdateOperationsInput | string | null
+    termsUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    privacyUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    supportPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubBrandingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    secondaryColor?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    textColor?: StringFieldUpdateOperationsInput | string
+    logoHeaderUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoMenuUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoFooterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerHomeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerPromoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    welcomeMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutUs?: NullableStringFieldUpdateOperationsInput | string | null
+    termsUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    privacyUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    supportPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -31436,6 +33135,87 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel>
     _max?: NestedEnumWhatsappMessageStatusFilter<$PrismaModel>
+  }
+
+  export type ClubBrandingCountOrderByAggregateInput = {
+    id?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    accentColor?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    logoHeaderUrl?: SortOrder
+    logoMenuUrl?: SortOrder
+    logoFooterUrl?: SortOrder
+    bannerHomeUrl?: SortOrder
+    bannerPromoUrl?: SortOrder
+    welcomeMessage?: SortOrder
+    aboutUs?: SortOrder
+    termsUrl?: SortOrder
+    privacyUrl?: SortOrder
+    supportEmail?: SortOrder
+    supportPhone?: SortOrder
+    websiteUrl?: SortOrder
+    instagramUrl?: SortOrder
+    facebookUrl?: SortOrder
+    twitterUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClubBrandingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    accentColor?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    logoHeaderUrl?: SortOrder
+    logoMenuUrl?: SortOrder
+    logoFooterUrl?: SortOrder
+    bannerHomeUrl?: SortOrder
+    bannerPromoUrl?: SortOrder
+    welcomeMessage?: SortOrder
+    aboutUs?: SortOrder
+    termsUrl?: SortOrder
+    privacyUrl?: SortOrder
+    supportEmail?: SortOrder
+    supportPhone?: SortOrder
+    websiteUrl?: SortOrder
+    instagramUrl?: SortOrder
+    facebookUrl?: SortOrder
+    twitterUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClubBrandingMinOrderByAggregateInput = {
+    id?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    accentColor?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    logoHeaderUrl?: SortOrder
+    logoMenuUrl?: SortOrder
+    logoFooterUrl?: SortOrder
+    bannerHomeUrl?: SortOrder
+    bannerPromoUrl?: SortOrder
+    welcomeMessage?: SortOrder
+    aboutUs?: SortOrder
+    termsUrl?: SortOrder
+    privacyUrl?: SortOrder
+    supportEmail?: SortOrder
+    supportPhone?: SortOrder
+    websiteUrl?: SortOrder
+    instagramUrl?: SortOrder
+    facebookUrl?: SortOrder
+    twitterUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AnalyticsEventCreateNestedManyWithoutUserInput = {

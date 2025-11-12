@@ -382,17 +382,17 @@ model GroupUser {
 }
 
 model WhatsappMessage {
-  id              String                @id @default(uuid()) @db.Uuid
-  senderUserId    String                @map("sender_user_id") @db.Uuid
-  templateId      String?               @map("template_id") @db.VarChar(50)
-  message         String
-  recipientUserIds Json                 @map("recipient_user_ids") @db.Json
-  recipientPhones Json                 @map("recipient_phones") @db.Json
-  status          WhatsappMessageStatus @default(sending)
-  successCount    Int                   @default(0) @map("success_count")
-  failureCount    Int                   @default(0) @map("failure_count")
-  results         Json?                 @db.Json
-  sentAt          DateTime              @default(now()) @map("sent_at") @db.Timestamptz(6)
+  id               String                @id @default(uuid()) @db.Uuid
+  senderUserId     String                @map("sender_user_id") @db.Uuid
+  templateId       String?               @map("template_id") @db.VarChar(50)
+  message          String
+  recipientUserIds Json                  @map("recipient_user_ids") @db.Json
+  recipientPhones  Json                  @map("recipient_phones") @db.Json
+  status           WhatsappMessageStatus @default(sending)
+  successCount     Int                   @default(0) @map("success_count")
+  failureCount     Int                   @default(0) @map("failure_count")
+  results          Json?                 @db.Json
+  sentAt           DateTime              @default(now()) @map("sent_at") @db.Timestamptz(6)
 
   @@index([senderUserId])
   @@index([sentAt])
@@ -405,44 +405,44 @@ model WhatsappMessage {
 // ==========================================
 
 model ClubBranding {
-  id               String   @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
 
   // Theme Colors (OTA updateable)
-  primaryColor     String   @default("#3B82F6") @map("primary_color") @db.VarChar(7)
-  secondaryColor   String   @default("#10B981") @map("secondary_color") @db.VarChar(7)
-  accentColor      String   @default("#F59E0B") @map("accent_color") @db.VarChar(7)
-  backgroundColor  String   @default("#FFFFFF") @map("background_color") @db.VarChar(7)
-  textColor        String   @default("#1F2937") @map("text_color") @db.VarChar(7)
+  primaryColor    String @default("#3B82F6") @map("primary_color") @db.VarChar(7)
+  secondaryColor  String @default("#10B981") @map("secondary_color") @db.VarChar(7)
+  accentColor     String @default("#F59E0B") @map("accent_color") @db.VarChar(7)
+  backgroundColor String @default("#FFFFFF") @map("background_color") @db.VarChar(7)
+  textColor       String @default("#1F2937") @map("text_color") @db.VarChar(7)
 
   // Internal Logos (Fixed URLs on S3)
-  logoHeaderUrl    String?  @map("logo_header_url") @db.VarChar(500)
-  logoMenuUrl      String?  @map("logo_menu_url") @db.VarChar(500)
-  logoFooterUrl    String?  @map("logo_footer_url") @db.VarChar(500)
+  logoHeaderUrl String? @map("logo_header_url") @db.VarChar(500)
+  logoMenuUrl   String? @map("logo_menu_url") @db.VarChar(500)
+  logoFooterUrl String? @map("logo_footer_url") @db.VarChar(500)
 
   // Banners (Fixed URLs on S3)
-  bannerHomeUrl    String?  @map("banner_home_url") @db.VarChar(500)
-  bannerPromoUrl   String?  @map("banner_promo_url") @db.VarChar(500)
+  bannerHomeUrl  String? @map("banner_home_url") @db.VarChar(500)
+  bannerPromoUrl String? @map("banner_promo_url") @db.VarChar(500)
 
   // Custom Text Content
-  welcomeMessage   String?  @map("welcome_message") @db.Text
-  aboutUs          String?  @map("about_us") @db.Text
+  welcomeMessage String? @map("welcome_message") @db.Text
+  aboutUs        String? @map("about_us") @db.Text
 
   // Support Links
-  termsUrl         String?  @map("terms_url") @db.VarChar(500)
-  privacyUrl       String?  @map("privacy_url") @db.VarChar(500)
-  supportEmail     String?  @map("support_email") @db.VarChar(100)
-  supportPhone     String?  @map("support_phone") @db.VarChar(20)
-  websiteUrl       String?  @map("website_url") @db.VarChar(500)
+  termsUrl     String? @map("terms_url") @db.VarChar(500)
+  privacyUrl   String? @map("privacy_url") @db.VarChar(500)
+  supportEmail String? @map("support_email") @db.VarChar(100)
+  supportPhone String? @map("support_phone") @db.VarChar(20)
+  websiteUrl   String? @map("website_url") @db.VarChar(500)
 
   // Social Media
-  instagramUrl     String?  @map("instagram_url") @db.VarChar(500)
-  facebookUrl      String?  @map("facebook_url") @db.VarChar(500)
-  twitterUrl       String?  @map("twitter_url") @db.VarChar(500)
-  linkedinUrl      String?  @map("linkedin_url") @db.VarChar(500)
+  instagramUrl String? @map("instagram_url") @db.VarChar(500)
+  facebookUrl  String? @map("facebook_url") @db.VarChar(500)
+  twitterUrl   String? @map("twitter_url") @db.VarChar(500)
+  linkedinUrl  String? @map("linkedin_url") @db.VarChar(500)
 
   // Timestamps
-  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("club_branding")
 }

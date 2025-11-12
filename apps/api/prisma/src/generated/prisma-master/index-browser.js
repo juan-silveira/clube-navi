@@ -171,6 +171,30 @@ exports.Prisma.ClubBrandingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ClubAppConfigScalarFieldEnum = {
+  id: 'id',
+  clubId: 'clubId',
+  appName: 'appName',
+  tenantSlug: 'tenantSlug',
+  appDescription: 'appDescription',
+  bundleId: 'bundleId',
+  packageName: 'packageName',
+  urlScheme: 'urlScheme',
+  appIconUrl: 'appIconUrl',
+  splashScreenUrl: 'splashScreenUrl',
+  currentVersion: 'currentVersion',
+  iosBuildNumber: 'iosBuildNumber',
+  androidBuildNumber: 'androidBuildNumber',
+  appStoreStatus: 'appStoreStatus',
+  playStoreStatus: 'playStoreStatus',
+  appStoreUrl: 'appStoreUrl',
+  playStoreUrl: 'playStoreUrl',
+  autoBuildEnabled: 'autoBuildEnabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  publishedAt: 'publishedAt'
+};
+
 exports.Prisma.ClubModuleScalarFieldEnum = {
   id: 'id',
   clubId: 'clubId',
@@ -293,6 +317,28 @@ exports.Prisma.ClubUsageStatsScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  clubId: 'clubId',
+  notificationType: 'notificationType',
+  targetType: 'targetType',
+  targetClubIds: 'targetClubIds',
+  title: 'title',
+  message: 'message',
+  data: 'data',
+  totalSent: 'totalSent',
+  totalDelivered: 'totalDelivered',
+  totalFailed: 'totalFailed',
+  totalClicked: 'totalClicked',
+  status: 'status',
+  scheduledFor: 'scheduledFor',
+  sentAt: 'sentAt',
+  sentBy: 'sentBy',
+  errorLog: 'errorLog',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -344,6 +390,15 @@ exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
   CANCELED: 'CANCELED'
 };
 
+exports.AppStoreStatus = exports.$Enums.AppStoreStatus = {
+  DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  IN_REVIEW: 'IN_REVIEW',
+  REJECTED: 'REJECTED',
+  PUBLISHED: 'PUBLISHED',
+  REMOVED: 'REMOVED'
+};
+
 exports.ModuleKey = exports.$Enums.ModuleKey = {
   marketplace: 'marketplace',
   internet: 'internet',
@@ -363,9 +418,34 @@ exports.AdminRole = exports.$Enums.AdminRole = {
   support: 'support'
 };
 
+exports.NotificationType = exports.$Enums.NotificationType = {
+  push_notification: 'push_notification',
+  email: 'email',
+  sms: 'sms',
+  in_app: 'in_app'
+};
+
+exports.NotificationTarget = exports.$Enums.NotificationTarget = {
+  all_clubs: 'all_clubs',
+  specific_clubs: 'specific_clubs',
+  active_clubs: 'active_clubs',
+  trial_clubs: 'trial_clubs',
+  suspended_clubs: 'suspended_clubs'
+};
+
+exports.NotificationStatus = exports.$Enums.NotificationStatus = {
+  pending: 'pending',
+  scheduled: 'scheduled',
+  sending: 'sending',
+  sent: 'sent',
+  failed: 'failed',
+  cancelled: 'cancelled'
+};
+
 exports.Prisma.ModelName = {
   Club: 'Club',
   ClubBranding: 'ClubBranding',
+  ClubAppConfig: 'ClubAppConfig',
   ClubModule: 'ClubModule',
   ClubStats: 'ClubStats',
   GlobalStats: 'GlobalStats',
@@ -374,7 +454,8 @@ exports.Prisma.ModelName = {
   ClubAdmin: 'ClubAdmin',
   SuperAdmin: 'SuperAdmin',
   ClubApiKey: 'ClubApiKey',
-  ClubUsageStats: 'ClubUsageStats'
+  ClubUsageStats: 'ClubUsageStats',
+  Notification: 'Notification'
 };
 
 /**

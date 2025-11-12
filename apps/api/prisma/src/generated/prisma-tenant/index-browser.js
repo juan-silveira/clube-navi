@@ -394,6 +394,33 @@ exports.Prisma.WhatsappMessageScalarFieldEnum = {
   sentAt: 'sentAt'
 };
 
+exports.Prisma.ClubBrandingScalarFieldEnum = {
+  id: 'id',
+  primaryColor: 'primaryColor',
+  secondaryColor: 'secondaryColor',
+  accentColor: 'accentColor',
+  backgroundColor: 'backgroundColor',
+  textColor: 'textColor',
+  logoHeaderUrl: 'logoHeaderUrl',
+  logoMenuUrl: 'logoMenuUrl',
+  logoFooterUrl: 'logoFooterUrl',
+  bannerHomeUrl: 'bannerHomeUrl',
+  bannerPromoUrl: 'bannerPromoUrl',
+  welcomeMessage: 'welcomeMessage',
+  aboutUs: 'aboutUs',
+  termsUrl: 'termsUrl',
+  privacyUrl: 'privacyUrl',
+  supportEmail: 'supportEmail',
+  supportPhone: 'supportPhone',
+  websiteUrl: 'websiteUrl',
+  instagramUrl: 'instagramUrl',
+  facebookUrl: 'facebookUrl',
+  twitterUrl: 'twitterUrl',
+  linkedinUrl: 'linkedinUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -546,7 +573,8 @@ exports.Prisma.ModelName = {
   UserRole: 'UserRole',
   Group: 'Group',
   GroupUser: 'GroupUser',
-  WhatsappMessage: 'WhatsappMessage'
+  WhatsappMessage: 'WhatsappMessage',
+  ClubBranding: 'ClubBranding'
 };
 
 /**
