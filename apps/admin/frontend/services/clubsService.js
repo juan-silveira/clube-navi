@@ -1,13 +1,15 @@
 import api from './api';
 
-const SUPER_ADMIN_API = process.env.NEXT_PUBLIC_SUPER_ADMIN_API_URL || 'http://localhost:8033/api/super-admin';
+const SUPER_ADMIN_API = '/api/super-admin';
 
 class ClubsService {
   /**
    * List all clubs with pagination and filters
    */
   async listClubs(params = {}) {
+    console.log('🔍 [ClubsService] Chamando:', `${SUPER_ADMIN_API}/clubs`, { params });
     const { data } = await api.get(`${SUPER_ADMIN_API}/clubs`, { params });
+    console.log('🔍 [ClubsService] Resposta raw:', data);
     return data;
   }
 

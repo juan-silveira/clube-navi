@@ -81,7 +81,17 @@ let refreshTokenThrottle = {
 api.interceptors.request.use(
   (config) => {
     const { accessToken, isAuthenticated, user } = useAuthStore.getState();
-    
+
+    // Log para debug de super-admin
+    if (config.url?.includes('/super-admin/clubs')) {
+      console.log('🔐 [API Interceptor] Super Admin Request:', {
+        url: config.url,
+        hasToken: !!accessToken,
+        isAuthenticated,
+        userEmail: user?.email
+      });
+    }
+
     // PROTEÇÃO SUPREMA: Bloquear TODAS as chamadas balance-sync se flag global ativa
     if (config.url?.includes('/balance-sync/') && isBalanceSyncAPIBlocked) {
       const ultraSilentError = Object.create(Error.prototype);
@@ -92,7 +102,7 @@ api.interceptors.request.use(
       ultraSilentError.toJSON = () => ({});
       return Promise.reject(ultraSilentError);
     }
-    
+
     // PROTEÇÃO CRÍTICA: Bloquear chamadas de balance-sync se usuário não está autenticado
     if (config.url?.includes('/balance-sync/') && (!isAuthenticated || !user?.publicKey || !accessToken)) {
       // Criar um erro silencioso que não gera logs no DevTools
@@ -105,7 +115,7 @@ api.interceptors.request.use(
       silentError.toJSON = () => ({}); // Evita serialização
       return Promise.reject(silentError);
     }
-    
+
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -1020,6 +1030,12 @@ export const clubAdminsService = {
   // Obter admin por ID
   getById: async (id) => {
     const response = await api.get(`/api/super-admin/club-admins/${id}`);
+    return response.data;
+  },
+
+  // Atualizar admin
+  update: async (id, data) => {
+    const response = await api.put(`/api/super-admin/club-admins/${id}`, data);
     return response.data;
   },
 

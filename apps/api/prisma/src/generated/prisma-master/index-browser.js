@@ -285,6 +285,8 @@ exports.Prisma.ClubAdminScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  phone: 'phone',
+  cpf: 'cpf',
   role: 'role',
   isActive: 'isActive',
   lastLoginAt: 'lastLoginAt',

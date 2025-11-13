@@ -124,6 +124,8 @@ class ClubAdminsController {
           clubId: true,
           name: true,
           email: true,
+          phone: true,
+          cpf: true,
           role: true,
           isActive: true,
           lastLoginAt: true,
@@ -134,8 +136,7 @@ class ClubAdminsController {
               id: true,
               companyName: true,
               slug: true,
-              status: true,
-              subscriptionStatus: true,
+              isActive: true,
               branding: {
                 select: {
                   logoUrl: true,
@@ -169,6 +170,58 @@ class ClubAdminsController {
 
     } catch (error) {
       console.error('❌ [ClubAdmins] Get by ID error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
+  }
+
+  /**
+   * Update club admin
+   * @route PUT /api/super-admin/club-admins/:id
+   */
+  async update(req, res) {
+    try {
+      const { id } = req.params;
+      const { name, cpf, phone } = req.body;
+
+      // Build update data
+      const updateData = {};
+      if (name !== undefined) updateData.name = name;
+      if (cpf !== undefined) updateData.cpf = cpf;
+      if (phone !== undefined) updateData.phone = phone;
+
+      const clubAdmin = await masterPrisma.clubAdmin.update({
+        where: { id },
+        data: updateData,
+        include: {
+          club: {
+            select: {
+              id: true,
+              companyName: true,
+              slug: true,
+              branding: {
+                select: {
+                  logoUrl: true,
+                  appName: true,
+                  primaryColor: true
+                }
+              }
+            }
+          }
+        }
+      });
+
+      res.json({
+        success: true,
+        message: 'Club admin updated successfully',
+        data: { clubAdmin }
+      });
+
+    } catch (error) {
+      console.error('❌ [ClubAdmins] Update error:', error);
       res.status(500).json({
         success: false,
         message: 'Internal server error',

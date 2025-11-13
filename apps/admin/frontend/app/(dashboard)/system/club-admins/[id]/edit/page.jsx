@@ -6,48 +6,31 @@ import useDarkMode from "@/hooks/useDarkMode";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Textinput from "@/components/ui/Textinput";
+import Tooltip from "@/components/ui/Tooltip";
 import usePermissions from "@/hooks/usePermissions";
+import { useAlertContext } from '@/contexts/AlertContext';
+import { clubAdminsService } from '@/services/api';
+import Badge from "@/components/ui/Badge";
 import {
   ArrowLeft,
-  Save,
-  X
+  CheckCircle,
+  XCircle
 } from 'lucide-react';
-
-// Mock data
-const getMockAdmin = (id) => ({
-  id,
-  name: 'João Silva',
-  email: 'joao@clube-navi.com',
-  role: 'admin',
-  isActive: true,
-  clubId: 1,
-  permissions: ['manage_users', 'view_reports', 'manage_products'],
-  phone: '+55 11 98765-4321',
-  cpf: '123.456.789-00'
-});
-
-const mockClubs = [
-  { id: 1, name: 'Clube Navi', slug: 'clube-navi' },
-  { id: 2, name: 'Empresa Teste', slug: 'empresa-teste' }
-];
 
 const ClubAdminEditPage = () => {
   const params = useParams();
   const router = useRouter();
   const permissions = usePermissions();
+  const { showSuccess, showError } = useAlertContext();
   const [isDark] = useDarkMode();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [admin, setAdmin] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     cpf: '',
-    phone: '',
-    clubId: '',
-    role: 'admin',
-    isActive: true,
-    permissions: []
+    phone: ''
   });
 
   useEffect(() => {
@@ -56,33 +39,60 @@ const ClubAdminEditPage = () => {
       return;
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      const admin = getMockAdmin(params.id);
-      setFormData({
-        name: admin.name,
-        email: admin.email,
-        cpf: admin.cpf,
-        phone: admin.phone,
-        clubId: admin.clubId,
-        role: admin.role,
-        isActive: admin.isActive,
-        permissions: admin.permissions
-      });
-      setLoading(false);
-    }, 500);
+    loadAdmin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
+
+  const loadAdmin = async () => {
+    try {
+      setLoading(true);
+      const response = await clubAdminsService.getById(params.id);
+      if (response.success) {
+        const adminData = response.data.clubAdmin;
+        setAdmin(adminData);
+        setFormData({
+          name: adminData.name,
+          cpf: adminData.cpf || '',
+          phone: adminData.phone || ''
+        });
+      }
+    } catch (error) {
+      console.error('Error loading club admin:', error);
+      showError('Erro ao carregar dados do administrador');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await clubAdminsService.update(params.id, formData);
+      if (response.success) {
+        showSuccess('Administrador atualizado com sucesso');
+        router.push(`/system/club-admins/${params.id}`);
+      }
+    } catch (error) {
+      console.error('Error updating admin:', error);
+      showError('Erro ao atualizar administrador');
+    } finally {
       setSaving(false);
-      router.push(`/system/club-admins/${params.id}`);
-    }, 1000);
+    }
+  };
+
+  const handleToggleStatus = async () => {
+    try {
+      const response = await clubAdminsService.updateStatus(admin.id, !admin.isActive);
+      if (response.success) {
+        showSuccess(response.message || 'Status atualizado com sucesso');
+        loadAdmin();
+      }
+    } catch (error) {
+      console.error('Error toggling admin status:', error);
+      showError('Erro ao alterar status do administrador');
+    }
   };
 
   const handleCancel = () => {
@@ -106,13 +116,14 @@ const ClubAdminEditPage = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button
-            icon={<ArrowLeft size={16} />}
-            className="btn-secondary"
-            onClick={handleCancel}
-          >
-            Voltar
-          </Button>
+          <Tooltip content="Voltar" placement="bottom">
+            <button
+              onClick={handleCancel}
+              className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors"
+            >
+              <ArrowLeft size={20} className="text-slate-600 dark:text-slate-300" />
+            </button>
+          </Tooltip>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
               Editar Administrador
@@ -122,7 +133,34 @@ const ClubAdminEditPage = () => {
             </p>
           </div>
         </div>
+        <div className="flex gap-2">
+          {admin && (
+            <Button
+              className={admin.isActive ? "btn-outline-danger" : "btn-outline-success"}
+              onClick={handleToggleStatus}
+              icon={admin.isActive ? "heroicons-outline:x-circle" : "heroicons-outline:check-circle"}
+              text={admin.isActive ? "Desativar" : "Ativar"}
+            />
+          )}
+        </div>
       </div>
+
+      {/* Status Badge */}
+      {admin && (
+        <div className="flex gap-2">
+          {admin.isActive ? (
+            <Badge className="bg-success-500/10 text-success-500 border-success-500 flex items-center gap-1">
+              <CheckCircle size={14} />
+              Ativo
+            </Badge>
+          ) : (
+            <Badge className="bg-danger-500/10 text-danger-500 border-danger-500 flex items-center gap-1">
+              <XCircle size={14} />
+              Inativo
+            </Badge>
+          )}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -143,10 +181,27 @@ const ClubAdminEditPage = () => {
                   <Textinput
                     label="Email"
                     type="email"
-                    placeholder="email@exemplo.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
+                    value={admin?.email || ''}
+                    disabled
+                    readonly
+                  />
+
+                  <Textinput
+                    label="Clube"
+                    type="text"
+                    value={admin?.club?.branding?.appName || admin?.club?.companyName || ''}
+                    disabled
+                    readonly
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Textinput
+                    label="CPF"
+                    type="text"
+                    placeholder="123.456.789-00"
+                    value={formData.cpf}
+                    onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
                   />
 
                   <Textinput
@@ -156,60 +211,6 @@ const ClubAdminEditPage = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
-                </div>
-
-                <Textinput
-                  label="CPF"
-                  type="text"
-                  placeholder="123.456.789-00"
-                  value={formData.cpf}
-                  onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
-                  required
-                />
-
-                <div className="form-group">
-                  <label className="form-label">Clube</label>
-                  <select
-                    className="form-control"
-                    value={formData.clubId}
-                    onChange={(e) => setFormData({ ...formData, clubId: e.target.value })}
-                    required
-                  >
-                    <option value="">Selecione um clube</option>
-                    {mockClubs.map((club) => (
-                      <option key={club.id} value={club.id}>
-                        {club.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Função</label>
-                  <select
-                    className="form-control"
-                    value={formData.role}
-                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    required
-                  >
-                    <option value="admin">Admin</option>
-                    <option value="manager">Gerente</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.isActive}
-                      onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                      className="form-checkbox"
-                    />
-                    <span>Ativo</span>
-                  </label>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    Desmarque para desativar o acesso do administrador
-                  </p>
                 </div>
               </div>
             </Card>
@@ -223,19 +224,17 @@ const ClubAdminEditPage = () => {
                   type="submit"
                   className="btn-primary w-full"
                   isLoading={saving}
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  Salvar Alterações
-                </Button>
+                  icon="heroicons-outline:check"
+                  text="Salvar Alterações"
+                />
                 <Button
                   type="button"
-                  className="btn-secondary w-full"
+                  className="btn-outline-secondary w-full"
                   onClick={handleCancel}
                   disabled={saving}
-                >
-                  <X className="w-4 h-4 mr-2" />
-                  Cancelar
-                </Button>
+                  icon="heroicons-outline:x-mark"
+                  text="Cancelar"
+                />
               </div>
 
               <div className={`mt-6 p-4 rounded-lg ${isDark ? 'bg-slate-800' : 'bg-slate-50'}`}>

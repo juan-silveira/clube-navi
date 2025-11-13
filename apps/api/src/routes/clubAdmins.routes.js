@@ -20,6 +20,9 @@ router.get('/', clubAdminsController.list);
 // Get club admin by ID
 router.get('/:id', clubAdminsController.getById);
 
+// Update club admin
+router.put('/:id', clubAdminsController.update);
+
 // Update club admin status
 router.patch('/:id/status', clubAdminsController.updateStatus);
 

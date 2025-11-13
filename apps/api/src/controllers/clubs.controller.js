@@ -22,21 +22,31 @@ class ClubsController {
         sortOrder = 'desc'
       } = req.query;
 
+      console.log('🔍 [Clubs Controller] List request:', {
+        query: req.query,
+        page,
+        limit,
+        isActive,
+        plan,
+        search,
+        superAdmin: req.superAdmin
+      });
+
       const skip = (parseInt(page) - 1) * parseInt(limit);
       const take = parseInt(limit);
 
       // Build where clause
       const where = {};
 
-      if (isActive !== undefined) {
+      if (isActive !== undefined && isActive !== '') {
         where.isActive = isActive === 'true';
       }
 
-      if (plan) {
+      if (plan && plan !== '') {
         where.plan = plan;
       }
 
-      if (search) {
+      if (search && search !== '') {
         where.OR = [
           { companyName: { contains: search, mode: 'insensitive' } },
           { slug: { contains: search, mode: 'insensitive' } },
@@ -45,8 +55,11 @@ class ClubsController {
         ];
       }
 
+      console.log('🔍 [Clubs Controller] Where clause:', where);
+
       // Get total count
       const total = await masterPrisma.club.count({ where });
+      console.log('🔍 [Clubs Controller] Total count:', total);
 
       // Get clubs
       const clubs = await masterPrisma.club.findMany({
@@ -81,6 +94,8 @@ class ClubsController {
           }
         }
       });
+
+      console.log('✅ [Clubs Controller] Clubs found:', clubs.length);
 
       res.json({
         success: true,

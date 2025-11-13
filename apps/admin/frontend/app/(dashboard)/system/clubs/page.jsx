@@ -52,11 +52,18 @@ const ClubsPage = () => {
   });
 
   useEffect(() => {
+    console.log('🔍 [Clubes] Verificando permissões:', {
+      canViewSystemSettings: permissions.canViewSystemSettings,
+      permissions
+    });
+
     if (!permissions.canViewSystemSettings) {
+      console.log('❌ [Clubes] Sem permissão - redirecionando para dashboard');
       router.push("/dashboard");
       return;
     }
 
+    console.log('✅ [Clubes] Carregando clubes...');
     loadTenants();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [permissions.canViewSystemSettings, router, currentPage]);
@@ -71,9 +78,12 @@ const ClubsPage = () => {
         ...filters
       };
 
+      console.log('📡 [Clubes] Chamando API com params:', params);
       const response = await clubsService.listClubs(params);
+      console.log('📡 [Clubes] Resposta da API:', response);
 
       if (response.success) {
+        console.log('✅ [Clubes] Clubes carregados:', response.data.clubs.length);
         setTenants(response.data.clubs);
         setTotalPages(response.data.pagination.totalPages);
         setTotalTenants(response.data.pagination.total);
@@ -89,7 +99,7 @@ const ClubsPage = () => {
         });
       }
     } catch (error) {
-      console.error('Error loading clubs:', error);
+      console.error('❌ [Clubes] Error loading clubs:', error);
       showError('Erro ao carregar clubes');
     } finally {
       setLoading(false);

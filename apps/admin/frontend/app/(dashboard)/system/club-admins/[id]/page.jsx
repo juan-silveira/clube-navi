@@ -6,13 +6,16 @@ import useDarkMode from "@/hooks/useDarkMode";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import Tooltip from "@/components/ui/Tooltip";
 import usePermissions from "@/hooks/usePermissions";
+import { useAlertContext } from '@/contexts/AlertContext';
+import { clubAdminsService } from '@/services/api';
 import {
   ArrowLeft,
-  Edit,
   Shield,
   Building,
   Mail,
+  Phone,
   Calendar,
   Clock,
   CheckCircle,
@@ -21,35 +24,11 @@ import {
   Unlock
 } from 'lucide-react';
 
-// Mock data
-const getMockAdmin = (id) => ({
-  id,
-  name: 'João Silva',
-  email: 'joao@clube-navi.com',
-  role: 'admin',
-  isActive: true,
-  lastLoginAt: '2025-01-12T10:30:00',
-  createdAt: '2024-06-15T10:00:00',
-  updatedAt: '2025-01-12T10:30:00',
-  club: {
-    id: 1,
-    companyName: 'Clube Navi',
-    slug: 'clube-navi',
-    branding: {
-      appName: 'Clube Navi',
-      logoUrl: 'https://via.placeholder.com/100',
-      primaryColor: '#3B82F6'
-    }
-  },
-  permissions: ['manage_users', 'view_reports', 'manage_products'],
-  phone: '+55 11 98765-4321',
-  cpf: '123.456.789-00'
-});
-
 const ClubAdminDetailPage = () => {
   const params = useParams();
   const router = useRouter();
   const permissions = usePermissions();
+  const { showSuccess, showError } = useAlertContext();
   const [isDark] = useDarkMode();
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -60,16 +39,36 @@ const ClubAdminDetailPage = () => {
       return;
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      setAdmin(getMockAdmin(params.id));
-      setLoading(false);
-    }, 500);
+    loadAdmin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
-  const handleToggleStatus = () => {
-    setAdmin({ ...admin, isActive: !admin.isActive });
+  const loadAdmin = async () => {
+    try {
+      setLoading(true);
+      const response = await clubAdminsService.getById(params.id);
+      if (response.success) {
+        setAdmin(response.data.clubAdmin);
+      }
+    } catch (error) {
+      console.error('Error loading club admin:', error);
+      showError('Erro ao carregar dados do administrador');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleToggleStatus = async () => {
+    try {
+      const response = await clubAdminsService.updateStatus(admin.id, !admin.isActive);
+      if (response.success) {
+        showSuccess(response.message || 'Status atualizado com sucesso');
+        loadAdmin();
+      }
+    } catch (error) {
+      console.error('Error toggling admin status:', error);
+      showError('Erro ao alterar status do administrador');
+    }
   };
 
   const getRoleBadge = (role) => {
@@ -129,13 +128,14 @@ const ClubAdminDetailPage = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button
-            icon={<ArrowLeft size={16} />}
-            className="btn-secondary"
-            onClick={() => router.push('/system/club-admins')}
-          >
-            Voltar
-          </Button>
+          <Tooltip content="Voltar" placement="bottom">
+            <button
+              onClick={() => router.push('/system/club-admins')}
+              className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors"
+            >
+              <ArrowLeft size={20} className="text-slate-600 dark:text-slate-300" />
+            </button>
+          </Tooltip>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
               Detalhes do Administrador
@@ -147,28 +147,17 @@ const ClubAdminDetailPage = () => {
         </div>
         <div className="flex gap-2">
           <Button
-            className={admin.isActive ? "btn-danger" : "btn-success"}
+            className={admin.isActive ? "btn-outline-danger" : "btn-outline-success"}
             onClick={handleToggleStatus}
-          >
-            {admin.isActive ? (
-              <>
-                <Lock className="w-4 h-4 mr-2" />
-                Bloquear
-              </>
-            ) : (
-              <>
-                <Unlock className="w-4 h-4 mr-2" />
-                Desbloquear
-              </>
-            )}
-          </Button>
+            icon={admin.isActive ? "heroicons-outline:x-circle" : "heroicons-outline:check-circle"}
+            text={admin.isActive ? "Desativar" : "Ativar"}
+          />
           <Button
             className="btn-primary"
             onClick={() => router.push(`/system/club-admins/${admin.id}/edit`)}
-          >
-            <Edit className="w-4 h-4 mr-2" />
-            Editar
-          </Button>
+            icon="heroicons-outline:pencil-square"
+            text="Editar"
+          />
         </div>
       </div>
 
@@ -194,43 +183,50 @@ const ClubAdminDetailPage = () => {
           {/* Personal Information */}
           <Card title="Informações Pessoais">
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-sm font-medium text-slate-600 dark:text-slate-300">
+                  <label className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2 mb-2">
+                    <Shield size={16} />
                     Nome Completo
                   </label>
-                  <p className="text-base font-semibold text-slate-900 dark:text-white mt-1">
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
                     {admin.name}
                   </p>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-slate-600 dark:text-slate-300">
-                    CPF
-                  </label>
-                  <p className="text-base font-semibold text-slate-900 dark:text-white mt-1">
-                    {admin.cpf}
-                  </p>
-                </div>
+                {admin.cpf && (
+                  <div>
+                    <label className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2 mb-2">
+                      <Shield size={16} />
+                      CPF
+                    </label>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                      {admin.cpf}
+                    </p>
+                  </div>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-sm font-medium text-slate-600 dark:text-slate-300 flex items-center gap-2">
+                  <label className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2 mb-2">
                     <Mail size={16} />
                     Email
                   </label>
-                  <p className="text-base font-semibold text-slate-900 dark:text-white mt-1">
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
                     {admin.email}
                   </p>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-slate-600 dark:text-slate-300">
-                    Telefone
-                  </label>
-                  <p className="text-base font-semibold text-slate-900 dark:text-white mt-1">
-                    {admin.phone}
-                  </p>
-                </div>
+                {admin.phone && (
+                  <div>
+                    <label className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2 mb-2">
+                      <Phone size={16} />
+                      Telefone
+                    </label>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                      {admin.phone}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </Card>
@@ -238,46 +234,50 @@ const ClubAdminDetailPage = () => {
           {/* Club Information */}
           <Card title="Clube">
             <div className="flex items-center gap-4">
-              {admin.club?.branding?.logoUrl && (
+              {admin.club?.branding?.logoUrl ? (
                 <img
                   src={admin.club.branding.logoUrl}
                   alt={admin.club.companyName}
-                  className="w-16 h-16 rounded-lg object-cover"
+                  className="w-16 h-16 rounded-lg object-contain bg-slate-50 dark:bg-slate-800 p-2"
                 />
-              )}
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <Building size={18} className="text-slate-500 dark:text-slate-400" />
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                    {admin.club?.branding?.appName || admin.club?.companyName}
-                  </h3>
+              ) : (
+                <div className="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                  <Building size={32} className="text-slate-400" />
                 </div>
+              )}
+              <div className="flex-1 space-y-2">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                  {admin.club?.branding?.appName || admin.club?.companyName}
+                </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
                   Slug: <span className="font-semibold">{admin.club?.slug}</span>
                 </p>
                 <Button
-                  className="btn-sm btn-outline-primary mt-2"
+                  className="btn-outline-primary btn-sm"
                   onClick={() => router.push(`/system/clubs/${admin.club.id}`)}
-                >
-                  Ver Detalhes do Clube
-                </Button>
+                  icon="heroicons-outline:arrow-right"
+                  text="Ver Detalhes do Clube"
+                  iconPosition="right"
+                />
               </div>
             </div>
           </Card>
 
           {/* Permissions */}
-          <Card title="Permissões">
-            <div className="flex flex-wrap gap-2">
-              {admin.permissions.map((permission, index) => (
-                <Badge
-                  key={index}
-                  className="bg-primary-500/10 text-primary-500 border-primary-500"
-                >
-                  {permission}
-                </Badge>
-              ))}
-            </div>
-          </Card>
+          {admin.permissions && admin.permissions.length > 0 && (
+            <Card title="Permissões">
+              <div className="flex flex-wrap gap-2">
+                {admin.permissions.map((permission, index) => (
+                  <Badge
+                    key={index}
+                    className="bg-primary-500/10 text-primary-500 border-primary-500"
+                  >
+                    {permission}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
+          )}
         </div>
 
         {/* Sidebar */}

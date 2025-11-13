@@ -228,21 +228,18 @@ const ClubAdminsPage = () => {
           placeholder="Buscar por nome ou email..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          icon={<Search className="w-4 h-4" />}
+          icon="heroicons-outline:magnifying-glass"
         />
       </Card>
 
       {/* Table */}
       <Card title={`Administradores (${filteredAdmins.length})`} noborder>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" style={{ minHeight: '300px' }}>
           <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
             <thead className="bg-slate-50 dark:bg-slate-800">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider">
                   Administrador
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider">
-                  Função
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider">
                   Status
@@ -261,7 +258,7 @@ const ClubAdminsPage = () => {
             <tbody className="bg-white dark:bg-slate-900 divide-y divide-slate-200 dark:divide-slate-700">
               {filteredAdmins.length === 0 ? (
                 <tr>
-                  <td colSpan="6" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                  <td colSpan="5" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
                     Nenhum administrador encontrado
                   </td>
                 </tr>
@@ -277,9 +274,6 @@ const ClubAdminsPage = () => {
                           {admin.email}
                         </div>
                       </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {getRoleBadge(admin.role)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {admin.isActive ? (
