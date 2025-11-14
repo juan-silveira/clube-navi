@@ -67,11 +67,31 @@ class S3Service {
     }
 
     console.log('🔍 [S3Service] Validando arquivo:', {
+      originalname: file.originalname,
       mimetype: file.mimetype,
+      size: file.size,
+      fieldname: file.fieldname,
       allowedTypes: this.allowedImageTypes
     });
 
-    if (!this.allowedImageTypes.includes(file.mimetype)) {
+    // Se mimetype está undefined, tenta inferir pela extensão
+    let mimetype = file.mimetype;
+    if (!mimetype && file.originalname) {
+      const ext = file.originalname.toLowerCase().split('.').pop();
+      const mimeMap = {
+        'jpg': 'image/jpeg',
+        'jpeg': 'image/jpeg',
+        'png': 'image/png',
+        'gif': 'image/gif',
+        'webp': 'image/webp',
+        'svg': 'image/svg+xml',
+        'ico': 'image/x-icon'
+      };
+      mimetype = mimeMap[ext];
+      console.log(`⚠️ [S3Service] Mimetype undefined, inferido da extensão .${ext}: ${mimetype}`);
+    }
+
+    if (!mimetype || !this.allowedImageTypes.includes(mimetype)) {
       throw new Error(`Tipo de arquivo não permitido. Tipos aceitos: ${this.allowedImageTypes.join(', ')}`);
     }
 
@@ -485,6 +505,22 @@ class S3Service {
       // Validar arquivo
       this.validateImageFile(file);
 
+      // Inferir mimetype se necessário
+      let mimetype = file.mimetype;
+      if (!mimetype && file.originalname) {
+        const ext = file.originalname.toLowerCase().split('.').pop();
+        const mimeMap = {
+          'jpg': 'image/jpeg',
+          'jpeg': 'image/jpeg',
+          'png': 'image/png',
+          'gif': 'image/gif',
+          'webp': 'image/webp',
+          'svg': 'image/svg+xml',
+          'ico': 'image/x-icon'
+        };
+        mimetype = mimeMap[ext] || 'application/octet-stream';
+      }
+
       // Gerar nome único
       const fileName = this.generateUniqueFileName(file.originalname, `${companyId}_${assetType}`);
       const key = `${this.prefixes.brandingAssets}${companyId}/${assetType}/${fileName}`;
@@ -498,7 +534,7 @@ class S3Service {
         Bucket: this.bucketName,
         Key: key,
         Body: file.buffer,
-        ContentType: file.mimetype,
+        ContentType: mimetype,
         Metadata: {
           companyId: companyId.toString(),
           assetType: assetType,
