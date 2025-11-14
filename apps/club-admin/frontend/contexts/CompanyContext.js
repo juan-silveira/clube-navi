@@ -22,15 +22,52 @@ export const CompanyProvider = ({ children }) => {
   
   const { isAuthenticated, user } = useAuthStore();
 
-  // No club-admin, não precisa carregar branding por API
-  // O branding é definido pelo subdomínio
+  // Carregar branding do clube quando usuário está autenticado
   useEffect(() => {
-    if (isAuthenticated && user && !brandingLoaded) {
-      console.log('🔐 Club-admin - não busca company/branding (definido por subdomínio)');
-      setBrandingLoaded(true);
-      setCurrentCompany(null);
-      setCompanyBranding(null);
-    }
+    const fetchClubBranding = async () => {
+      if (isAuthenticated && user && user.clubId && !brandingLoaded) {
+        console.log('🎨 [CompanyContext] Carregando branding do clube...');
+        try {
+          const response = await api.get('/api/club-admin/branding');
+
+          if (response.data.success && response.data.data) {
+            const brandingData = response.data.data;
+            console.log('✅ [CompanyContext] Branding carregado:', brandingData);
+
+            // Converter para o formato esperado pelo useBranding
+            const formattedBranding = {
+              brand_name: brandingData.appName || user.clubName || 'Clube Digital',
+              primary_color: brandingData.primaryColor || '#3B82F6',
+              secondary_color: brandingData.secondaryColor || '#10B981',
+              logo_url: brandingData.logoUrl,
+              logo_dark_url: brandingData.logoUrl, // Usar mesma logo por enquanto
+              miniUrl: brandingData.logoIconUrl,
+              favicon_url: brandingData.faviconUrl,
+              tagline: brandingData.appDescription || 'Sistema de gestão do clube'
+            };
+
+            setCompanyBranding(formattedBranding);
+            setCurrentCompany({
+              id: user.clubId,
+              name: brandingData.appName || user.clubName,
+              slug: user.clubSlug
+            });
+          }
+        } catch (error) {
+          console.error('❌ [CompanyContext] Erro ao carregar branding:', error);
+          // Em caso de erro, usar valores padrão do clube
+          setCurrentCompany({
+            id: user.clubId,
+            name: user.clubName || 'Clube Digital',
+            slug: user.clubSlug
+          });
+        } finally {
+          setBrandingLoaded(true);
+        }
+      }
+    };
+
+    fetchClubBranding();
   }, [isAuthenticated, user, brandingLoaded]);
 
   // No club-admin, não precisa carregar empresa do backend

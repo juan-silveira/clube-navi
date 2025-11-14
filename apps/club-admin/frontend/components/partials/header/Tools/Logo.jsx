@@ -36,34 +36,28 @@ const Logo = () => {
     // Se tem branding da empresa, tentar usar primeiro
     if (companyBranding) {
       let logoUrl = null;
-      
-      // Se o menu estiver colapsado, priorizar mini logos
-      if (collapsed) {
-        logoUrl = isDark 
-          ? (companyBranding.miniUrlDark || companyBranding.miniUrl)
-          : (companyBranding.miniUrl || companyBranding.miniUrlDark);
-        
+
+      // Se o menu estiver colapsado ou tela pequena, priorizar mini logos
+      if (collapsed || width < breakpoints.xl) {
+        logoUrl = companyBranding.miniUrl;
+
         // Se não tem mini logo, usar logo normal como fallback
         if (!logoUrl) {
-          logoUrl = isDark 
-            ? (companyBranding.logoUrlDark || companyBranding.logoUrl)
-            : (companyBranding.logoUrl || companyBranding.logoUrlDark);
+          logoUrl = companyBranding.logo_url;
         }
       } else {
         // Menu expandido - usar logo normal
-        logoUrl = isDark 
-          ? (companyBranding.logoUrlDark || companyBranding.logoUrl)
-          : (companyBranding.logoUrl || companyBranding.logoUrlDark);
+        logoUrl = companyBranding.logo_url;
       }
-      
-      // Se encontrou uma URL, usar com fallback
+
+      // Se encontrou uma URL válida, retornar
       if (logoUrl) {
-        return getImageSrc(logoUrl);
+        return logoUrl;
       }
     }
-    
+
     // Fallback para assets estáticos baseado no estado collapsed
-    if (width >= breakpoints.xl) {
+    if (width >= breakpoints.xl && !collapsed) {
       return isDark
         ? "/assets/images/logo/logo-white.svg"
         : "/assets/images/logo/logo.svg";

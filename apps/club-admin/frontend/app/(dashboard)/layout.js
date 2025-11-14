@@ -26,6 +26,7 @@ import AuthGuard from "@/components/AuthGuard";
 import useAuthStore from "@/store/authStore";
 import { AlertProvider, useAlertContext } from "@/contexts/AlertContext";
 import { useTranslation } from "@/hooks/useTranslation";
+import DynamicHead from "@/components/branding/DynamicHead";
 
 // Componente interno que usa os hooks de notificação
 const DashboardContent = ({ children }) => {
@@ -80,6 +81,9 @@ export default function RootLayout({ children }) {
   return (
     <AuthGuard>
       <AlertProvider>
+            {/* Componente para gerenciar favicon e título dinamicamente */}
+            <DynamicHead />
+
             <div
               dir={isRtl ? "rtl" : "ltr"}
               className={`app-warp    ${isDark ? "dark" : "light"} ${

@@ -12,20 +12,15 @@ const MobileLogo = () => {
 
   // Função para obter o logo correto
   const getLogo = () => {
-    // Se tem branding da empresa, usar os logos específicos
+    // Se tem branding da empresa, usar miniUrl ou logo_url
     if (companyBranding) {
-      if (isDark && companyBranding.logoUrlDark) {
-        return companyBranding.logoUrlDark;
-      }
-      if (!isDark && companyBranding.logoUrl) {
-        return companyBranding.logoUrl;
-      }
-      // Fallback dentro do branding da empresa
-      if (companyBranding.logoUrl) {
-        return companyBranding.logoUrl;
+      // Priorizar mini logo para mobile
+      const logoUrl = companyBranding.miniUrl || companyBranding.logo_url;
+      if (logoUrl) {
+        return logoUrl;
       }
     }
-    
+
     // Fallback para logos padrão quando não há branding
     return isDark ? LogoWhite : MainLogo;
   };

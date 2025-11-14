@@ -1,0 +1,93 @@
+// Branding Customization
+// Variáveis CSS para cores do branding (definidas dinamicamente via JavaScript)
+:root {
+  --brand-primary: #3B82F6;
+  --brand-secondary: #10B981;
+}
+
+// Aplicar cor primária do branding nos botões primários
+.btn-primary {
+  background-color: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+
+  &:hover {
+    background-color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+    opacity: 0.9;
+  }
+
+  &:focus {
+    background-color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--brand-primary-rgb), 0.5) !important;
+  }
+}
+
+// Links com cor do branding
+.text-primary {
+  color: var(--brand-primary) !important;
+}
+
+.bg-primary {
+  background-color: var(--brand-primary) !important;
+}
+
+.border-primary {
+  border-color: var(--brand-primary) !important;
+}
+
+// Hover states
+.hover\:text-primary:hover {
+  color: var(--brand-primary) !important;
+}
+
+.hover\:bg-primary:hover {
+  background-color: var(--brand-primary) !important;
+}
+
+// Badges e tags com cor do branding
+.badge-primary {
+  background-color: var(--brand-primary) !important;
+  color: white !important;
+}
+
+// Inputs com foco na cor do branding
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+}
+
+// Checkboxes e radios
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+}
+
+// Progress bars
+.progress-bar {
+  background-color: var(--brand-primary) !important;
+}
+
+// Tabs ativos
+.nav-tabs .nav-link.active {
+  color: var(--brand-primary) !important;
+  border-bottom-color: var(--brand-primary) !important;
+}
+
+// Switch toggle
+.form-switch input:checked {
+  background-color: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+}
+
+// Sidebar active menu item
+.sidebar-menu .menu-item.active {
+  color: var(--brand-primary) !important;
+}
+
+.sidebar-menu .menu-item.active .menu-link {
+  color: var(--brand-primary) !important;
+}
