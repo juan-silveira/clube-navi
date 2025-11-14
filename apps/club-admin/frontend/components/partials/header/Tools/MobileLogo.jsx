@@ -12,10 +12,10 @@ const MobileLogo = () => {
 
   // Função para obter o logo correto
   const getLogo = () => {
-    // Se tem branding da empresa, usar miniUrl ou logo_url
+    // Se tem branding da empresa, usar logoIconUrl ou logoUrl
     if (companyBranding) {
-      // Priorizar mini logo para mobile
-      const logoUrl = companyBranding.miniUrl || companyBranding.logo_url;
+      // Priorizar logo icon para mobile
+      const logoUrl = companyBranding.logoIconUrl || companyBranding.logoUrl;
       if (logoUrl) {
         return logoUrl;
       }

@@ -16,7 +16,7 @@ const DynamicHead = () => {
     if (!companyBranding && !currentCompany) return;
 
     const brandName = companyBranding?.brand_name || currentCompany?.name || 'Clube Digital';
-    const faviconUrl = companyBranding?.favicon_url;
+    const faviconUrl = companyBranding?.faviconUrl;
 
     // Atualizar favicon
     if (faviconUrl) {
@@ -76,8 +76,8 @@ const DynamicHead = () => {
   useEffect(() => {
     if (!companyBranding) return;
 
-    const primaryColor = companyBranding.primary_color || '#3B82F6';
-    const secondaryColor = companyBranding.secondary_color || '#10B981';
+    const primaryColor = companyBranding.primary_color || companyBranding.primaryColor || '#3B82F6';
+    const secondaryColor = companyBranding.secondary_color || companyBranding.secondaryColor || '#10B981';
 
     // Atualizar variáveis CSS
     const root = document.documentElement;

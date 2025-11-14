@@ -32,20 +32,22 @@ export const CompanyProvider = ({ children }) => {
 
           if (response.data.success && response.data.data) {
             const brandingData = response.data.data;
-            console.log('✅ [CompanyContext] Branding carregado:', brandingData);
+            console.log('✅ [CompanyContext] Branding carregado da API:', brandingData);
 
-            // Converter para o formato esperado pelo useBranding
+            // Converter para o formato esperado pelos componentes
             const formattedBranding = {
               brand_name: brandingData.appName || user.clubName || 'Clube Digital',
-              primary_color: brandingData.primaryColor || '#3B82F6',
-              secondary_color: brandingData.secondaryColor || '#10B981',
-              logo_url: brandingData.logoUrl,
-              logo_dark_url: brandingData.logoUrl, // Usar mesma logo por enquanto
-              miniUrl: brandingData.logoIconUrl,
-              favicon_url: brandingData.faviconUrl,
+              primaryColor: brandingData.primaryColor || '#3B82F6',
+              secondaryColor: brandingData.secondaryColor || '#10B981',
+              primary_color: brandingData.primaryColor || '#3B82F6', // Compatibilidade
+              secondary_color: brandingData.secondaryColor || '#10B981', // Compatibilidade
+              logoUrl: brandingData.logoUrl,
+              logoIconUrl: brandingData.logoIconUrl,
+              faviconUrl: brandingData.faviconUrl,
               tagline: brandingData.appDescription || 'Sistema de gestão do clube'
             };
 
+            console.log('✅ [CompanyContext] Branding formatado:', formattedBranding);
             setCompanyBranding(formattedBranding);
             setCurrentCompany({
               id: user.clubId,
