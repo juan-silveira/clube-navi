@@ -850,7 +850,7 @@ class ClubsController {
           plan,
           isActive: true, // Activate immediately since everything is configured
           subdomain,
-          adminSubdomain: `admin-${slug}`,
+          adminSubdomain: subdomain, // Same as subdomain, no "admin-" prefix
           customDomain: customDomain || null,
           databaseHost: 'localhost',
           databasePort: 5432,
