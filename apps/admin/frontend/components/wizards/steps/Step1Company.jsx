@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import Textinput from "@/components/ui/Textinput";
 import { Building2, FileText, User, Mail, Phone, CreditCard } from 'lucide-react';
 
 const Step1Company = ({ data, updateData, onNext, onCancel }) => {
@@ -129,15 +128,21 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
         <div className="space-y-4">
           {/* Company Name */}
           <div>
-            <Textinput
-              label="Nome da Empresa"
+            <label className="form-label flex items-center gap-2 mb-2">
+              <Building2 size={18} />
+              Nome da Empresa
+            </label>
+            <input
               type="text"
+              className="form-control py-2"
               placeholder="Ex: Clube Navi"
               value={formData.companyName}
               onChange={(e) => handleChange('companyName', e.target.value)}
-              error={errors.companyName}
-              icon={<Building2 size={18} />}
+              style={{ paddingLeft: '12px', paddingRight: '12px' }}
             />
+            {errors.companyName && (
+              <p className="text-danger-500 text-xs mt-1">{errors.companyName}</p>
+            )}
             {formData.companyName && !errors.companyName && (
               <p className="text-xs text-success-500 mt-1 flex items-center gap-1">
                 <span>✓</span> Slug será gerado automaticamente: <strong>{generateSlug(formData.companyName)}</strong>
@@ -147,15 +152,23 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
 
           {/* CNPJ and Plan */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Textinput
-              label="CNPJ"
-              type="text"
-              placeholder="12.345.678/0001-90"
-              value={formData.companyDocument}
-              onChange={(e) => handleChange('companyDocument', e.target.value)}
-              error={errors.companyDocument}
-              icon={<FileText size={18} />}
-            />
+            <div>
+              <label className="form-label flex items-center gap-2 mb-2">
+                <FileText size={18} />
+                CNPJ
+              </label>
+              <input
+                type="text"
+                className="form-control py-2"
+                placeholder="12.345.678/0001-90"
+                value={formData.companyDocument}
+                onChange={(e) => handleChange('companyDocument', e.target.value)}
+                style={{ paddingLeft: '12px', paddingRight: '12px' }}
+              />
+              {errors.companyDocument && (
+                <p className="text-danger-500 text-xs mt-1">{errors.companyDocument}</p>
+              )}
+            </div>
 
             <div>
               <label className="form-label flex items-center gap-2 mb-2">
@@ -188,37 +201,61 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
       <Card title="Informações de Contato">
         <div className="space-y-4">
           {/* Contact Name */}
-          <Textinput
-            label="Nome do Responsável"
-            type="text"
-            placeholder="Ex: João Silva"
-            value={formData.contactName}
-            onChange={(e) => handleChange('contactName', e.target.value)}
-            error={errors.contactName}
-            icon={<User size={18} />}
-          />
+          <div>
+            <label className="form-label flex items-center gap-2 mb-2">
+              <User size={18} />
+              Nome do Responsável
+            </label>
+            <input
+              type="text"
+              className="form-control py-2"
+              placeholder="Ex: João Silva"
+              value={formData.contactName}
+              onChange={(e) => handleChange('contactName', e.target.value)}
+              style={{ paddingLeft: '12px', paddingRight: '12px' }}
+            />
+            {errors.contactName && (
+              <p className="text-danger-500 text-xs mt-1">{errors.contactName}</p>
+            )}
+          </div>
 
           {/* Email and Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Textinput
-              label="Email de Contato"
-              type="email"
-              placeholder="contato@empresa.com"
-              value={formData.contactEmail}
-              onChange={(e) => handleChange('contactEmail', e.target.value)}
-              error={errors.contactEmail}
-              icon={<Mail size={18} />}
-            />
+            <div>
+              <label className="form-label flex items-center gap-2 mb-2">
+                <Mail size={18} />
+                Email de Contato
+              </label>
+              <input
+                type="email"
+                className="form-control py-2"
+                placeholder="contato@empresa.com"
+                value={formData.contactEmail}
+                onChange={(e) => handleChange('contactEmail', e.target.value)}
+                style={{ paddingLeft: '12px', paddingRight: '12px' }}
+              />
+              {errors.contactEmail && (
+                <p className="text-danger-500 text-xs mt-1">{errors.contactEmail}</p>
+              )}
+            </div>
 
-            <Textinput
-              label="Telefone"
-              type="text"
-              placeholder="+55 11 98765-4321"
-              value={formData.contactPhone}
-              onChange={(e) => handleChange('contactPhone', e.target.value)}
-              error={errors.contactPhone}
-              icon={<Phone size={18} />}
-            />
+            <div>
+              <label className="form-label flex items-center gap-2 mb-2">
+                <Phone size={18} />
+                Telefone
+              </label>
+              <input
+                type="text"
+                className="form-control py-2"
+                placeholder="+55 11 98765-4321"
+                value={formData.contactPhone}
+                onChange={(e) => handleChange('contactPhone', e.target.value)}
+                style={{ paddingLeft: '12px', paddingRight: '12px' }}
+              />
+              {errors.contactPhone && (
+                <p className="text-danger-500 text-xs mt-1">{errors.contactPhone}</p>
+              )}
+            </div>
           </div>
         </div>
       </Card>
