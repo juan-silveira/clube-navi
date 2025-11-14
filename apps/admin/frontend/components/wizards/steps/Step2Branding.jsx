@@ -17,7 +17,7 @@ import {
   Loader2
 } from 'lucide-react';
 
-const Step2Branding = ({ data, updateData, onNext, onBack }) => {
+const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
   const { showError } = useAlertContext();
   const [isDark] = useDarkMode();
 
@@ -374,13 +374,22 @@ const Step2Branding = ({ data, updateData, onNext, onBack }) => {
       {/* Navigation */}
       <Card>
         <div className="flex justify-between">
-          <Button
-            type="button"
-            className="btn-outline-secondary"
-            onClick={onBack}
-            icon="heroicons-outline:arrow-left"
-            text="Voltar"
-          />
+          <div className="flex gap-3">
+            <Button
+              type="button"
+              className="btn-outline-danger"
+              onClick={onCancel}
+              icon="heroicons-outline:x-mark"
+              text="Cancelar"
+            />
+            <Button
+              type="button"
+              className="btn-outline-secondary"
+              onClick={onBack}
+              icon="heroicons-outline:arrow-left"
+              text="Voltar"
+            />
+          </div>
           <Button
             type="button"
             className="btn-primary"

@@ -142,6 +142,7 @@ const NewClubWizard = () => {
             data={wizardData}
             updateData={updateWizardData}
             onNext={handleNext}
+            onCancel={handleCancel}
           />
         );
       case 2:
@@ -151,6 +152,7 @@ const NewClubWizard = () => {
             updateData={updateWizardData}
             onNext={handleNext}
             onBack={handleBack}
+            onCancel={handleCancel}
           />
         );
       case 3:
@@ -160,6 +162,7 @@ const NewClubWizard = () => {
             updateData={updateWizardData}
             onNext={handleNext}
             onBack={handleBack}
+            onCancel={handleCancel}
           />
         );
       case 4:
@@ -169,6 +172,7 @@ const NewClubWizard = () => {
             updateData={updateWizardData}
             onSubmit={handleSubmit}
             onBack={handleBack}
+            onCancel={handleCancel}
             isSubmitting={isSubmitting}
           />
         );
@@ -179,105 +183,94 @@ const NewClubWizard = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Criar Novo Clube
-        </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-          Configure completamente um novo clube em 4 etapas
-        </p>
-      </div>
-
       {/* Steps Progress */}
       <Card>
-        <div className="flex items-center justify-between">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            const isActive = currentStep === step.number;
-            const isCompleted = currentStep > step.number;
+        <div className="px-8 py-6">
+          <div className="flex items-start justify-between">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              const isActive = currentStep === step.number;
+              const isCompleted = currentStep > step.number;
 
-            return (
-              <div key={step.number} className="flex items-center flex-1">
-                <div className="flex flex-col items-center flex-1">
-                  {/* Step Circle */}
-                  <div
-                    className={`
-                      w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all
-                      ${isActive
-                        ? 'bg-primary-500 border-primary-500 text-white'
-                        : isCompleted
-                          ? 'bg-success-500 border-success-500 text-white'
-                          : 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-400'
-                      }
-                    `}
-                  >
-                    {isCompleted ? (
-                      <CheckCircle2 size={24} />
-                    ) : (
-                      <Icon size={24} />
-                    )}
-                  </div>
+              return (
+                <div key={step.number} className="flex items-start flex-1">
+                  <div className="flex flex-col items-center w-full">
+                    {/* Step Number Badge */}
+                    <div className="mb-3">
+                      <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                        Etapa {step.number} de {steps.length}
+                      </span>
+                    </div>
 
-                  {/* Step Info */}
-                  <div className="text-center mt-2">
-                    <p
+                    {/* Step Circle */}
+                    <div
                       className={`
-                        text-xs font-semibold
+                        w-16 h-16 rounded-full flex items-center justify-center border-2 transition-all mb-3
                         ${isActive
-                          ? 'text-primary-500'
+                          ? 'bg-primary-500 border-primary-500 text-white shadow-lg'
                           : isCompleted
-                            ? 'text-success-500'
-                            : 'text-slate-400'
+                            ? 'bg-success-500 border-success-500 text-white'
+                            : 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-400'
                         }
                       `}
                     >
-                      {step.title}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+                      {isCompleted ? (
+                        <CheckCircle2 size={28} />
+                      ) : (
+                        <Icon size={28} />
+                      )}
+                    </div>
 
-                {/* Connector Line */}
-                {index < steps.length - 1 && (
-                  <div
-                    className={`
-                      h-0.5 w-full mx-4 -mt-12 transition-all
-                      ${currentStep > step.number
-                        ? 'bg-success-500'
-                        : 'bg-slate-200 dark:bg-slate-700'
-                      }
-                    `}
-                  />
-                )}
-              </div>
-            );
-          })}
+                    {/* Step Info */}
+                    <div className="text-center px-2">
+                      <p
+                        className={`
+                          text-sm font-bold mb-1
+                          ${isActive
+                            ? 'text-primary-500'
+                            : isCompleted
+                              ? 'text-success-500'
+                              : 'text-slate-400'
+                          }
+                        `}
+                      >
+                        {step.title}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Arrow Connector */}
+                  {index < steps.length - 1 && (
+                    <div className="flex items-center px-4 mt-16">
+                      <svg
+                        className={`w-8 h-8 ${currentStep > step.number ? 'text-success-500' : 'text-slate-300 dark:text-slate-600'}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Card>
 
       {/* Step Content */}
-      <div className="min-h-[500px]">
+      <div>
         {renderStepContent()}
       </div>
-
-      {/* Cancel Button (always visible) */}
-      <Card>
-        <div className="flex justify-between items-center">
-          <Button
-            type="button"
-            className="btn-outline-danger"
-            onClick={handleCancel}
-            icon="heroicons-outline:x-mark"
-            text="Cancelar Criação"
-          />
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Etapa {currentStep} de {steps.length}
-          </p>
-        </div>
-      </Card>
     </div>
   );
 };

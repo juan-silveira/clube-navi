@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Textinput from "@/components/ui/Textinput";
 import { Building2, FileText, User, Mail, Phone, CreditCard } from 'lucide-react';
 
-const Step1Company = ({ data, updateData, onNext }) => {
+const Step1Company = ({ data, updateData, onNext, onCancel }) => {
   const [formData, setFormData] = useState({
     companyName: data.companyName || '',
     companyDocument: data.companyDocument || '',
@@ -217,7 +217,14 @@ const Step1Company = ({ data, updateData, onNext }) => {
 
       {/* Navigation */}
       <Card>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <Button
+            type="button"
+            className="btn-outline-danger"
+            onClick={onCancel}
+            icon="heroicons-outline:x-mark"
+            text="Cancelar"
+          />
           <Button
             type="button"
             className="btn-primary"

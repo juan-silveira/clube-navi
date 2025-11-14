@@ -15,7 +15,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 
-const Step3Technical = ({ data, updateData, onNext, onBack }) => {
+const Step3Technical = ({ data, updateData, onNext, onBack, onCancel }) => {
   const [isDark] = useDarkMode();
 
   const [formData, setFormData] = useState({
@@ -273,13 +273,22 @@ const Step3Technical = ({ data, updateData, onNext, onBack }) => {
       {/* Navigation */}
       <Card>
         <div className="flex justify-between">
-          <Button
-            type="button"
-            className="btn-outline-secondary"
-            onClick={onBack}
-            icon="heroicons-outline:arrow-left"
-            text="Voltar"
-          />
+          <div className="flex gap-3">
+            <Button
+              type="button"
+              className="btn-outline-danger"
+              onClick={onCancel}
+              icon="heroicons-outline:x-mark"
+              text="Cancelar"
+            />
+            <Button
+              type="button"
+              className="btn-outline-secondary"
+              onClick={onBack}
+              icon="heroicons-outline:arrow-left"
+              text="Voltar"
+            />
+          </div>
           <Button
             type="button"
             className="btn-primary"

@@ -18,7 +18,7 @@ import {
   Shield
 } from 'lucide-react';
 
-const Step4Admin = ({ data, updateData, onSubmit, onBack, isSubmitting }) => {
+const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting }) => {
   const [isDark] = useDarkMode();
 
   const [formData, setFormData] = useState({
@@ -344,14 +344,24 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, isSubmitting }) => {
       {/* Navigation */}
       <Card>
         <div className="flex justify-between">
-          <Button
-            type="button"
-            className="btn-outline-secondary"
-            onClick={onBack}
-            disabled={isSubmitting}
-            icon="heroicons-outline:arrow-left"
-            text="Voltar"
-          />
+          <div className="flex gap-3">
+            <Button
+              type="button"
+              className="btn-outline-danger"
+              onClick={onCancel}
+              disabled={isSubmitting}
+              icon="heroicons-outline:x-mark"
+              text="Cancelar"
+            />
+            <Button
+              type="button"
+              className="btn-outline-secondary"
+              onClick={onBack}
+              disabled={isSubmitting}
+              icon="heroicons-outline:arrow-left"
+              text="Voltar"
+            />
+          </div>
           <Button
             type="button"
             className="btn-success"
