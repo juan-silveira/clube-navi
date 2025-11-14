@@ -144,8 +144,8 @@ class ClubsService {
     if (wizardData.iconFile) {
       formData.append('iconFile', wizardData.iconFile);
     }
-    if (wizardData.splashFile) {
-      formData.append('splashFile', wizardData.splashFile);
+    if (wizardData.faviconFile) {
+      formData.append('faviconFile', wizardData.faviconFile);
     }
 
     // Step 3: Technical

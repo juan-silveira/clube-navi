@@ -33,21 +33,21 @@ const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
     logoPreview: data.logoUrl || '',
     iconFile: data.iconFile || null,
     iconPreview: data.iconUrl || '',
-    splashFile: data.splashFile || null,
-    splashPreview: data.splashUrl || ''
+    faviconFile: data.faviconFile || null,
+    faviconPreview: data.faviconUrl || ''
   });
 
   const [uploading, setUploading] = useState({
     logo: false,
     icon: false,
-    splash: false
+    favicon: false
   });
 
   const [errors, setErrors] = useState({});
 
   const logoInputRef = useRef(null);
   const iconInputRef = useRef(null);
-  const splashInputRef = useRef(null);
+  const faviconInputRef = useRef(null);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -106,7 +106,7 @@ const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
     // Reset file input
     if (type === 'logo' && logoInputRef.current) logoInputRef.current.value = '';
     if (type === 'icon' && iconInputRef.current) iconInputRef.current.value = '';
-    if (type === 'splash' && splashInputRef.current) splashInputRef.current.value = '';
+    if (type === 'favicon' && faviconInputRef.current) faviconInputRef.current.value = '';
   };
 
   const validate = () => {
@@ -146,8 +146,8 @@ const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
         logoUrl: formData.logoPreview,
         iconFile: formData.iconFile,
         iconUrl: formData.iconPreview,
-        splashFile: formData.splashFile,
-        splashUrl: formData.splashPreview
+        faviconFile: formData.faviconFile,
+        faviconUrl: formData.faviconPreview
       });
       onNext();
     }
@@ -283,9 +283,9 @@ const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
               Sobre o Branding
             </h4>
             <ul className="text-xs text-slate-600 dark:text-slate-300 space-y-1">
-              <li>• <strong>Logo:</strong> Exibida no app e dashboard (recomendado: 512x512px)</li>
-              <li>• <strong>Ícone:</strong> Usado como ícone do app (obrigatório: 1024x1024px)</li>
-              <li>• <strong>Splash Screen:</strong> Tela de abertura do app (opcional: 1242x2688px)</li>
+              <li>• <strong>Logo do App:</strong> Logo principal do clube (512x512px recomendado, PNG com fundo transparente)</li>
+              <li>• <strong>Ícone do App:</strong> Versão compacta para ícone (200x200px recomendado, PNG com fundo transparente)</li>
+              <li>• <strong>Favicon:</strong> Ícone para web (32x32px ou 64x64px, PNG ou ICO)</li>
               <li>• Os arquivos serão enviados para o S3 automaticamente ao criar o clube</li>
             </ul>
           </div>
@@ -327,12 +327,10 @@ const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
 
       {/* Images */}
       <Card title="Imagens">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {renderImageUpload('logo', 'Logo', 'Logo principal do clube (512x512px recomendado)', logoInputRef)}
-          {renderImageUpload('icon', 'Ícone do App', 'Ícone do aplicativo (1024x1024px obrigatório)', iconInputRef)}
-        </div>
-        <div className="mt-6">
-          {renderImageUpload('splash', 'Splash Screen (Opcional)', 'Tela de abertura (1242x2688px recomendado)', splashInputRef)}
+        <div className="space-y-6">
+          {renderImageUpload('logo', 'Logo do App', 'Recomendado: 512x512px, PNG com fundo transparente', logoInputRef)}
+          {renderImageUpload('icon', 'Ícone do App (Versão Compacta)', 'Recomendado: 200x200px, PNG com fundo transparente', iconInputRef)}
+          {renderImageUpload('favicon', 'Favicon (Web)', 'Recomendado: 32x32px ou 64x64px, PNG ou ICO', faviconInputRef)}
         </div>
       </Card>
 

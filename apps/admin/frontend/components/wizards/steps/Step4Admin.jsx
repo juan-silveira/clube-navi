@@ -17,15 +17,16 @@ import {
   CheckCircle2,
   Shield
 } from 'lucide-react';
+import { maskCPF, maskPhone, validateCPF, validatePhone } from '@/utils/masks';
 
 const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting }) => {
   const [isDark] = useDarkMode();
 
   const [formData, setFormData] = useState({
-    adminName: data.adminName || '',
-    adminEmail: data.adminEmail || '',
+    adminName: data.adminName || data.contactName || '',
+    adminEmail: data.adminEmail || data.contactEmail || '',
     adminCpf: data.adminCpf || '',
-    adminPhone: data.adminPhone || '',
+    adminPhone: data.adminPhone || data.contactPhone || '',
     adminPassword: data.adminPassword || '',
     adminPasswordConfirm: data.adminPasswordConfirm || ''
   });
@@ -48,30 +49,6 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting
     return re.test(email);
   };
 
-  const validateCPF = (cpf) => {
-    // Remove non-digits
-    const cleaned = cpf.replace(/\D/g, '');
-
-    // Basic validation (11 digits)
-    if (cleaned.length !== 11) {
-      return false;
-    }
-
-    // Check if all digits are the same
-    if (/^(\d)\1+$/.test(cleaned)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const validatePhone = (phone) => {
-    // Remove non-digits
-    const cleaned = phone.replace(/\D/g, '');
-
-    // Accept 10 or 11 digits
-    return cleaned.length >= 10 && cleaned.length <= 13;
-  };
 
   const validatePassword = (password) => {
     // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
@@ -141,9 +118,9 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting
     console.log('✅ [Step4Admin] Validation result:', isValid);
 
     if (isValid) {
-      console.log('🚀 [Step4Admin] Calling updateData and onSubmit');
-      updateData(formData);
-      onSubmit();
+      console.log('🚀 [Step4Admin] Calling onSubmit with form data');
+      // Passar os dados diretamente para o onSubmit
+      onSubmit(formData);
     } else {
       console.error('❌ [Step4Admin] Validation failed, errors:', errors);
     }
@@ -153,6 +130,23 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting
 
   return (
     <div className="space-y-5">
+      {/* Auto-fill Notice */}
+      {(data.contactName || data.contactEmail || data.contactPhone) && (
+        <div className={`p-4 rounded-lg border-2 ${isDark ? 'bg-success-900/20 border-success-800' : 'bg-success-50 border-success-200'}`}>
+          <div className="flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-success-600 dark:text-success-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="text-sm font-semibold text-success-600 dark:text-success-400 mb-1">
+                Dados preenchidos automaticamente
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-slate-300">
+                Os dados do responsável da Etapa 1 foram utilizados para preencher este formulário. Você pode editá-los se necessário.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Info Banner */}
       <div className={`p-4 rounded-lg border-2 ${isDark ? 'bg-blue-900/20 border-blue-800' : 'bg-blue-50 border-blue-200'}`}>
         <div className="flex items-start gap-3">
@@ -200,7 +194,7 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting
               type="text"
               placeholder="123.456.789-00"
               value={formData.adminCpf}
-              onChange={(e) => handleChange('adminCpf', e.target.value)}
+              onChange={(e) => handleChange('adminCpf', maskCPF(e.target.value))}
               error={errors.adminCpf}
               icon={<CreditCard size={18} />}
             />
@@ -208,9 +202,9 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting
             <Textinput
               label="Telefone"
               type="text"
-              placeholder="+55 11 98765-4321"
+              placeholder="(11) 98765-4321"
               value={formData.adminPhone}
-              onChange={(e) => handleChange('adminPhone', e.target.value)}
+              onChange={(e) => handleChange('adminPhone', maskPhone(e.target.value))}
               error={errors.adminPhone}
               icon={<Phone size={18} />}
             />

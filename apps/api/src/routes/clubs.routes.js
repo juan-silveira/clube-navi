@@ -42,7 +42,7 @@ router.get('/', clubsController.list);
 router.post('/complete', upload.fields([
   { name: 'logoFile', maxCount: 1 },
   { name: 'iconFile', maxCount: 1 },
-  { name: 'splashFile', maxCount: 1 }
+  { name: 'faviconFile', maxCount: 1 }
 ]), clubsController.createComplete);
 
 // Create new club (simple)

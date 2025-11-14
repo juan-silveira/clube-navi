@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { Building2, FileText, User, Mail, Phone, CreditCard } from 'lucide-react';
+import { maskCNPJ, maskPhone, validateCNPJ, validatePhone } from '@/utils/masks';
 
 const Step1Company = ({ data, updateData, onNext, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
 
   const [errors, setErrors] = useState({});
 
-  // Auto-generate slug when company name changes
+  // Auto-generate slug and branding defaults when company name changes
   useEffect(() => {
     if (formData.companyName) {
       const slug = generateSlug(formData.companyName);
@@ -27,7 +28,13 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
         subdomain: slug,
         bundleId: `com.clubedigital.${slug.replace(/-/g, '')}`,
         appName: formData.companyName,
-        appDescription: `Clube de benefícios ${formData.companyName}`
+        appDescription: `Clube de benefícios ${formData.companyName}`,
+        // Set default branding values
+        primaryColor: '#3B82F6',
+        secondaryColor: '#10B981',
+        accentColor: '#F59E0B',
+        backgroundColor: '#FFFFFF',
+        textColor: '#1F2937'
       });
     }
   }, [formData.companyName]);
@@ -42,35 +49,12 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
       .trim();
   };
 
-  const validateCNPJ = (cnpj) => {
-    // Remove non-digits
-    const cleaned = cnpj.replace(/\D/g, '');
-
-    // Basic validation (14 digits)
-    if (cleaned.length !== 14) {
-      return false;
-    }
-
-    // Check if all digits are the same
-    if (/^(\d)\1+$/.test(cleaned)) {
-      return false;
-    }
-
-    return true;
-  };
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
-  const validatePhone = (phone) => {
-    // Remove non-digits
-    const cleaned = phone.replace(/\D/g, '');
-
-    // Accept 10 or 11 digits (with or without country code)
-    return cleaned.length >= 10 && cleaned.length <= 13;
-  };
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -161,7 +145,7 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
                 className="form-control py-2"
                 placeholder="12.345.678/0001-90"
                 value={formData.companyDocument}
-                onChange={(e) => handleChange('companyDocument', e.target.value)}
+                onChange={(e) => handleChange('companyDocument', maskCNPJ(e.target.value))}
                 style={{ paddingLeft: '12px', paddingRight: '12px' }}
               />
               {errors.companyDocument && (
@@ -246,9 +230,9 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
               <input
                 type="text"
                 className="form-control py-2"
-                placeholder="+55 11 98765-4321"
+                placeholder="(11) 98765-4321"
                 value={formData.contactPhone}
-                onChange={(e) => handleChange('contactPhone', e.target.value)}
+                onChange={(e) => handleChange('contactPhone', maskPhone(e.target.value))}
                 style={{ paddingLeft: '12px', paddingRight: '12px' }}
               />
               {errors.contactPhone && (

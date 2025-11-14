@@ -101,7 +101,7 @@ const Step3Technical = ({ data, updateData, onNext, onBack, onCancel }) => {
   };
 
   const getAdminSubdomainUrl = () => {
-    return `http://${formData.subdomain}.localhost:3100`;
+    return `http://${formData.subdomain}.localhost:3001`;
   };
 
   return (

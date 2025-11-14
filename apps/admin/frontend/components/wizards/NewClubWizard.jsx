@@ -17,7 +17,6 @@ import {
 
 // Import step components
 import Step1Company from './steps/Step1Company';
-import Step2Branding from './steps/Step2Branding';
 import Step3Technical from './steps/Step3Technical';
 import Step4Admin from './steps/Step4Admin';
 
@@ -50,8 +49,8 @@ const NewClubWizard = () => {
     logoUrl: '',
     iconFile: null,
     iconUrl: '',
-    splashFile: null,
-    splashUrl: '',
+    faviconFile: null,
+    faviconUrl: '',
 
     // Step 3: Technical
     slug: '',
@@ -77,18 +76,12 @@ const NewClubWizard = () => {
     },
     {
       number: 2,
-      title: "Branding & Identidade",
-      icon: Palette,
-      description: "Logo, cores e visual do app"
-    },
-    {
-      number: 3,
       title: "Configuração Técnica",
       icon: Settings,
       description: "Domínio, slug e bundle ID"
     },
     {
-      number: 4,
+      number: 3,
       title: "Primeiro Administrador",
       icon: UserCog,
       description: "Criar conta de admin"
@@ -115,9 +108,12 @@ const NewClubWizard = () => {
     router.push('/system/clubs');
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (finalData = null) => {
     console.log('🚀 [NewClubWizard] handleSubmit called');
-    console.log('📦 [NewClubWizard] Wizard data:', wizardData);
+
+    // Se receber dados finais, mesclar com wizardData
+    const dataToSubmit = finalData ? { ...wizardData, ...finalData } : wizardData;
+    console.log('📦 [NewClubWizard] Data to submit:', dataToSubmit);
 
     setIsSubmitting(true);
 
@@ -125,7 +121,7 @@ const NewClubWizard = () => {
       console.log('📡 [NewClubWizard] Calling createClubComplete...');
 
       // Create club with all data
-      const response = await clubsService.createClubComplete(wizardData);
+      const response = await clubsService.createClubComplete(dataToSubmit);
 
       console.log('✅ [NewClubWizard] Response:', response);
 
@@ -155,16 +151,6 @@ const NewClubWizard = () => {
         );
       case 2:
         return (
-          <Step2Branding
-            data={wizardData}
-            updateData={updateWizardData}
-            onNext={handleNext}
-            onBack={handleBack}
-            onCancel={handleCancel}
-          />
-        );
-      case 3:
-        return (
           <Step3Technical
             data={wizardData}
             updateData={updateWizardData}
@@ -173,7 +159,7 @@ const NewClubWizard = () => {
             onCancel={handleCancel}
           />
         );
-      case 4:
+      case 3:
         return (
           <Step4Admin
             data={wizardData}
@@ -193,8 +179,9 @@ const NewClubWizard = () => {
     <div className="space-y-6">
       {/* Steps Progress */}
       <Card>
-        <div className="px-8 py-6">
-          <div className="flex items-start justify-between">
+        <div className="px-4 md:px-8 py-6">
+          {/* Desktop: All steps visible */}
+          <div className="hidden md:flex items-start justify-between">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = currentStep === step.number;
@@ -268,6 +255,51 @@ const NewClubWizard = () => {
                       </svg>
                     </div>
                   )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile: Current step only with progress bar */}
+          <div className="md:hidden">
+            {/* Progress bar */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  Etapa {currentStep} de {steps.length}
+                </span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">
+                  {Math.round((currentStep / steps.length) * 100)}%
+                </span>
+              </div>
+              <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                <div
+                  className="bg-primary-500 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${(currentStep / steps.length) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Current step info */}
+            {steps.map((step) => {
+              if (step.number !== currentStep) return null;
+              const Icon = step.icon;
+
+              return (
+                <div key={step.number} className="flex items-center gap-4">
+                  <div
+                    className="w-14 h-14 rounded-full flex items-center justify-center border-2 bg-primary-500 border-primary-500 text-white shadow-lg flex-shrink-0"
+                  >
+                    <Icon size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-primary-500 mb-1">
+                      {step.title}
+                    </p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}

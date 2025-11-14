@@ -767,23 +767,29 @@ class ClubsController {
         });
       }
 
-      if (!appName || !primaryColor) {
-        return res.status(400).json({
-          success: false,
-          message: 'Missing required branding fields'
-        });
-      }
+      // Branding fields are optional now (will be configured later)
+      const finalAppName = appName || companyName;
+      const finalPrimaryColor = primaryColor || '#3B82F6';
 
-      if (!adminName || !adminEmail || !adminPassword) {
+      if (!adminName || !adminEmail || !adminPassword || !adminCpf) {
+        console.log('❌ [Clubs] Missing admin fields:', {
+          adminName: !!adminName,
+          adminEmail: !!adminEmail,
+          adminPassword: !!adminPassword,
+          adminCpf: !!adminCpf
+        });
         return res.status(400).json({
           success: false,
           message: 'Missing required admin fields'
         });
       }
 
+      // Define database name (needed throughout the function)
+      const databaseName = `clube_digital_${slug.replace(/-/g, '_')}`;
+      console.log('📊 [Clubs] Database name will be:', databaseName);
+
       // Step 1: Create database
       console.log('📦 [Clubs] Step 1: Creating physical database...');
-      const databaseName = `clube_digital_${slug.replace(/-/g, '_')}`;
 
       try {
         await databaseManager.setupTenantDatabase(databaseName);
@@ -797,48 +803,12 @@ class ClubsController {
         });
       }
 
-      // Step 2: Upload branding assets to S3
-      console.log('☁️  [Clubs] Step 2: Uploading branding assets to S3...');
-      let logoUrl = '';
-      let iconUrl = '';
-      let splashUrl = '';
+      // Step 2: Skip S3 upload (branding will be configured later via UI)
+      console.log('⏭️  [Clubs] Step 2: Skipping branding upload (will be configured later)...');
 
-      try {
-        const files = req.files || {};
-
-        if (files.logoFile && files.logoFile[0]) {
-          const logoResult = await s3Service.uploadBrandingAsset(
-            files.logoFile[0],
-            slug,
-            'logo'
-          );
-          logoUrl = logoResult.url;
-          console.log('✅ Logo uploaded:', logoUrl);
-        }
-
-        if (files.iconFile && files.iconFile[0]) {
-          const iconResult = await s3Service.uploadBrandingAsset(
-            files.iconFile[0],
-            slug,
-            'icon'
-          );
-          iconUrl = iconResult.url;
-          console.log('✅ Icon uploaded:', iconUrl);
-        }
-
-        if (files.splashFile && files.splashFile[0]) {
-          const splashResult = await s3Service.uploadBrandingAsset(
-            files.splashFile[0],
-            slug,
-            'splash'
-          );
-          splashUrl = splashResult.url;
-          console.log('✅ Splash uploaded:', splashUrl);
-        }
-      } catch (s3Error) {
-        console.error('❌ [Clubs] S3 upload failed:', s3Error);
-        // Continue anyway, we can upload later
-      }
+      let logoUrl = null;
+      let iconUrl = null;
+      let faviconUrl = null;
 
       // Step 3: Create club in master database
       console.log('💾 [Clubs] Step 3: Creating club in master database...');
@@ -874,16 +844,16 @@ class ClubsController {
       await masterPrisma.clubBranding.create({
         data: {
           clubId: club.id,
-          appName,
-          appDescription,
+          appName: finalAppName,
+          appDescription: appDescription || `Clube de benefícios ${companyName}`,
           logoUrl: logoUrl || null,
-          iconUrl: iconUrl || null,
-          splashImageUrl: splashUrl || null,
-          primaryColor,
-          secondaryColor,
-          accentColor,
-          backgroundColor,
-          textColor
+          logoIconUrl: iconUrl || null, // Icon for the app
+          faviconUrl: faviconUrl || null, // Favicon
+          primaryColor: finalPrimaryColor,
+          secondaryColor: secondaryColor || '#10B981',
+          accentColor: accentColor || '#F59E0B',
+          backgroundColor: backgroundColor || '#FFFFFF',
+          textColor: textColor || '#1F2937'
         }
       });
 
@@ -891,14 +861,28 @@ class ClubsController {
 
       // Step 5: Create app config
       console.log('📱 [Clubs] Step 5: Creating app config...');
+
+      // Generate URL scheme (remove dots and hyphens)
+      const urlScheme = bundleId.replace(/\./g, '').replace(/-/g, '');
+
       await masterPrisma.clubAppConfig.create({
         data: {
           clubId: club.id,
+          appName: finalAppName,
+          tenantSlug: slug,
+          appDescription: appDescription || `Clube de benefícios ${companyName}`,
           bundleId,
-          appVersion: '1.0.0',
-          minAppVersion: '1.0.0',
-          forceUpdate: false,
-          maintenanceMode: false
+          packageName: bundleId, // Android package name (same as bundleId)
+          urlScheme, // Deep linking scheme
+          appIconUrl: iconUrl || 'https://via.placeholder.com/512', // Temporary placeholder
+          splashScreenUrl: 'https://via.placeholder.com/1080x1920', // Temporary placeholder (pode ser adicionado depois)
+          splashBackgroundColor: backgroundColor || '#FFFFFF',
+          currentVersion: '1.0.0',
+          iosBuildNumber: 1,
+          androidBuildNumber: 1,
+          appStoreStatus: 'DRAFT',
+          playStoreStatus: 'DRAFT',
+          autoBuildEnabled: true
         }
       });
 
@@ -918,6 +902,7 @@ class ClubsController {
       console.log('👤 [Clubs] Step 7: Creating first admin...');
       const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
+      // Create in master database (club_admins table)
       await masterPrisma.clubAdmin.create({
         data: {
           clubId: club.id,
@@ -931,7 +916,76 @@ class ClubsController {
         }
       });
 
-      console.log('✅ [Clubs] First admin created');
+      console.log('✅ [Clubs] First admin created in master database');
+
+      // Step 7.1: Create admin in tenant database (users table)
+      console.log('👤 [Clubs] Step 7.1: Creating admin in tenant database...');
+      console.log('📊 [Clubs] Database name for tenant:', databaseName);
+      console.log('📊 [Clubs] Club object:', { id: club.id, slug: club.slug, databaseName: club.databaseName });
+
+      const { getClubClient } = require('../database');
+      let tenantPrisma;
+
+      try {
+        tenantPrisma = getClubClient(club);  // Pass the club object, not just databaseName
+        console.log('✅ [Clubs] Tenant Prisma client obtained');
+      } catch (clientError) {
+        console.error('❌ [Clubs] Failed to get tenant Prisma client:', clientError);
+        throw clientError;
+      }
+
+      try {
+        // Split admin name into first and last name
+        const nameParts = adminName.trim().split(' ');
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(1).join(' ') || firstName;
+
+        // Generate unique username from email
+        const username = adminEmail.split('@')[0].toLowerCase().replace(/[^a-z0-9_]/g, '_');
+
+        console.log('📝 [Clubs] Creating admin with data:', {
+          firstName,
+          lastName,
+          email: adminEmail.toLowerCase(),
+          username,
+          cpf: adminCpf,
+          phone: adminPhone
+        });
+
+        await tenantPrisma.$executeRaw`
+          INSERT INTO users (
+            id, first_name, last_name, email, username, cpf, phone,
+            password, user_type, is_active, email_confirmed,
+            created_at, updated_at
+          ) VALUES (
+            gen_random_uuid(),
+            ${firstName},
+            ${lastName},
+            ${adminEmail.toLowerCase()},
+            ${username},
+            ${adminCpf},
+            ${adminPhone || null},
+            ${hashedPassword},
+            'admin',
+            true,
+            true,
+            NOW(),
+            NOW()
+          )
+        `;
+
+        console.log('✅ [Clubs] Admin created in tenant database');
+      } catch (tenantError) {
+        console.error('❌ [Clubs] Failed to create admin in tenant database:', tenantError);
+        console.error('❌ [Clubs] Error details:', {
+          message: tenantError.message,
+          code: tenantError.code,
+          meta: tenantError.meta
+        });
+        // Don't throw, just log - admin exists in master database
+      }
+
+      console.log('✅ [Clubs] First admin setup completed');
 
       // Step 8: Return success
       console.log('🎉 [Clubs] Complete club creation finished successfully!');
