@@ -38,7 +38,14 @@ router.post('/sync-stats/all', clubStatsSyncController.syncAll);
 // List clubs with pagination and filters
 router.get('/', clubsController.list);
 
-// Create new club
+// Create complete club with database, branding, and admin (wizard)
+router.post('/complete', upload.fields([
+  { name: 'logoFile', maxCount: 1 },
+  { name: 'iconFile', maxCount: 1 },
+  { name: 'splashFile', maxCount: 1 }
+]), clubsController.createComplete);
+
+// Create new club (simple)
 router.post('/', clubsController.create);
 
 // Get clube by ID

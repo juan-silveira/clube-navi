@@ -713,6 +713,261 @@ class ClubsController {
       });
     }
   }
+
+  /**
+   * Create club complete with database, branding, and first admin
+   * @route POST /api/super-admin/clubs/complete
+   */
+  async createComplete(req, res) {
+    const bcrypt = require('bcrypt');
+    const databaseManager = require('../utils/database-manager');
+    const s3Service = require('../services/s3.service');
+
+    try {
+      console.log('🚀 [Clubs] Starting complete club creation...');
+
+      // Extract data from form
+      const {
+        // Company info
+        companyName,
+        companyDocument,
+        contactName,
+        contactEmail,
+        contactPhone,
+        plan = 'basic',
+
+        // Branding
+        appName,
+        appDescription,
+        primaryColor,
+        secondaryColor,
+        accentColor,
+        backgroundColor,
+        textColor,
+
+        // Technical
+        slug,
+        subdomain,
+        customDomain,
+        bundleId,
+
+        // Admin
+        adminName,
+        adminEmail,
+        adminCpf,
+        adminPhone,
+        adminPassword
+      } = req.body;
+
+      // Validate required fields
+      if (!slug || !companyName || !companyDocument || !subdomain || !contactName || !contactEmail || !contactPhone) {
+        return res.status(400).json({
+          success: false,
+          message: 'Missing required company fields'
+        });
+      }
+
+      if (!appName || !primaryColor) {
+        return res.status(400).json({
+          success: false,
+          message: 'Missing required branding fields'
+        });
+      }
+
+      if (!adminName || !adminEmail || !adminPassword) {
+        return res.status(400).json({
+          success: false,
+          message: 'Missing required admin fields'
+        });
+      }
+
+      // Step 1: Create database
+      console.log('📦 [Clubs] Step 1: Creating physical database...');
+      const databaseName = `clube_digital_${slug.replace(/-/g, '_')}`;
+
+      try {
+        await databaseManager.setupTenantDatabase(databaseName);
+        console.log(`✅ [Clubs] Database created and migrated: ${databaseName}`);
+      } catch (dbError) {
+        console.error('❌ [Clubs] Database creation failed:', dbError);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to create database',
+          error: process.env.NODE_ENV === 'development' ? dbError.message : undefined
+        });
+      }
+
+      // Step 2: Upload branding assets to S3
+      console.log('☁️  [Clubs] Step 2: Uploading branding assets to S3...');
+      let logoUrl = '';
+      let iconUrl = '';
+      let splashUrl = '';
+
+      try {
+        const files = req.files || {};
+
+        if (files.logoFile && files.logoFile[0]) {
+          const logoResult = await s3Service.uploadBrandingAsset(
+            files.logoFile[0],
+            slug,
+            'logo'
+          );
+          logoUrl = logoResult.url;
+          console.log('✅ Logo uploaded:', logoUrl);
+        }
+
+        if (files.iconFile && files.iconFile[0]) {
+          const iconResult = await s3Service.uploadBrandingAsset(
+            files.iconFile[0],
+            slug,
+            'icon'
+          );
+          iconUrl = iconResult.url;
+          console.log('✅ Icon uploaded:', iconUrl);
+        }
+
+        if (files.splashFile && files.splashFile[0]) {
+          const splashResult = await s3Service.uploadBrandingAsset(
+            files.splashFile[0],
+            slug,
+            'splash'
+          );
+          splashUrl = splashResult.url;
+          console.log('✅ Splash uploaded:', splashUrl);
+        }
+      } catch (s3Error) {
+        console.error('❌ [Clubs] S3 upload failed:', s3Error);
+        // Continue anyway, we can upload later
+      }
+
+      // Step 3: Create club in master database
+      console.log('💾 [Clubs] Step 3: Creating club in master database...');
+      const club = await masterPrisma.club.create({
+        data: {
+          slug,
+          companyName,
+          companyDocument,
+          plan,
+          isActive: true, // Activate immediately since everything is configured
+          subdomain,
+          adminSubdomain: `admin-${slug}`,
+          customDomain: customDomain || null,
+          databaseHost: 'localhost',
+          databasePort: 5432,
+          databaseName,
+          databaseUser: 'clube_digital_user',
+          databasePassword: 'clube_digital_password',
+          contactName,
+          contactEmail,
+          contactPhone,
+          monthlyFee: 0,
+          maxUsers: 1000,
+          maxAdmins: 10,
+          maxStorageGB: 50
+        }
+      });
+
+      console.log('✅ [Clubs] Club created:', club.id);
+
+      // Step 4: Create branding
+      console.log('🎨 [Clubs] Step 4: Creating branding...');
+      await masterPrisma.clubBranding.create({
+        data: {
+          clubId: club.id,
+          appName,
+          appDescription,
+          logoUrl: logoUrl || null,
+          iconUrl: iconUrl || null,
+          splashImageUrl: splashUrl || null,
+          primaryColor,
+          secondaryColor,
+          accentColor,
+          backgroundColor,
+          textColor
+        }
+      });
+
+      console.log('✅ [Clubs] Branding created');
+
+      // Step 5: Create app config
+      console.log('📱 [Clubs] Step 5: Creating app config...');
+      await masterPrisma.clubAppConfig.create({
+        data: {
+          clubId: club.id,
+          bundleId,
+          appVersion: '1.0.0',
+          minAppVersion: '1.0.0',
+          forceUpdate: false,
+          maintenanceMode: false
+        }
+      });
+
+      console.log('✅ [Clubs] App config created');
+
+      // Step 6: Create stats
+      console.log('📊 [Clubs] Step 6: Creating stats...');
+      await masterPrisma.clubStats.create({
+        data: {
+          clubId: club.id
+        }
+      });
+
+      console.log('✅ [Clubs] Stats created');
+
+      // Step 7: Create first admin
+      console.log('👤 [Clubs] Step 7: Creating first admin...');
+      const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+      await masterPrisma.clubAdmin.create({
+        data: {
+          clubId: club.id,
+          name: adminName,
+          email: adminEmail,
+          password: hashedPassword,
+          cpf: adminCpf || null,
+          phone: adminPhone || null,
+          role: 'admin',
+          isActive: true
+        }
+      });
+
+      console.log('✅ [Clubs] First admin created');
+
+      // Step 8: Return success
+      console.log('🎉 [Clubs] Complete club creation finished successfully!');
+
+      res.status(201).json({
+        success: true,
+        message: 'Club created successfully with database, branding, and admin',
+        data: {
+          club: {
+            id: club.id,
+            slug: club.slug,
+            companyName: club.companyName,
+            subdomain: club.subdomain,
+            databaseName: club.databaseName,
+            isActive: club.isActive
+          }
+        }
+      });
+
+    } catch (error) {
+      console.error('❌ [Clubs] Create complete error:', error);
+
+      if (error.code === 'P2002') {
+        return res.status(409).json({
+          success: false,
+          message: 'Club with this slug, document, or subdomain already exists'
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
+  }
 }
 
 module.exports = new ClubsController();
