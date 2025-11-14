@@ -92,9 +92,25 @@ const LoginPage = () => {
             loginWelcomeEn: data.data.loginWelcomeEn || `Welcome to ${data.data.appName || 'Clube Digital'}`,
             loginWelcomeEs: data.data.loginWelcomeEs || `Bienvenido a ${data.data.appName || 'Clube Digital'}`,
             loginIllustrationUrl: data.data.loginIllustrationUrl || '/shared-assets/images/auth/ils1.svg',
-            primaryColor: data.data.primaryColor || '#3B82F6'
+            primaryColor: data.data.primaryColor || '#3B82F6',
+            faviconUrl: data.data.faviconUrl
           });
+
+          // Atualizar título da página
           document.title = `${data.data.appName || 'Clube Digital'} - Login`;
+
+          // Atualizar favicon se disponível
+          if (data.data.faviconUrl) {
+            const existingFavicons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+            existingFavicons.forEach(link => link.remove());
+
+            const link = document.createElement('link');
+            link.rel = 'icon';
+            link.href = data.data.faviconUrl;
+            document.head.appendChild(link);
+
+            console.log('✅ [Login] Favicon atualizado:', data.data.faviconUrl);
+          }
         }
       } catch (error) {
         console.error('Erro ao buscar branding:', error);
