@@ -116,18 +116,26 @@ const NewClubWizard = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('🚀 [NewClubWizard] handleSubmit called');
+    console.log('📦 [NewClubWizard] Wizard data:', wizardData);
+
     setIsSubmitting(true);
 
     try {
+      console.log('📡 [NewClubWizard] Calling createClubComplete...');
+
       // Create club with all data
       const response = await clubsService.createClubComplete(wizardData);
+
+      console.log('✅ [NewClubWizard] Response:', response);
 
       if (response.success) {
         showSuccess('Clube criado com sucesso! Database, branding e administrador configurados.');
         router.push(`/system/clubs/${response.data.club.id}`);
       }
     } catch (error) {
-      console.error('Error creating club:', error);
+      console.error('❌ [NewClubWizard] Error creating club:', error);
+      console.error('❌ [NewClubWizard] Error details:', error.response?.data);
       showError(error.response?.data?.message || 'Erro ao criar clube. Verifique os dados e tente novamente.');
     } finally {
       setIsSubmitting(false);

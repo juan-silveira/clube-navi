@@ -134,9 +134,18 @@ const Step4Admin = ({ data, updateData, onSubmit, onBack, onCancel, isSubmitting
   };
 
   const handleSubmit = () => {
-    if (validate()) {
+    console.log('🔍 [Step4Admin] handleSubmit called');
+    console.log('📝 [Step4Admin] Form data:', formData);
+
+    const isValid = validate();
+    console.log('✅ [Step4Admin] Validation result:', isValid);
+
+    if (isValid) {
+      console.log('🚀 [Step4Admin] Calling updateData and onSubmit');
       updateData(formData);
       onSubmit();
+    } else {
+      console.error('❌ [Step4Admin] Validation failed, errors:', errors);
     }
   };
 
