@@ -37,9 +37,8 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '') // Remove accents
-      .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .replace(/[^a-z0-9\s]/g, '') // Remove special chars except spaces
+      .replace(/\s+/g, '') // Remove all spaces (no hyphens)
       .trim();
   };
 
