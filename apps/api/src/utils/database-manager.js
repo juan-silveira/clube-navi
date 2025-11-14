@@ -17,22 +17,42 @@ class DatabaseManager {
     try {
       console.log(`📦 [DatabaseManager] Creating database: ${databaseName}`);
 
-      // Create database using PostgreSQL
-      const createDbCommand = `sudo -u postgres psql -c "CREATE DATABASE ${databaseName} OWNER clube_digital_user;"`;
+      // Try with sudo first (if configured without password)
+      let createDbCommand = `sudo -n -u postgres psql -c "CREATE DATABASE ${databaseName} OWNER clube_digital_user;"`;
 
-      const { stdout, stderr } = await execPromise(createDbCommand);
+      try {
+        const { stdout, stderr } = await execPromise(createDbCommand);
 
-      if (stderr && !stderr.includes('already exists')) {
-        console.error('❌ [DatabaseManager] Error creating database:', stderr);
-        throw new Error(`Failed to create database: ${stderr}`);
+        if (stderr && !stderr.includes('already exists') && !stderr.includes('CREATE DATABASE')) {
+          console.error('❌ [DatabaseManager] Error creating database:', stderr);
+          throw new Error(`Failed to create database: ${stderr}`);
+        }
+
+        console.log(`✅ [DatabaseManager] Database created: ${databaseName}`);
+        return {
+          success: true,
+          message: `Database ${databaseName} created successfully`
+        };
+
+      } catch (sudoError) {
+        // If sudo fails, try with regular psql using clube_digital_user
+        console.log('⚠️  [DatabaseManager] Sudo failed, trying with clube_digital_user...');
+
+        const fallbackCommand = `PGPASSWORD=clube_digital_password psql -U clube_digital_user -h localhost -d postgres -c "CREATE DATABASE ${databaseName} OWNER clube_digital_user;"`;
+
+        const { stdout, stderr } = await execPromise(fallbackCommand);
+
+        if (stderr && !stderr.includes('already exists') && !stderr.includes('CREATE DATABASE')) {
+          console.error('❌ [DatabaseManager] Error creating database:', stderr);
+          throw new Error(`Failed to create database: ${stderr}`);
+        }
+
+        console.log(`✅ [DatabaseManager] Database created: ${databaseName}`);
+        return {
+          success: true,
+          message: `Database ${databaseName} created successfully`
+        };
       }
-
-      console.log(`✅ [DatabaseManager] Database created: ${databaseName}`);
-
-      return {
-        success: true,
-        message: `Database ${databaseName} created successfully`
-      };
 
     } catch (error) {
       // Check if database already exists
