@@ -311,11 +311,12 @@ const Step2Branding = ({ data, updateData, onNext, onBack, onCancel }) => {
               Descrição do App
             </label>
             <textarea
-              className="form-control"
+              className="form-control resize-none"
               rows="3"
               placeholder="Descreva o clube de benefícios..."
               value={formData.appDescription}
               onChange={(e) => handleChange('appDescription', e.target.value)}
+              style={{ paddingTop: '8px', paddingBottom: '8px' }}
             />
             {errors.appDescription && (
               <p className="text-danger-500 text-xs mt-1">{errors.appDescription}</p>

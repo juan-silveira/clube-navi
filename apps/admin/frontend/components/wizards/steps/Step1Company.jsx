@@ -157,21 +157,29 @@ const Step1Company = ({ data, updateData, onNext, onCancel }) => {
               icon={<FileText size={18} />}
             />
 
-            <div className="form-group">
-              <label className="form-label flex items-center gap-2">
+            <div>
+              <label className="form-label flex items-center gap-2 mb-2">
                 <CreditCard size={18} />
                 Plano Inicial
               </label>
-              <select
-                className="form-control"
-                value={formData.plan}
-                onChange={(e) => handleChange('plan', e.target.value)}
-              >
-                <option value="basic">Basic - Funcionalidades essenciais</option>
-                <option value="pro">Pro - Recursos avançados</option>
-                <option value="premium">Premium - Todos os recursos</option>
-                <option value="custom">Custom - Personalizado</option>
-              </select>
+              <div className="relative">
+                <select
+                  className="form-control py-2 appearance-none cursor-pointer"
+                  value={formData.plan}
+                  onChange={(e) => handleChange('plan', e.target.value)}
+                  style={{ paddingLeft: '12px', paddingRight: '40px' }}
+                >
+                  <option value="basic">Basic - Funcionalidades essenciais</option>
+                  <option value="pro">Pro - Recursos avançados</option>
+                  <option value="premium">Premium - Todos os recursos</option>
+                  <option value="custom">Custom - Personalizado</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                  <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
