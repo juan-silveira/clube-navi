@@ -10,9 +10,11 @@ import Link from "next/link";
 import useMobileMenu from "@/hooks/useMobileMenu";
 import Icon from "@/components/ui/Icon";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useCompanyContext } from "@/contexts/CompanyContext";
 
 const MobileMenu = ({ className = "custom-class" }) => {
   const { t, isInitialized } = useLanguage();
+  const { companyBranding, currentCompany } = useCompanyContext();
   const menuItems = useMemo(() => {
     if (!isInitialized || !t) return [];
     return getMenuItems(t);
@@ -35,6 +37,22 @@ const MobileMenu = ({ className = "custom-class" }) => {
   const [skin] = useSkin();
   const [isDark] = useDarkMode();
   const [mobileMenu, setMobileMenu] = useMobileMenu();
+
+  // Get logo and club name from branding
+  const getLogo = () => {
+    if (companyBranding) {
+      // Use logoIconUrl or logoUrl from branding
+      return companyBranding.logoIconUrl || companyBranding.logoUrl;
+    }
+    // Fallback to default
+    return isDark || isSemiDark
+      ? "/assets/images/logo/logo-c-white.svg"
+      : "/assets/images/logo/logo-c.svg";
+  };
+
+  const getClubName = () => {
+    return companyBranding?.brand_name || currentCompany?.name || 'Clube Digital';
+  };
   return (
     <div
       className={`${className} fixed  top-0 bg-white dark:bg-slate-800 shadow-lg  h-full   w-[248px]`}
@@ -43,15 +61,17 @@ const MobileMenu = ({ className = "custom-class" }) => {
         <Link href="/">
           <div className="flex items-center space-x-4">
             <div className="logo-icon">
-              {!isDark && !isSemiDark ? (
-                <img src="/assets/images/logo/logo-c.svg" alt="" width={40} height={40}/>
-              ) : (
-                <img src="/assets/images/logo/logo-c-white.svg" alt="" width={40} height={40}/>
-              )}
+              <img
+                src={getLogo()}
+                alt={getClubName()}
+                width={40}
+                height={40}
+                style={{ maxHeight: '40px', width: 'auto' }}
+              />
             </div>
             <div>
               <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                Clube Digital
+                {getClubName()}
               </h1>
             </div>
           </div>
