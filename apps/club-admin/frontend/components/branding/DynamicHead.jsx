@@ -29,8 +29,6 @@ const DynamicHead = () => {
       link.rel = 'icon';
       link.href = faviconUrl;
       document.head.appendChild(link);
-
-      console.log('✅ [DynamicHead] Favicon atualizado:', faviconUrl);
     }
 
     // Atualizar título baseado na rota atual
@@ -68,7 +66,6 @@ const DynamicHead = () => {
     };
 
     document.title = getPageTitle();
-    console.log('✅ [DynamicHead] Título atualizado:', document.title);
 
   }, [companyBranding, currentCompany, pathname]);
 
@@ -83,8 +80,6 @@ const DynamicHead = () => {
     const root = document.documentElement;
     root.style.setProperty('--brand-primary', primaryColor);
     root.style.setProperty('--brand-secondary', secondaryColor);
-
-    console.log('✅ [DynamicHead] Cores aplicadas:', { primaryColor, secondaryColor });
   }, [companyBranding]);
 
   return null; // Este componente não renderiza nada

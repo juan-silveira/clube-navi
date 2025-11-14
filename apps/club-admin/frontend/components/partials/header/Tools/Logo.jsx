@@ -33,9 +33,6 @@ const Logo = () => {
 
   // Usar logo da empresa se disponível, senão usar default
   const getLogo = () => {
-    console.log('🎨 [Logo] companyBranding:', companyBranding);
-    console.log('🎨 [Logo] collapsed:', collapsed, 'width:', width, 'breakpoint.xl:', breakpoints.xl);
-
     // Se tem branding da empresa, tentar usar primeiro
     if (companyBranding) {
       let logoUrl = null;
@@ -43,11 +40,9 @@ const Logo = () => {
       // Se o menu estiver colapsado ou tela pequena, priorizar logo icon
       if (collapsed || width < breakpoints.xl) {
         logoUrl = companyBranding.logoIconUrl || companyBranding.logoUrl;
-        console.log('🎨 [Logo] Menu colapsado/mobile - usando:', logoUrl);
       } else {
         // Menu expandido - usar logo normal, fallback para logoIconUrl se não tiver
         logoUrl = companyBranding.logoUrl || companyBranding.logoIconUrl;
-        console.log('🎨 [Logo] Menu expandido - usando:', logoUrl);
       }
 
       // Se encontrou uma URL válida, retornar
@@ -55,8 +50,6 @@ const Logo = () => {
         return logoUrl;
       }
     }
-
-    console.log('🎨 [Logo] Usando fallback padrão');
     // Fallback para assets estáticos baseado no estado collapsed
     if (width >= breakpoints.xl && !collapsed) {
       return isDark

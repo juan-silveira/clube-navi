@@ -108,8 +108,6 @@ const LoginPage = () => {
             link.rel = 'icon';
             link.href = data.data.faviconUrl;
             document.head.appendChild(link);
-
-            console.log('✅ [Login] Favicon atualizado:', data.data.faviconUrl);
           }
         }
       } catch (error) {

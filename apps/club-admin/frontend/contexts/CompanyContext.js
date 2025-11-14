@@ -32,7 +32,6 @@ export const CompanyProvider = ({ children }) => {
 
           if (response.data.success && response.data.data) {
             const brandingData = response.data.data;
-            console.log('✅ [CompanyContext] Branding carregado da API:', brandingData);
 
             // Converter para o formato esperado pelos componentes
             const formattedBranding = {
@@ -47,7 +46,6 @@ export const CompanyProvider = ({ children }) => {
               tagline: brandingData.appDescription || 'Sistema de gestão do clube'
             };
 
-            console.log('✅ [CompanyContext] Branding formatado:', formattedBranding);
             setCompanyBranding(formattedBranding);
             setCurrentCompany({
               id: user.clubId,
